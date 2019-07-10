@@ -18,10 +18,14 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
+import { LoginModule } from './authentication/login/login.module';
+import { RegisterModule } from './authentication/register/register.module';
+import { ForgotPasswordModule } from './authentication/forgot-password/forgot-password.module';
+import { ResetPasswordModule } from './authentication/reset-password/reset-password.module';
 
 const appRoutes: Routes = [
     {
-        path      : '**',
+        path: '**',
         redirectTo: 'sample'
     }
 ];
@@ -30,7 +34,7 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -54,12 +58,15 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
+        LoginModule,
+        RegisterModule,
+        ForgotPasswordModule,
+        ResetPasswordModule,
         SampleModule
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }

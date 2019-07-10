@@ -73,6 +73,17 @@ $typography: mat-typography-config(
 // Setup the typography
 @include angular-material-typography($typography);
 
+@import "src/app/authentication/login/login.theme";
+@import "src/app/authentication/register/register.theme";
+@import "src/app/authentication/reset-password/reset-password.theme";
+@import "src/app/authentication/forgot-password/forgot-password.theme";
+@import "src/app/authentication/lock/lock.theme";
+@import "src/app/authentication/mail-confirm/mail-confirm.theme";
+@import "src/app/coming-soon/coming-soon.theme";
+@import "src/app/errors/404/error-404.theme";
+@import "src/app/errors/500/error-500.theme";
+@import "src/app/maintenance/maintenance.theme";
+
 // -----------------------------------------------------------------------------------------------------
 // @ Component theming
 // -----------------------------------------------------------------------------------------------------
@@ -87,6 +98,15 @@ $typography: mat-typography-config(
     // Layout components
     @include chat-panel-theme($theme);
     @include toolbar-theme($theme);
+
+    @include login-theme($theme);
+    @include register-theme($theme);
+    @include reset-password-theme($theme);
+    @include forgot-password-theme($theme);
+    @include lock-theme($theme);
+    @include mail-confirm-theme($theme);
+    @include coming-soon-theme($theme);
+    @include error-404-theme($theme);
 }
 
 // -----------------------------------------------------------------------------------------------------
