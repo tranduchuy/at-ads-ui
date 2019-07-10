@@ -1,0 +1,8 @@
+<h1 matDialogTitle>Lỗi</h1>
+<div mat-dialog-content>{{errorMessage}}</div>
+<div mat-dialog-actions
+     [fxLayoutAlign]="'center center'"
+     class="pt-24">
+  <button mat-raised-button class="mat-accent mr-16" (click)="dialogRef.close(true)">Confirm</button>
+  <button mat-button (click)="dialogRef.close(false)">Cancel</button>
+</div>

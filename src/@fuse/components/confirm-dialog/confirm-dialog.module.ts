@@ -7,6 +7,7 @@ import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/conf
 @NgModule({
     declarations: [
         FuseConfirmDialogComponent
+
     ],
     imports: [
         MatDialogModule,

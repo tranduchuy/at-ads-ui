@@ -70,6 +70,7 @@
             true,
             "ignore-params"
         ],
+        "no-namespace": false,
         "no-non-null-assertion": true,
         "no-string-literal": false,
         "no-switch-case-fall-through": true,

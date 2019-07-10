@@ -22,51 +22,55 @@ import { LoginModule } from './authentication/login/login.module';
 import { RegisterModule } from './authentication/register/register.module';
 import { ForgotPasswordModule } from './authentication/forgot-password/forgot-password.module';
 import { ResetPasswordModule } from './authentication/reset-password/reset-password.module';
+import { AuthService } from './shared/services/auth.service';
 
 const appRoutes: Routes = [
-    {
-        path: '**',
-        redirectTo: 'sample'
-    }
+  {
+    path: '**',
+    redirectTo: 'sample'
+  }
 ];
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes),
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
 
-        TranslateModule.forRoot(),
+    TranslateModule.forRoot(),
 
-        // Material moment date module
-        MatMomentDateModule,
+    // Material moment date module
+    MatMomentDateModule,
 
-        // Material
-        MatButtonModule,
-        MatIconModule,
+    // Material
+    MatButtonModule,
+    MatIconModule,
 
-        // Fuse modules
-        FuseModule.forRoot(fuseConfig),
-        FuseProgressBarModule,
-        FuseSharedModule,
-        FuseSidebarModule,
-        FuseThemeOptionsModule,
+    // Fuse modules
+    FuseModule.forRoot(fuseConfig),
+    FuseProgressBarModule,
+    FuseSharedModule,
+    FuseSidebarModule,
+    FuseThemeOptionsModule,
 
-        // App modules
-        LayoutModule,
-        LoginModule,
-        RegisterModule,
-        ForgotPasswordModule,
-        ResetPasswordModule,
-        SampleModule
-    ],
-    bootstrap: [
-        AppComponent
-    ]
+    // App modules
+    LayoutModule,
+    LoginModule,
+    RegisterModule,
+    ForgotPasswordModule,
+    ResetPasswordModule,
+    SampleModule
+  ],
+  providers: [
+    AuthService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {
 }
