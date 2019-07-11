@@ -3,7 +3,6 @@ import { IRegisterSuccess } from '../../authentication/register/models/i-registe
 import { ErrorDialogComponent } from '../../dialog/error-dialog/error-dialog.component';
 import { IRegisterError } from '../../authentication/register/models/i-register-error';
 import { MatDialog } from '@angular/material';
-import { SuccessDialogComponent } from '../../dialog/success-dialog/success-dialog.component';
 
 @Injectable()
 export class DialogService {
@@ -12,8 +11,8 @@ export class DialogService {
   }
 
   public _openSuccessDialog(res: IRegisterSuccess): void {
-    const dialogRef = this._matDialog.open(SuccessDialogComponent);
-    dialogRef.componentInstance.messages = res.messages;
+    const dialogRef = this._matDialog.open(ErrorDialogComponent);
+    dialogRef.componentInstance.errorMessages = res.messages;
   }
 
   public _openErrorDialog(error: IRegisterError): void {
