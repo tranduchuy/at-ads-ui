@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { AuthService } from '../../shared/services/auth.service';
+import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
+import { DialogService } from '../../shared/services/dialog.service';
+import { PageBaseComponent } from '../../shared/components/base/page-base.component';
 
 @Component({
     selector     : 'forgot-password',
@@ -11,7 +15,7 @@ import { fuseAnimations } from '@fuse/animations';
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class ForgotPasswordComponent implements OnInit
+export class ForgotPasswordComponent extends PageBaseComponent implements OnInit
 {
     forgotPasswordForm: FormGroup;
 
@@ -23,9 +27,13 @@ export class ForgotPasswordComponent implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _fuseSplashScreenService: FuseSplashScreenService,
+        private _authService: AuthService,
+        private _dialogService: DialogService
     )
     {
+        super();
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
@@ -57,5 +65,25 @@ export class ForgotPasswordComponent implements OnInit
         this.forgotPasswordForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]]
         });
+    }
+
+    onSubmit(): void {
+        this._fuseSplashScreenService.show();
+        const info = {
+            ...this.forgotPasswordForm.value
+        };
+        const sub = this._authService.forgotPassword(info.email).subscribe(res =>
+          {
+              this._fuseSplashScreenService.hide();
+              this._dialogService._openSuccessDialog(res);
+          },
+          error => {
+              if (error.error.messages) {
+                  this._dialogService._openErrorDialog(error.error);
+              }
+              this._fuseSplashScreenService.hide();
+          }
+        );
+        this.subscriptions.push(sub);
     }
 }

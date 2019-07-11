@@ -20,4 +20,19 @@ export class AuthService {
   public register(param: IAuthRegister): Observable<any> {
     return this.httpClient.post(API.User.Register, param);
   }
+
+  public forgotPassword(data: string): Observable<any>{
+    return this.httpClient.post(API.User.forgotPassword, {}, {
+      params: {email: data}
+    });
+  }
+
+  public resendEmail(data: string): Observable<any>{
+    return this.httpClient.post<any>(API.User.resendEmail, {email: data});
+  }
+
+  public resetPassword(password: string): Observable<any>{
+    return this.httpClient.post<any>(API.User.resetPassword, password);
+  }
+
 }
