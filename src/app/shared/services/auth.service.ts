@@ -13,6 +13,7 @@ export class AuthService {
   }
 
   public login(param: IAuthLogin): Observable<any> {
+    console.log(API.User.Login);
     return this.httpClient.post(API.User.Login, param);
   }
 

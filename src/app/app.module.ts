@@ -24,6 +24,7 @@ import { ForgotPasswordModule } from './authentication/forgot-password/forgot-pa
 import { ResetPasswordModule } from './authentication/reset-password/reset-password.module';
 import { DialogModule } from './dialog/dialog.module';
 import { AuthService } from './shared/services/auth.service';
+import { DialogService } from "./shared/services/dialog.service";
 
 const appRoutes: Routes = [
   {
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
     SampleModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    DialogService
   ],
   bootstrap: [
     AppComponent
