@@ -94,7 +94,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .subscribe(
         (response: IRegisterSuccess) => {
           this._fuseSplashScreenService.hide();
-          this._openSuccessDialog();
+          this._openSuccessDialog(response);
         }, (error: HttpErrorResponse) => {
           this._fuseSplashScreenService.hide();
           this._openErrorDialog(error.error);
@@ -102,9 +102,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
       );
   }
 
-  private _openSuccessDialog(): void {
+  private _openSuccessDialog(res: IRegisterSuccess): void {
     const dialogRef = this._matDialog.open(ErrorDialogComponent);
-    dialogRef.componentInstance.errorMessages = error.messages;
+    dialogRef.componentInstance.errorMessages = res.messages;
   }
 
   private _openErrorDialog(error: IRegisterError): void {
