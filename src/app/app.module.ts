@@ -27,13 +27,6 @@ import { AuthService } from './shared/services/auth.service';
 import { DialogService } from './shared/services/dialog.service';
 import { AppRoutingModule } from './app-routing.module';
 
-const appRoutes: Routes = [
-  {
-    path: '**',
-    redirectTo: 'sample'
-  }
-];
-
 @NgModule({
   declarations: [
     AppComponent

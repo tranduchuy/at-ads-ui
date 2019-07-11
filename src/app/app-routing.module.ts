@@ -15,10 +15,6 @@ const appRoutes: Routes = [
     loadChildren: './main/sample/sample.module#SampleModule'
   },
   {
-    path: 'auth',
-    loadChildren: './main/auth/auth.module#AuthModule'
-  },
-  {
     path: '**',
     redirectTo: 'home'
   }
