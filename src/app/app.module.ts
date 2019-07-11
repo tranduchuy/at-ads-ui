@@ -25,6 +25,7 @@ import { ResetPasswordModule } from './authentication/reset-password/reset-passw
 import { DialogModule } from './dialog/dialog.module';
 import { AuthService } from './shared/services/auth.service';
 import { DialogService } from "./shared/services/dialog.service";
+import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes: Routes = [
   {
@@ -41,7 +42,6 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
 
     TranslateModule.forRoot(),
 
@@ -68,7 +68,8 @@ const appRoutes: Routes = [
     RegisterModule,
     ForgotPasswordModule,
     ResetPasswordModule,
-    SampleModule
+    SampleModule,
+    AppRoutingModule
   ],
   providers: [
     AuthService,
