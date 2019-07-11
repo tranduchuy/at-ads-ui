@@ -3,11 +3,13 @@ import { FlexAlignDirective, FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatDialogModule } from '@angular/material';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 
 @NgModule({
   declarations: [
     InfoDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    SuccessDialogComponent
   ],
   providers: [],
   imports: [
@@ -17,11 +19,13 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
   ],
   entryComponents: [
     InfoDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    SuccessDialogComponent
   ],
   exports: [
     InfoDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    SuccessDialogComponent
   ]
 })
 export class DialogModule {
