@@ -22,6 +22,7 @@ import { LoginModule } from './authentication/login/login.module';
 import { RegisterModule } from './authentication/register/register.module';
 import { ForgotPasswordModule } from './authentication/forgot-password/forgot-password.module';
 import { ResetPasswordModule } from './authentication/reset-password/reset-password.module';
+import { DialogModule } from './dialog/dialog.module';
 import { AuthService } from './shared/services/auth.service';
 
 const appRoutes: Routes = [
@@ -56,6 +57,9 @@ const appRoutes: Routes = [
     FuseSharedModule,
     FuseSidebarModule,
     FuseThemeOptionsModule,
+
+    // Dialog
+    DialogModule,
 
     // App modules
     LayoutModule,

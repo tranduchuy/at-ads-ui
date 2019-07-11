@@ -6,7 +6,7 @@ import { MatDialogRef } from '@angular/material';
   templateUrl: './error-dialog.component.html'
 })
 export class ErrorDialogComponent {
-  public errorMessage: string;
+  public errorMessages: string[];
 
   /**
    * Constructor
