@@ -8,7 +8,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from '../../shared/services/dialog.service';
 import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
-import { IResetPasswordSuccess } from './models/i-login-success';
+import { IResetPasswordSuccess } from './models/i-reset-password-success';
 
 @Component({
     selector     : 'reset-password',
