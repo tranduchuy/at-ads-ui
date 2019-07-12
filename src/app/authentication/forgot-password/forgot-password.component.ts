@@ -7,6 +7,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
 import { DialogService } from '../../shared/services/dialog.service';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector     : 'forgot-password',
@@ -77,7 +78,7 @@ export class ForgotPasswordComponent extends PageBaseComponent implements OnInit
               this._fuseSplashScreenService.hide();
               this._dialogService._openSuccessDialog(res);
           },
-          error => {
+          (error: HttpErrorResponse) => {
               if (error.error.messages) {
                   this._dialogService._openErrorDialog(error.error);
               }
