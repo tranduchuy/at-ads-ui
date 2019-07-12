@@ -33,4 +33,8 @@ export class AuthService {
     return this.httpClient.post<any>(API.User.ResetPassword, data);
   }
 
+  public loginByGoogle(user: any): Observable<any> {
+    return this.httpClient.post(API.User.LoginByGoogle, user);
+  }
+
 }
