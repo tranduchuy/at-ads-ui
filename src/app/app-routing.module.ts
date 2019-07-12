@@ -17,6 +17,11 @@ const appRoutes: Routes = [
   {
     path: '**',
     redirectTo: 'home'
+  },
+  ,
+  {
+    path: '/reset-password/:token',
+    redirectTo: './authentication/reset-password/reset-password.module#ResetPasswordModule'
   }
 ];
 
