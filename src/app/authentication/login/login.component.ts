@@ -10,10 +10,11 @@ import { DialogService } from '../../shared/services/dialog.service';
 import { Router } from '@angular/router';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
 import { SessionService } from '../../shared/services/session.service';
+import { ILoginSuccess } from './models/i-login-success';
+import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 declare var gapi: any;
-
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -88,7 +89,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     const userInfo = {
       ...this.loginForm.value
     };
-    const sub = this._authService.login(userInfo).subscribe(res =>
+    const sub = this._authService.login(userInfo).subscribe((res: ILoginSuccess) =>
       {
         const token = res.data.meta.token;
         const user = res.data.user;
@@ -96,7 +97,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
         this._fuseSplashScreenService.hide();
         this._router.navigate(['/']);
       },
-      error => {
+      (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
         }
@@ -141,7 +142,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
       googleId,
       name,
       email
-    }).subscribe(res =>
+    }).subscribe((res: ILoginSuccess) =>
       {
         const token = res.data.meta.token;
         const user = res.data.user;
@@ -149,7 +150,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
         this._fuseSplashScreenService.hide();
         this._router.navigate(['/']);
       },
-      error => {
+      (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
         }
