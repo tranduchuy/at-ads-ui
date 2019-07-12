@@ -22,9 +22,7 @@ export class AuthService {
   }
 
   public forgotPassword(data: string): Observable<any>{
-    return this.httpClient.post(API.User.ForgotPassword, {}, {
-      params: {email: data}
-    });
+    return this.httpClient.post(API.User.ForgotPassword, {email: data});
   }
 
   public resendEmail(data: string): Observable<any>{
