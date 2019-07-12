@@ -4,20 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 const appRoutes: Routes = [
   {path: '', pathMatch: 'full', loadChildren: './main/sample/sample.module#SampleModule'},
   {
-    path: 'home',
+    path: '',
     loadChildren: './main/sample/sample.module#SampleModule'
   },
   {
-    path: '/reset-password/:token',
-    redirectTo: './authentication/reset-password/reset-password.module#ResetPasswordModule',
-  },
-  {
-    path: '',
+    path: '**',
     redirectTo: ''
   }
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, {useHash: true, onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(appRoutes, {useHash: false, onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

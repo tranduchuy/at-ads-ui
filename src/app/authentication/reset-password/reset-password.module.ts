@@ -13,7 +13,12 @@ const routes = [
     {
         path     : 'auth/reset-password',
         component: ResetPasswordComponent
-    }
+    },
+    {
+        path     : 'reset-password/:token',
+        component: ResetPasswordComponent
+    },
+
 ];
 
 @NgModule({
