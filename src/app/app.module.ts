@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -26,6 +26,9 @@ import { DialogModule } from './dialog/dialog.module';
 import { AuthService } from './shared/services/auth.service';
 import { DialogService } from './shared/services/dialog.service';
 import { AppRoutingModule } from './app-routing.module';
+import { TokenInterceptor } from './shared/services/token-interceptor.service';
+import { SessionService } from './shared/services/session.service';
+import { CookieModule, CookieOptionsProvider, CookieService } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -62,11 +65,21 @@ import { AppRoutingModule } from './app-routing.module';
     ForgotPasswordModule,
     ResetPasswordModule,
     SampleModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    // Cookie
+
+    CookieModule.forRoot(),
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     AuthService,
-    DialogService
+    DialogService,
+    SessionService
   ],
   bootstrap: [
     AppComponent
