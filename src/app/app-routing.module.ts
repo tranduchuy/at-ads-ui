@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
-  {path: '/', pathMatch: 'full', loadChildren: './main/sample/sample.module#SampleModule'},
+  {path: '', pathMatch: 'full', loadChildren: './main/sample/sample.module#SampleModule'},
   {
     path: 'home',
     loadChildren: './main/sample/sample.module#SampleModule'
