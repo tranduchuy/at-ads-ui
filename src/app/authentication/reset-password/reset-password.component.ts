@@ -8,7 +8,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { AuthService } from '../../shared/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from '../../shared/services/dialog.service';
 import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
 
@@ -22,6 +22,7 @@ import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.s
 export class ResetPasswordComponent extends PageBaseComponent implements OnInit
 {
     resetPasswordForm: FormGroup;
+    token: string;
 
     constructor(
         private _fuseConfigService: FuseConfigService,
@@ -30,6 +31,7 @@ export class ResetPasswordComponent extends PageBaseComponent implements OnInit
         private _formBuilder: FormBuilder,
         private _authService: AuthService,
         private _router: Router,
+        private _activatedRoute: ActivatedRoute,
         private _dialogService: DialogService
     )
     {
@@ -62,28 +64,29 @@ export class ResetPasswordComponent extends PageBaseComponent implements OnInit
      */
     ngOnInit(): void
     {
+        this.token = this._activatedRoute.snapshot.paramMap.get('token');
         this.resetPasswordForm = this._formBuilder.group({
-            name           : ['', Validators.required],
-            email          : ['', [Validators.required, Validators.email]],
             password       : ['', Validators.required],
-            passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
+            confirmedPassword: ['', [Validators.required, confirmPasswordValidator]]
         });
 
         // Update the validity of the 'passwordConfirm' field
         // when the 'password' field changes
         this.resetPasswordForm.get('password').valueChanges
             .subscribe(() => {
-                this.resetPasswordForm.get('passwordConfirm').updateValueAndValidity();
+                this.resetPasswordForm.get('confirmedPassword').updateValueAndValidity();
             });
     }
 
     onSubmit(): void {
         this._fuseSplashScreenService.show();
-        const userInfo = {
+        const resetPasswordInfo = {
+            token: this.token,
             ...this.resetPasswordForm.value
         };
-        const sub = this._authService.login(userInfo).subscribe(res =>
+        const sub = this._authService.resetPassword(resetPasswordInfo).subscribe(res =>
           {
+              this._dialogService._openSuccessDialog(res);
               this._fuseSplashScreenService.hide();
               this._router.navigate(['/']);
           },
@@ -113,7 +116,7 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
     }
 
     const password = control.parent.get('password');
-    const passwordConfirm = control.parent.get('passwordConfirm');
+    const passwordConfirm = control.parent.get('confirmedPassword');
 
     if ( !password || !passwordConfirm )
     {
