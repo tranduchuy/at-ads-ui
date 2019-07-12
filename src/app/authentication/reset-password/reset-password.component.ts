@@ -5,6 +5,12 @@ import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { PageBaseComponent } from '../../shared/components/base/page-base.component';
+import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
+import { DialogService } from '../../shared/services/dialog.service';
+import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
 
 @Component({
     selector     : 'reset-password',
@@ -13,18 +19,21 @@ import { fuseAnimations } from '@fuse/animations';
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class ResetPasswordComponent implements OnInit, OnDestroy
+export class ResetPasswordComponent extends PageBaseComponent implements OnInit
 {
     resetPasswordForm: FormGroup;
 
-    // Private
-    private _unsubscribeAll: Subject<any>;
-
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _fuseProgressiveBarService: FuseProgressBarService,
+        private _fuseSplashScreenService: FuseSplashScreenService,
+        private _formBuilder: FormBuilder,
+        private _authService: AuthService,
+        private _router: Router,
+        private _dialogService: DialogService
     )
     {
+        super();
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
@@ -42,9 +51,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy
                 }
             }
         };
-
-        // Set the private defaults
-        this._unsubscribeAll = new Subject();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -66,21 +72,31 @@ export class ResetPasswordComponent implements OnInit, OnDestroy
         // Update the validity of the 'passwordConfirm' field
         // when the 'password' field changes
         this.resetPasswordForm.get('password').valueChanges
-            .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
                 this.resetPasswordForm.get('passwordConfirm').updateValueAndValidity();
             });
     }
 
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
-        this._unsubscribeAll.complete();
+    onSubmit(): void {
+        this._fuseSplashScreenService.show();
+        const userInfo = {
+            ...this.resetPasswordForm.value
+        };
+        const sub = this._authService.login(userInfo).subscribe(res =>
+          {
+              this._fuseSplashScreenService.hide();
+              this._router.navigate(['/']);
+          },
+          error => {
+              if (error.error.messages) {
+                  this._dialogService._openErrorDialog(error.error);
+              }
+              this._fuseSplashScreenService.hide();
+          }
+        );
+        this.subscriptions.push(sub);
     }
+
 }
 
 /**
