@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainGuardService } from './shared/services/guard/main-guard.service';
 
 const appRoutes: Routes = [
-  {path: '', pathMatch: 'full', loadChildren: './main/sample/sample.module#SampleModule'},
   {
     path: '',
     canActivate: [MainGuardService],
