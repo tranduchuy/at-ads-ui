@@ -32,7 +32,7 @@ export class TokenInterceptor implements HttpInterceptor {
       // modify request
       request = request.clone({
         setHeaders: {
-          accessToken: this._sessionService.token
+          accessToken: this._sessionService.token || ''
         }
       });
 
