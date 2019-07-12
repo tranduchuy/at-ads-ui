@@ -37,4 +37,8 @@ export class AuthService {
     return this.httpClient.post(API.User.LoginByGoogle, user);
   }
 
+  public getLoggedInInfo(): Observable<any> {
+    return this.httpClient.get(API.User.getLoggedInInfo);
+  }
+
 }
