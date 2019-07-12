@@ -11,18 +11,12 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import HttpCode from '../constants/http_code';
 import { SessionService } from './session.service';
-import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
-import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
-import { DialogService } from './dialog.service';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private _router: Router,
-              private  _sessionService: SessionService,
-              private _fuseProgressiveBarService: FuseProgressBarService,
-              private _dialogService: DialogService,
-              private _fuseSplashScreenService: FuseSplashScreenService) {
+              private  _sessionService: SessionService) {
   }
 
   private _isUrlApi(url: string): boolean {
