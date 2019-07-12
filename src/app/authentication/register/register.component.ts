@@ -1,17 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { Subject } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/internal/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
-import { ErrorDialogComponent } from '../../dialog/error-dialog/error-dialog.component';
 import { AuthService } from '../../shared/services/auth.service';
-import { IRegisterError } from './models/i-register-error';
 import { IRegisterSuccess } from './models/i-register-success';
+import { PageBaseComponent } from '../../shared/components/base/page-base.component';
+import { DialogService } from '../../shared/services/dialog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'register',
@@ -20,19 +18,18 @@ import { IRegisterSuccess } from './models/i-register-success';
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent extends PageBaseComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
-
-  // Private
-  private _unsubscribeAll: Subject<any>;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
+    private _router: Router,
     private _fuseSplashScreenService: FuseSplashScreenService,
-    private _matDialog: MatDialog
+    private _dialogService: DialogService
   ) {
+    super();
     // Configure the layout
     this._fuseConfigService.config = {
       layout: {
@@ -50,9 +47,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
         }
       }
     };
-
-    // Set the private defaults
-    this._unsubscribeAll = new Subject();
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -67,49 +61,31 @@ export class RegisterComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
+      confirmedPassword: ['', [Validators.required, confirmPasswordValidator]]
     });
 
     // Update the validity of the 'passwordConfirm' field
     // when the 'password' field changes
     this.registerForm.get('password').valueChanges
-      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => {
-        this.registerForm.get('passwordConfirm').updateValueAndValidity();
+        this.registerForm.get('confirmedPassword').updateValueAndValidity();
       });
-  }
-
-  /**
-   * On destroy
-   */
-  ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();
   }
 
   onSubmit(): void {
     this._fuseSplashScreenService.show();
-    this._authService.register(this.registerForm.value)
+    const sub = this._authService.register(this.registerForm.value)
       .subscribe(
         (response: IRegisterSuccess) => {
           this._fuseSplashScreenService.hide();
-          this._openSuccessDialog(response);
+          this._dialogService._openSuccessDialog(response);
+          this._router.navigate(['/auth/login']);
         }, (error: HttpErrorResponse) => {
           this._fuseSplashScreenService.hide();
-          this._openErrorDialog(error.error);
+          this._dialogService._openErrorDialog(error.error);
         }
       );
-  }
-
-  private _openSuccessDialog(res: IRegisterSuccess): void {
-    const dialogRef = this._matDialog.open(ErrorDialogComponent);
-    dialogRef.componentInstance.errorMessages = res.messages;
-  }
-
-  private _openErrorDialog(error: IRegisterError): void {
-    const dialogRef = this._matDialog.open(ErrorDialogComponent);
-    dialogRef.componentInstance.errorMessages = error.messages;
+    this.subscriptions.push(sub);
   }
 }
 
@@ -126,7 +102,7 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
   }
 
   const password = control.parent.get('password');
-  const passwordConfirm = control.parent.get('passwordConfirm');
+  const passwordConfirm = control.parent.get('confirmedPassword');
 
   if (!password || !passwordConfirm) {
     return null;

@@ -6,7 +6,9 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
 import { AuthService } from '../../shared/services/auth.service';
-
+import { DialogService } from '../../shared/services/dialog.service';
+import { Router } from '@angular/router';
+import { PageBaseComponent } from '../../shared/components/base/page-base.component';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -14,7 +16,7 @@ import { AuthService } from '../../shared/services/auth.service';
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends PageBaseComponent implements OnInit {
   loginForm: FormGroup;
 
   /**
@@ -28,8 +30,11 @@ export class LoginComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _fuseProgressiveBarService: FuseProgressBarService,
     private _fuseSplashScreenService: FuseSplashScreenService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _router: Router,
+    private _dialogService: DialogService
   ) {
+    super();
     // Configure the layout
     this._fuseConfigService.config = {
       layout: {
@@ -67,10 +72,23 @@ export class LoginComponent implements OnInit {
   // @ public methods
   // -----------------------------------------------------------------------------------------------------
   onSubmit(): void {
-    console.log(this.loginForm.value);
     this._fuseSplashScreenService.show();
-    setTimeout(() => {
-      this._fuseSplashScreenService.hide();
-    }, 3000);
+    const userInfo = {
+      ...this.loginForm.value
+    };
+    const sub = this._authService.login(userInfo).subscribe(res =>
+      {
+        console.log(res);
+        this._fuseSplashScreenService.hide();
+        this._router.navigate(['/']);
+      },
+      error => {
+        if (error.error.messages) {
+          this._dialogService._openErrorDialog(error.error);
+        }
+        this._fuseSplashScreenService.hide();
+      }
+    );
+    this.subscriptions.push(sub);
   }
 }

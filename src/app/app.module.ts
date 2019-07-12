@@ -24,13 +24,8 @@ import { ForgotPasswordModule } from './authentication/forgot-password/forgot-pa
 import { ResetPasswordModule } from './authentication/reset-password/reset-password.module';
 import { DialogModule } from './dialog/dialog.module';
 import { AuthService } from './shared/services/auth.service';
-
-const appRoutes: Routes = [
-  {
-    path: '**',
-    redirectTo: 'sample'
-  }
-];
+import { DialogService } from './shared/services/dialog.service';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +35,6 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
 
     TranslateModule.forRoot(),
 
@@ -67,10 +61,12 @@ const appRoutes: Routes = [
     RegisterModule,
     ForgotPasswordModule,
     ResetPasswordModule,
-    SampleModule
+    SampleModule,
+    AppRoutingModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    DialogService
   ],
   bootstrap: [
     AppComponent
