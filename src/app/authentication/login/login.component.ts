@@ -10,8 +10,8 @@ import { DialogService } from '../../shared/services/dialog.service';
 import { Router } from '@angular/router';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
 import { SessionService } from '../../shared/services/session.service';
-import { ILoginSuccess } from './models/i-register-success';
-import { ILoginError } from './models/i-register-error';
+import { ILoginSuccess } from './models/i-login-success';
+import { ILoginError } from './models/i-login-error';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
