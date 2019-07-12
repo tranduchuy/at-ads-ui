@@ -13,7 +13,7 @@ export class MainGuardService implements CanActivate{
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-    if (this._sessionService.token || this._sessionService.user) {
+    if (this._sessionService.token && this._sessionService.user) {
       return true;
     }
     this._router.navigate(['/auth/login']);
