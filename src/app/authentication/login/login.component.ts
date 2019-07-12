@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
 import { SessionService } from '../../shared/services/session.service';
 import { ILoginSuccess } from './models/i-login-success';
-import { ILoginError } from './models/i-login-error';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -88,7 +88,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit {
         this._fuseSplashScreenService.hide();
         this._router.navigate(['/']);
       },
-      (error: ILoginError) => {
+      (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
         }

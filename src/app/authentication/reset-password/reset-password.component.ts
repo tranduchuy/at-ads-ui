@@ -1,8 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
@@ -11,6 +8,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from '../../shared/services/dialog.service';
 import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
+import { IResetPasswordSuccess } from './models/i-login-success';
 
 @Component({
     selector     : 'reset-password',
@@ -84,7 +82,7 @@ export class ResetPasswordComponent extends PageBaseComponent implements OnInit
             token: this.token,
             ...this.resetPasswordForm.value
         };
-        const sub = this._authService.resetPassword(resetPasswordInfo).subscribe(res =>
+        const sub = this._authService.resetPassword(resetPasswordInfo).subscribe((res: IResetPasswordSuccess) =>
           {
               this._dialogService._openSuccessDialog(res);
               this._fuseSplashScreenService.hide();
