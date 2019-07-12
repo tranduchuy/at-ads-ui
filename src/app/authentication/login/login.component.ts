@@ -79,7 +79,6 @@ export class LoginComponent extends PageBaseComponent implements OnInit {
     };
     const sub = this._authService.login(userInfo).subscribe(res =>
       {
-        console.log(res);
         this._fuseSplashScreenService.hide();
         this._router.navigate(['/']);
       },
