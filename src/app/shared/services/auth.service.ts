@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { API } from '../constants/api.constant';
 import { IAuthLogin } from '../models/i-auth-login';
 import { IAuthRegister } from '../models/i-auth-register';
+import { IAuthResetPassword } from '../models/i-auth-reset-password';
 
 @Injectable()
 export class AuthService {
@@ -28,8 +29,8 @@ export class AuthService {
     return this.httpClient.post<any>(API.User.ResetPassword, {email: data});
   }
 
-  public resetPassword(password: string): Observable<any>{
-    return this.httpClient.post<any>(API.User.ResetPassword, password);
+  public resetPassword(data: IAuthResetPassword): Observable<any>{
+    return this.httpClient.post<any>(API.User.ResetPassword, data);
   }
 
 }

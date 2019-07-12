@@ -5,6 +5,12 @@ import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { PageBaseComponent } from '../../shared/components/base/page-base.component';
+import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DialogService } from '../../shared/services/dialog.service';
+import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
 
 @Component({
     selector     : 'reset-password',
@@ -13,18 +19,23 @@ import { fuseAnimations } from '@fuse/animations';
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class ResetPasswordComponent implements OnInit, OnDestroy
+export class ResetPasswordComponent extends PageBaseComponent implements OnInit
 {
     resetPasswordForm: FormGroup;
-
-    // Private
-    private _unsubscribeAll: Subject<any>;
+    token: string;
 
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _fuseProgressiveBarService: FuseProgressBarService,
+        private _fuseSplashScreenService: FuseSplashScreenService,
+        private _formBuilder: FormBuilder,
+        private _authService: AuthService,
+        private _router: Router,
+        private _activatedRoute: ActivatedRoute,
+        private _dialogService: DialogService
     )
     {
+        super();
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
@@ -42,9 +53,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy
                 }
             }
         };
-
-        // Set the private defaults
-        this._unsubscribeAll = new Subject();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -56,31 +64,42 @@ export class ResetPasswordComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this.token = this._activatedRoute.snapshot.paramMap.get('token');
         this.resetPasswordForm = this._formBuilder.group({
-            name           : ['', Validators.required],
-            email          : ['', [Validators.required, Validators.email]],
             password       : ['', Validators.required],
-            passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
+            confirmedPassword: ['', [Validators.required, confirmPasswordValidator]]
         });
 
         // Update the validity of the 'passwordConfirm' field
         // when the 'password' field changes
         this.resetPasswordForm.get('password').valueChanges
-            .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
-                this.resetPasswordForm.get('passwordConfirm').updateValueAndValidity();
+                this.resetPasswordForm.get('confirmedPassword').updateValueAndValidity();
             });
     }
 
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
-        this._unsubscribeAll.complete();
+    onSubmit(): void {
+        this._fuseSplashScreenService.show();
+        const resetPasswordInfo = {
+            token: this.token,
+            ...this.resetPasswordForm.value
+        };
+        const sub = this._authService.resetPassword(resetPasswordInfo).subscribe(res =>
+          {
+              this._dialogService._openSuccessDialog(res);
+              this._fuseSplashScreenService.hide();
+              this._router.navigate(['/']);
+          },
+          error => {
+              if (error.error.messages) {
+                  this._dialogService._openErrorDialog(error.error);
+              }
+              this._fuseSplashScreenService.hide();
+          }
+        );
+        this.subscriptions.push(sub);
     }
+
 }
 
 /**
@@ -97,7 +116,7 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
     }
 
     const password = control.parent.get('password');
-    const passwordConfirm = control.parent.get('passwordConfirm');
+    const passwordConfirm = control.parent.get('confirmedPassword');
 
     if ( !password || !passwordConfirm )
     {
