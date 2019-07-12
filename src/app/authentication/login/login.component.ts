@@ -9,6 +9,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { DialogService } from '../../shared/services/dialog.service';
 import { Router } from '@angular/router';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
+import { SessionService } from '../../shared/services/session.service';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -32,7 +33,8 @@ export class LoginComponent extends PageBaseComponent implements OnInit {
     private _fuseSplashScreenService: FuseSplashScreenService,
     private _authService: AuthService,
     private _router: Router,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _sessionService: SessionService
   ) {
     super();
     // Configure the layout
@@ -78,6 +80,9 @@ export class LoginComponent extends PageBaseComponent implements OnInit {
     };
     const sub = this._authService.login(userInfo).subscribe(res =>
       {
+        const token = res.data.meta.token;
+        const user = res.data.user;
+        this._sessionService.set(token, user);
         this._fuseSplashScreenService.hide();
         this._router.navigate(['/']);
       },

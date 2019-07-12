@@ -8,11 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ResetPasswordComponent } from 'app/authentication/reset-password/reset-password.component';
+import { AuthGuardService } from '../../shared/services/guard/auth-guard.service';
 
 const routes = [
     {
         path     : 'auth/reset-password/:token',
-        component: ResetPasswordComponent
+        component: ResetPasswordComponent,
+        canActivate: [AuthGuardService]
     }
 ];
 

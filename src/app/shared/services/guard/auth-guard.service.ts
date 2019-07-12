@@ -12,13 +12,11 @@ export class AuthGuardService implements CanActivate{
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    if (this._sessionService.token && this._sessionService.user) {
+
+    if (!this._sessionService.token || !this._sessionService.user) {
       return true;
     }
-
-    // navigate to login page
-    this._router.navigate(['/login']);
-    // you can save redirect url so after authing we can move them back to the page they requested
+    this._router.navigate(['/']);
     return false;
   }
 }

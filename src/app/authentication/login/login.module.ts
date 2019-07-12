@@ -8,11 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { LoginComponent } from './login.component';
+import { AuthGuardService } from '../../shared/services/guard/auth-guard.service';
 
 const routes = [
     {
         path     : 'auth/login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [AuthGuardService]
     }
 ];
 

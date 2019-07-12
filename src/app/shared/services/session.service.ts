@@ -6,10 +6,6 @@ import CookieNames from '../constants/cookies';
 @Injectable()
 export class SessionService {
 
-  public token = '';
-
-  public user: any = null;
-
   constructor(private cookieService: CookieService) {
 
   }
@@ -18,17 +14,20 @@ export class SessionService {
     const today = new Date();
     today.setHours(today.getHours() + 8);
 
-    this.token = token;
-    this.user = user;
-
     this.cookieService.put(CookieNames.token, token, {expires: today});
     this.cookieService.putObject(CookieNames.user, user, {expires: today});
   }
 
   remove(): void {
-    this.token = '';
-    this.user = null;
     this.cookieService.remove(CookieNames.token);
     this.cookieService.remove(CookieNames.user);
+  }
+
+  get user(): any {
+    return this.cookieService.get(CookieNames.user);
+  }
+
+  get token(): any {
+    return this.cookieService.get(CookieNames.token);
   }
 }
