@@ -13,7 +13,6 @@ export class AuthService {
   }
 
   public login(param: IAuthLogin): Observable<any> {
-    console.log(API.User.Login);
     return this.httpClient.post(API.User.Login, param);
   }
 
@@ -22,17 +21,17 @@ export class AuthService {
   }
 
   public forgotPassword(data: string): Observable<any>{
-    return this.httpClient.post(API.User.forgotPassword, {}, {
+    return this.httpClient.post(API.User.ForgotPassword, {}, {
       params: {email: data}
     });
   }
 
   public resendEmail(data: string): Observable<any>{
-    return this.httpClient.post<any>(API.User.resendEmail, {email: data});
+    return this.httpClient.post<any>(API.User.ResetPassword, {email: data});
   }
 
   public resetPassword(password: string): Observable<any>{
-    return this.httpClient.post<any>(API.User.resetPassword, password);
+    return this.httpClient.post<any>(API.User.ResetPassword, password);
   }
 
 }
