@@ -72,7 +72,6 @@ export class LoginComponent extends PageBaseComponent implements OnInit {
   // @ public methods
   // -----------------------------------------------------------------------------------------------------
   onSubmit(): void {
-    console.log(this.loginForm.value);
     this._fuseSplashScreenService.show();
     const userInfo = {
       ...this.loginForm.value
