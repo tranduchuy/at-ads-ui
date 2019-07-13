@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IRegisterSuccess } from '../../authentication/register/models/i-register-success';
 import { ErrorDialogComponent } from '../../dialog/error-dialog/error-dialog.component';
-import { IRegisterError } from '../../authentication/register/models/i-register-error';
 import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from '../../dialog/success-dialog/success-dialog.component';
+import { ISuccess } from '../../dialog/models/i-success';
+import { IError } from '../../dialog/models/i-error';
 
 @Injectable()
 export class DialogService {
@@ -11,12 +11,12 @@ export class DialogService {
   constructor(private _matDialog: MatDialog) {
   }
 
-  public _openSuccessDialog(res: IRegisterSuccess): void {
+  public _openSuccessDialog(res: ISuccess): void {
     const dialogRef = this._matDialog.open(SuccessDialogComponent);
     dialogRef.componentInstance.messages = res.messages;
   }
 
-  public _openErrorDialog(error: IRegisterError): void {
+  public _openErrorDialog(error: IError): void {
     const dialogRef = this._matDialog.open(ErrorDialogComponent);
     dialogRef.componentInstance.errorMessages = error.messages;
   }
