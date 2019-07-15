@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,6 +28,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from './shared/services/token-interceptor.service';
 import { SessionService } from './shared/services/session.service';
 import { CookieModule, CookieOptionsProvider, CookieService } from 'ngx-cookie';
+import { AppInitService } from './shared/services/app-init.service';
+
+export function init_app(appInitService: AppInitService) {
+  return () => appInitService.initializeApp();
+}
 
 @NgModule({
   declarations: [
@@ -79,7 +83,9 @@ import { CookieModule, CookieOptionsProvider, CookieService } from 'ngx-cookie';
     },
     AuthService,
     DialogService,
-    SessionService
+    SessionService,
+    AppInitService,
+    { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true }
   ],
   bootstrap: [
     AppComponent

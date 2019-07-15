@@ -14,12 +14,7 @@ import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.
 import { navigation } from 'app/navigation/navigation';
 import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from './shared/services/auth.service';
-import { ISuccess } from './dialog/models/i-success';
-import { DialogService } from './shared/services/dialog.service';
-import { SessionService } from './shared/services/session.service';
-import { Router } from '@angular/router';
 import { FuseProgressBarService } from '../@fuse/components/progress-bar/progress-bar.service';
 
 @Component({
@@ -57,10 +52,7 @@ export class AppComponent implements OnInit, OnDestroy
         private _fuseProgressiveBarService: FuseProgressBarService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _translateService: TranslateService,
-        private _platform: Platform,
-        private _dialogService: DialogService,
-        private _sessionService: SessionService,
-        private _router: Router
+        private _platform: Platform
     )
     {
         // Get default navigation
@@ -166,7 +158,6 @@ export class AppComponent implements OnInit, OnDestroy
 
                 this.document.body.classList.add(this.fuseConfig.colorTheme);
             });
-        this.checkLoggedInUserToken();
     }
 
     /**
@@ -191,26 +182,5 @@ export class AppComponent implements OnInit, OnDestroy
     toggleSidebarOpen(key): void
     {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
-    }
-
-    checkLoggedInUserToken(): void
-    {
-        this._fuseProgressiveBarService.show();
-        this._authService.getLoggedInInfo()
-          .pipe(takeUntil(this._unsubscribeAll))
-          .subscribe((res: ISuccess) =>
-          {
-              const user = res.data.user;
-              this._sessionService.setLoggedInUser(user);
-              this._fuseProgressiveBarService.hide();
-              this._router.navigate(['/']);
-          },
-          (error: HttpErrorResponse) => {
-              if (error.error.messages) {
-                  this._dialogService._openErrorDialog(error.error);
-              }
-              this._fuseProgressiveBarService.hide();
-          }
-        );
     }
 }
