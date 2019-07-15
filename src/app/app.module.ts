@@ -30,7 +30,7 @@ import { SessionService } from './shared/services/session.service';
 import { CookieModule, CookieOptionsProvider, CookieService } from 'ngx-cookie';
 import { AppInitService } from './shared/services/app-init.service';
 
-export function init_app(appInitService: AppInitService) {
+export function init_app(appInitService: AppInitService): any {
   return () => appInitService.initializeApp();
 }
 
