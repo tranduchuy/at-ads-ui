@@ -27,13 +27,7 @@ export const navigation: FuseNavigation[] = [
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'email',
-        url: '/them-tai-khoan-moi',
-        badge: {
-          title: '25',
-          translate: 'NAV.SAMPLE.BADGE',
-          bg: '#F44336',
-          fg: '#FFFFFF'
-        }
+        url: '/them-tai-khoan-moi'
       }
     ]
   }
