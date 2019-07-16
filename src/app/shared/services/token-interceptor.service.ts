@@ -41,6 +41,7 @@ export class TokenInterceptor implements HttpInterceptor {
           event => {
             if (event instanceof HttpResponse) {
               if (event.body.status === HttpCode.UNAUTHORIZED) {
+                this._sessionService.remove();
                 this._router.navigate(['auth/login']);
               }
             }
@@ -48,6 +49,7 @@ export class TokenInterceptor implements HttpInterceptor {
           error => {
             // http response status code
             if (error.status === HttpCode.UNAUTHORIZED) {
+              this._sessionService.remove();
               this._router.navigate(['auth/login']);
             }
           }
