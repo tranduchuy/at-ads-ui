@@ -31,11 +31,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     const isSubmitted = form && form.submitted;
     return !!(control && form.invalid && (control.dirty || control.touched || isSubmitted));
   }
-
-  getControlName(c: AbstractControl): string | null {
-    const formGroup = c.parent.controls;
-    return Object.keys(formGroup).find(name => c === formGroup[name]) || null;
-  }
 }
 
 
