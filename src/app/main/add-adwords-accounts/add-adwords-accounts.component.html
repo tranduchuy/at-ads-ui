@@ -1,26 +1,32 @@
-<div gdAreas="header side | content content"
+<div gdAreas="connect-button input-side | content content"
      gdGap="16px"
      gdRows="auto auto"
      style="width: 100%"
 >
-  <div gdArea="header">
+  <div gdArea="connect-button" class="connect-button">
     Header
   </div>
-  <div gdArea="side">
+  <div gdArea="input-side" class="input-side">
     <form [formGroup]="form" novalidate>
-      <app-input-text [formControlName]="'adWordId'"
-                      [title]="'Adwords ID'"
-                      [placeholder]="'5456445193'"
-                      [pristine]="true"
-                      [errors]="getMessageErrors('adWordId')"
-      ></app-input-text>
-      <button mat-raised-button
-              color="accent"
-              class="submit-button"
-              aria-label="Kết nối"
-              (click)="onClickBtnSubmit()">
-        Kết nối
-      </button>
+      <div fxFlex="1 0 auto" fxLayout="row">
+        <div>
+          <app-input-text [formControlName]="'adWordId'"
+                          [title]="'Adwords ID'"
+                          [placeholder]="'5456445193'"
+                          [pristine]="true"
+                          [errors]="getMessageErrors('adWordId')"
+          ></app-input-text>
+        </div>
+        <div>
+          <button mat-raised-button
+                  color="accent"
+                  class="submit-button"
+                  aria-label="Kết nối"
+                  (click)="onClickBtnSubmit()">
+            Kết nối
+          </button>
+        </div>
+      </div>
     </form>
   </div>
   <div gdArea="content">
