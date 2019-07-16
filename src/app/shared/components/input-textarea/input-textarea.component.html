@@ -5,7 +5,7 @@
          [disabled]="isDisabled"
          [placeholder]="placeholder"
          [(ngModel)]="innerValue"
-         (focus)="onFocus($event)"
+         (focus)="onFocus()"
          (blur)="onLostFocus()"
             (ngModelChange)="onInputChange()"></textarea>
   <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>
