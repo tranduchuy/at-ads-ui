@@ -5,11 +5,14 @@ import { API } from '../constants/api.constant';
 import { IAuthLogin } from '../models/i-auth-login';
 import { IAuthRegister } from '../models/i-auth-register';
 import { IAuthResetPassword } from '../models/i-auth-reset-password';
+import { SessionService } from './session.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient
+              ) {
 
   }
 
@@ -35,6 +38,10 @@ export class AuthService {
 
   public loginByGoogle(user: any): Observable<any> {
     return this.httpClient.post(API.User.LoginByGoogle, user);
+  }
+
+  public getLoggedInInfo(): Observable<any> {
+    return this.httpClient.get(API.User.getLoggedInInfo);
   }
 
 }

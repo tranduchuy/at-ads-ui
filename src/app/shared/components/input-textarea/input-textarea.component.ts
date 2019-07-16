@@ -37,8 +37,8 @@ export class InputTextareaComponent extends BaseComponent implements ControlValu
     super();
   }
 
-  onFocus(event: any): void {
-    super.onFocus(event);
+  onFocus(): void {
+    super.onFocus();
 
     const input = this.el.nativeElement.querySelector('input');
     if (!input) {

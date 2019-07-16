@@ -18,6 +18,12 @@ export class SessionService {
     this.cookieService.putObject(CookieNames.user, user, {expires: today});
   }
 
+  setLoggedInUser(user): void {
+    const today = new Date();
+    today.setHours(today.getHours() + 8);
+    this.cookieService.putObject(CookieNames.user, user, {expires: today});
+  }
+
   remove(): void {
     this.cookieService.remove(CookieNames.token);
     this.cookieService.remove(CookieNames.user);

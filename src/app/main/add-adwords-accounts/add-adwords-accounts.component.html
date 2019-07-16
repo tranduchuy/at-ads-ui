@@ -1,0 +1,29 @@
+<div gdAreas="header side | content content"
+     gdGap="16px"
+     gdRows="auto auto"
+     style="width: 100%"
+>
+  <div gdArea="header">
+    Header
+  </div>
+  <div gdArea="side">
+    <form [formGroup]="form" novalidate>
+      <app-input-text [formControlName]="'adWordId'"
+                      [title]="'Adwords ID'"
+                      [placeholder]="'5456445193'"
+                      [pristine]="true"
+                      [errors]="getMessageErrors('adWordId')"
+      ></app-input-text>
+      <button mat-raised-button
+              color="accent"
+              class="submit-button"
+              aria-label="Kết nối"
+              (click)="onClickBtnSubmit()">
+        Kết nối
+      </button>
+    </form>
+  </div>
+  <div gdArea="content">
+    Content
+  </div>
+</div>

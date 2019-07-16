@@ -14,6 +14,11 @@ const appRoutes: Routes = [
     loadChildren: './main/sample/sample.module#SampleModule'
   },
   {
+    path: 'them-tai-khoan-moi',
+    canActivate: [MainGuardService],
+    loadChildren: './main/add-adwords-accounts/add-adwords-accounts.module#AddAdwordsAccountsModule'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

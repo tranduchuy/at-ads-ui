@@ -8,5 +8,9 @@ export namespace API {
     export const ResendEmail = environment.hostApi + '/api/users/confirm/resend';
     export const ResetPassword = environment.hostApi + '/api/users/reset-password';
     export const LoginByGoogle = environment.hostApi + '/api/users/login-by-google';
+    export const getLoggedInInfo = environment.hostApi + '/api/users/info';
+  }
+  export namespace AdwordsAccount {
+    export const addAccount = environment.hostApi + '/api/account-adwords';
   }
 }
