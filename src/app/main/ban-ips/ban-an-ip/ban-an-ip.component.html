@@ -13,23 +13,20 @@
     của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
   </p>
 
-  <form class="ban-ip-form" [formGroup]="banIPForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
+  <form class="ban-ip-form" [formGroup]="form" (ngSubmit)="onSubmitForm()">
 
-      <input matInput placeholder="Địa chỉ IP của bạn" formControlName="bannedIP">
+    <app-input-text [formControlName]="'bannedIP'" [errors]="getMessageErrors('bannedIP')" title="IP của bạn"></app-input-text>
 
-      <mat-error *ngIf="banIPForm.get('bannedIP').hasError('required')">
+    <!-- <mat-error *ngIf="banIPForm.get('bannedIP').hasError('required')">
         Vui lòng nhập IP
       </mat-error>
       <mat-error
         *ngIf="banIPForm.get('bannedIP').hasError('invalidIP') && !banIPForm.get('bannedIP').hasError('required')">
         IP không hợp lệ
-      </mat-error>
-
-    </mat-form-field>
+      </mat-error> -->
 
     <div class="button-area">
-      <button type="submit" mat-raised-button color="warn" [disabled]="banIPForm.invalid">
+      <button type="submit" mat-raised-button color="warn">
         <mat-icon>block</mat-icon> THỬ CHẶN IP CỦA BẠN
       </button>
     </div>
@@ -37,18 +34,25 @@
 
   <div class="banned-ip-info">
     <p>
-      IP <span>192.168.125.1</span> đã được chặn thành công trong hệ thống AdWords.
-      <b>Cách kiểm tra hệ thống hoạt động:</b>
-      <br><b>Bước 1:</b> Truy cập vào tài khoản AdWords tại trang <a href="https://ads.google.com">ads.google.com</a>
+      IP <b>192.168.125.1</b> đã được chặn thành công trong hệ thống AdWords.
+      <br><br><b>Cách kiểm tra hệ thống hoạt động:</b>
+      <br><b>Bước 1:</b> Truy cập vào tài khoản AdWords tại trang <a href="https://ads.google.com">Ads.google.com</a>
       bấm vào
       <span class="step"> 1 Chiến dịch</span>
       <mat-icon>arrow_forward</mat-icon>
       <span class="step"> Cài đặt</span>
       <mat-icon>arrow_forward</mat-icon>
       <span class="step"> Loại trừ 1 IP</span>
-      <br><b>Bước 2:</b> Truy cập vào trang <a href="https:/google.com.vn">google.com.vn</a> và tìm kiếm website của
+      <br><b>Bước 2:</b> Truy cập vào trang <a href="https:/google.com.vn">Google.com.vn</a> và tìm kiếm website của
       bạn. Nếu bạn không thấy quảng cáo, hệ thống hoạt động tốt.
+      <br>Sau khi kiểm tra, bạn có thể bỏ IP đang bị chặn. Bấm vào nút dưới đây
     </p>
+    <div>
+      <button mat-raised-button class="success-button">
+        <mat-icon>lock_open</mat-icon>
+        MỞ CHẶN IP CỦA BẠN
+      </button>
+    </div>
   </div>
 
 </div>

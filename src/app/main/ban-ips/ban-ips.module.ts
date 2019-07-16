@@ -12,6 +12,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { BanAnIPComponent } from './ban-an-ip/ban-an-ip.component';
 
+import { InputTextModule } from '../../shared/components/input-text/input-text.module';
+
 @NgModule({
   declarations: [BanAnIPComponent],
   imports: [
@@ -22,6 +24,7 @@ import { BanAnIPComponent } from './ban-an-ip/ban-an-ip.component';
     MatInputModule,
 
     ReactiveFormsModule,
+    InputTextModule,
 
     FuseSharedModule,
 
