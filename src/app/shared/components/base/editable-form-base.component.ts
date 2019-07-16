@@ -28,7 +28,7 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
     this.buildObjectError(this.form);
 
     if (this.errors.length !== 0) {
-      this._dialogService._openErrorDialog({messages: ['Please check: form have ' + this.errors.length + ' errors.']});
+      this._dialogService._openErrorDialog({messages: ['Đã xảy ra lỗi vui lòng kiểm tra lại thông tin.']});
       return;
     }
 

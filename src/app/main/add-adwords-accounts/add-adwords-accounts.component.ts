@@ -52,7 +52,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   initForm(): void {
     this.form = this.fb.group({
-      adWordId: [null, [Validators.required, this.validatorService.checkMinLength(10)]]
+      adWordId: [null, [Validators.required, this.validatorService.checkMinLength(10), this.validatorService.checkMaxLength(10)]]
     });
   }
 
