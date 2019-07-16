@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from './shared/services/token-interceptor.service';
 import { SessionService } from './shared/services/session.service';
 import { CookieModule, CookieOptionsProvider, CookieService } from 'ngx-cookie';
+import { ValidatorsService } from './shared/services/validator.service';
+import { ServiceLocator } from './shared/services/service-locator';
 
 @NgModule({
   declarations: [
@@ -79,11 +81,15 @@ import { CookieModule, CookieOptionsProvider, CookieService } from 'ngx-cookie';
     },
     AuthService,
     DialogService,
-    SessionService
+    SessionService,
+    ValidatorsService
   ],
   bootstrap: [
     AppComponent
   ]
 })
 export class AppModule {
+  constructor(private injector: Injector) {
+    ServiceLocator.injector = this.injector;
+  }
 }
