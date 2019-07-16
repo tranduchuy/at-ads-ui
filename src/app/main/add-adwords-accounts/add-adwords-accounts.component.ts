@@ -18,7 +18,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
-    private _dialogService: DialogService,
+    public _dialogService: DialogService,
     private _addAdwordsAccountsService: AddAdwordsAccountsService
   ) {
     super();

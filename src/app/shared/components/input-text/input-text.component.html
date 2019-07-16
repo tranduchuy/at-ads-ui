@@ -5,15 +5,16 @@
          [disabled]="isDisabled"
          [placeholder]="placeholder"
          [(ngModel)]="innerValue"
+         [errorStateMatcher]="matcher"
          (focus)="onFocus($event)"
          (blur)="onLostFocus()"
          (ngModelChange)="onInputChange()">
   <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>
-  <mat-hint *ngIf="!pristine">
+  <mat-error *ngIf="!pristine">
     <div *ngFor="let m of errors" class="error">{{m}}</div>
-  </mat-hint>
-  <mat-hint *ngIf="pristine">
+  </mat-error>
+  <mat-error *ngIf="pristine">
     <div class="error">{{errors[0]}}</div>
-  </mat-hint>
+  </mat-error>
 
 </mat-form-field>

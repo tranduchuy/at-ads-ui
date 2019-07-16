@@ -3,10 +3,49 @@
 .submit-button {
   height: 60px;
   margin: 2px;
+  width: 120px;
 }
 .step{
   color: #039be5;
 }
 .box{
   padding: 30px;
+}
+.loginwithGoogle {
+  padding: 30px 0px 20px 70px;
+}
+.g-sign-in-button {
+  width: 250px;
+  background: #2d77f3;
+}
+.g-sign-in-button {
+  height: 40px;
+  border-width: 0;
+  border-radius: 2px;
+  white-space: nowrap;
+  /* box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05); */
+  /* transition-property: background-color, box-shadow; */
+  /* transition-duration: 150ms; */
+  /* transition-timing-function: ease-in-out; */
+  padding: 0;
+  margin: 10px;
+  display: inline-block;
+  width: 210px;
+  background-color: #4285f4;
+  color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  transition: background-color .218s, border-color .218s, box-shadow .218s;
+}
+
+.text-container {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Roboto', arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: .21px;
+  font-size: 14px;
+  border: none;
+  text-align: center;
+  width: 166px;
+  padding-top: 10px;
 }

@@ -10,14 +10,34 @@ import {
   ElementRef
 } from '@angular/core';
 import { InputTextBaseComponent } from '../base/input-base.component';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { MatLabel } from '@angular/material';
+import {
+  NG_VALUE_ACCESSOR,
+  ControlValueAccessor,
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  AbstractControl
+} from '@angular/forms';
+import { ErrorStateMatcher, MatLabel } from '@angular/material';
 
 const INPUT_TEXT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => InputTextComponent),
   multi: true
 };
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && form.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+
+  getControlName(c: AbstractControl): string | null {
+    const formGroup = c.parent.controls;
+    return Object.keys(formGroup).find(name => c === formGroup[name]) || null;
+  }
+}
+
 
 @Component({
   selector: 'app-input-text',
@@ -27,6 +47,8 @@ const INPUT_TEXT_VALUE_ACCESSOR = {
 })
 export class InputTextComponent extends InputTextBaseComponent implements ControlValueAccessor, OnDestroy, OnInit {
   innerValue = '';
+
+  matcher = new MyErrorStateMatcher();
 
   @Input() pristine = false;
 
@@ -48,7 +70,6 @@ export class InputTextComponent extends InputTextBaseComponent implements Contro
   }
 
   ngOnInit(): void {
-    console.log(this.label);
   }
 
   onFocus(): void {

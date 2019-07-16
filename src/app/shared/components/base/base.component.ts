@@ -27,6 +27,7 @@ export abstract class BaseComponent implements OnDestroy {
     this.gotFocus.emit({target: this});
   }
 
+
   ngOnDestroy(): void {
     this.unsubscribeAllSubscriptions();
   }

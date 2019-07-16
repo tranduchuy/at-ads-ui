@@ -2,11 +2,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { PageBaseComponent } from './page-base.component';
 import { ServiceLocator } from '../../services/service-locator';
 import { ErrorNames, ValidatorsService } from '../../services/validator.service';
+import { DialogService } from '../../services/dialog.service';
 
 export abstract class EditableFormBaseComponent extends PageBaseComponent {
 
   protected fb: FormBuilder;
   protected validatorService: ValidatorsService;
+  protected _dialogService: DialogService;
 
   form: FormGroup;
   errors: any[] = [];
@@ -20,13 +22,13 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
 
   abstract post(name?: string): void;
 
-  onSubmit(name?: string): any {
+  onSubmit(): any {
     this.errors = [];
     this.markAsTouched(this.form);
     this.buildObjectError(this.form);
 
     if (this.errors.length !== 0) {
-      alert(['Please check: form have ' + this.errors.length + ' errors.']);
+      this._dialogService._openErrorDialog({messages: ['Please check: form have ' + this.errors.length + ' errors.']});
       return;
     }
 
@@ -65,6 +67,7 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
       } else if (!control.errors) {
         // do nothing
       } else {
+        control.hasError('incorrect');
         const errorKeys = Object.keys(control.errors);
         errorKeys.forEach((k: any) => {
           if (this.errors.indexOf(k) === -1) {
