@@ -9,15 +9,12 @@
   <div gdArea="input-side" class="input-side">
     <form [formGroup]="form" novalidate>
       <div fxFlex="1 0 auto" fxLayout="row">
-        <div>
           <app-input-text [formControlName]="'adWordId'"
                           [title]="'Adwords ID'"
                           [placeholder]="'5456445193'"
                           [pristine]="true"
                           [errors]="getMessageErrors('adWordId')"
           ></app-input-text>
-        </div>
-        <div>
           <button mat-raised-button
                   color="accent"
                   class="submit-button"
@@ -25,7 +22,6 @@
                   (click)="onClickBtnSubmit()">
             Kết nối
           </button>
-        </div>
       </div>
     </form>
   </div>
