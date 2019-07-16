@@ -23,8 +23,8 @@ export abstract class BaseComponent implements OnDestroy {
     this.lostFocus.emit({target: this});
   }
 
-  onFocus(event: any): void {
-    this.gotFocus.emit(event);
+  onFocus(): void {
+    this.gotFocus.emit({target: this});
   }
 
   ngOnDestroy(): void {

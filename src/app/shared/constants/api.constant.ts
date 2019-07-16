@@ -10,4 +10,7 @@ export namespace API {
     export const LoginByGoogle = environment.hostApi + '/api/users/login-by-google';
     export const getLoggedInInfo = environment.hostApi + '/api/users/info';
   }
+  export namespace AdwordsAccount {
+    export const addAccount = environment.hostApi + '/api/account-adwords';
+  }
 }

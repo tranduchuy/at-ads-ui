@@ -123,4 +123,11 @@ export class ValidatorsService {
       return {[ErrorNames.areStoreSelected[0]]: true};
     }
   }
+
+  public isRequired(control: AbstractControl): any {
+    const value = control.value;
+    if (!value) {
+      return {[ErrorNames.required[0]]: true};
+    }
+  }
 }

@@ -6,13 +6,21 @@ import { AddAdwordsAccountsRoutingModule } from './add-adwords-accounts-routing.
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import {MatGridListModule} from '@angular/material/grid-list';
+import { InputTextModule } from '../../shared/components/input-text/input-text.module';
+import { MatButtonModule } from '@angular/material';
+import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 @NgModule({
   declarations: [AddAdwordsAccountsComponent],
   imports: [
     CommonModule,
     AddAdwordsAccountsRoutingModule,
     MatGridListModule,
-    FuseSharedModule
+    FuseSharedModule,
+    InputTextModule,
+    MatButtonModule,
+  ],
+  providers: [
+    AddAdwordsAccountsService
   ]
 })
 export class AddAdwordsAccountsModule { }

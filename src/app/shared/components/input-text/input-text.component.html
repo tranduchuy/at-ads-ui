@@ -9,7 +9,11 @@
          (blur)="onLostFocus()"
          (ngModelChange)="onInputChange()">
   <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>
-  <mat-hint>
+  <mat-hint *ngIf="!pristine">
     <div *ngFor="let m of errors" class="error">{{m}}</div>
   </mat-hint>
+  <mat-hint *ngIf="pristine">
+    <div class="error">{{errors[0]}}</div>
+  </mat-hint>
+
 </mat-form-field>
