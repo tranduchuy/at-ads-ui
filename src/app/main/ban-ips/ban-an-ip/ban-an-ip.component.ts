@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { ValidateIP } from '../../../shared/validators/IP.validator';
+import { Validators } from '@angular/forms';
 
 import { BanAnIPService } from './ban-an-ip.service';
 

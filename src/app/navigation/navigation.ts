@@ -66,7 +66,7 @@ export const navigation: FuseNavigation[] = [
           title    : 'Chặn Tự Động Nhóm IP',
           translate: 'NAV.SAMPLE.TITLE',
           type     : 'item',
-          icon     : 'create',
+          icon     : 'grain',
           url      : '/chan-ip/chan-ip-theo-nhom',
         },
         {
@@ -74,7 +74,7 @@ export const navigation: FuseNavigation[] = [
           title    : 'Chặn 3G & 4G',
           translate: 'NAV.SAMPLE.TITLE',
           type     : 'item',
-          icon     : 'polymer',
+          icon     : 'wifi',
           url      : '/chan-ip/chan-3g4g',
         },
         {
@@ -82,7 +82,7 @@ export const navigation: FuseNavigation[] = [
           title    : 'Chặn Theo Mobile/PC/Tablet',
           translate: 'NAV.SAMPLE.TITLE',
           type     : 'item',
-          icon     : 'local_phone',
+          icon     : 'smartphone',
           url      : '/chan-ip/chan-theo-thiet-bi',
         },
       ]

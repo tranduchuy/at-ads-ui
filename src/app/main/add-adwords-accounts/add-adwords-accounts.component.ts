@@ -14,8 +14,6 @@ import { DialogService } from '../../shared/services/dialog.service';
 })
 export class AddAdwordsAccountsComponent extends EditableFormBaseComponent implements OnInit {
 
-  form;
-
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
