@@ -11,6 +11,7 @@ export class BanIpsService {
   constructor(private _http: HttpClient) { }
 
   public autoBlockingRangeIP(param): Observable<any> {
-    return this._http.post(API.AdwordsAccount.autoBlockingRangeIP, param);
+    const url =  API.AdwordsAccount.autoBlockingRangeIP.replace('{account_id}', '5406435113');
+    return this._http.post(url, param);
   }
 }
