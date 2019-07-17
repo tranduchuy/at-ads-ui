@@ -18,21 +18,21 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
   }
 
-  onSubmitForm() {
+  onSubmitForm(): void {
     this.onSubmit();
   }
 
-  initForm() {
+  initForm(): void {
     this.form = this.fb.group({
       bannedIP: ['', [Validators.required, this.validatorService.checkIP]]
     });
   }
 
-  post() {
+  post(): void {
     this._banAnIPService.banAnIP(this.form.get('bannedIP').value);
   }
 }

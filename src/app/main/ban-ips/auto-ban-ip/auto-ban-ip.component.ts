@@ -27,7 +27,7 @@ export class AutoBanIPComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

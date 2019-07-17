@@ -55,21 +55,21 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
   }
 
-  onSubmitForm() {
+  onSubmitForm(): void {
     this.onSubmit();
   }
 
-  initForm() {
+  initForm(): void {
     this.form = this.fb.group({
       listBannedIP: ['', [Validators.required, this.validatorService.checkIP]]
     })
   }
 
-  post() {
+  post(): void {
     const ip = this.form.get('listBannedIP').value;
     alert(ip);
     //this._banOptionalIPService.banOptionalIP();
