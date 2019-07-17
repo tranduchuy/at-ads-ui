@@ -7,8 +7,8 @@ export const navigation: FuseNavigation[] = [
     type: 'group',
     children: [
       {
-        id: 'leads',
-        title: 'Leads',
+        id: 'accounts',
+        title: 'Tài khoản',
         type: 'collapsable',
         icon: 'face',
         children: [
@@ -26,7 +26,7 @@ export const navigation: FuseNavigation[] = [
         id: 'account-list',
         title: 'Tài khoản Adwords',
         type: 'item',
-        icon: 'email',
+        icon: 'dashboard',
         url: '/account-list'
       }
     ]
