@@ -1,9 +1,16 @@
 import { Component, Input, Output, EventEmitter, ViewChild, forwardRef } from '@angular/core';
 import { ISelectTextItem } from './i-select-text-item';
 
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {MatSelect} from '@angular/material';
+import { ControlValueAccessor, FormControl, FormGroupDirective, NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
+import { ErrorStateMatcher, MatSelect } from '@angular/material';
 import { BaseComponent } from '../base/base.component';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && form.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-select-text',
@@ -19,6 +26,10 @@ import { BaseComponent } from '../base/base.component';
 })
 
 export class SelectTextComponent extends BaseComponent implements ControlValueAccessor {
+
+  _value = null;
+
+  matcher = new MyErrorStateMatcher();
 
   _selectedItems: ISelectTextItem[] = [];
 
