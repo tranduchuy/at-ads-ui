@@ -17,11 +17,13 @@ import { BanOptionalIPComponent } from './ban-optional-ip/ban-optional-ip.compon
 
 import { InputTextModule } from '../../shared/components/input-text/input-text.module';
 import { InputTextareaModule } from '../../shared/components/input-textarea/input-textarea.module';
+import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-blocking-range-ips.component';
 
 @NgModule({
   declarations: [
     BanAnIPComponent,
     BanOptionalIPComponent,
+    AutoBlockingRangeIpsComponent,
   ],
   imports: [
 
