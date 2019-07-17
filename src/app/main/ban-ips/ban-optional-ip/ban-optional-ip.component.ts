@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
 import { Validators } from '@angular/forms';
 
+import { BanIpsService } from '../ban-ips.service';
+
 
 export interface BannedIP {
   order: string;
@@ -49,7 +51,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   dataSource = ELEMENT_DATA;
 
   constructor(
-    
+    private _banIPService: BanIpsService
   ) {
     super();
   }
@@ -70,6 +72,6 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
   post(): void {
     const ip = this.form.get('listBannedIP').value;
-    alert(ip);
+    this._banIPService.banOptionalIP(ip);
   }
 }

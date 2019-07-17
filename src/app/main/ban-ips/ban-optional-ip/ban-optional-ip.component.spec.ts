@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BanOptionalIpComponent } from './ban-optional-ip.component';
+import { BanOptionalIPComponent } from './ban-optional-ip.component';
 
 describe('BanOptionalIpComponent', () => {
-  let component: BanOptionalIpComponent;
-  let fixture: ComponentFixture<BanOptionalIpComponent>;
+  let component: BanOptionalIPComponent;
+  let fixture: ComponentFixture<BanOptionalIPComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BanOptionalIpComponent ]
+      declarations: [ BanOptionalIPComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BanOptionalIpComponent);
+    fixture = TestBed.createComponent(BanOptionalIPComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

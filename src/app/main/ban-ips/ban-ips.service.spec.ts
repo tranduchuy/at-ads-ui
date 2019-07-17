@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BanAnIpService } from './ban-an-ip.service';
+import { BanIpsService } from './ban-ips.service';
 
-describe('BanAnIpService', () => {
+describe('BanIpsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: BanAnIpService = TestBed.get(BanAnIpService);
+    const service: BanIpsService = TestBed.get(BanIpsService);
     expect(service).toBeTruthy();
   });
 });
