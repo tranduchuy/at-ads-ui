@@ -12,18 +12,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { BanAnIPComponent } from './ban-an-ip/ban-an-ip.component';
-import { BanOptionalIPComponent } from './ban-optional-ip/ban-optional-ip.component';
-
 import { InputTextModule } from '../../shared/components/input-text/input-text.module';
 import { InputTextareaModule } from '../../shared/components/input-textarea/input-textarea.module';
 import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-blocking-range-ips.component';
+import { SelectTextModule } from '../../shared/components/select-text/select-text.module';
+import { BanAnIPComponent } from './ban-an-ip/ban-an-ip.component';
+import { BanOptionalIPComponent } from './ban-optional-ip/ban-optional-ip.component';
+import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 
 @NgModule({
   declarations: [
     BanAnIPComponent,
     BanOptionalIPComponent,
     AutoBlockingRangeIpsComponent,
+    AutoBanIPComponent
   ],
   imports: [
 
@@ -37,6 +39,7 @@ import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-bl
     ReactiveFormsModule,
     InputTextModule,
     InputTextareaModule,
+    SelectTextModule,
 
     FuseSharedModule,
 

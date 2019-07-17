@@ -16,7 +16,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   form;
   isConnected = false;
-
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
