@@ -51,8 +51,8 @@ export class AutoBlockingRangeIpsComponent extends EditableFormBaseComponent imp
 
   initForm(): void {
     this.form = this.fb.group({
-      classC: [false, [Validators.required]],
-      classD: [false, [Validators.required]]
+      classC: [this.itemsSource.classC[0], [Validators.required]],
+      classD: [this.itemsSource.classD[0], [Validators.required]]
     });
   }
 

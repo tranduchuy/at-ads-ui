@@ -4,14 +4,14 @@
               [compareWith]="compareFn"
               [(value)]="_selectedItems"
               [disabled]="isDisabled"
+              [errorStateMatcher]="matcher"
               (selectionChange)="selected($event)">
-    <mat-option [value]="null">None</mat-option>
     <mat-option *ngFor="let item of itemsSource"
                 [disabled]="item.isDisabled === true"
                 [value]="item">{{item[displayPath]}}</mat-option>
   </mat-select>
   <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>
-  <mat-hint>
+  <mat-hint class="err">
     <div *ngFor="let m of errors">{{m}}</div>
   </mat-hint>
 </mat-form-field>
