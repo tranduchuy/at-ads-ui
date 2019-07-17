@@ -13,6 +13,7 @@ export namespace ErrorNames {
   export const maxNumberValue = ['maxMaxNumber', 'Quá cao'];
   export const slug = ['slug', 'Slug sai'];
   export const areStoreSelected = ['areaStore', 'Chưa chọn store nào'];
+  export const invalidIP = ['invalidIP', 'IP không hợp lệ'];
 }
 
 @Injectable()
@@ -27,6 +28,12 @@ export class ValidatorsService {
     return pattern.test(str);
   }
 
+  public checkIP(control: AbstractControl): any {
+    const regex = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
+    if(!regex.test(control.value))
+      return {[ErrorNames.invalidIP[0]]: true};
+  }
+
   public checkDomain(str: string): boolean {
     return ValidatorsService.isURL(str);
   }
@@ -34,7 +41,7 @@ export class ValidatorsService {
   public checkUrlSeo(control: AbstractControl): any {
     const regex = new RegExp(/^[a-zA-Z0-9\-]+$/, 'g');
     if (!regex.test(control.value)) {
-      return {[ErrorNames.patternUrl[0]]: true};
+      return { [ErrorNames.patternUrl[0]]: true };
     }
   }
 
@@ -42,7 +49,7 @@ export class ValidatorsService {
     const value = control.value;
 
     if (!ValidatorsService.isURL(value.toString())) {
-      return {[ErrorNames.patternUrl[0]]: true};
+      return { [ErrorNames.patternUrl[0]]: true };
     }
   }
 
@@ -50,7 +57,7 @@ export class ValidatorsService {
     const reg = /^(\d|\s)+$/;
     const value = control.value;
     if (!reg.test(value.toString())) {
-      return {[ErrorNames.patternHotlineNumber[0]]: true};
+      return { [ErrorNames.patternHotlineNumber[0]]: true };
     }
   }
 
@@ -58,7 +65,7 @@ export class ValidatorsService {
     const reg = /^\d+$/;
     const value = control.value;
     if (!reg.test(value.toString())) {
-      return {[ErrorNames.patternNumber[0]]: true};
+      return { [ErrorNames.patternNumber[0]]: true };
     }
   }
 
@@ -112,14 +119,14 @@ export class ValidatorsService {
     const value = control.value;
     const reg = new RegExp('^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$');
     if (!reg.test(value.toString())) {
-      return {[ErrorNames.slug[0]]: true};
+      return { [ErrorNames.slug[0]]: true };
     }
   }
 
   public checkAreaStoreSelected(control: AbstractControl): any {
     const value = control.value;
     if (value.length === 0) {
-      return {[ErrorNames.areStoreSelected[0]]: true};
+      return { [ErrorNames.areStoreSelected[0]]: true };
     }
   }
 

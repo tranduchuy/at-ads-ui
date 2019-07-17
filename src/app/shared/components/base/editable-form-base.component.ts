@@ -107,6 +107,9 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
         return ErrorNames.patternHotlineNumber[1];
       case ErrorNames.minNumberValue[0]:
         return ErrorNames.minNumberValue[1];
+
+      case ErrorNames.invalidIP[0]:
+        return ErrorNames.invalidIP[1];
     }
 
     return `Something error ${keyErr}`;

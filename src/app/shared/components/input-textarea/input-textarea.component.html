@@ -1,6 +1,7 @@
 <mat-form-field appearance="outline">
   <mat-label>{{title}}</mat-label>
   <textarea (blur)="onLostFocus()"
+            [style.height]="height"
             (focus)="onFocus($event)"
             (ngModelChange)="onInputChange()"
             [(ngModel)]="innerValue"

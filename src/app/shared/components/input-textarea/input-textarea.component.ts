@@ -27,11 +27,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class InputTextareaComponent extends BaseComponent implements ControlValueAccessor {
   innerValue = '';
 
-
   @Input() pristine = false;
 
 
   matcher = new MyErrorStateMatcher();
+  @Input() height = '150px';
 
   @Input() icon = '';
   @Input()
