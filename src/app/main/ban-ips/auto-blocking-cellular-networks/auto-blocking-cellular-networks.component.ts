@@ -76,8 +76,6 @@ export class AutoBlockingCellularNetworksComponent  extends EditableFormBaseComp
 
   post(): void {
     const params = this.generatePostObject();
-    console.log(params);
-
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.autoBlocking3G4G(params).subscribe((res: ILoginSuccess) =>
       {
