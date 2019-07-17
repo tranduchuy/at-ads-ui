@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IAuthLogin } from '../../shared/models/i-auth-login';
 import { Observable } from 'rxjs';
 import { API } from '../../shared/constants/api.constant';
 import { HttpClient } from '@angular/common/http';

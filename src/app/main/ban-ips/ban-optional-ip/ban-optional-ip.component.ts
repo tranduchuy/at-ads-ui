@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
 import { Validators } from '@angular/forms';
-
 import { BanOptionalIPService } from './ban-optional-ip.service';
+
 
 export interface BannedIP {
   order: string;
