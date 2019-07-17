@@ -1,29 +1,40 @@
-<div gdAreas="header side | content content"
+<div gdAreas="connect-button input-side | content content"
      gdGap="16px"
      gdRows="auto auto"
      style="width: 100%"
 >
-  <div gdArea="header">
-    Header
-  </div>
-  <div gdArea="side">
-    <form [formGroup]="form" novalidate>
-      <app-input-text [formControlName]="'adWordId'"
-                      [title]="'Adwords ID'"
-                      [placeholder]="'5456445193'"
-                      [pristine]="true"
-                      [errors]="getMessageErrors('adWordId')"
-      ></app-input-text>
+  <div gdArea="connect-button" class="connect-button box">
+    <h3><strong><span class="step">[1]</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h3>
+    <p> Sử dụng tài khoản Gmail quản lý Google AdWords, bấm kết nối nhanh để hoàn tất quá trình kết nối</p>
+    <div class="loginwithGoogle">
       <button mat-raised-button
-              color="accent"
-              class="submit-button"
-              aria-label="Kết nối"
-              (click)="onClickBtnSubmit()">
-        Kết nối
-      </button>
-    </form>
+              color="accent">
+        <mat-icon matSuffix class="add_box">add_box</mat-icon> Kết Nối Nhanh Bằng Gmail</button>
+    </div>
   </div>
-  <div gdArea="content">
-    Content
+  <div gdArea="input-side" class="input-side box">
+    <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ ADWORDS CID</strong></h3>
+    <p><strong>Bước 1: </strong> Đăng nhập <a href="adwords.google.com" target="_blank">adwords.google.com</a>, ID tài
+      khoản adwords của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
+      tài khoản Adwords của bạn</p>
+    <form [formGroup]="form" novalidate>
+      <div fxFlex="1 0 auto" fxLayout="row">
+        <app-input-text [formControlName]="'adWordId'"
+                        [title]="'Adwords ID'"
+                        [placeholder]="'5456445193'"
+                        [pristine]="true"
+                        [errors]="getMessageErrors('adWordId')"
+        ></app-input-text>
+        <button mat-raised-button
+                color="accent"
+                class="submit-button"
+                aria-label="Kết nối"
+                (click)="onClickBtnSubmit()">
+
+          <mat-icon matSuffix class="add_box">add_box</mat-icon>
+          Kết nối
+        </button>
+      </div>
+    </form>
   </div>
 </div>

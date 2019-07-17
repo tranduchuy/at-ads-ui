@@ -7,7 +7,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { InputTextModule } from '../../shared/components/input-text/input-text.module';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatIconModule } from '@angular/material';
 import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 @NgModule({
   declarations: [AddAdwordsAccountsComponent],
@@ -18,6 +18,7 @@ import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
     FuseSharedModule,
     InputTextModule,
     MatButtonModule,
+    MatIconModule,
   ],
   providers: [
     AddAdwordsAccountsService

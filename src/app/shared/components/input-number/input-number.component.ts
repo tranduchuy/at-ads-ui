@@ -1,12 +1,21 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroupDirective, NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
 import { BaseComponent } from '../base/base.component';
+import { ErrorStateMatcher } from '@angular/material';
 
 const INPUT_NUMBER_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => InputNumberComponent),
   multi: true
 };
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && form.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 
 @Component({
   templateUrl: './input-number.component.html',
@@ -20,6 +29,10 @@ export class InputNumberComponent extends BaseComponent implements ControlValueA
   private _target;
   _value = '';
   _mask = '0*';
+
+  matcher = new MyErrorStateMatcher();
+
+  @Input() pristine = false;
 
   @Input() icon = '';
   @Input() placeholder = '';

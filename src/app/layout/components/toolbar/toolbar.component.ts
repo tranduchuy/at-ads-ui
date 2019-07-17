@@ -8,7 +8,6 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
-import { AuthService } from '../../../shared/services/auth.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
 
@@ -21,6 +20,11 @@ import { Router } from '@angular/router';
 
 export class ToolbarComponent implements OnInit, OnDestroy
 {
+    user = {
+        avatar: '',
+        name: '',
+        email: ''
+    };
     horizontalNavbar: boolean;
     rightNavbar: boolean;
     hiddenNavbar: boolean;
@@ -115,6 +119,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {id: this._translateService.currentLang});
+
+        this.user = JSON.parse(this._sessionService.user);
     }
 
     /**

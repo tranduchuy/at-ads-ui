@@ -107,8 +107,7 @@ export class ValidatorsService {
   public checkMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors => {
       const errors: ValidationErrors = {};
-      const value = control.value;
-
+      const value = control.value || '';
       if (value.toString().length > maxLength) {
         errors[ErrorNames.maxLength[0]] = true;
       }

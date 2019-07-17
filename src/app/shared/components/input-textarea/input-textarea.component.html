@@ -1,16 +1,20 @@
 <mat-form-field appearance="outline">
   <mat-label>{{title}}</mat-label>
-  <textarea matInput
-         type="text"
-         [style.height]="height"
-         [disabled]="isDisabled"
-         [placeholder]="placeholder"
-         [(ngModel)]="innerValue"
-         (focus)="onFocus($event)"
-         (blur)="onLostFocus()"
-            (ngModelChange)="onInputChange()"></textarea>
-  <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>
-  <mat-hint>
-    <div *ngFor="let m of errors">{{m}}</div>
-  </mat-hint>
+  <textarea (blur)="onLostFocus()"
+            [style.height]="height"
+            (focus)="onFocus($event)"
+            (ngModelChange)="onInputChange()"
+            [(ngModel)]="innerValue"
+            [disabled]="isDisabled"
+            [errorStateMatcher]="matcher"
+            [placeholder]="placeholder"
+            matInput
+            type="text"></textarea>
+  <mat-icon *ngIf="icon" matSuffix>{{icon}}</mat-icon>
+  <mat-error *ngIf="!pristine">
+    <div *ngFor="let m of errors" class="error">{{m}}</div>
+  </mat-error>
+  <mat-error *ngIf="pristine">
+    <div class="error">{{errors[0]}}</div>
+  </mat-error>
 </mat-form-field>

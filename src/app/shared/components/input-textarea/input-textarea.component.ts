@@ -1,7 +1,15 @@
 import {Component, EventEmitter, Input, Output, forwardRef, ViewChild, ElementRef} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {MatLabel} from '@angular/material';
+import { ControlValueAccessor, FormControl, FormGroupDirective, NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
+import { ErrorStateMatcher, MatLabel } from '@angular/material';
 import { BaseComponent } from '../base/base.component';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && form.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 
 @Component({
   selector: 'app-input-textarea',
@@ -19,6 +27,10 @@ import { BaseComponent } from '../base/base.component';
 export class InputTextareaComponent extends BaseComponent implements ControlValueAccessor {
   innerValue = '';
 
+  @Input() pristine = false;
+
+
+  matcher = new MyErrorStateMatcher();
   @Input() height = '150px';
 
   @Input() icon = '';

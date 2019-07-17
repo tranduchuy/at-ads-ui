@@ -8,10 +8,15 @@
          [class]="classes"
          [placeholder]="placeholder"
          (blur)="onGotBlur()"
+         [errorStateMatcher]="matcher"
          [ngModelOptions]="{standalone: true}"
          (ngModelChange)="onChangeValue()"/>
   <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>
-  <mat-hint>
-    <div *ngFor="let m of errors">{{m}}</div>
-  </mat-hint>
+  <mat-error *ngIf="!pristine">
+    <div *ngFor="let m of errors" class="error">{{m}}</div>
+  </mat-error>
+  <mat-error *ngIf="pristine">
+    <div class="error">{{errors[0]}}</div>
+  </mat-error>
+
 </mat-form-field>
