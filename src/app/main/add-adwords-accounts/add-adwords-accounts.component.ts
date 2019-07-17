@@ -37,6 +37,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
       {
         this._dialogService._openSuccessDialog(res);
         this.isConnected = true;
+        this._fuseProgressiveBarService.hide();
       },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
