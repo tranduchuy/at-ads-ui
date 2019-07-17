@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
 import { Validators } from '@angular/forms';
 
-import { BanOptionalIPService } from './ban-optional-ip.service';
 
 export interface BannedIP {
   order: string;
@@ -50,7 +49,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   dataSource = ELEMENT_DATA;
 
   constructor(
-    private _banOptionalIPService: BanOptionalIPService,
+    
   ) {
     super();
   }
@@ -65,14 +64,12 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
   initForm(): void {
     this.form = this.fb.group({
-      listBannedIP: ['', [Validators.required, this.validatorService.checkIP]]
+      listBannedIP: ['', [Validators.required]]
     })
   }
 
   post(): void {
     const ip = this.form.get('listBannedIP').value;
     alert(ip);
-    //this._banOptionalIPService.banOptionalIP();
   }
-
 }

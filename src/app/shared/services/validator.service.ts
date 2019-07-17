@@ -30,8 +30,15 @@ export class ValidatorsService {
 
   public checkIP(control: AbstractControl): any {
     const regex = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
-    if(!regex.test(control.value))
-      return {[ErrorNames.invalidIP[0]]: true};
+
+    console.log(control.value);
+
+    if (!regex.test(control.value)) {
+
+      console.log(regex.test(control.value));
+
+      return { [ErrorNames.invalidIP[0]]: true };
+    }
   }
 
   public checkDomain(str: string): boolean {
@@ -133,7 +140,7 @@ export class ValidatorsService {
   public isRequired(control: AbstractControl): any {
     const value = control.value;
     if (!value) {
-      return {[ErrorNames.required[0]]: true};
+      return { [ErrorNames.required[0]]: true };
     }
   }
 }

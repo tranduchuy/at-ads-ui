@@ -37,6 +37,29 @@
       </div>
     </form>
   </div>
+  <div gdArea="content" class="box" *ngIf="isConnected">
+    <hr>
+    <h3><strong><span class="step">[2]</span>  VUI LÒNG ĐỒNG Ý YÊU CẦU KẾT NỐI</strong></h3>
+    <p><strong>Bước 1: </strong> Truy cập lại tài khoản AdWords của bạn <a href="adwords.google.com" target="_blank">adwords.google.com</a> và bấm vào icon ở menu bên trái </p>
+    <p class="text-center"><img src="/assets/images/adwords-caidat-b1-moi.jpg?v=1"></p>
+    <p><strong>Bước 2: </strong> Sau đó bấm vào <code> Người Quản Lý </code> và bấm <code>Chấp Thuận</code> (nếu bạn không thấ người quản lý vui lòng chờ khoảng 5 phút)</p>
+    <p class="text-center">
+      <img src="./assets/images/adwords-caidat-b2-moi.jpg?v=1">
+    </p>
+    <p><strong>Bước 3: </strong>Một thông báo hiện ra, bạn chọn <code>Cấp Quyền Truy Cập</code></p>
+    <p class="text-center">
+      <img src="./assets/images/adwords-caidat-b3-moi.jpg?v=1">
+    </p>
+    <p class ="text-center">
+      <button mat-raised-button
+              color="warn"
+              aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI"
+              (click)="onClickBtnSubmit()">
+        <mat-icon matSuffix class="done_outline">done_outline</mat-icon>
+        TÔI ĐÃ HOÀN TẤT KẾT NỐI
+      </button>
+
+    </p>
   <div gdArea="content" class="box">
     <h3><strong><span class="step">[2]</span>  Vui lòng đồng ý yêu cầu kết nối</strong></h3>
     <p><strong>Bước 1: </strong> Đăng nhập <a href="adwords.google.com" target="_blank">adwords.google.com</a>, ID tài

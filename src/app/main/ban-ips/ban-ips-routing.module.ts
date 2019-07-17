@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { BanAnIPComponent } from './ban-an-ip/ban-an-ip.component';
 import { BanOptionalIPComponent } from './ban-optional-ip/ban-optional-ip.component';
+import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-blocking-range-ips.component';
 import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 
 
@@ -23,6 +24,11 @@ import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
         path: 'chan-ip-tu-dong',
         pathMatch: 'full',
         component: AutoBanIPComponent
+      },
+      {
+        path: 'chan-ip-theo-nhom',
+        pathMatch: 'full',
+        component: AutoBlockingRangeIpsComponent
       }
     ])
   ]

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { BanAnIPService } from './ban-an-ip.service';
-
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
 
 @Component({
@@ -13,7 +11,7 @@ import { EditableFormBaseComponent } from '../../../shared/components/base/edita
 export class BanAnIPComponent extends EditableFormBaseComponent implements OnInit {
 
   constructor(
-    private _banAnIPService: BanAnIPService
+
   ) {
     super();
   }
@@ -33,6 +31,6 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
   }
 
   post(): void {
-    this._banAnIPService.banAnIP(this.form.get('bannedIP').value);
+   
   }
 }

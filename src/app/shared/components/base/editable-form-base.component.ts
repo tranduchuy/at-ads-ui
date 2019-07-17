@@ -18,6 +18,7 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
 
     this.fb = ServiceLocator.injector.get(FormBuilder);
     this.validatorService = ServiceLocator.injector.get(ValidatorsService);
+    this._dialogService = ServiceLocator.injector.get(DialogService);
   }
 
   abstract post(name?: string): void;

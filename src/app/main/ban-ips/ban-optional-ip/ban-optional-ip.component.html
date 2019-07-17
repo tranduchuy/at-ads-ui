@@ -13,15 +13,22 @@
     của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
   </p>
 
-  <form  [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
 
     <div class="flex-box">
       <div class="flex-item list">
 
-        <app-input-textarea [formControlName]="'listBannedIP'" 
+        <!-- <app-input-textarea [formControlName]="'listBannedIP'"
                             [errors]="getMessageErrors('listBannedIP')" 
+                            (keyup)="onKeyUp($event.target.value)"
                             title="Nhập Danh Sách IP Muốn Chặn"
-                            height="360px"></app-input-textarea>
+                            height="360px"></app-input-textarea> -->
+
+        <mat-form-field class="list-ip">
+          <textarea [formControlName]="'listBannedIP'"
+                    matInput
+                    placeholder="Nhập Danh Sách IP Muốn Chặn"></textarea>         
+        </mat-form-field>
 
       </div>
       <div class="flex-item input-example">
