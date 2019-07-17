@@ -15,7 +15,8 @@ export class BanIpsService {
     return this._http.post(url, param);
   }
 
-  public banOptionalIP(param){
-    alert(param);
+  public blockIPs(param): Observable<any>{
+    const url = API.AdwordsAccount.blockIPs.replace('{account_id}', '5406435113');
+    return this._http.post(url, param);
   }
 }

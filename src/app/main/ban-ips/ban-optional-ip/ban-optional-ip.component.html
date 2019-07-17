@@ -18,11 +18,10 @@
     <div class="flex-box">
       <div class="flex-item list">
 
-        <mat-form-field class="list-ip">
-          <textarea [formControlName]="'listBannedIP'"
-                    matInput
-                    placeholder="Nhập danh sách IP muốn chặn"></textarea>         
-        </mat-form-field>
+        <app-input-textarea [formControlName]="'listBannedIP'"
+                            [errors]="getMessageErrors('listBannedIP')"
+                            title="Nhập danh sách IP cần chặn"
+                            height="360px"></app-input-textarea>
 
       </div>
       <div class="flex-item input-example">
