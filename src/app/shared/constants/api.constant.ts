@@ -12,5 +12,6 @@ export namespace API {
   }
   export namespace AdwordsAccount {
     export const addAccount = environment.hostApi + '/api/account-adwords';
+    export const autoBlockingRangeIP = environment.hostApi + '/account-adwords/{account_id}/auto-blocking-range-ip';
   }
 }
