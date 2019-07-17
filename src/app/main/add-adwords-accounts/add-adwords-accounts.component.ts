@@ -15,6 +15,7 @@ import { DialogService } from '../../shared/services/dialog.service';
 export class AddAdwordsAccountsComponent extends EditableFormBaseComponent implements OnInit {
 
   form;
+  isConnected = false;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -35,6 +36,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res: ILoginSuccess) =>
       {
         this._dialogService._openSuccessDialog(res);
+        this.isConnected = true;
       },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
