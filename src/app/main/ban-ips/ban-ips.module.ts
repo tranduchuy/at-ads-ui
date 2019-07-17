@@ -19,13 +19,16 @@ import { SelectTextModule } from '../../shared/components/select-text/select-tex
 import { BanAnIPComponent } from './ban-an-ip/ban-an-ip.component';
 import { BanOptionalIPComponent } from './ban-optional-ip/ban-optional-ip.component';
 import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
+import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
+import { CheckboxGroupModule } from '../../shared/components/checkbox-group/checkbox-group.module';
 
 @NgModule({
   declarations: [
     BanAnIPComponent,
     BanOptionalIPComponent,
     AutoBlockingRangeIpsComponent,
-    AutoBanIPComponent
+    AutoBanIPComponent,
+    AutoBlockingCellularNetworksComponent
   ],
   imports: [
 
@@ -35,7 +38,7 @@ import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
     MatInputModule,
     MatTableModule,
     MatTooltipModule,
-
+    CheckboxGroupModule,
     ReactiveFormsModule,
     InputTextModule,
     InputTextareaModule,

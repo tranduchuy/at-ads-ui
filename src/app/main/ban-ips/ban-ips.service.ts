@@ -14,4 +14,9 @@ export class BanIpsService {
     const url =  API.AdwordsAccount.autoBlockingRangeIP.replace('{account_id}', '5406435113');
     return this._http.post(url, param);
   }
+
+  public autoBlocking3G4G(param): Observable<any> {
+    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', '6668385722');
+    return this._http.post(url, param);
+  }
 }

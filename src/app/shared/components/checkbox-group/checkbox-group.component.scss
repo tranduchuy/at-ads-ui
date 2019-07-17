@@ -1,0 +1,15 @@
+.checkbox-group {
+  mat-checkbox {
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+
+  &.checkbox-group-row {
+    display: flex;
+    flex-direction: column;
+
+    mat-checkbox {
+      margin: 5px 0px;
+    }
+  }
+}
