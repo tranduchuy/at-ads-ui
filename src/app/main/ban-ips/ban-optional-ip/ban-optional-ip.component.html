@@ -1,0 +1,104 @@
+<div class="container">
+
+  <div class="title1">
+    CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP - TÀI KHOẢN <span class="account-id">322-238-0982</span>
+  </div>
+
+  <div class="title2">
+    TÍNH NĂNG CHẶN THEO DANH SÁCH IP TÙY CHỈNH
+  </div>
+
+  <p class="notification">
+    Hệ thống kiểm tra IP máy tính của bạn và chặn quảng cáo <span style="color: red">không cho hiển thị</span> trên máy
+    của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
+  </p>
+
+  <form class="ban-ip-form">
+
+    <div class="flex-box">
+      <div class="flex-item list">
+        <app-input-textarea title="Nhập Danh Sách IP Muốn Chặn" height="360px"></app-input-textarea>
+      </div>
+      <div class="flex-item input-example">
+        <p class="title3">Hướng Dẫn Chặn IP Tùy Chỉnh</p>
+        <p>
+          Bạn có thể chặn <b>từng IP riêng lẻ</b>, vui lòng điền mỗi IP 1 dòng
+        </p>
+        <b>Ví dụ IP riêng lẻ:</b>
+        <p>
+          127.0.0.1
+          <br>127.0.0.2
+          <br>127.0.0.3
+        </p>
+        <p>
+          Hoặc chặn <b>từng nhóm IP</b>, thêm dấu <span style="color: red">(*)</span> tượng trưng cho nhóm IP muốn chặn
+        </p>
+        <b>Ví dụ nhóm IP:</b>
+        <p>
+          IP4: 127.0.0.*
+          <br>IP4: 127.0.*.*
+          <br>IP4: 127.*.*.*
+          <br>IP6: 2620:0:1003:1011:fa1e:dfff:fee6:*
+        </p>
+        <span>
+          Hệ thống sẽ tự động chuyển đổi IP và chặn trong Adwords, thời gian thực hiện từ 50-60s
+        </span>
+      </div>
+    </div>
+
+    <div class="button-area">
+      <button type="submit" mat-raised-button color="warn">
+        <mat-icon>block</mat-icon> CHẶN THỦ CÔNG DANH SÁCH IP
+      </button>
+    </div>
+  </form>
+
+  <p class="table-title title3">Danh Sách IP Đã Chặn Gần Đây</p>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="order">
+      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell *matCellDef="let element" [class.new]="element.order === 'MỚI'"> {{element.order}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="ip">
+      <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <p class="status">
+          {{element.status}}
+        </p>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="task">
+      <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
+      <mat-cell *matCellDef>
+        <span class="task">
+          <mat-icon>beenhere</mat-icon> đã chặn
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unlockButton">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef>
+        <button mat-icon-button color="accent" matTooltip="Nhấn để mở khóa" class="unlock-button">
+          <mat-icon>lock_open</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>

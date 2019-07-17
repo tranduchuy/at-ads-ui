@@ -17,14 +17,6 @@
 
     <app-input-text [formControlName]="'bannedIP'" [errors]="getMessageErrors('bannedIP')" title="IP của bạn"></app-input-text>
 
-    <!-- <mat-error *ngIf="banIPForm.get('bannedIP').hasError('required')">
-        Vui lòng nhập IP
-      </mat-error>
-      <mat-error
-        *ngIf="banIPForm.get('bannedIP').hasError('invalidIP') && !banIPForm.get('bannedIP').hasError('required')">
-        IP không hợp lệ
-      </mat-error> -->
-
     <div class="button-area">
       <button type="submit" mat-raised-button color="warn">
         <mat-icon>block</mat-icon> THỬ CHẶN IP CỦA BẠN
@@ -37,7 +29,7 @@
       IP <b>192.168.125.1</b> đã được chặn thành công trong hệ thống AdWords.
       <br><br><b>Cách kiểm tra hệ thống hoạt động:</b>
       <br><b>Bước 1:</b> Truy cập vào tài khoản AdWords tại trang <a href="https://ads.google.com">Ads.google.com</a>
-      bấm vào
+      nhấn vào
       <span class="step"> 1 Chiến dịch</span>
       <mat-icon>arrow_forward</mat-icon>
       <span class="step"> Cài đặt</span>

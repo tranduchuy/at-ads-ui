@@ -19,6 +19,8 @@ import { BaseComponent } from '../base/base.component';
 export class InputTextareaComponent extends BaseComponent implements ControlValueAccessor {
   innerValue = '';
 
+  @Input() height = '150px';
+
   @Input() icon = '';
   @Input()
   set value(val: any) {

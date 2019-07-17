@@ -2,6 +2,7 @@
   <mat-label>{{title}}</mat-label>
   <textarea matInput
          type="text"
+         [style.height]="height"
          [disabled]="isDisabled"
          [placeholder]="placeholder"
          [(ngModel)]="innerValue"

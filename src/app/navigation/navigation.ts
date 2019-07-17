@@ -1,7 +1,6 @@
 import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
-<<<<<<< HEAD
     {
         id       : 'applications',
         title    : 'Applications',
@@ -21,6 +20,20 @@ export const navigation: FuseNavigation[] = [
                     bg       : '#F44336',
                     fg       : '#FFFFFF'
                 }
+            },
+            {
+              id: 'add-accounts',
+              title: 'Thêm tài khoản mới',
+              translate: 'NAV.SAMPLE.TITLE',
+              type: 'item',
+              icon: 'email',
+              url: '/them-tai-khoan-moi',
+              badge: {
+                title: '25',
+                translate: 'NAV.SAMPLE.BADGE',
+                bg: '#F44336',
+                fg: '#FFFFFF'
+              }
             }
         ]
     },
@@ -39,7 +52,7 @@ export const navigation: FuseNavigation[] = [
                 url      : '/chan-ip/chan-1-ip',
             },
             {
-                id       : 'ban-ip-optional',
+                id       : 'ban-optional-ip',
                 title    : 'Chặn IP Tùy Chỉnh',
                 translate: 'NAV.SAMPLE.TITLE',
                 type     : 'item',
@@ -47,7 +60,7 @@ export const navigation: FuseNavigation[] = [
                 url      : '/chan-ip/chan-ip-tuy-chinh',
             },
             {
-                id       : 'ban-ip-auto',
+                id       : 'auto-ban-ip',
                 title    : 'Chặn Tự Động IP',
                 translate: 'NAV.SAMPLE.TITLE',
                 type     : 'item',
@@ -55,7 +68,7 @@ export const navigation: FuseNavigation[] = [
                 url      : '/chan-ip/chan-ip-tu-dong',
             },
             {
-                id       : 'ban-ip-range',
+                id       : 'auto-ban-ip-range',
                 title    : 'Chặn Tự Động Nhóm IP',
                 translate: 'NAV.SAMPLE.TITLE',
                 type     : 'item',
@@ -80,42 +93,4 @@ export const navigation: FuseNavigation[] = [
             },
         ]
     }
-=======
-  {
-    id: 'applications',
-    title: 'Applications',
-    translate: 'NAV.APPLICATIONS',
-    type: 'group',
-    children: [
-      {
-        id: 'sample',
-        title: 'Sample',
-        translate: 'NAV.SAMPLE.TITLE',
-        type: 'item',
-        icon: 'email',
-        url: '/sample',
-        badge: {
-          title: '25',
-          translate: 'NAV.SAMPLE.BADGE',
-          bg: '#F44336',
-          fg: '#FFFFFF'
-        }
-      },
-      {
-        id: 'add-accounts',
-        title: 'Thêm tài khoản mới',
-        translate: 'NAV.SAMPLE.TITLE',
-        type: 'item',
-        icon: 'email',
-        url: '/them-tai-khoan-moi',
-        badge: {
-          title: '25',
-          translate: 'NAV.SAMPLE.BADGE',
-          bg: '#F44336',
-          fg: '#FFFFFF'
-        }
-      }
-    ]
-  }
->>>>>>> ban-ids
 ];
