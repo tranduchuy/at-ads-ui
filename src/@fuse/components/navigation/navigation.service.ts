@@ -12,6 +12,10 @@ export class FuseNavigationService
     onItemCollapsed: Subject<any>;
     onItemCollapseToggled: Subject<any>;
 
+    _onReloadNavigation: Subject<any>;
+
+    _onReloadNavigation$;
+
     // Private
     private _onNavigationChanged: BehaviorSubject<any>;
     private _onNavigationRegistered: BehaviorSubject<any>;
@@ -31,6 +35,9 @@ export class FuseNavigationService
         // Set the defaults
         this.onItemCollapsed = new Subject();
         this.onItemCollapseToggled = new Subject();
+        this._onReloadNavigation = new Subject();
+
+        this._onReloadNavigation$ = this._onReloadNavigation.asObservable();
 
         // Set the private defaults
         this._currentNavigationKey = null;
@@ -421,5 +428,9 @@ export class FuseNavigationService
 
         // Trigger the observable
         this._onNavigationItemRemoved.next(true);
+    }
+
+    reloadNavigation(): void{
+        this._onReloadNavigation.next();
     }
 }

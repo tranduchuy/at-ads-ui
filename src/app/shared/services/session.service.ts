@@ -27,7 +27,7 @@ export class SessionService {
   setActiveAccountId(accountId): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.putObject(CookieNames.activeAccountId, accountId, {expires: today});
+    this.cookieService.put(CookieNames.activeAccountId, accountId, {expires: today});
   }
 
   remove(): void {
@@ -37,6 +37,9 @@ export class SessionService {
 
   get user(): any {
     return this.cookieService.get(CookieNames.user);
+  }
+  get activeAccountId(): any {
+    return this.cookieService.get(CookieNames.activeAccountId);
   }
 
   get token(): any {

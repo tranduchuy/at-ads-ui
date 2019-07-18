@@ -76,6 +76,9 @@ export class FuseNavigationComponent implements OnInit {
     private _adwordsAccountsService: AdwordsAccountsService,
     private _sessionService: SessionService
   ) {
+    this._fuseNavigationService._onReloadNavigation$.subscribe(() => {
+      this.loadNavigation();
+    });
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
@@ -88,11 +91,20 @@ export class FuseNavigationComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
+    this.loadNavigation();
+  }
+  loadNavigation(): void {
     this._adwordsAccountsService.getAdwordsAccount().subscribe(res => {
         let accounts = res.data.accounts;
-        this.accounts.children[0].title = accounts[0].adsId;
-        this.accounts.children[0].id = accounts[0].adsId;
+        let activeAccountId = this._sessionService.activeAccountId.toString();
         if (accounts.length > 0) {
+          if (!activeAccountId) {
+            activeAccountId = accounts[0].adsId.toString();
+            this._sessionService.setActiveAccountId(accounts[0].adsId.toString());
+          }
+          accounts = accounts.filter( account => {
+            return account.adsId !== activeAccountId;
+          });
           accounts = accounts.map(account => {
             return {
               id: account.adsId,
@@ -100,22 +112,55 @@ export class FuseNavigationComponent implements OnInit {
               translate: 'NAV.SAMPLE.TITLE',
               type: 'item',
               icon: 'remove',
-              url: `${account.adsId}`
+              url: `/?cid=${account.adsId}`
             };
           });
+
+          this.accounts.children[0] = {
+            id: activeAccountId,
+            title: activeAccountId,
+            translate: 'NAV.APPLICATIONS',
+            icon: 'more_vert',
+            type: 'collapsable',
+            children: [
+              {
+                id: 'add-accounts',
+                title: 'Thêm tài khoản mới',
+                translate: 'NAV.SAMPLE.TITLE',
+                type: 'item',
+                icon: 'add_box',
+                url: '/them-tai-khoan-moi'
+              },
+              {
+                id: 'account-list',
+                title: 'Quản ý tài khoản Adwords',
+                type: 'item',
+                icon: 'dashboard',
+                url: '/account-list'
+              }
+            ]
+          };
           this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
-          this._sessionService.setActiveAccountId(accounts[0].adsId);
+        } else {
+          this.accounts.children[0].title = 'Thêm tài khoản mới';
+          this.accounts.children[0].id = null;
+          this.accounts.children[0].url = '/them-tai-khoan-moi';
         }
+        this.loadRecentNavigation();
       },
       error => {
-        console.log(error);
+        this.accounts.children[0] = {
+          id: 'add-accounts',
+          title: 'Thêm tài khoản mới',
+          type: 'item',
+          icon: 'add_box',
+          url: '/them-tai-khoan-moi'
+        };
+        this.loadRecentNavigation();
       });
-
-    this.loadNavigation();
-
   }
 
-  loadNavigation(): void {
+  loadRecentNavigation(): void {
     // Load the navigation either from the input or from the service
     this.navigation = this.navigation || this._fuseNavigationService.getCurrentNavigation();
 

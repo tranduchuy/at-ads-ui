@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from '../../shared/constants/api.constant';
 import { HttpClient } from '@angular/common/http';
+import { SessionService } from '../../shared/services/session.service';
 
 
 export interface IAutoBlockingRangeIPParams {
@@ -21,20 +22,26 @@ export interface IAutoBlocking3G4GParams {
 })
 export class BanIpsService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(
+    private _http: HttpClient,
+    private _sessionService: SessionService
+  ) { }
 
   public autoBlockingRangeIP(param: IAutoBlockingRangeIPParams): Observable<any> {
-    const url =  API.AdwordsAccount.autoBlockingRangeIP.replace('{account_id}', '6668385722');
+    const activeAccountId = this._sessionService.activeAccountId;
+    const url =  API.AdwordsAccount.autoBlockingRangeIP.replace('{account_id}', activeAccountId.toString());
     return this._http.post(url, param);
   }
 
   public autoBlocking3G4G(param: IAutoBlocking3G4GParams): Observable<any> {
-    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', '6668385722');
+    const activeAccountId = this._sessionService.activeAccountId;
+    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId.toString());
     return this._http.post(url, param);
   }
 
   public blockIPs(param): Observable<any>{
-    const url = API.AdwordsAccount.blockIPs.replace('{account_id}', '5406435113');
+    const activeAccountId = this._sessionService.activeAccountId;
+    const url = API.AdwordsAccount.blockIPs.replace('{account_id}', activeAccountId.toString());
     return this._http.post(url, param);
   }
 }
