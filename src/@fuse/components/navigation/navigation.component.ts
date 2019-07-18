@@ -19,6 +19,63 @@ export class FuseNavigationComponent implements OnInit
     @Input()
     navigation: any;
 
+  accounts =
+    {
+      id: 'adwords-accounts',
+      title: 'Tài Khoản',
+      type: 'group',
+      children: [
+        {
+          id: '2104087721',
+          title: '2104087721',
+          translate: 'NAV.APPLICATIONS',
+          icon: 'more_vert',
+          type: 'collapsable',
+          children: [
+            {
+              id: '2104087721',
+              title: '2104087721',
+              translate: 'NAV.SAMPLE.TITLE',
+              type: 'item',
+              icon: 'remove',
+              url: '/chan-ip/2104087721',
+            },
+            {
+              id: '5406435113',
+              title: '5406435113',
+              translate: 'NAV.SAMPLE.TITLE',
+              type: 'item',
+              icon: 'remove',
+              url: '/chan-ip/5406435113',
+            },
+            {
+              id: 'add-accounts',
+              title: 'Thêm tài khoản mới',
+              translate: 'NAV.SAMPLE.TITLE',
+              type: 'item',
+              icon: 'add_box',
+              url: '/them-tai-khoan-moi'
+            },
+            {
+              id: 'account-list',
+              title: 'Quản ý tài khoản Adwords',
+              type: 'item',
+              icon: 'dashboard',
+              url: '/account-list'
+            }
+          ]
+        },
+        {
+          id: 'account-list',
+          title: 'Quản ý tài khoản Adwords',
+          type: 'item',
+          icon: 'dashboard',
+          url: '/account-list'
+        }
+      ]
+    }
+  ;
+
     // Private
     private _unsubscribeAll: Subject<any>;
 
@@ -47,6 +104,8 @@ export class FuseNavigationComponent implements OnInit
     {
         // Load the navigation either from the input or from the service
         this.navigation = this.navigation || this._fuseNavigationService.getCurrentNavigation();
+
+        this.navigation.unshift(this.accounts);
 
         // Subscribe to the current navigation changes
         this._fuseNavigationService.onNavigationChanged

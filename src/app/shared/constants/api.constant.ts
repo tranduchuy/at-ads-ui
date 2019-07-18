@@ -11,6 +11,7 @@ export namespace API {
     export const getLoggedInInfo = environment.hostApi + '/api/users/info';
   }
   export namespace AdwordsAccount {
+    export const getAccounts = environment.hostApi + '/api/account-adwords';
     export const addAccount = environment.hostApi + '/api/account-adwords';
     export const autoBlockingRangeIP = environment.hostApi + '/api/account-adwords/{account_id}/auto-blocking-range-ip';
     export const autoBlocking3G4G = environment.hostApi + '/api/account-adwords/{account_id}/auto-blocking-3g4g';
