@@ -4,6 +4,7 @@
             [style.height]="height"
             (focus)="onFocus($event)"
             (ngModelChange)="onInputChange()"
+            (input)="onInputChange()"
             [(ngModel)]="innerValue"
             [disabled]="isDisabled"
             (change)="onInputChange()"
