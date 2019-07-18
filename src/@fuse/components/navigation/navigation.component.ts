@@ -106,13 +106,14 @@ export class FuseNavigationComponent implements OnInit {
             return account.adsId !== activeAccountId;
           });
           accounts = accounts.map(account => {
+            const url = '/account/' + account.adsId;
             return {
               id: account.adsId,
               title: account.adsId,
               translate: 'NAV.SAMPLE.TITLE',
               type: 'item',
               icon: 'remove',
-              url: `/?cid=${account.adsId}`
+              url: url
             };
           });
 
