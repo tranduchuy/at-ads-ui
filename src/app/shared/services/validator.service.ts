@@ -38,15 +38,11 @@ export class ValidatorsService {
   }
 
   public checkListIP(control: AbstractControl): any {
-
-    console.log(control.value);
-
-    const listIP = control.value.trim().split('\n');
+    let listIP = control.value.trim().split('\n');
     const regex = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
 
     for (let ip of listIP) {
-
-      if (!regex.test(ip.trim())) {
+      if (!regex.test(ip)) {
         return { [ErrorNames.invalidListIP[0]]: true };
       }
     }
