@@ -119,8 +119,6 @@ export class FuseNavigationComponent implements OnInit {
     // Load the navigation either from the input or from the service
     this.navigation = this.navigation || this._fuseNavigationService.getCurrentNavigation();
 
-    this.navigation.unshift(this.accounts);
-
     // Subscribe to the current navigation changes
     this._fuseNavigationService.onNavigationChanged
       .pipe(takeUntil(this._unsubscribeAll))
