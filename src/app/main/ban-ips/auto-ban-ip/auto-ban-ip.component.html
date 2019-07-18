@@ -12,11 +12,42 @@
     giúp bạn tiết kiệm được chi phí lãng phí do những hành vi phá hoại gây ra
   </p>
 
-  <p>
-    <b>
-      Chặn sau khi 1 IP nhấn quảng cáo (<span style="color: red">thường là 2 lần</span>)
-    </b>
-  </p>
-  <app-select-text 
-                   title="--Chọn số lần--"></app-select-text>
+  <form [formGroup]="form" (ngSumbit)="onSubmitForm()" novalidate>
+
+    <p>
+      <b>
+        Chặn sau khi 1 IP nhấn quảng cáo (<span style="color: red">thường là 2 lần</span>)
+      </b>
+    </p>
+    <app-select-text 
+      [itemsSource]="itemsSource.clickNumber"
+      [displayPath]="'text'"
+      [valuePath]="'value'"
+      [title]="'Chọn hình thức'"
+      [formControlName]="'clickNumber'"
+      [errors]="getMessageErrors('clickNumber')"></app-select-text>
+
+    <p>
+      <b>
+        Xóa hết IP đã chặn khi qua ngày mới (<span style="color: red">xóa vào lúc 0h-1h sáng</span>)
+      </b>
+    </p> 
+    <app-select-text 
+      [itemsSource]="itemsSource.removedTime"
+      [displayPath]="'text'"
+      [valuePath]="'value'"
+      [title]="'Chọn hình thức'"
+      [formControlName]="'removedTime'"
+      [errors]="getMessageErrors('removedTime')"></app-select-text>
+
+      <p class="text-center">
+        <button mat-raised-button
+                color="accent"
+                class="submit-button"
+                aria-label="Kết nối"
+                >
+          <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+        </button>
+      </p>
+  </form>
 </div>
