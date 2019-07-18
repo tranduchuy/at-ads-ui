@@ -36,6 +36,10 @@
 
   .button-area {
     margin-top: 15px;
+
+    button{
+      border-radius: 0;
+    }
   }
 
   .step {
@@ -51,6 +55,10 @@
     
     background-color: #eee;
     border-left: 5px solid darkorange;
+
+    button{
+      border-radius: 0;
+    }
   }
 
   .success-button{
