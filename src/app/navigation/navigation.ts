@@ -2,89 +2,59 @@ import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
   {
-    id: 'adwords-accounts',
-    title: 'Tài Khoản',
+    id: 'configuration',
+    title: 'CẤU HÌNH',
+    translate: 'NAV.APPLICATIONS',
     type: 'group',
     children: [
       {
-        id: 'accounts',
-        title: 'Tài khoản',
-        type: 'collapsable',
-        icon: 'face',
-        children: [
-          {
-            id: 'add-accounts',
-            title: 'Thêm tài khoản mới',
-            translate: 'NAV.SAMPLE.TITLE',
-            type: 'item',
-            icon: 'email',
-            url: '/them-tai-khoan-moi'
-          }
-        ]
+        id: 'ban-an-ip',
+        title: 'Thử Chặn 1 IP',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'info',
+        url: '/chan-ip/chan-1-ip',
       },
       {
-        id: 'account-list',
-        title: 'Tài khoản Adwords',
+        id: 'ban-optional-ip',
+        title: 'Chặn IP Tùy Chỉnh',
+        translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'dashboard',
-        url: '/account-list'
-      }
+        icon: 'format_list_bulleted',
+        url: '/chan-ip/chan-ip-tuy-chinh',
+      },
+      {
+        id: 'auto-ban-ip',
+        title: 'Chặn Tự Động IP',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'security',
+        url: '/chan-ip/chan-ip-tu-dong',
+      },
+      {
+        id: 'auto-ban-ip-range',
+        title: 'Chặn Tự Động Nhóm IP',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'grain',
+        url: '/chan-ip/chan-ip-theo-nhom',
+      },
+      {
+        id: 'ban-3g4g',
+        title: 'Chặn 3G & 4G',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'wifi',
+        url: '/chan-ip/chan-ip-theo-mang-di-dong',
+      },
+      {
+        id: 'ban-device',
+        title: 'Chặn Theo Mobile/PC/Tablet',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'smartphone',
+        url: '/chan-ip/chan-theo-thiet-bi',
+      },
     ]
-  },
-    {
-      id       : 'configuration',
-      title    : 'CẤU HÌNH',
-      translate: 'NAV.APPLICATIONS',
-      type     : 'group',
-      children : [
-        {
-          id       : 'ban-an-ip',
-          title    : 'Thử Chặn 1 IP',
-          translate: 'NAV.SAMPLE.TITLE',
-          type     : 'item',
-          icon     : 'info',
-          url      : '/chan-ip/chan-1-ip',
-        },
-        {
-          id       : 'ban-optional-ip',
-          title    : 'Chặn IP Tùy Chỉnh',
-          translate: 'NAV.SAMPLE.TITLE',
-          type     : 'item',
-          icon     : 'format_list_bulleted',
-          url      : '/chan-ip/chan-ip-tuy-chinh',
-        },
-        {
-          id       : 'auto-ban-ip',
-          title    : 'Chặn Tự Động IP',
-          translate: 'NAV.SAMPLE.TITLE',
-          type     : 'item',
-          icon     : 'security',
-          url      : '/chan-ip/chan-ip-tu-dong',
-        },
-        {
-          id       : 'auto-ban-ip-range',
-          title    : 'Chặn Tự Động Nhóm IP',
-          translate: 'NAV.SAMPLE.TITLE',
-          type     : 'item',
-          icon     : 'grain',
-          url      : '/chan-ip/chan-ip-theo-nhom',
-        },
-        {
-          id       : 'ban-3g4g',
-          title    : 'Chặn 3G & 4G',
-          translate: 'NAV.SAMPLE.TITLE',
-          type     : 'item',
-          icon     : 'wifi',
-          url      : '/chan-ip/chan-ip-theo-mang-di-dong',
-        },
-        {
-          id       : 'ban-device',
-          title    : 'Chặn Theo Mobile/PC/Tablet',
-          translate: 'NAV.SAMPLE.TITLE',
-          type     : 'item',
-          icon     : 'smartphone',
-          url      : '/chan-ip/chan-ip-theo-thiet-bi',
-        },
-      ]
-    }
+  }
 ];
