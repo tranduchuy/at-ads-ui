@@ -4,7 +4,7 @@ const CookieNames = {
   token: prefix + '_token',
   user: prefix + '_user',
   collapsed: prefix + '_sidebar_collapsed',
-  accounts: prefix + '_accounts'
+  activeAccountId: prefix + '_active_account_id'
 };
 
 export default CookieNames;

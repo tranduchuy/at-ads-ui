@@ -24,10 +24,10 @@ export class SessionService {
     this.cookieService.putObject(CookieNames.user, user, {expires: today});
   }
 
-  setAccounts(accounts): void {
+  setActiveAccountId(accountId): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.putObject(CookieNames.accounts, accounts, {expires: today});
+    this.cookieService.putObject(CookieNames.activeAccountId, accountId, {expires: today});
   }
 
   remove(): void {

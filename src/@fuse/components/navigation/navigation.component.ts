@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { AdwordsAccountsService } from '../../../app/shared/services/ads-accounts/adwords-accounts.service';
+import { SessionService } from '../../../app/shared/services/session.service';
 
 @Component({
   selector: 'fuse-navigation',
@@ -72,7 +73,8 @@ export class FuseNavigationComponent implements OnInit {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseNavigationService: FuseNavigationService,
-    private _adwordsAccountsService: AdwordsAccountsService
+    private _adwordsAccountsService: AdwordsAccountsService,
+    private _sessionService: SessionService
   ) {
     // Set the private defaults
     this._unsubscribeAll = new Subject();
@@ -88,6 +90,8 @@ export class FuseNavigationComponent implements OnInit {
   ngOnInit(): void {
     this._adwordsAccountsService.getAdwordsAccount().subscribe(res => {
         let accounts = res.data.accounts;
+        this.accounts.children[0].title = accounts[0].adsId;
+        this.accounts.children[0].id = accounts[0].adsId;
         if (accounts.length > 0) {
           accounts = accounts.map(account => {
             return {
@@ -100,6 +104,7 @@ export class FuseNavigationComponent implements OnInit {
             };
           });
           this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
+          this._sessionService.setActiveAccountId(accounts[0].adsId);
         }
       },
       error => {
@@ -113,8 +118,6 @@ export class FuseNavigationComponent implements OnInit {
   loadNavigation(): void {
     // Load the navigation either from the input or from the service
     this.navigation = this.navigation || this._fuseNavigationService.getCurrentNavigation();
-
-    this.navigation.unshift(this.accounts);
 
     // Subscribe to the current navigation changes
     this._fuseNavigationService.onNavigationChanged
