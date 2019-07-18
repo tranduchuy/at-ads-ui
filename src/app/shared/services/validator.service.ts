@@ -14,6 +14,7 @@ export namespace ErrorNames {
   export const slug = ['slug', 'Slug sai'];
   export const areStoreSelected = ['areaStore', 'Chưa chọn store nào'];
   export const invalidIP = ['invalidIP', 'IP không hợp lệ'];
+  export const invalidListIP = ['invalidListIP', 'Danh sách IP không hợp lệ'];
 }
 
 @Injectable()
@@ -33,6 +34,21 @@ export class ValidatorsService {
 
     if (!regex.test(control.value)) {
       return { [ErrorNames.invalidIP[0]]: true };
+    }
+  }
+
+  public checkListIP(control: AbstractControl): any {
+
+    console.log(control.value);
+
+    const listIP = control.value.trim().split('\n');
+    const regex = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
+
+    for (let ip of listIP) {
+
+      if (!regex.test(ip.trim())) {
+        return { [ErrorNames.invalidListIP[0]]: true };
+      }
     }
   }
 

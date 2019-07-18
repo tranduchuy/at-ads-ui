@@ -24,10 +24,11 @@
   }
 
   .success-badge{
+    margin-right: 5px;
     background-color: #4bb543;
     color: white;
     padding: 4px;
-    border-radius: 4px;
+    box-shadow: 1px 1px 5px silver;
     font-size: 12px;
     font-weight: bold;
   }
@@ -40,8 +41,14 @@
     background-color: #eeee;
   }
 
+  mat-cell, mat-header-cell{
+    display: flex;
+    justify-content: center;
+  }
+
   mat-cell:nth-child(8){
-    margin-right: 5px;
-    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: left;
   }
 }

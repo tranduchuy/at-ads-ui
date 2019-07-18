@@ -111,6 +111,9 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
 
       case ErrorNames.invalidIP[0]:
         return ErrorNames.invalidIP[1];
+
+      case ErrorNames.invalidListIP[0]:
+        return ErrorNames.invalidListIP[1];
     }
 
     return `Something error ${keyErr}`;

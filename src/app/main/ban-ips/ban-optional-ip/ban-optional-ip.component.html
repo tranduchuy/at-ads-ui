@@ -64,7 +64,7 @@
     <!-- Position Column -->
     <ng-container matColumnDef="order">
       <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell *matCellDef="let element" [class.new]="element.order === 'MỚI'"> {{element.order}} </mat-cell>
+      <mat-cell *matCellDef="let element"> <span [class.new]="element.order === 'MỚI'">{{element.order}}</span> </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
