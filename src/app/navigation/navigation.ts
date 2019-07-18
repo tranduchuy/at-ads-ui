@@ -75,7 +75,7 @@ export const navigation: FuseNavigation[] = [
           translate: 'NAV.SAMPLE.TITLE',
           type     : 'item',
           icon     : 'wifi',
-          url      : '/chan-ip/chan-3g4g',
+          url      : '/chan-ip/chan-ip-theo-mang-di-dong',
         },
         {
           id       : 'ban-device',
@@ -83,7 +83,7 @@ export const navigation: FuseNavigation[] = [
           translate: 'NAV.SAMPLE.TITLE',
           type     : 'item',
           icon     : 'smartphone',
-          url      : '/chan-ip/chan-theo-thiet-bi',
+          url      : '/chan-ip/chan-ip-theo-thiet-bi',
         },
       ]
     }

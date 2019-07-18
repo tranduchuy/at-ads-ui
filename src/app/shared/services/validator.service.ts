@@ -31,12 +31,7 @@ export class ValidatorsService {
   public checkIP(control: AbstractControl): any {
     const regex = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
 
-    console.log(control.value);
-
     if (!regex.test(control.value)) {
-
-      console.log(regex.test(control.value));
-
       return { [ErrorNames.invalidIP[0]]: true };
     }
   }
