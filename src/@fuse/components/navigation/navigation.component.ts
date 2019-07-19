@@ -94,7 +94,9 @@ export class FuseNavigationComponent implements OnInit {
     this.loadNavigation();
   }
   loadNavigation(): void {
-    this._adwordsAccountsService.getAdwordsAccount().subscribe(res => {
+    this._adwordsAccountsService.getAdwordsAccount()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(res => {
         let accounts = res.data.accounts;
         let activeAccountId = this._sessionService.activeAccountId;
         if (this._sessionService.activeAccountId) {
@@ -165,6 +167,7 @@ export class FuseNavigationComponent implements OnInit {
 
   changeActiveAccount(item): void {
     console.log(item);
+    console.log(this._sessionService);
     this._sessionService.setActiveAccountId(item.id);
     console.log('changeActiveAccount is called!');
   }
