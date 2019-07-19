@@ -6,6 +6,7 @@ import { ILoginSuccess } from '../../../authentication/login/models/i-login-succ
 import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
+import { SessionService } from '../../../shared/services/session.service';
 
 export interface BannedDevice {
   device: string;
@@ -80,7 +81,7 @@ const ELEMENT_DATA: BannedDevice[] = [
       }
     ]
   },
-]
+];
 
 @Component({
   selector: 'app-ban-device',
@@ -123,11 +124,14 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
         value: false
       }
     ]
-  }
+  };
 
-  constructor(private _banIpsService: BanIpsService,
+  constructor(
+    private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
-    public _dialogService: DialogService) {
+    private _sessionService: SessionService,
+    public _dialogService: DialogService
+  ) {
     super();
   }
 
@@ -143,12 +147,12 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
     });
   }
 
-  submitForm() {
+  submitForm(): void {
     this.onSubmit();
   }
 
   private generatePostObject(): any {
-    const selections = { ...this.form.value };
+    const selections = {...this.form.value};
     const params = {
       mobile: selections.mobile.value,
       tablet: selections.tablet.value,
@@ -162,9 +166,9 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
 
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.autoBlockingDevice(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-    },
+        this._dialogService._openSuccessDialog(res);
+        this._fuseProgressiveBarService.hide();
+      },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);

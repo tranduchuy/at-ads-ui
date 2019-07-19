@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { BanIpsService } from '../ban-ips.service';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
+import { SessionService } from '../../../shared/services/session.service';
 
 @Component({
   selector: 'app-auto-blocking-cellular-networks',
@@ -35,6 +36,7 @@ export class AutoBlockingCellularNetworksComponent  extends EditableFormBaseComp
 
   form;
   constructor(private _banIpsService: BanIpsService,
+              private _sessionService: SessionService,
               private _fuseProgressiveBarService: FuseProgressBarService,
               public _dialogService: DialogService) {
     super();

@@ -8,6 +8,7 @@ import { DialogService } from 'app/shared/services/dialog.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
+import { SessionService } from '../../../shared/services/session.service';
 
 @Component({
   selector: 'app-ban-an-ip',
@@ -16,9 +17,12 @@ import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
 })
 export class BanAnIPComponent extends EditableFormBaseComponent implements OnInit {
 
-  constructor(private _banIpsService: BanIpsService,
+  constructor(
+    private _banIpsService: BanIpsService,
+    private _sessionService: SessionService,
     private _fuseProgressiveBarService: FuseProgressBarService,
-    public _dialogService: DialogService) {
+    public _dialogService: DialogService
+  ) {
     super();
   }
 
@@ -36,23 +40,14 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
     });
   }
 
-  private generatePostObject(): any {
-    const params = {
-      action: 'ADD',
-      ips: [{ ...this.form.value }.bannedIP]
-    };
-    
-    return params;
-  }
-
   post(): void {
     const params = this.generatePostObject();
 
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.blockIPs(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-    },
+        this._dialogService._openSuccessDialog(res);
+        this._fuseProgressiveBarService.hide();
+      },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
@@ -61,5 +56,14 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
       }
     );
     this.subscriptions.push(sub);
+  }
+
+  private generatePostObject(): any {
+    const params = {
+      action: 'ADD',
+      ips: [{...this.form.value}.bannedIP]
+    };
+
+    return params;
   }
 }

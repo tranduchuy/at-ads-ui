@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { FuseNavigationItem } from '@fuse/types';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { SessionService } from '../../../../../app/shared/services/session.service';
 
 @Component({
     selector   : 'fuse-nav-vertical-item',
@@ -32,7 +33,8 @@ export class FuseNavVerticalItemComponent implements OnInit, OnDestroy
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        private _fuseNavigationService: FuseNavigationService
+        private _fuseNavigationService: FuseNavigationService,
+        private _sessionService: SessionService
     )
     {
         // Set the private defaults
@@ -69,5 +71,10 @@ export class FuseNavVerticalItemComponent implements OnInit, OnDestroy
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+    }
+
+    changeActiveAccount(): void {
+        this._sessionService.setActiveAccountId(this.item.id.toString());
+        this._fuseNavigationService.reloadNavigation();
     }
 }
