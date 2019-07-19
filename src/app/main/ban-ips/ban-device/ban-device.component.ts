@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
-import { Validators, SelectControlValueAccessor } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { BanIpsService } from '../ban-ips.service';
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';

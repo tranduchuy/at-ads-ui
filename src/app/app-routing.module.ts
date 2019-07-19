@@ -19,6 +19,11 @@ const appRoutes: Routes = [
     loadChildren: './main/add-adwords-accounts/add-adwords-accounts.module#AddAdwordsAccountsModule'
   },
   {
+    path: 'account-list',
+    canActivate: [MainGuardService],
+    loadChildren: './main/adwords-account-list/adwords-account-list.module#AdwordsAccountListModule'
+  },
+  {
     path: '**',
     redirectTo: ''
   }
