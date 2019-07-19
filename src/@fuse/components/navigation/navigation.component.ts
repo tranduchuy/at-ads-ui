@@ -166,6 +166,7 @@ export class FuseNavigationComponent implements OnInit {
           url: '/them-tai-khoan-moi'
         };
         this.loadRecentNavigation();
+        this._fuseSplashScreenService.hide();
       });
   }
 
