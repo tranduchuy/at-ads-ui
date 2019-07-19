@@ -12,7 +12,7 @@
     giúp bạn tiết kiệm được chi phí lãng phí do những hành vi phá hoại gây ra
   </p>
 
-  <form [formGroup]="form" (ngSumbit)="onSubmitForm()" novalidate>
+  <form [formGroup]="form" (ngSubmit)="onSubmitForm()" novalidate>
 
     <p>
       <b>
@@ -20,12 +20,12 @@
       </b>
     </p>
     <app-select-text 
-      [itemsSource]="itemsSource.clickNumber"
+      [itemsSource]="itemsSource.maxClick"
       [displayPath]="'text'"
       [valuePath]="'value'"
       [title]="'Chọn hình thức'"
-      [formControlName]="'clickNumber'"
-      [errors]="getMessageErrors('clickNumber')"></app-select-text>
+      [formControlName]="'maxClick'"
+      [errors]="getMessageErrors('maxClick')"></app-select-text>
 
     <p>
       <b>
@@ -33,21 +33,22 @@
       </b>
     </p> 
     <app-select-text 
-      [itemsSource]="itemsSource.removedTime"
+      [itemsSource]="itemsSource.autoRemove"
       [displayPath]="'text'"
       [valuePath]="'value'"
       [title]="'Chọn hình thức'"
-      [formControlName]="'removedTime'"
-      [errors]="getMessageErrors('removedTime')"></app-select-text>
+      [formControlName]="'autoRemove'"
+      [errors]="getMessageErrors('autoRemove')"></app-select-text>
 
       <p class="text-center">
         <button mat-raised-button
                 color="accent"
                 class="submit-button"
                 aria-label="Kết nối"
-                >
+                type="submit">
           <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
         </button>
       </p>
+
   </form>
 </div>
