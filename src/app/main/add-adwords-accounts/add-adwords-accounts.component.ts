@@ -6,6 +6,7 @@ import { ILoginSuccess } from '../../authentication/login/models/i-login-success
 import { HttpErrorResponse } from '@angular/common/http';
 import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 import { DialogService } from '../../shared/services/dialog.service';
+import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 
 @Component({
   selector: 'app-add-adwords-accounts',
@@ -19,6 +20,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
+    private _fuseNavigationService: FuseNavigationService,
     private _addAdwordsAccountsService: AddAdwordsAccountsService
   ) {
     super();
@@ -36,6 +38,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
       {
         this._dialogService._openSuccessDialog(res);
         this.isConnected = true;
+        this._fuseNavigationService.reloadNavigation();
         this._fuseProgressiveBarService.hide();
       },
       (error: HttpErrorResponse) => {
