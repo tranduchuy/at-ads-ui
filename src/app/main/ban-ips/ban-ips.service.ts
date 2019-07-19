@@ -57,24 +57,26 @@ export class BanIpsService {
   }
 
   public autoBlocking3G4G(param: IAutoBlocking3G4GParams): Observable<any> {
-    const url = API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', '6668385722');
+    const activeAccountId = this.getActiveAccountId();
+    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 
   public autoBlockingDevice(param: IAutoBlockingDeviceParams): Observable<any> {
-    const url = API.AdwordsAccount.autoBlockingDevice.replace('{account_id}', '5d2d4aaf4b262627049c23e9');
+    const activeAccountId = this.getActiveAccountId();
+    const url =  API.AdwordsAccount.autoBlockingDevice.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 
   public autoBlockingIP(param: IAutoBlockingIPParams): Observable<any> {
-    const activeAccountId = this._sessionService.activeAccountId;
-    const url = API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId.toString());
+    const activeAccountId = this.getActiveAccountId();
+    const url =  API.AdwordsAccount.autoBlockingIP.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 
   public blockIPs(param: IBlockIPsParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
-    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId);
+    const url =  API.AdwordsAccount.blockIPs.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 }
