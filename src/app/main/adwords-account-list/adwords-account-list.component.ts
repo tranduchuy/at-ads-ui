@@ -38,7 +38,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
   {
     date: '17/05/2019',
     adwords: '322-238-9982',
-    website: 'trungtamnguyenkim.com.vn',
+    website: '',
     service: 'MIỄN PHÍ - NÂNG VIP',
     cost: '-',
     display: '-',
@@ -49,7 +49,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
   {
     date: '17/05/2019',
     adwords: '322-238-9982',
-    website: 'trungtamnguyenkim.com.vn',
+    website: '',
     service: 'MIỄN PHÍ - NÂNG VIP',
     cost: '-',
     display: '-',
@@ -60,7 +60,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
   {
     date: '17/05/2019',
     adwords: '322-238-9982',
-    website: 'trungtamnguyenkim.com.vn',
+    website: '',
     service: 'MIỄN PHÍ - NÂNG VIP',
     cost: '-',
     display: '-',
@@ -71,7 +71,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
   {
     date: '17/05/2019',
     adwords: '322-238-9982',
-    website: 'trungtamnguyenkim.com.vn',
+    website: '',
     service: 'MIỄN PHÍ - NÂNG VIP',
     cost: '-',
     display: '-',
@@ -82,7 +82,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
   {
     date: '17/05/2019',
     adwords: '322-238-9982',
-    website: 'trungtamnguyenkim.com.vn',
+    website: '',
     service: 'MIỄN PHÍ - NÂNG VIP',
     cost: '-',
     display: '-',
@@ -93,7 +93,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
   {
     date: '17/05/2019',
     adwords: '322-238-9982',
-    website: 'trungtamnguyenkim.com.vn',
+    website: '',
     service: 'MIỄN PHÍ - NÂNG VIP',
     cost: '-',
     display: '-',

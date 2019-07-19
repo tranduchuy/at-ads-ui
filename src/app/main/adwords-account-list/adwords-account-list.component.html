@@ -27,7 +27,8 @@
           <mat-header-cell *matHeaderCellDef> AdWords </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <p>
-              <span *ngIf="element.tracking" class="tracking" matTooltip="Cần thực hiện tracking">{{element.adwords}}</span>
+              <span *ngIf="element.tracking" class="tracking"
+                matTooltip="Cần thực hiện tracking">{{element.adwords}}</span>
               <span *ngIf="!element.tracking" class="no-tracking">{{element.adwords}}</span>
               <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan" *ngIf="!element.tracking">
                 <mat-icon>notifications</mat-icon>
@@ -45,10 +46,10 @@
         <ng-container matColumnDef="website">
           <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <p>
+            <p *ngIf="element.website">
               {{element.website}}
               <button mat-icon-button color="accent" matTooltip="Gắn tracking chiến dịch tài khoản"
-                *ngIf="element.tracking">
+                *ngIf="element.tracking" style="color: red">
                 <mat-icon>code</mat-icon>
               </button>
               <button mat-icon-button color="accent" matTooltip="Ngắt kết nối Adwords cho website này">
@@ -58,6 +59,9 @@
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
             </p>
+            <button mat-button color="accent" *ngIf="!element.website" style="padding-left: 0">
+              <mat-icon>add_circle_outline</mat-icon> Thêm Website
+            </button>
           </mat-cell>
         </ng-container>
 
