@@ -120,7 +120,11 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
       .subscribe(() => {
         this.navigation = this._fuseNavigationService.getCurrentNavigation();
       });
-    this.user = JSON.parse(this._sessionService.user);
+
+    if (this._sessionService.user) {
+
+      this.user = JSON.parse(this._sessionService.user);
+    }
   }
 
   /**
