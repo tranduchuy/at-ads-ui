@@ -9,6 +9,7 @@ export interface AdwordsAccount {
   display: string;
   click: string;
   spamClick: string;
+  tracking: boolean;
 }
 
 const ELEMENT_DATA: AdwordsAccount[] = [
@@ -21,6 +22,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
     display: '-',
     click: '-',
     spamClick: '-',
+    tracking: false,
   },
   {
     date: '17/05/2019',
@@ -31,6 +33,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
     display: '-',
     click: '-',
     spamClick: '-',
+    tracking: true,
   },
   {
     date: '17/05/2019',
@@ -41,6 +44,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
     display: '-',
     click: '-',
     spamClick: '-',
+    tracking: true,
   },
   {
     date: '17/05/2019',
@@ -51,6 +55,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
     display: '-',
     click: '-',
     spamClick: '-',
+    tracking: true,
   },
   {
     date: '17/05/2019',
@@ -61,6 +66,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
     display: '-',
     click: '-',
     spamClick: '-',
+    tracking: true,
   },
   {
     date: '17/05/2019',
@@ -71,6 +77,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
     display: '-',
     click: '-',
     spamClick: '-',
+    tracking: true,
   },
   {
     date: '17/05/2019',
@@ -81,6 +88,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
     display: '-',
     click: '-',
     spamClick: '-',
+    tracking: true,
   },
   {
     date: '17/05/2019',
@@ -91,6 +99,7 @@ const ELEMENT_DATA: AdwordsAccount[] = [
     display: '-',
     click: '-',
     spamClick: '-',
+    tracking: true,
   },
 ]
 

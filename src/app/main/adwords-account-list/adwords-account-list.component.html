@@ -27,11 +27,12 @@
           <mat-header-cell *matHeaderCellDef> AdWords </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <p>
-              {{element.adwords}}
-              <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan">
+              <span *ngIf="element.tracking" class="tracking" matTooltip="Cần thực hiện tracking">{{element.adwords}}</span>
+              <span *ngIf="!element.tracking" class="no-tracking">{{element.adwords}}</span>
+              <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan" *ngIf="!element.tracking">
                 <mat-icon>notifications</mat-icon>
               </button>
-              <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
+              <button mat-icon-button color="accent" matTooltip="Chỉnh sửa" *ngIf="element.tracking">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button color="accent" matTooltip="Xóa">
@@ -46,11 +47,15 @@
           <mat-cell *matCellDef="let element">
             <p>
               {{element.website}}
-              <button mat-icon-button color="accent" matTooltip="Kết nối AdWords cho website này">
-                <mat-icon>add_circle_outline</mat-icon>
+              <button mat-icon-button color="accent" matTooltip="Gắn tracking chiến dịch tài khoản"
+                *ngIf="element.tracking">
+                <mat-icon>code</mat-icon>
               </button>
               <button mat-icon-button color="accent" matTooltip="Ngắt kết nối Adwords cho website này">
                 <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" matTooltip="Kết nối AdWords cho website này">
+                <mat-icon>add_circle_outline</mat-icon>
               </button>
             </p>
           </mat-cell>
