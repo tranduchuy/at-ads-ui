@@ -23,6 +23,7 @@ import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-blocking-range-ips.component';
 import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
 import { BanDeviceComponent } from './ban-device/ban-device.component';
+import { SessionService } from '../../shared/services/session.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { BanDeviceComponent } from './ban-device/ban-device.component';
     FuseSharedModule,
 
     BanIPsRoutingModule,
-  ]
+  ],
+  providers: [SessionService]
 })
 export class BanIPsModule { }

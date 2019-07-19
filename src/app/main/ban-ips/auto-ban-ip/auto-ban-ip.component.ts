@@ -6,6 +6,7 @@ import { ILoginSuccess } from '../../../authentication/login/models/i-login-succ
 import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
+import { SessionService } from '../../../shared/services/session.service';
 
 @Component({
   selector: 'app-auto-ban-ip',
@@ -51,11 +52,14 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
         value: true
       },
     ]
-  }
+  };
 
-  constructor(private _banIpsService: BanIpsService,
+  constructor(
+    private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
-    public _dialogService: DialogService) {
+    private _sessionService: SessionService,
+    public _dialogService: DialogService
+  ) {
     super();
   }
 
@@ -67,20 +71,11 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
     this.form = this.fb.group({
       maxClick: [this.itemsSource.maxClick[0], [Validators.required]],
       autoRemove: [this.itemsSource.autoRemove[0], [Validators.required]]
-    })
+    });
   }
 
-  onSubmitForm() {
+  onSubmitForm(): void {
     this.onSubmit();
-  }
-
-  private generatePostObject(): any {
-    const selections = { ...this.form.value };
-    const params = {
-      maxClick: selections.maxClick.value,
-      autoRemove: selections.autoRemove.value
-    }
-    return params;
   }
 
   post(): void {
@@ -99,5 +94,14 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
       }
     );
     this.subscriptions.push(sub);
+  }
+
+  private generatePostObject(): any {
+    const selections = { ...this.form.value };
+    const params = {
+      maxClick: selections.maxClick.value,
+      autoRemove: selections.autoRemove.value
+    };
+    return params;
   }
 }

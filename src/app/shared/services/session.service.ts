@@ -33,6 +33,7 @@ export class SessionService {
   remove(): void {
     this.cookieService.remove(CookieNames.token);
     this.cookieService.remove(CookieNames.user);
+    this.cookieService.remove(CookieNames.activeAccountId);
   }
 
   get user(): any {

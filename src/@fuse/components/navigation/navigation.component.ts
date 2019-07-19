@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { AdwordsAccountsService } from '../../../app/shared/services/ads-accounts/adwords-accounts.service';
 import { SessionService } from '../../../app/shared/services/session.service';
+import { FuseSplashScreenService } from '../../services/splash-screen.service';
 
 @Component({
   selector: 'fuse-navigation',
@@ -73,6 +74,7 @@ export class FuseNavigationComponent implements OnInit {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseNavigationService: FuseNavigationService,
+    private _fuseSplashScreenService: FuseSplashScreenService,
     private _adwordsAccountsService: AdwordsAccountsService,
     private _sessionService: SessionService
   ) {
@@ -94,6 +96,7 @@ export class FuseNavigationComponent implements OnInit {
     this.loadNavigation();
   }
   loadNavigation(): void {
+    this._fuseSplashScreenService.show();
     this._adwordsAccountsService.getAdwordsAccount()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(res => {
@@ -117,7 +120,7 @@ export class FuseNavigationComponent implements OnInit {
               translate: 'NAV.SAMPLE.TITLE',
               type: 'item',
               icon: 'remove',
-              function: this.changeActiveAccount
+              isAdsAccount: true
             };
           });
 
@@ -152,6 +155,7 @@ export class FuseNavigationComponent implements OnInit {
           this.accounts.children[0].url = '/them-tai-khoan-moi';
         }
         this.loadRecentNavigation();
+        this._fuseSplashScreenService.hide();
       },
       error => {
         this.accounts.children[0] = {
@@ -162,6 +166,7 @@ export class FuseNavigationComponent implements OnInit {
           url: '/them-tai-khoan-moi'
         };
         this.loadRecentNavigation();
+        this._fuseSplashScreenService.hide();
       });
   }
 

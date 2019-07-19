@@ -120,7 +120,9 @@ export class ToolbarComponent implements OnInit, OnDestroy
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {id: this._translateService.currentLang});
 
-        this.user = JSON.parse(this._sessionService.user);
+        if (this._sessionService.user) {
+            this.user = JSON.parse(this._sessionService.user);
+        }
     }
 
     /**

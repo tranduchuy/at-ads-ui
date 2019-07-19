@@ -6,6 +6,7 @@ import { ILoginSuccess } from '../../../authentication/login/models/i-login-succ
 import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
+import { SessionService } from '../../../shared/services/session.service';
 
 
 export interface BannedIP {
@@ -52,8 +53,10 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   displayedColumns: string[] = ['order', 'ip', 'status', 'task', 'unlockButton'];
   dataSource = ELEMENT_DATA;
 
-  constructor(private _banIpsService: BanIpsService,
+  constructor(
+    private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
+    private _sessionService: SessionService,
     public _dialogService: DialogService) {
     super();
   }
@@ -69,16 +72,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   initForm(): void {
     this.form = this.fb.group({
       listBannedIP: ['', [Validators.required, this.validatorService.checkListIP]]
-    })
-  }
-
-  private generatePostObject(): any {
-    const params = {
-      action: 'ADD',
-      ips: { ...this.form.value }.listBannedIP.split(/\r?\n/)
-    };
-
-    return params;
+    });
   }
 
   post(): void {
@@ -86,9 +80,9 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.blockIPs(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-    },
+        this._dialogService._openSuccessDialog(res);
+        this._fuseProgressiveBarService.hide();
+      },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
@@ -97,5 +91,14 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
       }
     );
     this.subscriptions.push(sub);
+  }
+
+  private generatePostObject(): any {
+    const params = {
+      action: 'ADD',
+      ips: {...this.form.value}.listBannedIP.split(/\r?\n/)
+    };
+
+    return params;
   }
 }
