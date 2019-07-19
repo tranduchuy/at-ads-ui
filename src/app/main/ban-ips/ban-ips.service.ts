@@ -44,7 +44,7 @@ export class BanIpsService {
 
   public autoBlockingRangeIP(param: IAutoBlockingRangeIPParams): Observable<any> {
     const activeAccountId = this._sessionService.activeAccountId;
-    const url =  API.AdwordsAccount.autoBlockingRangeIP.replace('{account_id}', activeAccountId.toString());
+    const url = API.AdwordsAccount.autoBlockingRangeIP.replace('{account_id}', activeAccountId.toString());
     return this._http.post(url, param);
   }
 
@@ -60,11 +60,11 @@ export class BanIpsService {
 
   public autoBlockingIP(param: IAutoBlockingIPParams): Observable<any> {
     const activeAccountId = this._sessionService.activeAccountId;
-    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId.toString());
+    const url = API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId.toString());
     return this._http.post(url, param);
   }
 
-  public blockIPs(param:IBlockIPsParams): Observable<any>{
+  public blockIPs(param: IBlockIPsParams): Observable<any> {
     const activeAccountId = this._sessionService.activeAccountId;
     const url = API.AdwordsAccount.blockIPs.replace('{account_id}', activeAccountId.toString());
     return this._http.post(url, param);
