@@ -49,7 +49,7 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
         value: 5
       },
     ],
-    removedTime:[
+    removedTime: [
       {
         text: 'Không xóa (được đề nghị)',
         value: false
@@ -72,12 +72,12 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
     })
   }
 
-  onSubmitForm(){
+  onSubmitForm() {
     this.onSubmit();
   }
 
-  private generatePostObject(){
-    
+  private generatePostObject() {
+
   }
 
   post(): void {

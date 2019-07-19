@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="title1">
+    CẤU HÌNH CHẶN THEO THIẾT BỊ - TÀI KHOẢN <span class="account-id">322-238-0982</span>
+  </div>
+
+  <div class="title2">
+    Kết quả có được theo thống kê từ ngày 25/05/2019 đến ngày 08/06/2019
+    <br><br>
+    <span class="success-badge">MẸO</span> Bạn có thể dừng quảng cáo trên các thiết bị mang lại hiệu quả quảng cáo thấp
+  </div>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="device">
+      <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.device}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cost">
+      <mat-header-cell *matHeaderCellDef> Chi phí </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cost}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="display">
+      <mat-header-cell *matHeaderCellDef> Hiển thị </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.display}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="click">
+      <mat-header-cell *matHeaderCellDef> Click </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="guest">
+      <mat-header-cell *matHeaderCellDef> Khách </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.guest}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="avgPosition">
+      <mat-header-cell *matHeaderCellDef> Vị trí trung bình </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.avgPosition}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="costPerGuest">
+      <mat-header-cell *matHeaderCellDef> Chi phí/Khách </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.costPerGuest}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="optimization">
+      <mat-header-cell *matHeaderCellDef>Tối ưu</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <app-select-text 
+          [itemsSource]="element.optimization"
+          [displayPath]="'text'"
+          [valuePath]="'value'"
+          [title]="'Chọn hình thức'"></app-select-text>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>

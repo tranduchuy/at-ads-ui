@@ -21,6 +21,7 @@ import { BanOptionalIPComponent } from './ban-optional-ip/ban-optional-ip.compon
 import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
 import { CheckboxGroupModule } from '../../shared/components/checkbox-group/checkbox-group.module';
+import { BanDeviceComponent } from './ban-device/ban-device.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CheckboxGroupModule } from '../../shared/components/checkbox-group/chec
     BanOptionalIPComponent,
     AutoBlockingRangeIpsComponent,
     AutoBanIPComponent,
-    AutoBlockingCellularNetworksComponent
+    AutoBlockingCellularNetworksComponent,
+    BanDeviceComponent
   ],
   imports: [
 

@@ -68,7 +68,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
   initForm(): void {
     this.form = this.fb.group({
-      listBannedIP: ['', [Validators.required]]
+      listBannedIP: ['', [Validators.required, this.validatorService.checkListIP]]
     })
   }
 
