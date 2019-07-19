@@ -96,7 +96,10 @@ export class FuseNavigationComponent implements OnInit {
   loadNavigation(): void {
     this._adwordsAccountsService.getAdwordsAccount().subscribe(res => {
         let accounts = res.data.accounts;
-        let activeAccountId = this._sessionService.activeAccountId.toString();
+        let activeAccountId = this._sessionService.activeAccountId;
+        if (this._sessionService.activeAccountId) {
+          activeAccountId = this._sessionService.activeAccountId.toString();
+        }
         if (accounts.length > 0) {
           if (!activeAccountId) {
             activeAccountId = accounts[0].adsId.toString();
