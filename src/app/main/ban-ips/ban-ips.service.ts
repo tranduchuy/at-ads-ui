@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ObservedValueOf } from 'rxjs';
 import { API } from '../../shared/constants/api.constant';
 import { HttpClient } from '@angular/common/http';
 import { SessionService } from '../../shared/services/session.service';
 
+export interface IBlockIPsParams {
+  action: string;
+  ips: string[];
+}
 
 export interface IAutoBlockingRangeIPParams {
   classC: boolean;
   classD: boolean;
+}
+
+export interface IAutoBlockingIPParams {
+  maxClick: number;
+  autoRemove: boolean;
 }
 
 export interface IAutoBlocking3G4GParams {
@@ -15,6 +24,12 @@ export interface IAutoBlocking3G4GParams {
   mobifone: boolean;
   viettel: boolean;
   vietnammobile: boolean;
+}
+
+export interface IAutoBlockingDeviceParams {
+  mobile: boolean;
+  tablet: boolean;
+  pc: boolean;
 }
 
 @Injectable({
@@ -42,14 +57,24 @@ export class BanIpsService {
   }
 
   public autoBlocking3G4G(param: IAutoBlocking3G4GParams): Observable<any> {
-    const activeAccountId = this.getActiveAccountId();
-    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId);
+    const url = API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', '6668385722');
     return this._http.post(url, param);
   }
 
-  public blockIPs(param): Observable<any>{
+  public autoBlockingDevice(param: IAutoBlockingDeviceParams): Observable<any> {
+    const url = API.AdwordsAccount.autoBlockingDevice.replace('{account_id}', '5d2d4aaf4b262627049c23e9');
+    return this._http.post(url, param);
+  }
+
+  public autoBlockingIP(param: IAutoBlockingIPParams): Observable<any> {
+    const activeAccountId = this._sessionService.activeAccountId;
+    const url = API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId.toString());
+    return this._http.post(url, param);
+  }
+
+  public blockIPs(param: IBlockIPsParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
-    const url = API.AdwordsAccount.blockIPs.replace('{account_id}', activeAccountId);
+    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 }

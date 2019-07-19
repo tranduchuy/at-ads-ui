@@ -14,16 +14,8 @@ import { DialogService } from '../../../shared/services/dialog.service';
 })
 export class AutoBanIPComponent extends EditableFormBaseComponent implements OnInit {
 
-
-
-  constructor(private _banIpsService: BanIpsService,
-    private _fuseProgressiveBarService: FuseProgressBarService,
-    public _dialogService: DialogService) {
-    super();
-  }
-
   itemsSource = {
-    clickNumber: [
+    maxClick: [
       {
         text: 'Không kích hoạt',
         value: 0
@@ -49,7 +41,7 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
         value: 5
       },
     ],
-    removedTime: [
+    autoRemove: [
       {
         text: 'Không xóa (được đề nghị)',
         value: false
@@ -61,14 +53,20 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
     ]
   }
 
+  constructor(private _banIpsService: BanIpsService,
+    private _fuseProgressiveBarService: FuseProgressBarService,
+    public _dialogService: DialogService) {
+    super();
+  }
+
   ngOnInit(): void {
     this.initForm();
   }
 
   initForm(): void {
     this.form = this.fb.group({
-      clickNumber: [this.itemsSource.clickNumber[0], [Validators.required]],
-      removedTime: [this.itemsSource.removedTime[0], [Validators.required]]
+      maxClick: [this.itemsSource.maxClick[0], [Validators.required]],
+      autoRemove: [this.itemsSource.autoRemove[0], [Validators.required]]
     })
   }
 
@@ -76,12 +74,30 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
     this.onSubmit();
   }
 
-  private generatePostObject() {
-
+  private generatePostObject(): any {
+    const selections = { ...this.form.value };
+    const params = {
+      maxClick: selections.maxClick.value,
+      autoRemove: selections.autoRemove.value
+    }
+    return params;
   }
 
   post(): void {
+    const params = this.generatePostObject();
 
+    this._fuseProgressiveBarService.show();
+    const sub = this._banIpsService.autoBlockingIP(params).subscribe((res: ILoginSuccess) => {
+      this._dialogService._openSuccessDialog(res);
+      this._fuseProgressiveBarService.hide();
+    },
+      (error: HttpErrorResponse) => {
+        if (error.error.messages) {
+          this._dialogService._openErrorDialog(error.error);
+        }
+        this._fuseProgressiveBarService.hide();
+      }
+    );
+    this.subscriptions.push(sub);
   }
-
 }
