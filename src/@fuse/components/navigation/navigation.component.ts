@@ -109,14 +109,13 @@ export class FuseNavigationComponent implements OnInit {
             return account.adsId !== activeAccountId;
           });
           accounts = accounts.map(account => {
-            const url = '/account/' + account.adsId;
             return {
               id: account.adsId,
               title: account.adsId,
               translate: 'NAV.SAMPLE.TITLE',
               type: 'item',
               icon: 'remove',
-              url: url
+              function: this.changeActiveAccount
             };
           });
 
@@ -162,6 +161,12 @@ export class FuseNavigationComponent implements OnInit {
         };
         this.loadRecentNavigation();
       });
+  }
+
+  changeActiveAccount(item): void {
+    console.log(item);
+    this._sessionService.setActiveAccountId(item.id);
+    console.log('changeActiveAccount is called!');
   }
 
   loadRecentNavigation(): void {
