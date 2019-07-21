@@ -1,9 +1,5 @@
-:host {
-  width: 100%;
-}
-
 .container {
-  padding: 10px;
+  padding: 15px 30px 15px 30px;
 
   width: 100%;
 
@@ -170,5 +166,8 @@
     button {
       font-size: 12px;
     }
+  }
+  .container{
+    padding: 15px;
   }
 }
