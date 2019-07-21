@@ -15,16 +15,14 @@
 
   <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
 
-    <div class="flex-box">
-      <div class="flex-item list">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
+      <div fxFlex="60">
 
-        <app-input-textarea [formControlName]="'listBannedIP'"
-                            [errors]="getMessageErrors('listBannedIP')"
-                            title="Nhập danh sách IP cần chặn"
-                            height="360px"></app-input-textarea>
+        <app-input-textarea [formControlName]="'listBannedIP'" [errors]="getMessageErrors('listBannedIP')"
+          title="Nhập danh sách IP cần chặn" height="360px"></app-input-textarea>
 
       </div>
-      <div class="flex-item input-example">
+      <div class="input-example" fxFlex="auto">
         <p class="title3">Hướng Dẫn Chặn IP Tùy Chỉnh</p>
         <p>
           Bạn có thể chặn <b>từng IP riêng lẻ</b>, vui lòng điền mỗi IP 1 dòng
@@ -60,50 +58,52 @@
 
   <p class="table-title title3">Danh Sách IP Đã Chặn Gần Đây</p>
 
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- Position Column -->
-    <ng-container matColumnDef="order">
-      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <span [class.new]="element.order === 'MỚI'">{{element.order}}</span> </mat-cell>
-    </ng-container>
+  <div class="table-wrapper">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="order">
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span [class.new]="element.order === 'MỚI'">{{element.order}}</span>
+        </mat-cell>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="ip">
-      <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="ip">
+        <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
+      </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <p class="status">
-          {{element.status}}
-        </p>
-      </mat-cell>
-    </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <p class="status">
+            {{element.status}}
+          </p>
+        </mat-cell>
+      </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="task">
-      <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
-      <mat-cell *matCellDef>
-        <span class="task">
-          <mat-icon>beenhere</mat-icon> đã chặn
-        </span>
-      </mat-cell>
-    </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="task">
+        <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
+        <mat-cell *matCellDef>
+          <span class="task">
+            <mat-icon>beenhere</mat-icon> đã chặn
+          </span>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="unlockButton">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef>
-        <button mat-icon-button color="accent" matTooltip="Nhấn để mở khóa" class="unlock-button">
-          <mat-icon>lock_open</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="unlockButton">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef>
+          <button mat-icon-button color="accent" matTooltip="Nhấn để mở khóa" class="unlock-button">
+            <mat-icon>lock_open</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 </div>

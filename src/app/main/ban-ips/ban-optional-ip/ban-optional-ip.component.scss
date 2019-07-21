@@ -3,7 +3,7 @@
 }
 
 .container {
-  margin: 15px 30px 15px 30px;
+  padding: 10px;
 
   width: 100%;
 
@@ -66,19 +66,15 @@
     .list {
       width: 60%;
     }
+  }
 
-    .input-example {
-      margin-left: 30px;
-      margin-top: 0;
-      width: 40%;
-      height: 400px;
-      color: gray;
-    }
+  .input-example {
+    margin-top: -10px;
+    color: gray;
   }
 
   .button-area {
     margin-top: 15px;
-    margin-left: 5px;
 
     button {
       border-radius: 0;
@@ -90,14 +86,39 @@
     color: gray;
   }
 
-  mat-row:hover {
-    background-color: #eeee;
-  }
+  .table-wrapper {
+    height: 500px;
+    overflow: auto;
 
-  mat-cell,
-  mat-header-cell {
-    display: flex;
-    justify-content: center;
+    mat-table {
+      width: 100%;
+    }
+
+    mat-row:hover {
+      background-color: #eeee;
+    }
+
+    mat-cell,
+    mat-header-cell {
+      display: flex;
+      justify-content: center;
+    }
+
+    mat-header-cell:nth-child(3),
+    mat-cell:nth-child(3) {
+      flex: 0 0 40%;
+    }
+
+    mat-header-cell:nth-child(1),
+    mat-cell:nth-child(1) {
+      flex: 0 0 10%;
+    }
+
+    mat-row,
+    mat-header-row {
+      min-width: 1000px;
+      width: 100%;
+    }
   }
 
   .step {
@@ -134,12 +155,20 @@
     margin: 0 auto;
   }
 
-  .new{
+  .new {
     background-color: crimson;
     color: white;
     padding: 4px;
     box-shadow: 1px 1px 5px silver;
     font-size: 12px;
     font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .button-area {
+    button {
+      font-size: 12px;
+    }
   }
 }
