@@ -1,5 +1,5 @@
 .container {
-  margin: 15px 30px 15px 30px;
+  padding: 15px 30px 15px 30px;
 
   width: 100%;
 
@@ -30,5 +30,16 @@
 
   .notification {
     text-align: justify;
+  }
+}
+
+@media screen and (max-width: 600px){
+
+  .container{
+    padding: 15px;
+  }
+
+  .submit-button{
+    font-size: 12px;
   }
 }

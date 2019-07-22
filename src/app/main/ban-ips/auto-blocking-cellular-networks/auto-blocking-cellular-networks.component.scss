@@ -1,5 +1,5 @@
 .container {
-  margin: 15px 30px 15px 30px;
+  padding: 15px 30px 15px 30px;
 
   width: 100%;
 
@@ -56,5 +56,16 @@
   .success-button{
     background-color: #4bb543;
     color: white;
+  }
+}
+
+@media screen and (max-width: 600px){
+
+  .container{
+    padding: 15px;
+  }
+
+  .submit-button{
+    font-size: 12px;
   }
 }

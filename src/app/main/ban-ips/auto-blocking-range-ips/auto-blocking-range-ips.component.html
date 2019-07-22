@@ -11,38 +11,29 @@
 
     <p class="notification">
       Nhóm IP là danh sách các IP có tiền tố giống nhau. Ví dụ IP 127.0.0.1 và 127.0.0.2 sẽ thuộc nhóm IP 127.0.0.*
-      Bạn chỉ nên chọn chặn theo nhóm khi bị phá hoại với số lượng lớn, vì chặn theo nhóm có thể sẽ <span style="color: red"> chặn nhầm khách hàng</span> của bạn.
+      Bạn chỉ nên chọn chặn theo nhóm khi bị phá hoại với số lượng lớn, vì chặn theo nhóm có thể sẽ <span
+        style="color: red"> chặn nhầm khách hàng</span> của bạn.
     </p>
     <p>
       <b>
         Chọn nhóm IP 127.0.0.* (255 IP)
       </b>
     </p>
-    <app-select-text
-        [itemsSource]="itemsSource.classC"
-        [displayPath]="'text'"
-        [valuePath]="'value'"
-        [title]="'--Chọn hình thức--'"
-        [formControlName]="'classC'"
-        [errors]="getMessageErrors('classC')"></app-select-text>
+    <app-select-text [itemsSource]="itemsSource.classC" [displayPath]="'text'" [valuePath]="'value'"
+      [title]="'--Chọn hình thức--'" [formControlName]="'classC'" [errors]="getMessageErrors('classC')">
+    </app-select-text>
     <p>
       <b>
         Chọn nhóm IP 127.0.*.* (65.026 IP)
       </b>
     </p>
-    <app-select-text
-        [itemsSource]="itemsSource.classD"
-        [displayPath]="'text'"
-        [valuePath]="'value'"
-        [title]="'--Chọn hình thức--'"
-        [formControlName]="'classD'"
-        [errors]="getMessageErrors('classD')"></app-select-text>
+    <app-select-text [itemsSource]="itemsSource.classD" [displayPath]="'text'" [valuePath]="'value'"
+      [title]="'--Chọn hình thức--'" [formControlName]="'classD'" [errors]="getMessageErrors('classD')">
+    </app-select-text>
     <p class="text-center">
-      <button mat-raised-button
-              color="accent"
-              class="submit-button"
-              aria-label="Kết nối"
-              (click)="onClickBtnSubmit()">Kích hoạt và cập nhật cấu hình</button>
+      <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" (click)="onClickBtnSubmit()">
+        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+      </button>
     </p>
   </form>
 </div>

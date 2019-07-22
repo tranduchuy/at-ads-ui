@@ -19,36 +19,24 @@
         Chặn sau khi 1 IP nhấn quảng cáo (<span style="color: red">thường là 2 lần</span>)
       </b>
     </p>
-    <app-select-text 
-      [itemsSource]="itemsSource.maxClick"
-      [displayPath]="'text'"
-      [valuePath]="'value'"
-      [title]="'Chọn hình thức'"
-      [formControlName]="'maxClick'"
-      [errors]="getMessageErrors('maxClick')"></app-select-text>
+    <app-select-text [itemsSource]="itemsSource.maxClick" [displayPath]="'text'" [valuePath]="'value'"
+      [title]="'Chọn hình thức'" [formControlName]="'maxClick'" [errors]="getMessageErrors('maxClick')">
+    </app-select-text>
 
     <p>
       <b>
         Xóa hết IP đã chặn khi qua ngày mới (<span style="color: red">xóa vào lúc 0h-1h sáng</span>)
       </b>
-    </p> 
-    <app-select-text 
-      [itemsSource]="itemsSource.autoRemove"
-      [displayPath]="'text'"
-      [valuePath]="'value'"
-      [title]="'Chọn hình thức'"
-      [formControlName]="'autoRemove'"
-      [errors]="getMessageErrors('autoRemove')"></app-select-text>
+    </p>
+    <app-select-text [itemsSource]="itemsSource.autoRemove" [displayPath]="'text'" [valuePath]="'value'"
+      [title]="'Chọn hình thức'" [formControlName]="'autoRemove'" [errors]="getMessageErrors('autoRemove')">
+    </app-select-text>
 
-      <p class="text-center">
-        <button mat-raised-button
-                color="accent"
-                class="submit-button"
-                aria-label="Kết nối"
-                type="submit">
-          <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
-        </button>
-      </p>
+    <p class="text-center">
+      <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" type="submit">
+        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+      </button>
+    </p>
 
   </form>
 </div>
