@@ -1,43 +1,42 @@
-<div gdAreas="connect-button input-side | content content"
-     gdGap="16px"
-     gdRows="auto auto"
-     style="width: 100%"
->
-  <div gdArea="connect-button" class="connect-button box">
-    <h3><strong><span class="step">[1]</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h3>
-    <p> Sử dụng tài khoản Gmail quản lý Google AdWords, bấm kết nối nhanh để hoàn tất quá trình kết nối</p>
-    <div class="loginwithGoogle">
-      <button mat-raised-button
-              color="accent">
-        <mat-icon matSuffix class="add_box">add_box</mat-icon> Kết Nối Nhanh Bằng Gmail</button>
+<div class="container">
+  <div fxLayout="row"
+       fxLayout.xs="column"
+       fxLayoutGap="15px">
+    <div gdArea="connect-button" class="connect-button">
+      <h3><strong><span class="step">[1]</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h3>
+      <p style="text-align: justify"> Sử dụng tài khoản Gmail quản lý Google AdWords, bấm kết nối nhanh để hoàn tất quá trình kết nối</p>
+      <div class="loginWithGoogle">
+        <button mat-raised-button>
+          <img src="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png" alt="" style="height: 24px; width:24px"> Kết Nối Nhanh Bằng Gmail</button>
+      </div>
+    </div>
+    <div gdArea="input-side" class="input-side">
+      <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ ADWORDS CID</strong></h3>
+      <p style="text-align: justify"><strong>Bước 1: </strong> Đăng nhập <a href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
+        khoản adwords của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
+        tài khoản Adwords của bạn</p>
+      <form [formGroup]="form" novalidate>
+        <div fxLayout="row">
+          <app-input-text [formControlName]="'adWordId'"
+                          [title]="'Adwords ID'"
+                          [placeholder]="'5456445193'"
+                          [pristine]="true"
+                          [errors]="getMessageErrors('adWordId')"
+          ></app-input-text>
+          <button mat-raised-button
+                  color="accent"
+                  class="submit-button"
+                  aria-label="Kết nối"
+                  (click)="onClickBtnSubmit()">
+
+            <mat-icon matSuffix class="add_box">add_box</mat-icon>
+            Kết nối
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  <div gdArea="input-side" class="input-side box">
-    <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ ADWORDS CID</strong></h3>
-    <p><strong>Bước 1: </strong> Đăng nhập <a href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
-      khoản adwords của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
-      tài khoản Adwords của bạn</p>
-    <form [formGroup]="form" novalidate>
-      <div fxFlex="1 0 auto" fxLayout="row">
-        <app-input-text [formControlName]="'adWordId'"
-                        [title]="'Adwords ID'"
-                        [placeholder]="'5456445193'"
-                        [pristine]="true"
-                        [errors]="getMessageErrors('adWordId')"
-        ></app-input-text>
-        <button mat-raised-button
-                color="accent"
-                class="submit-button"
-                aria-label="Kết nối"
-                (click)="onClickBtnSubmit()">
-
-          <mat-icon matSuffix class="add_box">add_box</mat-icon>
-          Kết nối
-        </button>
-      </div>
-    </form>
-  </div>
-  <div gdArea="content" class="box" *ngIf="isConnected">
+  <div gdArea="content" *ngIf="isConnected">
     <hr>
     <h3><strong><span class="step">[2]</span>  VUI LÒNG ĐỒNG Ý YÊU CẦU KẾT NỐI</strong></h3>
     <p><strong>Bước 1: </strong> Truy cập lại tài khoản AdWords của bạn <a href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a> và bấm vào icon ở menu bên trái </p>
@@ -60,7 +59,7 @@
       </button>
 
     </p>
-  <div gdArea="content" class="box">
+  <div gdArea="content">
     <h3><strong><span class="step">[2]</span>  Vui lòng đồng ý yêu cầu kết nối</strong></h3>
     <p><strong>Bước 1: </strong> Đăng nhập <a href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
       khoản adwords của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
