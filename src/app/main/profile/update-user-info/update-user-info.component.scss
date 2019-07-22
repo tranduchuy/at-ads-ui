@@ -1,0 +1,81 @@
+.container {
+  margin: 15px 30px 15px 30px;
+
+  width: 100%;
+
+  .title1 {
+    padding: 15px;
+
+    background-color: #eee;
+    color: gray;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .table-container {
+    height: 400px;
+    overflow: auto;
+
+    margin-top: 30px;
+  }
+
+  mat-header-cell,
+  mat-cell {
+    display: flex;
+    justify-content: center;
+  }
+
+  mat-header-cell:nth-child(3),
+  mat-cell:nth-child(3) {
+    flex: 0 0 20%;
+  }
+
+  mat-header-cell:nth-child(4),
+  mat-cell:nth-child(4) {
+    flex: 0 0 27%;
+    justify-content: left;
+  }
+
+  mat-header-cell:nth-child(5),
+  mat-cell:nth-child(5) {
+    flex: 0 0 10%;
+  }
+
+  mat-row:hover {
+    background-color: #eeee;
+  }
+
+  .info-button {
+    cursor: pointer;
+  }
+
+  .vip-service {
+    color: dodgerblue;
+    font-weight: bold;
+  }
+
+  .free-service {
+    color: coral;
+    font-weight: bold;
+  }
+
+  .button-area {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tracking {
+    color: orange;
+  }
+
+  .no-tracking {
+    color: dodgerblue;
+  }
+
+  .footer {
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -3,6 +3,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export namespace ErrorNames {
   export const required = ['required', 'Bắt buộc'];
+  export const email = ['email', 'Email không hợp lệ'];
   export const patternUrl = ['patternUrl', 'Url sai'];
   export const patternNumber = ['patternNumber', 'Chỉ được phéo nhập số'];
   export const patternHotlineNumber = ['patternHotlineNumber', 'Chỉ được phéo nhập số và khoảng trắng'];

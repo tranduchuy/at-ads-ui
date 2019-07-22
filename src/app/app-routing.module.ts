@@ -24,6 +24,11 @@ const appRoutes: Routes = [
     loadChildren: './main/adwords-account-list/adwords-account-list.module#AdwordsAccountListModule'
   },
   {
+    path: 'thong-tin-ca-nhan',
+    canActivate: [MainGuardService],
+    loadChildren: './main/profile/profile.module#ProfileModule'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

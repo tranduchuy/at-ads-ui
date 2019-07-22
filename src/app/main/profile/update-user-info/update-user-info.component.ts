@@ -18,6 +18,7 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
   }
 
   post(): void {
+    const params = this.generatePostObject();
   }
 
   private initForm(): void {
@@ -25,9 +26,19 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
       email:  ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required]],
       phone: ['', [Validators.required, this.validatorService.checkNumber]],
-      password: ['', [Validators.required]],
-      confirmedPassword: ['', [Validators.required]]
+      password: ['', []],
+      confirmedPassword: ['', []]
     }, {validators: this.validatorService.checkConfirmPassword()});
+  }
+
+  onClickBtnSubmit(): void {
+    this.onSubmit();
+  }
+
+  private generatePostObject(): any {
+    const params = {...this.form.value};
+
+    return params;
   }
 
 }
