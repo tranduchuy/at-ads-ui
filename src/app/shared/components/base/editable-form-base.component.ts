@@ -119,7 +119,7 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
         return ErrorNames.wrongPassword[1];
       case ErrorNames.email[0]:
         return ErrorNames.email[1];
-        
+
     }
 
     return `Something error ${keyErr}`;
