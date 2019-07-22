@@ -7,7 +7,7 @@ import {
   Input,
   ViewChild,
   OnInit,
-  ElementRef
+  ElementRef, Optional, Self
 } from '@angular/core';
 import { InputTextBaseComponent } from '../base/input-base.component';
 import {
@@ -16,20 +16,18 @@ import {
   FormControl,
   FormGroupDirective,
   NgForm,
-  AbstractControl
+  AbstractControl, NgControl
 } from '@angular/forms';
 import { ErrorStateMatcher, MatLabel } from '@angular/material';
 
-const INPUT_TEXT_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => InputTextComponent),
-  multi: true
-};
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
+  constructor(public ngControl: NgControl){
+
+  }
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && form.invalid && (control.dirty || control.touched || isSubmitted));
+    return !!(control && this.ngControl.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
 
@@ -37,13 +35,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-input-text',
   templateUrl: './input-text.component.html',
-  styleUrls: ['./input-text.component.scss'],
-  providers: [INPUT_TEXT_VALUE_ACCESSOR]
+  styleUrls: ['./input-text.component.scss']
 })
 export class InputTextComponent extends InputTextBaseComponent implements ControlValueAccessor, OnDestroy, OnInit {
   innerValue = '';
 
-  matcher = new MyErrorStateMatcher();
+  matcher;
 
   @Input() pristine = false;
 
@@ -60,8 +57,14 @@ export class InputTextComponent extends InputTextBaseComponent implements Contro
 
   @ViewChild('label', {static: true}) label: MatLabel;
 
-  constructor(protected el: ElementRef) {
+  constructor(protected el: ElementRef,   @Optional() @Self() public ngControl: NgControl) {
     super();
+    if (this.ngControl != null) {
+      // Setting the value accessor directly (instead of using
+      // the providers) to avoid running into a circular import.
+      this.ngControl.valueAccessor = this;
+      this.matcher = new MyErrorStateMatcher(this.ngControl);
+    }
   }
 
   ngOnInit(): void {
@@ -74,6 +77,7 @@ export class InputTextComponent extends InputTextBaseComponent implements Contro
     if (!input) {
       return;
     }
+    console.log(this.ngControl.invalid);
 
     this.blurEventListener = this.onBlur.bind(this);
     input.addEventListener('blur', this.blurEventListener);

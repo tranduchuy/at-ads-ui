@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
 
 import { InputTextModule } from '../../shared/components/input-text/input-text.module';
 import { InputTextareaModule } from '../../shared/components/input-textarea/input-textarea.module';
@@ -34,6 +35,7 @@ import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.co
     MatTooltipModule,
     MatBadgeModule,
     MatCheckboxModule,
+    MatCardModule,
 
     CheckboxGroupModule,
     ReactiveFormsModule,

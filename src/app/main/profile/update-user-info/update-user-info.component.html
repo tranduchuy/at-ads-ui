@@ -1,0 +1,43 @@
+<div class="container">
+
+  <div class="title1 text-center">
+    THAY ĐỔI THÔNG TIN TÀI KHOẢN
+  </div>
+
+   <form [formGroup]="form" novalidate>
+     <app-input-text [formControlName]="'email'"
+                     [title]="'Email(*)'"
+                     [pristine]="true"
+                     [errors]="getMessageErrors('email')"
+     ></app-input-text>
+     <app-input-text [formControlName]="'name'"
+                     [title]="'Họ và Tên'"
+                     [pristine]="true"
+                     [errors]="getMessageErrors('name')"
+     ></app-input-text>
+     <app-input-text [formControlName]="'phone'"
+                     [title]="'Số điện thoại'"
+                     [pristine]="true"
+                     [errors]="getMessageErrors('phone')"
+     ></app-input-text>
+     <div class="text-center title1"><strong>CẬP NHẬT MẬT KHẨU</strong></div>
+     <app-input-text [formControlName]="'password'"
+                     [title]="'Mật khẩu'"
+                     [pristine]="true"
+                     [errors]="getMessageErrors('password')"
+     ></app-input-text>
+
+     <app-input-text [formControlName]="'confirmedPassword'"
+                     [title]="'Nhập lại mật khẩu'"
+                     [pristine]="true"
+                     [errors]="getMessageErrors('confirmedPassword')"
+     ></app-input-text>
+    <p class="text-center">
+      <button mat-raised-button
+              color="accent"
+              class="submit-button"
+              aria-label="Cập nhật"
+              (click)="onClickBtnSubmit()">Cập nhật</button>
+    </p>
+  </form>
+</div>

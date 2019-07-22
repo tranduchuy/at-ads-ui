@@ -3,6 +3,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export namespace ErrorNames {
   export const required = ['required', 'Bắt buộc'];
+  export const email = ['email', 'Email không hợp lệ'];
   export const patternUrl = ['patternUrl', 'Url sai'];
   export const patternNumber = ['patternNumber', 'Chỉ được phéo nhập số'];
   export const patternHotlineNumber = ['patternHotlineNumber', 'Chỉ được phéo nhập số và khoảng trắng'];
@@ -15,6 +16,7 @@ export namespace ErrorNames {
   export const areStoreSelected = ['areaStore', 'Chưa chọn store nào'];
   export const invalidIP = ['invalidIP', 'IP không hợp lệ'];
   export const invalidListIP = ['invalidListIP', 'Danh sách IP không hợp lệ'];
+  export const wrongPassword = ['wrongPassword', 'Mật khẩu không khớp'];
 }
 
 @Injectable()
@@ -38,10 +40,10 @@ export class ValidatorsService {
   }
 
   public checkListIP(control: AbstractControl): any {
-    let listIP = control.value.trim().split('\n');
+    const listIP = control.value.trim().split('\n');
     const regex = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
 
-    for (let ip of listIP) {
+    for (const ip of listIP) {
       if (!regex.test(ip)) {
         return { [ErrorNames.invalidListIP[0]]: true };
       }
@@ -149,5 +151,16 @@ export class ValidatorsService {
     if (!value) {
       return { [ErrorNames.required[0]]: true };
     }
+  }
+
+  public checkConfirmPassword(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors => {
+      const password = control.get('password').value;
+      const confirmedPassword = control.get('confirmedPassword').value;
+
+      if (password !== confirmedPassword) {
+        return { [ErrorNames.wrongPassword[0]]: true };
+      }
+    };
   }
 }

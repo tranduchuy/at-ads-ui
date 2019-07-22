@@ -29,6 +29,11 @@ const appRoutes: Routes = [
     loadChildren: './main/add-tracking-tags/add-tracking-tags.module#AddTrackingTagsModule'
   },
   {
+    path: 'thong-tin-ca-nhan',
+    canActivate: [MainGuardService],
+    loadChildren: './main/profile/profile.module#ProfileModule'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

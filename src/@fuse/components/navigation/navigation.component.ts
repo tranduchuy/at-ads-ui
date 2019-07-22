@@ -45,7 +45,7 @@ export class FuseNavigationComponent implements OnInit {
             },
             {
               id: 'account-list',
-              title: 'Quản ý tài khoản Adwords',
+              title: 'Quản lý tài khoản Adwords',
               type: 'item',
               icon: 'dashboard',
               url: '/account-list'
@@ -54,7 +54,7 @@ export class FuseNavigationComponent implements OnInit {
         },
         {
           id: 'account-list',
-          title: 'Quản ý tài khoản Adwords',
+          title: 'Quản lý tài khoản Adwords',
           type: 'item',
           icon: 'dashboard',
           url: '/account-list'
@@ -141,7 +141,7 @@ export class FuseNavigationComponent implements OnInit {
               },
               {
                 id: 'account-list',
-                title: 'Quản ý tài khoản Adwords',
+                title: 'Quản lý tài khoản Adwords',
                 type: 'item',
                 icon: 'dashboard',
                 url: '/account-list'
