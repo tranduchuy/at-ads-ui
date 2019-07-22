@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="title1">
+    GẮN TRACKING THEO DÕI ADWORDS
+  </div>
+
+  <p class="usage">
+    <b>Công dụng của Tracking:</b> Tracking là đoạn mã nhỏ, tích hợp vào trong quảng cáo AdWords để theo dõi hoạt động
+    bấm quảng cáo
+  </p>
+
+  <div class="tracking-example">
+    <img src="https://files.slack.com/files-pri/THXMMTH2T-FL9V2KSTC/ma-traking-theo-doi-quang-cao.jpg" alt="">
+  </div>
+
+  <p class="title2">
+    <span style="color: dodgerblue">[GÁN MÃ]</span> CHỌN CHIẾN DỊCH CẦN GÁN MÃ
+  </p>
+
+  <form class="form">
+
+    <p class="table-title">Chọn chiến dịch để gắn tracking (nên chọn tất cả)</p>
+
+    <div class="table-wrapper">
+
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="order">
+          <mat-header-cell *matHeaderCellDef> STT </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.order}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="campaign">
+          <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.campaign}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.status === 'Hoạt động'" class="enable-status">
+              {{element.status}}
+            </span>
+            <span *ngIf="element.status === 'Đang dừng'" class="disabled-status">
+              {{element.status}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tracking">
+          <mat-header-cell *matHeaderCellDef> Gán mã </mat-header-cell>
+          <mat-cell *matCellDef>
+            <mat-checkbox></mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>
+
+    <button mat-raised-button class="submit-button">
+      
+    </button>
+
+  </form>
+
+</div>

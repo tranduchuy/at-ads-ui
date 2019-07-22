@@ -1,0 +1,83 @@
+.container {
+  padding: 15px 30px 15px 30px;
+
+  width: 100%;
+
+  .title1 {
+    padding: 15px;
+    background-color: #eee;
+    color: gray;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .title2 {
+    margin-top: 50px;
+    font-weight: bold;
+    text-align: justify;
+  }
+
+  .usage {
+    text-align: justify;
+    color: gray;
+    padding-top: 10px;
+  }
+
+  .tracking-example {
+    margin-top: 20px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .table-title {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    padding-top: 20px;
+  }
+
+  .table-wrapper {
+    height: 500px;
+    box-shadow: 2px 2px 10px silver;
+    overflow: auto;
+
+    mat-table {
+      width: 100%;
+      box-shadow: none;
+    }
+
+    mat-row:hover {
+      background-color: #eeee;
+    }
+
+    mat-header-cell,
+    mat-cell {
+      display: flex;
+      justify-content: center;
+
+      flex: 0 0 20%;
+    }
+
+    mat-header-cell:nth-child(2),
+    mat-cell:nth-child(2) {
+      justify-content: left;
+      flex: 0 0 40%;
+    }
+  }
+
+  .enable-status {
+    color: dodgerblue;
+  }
+
+  .disabled-status {
+    color: gray;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+}

@@ -9,8 +9,7 @@ import { AdwordsAccountListComponent } from './adwords-account-list.component';
       pathMatch: 'full',
       component: AdwordsAccountListComponent
     }
-  ])
-  ],
+  ])],
   exports: [RouterModule]
 })
 export class AdwordsAccountListRoutingModule { }

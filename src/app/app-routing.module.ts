@@ -24,6 +24,11 @@ const appRoutes: Routes = [
     loadChildren: './main/adwords-account-list/adwords-account-list.module#AdwordsAccountListModule'
   },
   {
+    path: 'add-tracking-tags',
+    canActivate: [MainGuardService],
+    loadChildren: './main/add-tracking-tags/add-tracking-tags.module#AddTrackingTagsModule'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

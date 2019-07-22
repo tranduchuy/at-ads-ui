@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forChild([
+    {
+      path: 'select-campaigns',
+      pathMatch: 'full',
+      component: SelectCampaignsComponent
+    }
+  ])],
+  exports: [RouterModule]
 })
 export class AddTrackingTagsRoutingModule { }
