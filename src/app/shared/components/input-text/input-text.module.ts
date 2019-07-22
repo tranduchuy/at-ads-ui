@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputTextComponent } from './input-text.component';
-import { MatInputModule, MatFormFieldModule, MatIconModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatFormFieldModule,
+  MatIconModule,
+  ErrorStateMatcher,
+  ShowOnDirtyErrorStateMatcher, MatFormFieldControl
+} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -18,7 +24,10 @@ import { FormsModule } from '@angular/forms';
   exports: [
     InputTextComponent
   ],
-  providers: []
+  providers: [
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
+    {provide: MatFormFieldControl, useExisting: InputTextComponent}
+  ]
 })
 export class InputTextModule {
 

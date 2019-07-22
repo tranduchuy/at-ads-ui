@@ -7,14 +7,13 @@
          [(ngModel)]="innerValue"
          [errorStateMatcher]="matcher"
          (focus)="onFocus($event)"
-
          (blur)="onLostFocus()"
          (ngModelChange)="onInputChange()">
   <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>
-  <mat-error *ngIf="!pristine">
+  <mat-error *ngIf="!pristine && ngControl.invalid">
     <div *ngFor="let m of errors" class="error">{{m}}</div>
   </mat-error>
-  <mat-error *ngIf="pristine">
+  <mat-error *ngIf="pristine && ngControl.invalid">
     <div class="error">{{errors[0]}}</div>
   </mat-error>
 
