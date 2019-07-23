@@ -75,6 +75,7 @@ export class FuseNavVerticalItemComponent implements OnInit, OnDestroy
 
     changeActiveAccount(): void {
         this._sessionService.setActiveAccountId(this.item.id.toString());
+        this._sessionService.setActiveAdsAccountId(this.item.title.toString());
         this._fuseNavigationService.reloadNavigation();
     }
 }
