@@ -41,10 +41,18 @@ export class ValidatorsService {
 
   public checkListIP(control: AbstractControl): any {
     const listIP = control.value.trim().split('\n');
-    const regex = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
 
+    //127.0.0.1
+    const regex1 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
+    //127.0.0.*
+    const regex2 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([*])$/);
+    //127.0.*.*
+    const regex3 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([*])[.]([*])$/);
+    //127.*.*.*
+    const regex4 = new RegExp(/^([0-9]{1,3})[.]([*])[.]([*])[.]([*])$/);
+    
     for (const ip of listIP) {
-      if (!regex.test(ip)) {
+      if (!regex1.test(ip) && !regex2.test(ip) && !regex3.test(ip) && !regex4.test(ip)) {
         return { [ErrorNames.invalidListIP[0]]: true };
       }
     }
