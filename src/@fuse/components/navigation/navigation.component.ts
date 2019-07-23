@@ -101,6 +101,7 @@ export class FuseNavigationComponent implements OnInit {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(res => {
         let accounts = res.data.accounts;
+        console.log(accounts);
         let activeAccountId = this._sessionService.activeAccountId;
         if (this._sessionService.activeAccountId) {
           activeAccountId = this._sessionService.activeAccountId.toString();
@@ -108,14 +109,14 @@ export class FuseNavigationComponent implements OnInit {
         if (accounts.length > 0) {
           if (!activeAccountId) {
             activeAccountId = accounts[0].adsId.toString();
-            this._sessionService.setActiveAccountId(accounts[0].adsId.toString());
+            this._sessionService.setActiveAccountId(accounts[0].id.toString());
           }
           accounts = accounts.filter( account => {
             return account.adsId !== activeAccountId;
           });
           accounts = accounts.map(account => {
             return {
-              id: account.adsId,
+              id: account.id,
               title: account.adsId,
               translate: 'NAV.SAMPLE.TITLE',
               type: 'item',
@@ -168,13 +169,6 @@ export class FuseNavigationComponent implements OnInit {
         this.loadRecentNavigation();
         this._fuseSplashScreenService.hide();
       });
-  }
-
-  changeActiveAccount(item): void {
-    console.log(item);
-    console.log(this._sessionService);
-    this._sessionService.setActiveAccountId(item.id);
-    console.log('changeActiveAccount is called!');
   }
 
   loadRecentNavigation(): void {
