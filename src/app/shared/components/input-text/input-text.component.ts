@@ -77,7 +77,6 @@ export class InputTextComponent extends InputTextBaseComponent implements Contro
     if (!input) {
       return;
     }
-    console.log(this.ngControl.invalid);
 
     this.blurEventListener = this.onBlur.bind(this);
     input.addEventListener('blur', this.blurEventListener);
