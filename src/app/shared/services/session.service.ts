@@ -30,6 +30,12 @@ export class SessionService {
     this.cookieService.put(CookieNames.activeAccountId, accountId, {expires: today});
   }
 
+  setActiveAdsAccountId(accountId): void {
+    const today = new Date();
+    today.setHours(today.getHours() + 8);
+    this.cookieService.put(CookieNames.activeAdsAccountId, accountId, {expires: today});
+  }
+
   remove(): void {
     this.cookieService.remove(CookieNames.token);
     this.cookieService.remove(CookieNames.user);
@@ -41,6 +47,10 @@ export class SessionService {
   }
   get activeAccountId(): any {
     return this.cookieService.get(CookieNames.activeAccountId);
+  }
+
+  get activeAdsAccountId(): any {
+    return this.cookieService.get(CookieNames.activeAdsAccountId);
   }
 
   get token(): any {

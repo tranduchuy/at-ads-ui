@@ -101,21 +101,25 @@ export class FuseNavigationComponent implements OnInit {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(res => {
         let accounts = res.data.accounts;
+        let activeAdsAccountId = '';
         let activeAccountId = this._sessionService.activeAccountId;
         if (this._sessionService.activeAccountId) {
           activeAccountId = this._sessionService.activeAccountId.toString();
+          activeAdsAccountId = this._sessionService.activeAdsAccountId.toString();
         }
         if (accounts.length > 0) {
           if (!activeAccountId) {
-            activeAccountId = accounts[0].adsId.toString();
-            this._sessionService.setActiveAccountId(accounts[0].adsId.toString());
+            activeAccountId = accounts[0].id.toString();
+            activeAdsAccountId = accounts[0].adsId.toString();
+            this._sessionService.setActiveAccountId(accounts[0].id.toString());
+            this._sessionService.setActiveAdsAccountId(accounts[0].adsId.toString());
           }
           accounts = accounts.filter( account => {
-            return account.adsId !== activeAccountId;
+            return account.adsId !== activeAdsAccountId;
           });
           accounts = accounts.map(account => {
             return {
-              id: account.adsId,
+              id: account.id,
               title: account.adsId,
               translate: 'NAV.SAMPLE.TITLE',
               type: 'item',
@@ -126,7 +130,7 @@ export class FuseNavigationComponent implements OnInit {
 
           this.accounts.children[0] = {
             id: activeAccountId,
-            title: activeAccountId,
+            title: activeAdsAccountId,
             translate: 'NAV.APPLICATIONS',
             icon: 'more_vert',
             type: 'collapsable',
@@ -168,13 +172,6 @@ export class FuseNavigationComponent implements OnInit {
         this.loadRecentNavigation();
         this._fuseSplashScreenService.hide();
       });
-  }
-
-  changeActiveAccount(item): void {
-    console.log(item);
-    console.log(this._sessionService);
-    this._sessionService.setActiveAccountId(item.id);
-    console.log('changeActiveAccount is called!');
   }
 
   loadRecentNavigation(): void {
