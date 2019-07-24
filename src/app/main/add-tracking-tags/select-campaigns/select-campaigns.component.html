@@ -23,19 +23,19 @@
 
     <div class="table-wrapper">
 
-      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <mat-table [dataSource]="campaignList" class="mat-elevation-z8">
 
         <ng-container matColumnDef="order">
           <mat-header-cell *matHeaderCellDef> STT </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.order}} </mat-cell>
+          <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="campaign">
+        <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.campaign}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="status">
+        <!-- <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span *ngIf="element.status === 'Hoạt động'" class="enable-status">
@@ -52,7 +52,7 @@
           <mat-cell *matCellDef>
             <mat-checkbox></mat-checkbox>
           </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

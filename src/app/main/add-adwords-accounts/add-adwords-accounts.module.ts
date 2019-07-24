@@ -5,8 +5,10 @@ import { AddAdwordsAccountsRoutingModule } from './add-adwords-accounts-routing.
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { InputTextModule } from '../../shared/components/input-text/input-text.module';
+import { InputNumberModule } from '../../shared/components/input-number/input-number.module';
+
 import { MatButtonModule, MatIconModule } from '@angular/material';
 import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 @NgModule({
@@ -19,6 +21,7 @@ import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
     InputTextModule,
     MatButtonModule,
     MatIconModule,
+    InputNumberModule,
   ],
   providers: [
     AddAdwordsAccountsService

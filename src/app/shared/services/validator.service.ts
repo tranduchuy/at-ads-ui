@@ -5,7 +5,7 @@ export namespace ErrorNames {
   export const required = ['required', 'Bắt buộc'];
   export const email = ['email', 'Email không hợp lệ'];
   export const patternUrl = ['patternUrl', 'Url sai'];
-  export const patternNumber = ['patternNumber', 'Chỉ được phéo nhập số'];
+  export const patternNumber = ['patternNumber', 'Chỉ được phép nhập số'];
   export const patternHotlineNumber = ['patternHotlineNumber', 'Chỉ được phéo nhập số và khoảng trắng'];
   export const fileNotLoad = ['fileNotLoad', 'Chưa có file'];
   export const minLength = ['minLength', 'Quá ngắn'];
@@ -17,6 +17,7 @@ export namespace ErrorNames {
   export const invalidIP = ['invalidIP', 'IP không hợp lệ'];
   export const invalidListIP = ['invalidListIP', 'Danh sách IP không hợp lệ'];
   export const wrongPassword = ['wrongPassword', 'Mật khẩu không khớp'];
+  export const invalidAdwordsAccountId = ['invalidAdwordsAccountId', 'ID không hợp lệ']
 }
 
 @Injectable()
@@ -39,6 +40,14 @@ export class ValidatorsService {
     }
   }
 
+  public checkAdwordsAccountId(control: AbstractControl): any {
+    const regex = new RegExp(/^([0-9]|[-])+$/);
+
+    if (!regex.test(control.value)) {
+      return { [ErrorNames.invalidAdwordsAccountId[0]]: true };
+    }
+  }
+
   public checkListIP(control: AbstractControl): any {
     const listIP = control.value.trim().split('\n');
 
@@ -48,11 +57,9 @@ export class ValidatorsService {
     const regex2 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([*])$/);
     //127.0.*.*
     const regex3 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([*])[.]([*])$/);
-    //127.*.*.*
-    const regex4 = new RegExp(/^([0-9]{1,3})[.]([*])[.]([*])[.]([*])$/);
-    
+
     for (const ip of listIP) {
-      if (!regex1.test(ip) && !regex2.test(ip) && !regex3.test(ip) && !regex4.test(ip)) {
+      if (!regex1.test(ip) && !regex2.test(ip) && !regex3.test(ip)) {
         return { [ErrorNames.invalidListIP[0]]: true };
       }
     }

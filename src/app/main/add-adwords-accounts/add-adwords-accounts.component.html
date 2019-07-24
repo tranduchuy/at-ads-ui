@@ -22,7 +22,7 @@
                           [placeholder]="'5456445193'"
                           [pristine]="true"
                           [errors]="getMessageErrors('adWordId')"
-          ></app-input-text>
+                          (keypress)="onPressId($event.keyCode)"></app-input-text>
           <button mat-raised-button
                   color="accent"
                   class="submit-button"

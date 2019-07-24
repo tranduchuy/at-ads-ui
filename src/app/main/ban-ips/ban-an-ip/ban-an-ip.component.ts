@@ -45,9 +45,9 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
 
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.blockIPs(params).subscribe((res: ILoginSuccess) => {
-        this._dialogService._openSuccessDialog(res);
-        this._fuseProgressiveBarService.hide();
-      },
+      this._dialogService._openSuccessDialog(res);
+      this._fuseProgressiveBarService.hide();
+    },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
@@ -61,7 +61,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
   private generatePostObject(): any {
     const params = {
       action: 'ADD',
-      ips: [{...this.form.value}.bannedIP]
+      ips: [{ ...this.form.value }.bannedIP]
     };
 
     return params;

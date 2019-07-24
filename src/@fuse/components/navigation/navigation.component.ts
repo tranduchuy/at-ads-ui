@@ -7,6 +7,8 @@ import { AdwordsAccountsService } from '../../../app/shared/services/ads-account
 import { SessionService } from '../../../app/shared/services/session.service';
 import { FuseSplashScreenService } from '../../services/splash-screen.service';
 
+import { AdsAccountIdPipe } from '../../../app/shared/pipes/ads-account-id/ads-account-id.pipe';
+
 @Component({
   selector: 'fuse-navigation',
   templateUrl: './navigation.component.html',
@@ -21,6 +23,8 @@ export class FuseNavigationComponent implements OnInit {
 
   @Input()
   navigation: any;
+
+  adsAccountIdPipe = new AdsAccountIdPipe();
 
   accounts =
     {
@@ -61,7 +65,7 @@ export class FuseNavigationComponent implements OnInit {
         }
       ]
     }
-  ;
+    ;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -76,7 +80,7 @@ export class FuseNavigationComponent implements OnInit {
     private _fuseNavigationService: FuseNavigationService,
     private _fuseSplashScreenService: FuseSplashScreenService,
     private _adwordsAccountsService: AdwordsAccountsService,
-    private _sessionService: SessionService
+    private _sessionService: SessionService,
   ) {
     this._fuseNavigationService._onReloadNavigation$.subscribe(() => {
       this.loadNavigation();
@@ -110,17 +114,19 @@ export class FuseNavigationComponent implements OnInit {
         if (accounts.length > 0) {
           if (!activeAccountId) {
             activeAccountId = accounts[0].id.toString();
-            activeAdsAccountId = accounts[0].adsId.toString();
-            this._sessionService.setActiveAccountId(accounts[0].id.toString());
             this._sessionService.setActiveAdsAccountId(accounts[0].adsId.toString());
+            activeAdsAccountId = this.adsAccountIdPipe.transform(accounts[0].adsId.toString());
+            this._sessionService.setActiveAccountId(accounts[0].id.toString());
           }
-          accounts = accounts.filter( account => {
-            return account.adsId !== activeAdsAccountId;
+
+          accounts = accounts.filter(account => {
+            return this.adsAccountIdPipe.transform(account.adsId) !== activeAdsAccountId;
           });
+
           accounts = accounts.map(account => {
             return {
               id: account.id,
-              title: account.adsId,
+              title: this.adsAccountIdPipe.transform(account.adsId),
               translate: 'NAV.SAMPLE.TITLE',
               type: 'item',
               icon: 'remove',
@@ -129,7 +135,7 @@ export class FuseNavigationComponent implements OnInit {
           });
 
           this.accounts.children[0] = {
-            id: activeAccountId,
+            id: activeAdsAccountId,
             title: activeAdsAccountId,
             translate: 'NAV.APPLICATIONS',
             icon: 'more_vert',
@@ -161,17 +167,17 @@ export class FuseNavigationComponent implements OnInit {
         this.loadRecentNavigation();
         this._fuseSplashScreenService.hide();
       },
-      error => {
-        this.accounts.children[0] = {
-          id: 'add-accounts',
-          title: 'Thêm tài khoản mới',
-          type: 'item',
-          icon: 'add_box',
-          url: '/them-tai-khoan-moi'
-        };
-        this.loadRecentNavigation();
-        this._fuseSplashScreenService.hide();
-      });
+        error => {
+          this.accounts.children[0] = {
+            id: 'add-accounts',
+            title: 'Thêm tài khoản mới',
+            type: 'item',
+            icon: 'add_box',
+            url: '/them-tai-khoan-moi'
+          };
+          this.loadRecentNavigation();
+          this._fuseSplashScreenService.hide();
+        });
   }
 
   loadRecentNavigation(): void {

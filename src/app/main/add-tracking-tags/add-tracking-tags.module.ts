@@ -22,6 +22,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.component';
 
+import { AddTrackingTagsService } from './add-tracking-tags.service';
+
 
 @NgModule({
   declarations: [SelectCampaignsComponent],
@@ -46,6 +48,7 @@ import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.co
     FuseSharedModule,
 
     AddTrackingTagsRoutingModule
-  ]
+  ],
+  providers: [AddTrackingTagsService]
 })
 export class AddTrackingTagsModule { }
