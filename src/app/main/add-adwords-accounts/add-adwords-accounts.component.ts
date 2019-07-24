@@ -78,7 +78,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   onPressId(keyCode: number) {
-    return (keyCode > 48 && keyCode < 57) || keyCode === 45;
+    return (keyCode >= 48 && keyCode < 57) || keyCode === 45;
   }
 
 }
