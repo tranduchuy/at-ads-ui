@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
-import { Validators } from '@angular/forms';
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from '../../../shared/services/dialog.service';
-import { FuseNavigationService } from '../../../../@fuse/components/navigation/navigation.service';
 
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
+import { SessionService } from 'app/shared/services/session.service';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 export interface Campaign {
   id: string;
@@ -19,7 +19,7 @@ export interface Campaign {
   templateUrl: './select-campaigns.component.html',
   styleUrls: ['./select-campaigns.component.scss']
 })
-export class SelectCampaignsComponent implements OnInit {
+export class SelectCampaignsComponent extends PageBaseComponent implements OnInit {
 
   displayedColumns: string[] = ['order', 'name'];
   campaignList: Campaign[];
@@ -27,18 +27,27 @@ export class SelectCampaignsComponent implements OnInit {
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _fuseNavigationService: FuseNavigationService,
+    private _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
-  ) { }
+  ) {
+    super();
+    this.campaignList = [];
+  }
 
   ngOnInit() {
-    this.getOriginalCampaigns();
+    const sub = this._sessionService.getAdwordId()
+      .subscribe((adwordId: string) => {
+        if (adwordId) {
+          this.getOriginalCampaigns();
+        }
+      });
+
+    this.subscriptions.push(sub);
   }
 
   getOriginalCampaigns() {
     this._fuseProgressiveBarService.show();
     const sub = this._addTrackingTagsService.getOriginalCampaigns().subscribe(res => {
-      this._fuseNavigationService.reloadNavigation();
       this._fuseProgressiveBarService.hide();
       this.campaignList = res.data.campaignList;
     },
@@ -50,5 +59,6 @@ export class SelectCampaignsComponent implements OnInit {
         this.campaignList = [];
       }
     );
+    this.subscriptions.push(sub);
   }
 }

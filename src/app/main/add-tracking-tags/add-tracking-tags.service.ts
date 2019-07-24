@@ -14,16 +14,8 @@ export class AddTrackingTagsService {
     private _sessionService: SessionService
   ) { }
 
-  getActiveAccountId(): string {
-    const activeAccountId = this._sessionService.activeAccountId;
-    if (!activeAccountId){
-      return null;
-    }
-    return activeAccountId.toString();
-  }
-
   public getOriginalCampaigns(): Observable<any> {
-    const activeAccountId = this.getActiveAccountId();
+    const activeAccountId = this._sessionService.getValueOfAdwordId();
     const url =  API.AdwordsAccount.getOriginalCampaigns.replace('{account_id}', activeAccountId);
     return this._http.get(url);
   }

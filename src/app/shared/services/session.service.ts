@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 
 import CookieNames from '../constants/cookies';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class SessionService {
+
+  private _accountId$ = new BehaviorSubject<string>('');
 
   constructor(private cookieService: CookieService) {
 
@@ -55,5 +58,17 @@ export class SessionService {
 
   get token(): any {
     return this.cookieService.get(CookieNames.token);
+  }
+
+  public getValueOfAdwordId(): string {
+    return this._accountId$.getValue();
+  }
+
+  public getAdwordId(): Observable<string> {
+    return this._accountId$.asObservable();
+  }
+
+  public setAdwordId(value: string) {
+    this._accountId$.next(value);
   }
 }

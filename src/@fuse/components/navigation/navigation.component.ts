@@ -110,13 +110,16 @@ export class FuseNavigationComponent implements OnInit {
         if (this._sessionService.activeAccountId) {
           activeAccountId = this._sessionService.activeAccountId.toString();
           activeAdsAccountId = this._sessionService.activeAdsAccountId.toString();
+          this._sessionService.setAdwordId(activeAccountId);
         }
         if (accounts.length > 0) {
           if (!activeAccountId) {
-            activeAccountId = accounts[0].id.toString();
             this._sessionService.setActiveAdsAccountId(accounts[0].adsId.toString());
-            activeAdsAccountId = this.adsAccountIdPipe.transform(accounts[0].adsId.toString());
             this._sessionService.setActiveAccountId(accounts[0].id.toString());
+            this._sessionService.setAdwordId(accounts[0].id.toString());
+
+            activeAdsAccountId = this.adsAccountIdPipe.transform(accounts[0].adsId.toString());
+            activeAccountId = accounts[0].id.toString();
           }
 
           accounts = accounts.filter(account => {
