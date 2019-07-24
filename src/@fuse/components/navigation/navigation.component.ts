@@ -152,13 +152,13 @@ export class FuseNavigationComponent implements OnInit {
                 icon: 'add_box',
                 url: '/them-tai-khoan-moi'
               },
-              {
-                id: 'account-list',
-                title: 'Quản lý tài khoản Adwords',
-                type: 'item',
-                icon: 'dashboard',
-                url: '/account-list'
-              }
+              // {
+              //   id: 'account-list',
+              //   title: 'Quản lý tài khoản Adwords',
+              //   type: 'item',
+              //   icon: 'dashboard',
+              //   url: '/account-list'
+              // }
             ]
           };
           this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);

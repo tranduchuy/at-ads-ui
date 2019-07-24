@@ -4,10 +4,10 @@ import { FuseProgressBarService } from '../../../../@fuse/components/progress-ba
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from '../../../shared/services/dialog.service';
-
-import { AddTrackingTagsService } from '../add-tracking-tags.service';
 import { SessionService } from 'app/shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+
+import { AddTrackingTagsService } from '../add-tracking-tags.service';
 
 export interface Campaign {
   id: string;
@@ -56,7 +56,6 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
           this._dialogService._openErrorDialog(error.error);
         }
         this._fuseProgressiveBarService.hide();
-        this.campaignList = [];
       }
     );
     this.subscriptions.push(sub);

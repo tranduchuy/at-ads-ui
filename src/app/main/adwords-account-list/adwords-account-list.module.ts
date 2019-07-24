@@ -20,6 +20,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { AdwordsAccountListService } from './adwords-account-list.service';
 
+import { AdsAccountIdModule } from 'app/shared/pipes/ads-account-id/ads-account-id.module';
+
 import { AdwordsAccountListComponent } from './adwords-account-list.component';
 
 @NgModule({
@@ -42,6 +44,8 @@ import { AdwordsAccountListComponent } from './adwords-account-list.component';
 
     FuseSharedModule,
 
+    AdsAccountIdModule,
+    
     AdwordsAccountListRoutingModule
   ],
   providers: [AdwordsAccountListService]
