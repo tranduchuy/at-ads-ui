@@ -13,17 +13,21 @@ import { FuseNavVerticalGroupComponent } from './vertical/group/group.component'
 import { FuseNavHorizontalItemComponent } from './horizontal/item/item.component';
 import { FuseNavHorizontalCollapsableComponent } from './horizontal/collapsable/collapsable.component';
 
+import { AdsAccountIdModule } from '../../../app/shared/pipes/ads-account-id/ads-account-id.module';
+
 @NgModule({
-    imports     : [
+    imports: [
         CommonModule,
         RouterModule,
 
         MatIconModule,
         MatRippleModule,
 
-        TranslateModule.forChild()
+        TranslateModule.forChild(),
+
+        AdsAccountIdModule,
     ],
-    exports     : [
+    exports: [
         FuseNavigationComponent
     ],
     declarations: [
@@ -35,6 +39,5 @@ import { FuseNavHorizontalCollapsableComponent } from './horizontal/collapsable/
         FuseNavHorizontalCollapsableComponent
     ]
 })
-export class FuseNavigationModule
-{
+export class FuseNavigationModule {
 }

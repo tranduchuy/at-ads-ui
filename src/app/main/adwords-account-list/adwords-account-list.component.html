@@ -7,7 +7,7 @@
 
     <div class="table-container">
 
-      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <mat-table [dataSource]="accounts" class="mat-elevation-z8">
 
         <ng-container matColumnDef="task">
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
@@ -20,16 +20,16 @@
 
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Ngày </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/yyyy HH:mm'}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="adwords">
+        <!-- <ng-container matColumnDef="adwords">
           <mat-header-cell *matHeaderCellDef> AdWords </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <p>
               <span *ngIf="element.tracking" class="tracking"
-                matTooltip="Cần thực hiện tracking">{{element.adwords}}</span>
-              <span *ngIf="!element.tracking" class="no-tracking">{{element.adwords}}</span>
+                matTooltip="Cần thực hiện tracking">{{element.adsId}}</span>
+              <span *ngIf="!element.tracking" class="no-tracking">{{element.adsId}}</span>
               <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan" *ngIf="!element.tracking">
                 <mat-icon>notifications</mat-icon>
               </button>
@@ -41,9 +41,58 @@
               </button>
             </p>
           </mat-cell>
+        </ng-container> -->
+
+        <ng-container matColumnDef="adwords">
+          <mat-header-cell *matHeaderCellDef> AdWords </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div fxLayout="row">
+              <p style="width: 100px">
+                {{element.adsId | adsAccountId}}
+              </p>
+              <div>
+                <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan">
+                  <mat-icon>notifications</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" matTooltip="Xóa">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="website">
+          <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <ol *ngIf="element.websites.length > 0">
+              <li *ngFor="let website of element.websites" fxLayout="row">
+                <p>{{website.domain}}</p>
+                <div>
+                  <button mat-icon-button color="accent" matTooltip="Gắn tracking chiến dịch tài khoản"
+                    style="color: red">
+                    <mat-icon>code</mat-icon>
+                  </button>
+                  <button mat-icon-button color="accent" matTooltip="Ngắt kết nối Adwords cho website này">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  <button mat-icon-button color="accent" matTooltip="Kết nối AdWords cho website này">
+                    <mat-icon>add_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </li>
+            </ol>
+            <a href="/add-tracking-tags/select-campaigns" mat-button color="accent" style="padding-left: 0"
+              *ngIf="element.websites.length === 0">
+              <mat-icon>add_circle_outline</mat-icon> Thêm Website
+            </a>
+          </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="website">
           <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <p *ngIf="element.website">
@@ -109,7 +158,7 @@
             </p>
           </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.spamClick}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

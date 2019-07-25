@@ -1,106 +1,63 @@
 import { Component, OnInit } from '@angular/core';
+import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
+import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
+import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
+import { HttpErrorResponse } from '@angular/common/http';
+import { DialogService } from '../../../shared/services/dialog.service';
+import { SessionService } from 'app/shared/services/session.service';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+
+import { AddTrackingTagsService } from '../add-tracking-tags.service';
 
 export interface Campaign {
-  order: number;
-  campaign: string;
-  status: string;
-  tracking: boolean;
+  id: string;
+  name: string;
 }
-
-const ELEMENT_DATA:Campaign[] = [
-  {
-    order: 1,
-    campaign: '1. Tivi - loại',
-    status: 'Hoạt động',
-    tracking: false,
-  },
-  {
-    order: 2,
-    campaign: '1. Tivi - thương hiệu',
-    status: 'Hoạt động',
-    tracking: false,
-  },
-  {
-    order: 3,
-    campaign: '1. Tivi - chung',
-    status: 'Hoạt động',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-  {
-    order: 23,
-    campaign: '8. Máy lạnh - Chung - không xác định',
-    status: 'Đang dừng',
-    tracking: false,
-  },
-]
 
 @Component({
   selector: 'app-select-campaigns',
   templateUrl: './select-campaigns.component.html',
   styleUrls: ['./select-campaigns.component.scss']
 })
-export class SelectCampaignsComponent implements OnInit {
+export class SelectCampaignsComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'campaign', 'status', 'tracking'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['order', 'name'];
+  campaignList: Campaign[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private _fuseProgressiveBarService: FuseProgressBarService,
+    public _dialogService: DialogService,
+    private _sessionService: SessionService,
+    private _addTrackingTagsService: AddTrackingTagsService,
+  ) {
+    super();
+    this.campaignList = [];
   }
 
+  ngOnInit() {
+    const sub = this._sessionService.getAdwordId()
+      .subscribe((adwordId: string) => {
+        if (adwordId) {
+          this.getOriginalCampaigns();
+        }
+      });
+
+    this.subscriptions.push(sub);
+  }
+
+  getOriginalCampaigns() {
+    this._fuseProgressiveBarService.show();
+    const sub = this._addTrackingTagsService.getOriginalCampaigns().subscribe(res => {
+      this._fuseProgressiveBarService.hide();
+      this.campaignList = res.data.campaignList;
+    },
+      (error: HttpErrorResponse) => {
+        if (error.error.messages) {
+          this._dialogService._openErrorDialog(error.error);
+        }
+        this._fuseProgressiveBarService.hide();
+      }
+    );
+    this.subscriptions.push(sub);
+  }
 }

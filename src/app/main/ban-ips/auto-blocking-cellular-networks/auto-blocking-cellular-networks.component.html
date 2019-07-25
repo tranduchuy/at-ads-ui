@@ -1,15 +1,18 @@
 <div class="container">
 
   <div class="title1">
-    CẤU HÌNH CHẶN TỰ ĐỘNG 3G 4G- TÀI KHOẢN <span class="account-id">{{_sessionService.activeAccountId || ''}}</span>
+    CẤU HÌNH CHẶN TỰ ĐỘNG 3G 4G- TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
-  <p> Bằng việc thiết lập này quảng cáo sẽ <span style="color: red">không hiển thị</span> trên hầu hết các thiết bị sử
+  <p class="title2"> Bằng việc thiết lập này quảng cáo sẽ <span style="color: red">không hiển thị</span> trên hầu hết các thiết bị sử
     dụng truy cập <span style="color: red">(3G & 4G)</span> của các mạng di động tại Việt Nam</p>
+
   <form [formGroup]="form" novalidate>
-    <app-checkbox-group [itemsSource]="networkItemsSource" [direction]="'column'"
-      [errors]="getErrorMessages(form, 'networks')" [formControlName]="'networks'" [valuePath]="'value'"
-      [displayPath]="'text'"></app-checkbox-group>
+    <div class="checkbox-group">
+      <app-checkbox-group [itemsSource]="networkItemsSource" [direction]="'column'"
+        [errors]="getErrorMessages(form, 'networks')" [formControlName]="'networks'" [valuePath]="'value'"
+        [displayPath]="'text'"></app-checkbox-group>
+    </div>
     <p class="text-center">
       <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" (click)="onClickBtnSubmit()">
         <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH

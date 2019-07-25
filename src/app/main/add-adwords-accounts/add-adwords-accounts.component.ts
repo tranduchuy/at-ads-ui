@@ -34,13 +34,12 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     const params = this.generatePostObject();
 
     this._fuseProgressiveBarService.show();
-    const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res: ILoginSuccess) =>
-      {
-        this._dialogService._openSuccessDialog(res);
-        this.isConnected = true;
-        this._fuseNavigationService.reloadNavigation();
-        this._fuseProgressiveBarService.hide();
-      },
+    const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res: ILoginSuccess) => {
+      this._dialogService._openSuccessDialog(res);
+      this.isConnected = true;
+      this._fuseNavigationService.reloadNavigation();
+      this._fuseProgressiveBarService.hide();
+    },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
@@ -57,17 +56,29 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   initForm(): void {
     this.form = this.fb.group({
-      adWordId: [null, [Validators.required, this.validatorService.checkMinLength(10), this.validatorService.checkMaxLength(10)]]
+      adWordId: [
+        null,
+        [
+          Validators.required,
+          this.validatorService.checkMinLength(10),
+          this.validatorService.checkMaxLength(12),
+          this.validatorService.checkAdwordsAccountId,
+        ]
+      ]
     });
   }
 
   private generatePostObject(): any {
-    const params = {...this.form.value};
+    const params = { ...this.form.value };
 
     // required
-    params.adWordId = params.adWordId;
+    params.adWordId = params.adWordId.replace(/[^a-zA-Z0-9 ]/g, '');
 
     return params;
+  }
+
+  onPressId(keyCode: number) {
+    return (keyCode >= 48 && keyCode < 57) || keyCode === 45;
   }
 
 }

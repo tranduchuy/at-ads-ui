@@ -117,8 +117,12 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
 
       case ErrorNames.wrongPassword[0]:
         return ErrorNames.wrongPassword[1];
+
       case ErrorNames.email[0]:
         return ErrorNames.email[1];
+
+      case ErrorNames.invalidAdwordsAccountId[0]:
+        return ErrorNames.invalidAdwordsAccountId[1];
 
     }
 

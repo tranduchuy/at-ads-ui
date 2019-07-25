@@ -21,21 +21,26 @@
 
     <p class="table-title">Chọn chiến dịch để gắn tracking (nên chọn tất cả)</p>
 
-    <div class="table-wrapper">
+    <p class="notification" *ngIf="campaignList.length === 0">
+      Chúng tôi không tìm thấy chiến dịch nào đang chạy. Vui lòng thử lại hoặc <span style="color: dodgerblue">liên
+        hệ</span> với hỗ trợ viên để được giúp đỡ.
+    </p>
 
-      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <div class="table-wrapper" *ngIf="campaignList.length > 0">
+
+      <mat-table [dataSource]="campaignList" class="mat-elevation-z8">
 
         <ng-container matColumnDef="order">
           <mat-header-cell *matHeaderCellDef> STT </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.order}} </mat-cell>
+          <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="campaign">
+        <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.campaign}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="status">
+        <!-- <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span *ngIf="element.status === 'Hoạt động'" class="enable-status">
@@ -52,7 +57,7 @@
           <mat-cell *matCellDef>
             <mat-checkbox></mat-checkbox>
           </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -60,7 +65,7 @@
 
     </div>
 
-    <p style="text-align: center">
+    <p style="text-align: center" *ngIf="campaignList.length > 0">
       <button type="submit" mat-raised-button class="submit-button" color="accent">
         <mat-icon>crop_free</mat-icon> GÁN MÃ TRACKING
       </button>
