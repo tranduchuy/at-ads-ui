@@ -54,6 +54,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
       if (this.accounts.length > 0) {
         for (const item of this.accounts) {
+          item.websites = [];
           const getWebsiteSub = this._adwordsAccountListService.getWebsites(item.id).subscribe(res => {
             this._fuseProgressiveBarService.hide();
             item.websites = res.data.website;
@@ -76,7 +77,6 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
               if (error.error.messages) {
                 this._fuseProgressiveBarService.hide();
                 //this._dialogService._openErrorDialog(error.error);
-                item.websites = [];
               }
             });
           this.subscriptions.push(getWebsiteSub);

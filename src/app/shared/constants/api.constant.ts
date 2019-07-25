@@ -22,5 +22,6 @@ export namespace API {
   }
   export namespace Website {
     export const getWebsites = environment.hostApi + '/api/websites?accountId={accountId}';
+    export const addWebsite = environment.hostApi + '/api/websites';
   }
 }

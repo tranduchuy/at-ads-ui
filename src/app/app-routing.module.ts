@@ -19,7 +19,7 @@ const appRoutes: Routes = [
     loadChildren: './main/add-adwords-accounts/add-adwords-accounts.module#AddAdwordsAccountsModule'
   },
   {
-    path: 'account-list',
+    path: 'danh-sach-tai-khoan',
     canActivate: [MainGuardService],
     loadChildren: './main/adwords-account-list/adwords-account-list.module#AdwordsAccountListModule'
   },
@@ -27,6 +27,11 @@ const appRoutes: Routes = [
     path: 'add-tracking-tags',
     canActivate: [MainGuardService],
     loadChildren: './main/add-tracking-tags/add-tracking-tags.module#AddTrackingTagsModule'
+  },
+  {
+    path: 'quan-ly-website',
+    canActivate: [MainGuardService],
+    loadChildren: './main/website-management/website-management.module#WebsiteManagementModule'
   },
   {
     path: 'thong-tin-ca-nhan',

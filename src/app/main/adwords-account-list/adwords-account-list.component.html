@@ -23,26 +23,6 @@
           <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/yyyy HH:mm'}} </mat-cell>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="adwords">
-          <mat-header-cell *matHeaderCellDef> AdWords </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <p>
-              <span *ngIf="element.tracking" class="tracking"
-                matTooltip="Cần thực hiện tracking">{{element.adsId}}</span>
-              <span *ngIf="!element.tracking" class="no-tracking">{{element.adsId}}</span>
-              <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan" *ngIf="!element.tracking">
-                <mat-icon>notifications</mat-icon>
-              </button>
-              <button mat-icon-button color="accent" matTooltip="Chỉnh sửa" *ngIf="element.tracking">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button color="accent" matTooltip="Xóa">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </p>
-          </mat-cell>
-        </ng-container> -->
-
         <ng-container matColumnDef="adwords">
           <mat-header-cell *matHeaderCellDef> AdWords </mat-header-cell>
           <mat-cell *matCellDef="let element">
@@ -68,9 +48,9 @@
         <ng-container matColumnDef="website">
           <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <ol *ngIf="element.websites.length > 0">
-              <li *ngFor="let website of element.websites" fxLayout="row">
-                <p>{{website.domain}}</p>
+            <ul>
+              <li *ngFor="let website of element.websites, let i = index" fxLayout="row">
+                <p style="width: 100px"><span>{{i+1}}</span>. {{website.domain}}</p>
                 <div>
                   <button mat-icon-button color="accent" matTooltip="Gắn tracking chiến dịch tài khoản"
                     style="color: red">
@@ -84,11 +64,12 @@
                   </button>
                 </div>
               </li>
-            </ol>
-            <a href="/add-tracking-tags/select-campaigns" mat-button color="accent" style="padding-left: 0"
-              *ngIf="element.websites.length === 0">
-              <mat-icon>add_circle_outline</mat-icon> Thêm Website
-            </a>
+              <li>
+                <a routerLink="/quan-ly-website" mat-button color="accent" style="padding-left: 0">
+                  <mat-icon>add_circle_outline</mat-icon> Thêm Website
+                </a>
+              </li>
+            </ul>
           </mat-cell>
         </ng-container>
 
