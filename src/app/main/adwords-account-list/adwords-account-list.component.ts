@@ -47,6 +47,12 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     this.getAccounts();
   }
 
+  showRemoveDomainDialog(){
+    if(window.confirm('Ngắt kết nối Adwords cho website này?')){
+      alert('Ngắt kết nối thành công!');
+    }
+  }
+
   getAccounts() {
     this._fuseProgressiveBarService.show();
     const sub = this._adwordsAccountListService.getAccounts().subscribe(res => {
@@ -58,27 +64,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
           const getWebsiteSub = this._adwordsAccountListService.getWebsites(item.id).subscribe(res => {
             this._fuseProgressiveBarService.hide();
             item.websites = res.data.website;
-            // item.websites = [
-            //   {
-            //     domain: 'appnet.edu.vn',
-            //     code: 'xxx',
-            //     expiredAt: new Date(),
-            //     status: 200
-            //   },
-            //   {
-            //     domain: 'appnet.edu.vn',
-            //     code: 'xxx',
-            //     expiredAt: new Date(),
-            //     status: 200
-            //   },
-            // ]
-          },
-            (error: HttpErrorResponse) => {
-              if (error.error.messages) {
-                this._fuseProgressiveBarService.hide();
-                //this._dialogService._openErrorDialog(error.error);
-              }
-            });
+          });
           this.subscriptions.push(getWebsiteSub);
         }
       }
