@@ -44,7 +44,7 @@ export class BanIpsService {
 
   getActiveAccountId(): string {
     const activeAccountId = this._sessionService.activeAccountId;
-    if (!activeAccountId){
+    if (!activeAccountId) {
       return null;
     }
     return activeAccountId.toString();
@@ -52,31 +52,37 @@ export class BanIpsService {
 
   public autoBlockingRangeIP(param: IAutoBlockingRangeIPParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
-    const url =  API.AdwordsAccount.autoBlockingRangeIP.replace('{account_id}', activeAccountId);
+    const url = API.AdwordsAccount.autoBlockingRangeIP.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 
   public autoBlocking3G4G(param: IAutoBlocking3G4GParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
-    const url =  API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId);
+    const url = API.AdwordsAccount.autoBlocking3G4G.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 
   public autoBlockingDevice(param: IAutoBlockingDeviceParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
-    const url =  API.AdwordsAccount.autoBlockingDevice.replace('{account_id}', activeAccountId);
+    const url = API.AdwordsAccount.autoBlockingDevice.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 
   public autoBlockingIP(param: IAutoBlockingIPParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
-    const url =  API.AdwordsAccount.autoBlockingIP.replace('{account_id}', activeAccountId);
+    const url = API.AdwordsAccount.autoBlockingIP.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
   }
 
   public blockIPs(param: IBlockIPsParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
-    const url =  API.AdwordsAccount.blockIPs.replace('{account_id}', activeAccountId);
+    const url = API.AdwordsAccount.blockIPs.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
+  }
+
+  public getDeviceReport(): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAdwordId();
+    const url = API.AdwordsAccount.getDeviceReport.replace('{account_id}', activeAccountId);
+    return this._http.get(url);
   }
 }

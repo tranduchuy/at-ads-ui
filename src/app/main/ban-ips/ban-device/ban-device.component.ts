@@ -8,80 +8,14 @@ import { FuseProgressBarService } from '../../../../@fuse/components/progress-ba
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 
-export interface BannedDevice {
+export interface DeviceReport {
   device: string;
-  type: string;
   cost: number;
-  display: number;
-  click: number;
-  guest: number;
+  impresstions: number;
+  clicks: number;
   avgPosition: number;
-  costPerGuest: number;
-  optimization: any[];
+  ctr: number;
 }
-
-const ELEMENT_DATA: BannedDevice[] = [
-  {
-    device: 'Di động',
-    type: 'mobile',
-    cost: 78386830,
-    display: 35102,
-    click: 3286,
-    guest: 336,
-    avgPosition: 2.8,
-    costPerGuest: 233475,
-    optimization: [
-      {
-        text: 'Chạy quảng cáo',
-        value: true,
-      },
-      {
-        text: 'Dừng quảng cáo',
-        value: false,
-      }
-    ]
-  },
-  {
-    device: 'Tablet',
-    type: 'tablet',
-    cost: 78386830,
-    display: 35102,
-    click: 3286,
-    guest: 336,
-    avgPosition: 2.8,
-    costPerGuest: 233475,
-    optimization: [
-      {
-        text: 'Chạy quảng cáo',
-        value: true,
-      },
-      {
-        text: 'Dừng quảng cáo',
-        value: false,
-      }
-    ]
-  },
-  {
-    device: 'Máy tính',
-    type: 'pc',
-    cost: 78386830,
-    display: 35102,
-    click: 3286,
-    guest: 336,
-    avgPosition: 2.8,
-    costPerGuest: 233475,
-    optimization: [
-      {
-        text: 'Chạy quảng cáo',
-        value: true,
-      },
-      {
-        text: 'Dừng quảng cáo',
-        value: false,
-      }
-    ]
-  },
-];
 
 @Component({
   selector: 'app-ban-device',
@@ -90,8 +24,10 @@ const ELEMENT_DATA: BannedDevice[] = [
 })
 export class BanDeviceComponent extends EditableFormBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['device', 'cost', 'display', 'click', 'guest', 'avgPosition', 'costPerGuest', 'optimization'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['device', 'cost', 'impressions', 'clicks', 'avgPosition', 'ctr', 'optimization'];
+  deviceReports: DeviceReport[];
+  hasReport: boolean;
+  activeAdsAccountId: string;
 
   optimizationItemsSource = {
     mobile: [
@@ -133,17 +69,26 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
     public _dialogService: DialogService
   ) {
     super();
+    this.deviceReports = [];
   }
 
   ngOnInit(): void {
     this.initForm();
+
+    const sub = this._sessionService.getAdwordId()
+      .subscribe((adwordId: string) => {
+        if (adwordId)
+          this.getDeviceReport();
+      });
+
+    this.subscriptions.push(sub);
   }
 
   initForm(): void {
     this.form = this.fb.group({
-      mobile: [this.optimizationItemsSource.mobile[0], [Validators.required]],
-      tablet: [this.optimizationItemsSource.tablet[0], [Validators.required]],
-      pc: [this.optimizationItemsSource.pc[0], [Validators.required]]
+      mobile: [this.optimizationItemsSource.mobile[0]],
+      tablet: [this.optimizationItemsSource.tablet[0]],
+      pc: [this.optimizationItemsSource.pc[0]]
     });
   }
 
@@ -151,8 +96,29 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
     this.onSubmit();
   }
 
+  getDeviceReport() {
+    this._fuseProgressiveBarService.show();
+    const sub = this._banIpsService.getDeviceReport().subscribe(res => {
+      this._fuseProgressiveBarService.hide();
+      this.deviceReports = res.data.reportDevice;
+      this.activeAdsAccountId = this._sessionService.activeAdsAccountId;
+
+      if (this.deviceReports.length > 0)
+        this.hasReport = true;
+      else this.hasReport = false;
+    },
+      (error: HttpErrorResponse) => {
+        if (error.error.messages) {
+          this._dialogService._openErrorDialog(error.error);
+        }
+        this._fuseProgressiveBarService.hide();
+      }
+    );
+    this.subscriptions.push(sub);
+  }
+
   private generatePostObject(): any {
-    const selections = {...this.form.value};
+    const selections = { ...this.form.value };
     const params = {
       mobile: selections.mobile.value,
       tablet: selections.tablet.value,
@@ -166,9 +132,9 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
 
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.autoBlockingDevice(params).subscribe((res: ILoginSuccess) => {
-        this._dialogService._openSuccessDialog(res);
-        this._fuseProgressiveBarService.hide();
-      },
+      this._dialogService._openSuccessDialog(res);
+      this._fuseProgressiveBarService.hide();
+    },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);

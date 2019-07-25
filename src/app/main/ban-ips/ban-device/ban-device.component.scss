@@ -17,10 +17,14 @@
   }
 
   .title2 {
-    padding-top: 30px;
+    padding-top: 15px;
     padding-bottom: 15px;
 
     text-align: justify;
+
+    .advise{
+      font-size: 12px;
+    }
   }
 
   .success-badge {
@@ -34,7 +38,7 @@
   }
 
   .table-wrapper {
-    margin-top: 20px;
+    margin-top: 10px;
     box-shadow: 2px 2px 10px silver;
     overflow: auto;
 
@@ -53,13 +57,10 @@
       justify-content: center;
     }
 
-    mat-header-cell:nth-child(8),
-    mat-cell:nth-child(8) {
-      flex: 0 0 20%;
-    }
-
-    mat-cell:nth-child(8) {
+    mat-header-cell:nth-child(7),
+    mat-cell:nth-child(7) {
       padding-top: 10px;
+      flex: 0 0 20%;
     }
 
     mat-row,

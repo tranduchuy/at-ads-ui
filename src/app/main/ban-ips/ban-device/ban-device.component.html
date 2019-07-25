@@ -1,17 +1,22 @@
 <div class="container">
   <div class="title1">
-    CẤU HÌNH CHẶN THEO THIẾT BỊ - TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
+    CẤU HÌNH CHẶN THEO THIẾT BỊ - TÀI KHOẢN <span class="account-id">{{activeAdsAccountId}}</span>
   </div>
 
   <div class="title2">
-    Kết quả có được theo thống kê từ ngày 25/05/2019 đến ngày 08/06/2019
-    <br><br>
-    <span class="success-badge">MẸO</span> Bạn có thể dừng quảng cáo trên các thiết bị mang lại hiệu quả quảng cáo thấp
+    <p>
+      Kết quả có được theo thống kê từ ngày <b>25/05/2019</b> đến ngày <b>08/06/2019</b>
+    </p>
+    <p class="advise">
+      <span class="success-badge">MẸO</span> Bạn có thể dừng quảng cáo trên các thiết bị mang lại hiệu quả quảng cáo
+      thấp
+    </p>
   </div>
 
-  <form [formGroup]="form">
+  <form [formGroup]="form" *ngIf="hasReport && activeAdsAccountId">
+
     <div class="table-wrapper">
-      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <mat-table [dataSource]="deviceReports" class="mat-elevation-z8">
 
         <ng-container matColumnDef="device">
           <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
@@ -20,22 +25,17 @@
 
         <ng-container matColumnDef="cost">
           <mat-header-cell *matHeaderCellDef> Chi phí </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.cost}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.cost | number: '1.0-0'}} VNĐ</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="display">
+        <ng-container matColumnDef="impressions">
           <mat-header-cell *matHeaderCellDef> Hiển thị </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.display}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.impressions}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="click">
+        <ng-container matColumnDef="clicks">
           <mat-header-cell *matHeaderCellDef> Click </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="guest">
-          <mat-header-cell *matHeaderCellDef> Khách </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.guest}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.clicks}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="avgPosition">
@@ -43,41 +43,26 @@
           <mat-cell *matCellDef="let element"> {{element.avgPosition}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="costPerGuest">
-          <mat-header-cell *matHeaderCellDef> Chi phí/Khách </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.costPerGuest}} </mat-cell>
+        <ng-container matColumnDef="ctr">
+          <mat-header-cell *matHeaderCellDef> CTR </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ctr}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="optimization">
           <mat-header-cell *matHeaderCellDef>Tối ưu</mat-header-cell>
           <mat-cell *matCellDef="let element">
 
-              <app-select-text
-              *ngIf="element.type === 'mobile'"
-              (valueChanged)="submitForm()"
-              [itemsSource]="optimizationItemsSource.mobile"
-              [displayPath]="'text'"
-              [valuePath]="'value'"
-              [formControlName]="'mobile'"
-              [title]="'Chọn hình thức'"></app-select-text>
+            <app-select-text *ngIf="element.device === 'Điện thoại'" (valueChanged)="submitForm()"
+              [itemsSource]="optimizationItemsSource.mobile" [displayPath]="'text'" [valuePath]="'value'"
+              [formControlName]="'mobile'" [title]="'Chọn hình thức'"></app-select-text>
 
-              <app-select-text
-              *ngIf="element.type === 'tablet'"
-              (valueChanged)="submitForm()"
-              [itemsSource]="optimizationItemsSource.tablet"
-              [displayPath]="'text'"
-              [valuePath]="'value'"
-              [formControlName]="'tablet'"
-              [title]="'Chọn hình thức'"></app-select-text>
+            <app-select-text *ngIf="element.device === 'Máy tính bảng'" (valueChanged)="submitForm()"
+              [itemsSource]="optimizationItemsSource.tablet" [displayPath]="'text'" [valuePath]="'value'"
+              [formControlName]="'tablet'" [title]="'Chọn hình thức'"></app-select-text>
 
-              <app-select-text
-              *ngIf="element.type === 'pc'"
-              (valueChanged)="submitForm()"
-              [itemsSource]="optimizationItemsSource.pc"
-              [displayPath]="'text'"
-              [valuePath]="'value'"
-              [formControlName]="'pc'"
-              [title]="'Chọn hình thức'"></app-select-text>
+            <app-select-text *ngIf="element.device === 'Máy tính'" (valueChanged)="submitForm()"
+              [itemsSource]="optimizationItemsSource.pc" [displayPath]="'text'" [valuePath]="'value'"
+              [formControlName]="'pc'" [title]="'Chọn hình thức'"></app-select-text>
 
           </mat-cell>
         </ng-container>
@@ -88,5 +73,9 @@
     </div>
 
   </form>
+
+  <p *ngIf="!hasReport && activeAdsAccountId">
+    Chưa có thiết bị nào trên tài khoản AdWords này.
+  </p>
 
 </div>

@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { InputTextModule } from '../../shared/components/input-text/input-text.module';
 import { InputTextareaModule } from '../../shared/components/input-textarea/input-textarea.module';
@@ -23,7 +24,6 @@ import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-blocking-range-ips.component';
 import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
 import { BanDeviceComponent } from './ban-device/ban-device.component';
-import { SessionService } from '../../shared/services/session.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,8 @@ import { SessionService } from '../../shared/services/session.service';
     MatInputModule,
     MatTableModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
+
     CheckboxGroupModule,
     ReactiveFormsModule,
     InputTextModule,
@@ -52,6 +54,6 @@ import { SessionService } from '../../shared/services/session.service';
 
     BanIPsRoutingModule,
   ],
-  providers: [SessionService]
+  providers: []
 })
 export class BanIPsModule { }
