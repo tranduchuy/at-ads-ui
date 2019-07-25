@@ -54,6 +54,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
+          this.campaignList = [];
         }
         this._fuseProgressiveBarService.hide();
       }
