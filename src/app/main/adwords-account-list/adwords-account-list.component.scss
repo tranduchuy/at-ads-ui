@@ -54,6 +54,10 @@
       flex: 0 0 18%;
       justify-content: left;
     }
+    mat-cell:nth-child(3) {
+      font-weight: bold;
+      color: gray;
+    }
 
     mat-header-cell:nth-child(4),
     mat-cell:nth-child(4) {

@@ -94,6 +94,10 @@
       box-shadow: none;
     }
 
+    mat-row{
+      transition: 0.2s;
+    }
+
     mat-row:hover {
       background-color: #eeee;
     }
@@ -102,6 +106,11 @@
     mat-header-cell {
       display: flex;
       justify-content: center;
+    }
+
+    mat-cell:nth-child(2){
+      font-weight: bold;
+      color: gray;
     }
 
     mat-header-cell:nth-child(3),
