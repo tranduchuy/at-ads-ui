@@ -67,9 +67,11 @@ export class ValidatorsService {
   }
 
   public checkDomain(control: AbstractControl): any {
-    const value = control.value;
-
-    if (!ValidatorsService.isURL(value.toString())) {
+    const regex = new RegExp('^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\#[-a-z\\d_]*)?$', 'i');
+    if (!regex.test(control.value)) {
       return { [ErrorNames.invalidDomain[0]]: true };
     }
   }
