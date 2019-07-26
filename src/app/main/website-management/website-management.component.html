@@ -1,7 +1,7 @@
 <div class="container">
   <div class="title1">
-    WEBSITE ĐANG QUẢNG CÁO TRONG TÀI KHOẢN <b><span [(ngModel)]="selectedAdsId"
-        ngDefaultControl>{{selectedAdsId}}</span></b>
+    WEBSITE ĐANG QUẢNG CÁO TRONG TÀI KHOẢN <b><span [(ngModel)]="selectedAdsId" ngDefaultControl
+        style="color: black">{{selectedAdsId}}</span></b>
   </div>
   <p style="margin-top: 30px">
     <b>Bạn cần thêm 1 website để sử dụng các tính năng của hệ thống</b>
@@ -41,8 +41,37 @@
 
   <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
 
-  <p><strong>CÁC WEBSITE CỦA BẠN TRONG TÀI KHOẢN: <span [(ngModel)]="selectedAdsId"
-        ngDefaultControl style="color: dodgerblue">{{selectedAdsId}}</span></strong></p>
+  <p><strong>CÁC WEBSITE CỦA BẠN TRONG TÀI KHOẢN: <span [(ngModel)]="selectedAdsId" ngDefaultControl
+        style="color: dodgerblue">{{selectedAdsId}}</span></strong></p>
 
+  <div class="table-wrapper">
+    <mat-table [dataSource]="websites" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="order">
+        <mat-header-cell *matHeaderCellDef> STT </mat-header-cell>
+        <mat-cell *matCellDef="let i = index"> {{i + 1}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="website">
+        <mat-header-cell *matHeaderCellDef> Website cần gắn tracking </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.domain}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tracking">
+        <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
+        <mat-cell *matCellDef="let i = index">
+          <button *ngIf="i % 2 === 0" mat-stroked-button color="accent" matTooltip="Nhấn để hủy tracking">
+            <mat-icon>check</mat-icon> Hoàn
+            thành
+          </button>
+          <button *ngIf="i % 2 !== 0" mat-stroked-button color="warn" matTooltip="Nhấn để tiến hành gắn tracking"
+            class="tracking-button"><mat-icon>close</mat-icon> Chưa có </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 
 </div>

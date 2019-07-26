@@ -9,6 +9,8 @@ import { ValidatorsService } from 'app/shared/services/validator.service';
 import { Validators } from '@angular/forms';
 import { WebsiteManagementService } from './website-management.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 export interface Website {
   domain: string;
@@ -32,6 +34,10 @@ export interface Account {
 })
 export class WebsiteManagementComponent extends EditableFormBaseComponent implements OnInit {
 
+  displayedColumns: string[] = ['order', 'website', 'tracking'];
+
+  websites: Website[];
+
   accounts: Account[];
 
   accountItemsSource: any[];
@@ -39,34 +45,107 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   adsAccountIdPipe: AdsAccountIdPipe = new AdsAccountIdPipe();
 
   selectedAdsId: string;
+  selectedAccountId: string;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
     private _sessionService: SessionService,
     private _validatorsService: ValidatorsService,
-    private _websiteManagementService: WebsiteManagementService
+    private _websiteManagementService: WebsiteManagementService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     super();
     this.accounts = [];
+    this.websites = [];
     this.accountItemsSource = [];
     this.selectedAdsId = '';
+    this.selectedAccountId = '';
   }
 
   ngOnInit() {
-    this.getAccounts();
-    this.initForm();
+    const sub = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => params.getAll('adsId'))
+    )
+      .subscribe((adsId: string) => {
+        this.selectedAdsId = this.adsAccountIdPipe.transform(adsId);
+        this.getAccounts();
+        this.initForm();
+      });
+    this.subscriptions.push(sub);
   }
 
   initForm() {
     this.form = this.fb.group({
       adsId: [''],
-      domain: ['', [Validators.required]]
+      domain: ['', [Validators.required, this._validatorsService.checkDomain]]
     })
   }
 
   onSubmitForm() {
     this.onSubmit();
+  }
+
+  getWebsites() {
+    this.websites = [];
+    this._fuseProgressiveBarService.show();
+    const sub = this._websiteManagementService.getWebsites(this.selectedAccountId).subscribe(res => {
+      this._fuseProgressiveBarService.hide();
+      this.websites = res.data.website;
+    });
+    this.subscriptions.push(sub);
+  }
+
+  getAccounts() {
+    this._fuseProgressiveBarService.show();
+    const sub = this._websiteManagementService.getAccounts().subscribe(res => {
+      this.accounts = res.data.accounts;
+
+      if (this.accounts.length > 0) {
+
+        for (const item of this.accounts) {
+          item.websites = [];
+          const getWebsiteSub = this._websiteManagementService.getWebsites(item.id).subscribe(res => {
+            this._fuseProgressiveBarService.hide();
+            item.websites = res.data.website;
+
+            if (this.adsAccountIdPipe.transform(item.adsId) !== this.selectedAdsId) {
+              this.accountItemsSource.push({
+                text: this.adsAccountIdPipe.transform(item.adsId),
+                value: item.id
+              });
+            } else {
+              this.accountItemsSource.unshift({
+                text: this.selectedAdsId,
+                value: item.id
+              });
+              this.selectedAccountId = item.id;
+              this.getWebsites();
+            }
+
+            if (this.accountItemsSource.length === 1) {
+              this.form.controls['adsId'].setValue(this.accountItemsSource[0]);
+            }
+          },
+            (error: HttpErrorResponse) => {
+              if (error.error.messages) {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error);
+              }
+            });
+          this.subscriptions.push(getWebsiteSub);
+        }
+      }
+    },
+      (error: HttpErrorResponse) => {
+
+        if (error.error.messages) {
+          this._dialogService._openErrorDialog(error.error);
+        }
+        this._fuseProgressiveBarService.hide();
+      });
+    this.subscriptions.push(sub);
   }
 
   generatePostObject() {
@@ -85,6 +164,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     const sub = this._websiteManagementService.addWebsite(params).subscribe((res: ILoginSuccess) => {
       this._dialogService._openSuccessDialog(res);
       this._fuseProgressiveBarService.hide();
+      this.getWebsites();
     },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
@@ -97,50 +177,9 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   onSelectAdsId(event) {
-    this.selectedAdsId = event.source.value.text;
-  }
-
-  getAccounts() {
-    this._fuseProgressiveBarService.show();
-    const sub = this._websiteManagementService.getAccounts().subscribe(res => {
-      this.accounts = res.data.accounts;
-
-      if (this.accounts.length > 0) {
-
-        for (const item of this.accounts) {
-          item.websites = [];
-          const getWebsiteSub = this._websiteManagementService.getWebsites(item.id).subscribe(res => {
-            this._fuseProgressiveBarService.hide();
-            item.websites = res.data.website;
-
-            this.accountItemsSource.push({
-              text: this.adsAccountIdPipe.transform(item.adsId),
-              value: item.id
-            });
-
-            if (this.accountItemsSource.length === 1) {
-              this.form.controls['adsId'].setValue(this.accountItemsSource[0]);
-              this.selectedAdsId = this.form.controls['adsId'].value.text;
-            }
-          },
-            (error: HttpErrorResponse) => {
-              if (error.error.messages) {
-                this._fuseProgressiveBarService.hide();
-                //this._dialogService._openErrorDialog(error.error);
-              }
-            });
-          this.subscriptions.push(getWebsiteSub);
-        }
-      }
-    },
-      (error: HttpErrorResponse) => {
-
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
-        }
-        this._fuseProgressiveBarService.hide();
-      });
-    this.subscriptions.push(sub);
+    this.selectedAdsId = event.value.text;
+    this.selectedAccountId = event.value.value;
+    this.getWebsites();
   }
 
 }

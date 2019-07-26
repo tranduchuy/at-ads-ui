@@ -124,6 +124,8 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
       case ErrorNames.invalidAdwordsAccountId[0]:
         return ErrorNames.invalidAdwordsAccountId[1];
 
+      case ErrorNames.invalidDomain[0]:
+        return ErrorNames.invalidDomain[1];
     }
 
     return `Something error ${keyErr}`;

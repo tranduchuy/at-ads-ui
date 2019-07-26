@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   {
     path: '',
     canActivate: [MainGuardService],
-    loadChildren: './main/sample/sample.module#SampleModule'
+    loadChildren: './main/add-adwords-accounts/add-adwords-accounts.module#AddAdwordsAccountsModule'
   },
   {
     path: 'them-tai-khoan-moi',
@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     loadChildren: './main/add-tracking-tags/add-tracking-tags.module#AddTrackingTagsModule'
   },
   {
-    path: 'quan-ly-website',
+    path: 'quan-ly-website/:adsId',
     canActivate: [MainGuardService],
     loadChildren: './main/website-management/website-management.module#WebsiteManagementModule'
   },
@@ -40,7 +40,7 @@ const appRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: '/them-tai-khoan-moi'
   }
 ];
 @NgModule({

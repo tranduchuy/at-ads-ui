@@ -60,8 +60,17 @@
       justify-content: left;
     }
 
+    mat-row{
+      transition: 0.2s;
+    }
+
     mat-row:hover {
-      background-color: #eeeeee;
+      background-color: #eeee;
+
+      mat-cell {
+        color: gray;
+        font-weight: bold;
+      }
     }
 
     ul {

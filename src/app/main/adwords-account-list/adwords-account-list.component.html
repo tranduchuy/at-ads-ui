@@ -3,7 +3,7 @@
     QUẢN LÝ TÀI KHOẢN ADWORDS VÀ WEBSITE
   </div>
 
-  <form *ngIf="accounts.length > 0">
+  <form>
 
     <div class="table-container">
 
@@ -50,7 +50,7 @@
           <mat-cell *matCellDef="let element">
             <ul>
               <li *ngFor="let website of element.websites, let i = index" fxLayout="row">
-                <p style="width: 100px"><span>{{i+1}}</span>. {{website.domain}}</p>
+                <p style="width: 200px"><span>{{i+1}}</span>. {{website.domain}}</p>
                 <div>
                   <button mat-icon-button color="accent" matTooltip="Gắn tracking chiến dịch tài khoản"
                     style="color: red">
@@ -65,7 +65,7 @@
                 </div>
               </li>
               <li>
-                <a routerLink="/quan-ly-website" mat-button color="accent" style="padding-left: 0">
+                <a [routerLink]="['/quan-ly-website', element.adsId]" mat-button color="accent" style="padding-left: 0">
                   <mat-icon>add_circle_outline</mat-icon> Thêm Website
                 </a>
               </li>
@@ -154,9 +154,5 @@
     </div>
 
   </form>
-
-  <p *ngIf="accounts.length === 0">
-    Bạn chưa kết nối tài khoản AdWords nào.
-  </p>
-
+  
 </div>

@@ -17,7 +17,8 @@ export namespace ErrorNames {
   export const invalidIP = ['invalidIP', 'IP không hợp lệ'];
   export const invalidListIP = ['invalidListIP', 'Danh sách IP không hợp lệ'];
   export const wrongPassword = ['wrongPassword', 'Mật khẩu không khớp'];
-  export const invalidAdwordsAccountId = ['invalidAdwordsAccountId', 'ID không hợp lệ']
+  export const invalidAdwordsAccountId = ['invalidAdwordsAccountId', 'ID không hợp lệ'];
+  export const invalidDomain = ['invalidDomain', 'Tên miền không hợp lệ'];
 }
 
 @Injectable()
@@ -65,8 +66,12 @@ export class ValidatorsService {
     }
   }
 
-  public checkDomain(str: string): boolean {
-    return ValidatorsService.isURL(str);
+  public checkDomain(control: AbstractControl): any {
+    const value = control.value;
+
+    if (!ValidatorsService.isURL(value.toString())) {
+      return { [ErrorNames.invalidDomain[0]]: true };
+    }
   }
 
   public checkUrlSeo(control: AbstractControl): any {
