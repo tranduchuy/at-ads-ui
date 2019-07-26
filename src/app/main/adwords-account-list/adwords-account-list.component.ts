@@ -47,13 +47,26 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     this.getAccounts();
   }
 
-  showRemoveDomainDialog(){
-    if(window.confirm('Ngắt kết nối Adwords cho website này?')){
-      alert('Ngắt kết nối thành công!');
+  openRemoveWebsiteDialog(websiteId: string) {
+    if (window.confirm('Ngắt kết nối Adwords cho website này?')) {
+      this._fuseProgressiveBarService.show();
+      const sub = this._adwordsAccountListService.removeWebsite(websiteId).subscribe((res: ILoginSuccess) => {
+        this._fuseProgressiveBarService.hide();
+        this._dialogService._openSuccessDialog(res);
+        this.getAccounts();
+      },
+        (error: HttpErrorResponse) => {
+          if (error.error.messages) {
+            this._dialogService._openErrorDialog(error.error);
+          }
+          this._fuseProgressiveBarService.hide();
+        });
+      this.subscriptions.push(sub);
     }
   }
 
   getAccounts() {
+    this.accounts = [];
     this._fuseProgressiveBarService.show();
     const sub = this._adwordsAccountListService.getAccounts().subscribe(res => {
       this.accounts = res.data.accounts;
