@@ -152,7 +152,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     const body = { ...this.form.value };
     const params = {
       domain: body.domain,
-      accountId: body.adsId.value
+      accountId: this.selectedAccountId
     }
     return params;
   }

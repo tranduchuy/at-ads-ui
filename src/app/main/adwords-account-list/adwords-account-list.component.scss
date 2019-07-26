@@ -59,6 +59,10 @@
     mat-cell:nth-child(4) {
       justify-content: left;
     }
+    mat-cell:nth-child(4) {
+      font-weight: bold;
+      color: gray;
+    }
 
     mat-row{
       transition: 0.2s;
