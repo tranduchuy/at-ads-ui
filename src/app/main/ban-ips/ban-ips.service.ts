@@ -32,6 +32,11 @@ export interface IAutoBlockingDeviceParams {
   pc: boolean;
 }
 
+export interface ISetDeviceCampaignRunningParams {
+  device: number;
+  isEnable: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -72,6 +77,12 @@ export class BanIpsService {
     const activeAccountId = this.getActiveAccountId();
     const url = API.AdwordsAccount.autoBlockingIP.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);
+  }
+
+  public setDeviceCampaignRunning(param: ISetDeviceCampaignRunningParams): Observable<any> {
+    const activeAccountId = this.getActiveAccountId();
+    const url = API.AdwordsAccount.setDeviceCampaignRunning.replace('{account_id}', activeAccountId);
+    return this._http.put(url, param);
   }
 
   public blockIPs(param: IBlockIPsParams): Observable<any> {

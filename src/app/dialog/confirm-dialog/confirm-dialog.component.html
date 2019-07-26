@@ -1,0 +1,13 @@
+<h1 matDialogTitle>Xác nhận</h1>
+<div mat-dialog-content>{{confirmMessage}}</div>
+<div mat-dialog-actions
+     [fxLayoutAlign]="'center center'"
+     fxLayout="row"
+     class="pt-24">
+     <button mat-raised-button color="basic" (click)="dialogRef.close(true)">
+        Đồng ý
+    </button>
+    <button mat-raised-button color="basic" (click)="dialogRef.close(false)">
+        Hủy
+    </button>
+</div>

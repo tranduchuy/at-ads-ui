@@ -52,15 +52,15 @@
           <mat-header-cell *matHeaderCellDef>Tối ưu</mat-header-cell>
           <mat-cell *matCellDef="let element">
 
-            <app-select-text *ngIf="element.device === 'Điện thoại'" (valueChanged)="submitForm()"
+            <app-select-text *ngIf="element.device === 'Điện thoại'" (valueChanged)="setDeviceCampaignRunning($event,30001)"
               [itemsSource]="optimizationItemsSource.mobile" [displayPath]="'text'" [valuePath]="'value'"
               [formControlName]="'mobile'" [title]="'Chọn hình thức'"></app-select-text>
 
-            <app-select-text *ngIf="element.device === 'Máy tính bảng'" (valueChanged)="submitForm()"
+            <app-select-text *ngIf="element.device === 'Máy tính bảng'" (valueChanged)="setDeviceCampaignRunning($event,30002)"
               [itemsSource]="optimizationItemsSource.tablet" [displayPath]="'text'" [valuePath]="'value'"
               [formControlName]="'tablet'" [title]="'Chọn hình thức'"></app-select-text>
 
-            <app-select-text *ngIf="element.device === 'Máy tính'" (valueChanged)="submitForm()"
+            <app-select-text *ngIf="element.device === 'Máy tính'" (valueChanged)="setDeviceCampaignRunning($event,30000)"
               [itemsSource]="optimizationItemsSource.pc" [displayPath]="'text'" [valuePath]="'value'"
               [formControlName]="'pc'" [title]="'Chọn hình thức'"></app-select-text>
 

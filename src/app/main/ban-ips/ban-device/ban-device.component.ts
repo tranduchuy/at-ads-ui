@@ -117,21 +117,14 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
     this.subscriptions.push(sub);
   }
 
-  private generatePostObject(): any {
-    const selections = { ...this.form.value };
+  setDeviceCampaignRunning(event, deviceId: number) {
     const params = {
-      mobile: selections.mobile.value,
-      tablet: selections.tablet.value,
-      pc: selections.pc.value
-    };
-    return params;
-  }
-
-  post(): void {
-    const params = this.generatePostObject();
+      device: deviceId,
+      isEnable: event.value.value
+    }
 
     this._fuseProgressiveBarService.show();
-    const sub = this._banIpsService.autoBlockingDevice(params).subscribe((res: ILoginSuccess) => {
+    const sub = this._banIpsService.setDeviceCampaignRunning(params).subscribe((res: ILoginSuccess) => {
       this._dialogService._openSuccessDialog(res);
       this._fuseProgressiveBarService.hide();
     },
@@ -144,4 +137,6 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
     );
     this.subscriptions.push(sub);
   }
+
+  post(): void { }
 }

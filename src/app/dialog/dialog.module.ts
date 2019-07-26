@@ -4,12 +4,14 @@ import { MatButtonModule, MatDialogModule } from '@angular/material';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     InfoDialogComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    ConfirmDialogComponent
   ],
   providers: [],
   imports: [
@@ -20,7 +22,8 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
   entryComponents: [
     InfoDialogComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    ConfirmDialogComponent,
   ],
   exports: [
     InfoDialogComponent,
