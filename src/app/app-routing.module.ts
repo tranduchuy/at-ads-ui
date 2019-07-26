@@ -39,10 +39,16 @@ const appRoutes: Routes = [
     loadChildren: './main/profile/profile.module#ProfileModule'
   },
   {
+    path: 'bao-cao',
+    canActivate: [MainGuardService],
+    loadChildren: './main/reports/reports.module#ReportsModule'
+  },
+  {
     path: '**',
     redirectTo: '/them-tai-khoan-moi'
-  }
+  },
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes, { useHash: false, onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]

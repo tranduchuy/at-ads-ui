@@ -2,6 +2,46 @@ import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
   {
+    id: 'report',
+    title: 'BÁO CÁO CLICK ẢO',
+    translate: 'NAV.APPLICATIONS',
+    type: 'group',
+    children: [
+      {
+        id: 'spam-click',
+        title: 'Xem Báo Cáo Click Ảo',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'data_usage',
+        url: '/bao-cao/click-ao'
+      },
+      {
+        id: 'ip-on-click',
+        title: 'IP Đang Click',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'touch_app',
+        url: '**'
+      },
+      {
+        id: 'ip-range-on-click',
+        title: 'Nhóm IP Đang Click',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'blur_linear',
+        url: '**'
+      },
+      {
+        id: 'blocked-ip-list',
+        title: 'Danh Sách IP Đã Chặn',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'block',
+        url: '**'
+      },
+    ]
+  },
+  {
     id: 'configuration',
     title: 'CẤU HÌNH',
     translate: 'NAV.APPLICATIONS',
@@ -12,7 +52,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Thử Chặn 1 IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'info',
+        icon: 'remove_circle_outline',
         url: '/chan-ip/chan-1-ip',
       },
       {
@@ -44,7 +84,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Chặn 3G & 4G',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'wifi',
+        icon: 'wifi_off',
         url: '/chan-ip/chan-ip-theo-mang-di-dong',
       },
       {
@@ -52,7 +92,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Chặn Theo Mobile/PC/Tablet',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'smartphone',
+        icon: 'phonelink_lock',
         url: '/chan-ip/chan-ip-theo-thiet-bi',
       },
     ]
