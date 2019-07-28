@@ -56,7 +56,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   constructor(
     private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
-    private _sessionService: SessionService,
+    public _sessionService: SessionService,
     public _dialogService: DialogService) {
     super();
   }

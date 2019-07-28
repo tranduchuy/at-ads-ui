@@ -19,7 +19,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
 
   constructor(
     private _banIpsService: BanIpsService,
-    private _sessionService: SessionService,
+    public _sessionService: SessionService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService
   ) {

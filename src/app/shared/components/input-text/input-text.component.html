@@ -6,7 +6,7 @@
          [placeholder]="placeholder"
          [(ngModel)]="innerValue"
          [errorStateMatcher]="matcher"
-         (focus)="onFocus($event)"
+         (focus)="onFocus()"
          (blur)="onLostFocus()"
          (ngModelChange)="onInputChange()">
   <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>

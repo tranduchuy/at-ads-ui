@@ -57,7 +57,7 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
   constructor(
     private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
-    private _sessionService: SessionService,
+    public _sessionService: SessionService,
     public _dialogService: DialogService
   ) {
     super();

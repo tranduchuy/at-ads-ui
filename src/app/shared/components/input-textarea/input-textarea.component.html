@@ -2,7 +2,7 @@
   <mat-label>{{title}}</mat-label>
   <textarea (blur)="onLostFocus()"
             [style.height]="height"
-            (focus)="onFocus($event)"
+            (focus)="onFocus()"
             (ngModelChange)="onInputChange()"
             (input)="onInputChange()"
             [(ngModel)]="innerValue"
