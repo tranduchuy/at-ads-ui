@@ -7,6 +7,8 @@ export const environment = {
   hmr: false,
   hostApi: 'http://localhost:3000',
   googleAuth2ClientID: '794452191528-l00i142j490ta79qgsld3alqace3t3pq.apps.googleusercontent.com'
+  //app vanducsonha
+  // googleAuth2ClientID: '789817858624-1iip3rm6c9f6i066j77untm6j6b57083.apps.googleusercontent.com'
 };
 
 /*
