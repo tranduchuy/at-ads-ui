@@ -112,7 +112,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
       this.auth2 = gapi.auth2.init({
         client_id: environment.googleAuth2ClientID,
         cookiepolicy: 'single_host_origin',
-        scope: 'profile email'
+        scope: 'profile email https://www.googleapis.com/auth/adwords'
       });
 
       this.attachSignIn(this.googleBtn._elementRef.nativeElement);
