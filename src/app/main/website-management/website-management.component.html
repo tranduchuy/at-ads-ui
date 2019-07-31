@@ -34,7 +34,9 @@
     <div fxLayout="row" fxLayout.xs="column">
       <app-input-text [placeholder]="'http://'" [formControlName]="'domain'" [errors]="getMessageErrors('domain')"
         [title]="'Nhập tên miền của bạn'"></app-input-text>
-      <button type="submit" mat-raised-button color="accent" class="add-website-button">THÊM WEBSITE</button>
+      <button type="submit" mat-raised-button color="accent" class="add-website-button" [disabled]="onAddingDomain">
+        THÊM WEBSITE
+      </button>
     </div>
 
   </form>

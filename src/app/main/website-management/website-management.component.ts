@@ -47,6 +47,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
   selectedAdsId: string;
   selectedAccountId: string;
+  onAddingDomain: boolean;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -63,6 +64,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     this.accountItemsSource = [];
     this.selectedAdsId = '';
     this.selectedAccountId = '';
+    this.onAddingDomain = false;
   }
 
   ngOnInit() {
@@ -170,11 +172,12 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
   post() {
     const params = this.generatePostObject();
-
+    this.onAddingDomain = true;
     this._fuseProgressiveBarService.show();
     const sub = this._websiteManagementService.addWebsite(params).subscribe((res: ILoginSuccess) => {
       this._dialogService._openSuccessDialog(res);
       this._fuseProgressiveBarService.hide();
+      this.onAddingDomain = false;
       this.getWebsites();
     },
       (error: HttpErrorResponse) => {
@@ -182,6 +185,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
           this._dialogService._openErrorDialog(error.error);
         }
         this._fuseProgressiveBarService.hide();
+        this.onAddingDomain = false;
       }
     );
     this.subscriptions.push(sub);
