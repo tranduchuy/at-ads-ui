@@ -20,7 +20,10 @@ export namespace API {
     export const autoBlockingIP = environment.hostApi + '/api/account-adwords/{account_id}/auto-blocking-ip';
     export const setDeviceCampaignRunning = environment.hostApi + '/api/account-adwords/{account_id}/report/device'
     export const getOriginalCampaigns = environment.hostApi + '/api/account-adwords/{account_id}/original-campaigns';
-    export const getDeviceReport = environment.hostApi + '/api/account-adwords/{account_id}/report/device'; 
+    export const getDeviceReport = environment.hostApi + '/api/account-adwords/{account_id}/report/device';
+    export const removeBlockedIPs = environment.hostApi + '/api/account-adwords/{account_id}/ips';
+    export const blockSampleIP = environment.hostApi + '/api/account-adwords/{account_id}/block-sample-ip';
+    export const unblockSampleIP = environment.hostApi + '/api/account-adwords/{account_id}/unblock-sample-ip'
   }
   export namespace Website {
     export const getWebsites = environment.hostApi + '/api/websites?accountId={accountId}';

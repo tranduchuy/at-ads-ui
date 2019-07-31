@@ -40,11 +40,19 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
     });
   }
 
+  private generateBlockSapmleIPParams(): any {
+    const params = {
+      ip: { ...this.form.value }.bannedIP
+    };
+
+    return params;
+  }
+
   post(): void {
-    const params = this.generatePostObject();
+    const params = this.generateBlockSapmleIPParams();
 
     this._fuseProgressiveBarService.show();
-    const sub = this._banIpsService.blockIPs(params).subscribe((res: ILoginSuccess) => {
+    const sub = this._banIpsService.blockSampleIP(params).subscribe((res: ILoginSuccess) => {
       this._dialogService._openSuccessDialog(res);
       this._fuseProgressiveBarService.hide();
     },
@@ -58,12 +66,59 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
     this.subscriptions.push(sub);
   }
 
-  private generatePostObject(): any {
-    const params = {
-      action: 'ADD',
-      ips: [{ ...this.form.value }.bannedIP]
-    };
-
-    return params;
+  private generateUnblockeSampleIPParmas(): any {
+    const parmas = {
+      ip: '1.3.3.3'
+    }
+    return parmas;
   }
+
+  unblockSampleIP() {
+    this._dialogService._openConfirmDialog('Mở chặn IP này?')
+      .subscribe((result: boolean) => {
+        if (result) {
+          const params = this.generateUnblockeSampleIPParmas();
+          this._fuseProgressiveBarService.show();
+          const sub = this._banIpsService.unblockSampleIP(params)
+            .subscribe((res: ILoginSuccess) => {
+              this._fuseProgressiveBarService.hide();
+              this._dialogService._openSuccessDialog(res);
+            },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error)
+              })
+          this.subscriptions.push(sub);
+        }
+      })
+  }
+
+  // private generateRemoveBlockedIPsParams(): any {
+  //   const params = {
+  //     action: 'REMOVE',
+  //     ips: ['1.2.3.4']
+  //   };
+
+  //   return params;
+  // }
+
+  // removeBlockedIPs(): void {
+  //   this._dialogService._openConfirmDialog('Mở chặn IP này?')
+  //     .subscribe((result: boolean) => {
+  //       if (result) {
+  //         const params = this.generateRemoveBlockedIPsParams();
+  //         this._fuseProgressiveBarService.show();
+  //         const sub = this._banIpsService.removeBlockedIPs(params)
+  //           .subscribe((res: ILoginSuccess) => {
+  //             this._fuseProgressiveBarService.hide();
+  //             this._dialogService._openSuccessDialog(res);
+  //           },
+  //             (error: HttpErrorResponse) => {
+  //               this._fuseProgressiveBarService.hide();
+  //               this._dialogService._openErrorDialog(error.error)
+  //             })
+  //         this.subscriptions.push(sub);
+  //       }
+  //     })
+  // }
 }

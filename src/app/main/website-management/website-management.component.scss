@@ -46,11 +46,6 @@
 
     mat-row:hover {
       background-color: #eeee;
-
-      mat-cell {
-        color: gray;
-        font-weight: bold;
-      }
     }
 
     mat-header-cell:nth-child(1),
@@ -61,10 +56,6 @@
     mat-header-cell:nth-child(2),
     mat-cell:nth-child(2) {
       flex: 0 0 75%;
-    }
-    mat-cell:nth-child(2) {
-      font-weight: bold;
-      color: gray;
     }
 
     mat-cell:nth-child(3) {

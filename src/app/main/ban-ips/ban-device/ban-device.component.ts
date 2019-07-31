@@ -120,7 +120,7 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
   setDeviceCampaignRunning(event, deviceId: number) {
     const params = {
       device: deviceId,
-      isEnable: event.value.value
+      isEnabled: event.value.value
     }
 
     this._fuseProgressiveBarService.show();

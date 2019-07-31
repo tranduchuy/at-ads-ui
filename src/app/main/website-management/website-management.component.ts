@@ -11,6 +11,7 @@ import { WebsiteManagementService } from './website-management.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { IError } from 'app/dialog/models/i-error';
 
 export interface Website {
   domain: string;
@@ -53,8 +54,8 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     private _sessionService: SessionService,
     private _validatorsService: ValidatorsService,
     private _websiteManagementService: WebsiteManagementService,
-    private route: ActivatedRoute,
-    private router: Router,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router,
   ) {
     super();
     this.accounts = [];
@@ -65,14 +66,19 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   ngOnInit() {
-    const sub = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => params.getAll('adsId'))
-    )
-      .subscribe((adsId: string) => {
+    const sub = this._activatedRoute.params.subscribe((params: any) => {
+      const adsId = params.adsId;
+
+      if (!adsId || isNaN(Number(adsId))) {
+        this.selectedAdsId = this._sessionService.activeAdsAccountId;
+      }
+      else {
         this.selectedAdsId = this.adsAccountIdPipe.transform(adsId);
-        this.getAccounts();
-        this.initForm();
-      });
+      }
+
+      this.getAccounts();
+      this.initForm();
+    });
     this.subscriptions.push(sub);
   }
 
@@ -136,6 +142,11 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
             });
           this.subscriptions.push(getWebsiteSub);
         }
+      } else {
+        this._dialogService._openErrorDialog({
+          messages: ['Vui lòng thêm tài khoản AdWords']
+        });
+        this._router.navigateByUrl('/them-tai-khoan-moi');
       }
     },
       (error: HttpErrorResponse) => {

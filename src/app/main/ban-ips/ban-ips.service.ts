@@ -4,6 +4,10 @@ import { API } from '../../shared/constants/api.constant';
 import { HttpClient } from '@angular/common/http';
 import { SessionService } from '../../shared/services/session.service';
 
+export interface IBlockSampleIPParams {
+  ip: string;
+}
+
 export interface IBlockIPsParams {
   action: string;
   ips: string[];
@@ -34,7 +38,7 @@ export interface IAutoBlockingDeviceParams {
 
 export interface ISetDeviceCampaignRunningParams {
   device: number;
-  isEnable: boolean;
+  isEnabled: boolean;
 }
 
 @Injectable({
@@ -86,6 +90,24 @@ export class BanIpsService {
   }
 
   public blockIPs(param: IBlockIPsParams): Observable<any> {
+    const activeAccountId = this.getActiveAccountId();
+    const url = API.AdwordsAccount.blockIPs.replace('{account_id}', activeAccountId);
+    return this._http.post(url, param);
+  }
+
+  public blockSampleIP(param: IBlockSampleIPParams): Observable<any> {
+    const activeAccountId = this.getActiveAccountId();
+    const url = API.AdwordsAccount.blockSampleIP.replace('{account_id}', activeAccountId);
+    return this._http.post(url, param);
+  }
+
+  public unblockSampleIP(param: IBlockSampleIPParams): Observable<any> {
+    const activeAccountId = this.getActiveAccountId();
+    const url = API.AdwordsAccount.unblockSampleIP.replace('{account_id}', activeAccountId);
+    return this._http.post(url, param);
+  }
+
+  public removeBlockedIPs(param: IBlockIPsParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
     const url = API.AdwordsAccount.blockIPs.replace('{account_id}', activeAccountId);
     return this._http.post(url, param);

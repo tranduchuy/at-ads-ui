@@ -34,6 +34,11 @@ const appRoutes: Routes = [
     loadChildren: './main/website-management/website-management.module#WebsiteManagementModule'
   },
   {
+    path: 'quan-ly-website',
+    canActivate: [MainGuardService],
+    loadChildren: './main/website-management/website-management.module#WebsiteManagementModule'
+  },
+  {
     path: 'thong-tin-ca-nhan',
     canActivate: [MainGuardService],
     loadChildren: './main/profile/profile.module#ProfileModule'
@@ -50,7 +55,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, { useHash: true, onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(appRoutes, { useHash: false, onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
