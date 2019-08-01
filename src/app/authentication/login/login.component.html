@@ -1,10 +1,7 @@
 <div id="login" fxLayout="column">
-  <div id="login-form-wrapper"
-       fxLayout="column"
-       fxLayoutAlign="center center">
+  <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
 
-    <div id="login-form"
-         [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+    <div id="login-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
 
       <div class="logo">
         <img src="assets/images/logos/fuse.svg">
@@ -12,9 +9,7 @@
 
       <div class="title">ĐĂNG NHẬP</div>
 
-      <form name="loginForm"
-            [formGroup]="loginForm"
-            novalidate>
+      <form name="loginForm" [formGroup]="loginForm" novalidate>
 
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
@@ -23,8 +18,7 @@
           <mat-error *ngIf="loginForm.get('email').hasError('required')">
             Vui lòng nhập địa chỉ email
           </mat-error>
-          <mat-error
-              *ngIf="!loginForm.get('email').hasError('required') &&
+          <mat-error *ngIf="!loginForm.get('email').hasError('required') &&
                                 loginForm.get('email').hasError('email')">
             Địa chỉ email không hợp lệ
           </mat-error>
@@ -39,26 +33,18 @@
           </mat-error>
         </mat-form-field>
 
-        <div class="remember-forgot-password"
-             fxLayout="row"
-             fxLayout.xs="column"
-             fxLayoutAlign="space-between center">
+        <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
           <mat-checkbox class="remember-me" aria-label="Remember Me">
             Lưu mật khẩu
           </mat-checkbox>
 
-          <a class="forgot-password"
-             [routerLink]="'/auth/forgot-password'">
+          <a class="forgot-password" [routerLink]="'/auth/forgot-password'">
             Quên mật khẩu?
           </a>
         </div>
 
-        <button mat-raised-button
-                color="accent"
-                class="submit-button"
-                aria-label="LOG IN"
-                (click)="onSubmit()"
-                [disabled]="loginForm.invalid">
+        <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN" (click)="onSubmit()"
+          [disabled]="loginForm.invalid">
           ĐĂNG NHẬP
         </button>
 
@@ -68,17 +54,12 @@
         <span class="text">HOẶC</span>
       </div>
 
-      <button #googleBtn
-              mat-raised-button
-              id="googleBtn"
-              label="Google"
-              class="google">
-        Đăng nhập bằng Google
+      <button #googleBtn mat-raised-button id="googleBtn" label="Google" class="google">
+        <img src="http://pluspng.com/img-png/google-logo-png-open-2000.png" alt=""
+          style="height: 18px; width:18px; margin-top: -5px; margin-right: 5px">Đăng nhập bằng Google
       </button>
 
-      <div class="register"
-           fxLayout="column"
-           fxLayoutAlign="center center">
+      <div class="register" fxLayout="column" fxLayoutAlign="center center">
         <span class="text">Bạn chưa có tài khoản</span>
         <a class="link" [routerLink]="'/auth/register'">Tạo tài khoản mới</a>
       </div>

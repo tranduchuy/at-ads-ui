@@ -33,13 +33,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   ngOnInit(): void {
-    this._fuseSlashScreenService.show();
     this.initForm();
-    const sub = this._sessionService.getAccountId()
-      .subscribe((accountId: string) => {
-        this._fuseSlashScreenService.hide();
-      });
-    this.subscriptions.push(sub);
   }
 
   completeAccountConnection() {

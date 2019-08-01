@@ -1,7 +1,7 @@
 .input-side {
 }
 .container {
-  padding: 15px;
+  padding: 30px;
   width: 100%;
 }
 .submit-button {
@@ -24,7 +24,8 @@
   margin-bottom: 10px;
 
   button {
-    color: gray;
+    color: darkred;
+    background: #ffffff; 
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -67,6 +68,9 @@
 }
 
 @media screen and(max-width: 600px) {
+  .container{
+    padding: 15px;
+  }
   .submit-button {
     padding: 0;
     padding-right: 5px;

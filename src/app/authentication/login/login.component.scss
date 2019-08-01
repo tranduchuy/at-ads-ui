@@ -122,10 +122,11 @@ login {
 
                     &.google,
                     &.facebook {
-                        width: 192px;
+                        width: auto;
                         text-transform: none;
                         color: #FFFFFF;
                         font-size: 13px;
+                        text-align: center;
                     }
 
                     @include media-breakpoint('xs') {
@@ -133,7 +134,8 @@ login {
                     }
 
                     &.google {
-                        background-color: #D73D32;
+                        background-color: white;
+                        color: gray;
                         margin-bottom: 8px;
                     }
 
