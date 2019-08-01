@@ -12,7 +12,7 @@ import { AuthGuardService } from '../../shared/services/guard/auth-guard.service
 
 const routes = [
     {
-        path     : 'auth/login',
+        path: 'auth/login',
         component: LoginComponent,
         canActivate: [AuthGuardService]
     }
@@ -22,7 +22,7 @@ const routes = [
     declarations: [
         LoginComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
 
         MatButtonModule,
@@ -34,6 +34,5 @@ const routes = [
         FuseSharedModule
     ]
 })
-export class LoginModule
-{
+export class LoginModule {
 }

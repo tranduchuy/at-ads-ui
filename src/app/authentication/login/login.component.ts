@@ -132,16 +132,15 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
   }
 
   onSignIn(googleUser: any): void {
-    const profile = googleUser.getBasicProfile();
-    const googleId: number = profile.getId();
-    const name: string = profile.getName();
-    const email: string = profile.getEmail();
+    // const profile = googleUser.getBasicProfile();
+    // const googleId: number = profile.getId();
+    // const name: string = profile.getName();
+    // const email: string = profile.getEmail();
+    const accessToken: string = googleUser.Zi.access_token;
 
     this._fuseProgressiveBarService.show();
     const sub = this._authService.loginByGoogle({
-      googleId,
-      name,
-      email
+      accessToken
     }).subscribe((res: ILoginSuccess) =>
       {
         const token = res.data.meta.token;
@@ -152,6 +151,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
       },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
+          this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
         }
         this._fuseSplashScreenService.hide();
