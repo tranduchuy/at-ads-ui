@@ -58,14 +58,14 @@ export class FuseNavigationComponent implements OnInit {
         },
         {
           id: 'account-list',
-          title: 'Quản lý tài khoản Adwords',
+          title: 'Quản Lý Tài Khoản AdWords',
           type: 'item',
           icon: 'dashboard',
           url: '/danh-sach-tai-khoan'
         },
         {
           id: 'add-tracking-tags',
-          title: 'Gắn tracking chiến dịch',
+          title: 'Gắn Tracking Chiến Dịch',
           type: 'item',
           icon: 'location_searching',
           url: '/gan-tracking/chon-chien-dich'
