@@ -24,7 +24,7 @@ declare var gapi: any;
 })
 export class LoginComponent extends PageBaseComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup;
-  @ViewChild('googleBtn', {static: true}) googleBtn;
+  @ViewChild('googleBtn', { static: true }) googleBtn;
   auth2: any;
 
   /**
@@ -89,14 +89,13 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     const userInfo = {
       ...this.loginForm.value
     };
-    const sub = this._authService.login(userInfo).subscribe((res: ILoginSuccess) =>
-      {
-        const token = res.data.meta.token;
-        const user = res.data.user;
-        this._sessionService.set(token, user);
-        this._fuseSplashScreenService.hide();
-        this._router.navigate(['/']);
-      },
+    const sub = this._authService.login(userInfo).subscribe((res: ILoginSuccess) => {
+      const token = res.data.meta.token;
+      const user = res.data.user;
+      this._sessionService.set(token, user);
+      this._fuseSplashScreenService.hide();
+      this._router.navigate(['/']);
+    },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
@@ -141,14 +140,13 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     this._fuseProgressiveBarService.show();
     const sub = this._authService.loginByGoogle({
       accessToken
-    }).subscribe((res: ILoginSuccess) =>
-      {
-        const token = res.data.meta.token;
-        const user = res.data.user;
-        this._sessionService.set(token, user);
-        this._fuseSplashScreenService.hide();
-        this._router.navigate(['/']);
-      },
+    }).subscribe((res: ILoginSuccess) => {
+      const token = res.data.meta.token;
+      const user = res.data.user;
+      this._sessionService.set(token, user);
+      this._fuseSplashScreenService.hide();
+      this._router.navigateByUrl('/');
+    },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._fuseProgressiveBarService.hide();

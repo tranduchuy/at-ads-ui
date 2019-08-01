@@ -41,6 +41,10 @@ export interface ISetDeviceCampaignRunningParams {
   isEnabled: boolean;
 }
 
+export interface ICheckAccountAcceptance {
+  adWordId: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -114,8 +118,12 @@ export class BanIpsService {
   }
 
   public getDeviceReport(): Observable<any> {
-    const activeAccountId = this._sessionService.getValueOfAdwordId();
+    const activeAccountId = this._sessionService.getValueOfAccountId();
     const url = API.AdwordsAccount.getDeviceReport.replace('{account_id}', activeAccountId);
     return this._http.get(url);
+  }
+
+  public checkAccountAcceptance(params: ICheckAccountAcceptance): Observable<any>{
+    return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
 }

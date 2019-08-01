@@ -62,6 +62,13 @@ export class FuseNavigationComponent implements OnInit {
           type: 'item',
           icon: 'dashboard',
           url: '/danh-sach-tai-khoan'
+        },
+        {
+          id: 'add-tracking-tags',
+          title: 'Gắn tracking chiến dịch',
+          type: 'item',
+          icon: 'location_searching',
+          url: '/gan-tracking/chon-chien-dich'
         }
       ]
     }
@@ -111,7 +118,8 @@ export class FuseNavigationComponent implements OnInit {
         if (this._sessionService.activeAccountId) {
           activeAccountId = this._sessionService.activeAccountId.toString();
           activeAdsAccountId = this._sessionService.activeAdsAccountId.toString();
-          this._sessionService.setAdwordId(activeAccountId);
+          this._sessionService.setAdwordId(activeAdsAccountId);
+          this._sessionService.setAccountId(activeAccountId);
         }
 
         if (accounts.length > 0) {
@@ -119,7 +127,8 @@ export class FuseNavigationComponent implements OnInit {
           if (!activeAccountId) {
             this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(accounts[0].adsId.toString()));
             this._sessionService.setActiveAccountId(accounts[0].id.toString());
-            this._sessionService.setAdwordId(accounts[0].id.toString());
+            this._sessionService.setAdwordId(accounts[0].adsId.toString());
+            this._sessionService.setAccountId(accounts[0].id.toString());
 
             activeAdsAccountId = this.adsAccountIdPipe.transform(accounts[0].adsId.toString());
             activeAccountId = accounts[0].id.toString();
@@ -155,13 +164,6 @@ export class FuseNavigationComponent implements OnInit {
                 icon: 'add_box',
                 url: '/them-tai-khoan-moi'
               },
-              // {
-              //   id: 'account-list',
-              //   title: 'Quản lý tài khoản Adwords',
-              //   type: 'item',
-              //   icon: 'dashboard',
-              //   url: '/danh-sach-tai-khoan'
-              // }
             ]
           };
           this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
@@ -177,6 +179,7 @@ export class FuseNavigationComponent implements OnInit {
           this._sessionService.setActiveAdsAccountId('');
           this._sessionService.setActiveAccountId('');
           this._sessionService.setAdwordId('');
+          this._sessionService.setAccountId('');
           this.accounts.children[0] = {
             id: 'add-accounts',
             title: 'Thêm tài khoản mới',

@@ -9,6 +9,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
 import { Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 export interface Campaign {
   id: string;
@@ -31,7 +32,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     public _dialogService: DialogService,
     private _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
-    private _router: Router
+    private _router: Router,
+    private _fuseSlashScreenService: FuseSplashScreenService
   ) {
     super();
     this.campaignList = [];
@@ -39,13 +41,10 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   }
 
   ngOnInit() {
-    const sub = this._sessionService.getAdwordId()
-      .subscribe((adwordId: string) => {
-        if (adwordId) {
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
           this.getOriginalCampaigns();
-        } else {
-          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
-          this._router.navigateByUrl('/them-tai-khoan-moi');
         }
       });
 
@@ -92,18 +91,19 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
   getOriginalCampaigns() {
     this._fuseProgressiveBarService.show();
-    const sub = this._addTrackingTagsService.getOriginalCampaigns().subscribe(res => {
-      this._fuseProgressiveBarService.hide();
-      this.campaignList = res.data.campaignList;
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
-          this.campaignList = [];
-        }
+    const sub = this._addTrackingTagsService.getOriginalCampaigns()
+      .subscribe(res => {
         this._fuseProgressiveBarService.hide();
-      }
-    );
+        this.campaignList = res.data.campaignList;
+      },
+        (error: HttpErrorResponse) => {
+          if (error.error.messages) {
+            this._dialogService._openErrorDialog(error.error);
+            this.campaignList = [];
+          }
+          this._fuseProgressiveBarService.hide();
+        }
+      );
     this.subscriptions.push(sub);
   }
 }

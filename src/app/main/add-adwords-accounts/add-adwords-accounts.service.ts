@@ -25,4 +25,5 @@ export class AddAdwordsAccountsService {
   public getAccounts(): Observable<any> {
     return this._http.get(API.AdwordsAccount.getAccounts);
   }
+
 }

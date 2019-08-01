@@ -6,7 +6,7 @@ import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.co
 @NgModule({
   imports: [RouterModule.forChild([
     {
-      path: 'select-campaigns',
+      path: 'chon-chien-dich',
       pathMatch: 'full',
       component: SelectCampaignsComponent
     }

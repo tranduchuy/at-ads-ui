@@ -10,6 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-ban-an-ip',
@@ -23,22 +24,13 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
     public _sessionService: SessionService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _router: Router
+    private _router: Router,
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.initForm();
-    const sub = this._sessionService.getAdwordId()
-      .subscribe((adsId: string) => {
-        if (!adsId) {
-          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
-          this._router.navigateByUrl('/them-tai-khoan-moi');
-        }
-      });
-
-    this.subscriptions.push(sub);
   }
 
   onSubmitForm(): void {

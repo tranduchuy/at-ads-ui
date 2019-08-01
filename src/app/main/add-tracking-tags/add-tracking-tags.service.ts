@@ -8,6 +8,10 @@ export interface IAddCampaignTrackingParams {
   campaignIds: string[];
 }
 
+export interface ICheckAccountAcceptance{
+  adWordId: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +23,7 @@ export class AddTrackingTagsService {
   ) { }
 
   public getOriginalCampaigns(): Observable<any> {
-    const activeAccountId = this._sessionService.getValueOfAdwordId();
+    const activeAccountId = this._sessionService.getValueOfAccountId();
     const url =  API.AdwordsAccount.getOriginalCampaigns.replace('{account_id}', activeAccountId);
     return this._http.get(url);
   }
@@ -28,6 +32,10 @@ export class AddTrackingTagsService {
     const activeAccountId = this._sessionService.activeAccountId;
     const url = API.AdwordsAccount.addCampaignTracking.replace('{account_id}', activeAccountId);
     return this._http.post(url, params);
+  }
+
+  public checkAccountAcceptance(params: ICheckAccountAcceptance): Observable<any>{
+    return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
   
 }

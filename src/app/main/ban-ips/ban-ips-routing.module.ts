@@ -8,7 +8,6 @@ import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
 import { BanDeviceComponent } from './ban-device/ban-device.component';
 
-
 @NgModule({
   imports: [
     RouterModule.forChild([

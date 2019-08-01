@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainGuardService } from './shared/services/guard/main-guard.service';
+import { AccountAcceptanceGuardService } from './shared/services/guard/account-acceptance-guard.service';
 
 const appRoutes: Routes = [
   {
     path: 'chan-ip',
-    canActivate: [MainGuardService],
+    canActivate: [MainGuardService, AccountAcceptanceGuardService],
     loadChildren: './main/ban-ips/ban-ips.module#BanIPsModule'
   },
   {
@@ -24,8 +25,8 @@ const appRoutes: Routes = [
     loadChildren: './main/adwords-account-list/adwords-account-list.module#AdwordsAccountListModule'
   },
   {
-    path: 'add-tracking-tags',
-    canActivate: [MainGuardService],
+    path: 'gan-tracking',
+    canActivate: [MainGuardService, AccountAcceptanceGuardService],
     loadChildren: './main/add-tracking-tags/add-tracking-tags.module#AddTrackingTagsModule'
   },
   {

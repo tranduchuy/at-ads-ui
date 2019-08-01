@@ -8,6 +8,7 @@ import { FuseProgressBarService } from '../../../../@fuse/components/progress-ba
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 export interface DeviceReport {
   device: string;
@@ -69,6 +70,7 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
     private _sessionService: SessionService,
     public _dialogService: DialogService,
     private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
     this.deviceReports = [];
@@ -76,14 +78,10 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
 
   ngOnInit(): void {
     this.initForm();
-
     const sub = this._sessionService.getAdwordId()
-      .subscribe((adwordId: string) => {
-        if (adwordId) {
+      .subscribe((adsId: string) => {
+        if (adsId) {
           this.getDeviceReport();
-        } else {
-          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
-          this._router.navigateByUrl('/them-tai-khoan-moi');
         }
       });
 

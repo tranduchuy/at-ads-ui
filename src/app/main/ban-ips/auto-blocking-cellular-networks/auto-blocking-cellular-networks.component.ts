@@ -47,15 +47,6 @@ export class AutoBlockingCellularNetworksComponent extends EditableFormBaseCompo
 
   ngOnInit(): void {
     this.initForm();
-    const sub = this._sessionService.getAdwordId()
-      .subscribe((adsId: string) => {
-        if (!adsId) {
-          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
-          this._router.navigateByUrl('/them-tai-khoan-moi');
-        }
-      });
-
-    this.subscriptions.push(sub);
   }
 
   initForm(): void {

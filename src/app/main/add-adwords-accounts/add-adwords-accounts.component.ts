@@ -8,6 +8,7 @@ import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 import { DialogService } from '../../shared/services/dialog.service';
 import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 import { SessionService } from 'app/shared/services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-adwords-accounts',
@@ -23,7 +24,8 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     public _dialogService: DialogService,
     private _fuseNavigationService: FuseNavigationService,
     private _addAdwordsAccountsService: AddAdwordsAccountsService,
-    private _sessionService: SessionService
+    private _sessionService: SessionService,
+    private _router: Router
   ) {
     super();
   }
@@ -32,12 +34,16 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     this.initForm();
   }
 
+  completeAccountConnection(){
+    this._router.navigateByUrl('/gan-tracking/chon-chien-dich');
+  }
+
   post(): void {
     const params = this.generatePostObject();
 
     this._fuseProgressiveBarService.show();
     const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
+      this._dialogService._openInfoDialog(res.messages[0]);
       this.isConnected = true;
       this._fuseNavigationService.reloadNavigation();
       this._fuseProgressiveBarService.hide();
