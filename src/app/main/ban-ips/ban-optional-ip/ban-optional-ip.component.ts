@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
+import { Router } from '@angular/router';
 
 
 export interface BannedIP {
@@ -57,12 +58,23 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
     private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _sessionService: SessionService,
-    public _dialogService: DialogService) {
+    public _dialogService: DialogService,
+    private _router: Router
+  ) {
     super();
   }
 
   ngOnInit(): void {
     this.initForm();
+    const sub = this._sessionService.getAdwordId()
+      .subscribe((adsId: string) => {
+        if (!adsId) {
+          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+          this._router.navigateByUrl('/them-tai-khoan-moi');
+        }
+      });
+
+    this.subscriptions.push(sub);
   }
 
   onSubmitForm(): void {
@@ -80,9 +92,9 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.blockIPs(params).subscribe((res: ILoginSuccess) => {
-        this._dialogService._openSuccessDialog(res);
-        this._fuseProgressiveBarService.hide();
-      },
+      this._dialogService._openSuccessDialog(res);
+      this._fuseProgressiveBarService.hide();
+    },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
@@ -96,7 +108,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   private generatePostObject(): any {
     const params = {
       action: 'ADD',
-      ips: {...this.form.value}.listBannedIP.split(/\r?\n/)
+      ips: { ...this.form.value }.listBannedIP.split(/\r?\n/)
     };
 
     return params;

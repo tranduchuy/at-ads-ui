@@ -23,7 +23,8 @@ export namespace API {
     export const getDeviceReport = environment.hostApi + '/api/account-adwords/{account_id}/report/device';
     export const removeBlockedIPs = environment.hostApi + '/api/account-adwords/{account_id}/ips';
     export const blockSampleIP = environment.hostApi + '/api/account-adwords/{account_id}/block-sample-ip';
-    export const unblockSampleIP = environment.hostApi + '/api/account-adwords/{account_id}/unblock-sample-ip'
+    export const unblockSampleIP = environment.hostApi + '/api/account-adwords/{account_id}/unblock-sample-ip';
+    export const addCampaignTracking = environment.hostApi + '/api/account-adwords/{account_id}/campaigns'
   }
   export namespace Website {
     export const getWebsites = environment.hostApi + '/api/websites?accountId={accountId}';

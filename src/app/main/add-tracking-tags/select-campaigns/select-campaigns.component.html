@@ -34,25 +34,13 @@
           <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
-
-        <!-- <ng-container matColumnDef="status">
-          <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span *ngIf="element.status === 'Hoạt động'" class="enable-status">
-              {{element.status}}
-            </span>
-            <span *ngIf="element.status === 'Đang dừng'" class="disabled-status">
-              {{element.status}}
-            </span>
-          </mat-cell>
-        </ng-container>
-
+        "let element"
         <ng-container matColumnDef="tracking">
           <mat-header-cell *matHeaderCellDef> Gán mã </mat-header-cell>
-          <mat-cell *matCellDef>
-            <mat-checkbox></mat-checkbox>
+          <mat-cell *matCellDef="let element">
+            <mat-checkbox (change)="onSelectCampaign($event, element.id)"></mat-checkbox>
           </mat-cell>
-        </ng-container> -->
+        </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -61,7 +49,7 @@
     </div>
 
     <p style="text-align: center" *ngIf="campaignList.length > 0">
-      <button type="submit" mat-raised-button class="submit-button" color="accent">
+      <button (click)="addCampaignTracking()" mat-raised-button class="submit-button" color="accent">
         <mat-icon>location_searching</mat-icon> GÁN MÃ TRACKING
       </button>
     </p>

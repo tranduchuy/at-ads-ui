@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auto-ban-ip',
@@ -58,13 +59,23 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
     private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _sessionService: SessionService,
-    public _dialogService: DialogService
+    public _dialogService: DialogService,
+    private _router: Router
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.initForm();
+    const sub = this._sessionService.getAdwordId()
+      .subscribe((adsId: string) => {
+        if (!adsId) {
+          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+          this._router.navigateByUrl('/them-tai-khoan-moi');
+        }
+      });
+
+    this.subscriptions.push(sub);
   }
 
   initForm(): void {

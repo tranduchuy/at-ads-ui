@@ -8,6 +8,7 @@ import { SessionService } from 'app/shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
+import { Router } from '@angular/router';
 
 export interface Campaign {
   id: string;
@@ -21,17 +22,20 @@ export interface Campaign {
 })
 export class SelectCampaignsComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'name'];
+  displayedColumns: string[] = ['order', 'name', 'tracking'];
   campaignList: Campaign[];
+  selectedCampaigns: string[];
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
     private _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
+    private _router: Router
   ) {
     super();
     this.campaignList = [];
+    this.selectedCampaigns = [];
   }
 
   ngOnInit() {
@@ -39,9 +43,50 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
       .subscribe((adwordId: string) => {
         if (adwordId) {
           this.getOriginalCampaigns();
+        } else {
+          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+          this._router.navigateByUrl('/them-tai-khoan-moi');
         }
       });
 
+    this.subscriptions.push(sub);
+  }
+
+  onSelectCampaign(event, campaignId: string) {
+    if (event.checked) {
+      if (!this.selectedCampaigns.includes(campaignId)) {
+        this.selectedCampaigns.push(campaignId);
+      } else {
+        this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId)
+      }
+    } else {
+      this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId)
+    }
+  }
+
+  addCampaignTracking() {
+
+    if (this.selectedCampaigns.length === 0) {
+      this._dialogService._openErrorDialog({
+        messages: ['Vui lòng lựa chọn chiến dịch']
+      });
+      return;
+    }
+
+    const params = {
+      campaignIds: this.selectedCampaigns
+    }
+
+    this._fuseProgressiveBarService.show();
+    const sub = this._addTrackingTagsService.addCampaignTracking(params)
+      .subscribe((res: ILoginSuccess) => {
+        this._fuseProgressiveBarService.hide();
+        this._dialogService._openSuccessDialog(res);
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+        });
     this.subscriptions.push(sub);
   }
 

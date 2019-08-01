@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
+import { Router } from '@angular/router';
 
 export interface DeviceReport {
   device: string;
@@ -66,7 +67,8 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
     private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     private _sessionService: SessionService,
-    public _dialogService: DialogService
+    public _dialogService: DialogService,
+    private _router: Router,
   ) {
     super();
     this.deviceReports = [];
@@ -77,8 +79,12 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
 
     const sub = this._sessionService.getAdwordId()
       .subscribe((adwordId: string) => {
-        if (adwordId)
+        if (adwordId) {
           this.getDeviceReport();
+        } else {
+          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+          this._router.navigateByUrl('/them-tai-khoan-moi');
+        }
       });
 
     this.subscriptions.push(sub);

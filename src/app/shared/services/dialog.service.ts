@@ -6,11 +6,17 @@ import { ISuccess } from '../../dialog/models/i-success';
 import { IError } from '../../dialog/models/i-error';
 import { ConfirmDialogComponent } from 'app/dialog/confirm-dialog/confirm-dialog.component';
 import { Observable } from 'rxjs';
+import { InfoDialogComponent } from 'app/dialog/info-dialog/info-dialog.component';
 
 @Injectable()
 export class DialogService {
 
   constructor(private _matDialog: MatDialog) {
+  }
+
+  public _openInfoDialog(message: string): void {
+    const dialogRef = this._matDialog.open(InfoDialogComponent);
+    dialogRef.componentInstance.confirmMessage = message;
   }
 
   public _openSuccessDialog(res: ISuccess): void {

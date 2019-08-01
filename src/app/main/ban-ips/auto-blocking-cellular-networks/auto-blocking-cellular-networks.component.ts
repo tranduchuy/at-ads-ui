@@ -7,13 +7,14 @@ import { BanIpsService } from '../ban-ips.service';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auto-blocking-cellular-networks',
   templateUrl: './auto-blocking-cellular-networks.component.html',
   styleUrls: ['./auto-blocking-cellular-networks.component.scss']
 })
-export class AutoBlockingCellularNetworksComponent  extends EditableFormBaseComponent implements OnInit {
+export class AutoBlockingCellularNetworksComponent extends EditableFormBaseComponent implements OnInit {
 
   networkItemsSource = [
     {
@@ -36,14 +37,25 @@ export class AutoBlockingCellularNetworksComponent  extends EditableFormBaseComp
 
   form;
   constructor(private _banIpsService: BanIpsService,
-              public _sessionService: SessionService,
-              private _fuseProgressiveBarService: FuseProgressBarService,
-              public _dialogService: DialogService) {
+    public _sessionService: SessionService,
+    private _fuseProgressiveBarService: FuseProgressBarService,
+    public _dialogService: DialogService,
+    private _router: Router
+  ) {
     super();
   }
 
   ngOnInit(): void {
     this.initForm();
+    const sub = this._sessionService.getAdwordId()
+      .subscribe((adsId: string) => {
+        if (!adsId) {
+          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+          this._router.navigateByUrl('/them-tai-khoan-moi');
+        }
+      });
+
+    this.subscriptions.push(sub);
   }
 
   initForm(): void {
@@ -57,7 +69,7 @@ export class AutoBlockingCellularNetworksComponent  extends EditableFormBaseComp
   }
 
   private generatePostObject(): any {
-    const params = {...this.form.value};
+    const params = { ...this.form.value };
 
     const defaultObject = {
       vinafone: false,
@@ -79,11 +91,10 @@ export class AutoBlockingCellularNetworksComponent  extends EditableFormBaseComp
   post(): void {
     const params = this.generatePostObject();
     this._fuseProgressiveBarService.show();
-    const sub = this._banIpsService.autoBlocking3G4G(params).subscribe((res: ILoginSuccess) =>
-      {
-        this._dialogService._openSuccessDialog(res);
-        this._fuseProgressiveBarService.hide();
-      },
+    const sub = this._banIpsService.autoBlocking3G4G(params).subscribe((res: ILoginSuccess) => {
+      this._dialogService._openSuccessDialog(res);
+      this._fuseProgressiveBarService.hide();
+    },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
