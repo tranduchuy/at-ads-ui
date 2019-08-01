@@ -43,6 +43,7 @@ export class SessionService {
     this.cookieService.remove(CookieNames.token);
     this.cookieService.remove(CookieNames.user);
     this.cookieService.remove(CookieNames.activeAccountId);
+    this.cookieService.remove(CookieNames.activeAdsAccountId);
   }
 
   get user(): any {

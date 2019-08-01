@@ -107,14 +107,17 @@ export class FuseNavigationComponent implements OnInit {
         let accounts = res.data.accounts;
         let activeAdsAccountId = '';
         let activeAccountId = this._sessionService.activeAccountId;
+        
         if (this._sessionService.activeAccountId) {
           activeAccountId = this._sessionService.activeAccountId.toString();
           activeAdsAccountId = this._sessionService.activeAdsAccountId.toString();
           this._sessionService.setAdwordId(activeAccountId);
         }
+
         if (accounts.length > 0) {
+
           if (!activeAccountId) {
-            this._sessionService.setActiveAdsAccountId(accounts[0].adsId.toString());
+            this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(accounts[0].adsId.toString()));
             this._sessionService.setActiveAccountId(accounts[0].id.toString());
             this._sessionService.setAdwordId(accounts[0].id.toString());
 
@@ -171,6 +174,9 @@ export class FuseNavigationComponent implements OnInit {
         this._fuseSplashScreenService.hide();
       },
         error => {
+          this._sessionService.setActiveAdsAccountId('');
+          this._sessionService.setActiveAccountId('');
+          this._sessionService.setAdwordId('');
           this.accounts.children[0] = {
             id: 'add-accounts',
             title: 'Thêm tài khoản mới',

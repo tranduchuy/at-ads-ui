@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 import { DialogService } from '../../shared/services/dialog.service';
 import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
+import { SessionService } from 'app/shared/services/session.service';
 
 @Component({
   selector: 'app-add-adwords-accounts',
@@ -21,7 +22,8 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
     private _fuseNavigationService: FuseNavigationService,
-    private _addAdwordsAccountsService: AddAdwordsAccountsService
+    private _addAdwordsAccountsService: AddAdwordsAccountsService,
+    private _sessionService: SessionService
   ) {
     super();
   }
