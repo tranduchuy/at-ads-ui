@@ -9,6 +9,7 @@ import { DialogService } from '../../shared/services/dialog.service';
 import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 import { SessionService } from 'app/shared/services/session.service';
 import { Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-add-adwords-accounts',
@@ -25,16 +26,23 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     private _fuseNavigationService: FuseNavigationService,
     private _addAdwordsAccountsService: AddAdwordsAccountsService,
     private _sessionService: SessionService,
-    private _router: Router
+    private _router: Router,
+    private _fuseSlashScreenService: FuseSplashScreenService
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this._fuseSlashScreenService.show();
     this.initForm();
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        this._fuseSlashScreenService.hide();
+      });
+    this.subscriptions.push(sub);
   }
 
-  completeAccountConnection(){
+  completeAccountConnection() {
     this._router.navigateByUrl('/gan-tracking/chon-chien-dich');
   }
 

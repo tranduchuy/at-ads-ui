@@ -78,8 +78,8 @@ export class RegisterComponent extends PageBaseComponent implements OnInit, OnDe
       .subscribe(
         (response: IRegisterSuccess) => {
           this._fuseSplashScreenService.hide();
-          this._dialogService._openSuccessDialog(response);
-          this._router.navigate(['/auth/login']);
+          this._dialogService._openInfoDialog('Vui lòng xác nhận email để hoàn tất đăng ký');
+          this._router.navigateByUrl('/auth/login');
         }, (error: HttpErrorResponse) => {
           this._fuseSplashScreenService.hide();
           this._dialogService._openErrorDialog(error.error);

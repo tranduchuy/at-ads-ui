@@ -32,6 +32,7 @@ import { CookieModule, CookieOptionsProvider, CookieService } from 'ngx-cookie';
 import { ValidatorsService } from './shared/services/validator.service';
 import { ServiceLocator } from './shared/services/service-locator';
 import { AppInitService } from './shared/services/app-init.service';
+import { MailConfirmModule } from './authentication/mail-confirm/mail-confirm.module';
 
 export function init_app(appInitService: AppInitService): any {
   return () => appInitService.initializeApp();
@@ -73,6 +74,7 @@ export function init_app(appInitService: AppInitService): any {
     ResetPasswordModule,
     SampleModule,
     AppRoutingModule,
+    MailConfirmModule,
 
     // Cookie
 

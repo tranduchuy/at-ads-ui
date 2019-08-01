@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
@@ -10,7 +10,7 @@ import { fuseAnimations } from '@fuse/animations';
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class MailConfirmComponent
+export class MailConfirmComponent implements OnInit
 {
     /**
      * Constructor
@@ -38,5 +38,9 @@ export class MailConfirmComponent
                 }
             }
         };
+    }
+
+    ngOnInit() {
+        
     }
 }

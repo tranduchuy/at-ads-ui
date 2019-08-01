@@ -137,22 +137,19 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     // const email: string = profile.getEmail();
     const accessToken: string = googleUser.Zi.access_token;
 
-    this._fuseProgressiveBarService.show();
+    this._fuseSplashScreenService.show();
     const sub = this._authService.loginByGoogle({
       accessToken
     }).subscribe((res: ILoginSuccess) => {
+      this._fuseSplashScreenService.hide();
       const token = res.data.meta.token;
       const user = res.data.user;
       this._sessionService.set(token, user);
-      this._fuseSplashScreenService.hide();
       this._router.navigateByUrl('/');
     },
       (error: HttpErrorResponse) => {
-        if (error.error.messages) {
-          this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
-        }
         this._fuseSplashScreenService.hide();
+        this._dialogService._openErrorDialog(error.error);
       }
     );
     this.subscriptions.push(sub);
