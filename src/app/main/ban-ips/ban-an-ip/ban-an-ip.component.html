@@ -26,9 +26,9 @@
     </div>
   </form>
 
-  <div class="banned-ip-info">
+  <div class="banned-ip-info" *ngIf="hasBlockedIP === true">
     <p>
-      IP <b>192.168.125.1</b> đã được chặn thành công trong hệ thống AdWords.
+      IP <b><span [(ngModel)]="blockedIPs[0]">{{blockedIPs[0]}}</span></b> đã được chặn thành công trong hệ thống AdWords.
       <br><br><b>Cách kiểm tra hệ thống hoạt động:</b>
       <br><b>Bước 1:</b> Truy cập vào tài khoản AdWords tại trang <a href="https://ads.google.com/intl/vi_VN/home/"
         target="blank">Ads.google.com</a>

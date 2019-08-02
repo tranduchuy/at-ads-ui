@@ -27,6 +27,7 @@ export namespace API {
     export const unblockSampleIP = environment.hostApi + '/api/account-adwords/{account_id}/unblock-sample-ip';
     export const addCampaignTracking = environment.hostApi + '/api/account-adwords/{account_id}/campaigns';
     export const checkAccountAcceptance = environment.hostApi + '/api/account-adwords/connection-confirmation';
+    export const getBlockedSampleIP = environment.hostApi + '/api/account-adwords/{account_id}/block-sample-ip';
   }
   export namespace Website {
     export const getWebsites = environment.hostApi + '/api/websites?accountId={accountId}';

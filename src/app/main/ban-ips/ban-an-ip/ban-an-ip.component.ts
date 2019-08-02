@@ -19,6 +19,9 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 })
 export class BanAnIPComponent extends EditableFormBaseComponent implements OnInit {
 
+  blockedIPs: string[];
+  hasBlockedIP: boolean;
+
   constructor(
     private _banIpsService: BanIpsService,
     public _sessionService: SessionService,
@@ -27,10 +30,36 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
     private _router: Router,
   ) {
     super();
+    this.blockedIPs = [];
   }
 
   ngOnInit(): void {
+    this._fuseProgressiveBarService.show();
+    this.hasBlockedIP = false;
     this.initForm();
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
+          const blockedIPsSub = this._banIpsService.getBlockedSampleIP()
+            .subscribe(res => {
+              this.blockedIPs = res.data.ips;
+
+              if (this.blockedIPs.length > 0)
+                this.hasBlockedIP = true;
+              else this.hasBlockedIP = false;
+
+              setTimeout(() => {
+                this._fuseProgressiveBarService.hide();
+              }, 0);
+            },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error);
+              });
+          this.subscriptions.push(blockedIPsSub);
+        }
+      });
+    this.subscriptions.push(sub);
   }
 
   onSubmitForm(): void {
@@ -55,23 +84,28 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
     const params = this.generateBlockSapmleIPParams();
 
     this._fuseProgressiveBarService.show();
-    const sub = this._banIpsService.blockSampleIP(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
-        }
+    const sub = this._banIpsService.blockSampleIP(params)
+      .subscribe((res: ILoginSuccess) => {
         this._fuseProgressiveBarService.hide();
-      }
-    );
+        this.blockedIPs[0] = params.ip;
+        this.hasBlockedIP = true;
+        setTimeout(() => {
+          this._dialogService._openSuccessDialog(res);
+        }, 0);
+      },
+        (error: HttpErrorResponse) => {
+          if (error.error.messages) {
+            this._dialogService._openErrorDialog(error.error);
+          }
+          this._fuseProgressiveBarService.hide();
+        }
+      );
     this.subscriptions.push(sub);
   }
 
   private generateUnblockeSampleIPParmas(): any {
     const parmas = {
-      ip: '1.3.3.3'
+      ip: this.blockedIPs[0]
     }
     return parmas;
   }
@@ -85,6 +119,8 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
           const sub = this._banIpsService.unblockSampleIP(params)
             .subscribe((res: ILoginSuccess) => {
               this._fuseProgressiveBarService.hide();
+              this.blockedIPs = [];
+              this.hasBlockedIP = false;
               this._dialogService._openSuccessDialog(res);
             },
               (error: HttpErrorResponse) => {
@@ -95,33 +131,4 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
         }
       })
   }
-
-  // private generateRemoveBlockedIPsParams(): any {
-  //   const params = {
-  //     action: 'REMOVE',
-  //     ips: ['1.2.3.4']
-  //   };
-
-  //   return params;
-  // }
-
-  // removeBlockedIPs(): void {
-  //   this._dialogService._openConfirmDialog('Mở chặn IP này?')
-  //     .subscribe((result: boolean) => {
-  //       if (result) {
-  //         const params = this.generateRemoveBlockedIPsParams();
-  //         this._fuseProgressiveBarService.show();
-  //         const sub = this._banIpsService.removeBlockedIPs(params)
-  //           .subscribe((res: ILoginSuccess) => {
-  //             this._fuseProgressiveBarService.hide();
-  //             this._dialogService._openSuccessDialog(res);
-  //           },
-  //             (error: HttpErrorResponse) => {
-  //               this._fuseProgressiveBarService.hide();
-  //               this._dialogService._openErrorDialog(error.error)
-  //             })
-  //         this.subscriptions.push(sub);
-  //       }
-  //     })
-  // }
 }

@@ -105,6 +105,12 @@ export class BanIpsService {
     return this._http.post(url, param);
   }
 
+  public getBlockedSampleIP(): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    const url = API.AdwordsAccount.getBlockedSampleIP.replace('{account_id}', activeAccountId);
+    return this._http.get(url);
+  } 
+
   public unblockSampleIP(param: IBlockSampleIPParams): Observable<any> {
     const activeAccountId = this.getActiveAccountId();
     const url = API.AdwordsAccount.unblockSampleIP.replace('{account_id}', activeAccountId);
