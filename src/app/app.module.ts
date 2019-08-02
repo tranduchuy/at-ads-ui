@@ -33,6 +33,7 @@ import { ValidatorsService } from './shared/services/validator.service';
 import { ServiceLocator } from './shared/services/service-locator';
 import { AppInitService } from './shared/services/app-init.service';
 import { MailConfirmModule } from './authentication/mail-confirm/mail-confirm.module';
+import { AccountConfirmModule } from './authentication/account-confirm/account-confirm.module';
 
 export function init_app(appInitService: AppInitService): any {
   return () => appInitService.initializeApp();
@@ -73,8 +74,10 @@ export function init_app(appInitService: AppInitService): any {
     ForgotPasswordModule,
     ResetPasswordModule,
     SampleModule,
-    AppRoutingModule,
     MailConfirmModule,
+    AccountConfirmModule,
+
+    AppRoutingModule,
 
     // Cookie
 

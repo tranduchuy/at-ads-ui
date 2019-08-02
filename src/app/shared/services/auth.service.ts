@@ -8,6 +8,10 @@ import { IAuthResetPassword } from '../models/i-auth-reset-password';
 import { SessionService } from './session.service';
 import { Router } from '@angular/router';
 
+export interface IConfirmEmailParams {
+  token: string;
+}
+
 @Injectable()
 export class AuthService {
 
@@ -42,6 +46,10 @@ export class AuthService {
 
   public getLoggedInInfo(): Observable<any> {
     return this.httpClient.get(API.User.getLoggedInInfo);
+  }
+
+  public confirmEmail(param: IConfirmEmailParams): Observable<any> {
+    return this.httpClient.post(API.User.confirmEmail, param);
   }
 
 }

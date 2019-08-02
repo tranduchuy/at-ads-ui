@@ -4,29 +4,30 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { MailConfirmComponent } from 'app/authentication/mail-confirm/mail-confirm.component';
 import { AuthGuardService } from '../../shared/services/guard/auth-guard.service';
+import { AccountConfirmComponent } from './account-confirm.component';
+import { MatButtonModule } from '@angular/material';
 
 const routes = [
     {
-        path     : 'auth/mail-confirm/:email',
-        component: MailConfirmComponent,
+        path     : 'account-confirm/:token',
+        component: AccountConfirmComponent,
         canActivate: [AuthGuardService]
     }
 ];
 
 @NgModule({
     declarations: [
-        MailConfirmComponent
+        AccountConfirmComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
 
         MatIconModule,
+        MatButtonModule,
 
         FuseSharedModule
     ]
 })
-export class MailConfirmModule
-{
-}
+export class AccountConfirmModule { }
+
