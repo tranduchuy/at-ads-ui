@@ -9,18 +9,20 @@ import { ILoginSuccess } from '../login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { EditableFormBaseComponent } from 'app/shared/components/base/editable-form-base.component';
+import { Validators } from '@angular/forms';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 
 @Component({
-  selector: 'app-account-confirm',
-  templateUrl: './account-confirm.component.html',
-  styleUrls: ['./account-confirm.component.scss'],
+  selector: 'app-resend-email',
+  templateUrl: './resend-email.component.html',
+  styleUrls: ['./resend-email.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
-export class AccountConfirmComponent extends PageBaseComponent implements OnInit {
+export class ResendEmailComponent extends EditableFormBaseComponent implements OnInit {
 
-  email: string;
-  token: string;
+  onSubmiting: boolean = false;
 
   /**
    * Constructor
@@ -32,8 +34,7 @@ export class AccountConfirmComponent extends PageBaseComponent implements OnInit
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _authService: AuthService,
-    private _fuseSplashScreenService: FuseSplashScreenService,
-    private _dialogService: DialogService
+    private _fuseProgressBarService: FuseProgressBarService
   ) {
     super();
 
@@ -57,28 +58,34 @@ export class AccountConfirmComponent extends PageBaseComponent implements OnInit
   }
 
   ngOnInit() {
-    const sub = this._activatedRoute.params
-      .subscribe((param: any) => {
-        this.token = param.token;
-        if (!this.token) {
-          this._router.navigateByUrl('/auth/login');
-        }
-      })
-    this.subscriptions.push(sub);
+    this.initForm();
   }
 
-  activateAccount() {
-    this._fuseSplashScreenService.show();
-    const sub = this._authService.confirmEmail({ token: this.token })
+  initForm() {
+    this.form = this.fb.group({
+      email: ['', [Validators.required]]
+    });
+  }
+
+  resendEmail() {
+    this.onSubmit();
+  }
+
+  post() {
+    this.onSubmiting = true;
+    this._fuseProgressBarService.show();
+    const sub = this._authService.resendEmail({ ...this.form.value }.email)
       .subscribe((res: ILoginSuccess) => {
-        this._fuseSplashScreenService.hide();
-        this._dialogService._openSuccessDialog(res);
-        this._router.navigateByUrl('/auth/login');
+        this._fuseProgressBarService.hide();
+        this._dialogService._openInfoDialog(res.messages[0]);
+        this.onSubmiting = false;
       },
         (error: HttpErrorResponse) => {
-          this._fuseSplashScreenService.hide();
+          this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
+          this.onSubmiting = false;
         });
     this.subscriptions.push(sub);
   }
+
 }

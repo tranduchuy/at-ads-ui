@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material';
 
 const routes = [
     {
-        path     : 'account-confirm/:token',
+        path: 'account-confirm/:token',
         component: AccountConfirmComponent,
         canActivate: [AuthGuardService]
     }
@@ -20,7 +20,7 @@ const routes = [
     declarations: [
         AccountConfirmComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
 
         MatIconModule,

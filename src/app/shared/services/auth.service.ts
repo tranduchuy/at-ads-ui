@@ -16,7 +16,7 @@ export interface IConfirmEmailParams {
 export class AuthService {
 
   constructor(private httpClient: HttpClient
-              ) {
+  ) {
 
   }
 
@@ -28,15 +28,15 @@ export class AuthService {
     return this.httpClient.post(API.User.Register, param);
   }
 
-  public forgotPassword(data: string): Observable<any>{
-    return this.httpClient.post(API.User.ForgotPassword, {email: data});
+  public forgotPassword(data: string): Observable<any> {
+    return this.httpClient.post(API.User.ForgotPassword, { email: data });
   }
 
-  public resendEmail(data: string): Observable<any>{
-    return this.httpClient.post<any>(API.User.ResetPassword, {email: data});
+  public resendEmail(email: string): Observable<any> {
+    return this.httpClient.post<any>(API.User.ResendEmail, { email });
   }
 
-  public resetPassword(data: IAuthResetPassword): Observable<any>{
+  public resetPassword(data: IAuthResetPassword): Observable<any> {
     return this.httpClient.post<any>(API.User.ResetPassword, data);
   }
 

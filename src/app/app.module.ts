@@ -34,6 +34,7 @@ import { ServiceLocator } from './shared/services/service-locator';
 import { AppInitService } from './shared/services/app-init.service';
 import { MailConfirmModule } from './authentication/mail-confirm/mail-confirm.module';
 import { AccountConfirmModule } from './authentication/account-confirm/account-confirm.module';
+import { ResendEmailModule } from './authentication/resend-email/resend-email.module';
 
 export function init_app(appInitService: AppInitService): any {
   return () => appInitService.initializeApp();
@@ -76,6 +77,7 @@ export function init_app(appInitService: AppInitService): any {
     SampleModule,
     MailConfirmModule,
     AccountConfirmModule,
+    ResendEmailModule,
 
     AppRoutingModule,
 
