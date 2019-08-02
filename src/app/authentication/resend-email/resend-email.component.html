@@ -5,21 +5,23 @@
     <div id="mail-confirm-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
 
       <div class="logo">
-        <mat-icon class="mat-accent s-96">email</mat-icon>
+        <mat-icon class="mat-accent s-96">how_to_reg</mat-icon>
       </div>
 
-      <div class="title">XÁC NHẬN LẠI EMAIL</div>
+      <div class="title">KÍCH HOẠT TÀI KHOẢN</div>
 
       <div class="subtitle">
         <form [formGroup]="form">
-          <app-input-text [formControlName]="'email'" [errors]="getMessageErrors('email')" title="Địa chỉ email của bạn">
+          <app-input-text [formControlName]="'email'" [errors]="getMessageErrors('email')"
+            title="Địa chỉ email của bạn">
           </app-input-text>
         </form>
-        <button mat-raised-button color="accent" (click)="resendEmail()" [disabled]="onSubmiting" style="margin-top: 5px">Gửi</button>
+        <button mat-raised-button color="accent" (click)="resendEmail()" [disabled]="onSubmiting"
+          style="margin-top: 5px; border-radius: 0; width: 100%">Gửi</button>
       </div>
 
       <div class="message">
-        <a class="link" [routerLink]="'/pages/auth/login'">Trở về trang đăng nhập</a>
+        <a class="link" [routerLink]="'/pages/auth/login'">ĐĂNG NHẬP</a>
       </div>
 
     </div>
