@@ -29,16 +29,18 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
 
         if(!activeAdsAccountId) {
             this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+            this._router.navigateByUrl('/them-tai-khoan');
             return false;
         }
 
-        // const sub = this._blockIPService.checkAccountAcceptance({adWordId: activeAdsAccountId})
-        // .subscribe(res => {
-        //     if(!res.data.isConnected) {
-        //         this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
-        //         return false;
-        //     }
-        // });
+        const sub = this._blockIPService.checkAccountAcceptance({adWordId: activeAdsAccountId})
+        .subscribe(res => {
+            if(!res.data.isConnected) {
+                this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                this._router.navigateByUrl('/them-tai-khoan');
+                return false;
+            }
+        });
         
         return true;
     }
