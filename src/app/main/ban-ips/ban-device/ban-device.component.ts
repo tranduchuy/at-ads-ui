@@ -78,9 +78,9 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
 
   ngOnInit(): void {
     this.initForm();
-    const sub = this._sessionService.getAdwordId()
-      .subscribe((adsId: string) => {
-        if (adsId) {
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
           this.getDeviceReport();
         }
       });
@@ -102,22 +102,23 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
 
   getDeviceReport() {
     this._fuseProgressiveBarService.show();
-    const sub = this._banIpsService.getDeviceReport().subscribe(res => {
-      this._fuseProgressiveBarService.hide();
-      this.deviceReports = res.data.reportDevice;
-      this.activeAdsAccountId = this._sessionService.activeAdsAccountId;
-
-      if (this.deviceReports.length > 0)
-        this.hasReport = true;
-      else this.hasReport = false;
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
-        }
+    const sub = this._banIpsService.getDeviceReport()
+      .subscribe(res => {
         this._fuseProgressiveBarService.hide();
-      }
-    );
+        this.deviceReports = res.data.reportDevice;
+        this.activeAdsAccountId = this._sessionService.activeAdsAccountId;
+
+        if (this.deviceReports.length > 0)
+          this.hasReport = true;
+        else this.hasReport = false;
+      },
+        (error: HttpErrorResponse) => {
+          if (error.error.messages) {
+            this._dialogService._openErrorDialog(error.error);
+          }
+          this._fuseProgressiveBarService.hide();
+        }
+      );
     this.subscriptions.push(sub);
   }
 

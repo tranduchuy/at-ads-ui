@@ -10,11 +10,13 @@
     color: gray;
     font-size: 16px;
     font-weight: bold;
+
+    box-shadow: 2px 2px 5px silver;
   }
 
   .table-container {
     height: 440px;
-    box-shadow: 2px 2px 10px silver;
+    box-shadow: 2px 2px 5px silver;
     background-color: white;
     overflow: auto;
 

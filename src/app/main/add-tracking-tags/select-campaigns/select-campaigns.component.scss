@@ -1,6 +1,5 @@
 .container {
   padding: 15px 30px 15px 30px;
-
   width: 100%;
 
   .title1 {
@@ -9,6 +8,7 @@
     color: gray;
     font-size: 16px;
     font-weight: bold;
+    box-shadow: 2px 2px 5px silver;
   }
 
   .title2 {
@@ -20,7 +20,7 @@
   .usage {
     text-align: justify;
     color: gray;
-    padding-top: 10px;
+    padding-top: 20px;
   }
 
   .tracking-example {
@@ -28,6 +28,7 @@
 
     img {
       width: 100%;
+      box-shadow: 2px 2px 5px silver;
     }
   }
 
@@ -52,7 +53,7 @@
 
   .table-wrapper {
     height: 500px;
-    box-shadow: 2px 2px 10px silver;
+    box-shadow: 2px 2px 5px silver;
     background-color: white;
     overflow: auto;
 
