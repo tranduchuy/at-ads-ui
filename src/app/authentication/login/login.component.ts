@@ -143,6 +143,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     }).subscribe((res: ILoginSuccess) => {
       const token = res.data.meta.token;
       const user = res.data.user;
+      user.avatar = googleUser.w3.Paa;
       this._sessionService.set(token, user);
       this._router.navigateByUrl('/');
       this._ngZone.run(() => this._router.navigateByUrl('/')

@@ -52,7 +52,7 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
   // -----------------------------------------------------------------------------------------------------
 
   // Directive
-  @ViewChild(FusePerfectScrollbarDirective, {static: true})
+  @ViewChild(FusePerfectScrollbarDirective, { static: true })
   set directive(theDirective: FusePerfectScrollbarDirective) {
     if (!theDirective) {
       return;
@@ -77,10 +77,10 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
         take(1)
       )
       .subscribe(() => {
-          setTimeout(() => {
-            this._fusePerfectScrollbar.scrollToElement('navbar .nav-link.active', -120);
-          });
-        }
+        setTimeout(() => {
+          this._fusePerfectScrollbar.scrollToElement('navbar .nav-link.active', -120);
+        });
+      }
       );
   }
 
@@ -92,16 +92,17 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+
     this._router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         takeUntil(this._unsubscribeAll)
       )
       .subscribe(() => {
-          if (this._fuseSidebarService.getSidebar('navbar')) {
-            this._fuseSidebarService.getSidebar('navbar').close();
-          }
+        if (this._fuseSidebarService.getSidebar('navbar')) {
+          this._fuseSidebarService.getSidebar('navbar').close();
         }
+      }
       );
 
     // Subscribe to the config changes
