@@ -63,7 +63,7 @@ export class ResendEmailComponent extends EditableFormBaseComponent implements O
 
   initForm() {
     this.form = this.fb.group({
-      email: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 

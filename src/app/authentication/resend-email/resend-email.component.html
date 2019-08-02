@@ -15,7 +15,7 @@
           <app-input-text [formControlName]="'email'" [errors]="getMessageErrors('email')" title="Địa chỉ email của bạn">
           </app-input-text>
         </form>
-        <button mat-raised-button color="accent" (click)="resendEmail()" [disabled]="onSubmiting">Gửi</button>
+        <button mat-raised-button color="accent" (click)="resendEmail()" [disabled]="onSubmiting" style="margin-top: 5px">Gửi</button>
       </div>
 
       <div class="message">
