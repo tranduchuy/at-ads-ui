@@ -32,13 +32,13 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
             return false;
         }
 
-        const sub = this._blockIPService.checkAccountAcceptance({adWordId: activeAdsAccountId})
-        .subscribe(res => {
-            if(!res.data.isConnected) {
-                this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
-                return false;
-            }
-        });
+        // const sub = this._blockIPService.checkAccountAcceptance({adWordId: activeAdsAccountId})
+        // .subscribe(res => {
+        //     if(!res.data.isConnected) {
+        //         this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+        //         return false;
+        //     }
+        // });
         
         return true;
     }
