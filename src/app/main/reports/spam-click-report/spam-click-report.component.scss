@@ -9,9 +9,9 @@
     background-color: white;
 
     .click-total {
-      position: relative;
+      position: absolute;
       left: 50%;
-      top: 0;
+      top: 21%;
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
@@ -46,7 +46,7 @@
       margin-left: 16px;
     }
   }
-  
+
   .left,
   .right {
     margin: 10px;

@@ -5,6 +5,11 @@
       BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">322-238-9982</span> TỪ <span
         style="color: black">31/05/2019</span>
       ĐẾN <span style="color: black">06/06/2019</span>
+      <mat-form-field style="float: right; margin-top: -12px">
+        <input matInput [matDatepicker]="picker" placeholder="Chọn ngày thống kê" [(ngModel)]="dayNow">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </p>
     <div class="div-pie-chart">
       <p style="text-align: center">
@@ -43,20 +48,16 @@
     </div>
 
     <div class="position-relative h-256 pb-16 blue-600">
-        <canvas baseChart
-                [datasets]="lineChart.datasets[lineChartOption]"
-                [labels]="lineChart.labels"
-                [colors]="lineChart.colors"
-                [options]="lineChart.options"
-                [chartType]="lineChart.chartType">
-        </canvas>
+      <canvas baseChart [datasets]="lineChart.datasets[lineChartOption]" [labels]="lineChart.labels"
+        [colors]="lineChart.colors" [options]="lineChart.options" [chartType]="lineChart.chartType">
+      </canvas>
     </div>
 
     <div class="line-chart-options">
-        <mat-radio-group aria-label="Select an option" (change)="onChangeLineChartOption($event)">
-          <mat-radio-button value="invalidClick" checked color="warn">Click không hợp lệ</mat-radio-button>
-          <mat-radio-button value="validClick">Click hợp lệ</mat-radio-button>
-        </mat-radio-group>
+      <mat-radio-group aria-label="Select an option" (change)="onChangeLineChartOption($event)">
+        <mat-radio-button value="invalidClick" checked color="warn">Click không hợp lệ</mat-radio-button>
+        <mat-radio-button value="validClick">Click hợp lệ</mat-radio-button>
+      </mat-radio-group>
     </div>
 
   </div>

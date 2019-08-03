@@ -10,6 +10,8 @@ export class SpamClickReportComponent implements OnInit {
   pieChart: any = {};
   lineChart: any = {};
 
+  dayNow = new Date();
+
   lineChartOption: string = 'invalidClick';
 
   onChangeLineChartOption(event) {

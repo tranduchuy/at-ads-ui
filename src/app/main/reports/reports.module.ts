@@ -23,7 +23,7 @@ import { SpamClickReportComponent } from './spam-click-report/spam-click-report.
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { ChartsModule } from 'ng2-charts';
-import { MatRadioModule } from '@angular/material';
+import { MatRadioModule, MatDatepickerModule } from '@angular/material';
 
 @NgModule({
   declarations: [SpamClickReportComponent],
@@ -37,6 +37,7 @@ import { MatRadioModule } from '@angular/material';
     MatTooltipModule,
     MatBadgeModule,
     MatRadioModule,
+    MatDatepickerModule,
 
     CheckboxGroupModule,
     ReactiveFormsModule,
