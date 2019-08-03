@@ -5,12 +5,18 @@
       BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">322-238-9982</span> TỪ <span
         style="color: black">31/05/2019</span>
       ĐẾN <span style="color: black">06/06/2019</span>
-      <mat-form-field style="float: right; margin-top: -12px">
-        <input matInput [matDatepicker]="picker" placeholder="Chọn ngày thống kê" [(ngModel)]="dayNow">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picke2r" placeholder="Ngày kết thúc" [(ngModel)]="dayTo">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="Ngày bắt đầu" [(ngModel)]="dayFrom">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
     </p>
+    <div class="clear"></div>
     <div class="div-pie-chart">
       <p style="text-align: center">
         Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold">6 ngày</span> từ <span
