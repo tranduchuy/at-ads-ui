@@ -1,15 +1,151 @@
 <div class="container">
-  <div class="report-1">
+
+  <div class="section">
     <p class="title1">
       BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">322-238-9982</span> TỪ <span
         style="color: black">31/05/2019</span>
       ĐẾN <span style="color: black">06/06/2019</span>
     </p>
-    <p>
-      Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold">6 ngày</span> từ <span
-        style="color:dodgerblue; font-weight: bold">31/05/2019</span> đến ngày <span style="color: dodgerblue; font-weight: bold">06/06/2019</span> bằng việc
-      hạn chế chiến dịch ảo
-    </p>
+    <div class="div-pie-chart">
+      <p style="text-align: center">
+        Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold">6 ngày</span> từ <span
+          style="color:dodgerblue; font-weight: bold">31/05/2019</span> đến ngày <span
+          style="color: dodgerblue; font-weight: bold">06/06/2019</span> bằng việc
+        hạn chế chiến dịch ảo
+      </p>
+      <div class="h-400 pie-chart">
+        <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
+          [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
+          [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" (select)="pieChart.onSelect($event)"
+          [labelFormatting]="pieChart.setLabelFormatting">
+
+          <ng-template #tooltipTemplate let-model="model">
+            <p style="color: #fff">
+              {{model.name}}
+              <br>{{model.value}}%
+              <br>{{model.times}}
+            </p>
+          </ng-template>
+
+        </ngx-charts-pie-chart>
+        <p style="text-align: center" class="click-total">
+          <span style="font-size: 18px">762</span>
+          <br><span style="color: gray">click</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section div-line-chart">
+    <div class="title1">
+      <span style="margin-right: 20px">BÁO CÁO TỔNG THỂ THEO NGÀY</span>
+      <button mat-raised-button color="accent" style="border-radius: 15px">Xem Đầy Đủ</button>
+    </div>
+
+    <div class="position-relative h-256 pb-16 blue-600">
+        <canvas baseChart
+                [datasets]="lineChart.datasets[lineChartOption]"
+                [labels]="lineChart.labels"
+                [colors]="lineChart.colors"
+                [options]="lineChart.options"
+                [chartType]="lineChart.chartType">
+        </canvas>
+    </div>
+
+    <div class="line-chart-options">
+        <mat-radio-group aria-label="Select an option" (change)="onChangeLineChartOption($event)">
+          <mat-radio-button value="invalidClick" checked color="warn">Click không hợp lệ</mat-radio-button>
+          <mat-radio-button value="validClick">Click hợp lệ</mat-radio-button>
+        </mat-radio-group>
+    </div>
 
   </div>
+
+  <div class="section tables" fxLayout="row" fxLayout.xs="column">
+
+    <div class="left" fxFlex="50">
+      <div class="title1" style="text-align: center">
+        BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN
+      </div>
+
+      <div class="left-table">
+        <mat-table [dataSource]="leftTable" class="mat-elevation-z8">
+          <ng-container matColumnDef="time">
+            <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ip">
+            <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="click">
+            <mat-header-cell *matHeaderCellDef> Click </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="keyword">
+            <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="location">
+            <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="leftTableColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: leftTableColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+      <button mat-raised-button color="accent" class="table-button" style="background-color:#4bb453">BÁO CÁO TOÀN BỘ
+        IP</button>
+
+    </div>
+
+    <div class="right" fxFlex="50">
+      <div class="title1" style="text-align: center">
+        KHÁCH CÓ THÔNG TIN (SỐ DI ĐỘNG)
+      </div>
+
+      <div class="right-table">
+        <mat-table [dataSource]="rightTable" class="mat-elevation-z8">
+          <ng-container matColumnDef="order">
+            <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+            <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="time">
+            <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef> Số điện thoại </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="network">
+            <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.network}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="rightTableColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: rightTableColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+      <button mat-raised-button color="accent" class="table-button">TOÀN BỘ KHÁCH HÀNG</button>
+
+    </div>
+
+  </div>
+
 </div>

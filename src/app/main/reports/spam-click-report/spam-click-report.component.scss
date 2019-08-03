@@ -1,16 +1,83 @@
 .container {
-  padding: 15px 30px 15px 30px;
-
+  padding: 0 30px 15px 30px;
   width: 100%;
 
-  .title1 {
-    padding: 15px;
+  .section {
+    box-shadow: 2px 2px 5px silver;
+    margin-top: 20px;
+    padding-bottom: 30px;
+    background-color: white;
 
+    .click-total {
+      position: relative;
+      left: 50%;
+      top: 0;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .title1 {
+      padding: 15px;
+      background-color: #eee;
+      color: gray;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .div-pie-chart {
+      width: 100%;
+    }
+  }
+
+  .full-view-button {
+    border-radius: 15px;
     background-color: #eee;
     color: gray;
-    font-size: 16px;
-    font-weight: bold;
+  }
 
-    box-shadow: 2px 2px 5px silver;
+  .div-line-chart {
+    padding-bottom: 0;
+  }
+
+  .line-chart-options {
+    padding: 20px;
+
+    .mat-radio-button ~ .mat-radio-button {
+      margin-left: 16px;
+    }
+  }
+  
+  .left,
+  .right {
+    margin: 10px;
+  }
+
+  .tables {
+    padding-bottom: 10px;
+
+    mat-table {
+      box-shadow: none;
+    }
+  }
+
+  .left-table,
+  .right-table {
+    height: 400px;
+    overflow: auto;
+  }
+
+  .table-button {
+    display: table;
+    margin: 0 auto;
+    margin-top: 15px;
+    border-radius: 0;
+  }
+
+  :host ::ng-deep .pie-chart {
+    margin-top: 30px;
+
+    .pie-label {
+      font-size: 18px !important;
+    }
   }
 }

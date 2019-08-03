@@ -20,6 +20,11 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { SpamClickReportComponent } from './spam-click-report/spam-click-report.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
+import { ChartsModule } from 'ng2-charts';
+import { MatRadioModule } from '@angular/material';
+
 @NgModule({
   declarations: [SpamClickReportComponent],
   imports: [
@@ -31,12 +36,17 @@ import { SpamClickReportComponent } from './spam-click-report/spam-click-report.
     MatTableModule,
     MatTooltipModule,
     MatBadgeModule,
+    MatRadioModule,
 
     CheckboxGroupModule,
     ReactiveFormsModule,
     InputTextModule,
     InputTextareaModule,
     SelectTextModule,
+
+    NgxChartsModule,
+    FuseWidgetModule,
+    ChartsModule,
 
     FuseSharedModule,
     
