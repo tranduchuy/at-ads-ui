@@ -13,190 +13,6 @@ export class SpamClickReportComponent implements OnInit {
   dayFrom = new Date();
   dayTo = new Date();
 
-  lineChartOption: string = 'invalidClick';
-
-  onChangeLineChartOption(event) {
-    this.lineChartOption = event.value;
-    if (event.value === 'invalidClick') {
-      this.lineChart = {
-        chartType: 'line',
-        datasets: {
-          validClick: [
-            {
-              label: 'Click hợp lệ',
-              data: [141, 176, 40, 99, 114, 72, 70],
-              fill: 'start'
-            }
-          ],
-          invalidClick: [
-            {
-              label: 'Click không hợp lệ',
-              data: [116, 85, 133, 12, 120, 10, 150],
-              fill: 'start'
-            }
-          ],
-        },
-        labels: ['31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06'],
-        colors: [
-          {
-            borderColor: '#f44336',
-            backgroundColor: '#1e88e5',
-            pointBackgroundColor: '#1e88e5',
-            pointHoverBackgroundColor: '#1e88e5',
-            pointBorderColor: '#ffffff',
-            pointHoverBorderColor: '#ffffff'
-          }
-        ],
-        options: {
-          spanGaps: false,
-          legend: {
-            display: false
-          },
-          maintainAspectRatio: false,
-          layout: {
-            padding: {
-              top: 32,
-              left: 32,
-              right: 32
-            }
-          },
-          elements: {
-            point: {
-              radius: 4,
-              borderWidth: 2,
-              hoverRadius: 4,
-              hoverBorderWidth: 2
-            },
-            line: {
-              tension: 0
-            }
-          },
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                  drawBorder: false,
-                  tickMarkLength: 18
-                },
-                ticks: {
-                  fontColor: '#ffffff'
-                }
-              }
-            ],
-            yAxes: [
-              {
-                display: false,
-                ticks: {
-                  min: 0,
-                  max: 180,
-                  stepSize: 1
-                }
-              }
-            ]
-          },
-          plugins: {
-            filler: {
-              propagate: false
-            },
-            xLabelsOnTop: {
-              active: true
-            }
-          }
-        }
-      }
-    }
-    else {
-      this.lineChart = {
-        chartType: 'line',
-        datasets: {
-          validClick: [
-            {
-              label: 'Click hợp lệ',
-              data: [141, 176, 40, 99, 114, 72, 70],
-              fill: 'start'
-            }
-          ],
-          invalidClick: [
-            {
-              label: 'Click không hợp lệ',
-              data: [116, 85, 133, 12, 120, 10, 150],
-              fill: 'start'
-            }
-          ],
-        },
-        labels: ['31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06'],
-        colors: [
-          {
-            borderColor: '#42a5f5',
-            backgroundColor: '#1e88e5',
-            pointBackgroundColor: '#1e88e5',
-            pointHoverBackgroundColor: '#1e88e5',
-            pointBorderColor: '#ffffff',
-            pointHoverBorderColor: '#ffffff'
-          }
-        ],
-        options: {
-          spanGaps: false,
-          legend: {
-            display: false
-          },
-          maintainAspectRatio: false,
-          layout: {
-            padding: {
-              top: 32,
-              left: 32,
-              right: 32
-            }
-          },
-          elements: {
-            point: {
-              radius: 4,
-              borderWidth: 2,
-              hoverRadius: 4,
-              hoverBorderWidth: 2
-            },
-            line: {
-              tension: 0
-            }
-          },
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                  drawBorder: false,
-                  tickMarkLength: 18
-                },
-                ticks: {
-                  fontColor: '#ffffff'
-                }
-              }
-            ],
-            yAxes: [
-              {
-                display: false,
-                ticks: {
-                  min: 0,
-                  max: 180,
-                  stepSize: 1
-                }
-              }
-            ]
-          },
-          plugins: {
-            filler: {
-              propagate: false
-            },
-            xLabelsOnTop: {
-              active: true
-            }
-          }
-        }
-      }
-    }
-  }
-
   constructor(
 
   ) {
@@ -230,17 +46,16 @@ export class SpamClickReportComponent implements OnInit {
     this.lineChart = {
       chartType: 'line',
       datasets: {
-        validClick: [
+        report: [
           {
             label: 'Click hợp lệ',
             data: [141, 176, 40, 99, 114, 72, 70],
             fill: 'start'
-          }
-        ],
-        invalidClick: [
+
+          },
           {
             label: 'Click không hợp lệ',
-            data: [116, 85, 133, 12, 120, 10, 150],
+            data: [11, 14, 1, 12, 4, 4, 4],
             fill: 'start'
           }
         ],
@@ -248,24 +63,36 @@ export class SpamClickReportComponent implements OnInit {
       labels: ['31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06'],
       colors: [
         {
+          borderColor: '#35afea',
+          backgroundColor: 'rgba(0,0,0,0)',
+          pointBackgroundColor: 'white',
+          pointHoverBackgroundColor: '#35afea',
+          pointBorderColor: '#35afea',
+          pointHoverBorderColor: '#35afea'
+        },
+        {
           borderColor: '#f44336',
-          backgroundColor: '#1e88e5',
-          pointBackgroundColor: '#1e88e5',
-          pointHoverBackgroundColor: '#1e88e5',
-          pointBorderColor: '#ffffff',
-          pointHoverBorderColor: '#ffffff'
+          backgroundColor: 'rgba(0,0,0,0)',
+          pointBackgroundColor: 'white',
+          pointHoverBackgroundColor: '#f44336',
+          pointBorderColor: '#f44336',
+          pointHoverBorderColor: '#f44336'
         }
       ],
       options: {
         spanGaps: false,
         legend: {
-          display: false
+          display: true
         },
         maintainAspectRatio: false,
+        tooltips: {
+          position: 'nearest',
+          mode: 'index',
+          intersect: false
+        },
         layout: {
           padding: {
-            top: 32,
-            left: 32,
+            left: 24,
             right: 32
           }
         },
@@ -284,22 +111,20 @@ export class SpamClickReportComponent implements OnInit {
           xAxes: [
             {
               gridLines: {
-                display: false,
-                drawBorder: false,
-                tickMarkLength: 18
+                display: true
               },
               ticks: {
-                fontColor: '#ffffff'
+                fontColor: 'rgba(0,0,0,0.54)'
               }
             }
           ],
           yAxes: [
             {
-              display: false,
+              gridLines: {
+                tickMarkLength: 180
+              },
               ticks: {
-                min: 0,
-                max: 180,
-                stepSize: 1
+                stepSize: 30
               }
             }
           ]
@@ -307,15 +132,12 @@ export class SpamClickReportComponent implements OnInit {
         plugins: {
           filler: {
             propagate: false
-          },
-          xLabelsOnTop: {
-            active: true
           }
         }
       }
     }
 
-    this._registerCustomChartJSPlugin();
+    //this._registerCustomChartJSPlugin();
   };
 
   leftTableColumns = ['time', 'ip', 'click', 'id', 'keyword', 'location'];

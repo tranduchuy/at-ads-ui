@@ -1,4 +1,4 @@
-.clear{
+.clear {
   clear: both;
 }
 .container {
@@ -11,16 +11,18 @@
     padding-bottom: 30px;
     background-color: white;
 
-    mat-form-field{
+    mat-form-field {
       margin-left: 12px;
       float: right;
       margin-top: -12px;
+      position: relative;
+      z-index: 100;
     }
 
     .click-total {
-      position: absolute;
+      position: relative;
       left: 50%;
-      top: 22.5%;
+      top: 0;
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }

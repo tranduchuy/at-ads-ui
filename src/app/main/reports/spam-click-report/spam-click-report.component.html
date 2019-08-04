@@ -30,19 +30,21 @@
           [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" (select)="pieChart.onSelect($event)"
           [labelFormatting]="pieChart.setLabelFormatting">
 
-          <ng-template #tooltipTemplate let-model="model">
+          <!-- <ng-template #tooltipTemplate let-model="model">
             <p style="color: #fff">
               {{model.name}}
               <br>{{model.value}}%
               <br>{{model.times}}
             </p>
-          </ng-template>
+          </ng-template> -->
 
         </ngx-charts-pie-chart>
+
         <p style="text-align: center" class="click-total">
           <span style="font-size: 18px">762</span>
           <br><span style="color: gray">click</span>
         </p>
+        
       </div>
     </div>
   </div>
@@ -53,17 +55,10 @@
       <button mat-raised-button color="accent" style="border-radius: 15px">Xem Đầy Đủ</button>
     </div>
 
-    <div class="position-relative h-256 pb-16 blue-600">
-      <canvas baseChart [datasets]="lineChart.datasets[lineChartOption]" [labels]="lineChart.labels"
+    <div class="position-relative h-368 pb-16">
+      <canvas baseChart [datasets]="lineChart.datasets['report']" [labels]="lineChart.labels"
         [colors]="lineChart.colors" [options]="lineChart.options" [chartType]="lineChart.chartType">
       </canvas>
-    </div>
-
-    <div class="line-chart-options">
-      <mat-radio-group aria-label="Select an option" (change)="onChangeLineChartOption($event)">
-        <mat-radio-button value="invalidClick" checked color="warn">Click không hợp lệ</mat-radio-button>
-        <mat-radio-button value="validClick">Click hợp lệ</mat-radio-button>
-      </mat-radio-group>
     </div>
 
   </div>
