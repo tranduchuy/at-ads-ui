@@ -36,7 +36,6 @@
     }
 
     .title2 {
-      
     }
 
     .div-pie-chart {
@@ -78,10 +77,10 @@
     mat-table {
       box-shadow: none;
 
-      mat-row{
+      mat-row {
         transition: 0.2s;
       }
-      mat-row:hover{
+      mat-row:hover {
         background-color: #eee;
       }
     }
@@ -106,6 +105,5 @@
     .pie-label {
       font-size: 16px !important;
     }
-    
   }
 }
