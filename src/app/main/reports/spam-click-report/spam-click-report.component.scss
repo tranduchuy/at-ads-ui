@@ -27,6 +27,31 @@
       transform: translate(-50%, -110px);
     }
 
+    .invalid-click-info {
+      position: relative;
+      left: 30%;
+      top: -350px;
+    }
+
+    .valid-click-info {
+      position: relative;
+      left: 64.5%;
+      top: -35px;
+    }
+
+    .click-number {
+      margin-right: 5px;
+      font-weight: bold;
+    }
+
+    .click-percentage {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 2px 4px 2px 4px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
     .title1 {
       padding: 15px;
       background-color: #eee;
@@ -101,9 +126,10 @@
 
   :host ::ng-deep .pie-chart {
     margin-top: 30px;
+    margin-bottom: 20px;
 
     .pie-label {
-      font-size: 16px !important;
+      font-size: 20px !important;
     }
   }
 }

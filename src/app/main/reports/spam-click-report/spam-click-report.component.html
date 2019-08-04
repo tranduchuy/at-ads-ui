@@ -5,6 +5,7 @@
       BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">322-238-9982</span> TỪ <span
         style="color:black">31/05/2019</span>
       ĐẾN <span style="color: black">06/06/2019</span>
+
       <mat-form-field>
         <input matInput [matDatepicker]="picker2" placeholder="Ngày kết thúc" [(ngModel)]="dayTo">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -15,6 +16,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
+
     </div>
     <div class="clear"></div>
     <div class="div-pie-chart">
@@ -25,6 +27,7 @@
         hạn chế chiến dịch ảo
       </p>
       <div class="h-400 pie-chart">
+        
         <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
           [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
           [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" (select)="pieChart.onSelect($event)"
@@ -33,15 +36,27 @@
           <ng-template #tooltipTemplate let-model="model">
             <p style="color: #fff">
               {{model.name}}
+              <br>
+              {{model.value}}%
             </p>
           </ng-template>
 
         </ngx-charts-pie-chart>
 
-        <p style="text-align: center" class="click-total">
-          <span style="font-size: 18px">762</span>
+        <div style="text-align: center" class="click-total">
+          <span style="font-size: 20px">762</span>
           <br><span style="color: gray">click</span>
-        </p>
+        </div>
+
+        <div class="invalid-click-info">
+          <span style="color: #f44336;" class="click-number">50</span>
+          <span class="click-percentage">6.56%</span>
+        </div>
+
+        <div class="valid-click-info">
+          <span style="color:dodgerblue" class="click-number">712</span>
+          <span class="click-percentage">93.44%</span>
+        </div>
 
       </div>
     </div>

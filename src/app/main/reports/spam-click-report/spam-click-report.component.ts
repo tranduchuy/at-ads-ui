@@ -27,11 +27,11 @@ export class SpamClickReportComponent implements OnInit {
       },
       dataSource: [
         {
-          name: 'Click thật: 712 (93.44%)',
+          name: 'Click thật',
           value: 93.44
         },
         {
-          name: 'Click ảo: 50 (6.5%)',
+          name: 'Click ảo',
           value: 6.5
         },
       ],
