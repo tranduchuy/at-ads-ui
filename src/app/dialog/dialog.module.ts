@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FlexAlignDirective, FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatIconModule } from '@angular/material';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
@@ -17,7 +17,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
   imports: [
     MatButtonModule,
     MatDialogModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatIconModule
   ],
   entryComponents: [
     InfoDialogComponent,
