@@ -93,7 +93,8 @@ export class SpamClickReportComponent implements OnInit {
         layout: {
           padding: {
             left: 24,
-            right: 32
+            right: 32,
+            top: 20
           }
         },
         elements: {
@@ -218,6 +219,11 @@ export class SpamClickReportComponent implements OnInit {
 
   rightTableColumns = ['order', 'time', 'phone', 'network'];
   rightTable = [
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
     {
       time: '19:40 06/06',
       phone: '0908xxx191',

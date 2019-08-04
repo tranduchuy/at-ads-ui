@@ -1,12 +1,12 @@
 <div class="container">
 
   <div class="section">
-    <p class="title1">
+    <div class="title1 title2">
       BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">322-238-9982</span> TỪ <span
-        style="color: black">31/05/2019</span>
+        style="color:black">31/05/2019</span>
       ĐẾN <span style="color: black">06/06/2019</span>
       <mat-form-field>
-        <input matInput [matDatepicker]="picke2r" placeholder="Ngày kết thúc" [(ngModel)]="dayTo">
+        <input matInput [matDatepicker]="picker2" placeholder="Ngày kết thúc" [(ngModel)]="dayTo">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
@@ -15,7 +15,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
-    </p>
+    </div>
     <div class="clear"></div>
     <div class="div-pie-chart">
       <p style="text-align: center">
@@ -30,13 +30,11 @@
           [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" (select)="pieChart.onSelect($event)"
           [labelFormatting]="pieChart.setLabelFormatting">
 
-          <!-- <ng-template #tooltipTemplate let-model="model">
+          <ng-template #tooltipTemplate let-model="model">
             <p style="color: #fff">
               {{model.name}}
-              <br>{{model.value}}%
-              <br>{{model.times}}
             </p>
-          </ng-template> -->
+          </ng-template>
 
         </ngx-charts-pie-chart>
 
@@ -44,7 +42,7 @@
           <span style="font-size: 18px">762</span>
           <br><span style="color: gray">click</span>
         </p>
-        
+
       </div>
     </div>
   </div>
