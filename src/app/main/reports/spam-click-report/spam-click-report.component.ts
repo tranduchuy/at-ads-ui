@@ -1,21 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment'
+import { SessionService } from 'app/shared/services/session.service';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 @Component({
   selector: 'app-spam-click-report',
   templateUrl: './spam-click-report.component.html',
   styleUrls: ['./spam-click-report.component.scss'],
 })
-export class SpamClickReportComponent implements OnInit {
+export class SpamClickReportComponent extends PageBaseComponent implements OnInit {
 
   pieChart: any = {};
   lineChart: any = {};
 
-  dayFrom = new Date();
-  dayTo = new Date();
+  selectedDateRange: any = {
+    start: moment().subtract(6, 'days'),
+    end: moment()
+  }
+
+  dateRangeOptions: any = {
+    'Hôm nay': [moment(), moment()],
+    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    '7 ngày trước': [moment().subtract(6, 'days'), moment()],
+    '30 ngày trước': [moment().subtract(29, 'days'), moment()],
+    'Tháng này': [moment().startOf('month'), moment().endOf('month')],
+    'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+  }
 
   constructor(
-
+    private _sessionService: SessionService
   ) {
+
+    super();
+
     this.pieChart = {
       legend: false,
       explodeSlices: false,
@@ -27,11 +44,11 @@ export class SpamClickReportComponent implements OnInit {
       },
       dataSource: [
         {
-          name: 'Click thật',
+          name: 'Click thật: 712',
           value: 93.44
         },
         {
-          name: 'Click ảo',
+          name: 'Click ảo: 50',
           value: 6.5
         },
       ],
@@ -48,19 +65,19 @@ export class SpamClickReportComponent implements OnInit {
       datasets: {
         report: [
           {
-            label: 'Click hợp lệ',
-            data: [141, 176, 40, 99, 114, 72, 70],
+            label: 'Hợp lệ',
+            data: [141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70, 141, 176, 40, 99, 114, 72, 70],
             fill: 'start'
 
           },
           {
-            label: 'Click không hợp lệ',
-            data: [11, 14, 1, 12, 4, 4, 4],
+            label: 'Không hợp lệ',
+            data: [11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4, 11, 14, 1, 12, 4, 4, 4],
             fill: 'start'
           }
         ],
       },
-      labels: ['31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06'],
+      labels: ['31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06', '06/06'],
       colors: [
         {
           borderColor: '#35afea',
@@ -100,32 +117,51 @@ export class SpamClickReportComponent implements OnInit {
         elements: {
           point: {
             radius: 4,
-            borderWidth: 2,
+            borderWstatusth: 2,
             hoverRadius: 4,
-            hoverBorderWidth: 2
+            hoverBorderWstatusth: 2
           },
           line: {
             tension: 0
           }
         },
         scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: true
-              },
-              ticks: {
-                fontColor: 'rgba(0,0,0,0.54)'
-              }
-            }
-          ],
+          // xAxes: [
+          //   {
+          //     grstatusLines: {
+          //       display: true
+          //     },
+          //     ticks: {
+          //       fontColor: 'rgba(0,0,0,0.54)'
+          //     }
+          //   }
+          // ],
+          // yAxes: [
+          //   {
+          //     grstatusLines: {
+          //       tickMarkLength: 180
+          //     },
+          //     ticks: {
+          //       stepSize: 30
+          //     }
+          //   }
+          // ]
+
+          xAxes: [{}],
           yAxes: [
             {
-              gridLines: {
-                tickMarkLength: 180
-              },
+              status: 'y-axis-0',
+              position: 'left',
               ticks: {
                 stepSize: 30
+              }
+            },
+            {
+              status: 'y-axis-1',
+              position: 'left',
+              display: false,
+              grstatusLines: {
+                tickMarkLength: 180
               }
             }
           ]
@@ -141,13 +177,37 @@ export class SpamClickReportComponent implements OnInit {
     //this._registerCustomChartJSPlugin();
   };
 
-  leftTableColumns = ['time', 'ip', 'click', 'id', 'keyword', 'location'];
+  leftTableColumns = ['time', 'ip', 'click', 'status', 'keyword', 'location'];
   leftTable = [
     {
       time: '20:27 06/06',
       ip: '192.168.1.1',
       click: 3,
-      id: 'Đã chặn',
+      status: 'Đã chặn',
+      keyword: '[Robot kiểm tra]',
+      location: 'Ho Chi Minh City'
+    },
+    {
+      time: '20:27 06/06',
+      ip: '192.168.1.2',
+      click: 3,
+      status: 'Hợp lệ',
+      keyword: '[Robot kiểm tra]',
+      location: 'Ho Chi Minh City'
+    },
+    {
+      time: '20:27 06/06',
+      ip: '192.168.1.3',
+      click: 3,
+      status: 'Đã chặn',
+      keyword: '[Robot kiểm tra]',
+      location: 'Ho Chi Minh City'
+    },
+    {
+      time: '20:27 06/06',
+      ip: '192.168.1.4',
+      click: 3,
+      status: 'Hợp lệ',
       keyword: '[Robot kiểm tra]',
       location: 'Ho Chi Minh City'
     },
@@ -155,7 +215,7 @@ export class SpamClickReportComponent implements OnInit {
       time: '20:27 06/06',
       ip: '192.168.1.1',
       click: 3,
-      id: 'Đã chặn',
+      status: 'Đã chặn',
       keyword: '[Robot kiểm tra]',
       location: 'Ho Chi Minh City'
     },
@@ -163,7 +223,7 @@ export class SpamClickReportComponent implements OnInit {
       time: '20:27 06/06',
       ip: '192.168.1.1',
       click: 3,
-      id: 'Đã chặn',
+      status: 'Đã chặn',
       keyword: '[Robot kiểm tra]',
       location: 'Ho Chi Minh City'
     },
@@ -171,7 +231,7 @@ export class SpamClickReportComponent implements OnInit {
       time: '20:27 06/06',
       ip: '192.168.1.1',
       click: 3,
-      id: 'Đã chặn',
+      status: 'Đã chặn',
       keyword: '[Robot kiểm tra]',
       location: 'Ho Chi Minh City'
     },
@@ -179,7 +239,7 @@ export class SpamClickReportComponent implements OnInit {
       time: '20:27 06/06',
       ip: '192.168.1.1',
       click: 3,
-      id: 'Đã chặn',
+      status: 'Đã chặn',
       keyword: '[Robot kiểm tra]',
       location: 'Ho Chi Minh City'
     },
@@ -187,31 +247,7 @@ export class SpamClickReportComponent implements OnInit {
       time: '20:27 06/06',
       ip: '192.168.1.1',
       click: 3,
-      id: 'Đã chặn',
-      keyword: '[Robot kiểm tra]',
-      location: 'Ho Chi Minh City'
-    },
-    {
-      time: '20:27 06/06',
-      ip: '192.168.1.1',
-      click: 3,
-      id: 'Đã chặn',
-      keyword: '[Robot kiểm tra]',
-      location: 'Ho Chi Minh City'
-    },
-    {
-      time: '20:27 06/06',
-      ip: '192.168.1.1',
-      click: 3,
-      id: 'Đã chặn',
-      keyword: '[Robot kiểm tra]',
-      location: 'Ho Chi Minh City'
-    },
-    {
-      time: '20:27 06/06',
-      ip: '192.168.1.1',
-      click: 3,
-      id: 'Đã chặn',
+      status: 'Đã chặn',
       keyword: '[Robot kiểm tra]',
       location: 'Ho Chi Minh City'
     },
@@ -268,7 +304,7 @@ export class SpamClickReportComponent implements OnInit {
 
   ngOnInit() { }
 
-  private _registerCustomChartJSPlugin(): void {
+  private _registerCustomChartJSPlugin() {
     (window as any).Chart.plugins.register({
       afterDatasetsDraw: function (chart, easing): any {
         // Only activate the plugin if it's made available
@@ -285,7 +321,7 @@ export class SpamClickReportComponent implements OnInit {
 
         chart.data.datasets.forEach(function (dataset, i): any {
           const meta = chart.getDatasetMeta(i);
-          if (!meta.hidden) {
+          if (!meta.hstatusden) {
             meta.data.forEach(function (element, index): any {
 
               // Draw the text in black, with the specified font
@@ -300,7 +336,7 @@ export class SpamClickReportComponent implements OnInit {
 
               // Make sure alignment settings are correct
               ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
+              ctx.textBaseline = 'mstatusdle';
               const padding = 15;
               const startY = 24;
               const position = element.tooltipPosition();

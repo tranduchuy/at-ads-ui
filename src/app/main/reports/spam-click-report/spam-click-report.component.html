@@ -1,33 +1,39 @@
 <div class="container">
 
   <div class="section">
-    <div class="title1 title2">
-      BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">322-238-9982</span> TỪ <span
-        style="color:black">31/05/2019</span>
-      ĐẾN <span style="color: black">06/06/2019</span>
+    <div class="title1 pie-chart-report-title">
+      <div class="title2">
+        BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">{{_sessionService.activeAdsAccountId}}</span>
+        TỪ <span style="color:black" [(ngModel)]="selectedDateRange"
+          ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span>
+        ĐẾN <span style="color: black" [(ngModel)]="selectedDateRange"
+          ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span>
+      </div>
 
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker2" placeholder="Ngày kết thúc" [(ngModel)]="dayTo">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
+      <mat-form-field class="datePicker">
+        <input type="text" ngxDaterangepickerMd matInput placeholder="Ngày thống kê" readonly [locale]="{
+                 format: 'DD/MM/YYYY',
+                 separator: ' Đến ',
+                 applyLabel: 'Áp dụng',
+                 cancelLabel: 'Đóng'
+               }" [(ngModel)]="selectedDateRange" ngDefaultControl startKey="start" endKey="end" />
       </mat-form-field>
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker1" placeholder="Ngày bắt đầu" [(ngModel)]="dayFrom">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
+
+      <div class="clear"></div>
 
     </div>
-    <div class="clear"></div>
     <div class="div-pie-chart">
       <p style="text-align: center">
-        Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold">6 ngày</span> từ <span
-          style="color:dodgerblue; font-weight: bold">31/05/2019</span> đến ngày <span
-          style="color: dodgerblue; font-weight: bold">06/06/2019</span> bằng việc
+        Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold" [(ngModel)]="selectedDateRange"
+          ngDefaultControl>{{this.selectedDateRange.end.diff(this.selectedDateRange.start, 'days') + 1}} ngày</span>
+        từ <span style="color:dodgerblue; font-weight: bold" [(ngModel)]="selectedDateRange"
+          ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
+        ngày <span style="color: dodgerblue; font-weight: bold" [(ngModel)]="selectedDateRange"
+          ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
         hạn chế chiến dịch ảo
       </p>
       <div class="h-400 pie-chart">
-        
+
         <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
           [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
           [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" (select)="pieChart.onSelect($event)"
@@ -35,8 +41,6 @@
 
           <ng-template #tooltipTemplate let-model="model">
             <p style="color: #fff">
-              {{model.name}}
-              <br>
               {{model.value}}%
             </p>
           </ng-template>
@@ -44,18 +48,8 @@
         </ngx-charts-pie-chart>
 
         <div style="text-align: center" class="click-total">
-          <span style="font-size: 20px">762</span>
+          <span class="click-number">762</span>
           <br><span style="color: gray">click</span>
-        </div>
-
-        <div class="invalid-click-info">
-          <span style="color: #f44336;" class="click-number">50</span>
-          <span class="click-percentage">6.56%</span>
-        </div>
-
-        <div class="valid-click-info">
-          <span style="color:dodgerblue" class="click-number">712</span>
-          <span class="click-percentage">93.44%</span>
         </div>
 
       </div>
@@ -76,9 +70,9 @@
 
   </div>
 
-  <div class="section tables" fxLayout="row" fxLayout.xs="column">
+  <div class="section tables">
 
-    <div class="left" fxFlex="50">
+    <div class="left">
       <div class="title1" style="text-align: center">
         BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN
       </div>
@@ -92,7 +86,16 @@
 
           <ng-container matColumnDef="ip">
             <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.status === 'Đã chặn'" style="color: crimson; margin-right: 2px">not_interested
+              </mat-icon>
+              <mat-icon *ngIf="element.status === 'Hợp lệ'" style="color:silver; margin-right: 2px">not_interested
+              </mat-icon>
+              <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
+                style="font-weight: bold">
+                {{element.ip}}
+              </a>
+            </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="click">
@@ -100,9 +103,14 @@
             <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="id">
+          <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            <mat-cell *matCellDef="let element">
+              <span *ngIf="element.status === 'Đã chặn'"
+                style="color: crimson; font-weight: bold">{{element.status}}</span>
+              <span *ngIf="element.status === 'Hợp lệ'"
+                style="color: dodgerblue; font-weight: bold">{{element.status}}</span>
+            </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="keyword">
@@ -120,12 +128,12 @@
         </mat-table>
       </div>
 
-      <button mat-raised-button color="accent" class="table-button" style="background-color:#4bb453">BÁO CÁO TOÀN BỘ
-        IP</button>
+      <!-- <button mat-raised-button color="accent" class="table-button" style="background-color:#4bb453">BÁO CÁO TOÀN BỘ
+        IP</button> -->
 
     </div>
 
-    <div class="right" fxFlex="50">
+    <!-- <div class="right" fxFlex="50">
       <div class="title1" style="text-align: center">
         KHÁCH CÓ THÔNG TIN (SỐ DI ĐỘNG)
       </div>
@@ -159,7 +167,7 @@
 
       <button mat-raised-button color="accent" class="table-button">TOÀN BỘ KHÁCH HÀNG</button>
 
-    </div>
+    </div> -->
 
   </div>
 

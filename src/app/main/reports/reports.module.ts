@@ -24,9 +24,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { ChartsModule } from 'ng2-charts';
 import { MatRadioModule, MatDatepickerModule } from '@angular/material';
+import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
+import { IpDetailComponent } from './ip-detail/ip-detail.component'
 
 @NgModule({
-  declarations: [SpamClickReportComponent],
+  declarations: [SpamClickReportComponent, IpDetailComponent],
   imports: [
 
     MatButtonModule,
@@ -48,9 +50,10 @@ import { MatRadioModule, MatDatepickerModule } from '@angular/material';
     NgxChartsModule,
     FuseWidgetModule,
     ChartsModule,
+    NgxDaterangepickerMd,
 
     FuseSharedModule,
-    
+
     ReportsRoutingModule
   ]
 })

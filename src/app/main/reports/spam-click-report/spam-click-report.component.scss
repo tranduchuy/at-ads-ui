@@ -11,9 +11,8 @@
     padding-bottom: 30px;
     background-color: white;
 
-    mat-form-field {
-      margin-left: 24px;
-      margin-top: -12px;
+    .datePicker {
+      width: 250px;
       float: right;
     }
 
@@ -44,8 +43,7 @@
     }
 
     .click-number {
-      margin-right: 5px;
-      font-weight: bold;
+      font-size: 20px;
     }
 
     .click-percentage {
@@ -64,7 +62,13 @@
       font-weight: bold;
     }
 
+    .pie-chart-report-title{
+      padding-bottom: 0;
+    }
+
     .title2 {
+      float: left;
+      padding-top: 15px;
     }
 
     .div-pie-chart {
@@ -100,8 +104,13 @@
     padding-bottom: 40px;
   }
 
+  .left {
+    margin: 0;
+    border-radius: 0;
+  }
+
   .tables {
-    padding-bottom: 10px;
+    padding: 0;
 
     mat-table {
       box-shadow: none;
@@ -111,6 +120,12 @@
       }
       mat-row:hover {
         background-color: #eee;
+      }
+
+      mat-row,
+      mat-header-row {
+        min-width: 1000px;
+        width: 100%;
       }
     }
   }
@@ -134,6 +149,47 @@
 
     .pie-label {
       font-size: 20px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 15px;
+    padding-top: 0;
+
+    .section {
+      padding-bottom: 0;
+
+      .datePicker {
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      .title1 {
+        font-size: 14px;
+      }
+
+      .click-number {
+        font-size: 14px;
+      }
+
+      .div-pie-chart {
+        width: 100%;
+        padding-top: 10px;
+      }
+    }
+
+    .div-line-chart {
+      padding: 0;
+    }
+
+    :host ::ng-deep .pie-chart {
+      margin: 0;
+
+      .pie-label {
+        font-size: 12px !important;
+      }
     }
   }
 }
