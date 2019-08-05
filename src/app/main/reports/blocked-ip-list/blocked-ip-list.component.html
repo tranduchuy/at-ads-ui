@@ -1,0 +1,51 @@
+<div class="container">
+  <p class="title1">
+    BÁO CÁO IP ĐANG CHẠY QUẢNG CÁO
+  </p>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef> # </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="task">
+        <th mat-header-cell *matHeaderCellDef> Tác vụ </th>
+        <td mat-cell *matCellDef="let element"> {{element.task}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="ip">
+        <th mat-header-cell *matHeaderCellDef> IP </th>
+        <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="network">
+        <th mat-header-cell *matHeaderCellDef> Mạng </th>
+        <td mat-cell *matCellDef="let element"> {{element.network}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="blockingOver">
+        <th mat-header-cell *matHeaderCellDef> Khóa trên </th>
+        <td mat-cell *matCellDef="let element"> {{element.blockingOver}} chiến dịch </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="campaign">
+          <th mat-header-cell *matHeaderCellDef> Chiến dịch </th>
+          <td mat-cell *matCellDef="let element"> {{element.campaign}} </td>
+        </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
