@@ -67,10 +67,8 @@ export class ValidatorsService {
   }
 
   public checkDomain(control: AbstractControl): any {
-    const regex = new RegExp('^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\#[-a-z\\d_]*)?$', 'i');
+    const regex = new RegExp(/(https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9])(:?\d*)\/?([a-z_\/0-9\-#.]*)\??([a-z_\/0-9\-#=&]*)/g);
+
     if (!regex.test(control.value)) {
       return { [ErrorNames.invalidDomain[0]]: true };
     }
