@@ -23,10 +23,10 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.component';
 
 import { AddTrackingTagsService } from './add-tracking-tags.service';
-
+import { TrackingWebsiteComponent } from './tracking-website/tracking-website.component';
 
 @NgModule({
-  declarations: [SelectCampaignsComponent],
+  declarations: [SelectCampaignsComponent, TrackingWebsiteComponent],
   imports: [
 
     MatButtonModule,
