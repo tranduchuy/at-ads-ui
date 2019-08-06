@@ -3,49 +3,56 @@
     BÁO CÁO IP ĐANG CHẠY QUẢNG CÁO
   </p>
 
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+  <div class="mat-elevation-z8 table-wrapper">
+    <mat-table [dataSource]="dataSource">
 
       <!-- Position Column -->
       <ng-container matColumnDef="order">
-        <th mat-header-cell *matHeaderCellDef> # </th>
-        <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index"> {{i+1}} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="task">
-        <th mat-header-cell *matHeaderCellDef> Tác vụ </th>
-        <td mat-cell *matCellDef="let element"> {{element.task}} </td>
+        <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-icon style="color: crimson">lock</mat-icon>
+        </mat-cell>
       </ng-container>
 
       <!-- Weight Column -->
       <ng-container matColumnDef="ip">
-        <th mat-header-cell *matHeaderCellDef> IP </th>
-        <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
+        <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="network">
-        <th mat-header-cell *matHeaderCellDef> Mạng </th>
-        <td mat-cell *matCellDef="let element"> {{element.network}} </td>
+        <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span *ngIf="element.network === 'MOBIFONE'" style="color: #4bb543; font-weight: bold">{{element.network}}</span>
+          <span *ngIf="element.network === 'VNPT'" style="color: orange; font-weight: bold">{{element.network}}</span>
+          <span *ngIf="element.network === 'SCTV'" style="color: gold; font-weight: bold">{{element.network}}</span>
+          <span *ngIf="element.network === 'FPT'" style="color: crimson; font-weight: bold">{{element.network}}</span>
+        </mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="blockingOver">
-        <th mat-header-cell *matHeaderCellDef> Khóa trên </th>
-        <td mat-cell *matCellDef="let element"> {{element.blockingOver}} chiến dịch </td>
+        <mat-header-cell *matHeaderCellDef> Khóa trên </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.blockingOver}} chiến dịch </mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="campaign">
-          <th mat-header-cell *matHeaderCellDef> Chiến dịch </th>
-          <td mat-cell *matCellDef="let element"> {{element.campaign}} </td>
-        </ng-container>
+        <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.campaign}} </mat-cell>
+      </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
   </div>
 </div>

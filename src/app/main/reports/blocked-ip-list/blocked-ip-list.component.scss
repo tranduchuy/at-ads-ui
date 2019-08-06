@@ -1,6 +1,5 @@
 .container {
   padding: 0px 30px 15px 30px;
-
   width: 100%;
 
   .title1 {
@@ -9,5 +8,41 @@
     color: gray;
     font-size: 16px;
     font-weight: bold;
+
+    box-shadow: 2px 2px 5px silver;
+    text-align: center;
+  }
+
+  .table-wrapper {
+    margin-top: -14px;
+    height: 520px;
+    overflow: auto;
+
+    mat-table {
+      box-shadow: none;
+    }
+
+    mat-header-cell:nth-child(1),
+    mat-cell:nth-child(1) {
+      flex: 0 0 5%;
+    }
+
+    mat-header-cell:nth-child(2),
+    mat-cell:nth-child(2) {
+      flex: 0 0 10%;
+      display: flex;
+      justify-content: center;
+    }
+
+    mat-header-cell:nth-child(6),
+    mat-cell:nth-child(6) {
+      flex: 0 0 45%;
+    }
+
+    mat-header-row,
+    mat-row {
+      min-width: 1000px;
+      width: 100%;
+    }
   }
 }

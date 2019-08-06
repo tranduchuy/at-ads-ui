@@ -37,7 +37,7 @@ export const navigation: FuseNavigation[] = [
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'block',
-        url: '**'
+        url: '/bao-cao/danh-sach-ip-da-chan'
       },
     ]
   },

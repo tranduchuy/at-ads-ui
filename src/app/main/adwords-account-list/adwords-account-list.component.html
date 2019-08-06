@@ -52,14 +52,15 @@
               <li *ngFor="let website of element.websites, let i = index" fxLayout="row">
                 <p style="width: 200px"><span>{{i+1}}</span>. {{website.domain}}</p>
                 <div>
-                  <button mat-icon-button color="accent" matTooltip="Gắn tracking chiến dịch tài khoản"
+                  <button mat-icon-button color="accent" matTooltip="Gắn mã tracking"
                     style="color: red">
                     <mat-icon>code</mat-icon>
                   </button>
-                  <button (click)="openRemoveWebsiteDialog(website.code)" mat-icon-button color="accent" matTooltip="Ngắt kết nối Adwords cho website này">
+                  <button (click)="openRemoveWebsiteDialog(website.code)" mat-icon-button color="accent"
+                    matTooltip="Ngắt kết nối AdWords">
                     <mat-icon>delete</mat-icon>
                   </button>
-                  <button mat-icon-button color="accent" matTooltip="Kết nối AdWords cho website này">
+                  <button mat-icon-button color="accent" matTooltip="Kết nối AdWords">
                     <mat-icon>add_circle_outline</mat-icon>
                   </button>
                 </div>
@@ -154,5 +155,5 @@
     </div>
 
   </form>
-  
+
 </div>

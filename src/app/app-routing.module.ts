@@ -46,7 +46,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'bao-cao',
-    canActivate: [MainGuardService],
+    canActivate: [MainGuardService, AccountAcceptanceGuardService],
     loadChildren: './main/reports/reports.module#ReportsModule'
   },
   {

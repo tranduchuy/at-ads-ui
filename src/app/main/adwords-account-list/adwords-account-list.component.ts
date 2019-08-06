@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EditableFormBaseComponent } from '../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { ILoginSuccess } from '../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -74,7 +73,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     this._fuseProgressiveBarService.show();
     const sub = this._adwordsAccountListService.getAccounts().subscribe(res => {
       this.accounts = res.data.accounts;
-
+      
       if (this.accounts.length > 0) {
         for (const item of this.accounts) {
           item.websites = [];

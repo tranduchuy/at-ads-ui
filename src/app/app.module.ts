@@ -96,7 +96,7 @@ export function init_app(appInitService: AppInitService): any {
     SessionService,
     ValidatorsService,
     AppInitService,
-    { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true }
+    { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true },
   ],
   bootstrap: [
     AppComponent

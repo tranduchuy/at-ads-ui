@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { EditableFormBaseComponent } from '../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { ILoginSuccess } from '../../authentication/login/models/i-login-success';
@@ -10,8 +10,6 @@ import { Validators } from '@angular/forms';
 import { WebsiteManagementService } from './website-management.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { IError } from 'app/dialog/models/i-error';
 
 export interface Website {
   domain: string;

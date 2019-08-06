@@ -63,6 +63,10 @@
       box-shadow: none;
     }
 
+    mat-row{
+      transition: 0.2s;
+    }
+
     mat-row:hover {
       background-color: #eeee;
     }
