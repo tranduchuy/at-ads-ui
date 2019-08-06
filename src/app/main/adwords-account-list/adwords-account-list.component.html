@@ -34,6 +34,9 @@
                 <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan">
                   <mat-icon>notifications</mat-icon>
                 </button>
+                <a [routerLink]="['/gan-tracking/website', element.adsId,element.key]" mat-icon-button color="accent" matTooltip="Gắn mã tracking website" style="color: red">
+                  <mat-icon>code</mat-icon>
+                </a>
                 <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
                   <mat-icon>edit</mat-icon>
                 </button>
@@ -52,17 +55,13 @@
               <li *ngFor="let website of element.websites, let i = index" fxLayout="row">
                 <p style="width: 200px"><span>{{i+1}}</span>. {{website.domain}}</p>
                 <div>
-                  <button mat-icon-button color="accent" matTooltip="Gắn mã tracking"
-                    style="color: red">
-                    <mat-icon>code</mat-icon>
-                  </button>
                   <button (click)="openRemoveWebsiteDialog(website.code)" mat-icon-button color="accent"
-                    matTooltip="Ngắt kết nối AdWords">
+                    matTooltip="Xóa website">
                     <mat-icon>delete</mat-icon>
                   </button>
-                  <button mat-icon-button color="accent" matTooltip="Kết nối AdWords">
+                  <!-- <button mat-icon-button color="accent" matTooltip="Kết nối AdWords">
                     <mat-icon>add_circle_outline</mat-icon>
-                  </button>
+                  </button> -->
                 </div>
               </li>
               <li>

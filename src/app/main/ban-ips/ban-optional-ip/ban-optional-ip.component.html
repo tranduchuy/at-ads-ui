@@ -1,7 +1,8 @@
 <div class="container">
 
   <div class="title1">
-    CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP - TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
+    CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP - TÀI KHOẢN <span
+      class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
   <div class="title2">
@@ -57,31 +58,31 @@
   <p class="table-title"><b>Danh Sách IP Đã Chặn Gần Đây</b></p>
 
   <div class="table-wrapper">
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Position Column -->
+
+    <mat-table [dataSource]="blockedIPs" class="mat-elevation-z8">
+
       <ng-container matColumnDef="order">
         <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-        <mat-cell *matCellDef="let element"> <span [class.new]="element.order === 'MỚI'">{{element.order}}</span>
+        <mat-cell *matCellDef="let element; let i = index"> <span [class.new]="element.order === 'MỚI'">{{i+1}}</span>
         </mat-cell>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="ip">
         <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          <span style="color: dodgerblue; font-weight: bold">{{element}}</span>
+        </mat-cell>
       </ng-container>
 
-      <!-- Weight Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <p class="status">
-            {{element.status}}
+            Chặn thành công <span style="color: gray; font-weight: bold">{{element}}</span> vào tổng <span style="color: crimson; font-weight: bold">20</span> chiến dịch.
           </p>
         </mat-cell>
       </ng-container>
 
-      <!-- Symbol Column -->
       <ng-container matColumnDef="task">
         <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
         <mat-cell *matCellDef>
@@ -94,7 +95,7 @@
       <ng-container matColumnDef="unlockButton">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef>
-          <button mat-icon-button color="accent" matTooltip="Nhấn để mở khóa" class="unlock-button">
+          <button mat-icon-button color="accent" matTooltip="Nhấn để mở chặn" class="unlock-button">
             <mat-icon>lock_open</mat-icon>
           </button>
         </mat-cell>
@@ -103,5 +104,6 @@
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+
   </div>
 </div>

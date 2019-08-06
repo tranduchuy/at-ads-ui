@@ -132,4 +132,10 @@ export class BanIpsService {
   public checkAccountAcceptance(params: ICheckAccountAcceptance): Observable<any>{
     return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
+
+  public getBlockedCustomIPs():Observable<any>{
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    const url = API.AdwordsAccount.getBlockedCustomIPs.replace('{account_id}', activeAccountId);
+    return this._http.get(url);
+  }
 }

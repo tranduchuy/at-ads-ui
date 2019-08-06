@@ -68,7 +68,7 @@ export class FuseNavigationComponent implements OnInit {
           title: 'Gắn Tracking Chiến Dịch',
           type: 'item',
           icon: 'location_searching',
-          url: '/gan-tracking/chon-chien-dich'
+          url: '/gan-tracking/chien-dich'
         }
       ]
     }

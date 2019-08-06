@@ -9,41 +9,6 @@ import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
 
-
-export interface BannedIP {
-  order: string;
-  ip: string;
-  status: string;
-}
-
-const ELEMENT_DATA: BannedIP[] = [
-  {
-    order: 'MỚI',
-    ip: '192.168.1.1',
-    status: 'Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch. Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch.Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch',
-  },
-  {
-    order: 'MỚI',
-    ip: '192.168.1.1',
-    status: 'Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch. Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch.Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch',
-  },
-  {
-    order: 'MỚI',
-    ip: '192.168.1.1',
-    status: 'Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch. Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch.Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch',
-  },
-  {
-    order: 'MỚI',
-    ip: '192.168.1.1',
-    status: 'Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch. Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch.Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch',
-  },
-  {
-    order: 'MỚI',
-    ip: '192.168.1.1',
-    status: 'Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch. Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch.Chặn thành công 192.168.1.1 vào tổng 20 chiến dịch',
-  },
-];
-
 @Component({
   selector: 'app-ban-optional-ip',
   templateUrl: './ban-optional-ip.component.html',
@@ -52,7 +17,7 @@ const ELEMENT_DATA: BannedIP[] = [
 export class BanOptionalIPComponent extends EditableFormBaseComponent implements OnInit {
 
   displayedColumns: string[] = ['order', 'ip', 'status', 'task', 'unlockButton'];
-  dataSource = ELEMENT_DATA;
+  blockedIPs: string[] = [];
 
   constructor(
     private _banIpsService: BanIpsService,
@@ -66,6 +31,29 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
   ngOnInit(): void {
     this.initForm();
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
+          this.getBlockedCustomIPs();
+        }
+      });
+    this.subscriptions.push(sub);
+  }
+
+  getBlockedCustomIPs() {
+    this._fuseProgressiveBarService.show();
+    const sub = this._banIpsService.getBlockedCustomIPs()
+      .subscribe(res => {
+        this._fuseProgressiveBarService.hide();
+        this.blockedIPs = res.data.ips;
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.blockedIPs = [];
+        }
+      );
+    this.subscriptions.push(sub);
   }
 
   onSubmitForm(): void {
