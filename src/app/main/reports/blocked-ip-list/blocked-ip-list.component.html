@@ -16,7 +16,7 @@
       <ng-container matColumnDef="task">
         <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-icon style="color: crimson">lock</mat-icon>
+          <mat-icon style="color: crimson" matTooltip="Đã chặn">lock</mat-icon>
         </mat-cell>
       </ng-container>
 
@@ -30,10 +30,10 @@
       <ng-container matColumnDef="network">
         <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span *ngIf="element.network === 'MOBIFONE'" style="color: #4bb543; font-weight: bold">{{element.network}}</span>
-          <span *ngIf="element.network === 'VNPT'" style="color: orange; font-weight: bold">{{element.network}}</span>
-          <span *ngIf="element.network === 'SCTV'" style="color: gold; font-weight: bold">{{element.network}}</span>
-          <span *ngIf="element.network === 'FPT'" style="color: crimson; font-weight: bold">{{element.network}}</span>
+          <img *ngIf="element.network === 'MOBIFONE'" class="network-logo" src="https://brasol.vn/public/uploads/1521197514-brasol.vn-logo-mobifone-mobifone-logo.svg_.png" alt="">
+          <img *ngIf="element.network === 'VNPT'" class="network-logo" src="https://hanoivnpt.net/wp-content/uploads/2018/03/LOGVNPT-MOI.png" alt="">
+          <img *ngIf="element.network === 'SCTV'" class="network-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/SCTV_Logo.svg/1200px-SCTV_Logo.svg.png" alt="">
+          <img *ngIf="element.network === 'FPT'" style="height: 50px; width: 60px" src="http://hcm-fpt.com/uploads/fpttelecomhcm/images/Logo_FPT_Telecom_vuong_chim_1.png" alt="">
         </mat-cell>
       </ng-container>
 

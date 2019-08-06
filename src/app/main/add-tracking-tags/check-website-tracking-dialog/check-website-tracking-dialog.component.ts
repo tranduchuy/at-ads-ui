@@ -3,7 +3,6 @@ import { MatDialogRef } from '@angular/material';
 import { SessionService } from 'app/shared/services/session.service';
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
-import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
@@ -24,26 +23,24 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
     public _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
     private _fuseProgressBarService: FuseProgressBarService,
-    private _fuseSplashScreenService: FuseSplashScreenService,
     private _dialogService: DialogService
   ) {
     super();
   }
 
   ngOnInit() {
-    //this._fuseProgressBarService.show();
-    this._fuseSplashScreenService.show();
+    setTimeout(() => {
+      this._fuseProgressBarService.show();
+    }, 0);
     const sub = this._addTrackingTagsService.getWebsiteTrackingInfo(this.accountId)
       .subscribe(res => {
+        this._fuseProgressBarService.hide();
         this.websites = res.data.websites;
-        //this._fuseProgressBarService.hide();
-        this._fuseSplashScreenService.hide();
       },
         (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.websites = [];
-          //this._fuseProgressBarService.hide();
-          this._fuseSplashScreenService.hide();
         });
     this.subscriptions.push(sub);
   }

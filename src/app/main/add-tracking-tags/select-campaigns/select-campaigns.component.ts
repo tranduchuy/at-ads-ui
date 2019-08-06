@@ -26,11 +26,12 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   displayedColumns: string[] = ['order', 'name', 'tracking'];
   campaignList: Campaign[];
   selectedCampaigns: string[];
+  activatedAdsId: string;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
-    public _dialogService: DialogService,
-    public _sessionService: SessionService,
+    private _dialogService: DialogService,
+    private _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
     private _router: Router,
     private _fuseSlashScreenService: FuseSplashScreenService
@@ -41,13 +42,13 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   }
 
   ngOnInit() {
+    this.activatedAdsId = this._sessionService.activeAdsAccountId;
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
           this.getOriginalCampaigns();
         }
       });
-
     this.subscriptions.push(sub);
   }
 

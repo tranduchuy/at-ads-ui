@@ -50,28 +50,28 @@
     <mat-table [dataSource]="websites" class="mat-elevation-z8">
 
       <ng-container matColumnDef="order">
-        <mat-header-cell *matHeaderCellDef> STT </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
         <mat-cell *matCellDef="let i = index"> {{i + 1}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="website">
         <mat-header-cell *matHeaderCellDef> Website cần gắn tracking </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <a href="{{element.domain}}">{{element.domain}}</a>
+          <a href="{{element.domain}}" target="_blank">{{element.domain}}</a>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="tracking">
         <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
-        <mat-cell *matCellDef="let i = index">
-          <button *ngIf="i % 2 === 0" mat-stroked-button color="accent" matTooltip="Nhấn để hủy tracking">
+        <mat-cell *matCellDef="let element">
+          <button *ngIf="element.isTracking" mat-stroked-button color="accent">
             <mat-icon>check</mat-icon> Hoàn
             thành
           </button>
-          <button *ngIf="i % 2 !== 0" mat-stroked-button color="warn" matTooltip="Nhấn để tiến hành gắn tracking"
-            class="tracking-button">
+          <a *ngIf="!element.isTracking" mat-stroked-button matTooltip="Nhấn để tiến hành gắn tracking"
+            style="color: crimson; border: 0; padding-left: 0">
             <mat-icon>close</mat-icon> Chưa có
-          </button>
+          </a>
         </mat-cell>
       </ng-container>
 

@@ -30,7 +30,7 @@ export class AutoBlockingCellularNetworksComponent extends EditableFormBaseCompo
       value: 'vinafone'
     },
     {
-      text: 'Mạng VIETNAMMOBLE',
+      text: 'Mạng VIETNAMOBILE',
       value: 'vietnammobile'
     }
   ];

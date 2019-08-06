@@ -10,6 +10,7 @@ import { FuseNavigationService } from '../../../@fuse/components/navigation/navi
 import { SessionService } from 'app/shared/services/session.service';
 import { Router } from '@angular/router';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 
 @Component({
   selector: 'app-add-adwords-accounts',
@@ -20,6 +21,9 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   form;
   isConnected = false;
+  connectedAccountId: string;
+  _adsAccountIdPipe = new AdsAccountIdPipe();
+
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
@@ -37,7 +41,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   completeAccountConnection() {
-
     this._router.navigateByUrl('/gan-tracking/chien-dich');
   }
 
@@ -67,7 +70,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   initForm(): void {
     this.form = this.fb.group({
-      adWordId: [null,[Validators.required]]
+      adWordId: [null, [Validators.required]]
     });
   }
 

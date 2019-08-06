@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { ILoginSuccess } from '../../authentication/login/models/i-login-success';
@@ -94,12 +94,17 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   getWebsites() {
-    this.websites = [];
     this._fuseProgressiveBarService.show();
-    const sub = this._websiteManagementService.getWebsites(this.selectedAccountId).subscribe(res => {
-      this._fuseProgressiveBarService.hide();
-      this.websites = res.data.website;
-    });
+    const sub = this._websiteManagementService.getWebsiteTrackingInfo(this.selectedAccountId)
+      .subscribe(res => {
+        this._fuseProgressiveBarService.hide();
+        this.websites = res.data.websites;
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.websites = [];
+        });
     this.subscriptions.push(sub);
   }
 
