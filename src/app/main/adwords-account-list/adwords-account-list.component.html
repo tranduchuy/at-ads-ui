@@ -34,7 +34,9 @@
                 <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan">
                   <mat-icon>notifications</mat-icon>
                 </button>
-                <a *ngIf="element.websites.length > 0" [routerLink]="['/gan-tracking/website', element.adsId,element.key]" mat-icon-button color="accent" matTooltip="Gắn mã tracking website" style="color: red">
+                <a *ngIf="element.websites.length > 0"
+                  [routerLink]="['/gan-tracking/website', element.adsId,element.key]" mat-icon-button color="accent"
+                  matTooltip="Gắn mã tracking website" style="color: red">
                   <mat-icon>code</mat-icon>
                 </a>
                 <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
@@ -53,7 +55,10 @@
           <mat-cell *matCellDef="let element">
             <ul>
               <li *ngFor="let website of element.websites, let i = index" fxLayout="row">
-                <p style="width: 200px"><span>{{i+1}}</span>. {{website.domain}}</p>
+                <p style="width: 200px; padding-left: 5px">
+                  <span>{{i+1}}</span>. 
+                  <a href="{{website.domain}}">{{website.domain}}</a>
+                </p>
                 <div>
                   <button (click)="openRemoveWebsiteDialog(website.code)" mat-icon-button color="accent"
                     matTooltip="Xóa website">

@@ -56,7 +56,9 @@
 
       <ng-container matColumnDef="website">
         <mat-header-cell *matHeaderCellDef> Website cần gắn tracking </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.domain}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          <a href="{{element.domain}}">{{element.domain}}</a>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="tracking">
@@ -67,7 +69,9 @@
             thành
           </button>
           <button *ngIf="i % 2 !== 0" mat-stroked-button color="warn" matTooltip="Nhấn để tiến hành gắn tracking"
-            class="tracking-button"><mat-icon>close</mat-icon> Chưa có </button>
+            class="tracking-button">
+            <mat-icon>close</mat-icon> Chưa có
+          </button>
         </mat-cell>
       </ng-container>
 
