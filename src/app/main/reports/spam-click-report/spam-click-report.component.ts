@@ -28,7 +28,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   }
 
   constructor(
-    private _sessionService: SessionService
+    public _sessionService: SessionService
   ) {
 
     super();
