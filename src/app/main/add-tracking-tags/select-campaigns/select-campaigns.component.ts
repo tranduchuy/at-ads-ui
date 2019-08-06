@@ -30,7 +30,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _sessionService: SessionService,
+    public _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
     private _router: Router,
     private _fuseSlashScreenService: FuseSplashScreenService

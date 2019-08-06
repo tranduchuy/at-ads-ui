@@ -20,8 +20,8 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
   accountId: string;
 
   constructor(
-    private dialogRef: MatDialogRef<CheckWebsiteTrackingDialogComponent>,
-    private _sessionService: SessionService,
+    public dialogRef: MatDialogRef<CheckWebsiteTrackingDialogComponent>,
+    public _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _fuseSplashScreenService: FuseSplashScreenService,
