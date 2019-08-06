@@ -1,0 +1,27 @@
+<div mat-dialog-content style="width: 500px">
+  <div class="container">
+
+    <mat-table [dataSource]="websites" class="mat-elevation-z8">
+      <ng-container matColumnDef="website">
+        <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.domain}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tracking">
+        <mat-header-cell *matHeaderCellDef> Tracking </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.isTracking" style="color:#44b543">check</mat-icon>
+          <mat-icon *ngIf="!element.isTracking" style="color: silver">check</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </div>
+</div>
+<div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">
+  <button mat-raised-button color="basic" (click)="dialogRef.close(true)">Đóng
+  </button>
+</div>

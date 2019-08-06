@@ -12,11 +12,11 @@
 
   <div>
     <b>Bước 1:</b> Copy mã tracking
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2px" style="padding-top: 10px">
+    <div fxLayout="row" style="padding-top: 10px">
       <input class="key" type="text" #inputKey
         value='&lt;script type="text/javascript" src="http://159.65.11.195:3001/static/tracking.js?key={{key}}"&gt;&lt;/script&gt;'
         readonly>
-      <button mat-stroked-button (click)="copyKey(inputKey.value)">copy</button>
+      <button mat-stroked-button (click)="copyKey(inputKey.value)" class="copy-button">copy</button>
     </div>
     <p style="padding-top: 20px">
       <b>Bước 2:</b> Mở website <a href="https://hecta.vn/">hecta.vn</a> và gắn mã vào trong thẻ <span
@@ -25,11 +25,11 @@
     <div style="padding-top: 20px">
       <b>Bước 3:</b> Kiểm tra mã
       <p>
-        <button mat-raised-button color="accent" style="border-radius: 0">
+        <button mat-raised-button color="accent" style="border-radius: 0" (click)="checkWebsiteTracking()">
           BẤM ĐỂ KIỂM TRA MÃ
         </button>
       </p>
     </div>
   </div>
-
+  
 </div>

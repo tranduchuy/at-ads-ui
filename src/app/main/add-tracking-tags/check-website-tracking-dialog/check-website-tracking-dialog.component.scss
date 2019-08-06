@@ -1,0 +1,16 @@
+.container {
+  height: 400px;
+
+  mat-table {
+    mat-header-cell:nth-child(1),
+    mat-cell:nth-child(1) {
+      flex: 0 0 80%;
+    }
+
+    mat-header-cell:nth-child(2),
+    mat-cell:nth-child(2) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

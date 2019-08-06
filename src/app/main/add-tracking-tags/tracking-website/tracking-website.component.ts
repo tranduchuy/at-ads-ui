@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { SessionService } from 'app/shared/services/session.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { CheckWebsiteTrackingDialogComponent } from '../check-website-tracking-dialog/check-website-tracking-dialog.component';
 
 @Component({
   selector: 'app-tracking-website',
@@ -19,7 +21,8 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    //private _sessionService: SessionService
+    //private _sessionService: SessionService,
+    private _matDialog: MatDialog
   ) {
     super();
   }
@@ -44,4 +47,8 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
     document.execCommand('copy');
   }
 
+  checkWebsiteTracking(){
+    const dialogRef = this._matDialog.open(CheckWebsiteTrackingDialogComponent);
+    return dialogRef.afterClosed();
+  }
 }

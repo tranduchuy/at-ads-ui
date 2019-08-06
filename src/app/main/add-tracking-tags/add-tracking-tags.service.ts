@@ -37,5 +37,11 @@ export class AddTrackingTagsService {
   public checkAccountAcceptance(params: ICheckAccountAcceptance): Observable<any>{
     return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
+
+  public getWebsiteTrackingInfo(): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    const url =  API.Website.getWebsiteTrackingInfo.replace('{account_id}', activeAccountId);
+    return this._http.get(url);
+  }
   
 }

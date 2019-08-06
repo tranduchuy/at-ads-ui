@@ -24,6 +24,7 @@ import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.co
 
 import { AddTrackingTagsService } from './add-tracking-tags.service';
 import { TrackingWebsiteComponent } from './tracking-website/tracking-website.component';
+import { CheckWebsiteTrackingDialogComponent } from './check-website-tracking-dialog/check-website-tracking-dialog.component';
 
 @NgModule({
   declarations: [SelectCampaignsComponent, TrackingWebsiteComponent],
@@ -48,6 +49,12 @@ import { TrackingWebsiteComponent } from './tracking-website/tracking-website.co
     FuseSharedModule,
 
     AddTrackingTagsRoutingModule
+  ],
+  entryComponents: [
+    // CheckWebsiteTrackingDialogComponent
+  ],
+  exports: [
+    // CheckWebsiteTrackingDialogComponent
   ],
   providers: [AddTrackingTagsService]
 })
