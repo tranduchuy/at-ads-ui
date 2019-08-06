@@ -1,7 +1,12 @@
 .container {
   height: 400px;
+  overflow: auto;
+  box-shadow: 2px 2px 5px silver;
 
   mat-table {
+
+    box-shadow: none;
+
     mat-header-cell:nth-child(1),
     mat-cell:nth-child(1) {
       flex: 0 0 80%;
