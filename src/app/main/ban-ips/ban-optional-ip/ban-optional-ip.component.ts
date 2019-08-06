@@ -7,7 +7,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ban-optional-ip',
@@ -24,7 +23,6 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _sessionService: SessionService,
     public _dialogService: DialogService,
-    private _router: Router
   ) {
     super();
   }
