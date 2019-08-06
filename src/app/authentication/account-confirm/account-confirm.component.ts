@@ -62,6 +62,8 @@ export class AccountConfirmComponent extends PageBaseComponent implements OnInit
         this.token = param.token;
         if (!this.token) {
           this._router.navigateByUrl('/auth/login');
+        } else {
+          this.activateAccount();
         }
       })
     this.subscriptions.push(sub);
@@ -78,6 +80,7 @@ export class AccountConfirmComponent extends PageBaseComponent implements OnInit
         (error: HttpErrorResponse) => {
           this._fuseSplashScreenService.hide();
           this._dialogService._openErrorDialog(error.error);
+          this._router.navigateByUrl('/auth/login');
         });
     this.subscriptions.push(sub);
   }

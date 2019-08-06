@@ -14,7 +14,7 @@
     <b>Bước 1:</b> Copy mã tracking
     <div fxLayout="row" style="padding-top: 10px">
       <input class="key" type="text" #inputKey
-        value='&lt;script type="text/javascript" src="http://159.65.11.195:3001/static/tracking.js?key={{key}}"&gt;&lt;/script&gt;'
+        value='&lt;script type="text/javascript" src="{{hostTracking}}?key={{key}}"&gt;&lt;/script&gt;'
         readonly>
       <button mat-stroked-button (click)="copyKey(inputKey.value)" class="copy-button">copy</button>
     </div>

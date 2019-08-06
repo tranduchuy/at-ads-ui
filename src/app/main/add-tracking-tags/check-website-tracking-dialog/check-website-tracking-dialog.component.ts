@@ -15,7 +15,7 @@ import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-b
 })
 export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['website', 'tracking'];
+  displayedColumns: string[] = ['order', 'website', 'tracking'];
   websites: any = [];
   accountId: string;
 

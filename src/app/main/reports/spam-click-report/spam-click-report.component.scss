@@ -153,13 +153,13 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 576px) {
   .container {
     padding: 15px;
     padding-top: 0;
 
     .section {
-      padding-bottom: 0;
+      padding: 0;
 
       .datePicker {
         margin-top: 10px;
@@ -175,8 +175,7 @@
       }
 
       .div-pie-chart {
-        width: 100%;
-        padding-top: 10px;
+        padding: 5px;
       }
     }
 
@@ -185,7 +184,8 @@
     }
 
     :host ::ng-deep .pie-chart {
-      margin: 0;
+      margin-top: -100px;
+      margin-bottom: -60px;
 
       .pie-label {
         font-size: 12px !important;

@@ -1,7 +1,13 @@
-<div mat-dialog-content style="width: 500px">
+<div mat-dialog-content style="min-width: 550px">
   <div class="container">
 
     <mat-table [dataSource]="websites" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="order">
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="website">
         <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.domain}} </mat-cell>
@@ -10,8 +16,12 @@
       <ng-container matColumnDef="tracking">
         <mat-header-cell *matHeaderCellDef> Tracking </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.isTracking" style="color:#44b543">check</mat-icon>
-          <mat-icon *ngIf="!element.isTracking" style="color: silver">check</mat-icon>
+          <span *ngIf="element.isTracking" style="color: #44b543">
+            <mat-icon style="color:#44b543">check</mat-icon> Đã gắn
+          </span>
+          <span *ngIf="!element.isTracking" style="color: silver">
+            Chưa gắn
+          </span>
         </mat-cell>
       </ng-container>
 

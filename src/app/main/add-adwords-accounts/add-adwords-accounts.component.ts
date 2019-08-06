@@ -37,7 +37,8 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   completeAccountConnection() {
-    this._router.navigateByUrl('/gan-tracking/chon-chien-dich');
+
+    this._router.navigateByUrl('/gan-tracking/chien-dich');
   }
 
   post(): void {
@@ -66,15 +67,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   initForm(): void {
     this.form = this.fb.group({
-      adWordId: [
-        null,
-        [
-          Validators.required,
-          this.validatorService.checkMinLength(10),
-          this.validatorService.checkMaxLength(12),
-          this.validatorService.checkAdwordsAccountId,
-        ]
-      ]
+      adWordId: [null,[Validators.required]]
     });
   }
 
@@ -88,7 +81,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   onPressId(keyCode: number) {
-    return (keyCode >= 48 && keyCode < 57) || keyCode === 45;
+    return (keyCode >= 48 && keyCode <= 57) || keyCode === 45;
   }
 
 }
