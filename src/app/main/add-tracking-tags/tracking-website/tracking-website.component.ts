@@ -14,6 +14,7 @@ import { CheckWebsiteTrackingDialogComponent } from '../check-website-tracking-d
 export class TrackingWebsiteComponent extends PageBaseComponent implements OnInit {
 
   adsId: string;
+  id: string;
   key: string;
 
   adsAccountIdPipe = new AdsAccountIdPipe();
@@ -31,6 +32,7 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
 
     const sub = this._activatedRoute.params
       .subscribe((params: any) => {
+        this.id = params.id;
         this.adsId = this.adsAccountIdPipe.transform(params.adsId);
         this.key = params.key;
       });
@@ -49,6 +51,6 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
 
   checkWebsiteTracking(){
     const dialogRef = this._matDialog.open(CheckWebsiteTrackingDialogComponent);
-    return dialogRef.afterClosed();
+    return dialogRef.componentInstance.accountId = this.id;
   }
 }

@@ -12,7 +12,7 @@ import { TrackingWebsiteComponent } from './tracking-website/tracking-website.co
       component: SelectCampaignsComponent
     },
     {
-      path: 'website/:adsId/:key',
+      path: 'website/:id/:adsId/:key',
       pathMatch: 'full',
       component: TrackingWebsiteComponent
     },

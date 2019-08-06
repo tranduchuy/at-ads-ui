@@ -6,6 +6,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 
 @Component({
   selector: 'app-check-website-tracking-dialog',
@@ -16,12 +17,13 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
 
   displayedColumns: string[] = ['website', 'tracking'];
   websites: any = [];
+  accountId: string;
 
   constructor(
     private dialogRef: MatDialogRef<CheckWebsiteTrackingDialogComponent>,
     private _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
-    private _fuseSlashScreenService: FuseSplashScreenService,
+    private _fuseProgressBarService:FuseProgressBarService,
     private _dialogService: DialogService
   ) {
     super();
@@ -38,14 +40,11 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
   }
 
   getWebsiteTrackingInfo() {
-    this._fuseSlashScreenService.show();
-    const sub = this._addTrackingTagsService.getWebsiteTrackingInfo()
+    const sub = this._addTrackingTagsService.getWebsiteTrackingInfo(this.accountId)
       .subscribe(res => {
-        this._fuseSlashScreenService.hide();
         this.websites = res.data.websites;
       },
         (error: HttpErrorResponse) => {
-          this._fuseSlashScreenService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.websites = [];
         });
