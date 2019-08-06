@@ -23,30 +23,27 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
     private dialogRef: MatDialogRef<CheckWebsiteTrackingDialogComponent>,
     private _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
-    private _fuseProgressBarService:FuseProgressBarService,
+    private _fuseProgressBarService: FuseProgressBarService,
+    private _fuseSplashScreenService: FuseSplashScreenService,
     private _dialogService: DialogService
   ) {
     super();
   }
 
   ngOnInit() {
-    const sub = this._sessionService.getAccountId()
-      .subscribe((accountId) => {
-        if (accountId) {
-          this.getWebsiteTrackingInfo();
-        }
-      });
-    this.subscriptions.push(sub);
-  }
-
-  getWebsiteTrackingInfo() {
+    //this._fuseProgressBarService.show();
+    this._fuseSplashScreenService.show();
     const sub = this._addTrackingTagsService.getWebsiteTrackingInfo(this.accountId)
       .subscribe(res => {
         this.websites = res.data.websites;
+        //this._fuseProgressBarService.hide();
+        this._fuseSplashScreenService.hide();
       },
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);
           this.websites = [];
+          //this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
         });
     this.subscriptions.push(sub);
   }
