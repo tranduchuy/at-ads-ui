@@ -55,6 +55,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
               (error: HttpErrorResponse) => {
                 this._fuseProgressiveBarService.hide();
                 this._dialogService._openErrorDialog(error.error);
+                this.hasBlockedIP = false;
               });
           this.subscriptions.push(blockedIPsSub);
         }
