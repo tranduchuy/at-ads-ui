@@ -71,25 +71,21 @@
       background-color: #eeee;
     }
 
-    mat-header-cell,
-    mat-cell {
-      display: flex;
-      justify-content: center;
-
-      flex: 0 0 15%;
-    }
-
     mat-header-cell:nth-child(1),
     mat-cell:nth-child(1) {
       flex: 0 0 10%;
-      justify-content: left;
     }
 
 
     mat-header-cell:nth-child(2),
     mat-cell:nth-child(2) {
-      justify-content: left;
       flex: 0 0 70%;
+    }
+
+    mat-header-cell:nth-child(3),
+    mat-cell:nth-child(3) {
+      flex: 0 0 20%;
+      padding-left: 20px
     }
 
     mat-row,

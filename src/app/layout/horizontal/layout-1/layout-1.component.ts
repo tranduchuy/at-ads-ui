@@ -3,7 +3,9 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
-import { navigation } from 'app/navigation/navigation';
+import { navigation, NotConnectedAccountNavigation } from 'app/navigation/navigation';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { SessionService } from 'app/shared/services/session.service';
 
 @Component({
     selector     : 'horizontal-layout-1',
@@ -11,7 +13,7 @@ import { navigation } from 'app/navigation/navigation';
     styleUrls    : ['./layout-1.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class HorizontalLayout1Component implements OnInit, OnDestroy
+export class HorizontalLayout1Component extends PageBaseComponent implements OnInit, OnDestroy
 {
     fuseConfig: any;
     navigation: any;
@@ -25,9 +27,12 @@ export class HorizontalLayout1Component implements OnInit, OnDestroy
      * @param {FuseConfigService} _fuseConfigService
      */
     constructor(
-        private _fuseConfigService: FuseConfigService
+        private _fuseConfigService: FuseConfigService,
+        private _sessionService: SessionService
     )
     {
+        super();
+        
         // Set the defaults
         this.navigation = navigation;
 

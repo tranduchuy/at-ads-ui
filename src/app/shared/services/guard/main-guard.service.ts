@@ -8,7 +8,9 @@ import { SessionService } from '../session.service';
 })
 export class MainGuardService implements CanActivate{
 
-  constructor(private _router: Router, private _sessionService: SessionService) {
+  constructor(
+    private _router: Router, 
+    private _sessionService: SessionService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
@@ -16,6 +18,7 @@ export class MainGuardService implements CanActivate{
     if (this._sessionService.token && this._sessionService.user) {
       return true;
     }
+    
     this._router.navigate(['/auth/login']);
     return false;
   }

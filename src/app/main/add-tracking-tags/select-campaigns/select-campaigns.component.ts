@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -10,6 +9,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
 import { Router } from '@angular/router';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 export interface Campaign {
   id: string;
@@ -27,11 +27,12 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   campaignList: Campaign[];
   selectedCampaigns: string[];
   activatedAdsId: string;
+  selectAll: boolean = false;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     private _dialogService: DialogService,
-    private _sessionService: SessionService,
+    public _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
     private _router: Router,
     private _fuseSlashScreenService: FuseSplashScreenService
@@ -42,14 +43,24 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   }
 
   ngOnInit() {
-    this.activatedAdsId = this._sessionService.activeAdsAccountId;
     const sub = this._sessionService.getAccountId()
+      .pipe(distinctUntilChanged())
       .subscribe((accountId: string) => {
         if (accountId) {
           this.getOriginalCampaigns();
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  onSelectAllCampaign(event) {
+    if (event.checked) {
+      this.selectAll = true;
+      this.selectedCampaigns = this.campaignList.map(item => item.id);
+    } else {
+      this.selectAll = false;
+      this.selectedCampaigns = [];
+    }
   }
 
   onSelectCampaign(event, campaignId: string) {

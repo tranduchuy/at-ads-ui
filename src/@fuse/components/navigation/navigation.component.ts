@@ -63,13 +63,6 @@ export class FuseNavigationComponent implements OnInit {
           icon: 'dashboard',
           url: '/danh-sach-tai-khoan'
         },
-        {
-          id: 'add-tracking-tags',
-          title: 'Gắn Tracking Chiến Dịch',
-          type: 'item',
-          icon: 'location_searching',
-          url: '/gan-tracking/chien-dich'
-        }
       ]
     }
     ;
@@ -113,7 +106,7 @@ export class FuseNavigationComponent implements OnInit {
       .subscribe(res => {
         let accounts = res.data.accounts;
         let activeAdsAccountId = '';
-        let activeAccountId = this._sessionService.activeAccountId;
+        let activeAccountId = '';
 
         if (this._sessionService.activeAccountId) {
           activeAccountId = this._sessionService.activeAccountId.toString();
@@ -166,7 +159,16 @@ export class FuseNavigationComponent implements OnInit {
               },
             ]
           };
+
           this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
+
+          this.accounts.children[2] = {
+            id: 'add-tracking-tags',
+            title: 'Gắn Tracking Chiến Dịch',
+            type: 'item',
+            icon: 'location_searching',
+            url: '/gan-tracking/chien-dich'
+          }
         } else {
           this.accounts.children[0].title = 'Thêm tài khoản mới';
           this.accounts.children[0].id = null;

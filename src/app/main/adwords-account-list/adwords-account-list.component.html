@@ -53,13 +53,13 @@
         <ng-container matColumnDef="website">
           <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <ul>
+            <ul style="width: 100%">
               <li *ngFor="let website of element.websites, let i = index" fxLayout="row">
-                <p style="width: 200px; padding-left: 5px">
+                <p style="padding-left: 5px" fxFlex="90">
                   <span>{{i+1}}</span>. 
                   <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
                 </p>
-                <div>
+                <div fxFlex="10">
                   <button (click)="openRemoveWebsiteDialog(website.code)" mat-icon-button color="accent"
                     matTooltip="Xóa website">
                     <mat-icon>delete</mat-icon>

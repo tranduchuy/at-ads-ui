@@ -1,5 +1,7 @@
 import { FuseNavigation } from '@fuse/types';
 
+export const NotConnectedAccountNavigation: FuseNavigation[] = [];
+
 export const navigation: FuseNavigation[] = [
   {
     id: 'report',

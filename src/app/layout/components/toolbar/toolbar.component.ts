@@ -7,9 +7,10 @@ import * as _ from 'lodash';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
-import { navigation } from 'app/navigation/navigation';
+import { navigation, NotConnectedAccountNavigation } from 'app/navigation/navigation';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 @Component({
     selector     : 'toolbar',
@@ -18,7 +19,7 @@ import { Router } from '@angular/router';
     encapsulation: ViewEncapsulation.None
 })
 
-export class ToolbarComponent implements OnInit, OnDestroy
+export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDestroy
 {
     user = {
         avatar: '',
@@ -51,6 +52,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
         private _router: Router
     )
     {
+        super();
+
         // Set the defaults
         this.userStatusOptions = [
             {

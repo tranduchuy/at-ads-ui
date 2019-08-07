@@ -1,6 +1,6 @@
 <div class="container">
   <div class="title1">
-    GẮN TRACKING THEO DÕI CHIẾN DỊCH TÀI KHOẢN <span style="color:black; font-weight: bolder">{{activatedAdsId}}</span>
+    GẮN TRACKING THEO DÕI CHIẾN DỊCH TÀI KHOẢN <span style="color:black; font-weight: bolder">{{_sessionService.activeAdsAccountId}}</span>
   </div>
 
   <p class="usage">
@@ -35,9 +35,14 @@
         </ng-container>
         "let element"
         <ng-container matColumnDef="tracking">
-          <mat-header-cell *matHeaderCellDef> Gắn mã </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>
+            <p>
+              <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px" matTooltip="Chọn/ Bỏ chọn tất cả">
+              </mat-checkbox> Gắn mã
+            </p>
+          </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <mat-checkbox (change)="onSelectCampaign($event, element.id)"></mat-checkbox>
+            <mat-checkbox (change)="onSelectCampaign($event, element.id)" [checked]="selectAll"></mat-checkbox>
           </mat-cell>
         </ng-container>
 

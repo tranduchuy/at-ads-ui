@@ -30,16 +30,20 @@
     <app-select-text (valueChanged)="onSelectAdsId($event)" [itemsSource]="accountItemsSource" [displayPath]="'text'"
       [valuePath]="'value'" [title]="'Chọn tài khoản AdWords'" [formControlName]="'adsId'"></app-select-text>
 
-    <p><strong>Tên miền (domain) website của bạn vào ô bên dưới</strong></p>
+    <p>
+      <strong>Tên miền (domain) website của bạn vào ô bên dưới</strong>
+    </p>
     <div fxLayout="row" fxLayout.xs="column">
-      <app-input-text [placeholder]="'http://'" [formControlName]="'domain'" [errors]="getMessageErrors('domain')"
+      <app-input-text [formControlName]="'domain'" [errors]="getMessageErrors('domain')"
         [title]="'Nhập tên miền của bạn'"></app-input-text>
       <button type="submit" mat-raised-button color="accent" class="add-website-button" [disabled]="onAddingDomain">
         THÊM WEBSITE
       </button>
     </div>
-
   </form>
+
+  <br><span><b><span style="color: red">*</span>Lưu ý:</b> Tên miền phải kèm theo <span style="color: dodgerblue">http://</span> hoặc <span
+      style="color: dodgerblue">https://</span></span>
 
   <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
 

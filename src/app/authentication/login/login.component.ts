@@ -13,7 +13,7 @@ import { SessionService } from '../../shared/services/session.service';
 import { ILoginSuccess } from './models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { ThrowStmt } from '@angular/compiler';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
 declare var gapi: any;
 @Component({
@@ -43,7 +43,8 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     private _router: Router,
     private _dialogService: DialogService,
     private _sessionService: SessionService,
-    private _ngZone: NgZone
+    private _ngZone: NgZone,
+    private _navigationService: FuseNavigationService
   ) {
     super();
     // Configure the layout
@@ -145,9 +146,8 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
       const user = res.data.user;
       user.avatar = googleUser.w3.Paa;
       this._sessionService.set(token, user);
-      this._router.navigateByUrl('/');
       this._ngZone.run(() => this._router.navigateByUrl('/')
-        .then(resolve => this._fuseSplashScreenService.hide()));
+        .then(resolve => { this._fuseSplashScreenService.hide(); }));
     },
       (error: HttpErrorResponse) => {
         this._fuseSplashScreenService.hide();
