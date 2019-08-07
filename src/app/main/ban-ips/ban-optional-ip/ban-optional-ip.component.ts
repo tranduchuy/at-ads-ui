@@ -17,6 +17,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
   displayedColumns: string[] = ['order', 'ip', 'status', 'task', 'unlockButton'];
   blockedIPs: string[] = [];
+  isProcessing: boolean = false;
 
   constructor(
     private _banIpsService: BanIpsService,
@@ -66,13 +67,14 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
   post(): void {
     const params = this.generatePostObject();
-
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.blockIPs(params).subscribe((res: ILoginSuccess) => {
       this.getBlockedCustomIPs();
       this._fuseProgressiveBarService.hide();
       setTimeout(() => {
         this._dialogService._openSuccessDialog(res);
+        this.isProcessing = false;
       }, 0);
     },
       (error: HttpErrorResponse) => {
@@ -84,6 +86,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
         } else {
           this._dialogService._openErrorDialog(error.error);
         }
+        this.isProcessing = false;
       }
     );
     this.subscriptions.push(sub);
