@@ -21,6 +21,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
 
   blockedIPs: string[];
   hasBlockedIP: boolean;
+  isProcessing: boolean = false;
 
   constructor(
     private _banIpsService: BanIpsService,
@@ -83,7 +84,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
 
   post(): void {
     const params = this.generateBlockSapmleIPParams();
-
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.blockSampleIP(params)
       .subscribe((res: ILoginSuccess) => {
@@ -92,6 +93,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
         this.hasBlockedIP = true;
         setTimeout(() => {
           this._dialogService._openSuccessDialog(res);
+          this.isProcessing = false;
         }, 0);
       },
         (error: HttpErrorResponse) => {
@@ -99,6 +101,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
             this._dialogService._openErrorDialog(error.error);
           }
           this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
         }
       );
     this.subscriptions.push(sub);
@@ -116,6 +119,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
       .subscribe((result: boolean) => {
         if (result) {
           const params = this.generateUnblockeSampleIPParmas();
+          this.isProcessing = true;
           this._fuseProgressiveBarService.show();
           const sub = this._banIpsService.unblockSampleIP(params)
             .subscribe((res: ILoginSuccess) => {
@@ -123,10 +127,12 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
               this.blockedIPs = [];
               this.hasBlockedIP = false;
               this._dialogService._openSuccessDialog(res);
+              this.isProcessing = false;
             },
               (error: HttpErrorResponse) => {
                 this._fuseProgressiveBarService.hide();
-                this._dialogService._openErrorDialog(error.error)
+                this._dialogService._openErrorDialog(error.error);
+                this.isProcessing = false;
               })
           this.subscriptions.push(sub);
         }
