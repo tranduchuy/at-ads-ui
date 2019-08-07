@@ -44,7 +44,7 @@ export class FuseNavigationComponent implements OnInit {
               title: 'Thêm tài khoản mới',
               translate: 'NAV.SAMPLE.TITLE',
               type: 'item',
-              icon: 'add_box',
+              icon: 'person_add',
               url: '/them-tai-khoan-moi'
             },
             {
@@ -154,7 +154,7 @@ export class FuseNavigationComponent implements OnInit {
                 title: 'Thêm tài khoản mới',
                 translate: 'NAV.SAMPLE.TITLE',
                 type: 'item',
-                icon: 'add_box',
+                icon: 'person_add',
                 url: '/them-tai-khoan-moi'
               },
             ]
@@ -186,7 +186,7 @@ export class FuseNavigationComponent implements OnInit {
             id: 'add-accounts',
             title: 'Thêm tài khoản mới',
             type: 'item',
-            icon: 'add_box',
+            icon: 'person_add',
             url: '/them-tai-khoan-moi'
           };
           this.loadRecentNavigation();

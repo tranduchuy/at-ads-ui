@@ -12,7 +12,10 @@
     font-weight: bold;
 
     box-shadow: 2px 2px 5px silver;
-    text-align: center;
+  }
+
+  .add-account-button {
+    
   }
 
   .table-container {
@@ -61,7 +64,7 @@
       justify-content: left;
     }
 
-    mat-row{
+    mat-row {
       transition: 0.2s;
     }
 
@@ -102,6 +105,10 @@
     color: dodgerblue;
   }
 
+  .clear {
+    clear: both;
+  }
+
   .footer {
     padding-top: 15px;
     display: flex;
@@ -112,5 +119,8 @@
 @media screen and (max-width: 600px) {
   .container {
     padding: 15px;
+  }
+  .title1 {
+    text-align: center;
   }
 }

@@ -1,6 +1,9 @@
 <div class="container">
-  <div class="title1">
-    QUẢN LÝ TÀI KHOẢN ADWORDS VÀ WEBSITE
+  <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
+    <span fxFlex="75">QUẢN LÝ TÀI KHOẢN ADWORDS VÀ WEBSITE</span>
+    <a [routerLink]="'/them-tai-khoan'" mat-button color="accent" class="add-account-button">
+      <mat-icon>person_add</mat-icon> Thêm tài khoản mới
+    </a>
   </div>
 
   <form>
@@ -24,10 +27,10 @@
         </ng-container>
 
         <ng-container matColumnDef="adwords">
-          <mat-header-cell *matHeaderCellDef> AdWords </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> AdWords ID </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div fxLayout="row">
-              <p style="width: 100px">
+              <p style="width: 120px">
                 {{element.adsId | adsAccountId}}
               </p>
               <div>

@@ -47,7 +47,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   openRemoveWebsiteDialog(websiteId: string) {
-    const confirmDialogSub = this._dialogService._openConfirmDialog('Xóa tên miền này?')
+    const confirmDialogSub = this._dialogService._openConfirmDialog('Xóa website này khỏi tài khoản AdWords?')
       .subscribe((result) => {
         if (result) {
           this._fuseProgressiveBarService.show();
