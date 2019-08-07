@@ -69,14 +69,21 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.blockIPs(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
+      this.getBlockedCustomIPs();
       this._fuseProgressiveBarService.hide();
+      setTimeout(() => {
+        this._dialogService._openSuccessDialog(res);
+      }, 0);
     },
       (error: HttpErrorResponse) => {
-        if (error.error.messages) {
+        this._fuseProgressiveBarService.hide();
+        if (error.status === 409) {
+          this._dialogService._openErrorDialog({
+            messages: [`${error.error.data.ips.join(', ')} đã có trong blacklist.`]
+          });
+        } else {
           this._dialogService._openErrorDialog(error.error);
         }
-        this._fuseProgressiveBarService.hide();
       }
     );
     this.subscriptions.push(sub);
