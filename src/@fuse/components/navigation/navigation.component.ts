@@ -114,7 +114,7 @@ export class FuseNavigationComponent implements OnInit {
         let accounts = res.data.accounts;
         let activeAdsAccountId = '';
         let activeAccountId = this._sessionService.activeAccountId;
-        
+
         if (this._sessionService.activeAccountId) {
           activeAccountId = this._sessionService.activeAccountId.toString();
           activeAdsAccountId = this._sessionService.activeAdsAccountId.toString();

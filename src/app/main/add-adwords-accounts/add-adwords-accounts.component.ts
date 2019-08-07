@@ -48,9 +48,11 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     const params = this.generatePostObject();
 
     this._fuseProgressiveBarService.show();
-    const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res: ILoginSuccess) => {
+    const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res) => {
       this._dialogService._openInfoDialog(res.messages[0]);
       this.isConnected = true;
+      this._sessionService.setActiveAccountId(res.data.account._id);
+      this._sessionService.setActiveAdsAccountId(this._adsAccountIdPipe.transform(res.data.account.adsId));
       this._fuseNavigationService.reloadNavigation();
       this._fuseProgressiveBarService.hide();
     },
