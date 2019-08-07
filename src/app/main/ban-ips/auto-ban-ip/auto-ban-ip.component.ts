@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 })
 export class AutoBanIPComponent extends EditableFormBaseComponent implements OnInit {
 
+  isProcessing: boolean = false;
+
   itemsSource = {
     maxClick: [
       {
@@ -82,17 +84,19 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
 
   post(): void {
     const params = this.generatePostObject();
-
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.autoBlockingIP(params).subscribe((res: ILoginSuccess) => {
       this._dialogService._openSuccessDialog(res);
       this._fuseProgressiveBarService.hide();
+      this.isProcessing = false;
     },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
         }
         this._fuseProgressiveBarService.hide();
+        this.isProcessing = false;
       }
     );
     this.subscriptions.push(sub);

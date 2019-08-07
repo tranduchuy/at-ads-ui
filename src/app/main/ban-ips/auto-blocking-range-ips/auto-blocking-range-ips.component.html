@@ -31,7 +31,7 @@
       [title]="'--Chọn hình thức--'" [formControlName]="'classD'" [errors]="getMessageErrors('classD')">
     </app-select-text>
     <p class="text-center">
-      <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" (click)="onClickBtnSubmit()">
+      <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" (click)="onClickBtnSubmit()" [disabled]="isProcessing">
         <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
       </button>
     </p>

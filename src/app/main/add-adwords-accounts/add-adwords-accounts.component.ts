@@ -23,6 +23,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   isConnected = false;
   connectedAccountId: string;
   _adsAccountIdPipe = new AdsAccountIdPipe();
+  isProcessing: boolean = false;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -46,7 +47,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   post(): void {
     const params = this.generatePostObject();
-
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res) => {
       this._dialogService._openInfoDialog(res.messages[0]);
@@ -55,12 +56,14 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
       this._sessionService.setActiveAdsAccountId(this._adsAccountIdPipe.transform(res.data.account.adsId));
       this._fuseNavigationService.reloadNavigation();
       this._fuseProgressiveBarService.hide();
+      this.isProcessing = false;
     },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
         }
         this._fuseProgressiveBarService.hide();
+        this.isProcessing = false;
       }
     );
     this.subscriptions.push(sub);

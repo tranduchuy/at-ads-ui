@@ -18,6 +18,8 @@ export class AutoBlockingRangeIpsComponent extends EditableFormBaseComponent imp
 
   form;
 
+  isProcessing: boolean = false;
+
   constructor(private _banIpsService: BanIpsService,
     public _sessionService: SessionService,
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -63,17 +65,19 @@ export class AutoBlockingRangeIpsComponent extends EditableFormBaseComponent imp
 
   post(): void {
     const params = this.generatePostObject();
-
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.autoBlockingRangeIP(params).subscribe((res: ILoginSuccess) => {
       this._dialogService._openSuccessDialog(res);
       this._fuseProgressiveBarService.hide();
+      this.isProcessing = false;
     },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
         }
         this._fuseProgressiveBarService.hide();
+        this.isProcessing = false;
       }
     );
     this.subscriptions.push(sub);

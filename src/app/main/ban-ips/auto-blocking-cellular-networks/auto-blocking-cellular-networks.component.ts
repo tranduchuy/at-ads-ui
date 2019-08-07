@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 })
 export class AutoBlockingCellularNetworksComponent extends EditableFormBaseComponent implements OnInit {
 
+  isProcessing: boolean = false;
+
   networkItemsSource = [
     {
       text: 'Mạng VIETTEL',
@@ -81,16 +83,19 @@ export class AutoBlockingCellularNetworksComponent extends EditableFormBaseCompo
 
   post(): void {
     const params = this.generatePostObject();
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.autoBlocking3G4G(params).subscribe((res: ILoginSuccess) => {
       this._dialogService._openSuccessDialog(res);
       this._fuseProgressiveBarService.hide();
+      this.isProcessing = false;
     },
       (error: HttpErrorResponse) => {
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
         }
         this._fuseProgressiveBarService.hide();
+        this.isProcessing = false;
       }
     );
     this.subscriptions.push(sub);

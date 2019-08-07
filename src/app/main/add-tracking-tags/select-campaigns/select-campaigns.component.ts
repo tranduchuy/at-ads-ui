@@ -28,6 +28,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   selectedCampaigns: string[];
   activatedAdsId: string;
   selectAll: boolean = false;
+  isProcessing: boolean = false;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -89,14 +90,17 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     }
 
     this._fuseProgressiveBarService.show();
+    this.isProcessing = true;
     const sub = this._addTrackingTagsService.addCampaignTracking(params)
       .subscribe((res: ILoginSuccess) => {
         this._fuseProgressiveBarService.hide();
         this._dialogService._openSuccessDialog(res);
+        this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
         });
     this.subscriptions.push(sub);
   }
