@@ -25,9 +25,11 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
   displayedColumns: string[] = ['order', 'name', 'tracking'];
   campaignList: Campaign[];
+  trackingCampaignList: string[];
   selectedCampaigns: string[];
   activatedAdsId: string;
-  selectAll: boolean = false;
+  selectAllChecked: boolean;
+  selectAllCheckBoxChecked: boolean;
   isProcessing: boolean = false;
 
   constructor(
@@ -41,6 +43,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     super();
     this.campaignList = [];
     this.selectedCampaigns = [];
+    this.trackingCampaignList = [];
   }
 
   ngOnInit() {
@@ -56,11 +59,11 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
   onSelectAllCampaign(event) {
     if (event.checked) {
-      this.selectAll = true;
       this.selectedCampaigns = this.campaignList.map(item => item.id);
+      this.selectAllChecked = true;
     } else {
-      this.selectAll = false;
       this.selectedCampaigns = [];
+      this.selectAllChecked = false;
     }
   }
 
@@ -68,11 +71,19 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     if (event.checked) {
       if (!this.selectedCampaigns.includes(campaignId)) {
         this.selectedCampaigns.push(campaignId);
-      } else {
-        this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId)
       }
-    } else {
-      this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId)
+      else {
+        this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId);
+      }
+      if (this.campaignList.length === this.selectedCampaigns.length) {
+        this.selectAllCheckBoxChecked = true;
+      } else {
+        this.selectAllCheckBoxChecked = false;
+      }
+    }
+    else {
+      this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId);
+      this.selectAllCheckBoxChecked = false;
     }
   }
 
@@ -109,17 +120,44 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     this._fuseProgressiveBarService.show();
     const sub = this._addTrackingTagsService.getOriginalCampaigns()
       .subscribe(res => {
-        this._fuseProgressiveBarService.hide();
         this.campaignList = res.data.campaignList;
+        const sub1 = this._addTrackingTagsService.getTrackingCampaigns()
+          .subscribe(res => {
+            this._fuseProgressiveBarService.hide();
+            this.trackingCampaignList = res.data.campaignIds;
+
+            if (this.campaignList.every(item => this.trackingCampaignList.indexOf(item.id) >= 0)) {
+              this.selectAllCheckBoxChecked = true;
+              this.selectAllChecked = true;
+              this.selectedCampaigns = this.campaignList.map(item => item.id);
+            }
+            else {
+              this.selectAllCheckBoxChecked = false;
+              this.selectAllChecked = false;
+              this.selectedCampaigns = [];
+            }
+
+          },
+            (error: HttpErrorResponse) => {
+              this._fuseProgressiveBarService.hide();
+              this._dialogService._openErrorDialog(error.error);
+              this.trackingCampaignList = [];
+            });
+        this.subscriptions.push(sub1);
       },
         (error: HttpErrorResponse) => {
           if (error.error.messages) {
             this._dialogService._openErrorDialog(error.error);
             this.campaignList = [];
+            this.trackingCampaignList = [];
           }
           this._fuseProgressiveBarService.hide();
         }
       );
     this.subscriptions.push(sub);
+  }
+
+  isSelectedCampaign(campaignId: string): boolean {
+    return this.trackingCampaignList.includes(campaignId);
   }
 }

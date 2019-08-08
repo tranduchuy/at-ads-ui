@@ -29,6 +29,7 @@ export namespace API {
     export const checkAccountAcceptance = environment.hostApi + '/api/account-adwords/connection-confirmation';
     export const getBlockedSampleIP = environment.hostApi + '/api/account-adwords/{account_id}/block-sample-ip';
     export const getBlockedCustomIPs = environment.hostApi + '/api/account-adwords/{account_id}/ips';
+    export const getTrackingCampaigns = environment.hostApi + '/api/account-adwords/{account_id}/campaigns';
   }
   export namespace Website {
     export const getWebsites = environment.hostApi + '/api/websites?accountId={accountId}';

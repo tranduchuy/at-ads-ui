@@ -28,6 +28,12 @@ export class AddTrackingTagsService {
     return this._http.get(url);
   }
 
+  public getTrackingCampaigns(): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    const url =  API.AdwordsAccount.getTrackingCampaigns.replace('{account_id}', activeAccountId);
+    return this._http.get(url);
+  }
+
   public addCampaignTracking(params: IAddCampaignTrackingParams): Observable<any> {
     const activeAccountId = this._sessionService.activeAccountId;
     const url = API.AdwordsAccount.addCampaignTracking.replace('{account_id}', activeAccountId);
