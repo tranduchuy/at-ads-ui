@@ -28,8 +28,6 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   trackingCampaignList: string[];
   selectedCampaigns: string[];
   activatedAdsId: string;
-  selectAllChecked: boolean;
-  selectAllCheckBoxChecked: boolean;
   isProcessing: boolean = false;
 
   constructor(
@@ -60,10 +58,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   onSelectAllCampaign(event) {
     if (event.checked) {
       this.selectedCampaigns = this.campaignList.map(item => item.id);
-      this.selectAllChecked = true;
     } else {
       this.selectedCampaigns = [];
-      this.selectAllChecked = false;
     }
   }
 
@@ -72,30 +68,13 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
       if (!this.selectedCampaigns.includes(campaignId)) {
         this.selectedCampaigns.push(campaignId);
       }
-      else {
-        this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId);
-      }
-      if (this.campaignList.length === this.selectedCampaigns.length) {
-        this.selectAllCheckBoxChecked = true;
-      } else {
-        this.selectAllCheckBoxChecked = false;
-      }
     }
     else {
       this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId);
-      this.selectAllCheckBoxChecked = false;
     }
   }
 
   addCampaignTracking() {
-
-    if (this.selectedCampaigns.length === 0) {
-      this._dialogService._openErrorDialog({
-        messages: ['Vui lòng lựa chọn chiến dịch']
-      });
-      return;
-    }
-
     const params = {
       campaignIds: this.selectedCampaigns
     }
@@ -106,6 +85,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
       .subscribe((res: ILoginSuccess) => {
         this._fuseProgressiveBarService.hide();
         this._dialogService._openSuccessDialog(res);
+        this.getOriginalCampaigns();
         this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
@@ -125,18 +105,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
           .subscribe(res => {
             this._fuseProgressiveBarService.hide();
             this.trackingCampaignList = res.data.campaignIds;
-
-            if (this.campaignList.every(item => this.trackingCampaignList.indexOf(item.id) >= 0)) {
-              this.selectAllCheckBoxChecked = true;
-              this.selectAllChecked = true;
-              this.selectedCampaigns = this.campaignList.map(item => item.id);
-            }
-            else {
-              this.selectAllCheckBoxChecked = false;
-              this.selectAllChecked = false;
-              this.selectedCampaigns = [];
-            }
-
+            this.selectedCampaigns = this.trackingCampaignList;
           },
             (error: HttpErrorResponse) => {
               this._fuseProgressiveBarService.hide();
@@ -155,9 +124,5 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         }
       );
     this.subscriptions.push(sub);
-  }
-
-  isSelectedCampaign(campaignId: string): boolean {
-    return this.trackingCampaignList.includes(campaignId);
   }
 }

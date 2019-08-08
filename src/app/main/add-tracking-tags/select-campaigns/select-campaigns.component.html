@@ -42,12 +42,12 @@
         <ng-container matColumnDef="tracking">
           <mat-header-cell *matHeaderCellDef>
             <p>
-              <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px" matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="selectAllCheckBoxChecked && selectAllChecked || selectAllCheckBoxChecked">
+              <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px" matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="selectedCampaigns.length === campaignList.length">
               </mat-checkbox> Gắn mã
             </p>
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <mat-checkbox (change)="onSelectCampaign($event, element.id)" [checked]="isSelectedCampaign(element.id) && selectAllChecked"></mat-checkbox>
+            <mat-checkbox (change)="onSelectCampaign($event, element.id)" [checked]="selectedCampaigns.includes(element.id)"></mat-checkbox>
           </mat-cell>
         </ng-container>
 
