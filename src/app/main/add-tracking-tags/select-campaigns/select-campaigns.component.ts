@@ -23,7 +23,7 @@ export interface Campaign {
 })
 export class SelectCampaignsComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'name', 'tracking'];
+  displayedColumns: string[] = ['order', 'id', 'name', 'tracking'];
   campaignList: Campaign[];
   trackingCampaignList: string[];
   selectedCampaigns: string[];
