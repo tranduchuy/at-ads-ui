@@ -37,4 +37,7 @@ export namespace API {
     export const removeWebsite = environment.hostApi + '/api/websites/{website_id}';
     export const getWebsiteTrackingInfo = environment.hostApi + '/api/account-adwords/{account_id}/verify-acctached-code-domains'
   }
+  export namespace Report {
+    export const getAccountReport = environment.hostApi + '/api/account-adwords/{account_id}/report?from={from}&to={to}';
+  }
 }

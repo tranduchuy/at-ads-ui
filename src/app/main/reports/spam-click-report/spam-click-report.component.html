@@ -11,12 +11,13 @@
       </div>
 
       <mat-form-field class="datePicker">
-        <input type="text" ngxDaterangepickerMd matInput placeholder="Ngày thống kê" readonly [locale]="{
-                 format: 'DD/MM/YYYY',
-                 separator: ' Đến ',
-                 applyLabel: 'Áp dụng',
-                 cancelLabel: 'Đóng'
-               }" [(ngModel)]="selectedDateRange" ngDefaultControl startKey="start" endKey="end" />
+        <input type="text" ngxDaterangepickerMd matInput placeholder="Khoảng thời gian thống kê" readonly
+               [locale]="locale"
+               [(ngModel)]="selectedDateRange"
+               startKey="start" 
+               endKey="end" 
+               (datesUpdated)="onApplyDateRange($event)"
+               ngDefaultControl/>
       </mat-form-field>
 
       <div class="clear"></div>
@@ -25,7 +26,7 @@
     <div class="div-pie-chart">
       <p style="text-align: center">
         Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{this.selectedDateRange.end.diff(this.selectedDateRange.start, 'days') + 1}} ngày</span>
+          ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>
         từ <span style="color:dodgerblue; font-weight: bold" [(ngModel)]="selectedDateRange"
           ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
         ngày <span style="color: dodgerblue; font-weight: bold" [(ngModel)]="selectedDateRange"
@@ -48,7 +49,7 @@
         </ngx-charts-pie-chart>
 
         <div style="text-align: center" class="click-total">
-          <span class="click-number">762</span>
+          <span class="click-number">{{clickTotal}}</span>
           <br><span style="color: gray">click</span>
         </div>
 
@@ -63,7 +64,7 @@
     </div>
 
     <div class="position-relative h-368 pb-16">
-      <canvas baseChart [datasets]="lineChart.datasets['report']" [labels]="lineChart.labels"
+      <canvas baseChart [datasets]="lineChart.datasets.report" [labels]="lineChart.labels"
         [colors]="lineChart.colors" [options]="lineChart.options" [chartType]="lineChart.chartType">
       </canvas>
     </div>
@@ -78,18 +79,18 @@
       </div>
 
       <div class="left-table">
-        <mat-table [dataSource]="leftTable" class="mat-elevation-z8">
+        <mat-table [dataSource]="advertisementClickReport" class="mat-elevation-z8">
           <ng-container matColumnDef="time">
             <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="ip">
             <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <mat-icon *ngIf="element.status === 'Đã chặn'" style="color: red; margin-right: 5px">not_interested
+              <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px">not_interested
               </mat-icon>
-              <mat-icon *ngIf="element.status === 'Hợp lệ'" style="color:silver; margin-right: 5px">not_interested
+              <mat-icon *ngIf="!element.isSpam" style="color:silver; margin-right: 5px">not_interested
               </mat-icon>
               <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
                 style="font-weight: bold; padding-left: 0" mat-button color="accent">
@@ -98,18 +99,13 @@
             </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="click">
-            <mat-header-cell *matHeaderCellDef> Click </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
-          </ng-container>
-
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <span *ngIf="element.status === 'Đã chặn'"
-                style="color: red; font-weight: bold">{{element.status}}</span>
-              <span *ngIf="element.status === 'Hợp lệ'"
-                style="color: dodgerblue; font-weight: bold">{{element.status}}</span>
+              <span *ngIf="element.isSpam"
+                style="color: red; font-weight: bold">Đã chặn</span>
+              <span *ngIf="!element.isSpam"
+                style="color: dodgerblue; font-weight: bold">Hợp lệ</span>
             </mat-cell>
           </ng-container>
 
@@ -120,11 +116,11 @@
 
           <ng-container matColumnDef="location">
             <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.location.city}} </mat-cell>
           </ng-container>
 
-          <mat-header-row *matHeaderRowDef="leftTableColumns; sticky: true"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: leftTableColumns;"></mat-row>
+          <mat-header-row *matHeaderRowDef="advertisementClickReportColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: advertisementClickReportColumns;"></mat-row>
         </mat-table>
       </div>
 
