@@ -116,7 +116,7 @@
 
           <ng-container matColumnDef="location">
             <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.location.city}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.location?.city}} </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="advertisementClickReportColumns; sticky: true"></mat-header-row>
