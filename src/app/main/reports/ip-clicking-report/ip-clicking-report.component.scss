@@ -1,0 +1,75 @@
+.container {
+  padding: 15px 30px 15px 30px;
+
+  width: 100%;
+
+  .title1 {
+    padding: 15px;
+
+    background-color: #eee;
+    color: gray;
+    font-size: 16px;
+    font-weight: bold;
+
+    padding-left: 25px;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+    background-color: #eee;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  :host ::ng-deep .page-number {
+    margin-top: -18px;
+  }
+
+  ::ng-deep .mat-tab-list .mat-tab-labels {
+      display: flex;
+      justify-content: center;
+  }
+
+  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label{
+    min-width: 50px !important;
+  }
+
+  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+    min-width: 50px !important;
+  }
+
+  ::ng-deep .mat-ink-bar {
+    background-color: dodgerblue !important;
+  }
+
+  .table-wrapper {
+    height: 400px;
+    background-color: white;
+    margin-bottom: 20px;
+    overflow: auto;
+
+    mat-table {
+      box-shadow: none;
+
+      mat-header-cell:nth-child(7),
+      mat-cell:nth-child(7) {
+        flex: 0 0 10%;
+      }
+
+      mat-header-row,
+      mat-row {
+        min-width: 2000px;
+        width: 100%;
+      }
+
+      mat-row {
+        transition: 0.2s;
+      }
+
+      mat-row:hover {
+        background-color: #eee;
+      }
+    }
+  }
+}

@@ -23,6 +23,12 @@ const ELEMENT_DATA: blockedIP[] = [
   },
   {
     ip: '192.168.1.1',
+    network: 'VIETTEL',
+    blockingOver: 20,
+    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+  },
+  {
+    ip: '192.168.1.1',
     network: 'SCTV',
     blockingOver: 20,
     campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'

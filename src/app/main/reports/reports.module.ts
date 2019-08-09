@@ -23,15 +23,16 @@ import { SpamClickReportComponent } from './spam-click-report/spam-click-report.
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { ChartsModule } from 'ng2-charts';
-import { MatRadioModule, MatDatepickerModule, MatPaginatorModule, MatPaginator, MatPaginatorIntl } from '@angular/material';
+import { MatRadioModule, MatDatepickerModule, MatPaginatorModule, MatPaginator, MatPaginatorIntl, MatDividerModule, MatTabsModule } from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
 import { IpDetailComponent } from './ip-detail/ip-detail.component';
 import { BlockedIpListComponent } from './blocked-ip-list/blocked-ip-list.component';
 
 import {getVietnamesePaginatorIntl} from './vietnamese-paginator-intl';
+import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-report.component';
 
 @NgModule({
-  declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent],
+  declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent],
   imports: [
 
     MatButtonModule,
@@ -44,6 +45,8 @@ import {getVietnamesePaginatorIntl} from './vietnamese-paginator-intl';
     MatRadioModule,
     MatDatepickerModule,
     MatPaginatorModule,
+    MatDividerModule,
+    MatTabsModule,
 
     CheckboxGroupModule,
     ReactiveFormsModule,

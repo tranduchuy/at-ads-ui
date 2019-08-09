@@ -19,7 +19,7 @@
   }
 
   .table-wrapper {
-    margin-top: -15px;
+    margin-top: -18px;
     height: 520px;
     overflow: auto;
 
@@ -48,6 +48,14 @@
     mat-row {
       min-width: 1000px;
       width: 100%;
+    }
+
+    mat-row {
+      transition: 0.2s;
+    }
+    
+    mat-row:hover{
+      background-color: #eee;
     }
   }
 }

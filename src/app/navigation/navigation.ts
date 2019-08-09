@@ -10,7 +10,7 @@ export const navigation: FuseNavigation[] = [
     type: 'group',
     children: [
       {
-        id: 'spam-click',
+        id: 'spam-click-report',
         title: 'Xem Báo Cáo Click Ảo',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
@@ -18,12 +18,12 @@ export const navigation: FuseNavigation[] = [
         url: '/bao-cao/click-ao'
       },
       {
-        id: 'ip-on-click',
+        id: 'ip-clicking-report',
         title: 'IP Đang Click',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'touch_app',
-        url: '**'
+        url: '/bao-cao/ip-dang-click'
       },
       {
         id: 'ip-range-on-click',
