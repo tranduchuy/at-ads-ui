@@ -27,11 +27,11 @@
   }
 
   ::ng-deep .mat-tab-list .mat-tab-labels {
-      display: flex;
-      justify-content: center;
+    display: flex;
+    justify-content: center;
   }
 
-  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label{
+  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label {
     min-width: 50px !important;
   }
 
@@ -71,5 +71,12 @@
         background-color: #eee;
       }
     }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 15px;
+    padding-top: 0;
   }
 }
