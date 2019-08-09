@@ -83,10 +83,12 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     this.isProcessing = true;
     const sub = this._addTrackingTagsService.addCampaignTracking(params)
       .subscribe((res: ILoginSuccess) => {
-        this._fuseProgressiveBarService.hide();
-        this._dialogService._openSuccessDialog(res);
         this.getOriginalCampaigns();
         this.isProcessing = false;
+        setTimeout(() => {
+          this._dialogService._openSuccessDialog(res);
+          this._fuseProgressiveBarService.hide();
+        }, 0);
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
