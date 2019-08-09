@@ -1,6 +1,7 @@
 <div class="container">
   <div class="title1">
-    GẮN TRACKING THEO DÕI CHIẾN DỊCH TÀI KHOẢN <span style="color:black; font-weight: bolder">{{_sessionService.activeAdsAccountId}}</span>
+    GẮN TRACKING THEO DÕI CHIẾN DỊCH TÀI KHOẢN <span
+      style="color:black; font-weight: bolder">{{_sessionService.activeAdsAccountId}}</span>
   </div>
 
   <p class="usage">
@@ -42,12 +43,14 @@
         <ng-container matColumnDef="tracking">
           <mat-header-cell *matHeaderCellDef>
             <p>
-              <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px" matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="selectedCampaigns.length === campaignList.length">
+              <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px"
+                matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="selectedCampaigns.length === campaignList.length">
               </mat-checkbox> Gắn mã
             </p>
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <mat-checkbox (change)="onSelectCampaign($event, element.id)" [checked]="selectedCampaigns.includes(element.id)"></mat-checkbox>
+            <mat-checkbox (change)="onSelectCampaign($event, element.id)"
+              [checked]="selectedCampaigns.includes(element.id)"></mat-checkbox>
           </mat-cell>
         </ng-container>
 
@@ -58,7 +61,8 @@
     </div>
 
     <p style="text-align: center" *ngIf="campaignList.length > 0">
-      <button (click)="addCampaignTracking()" mat-raised-button class="submit-button" color="warn" [disabled]="isProcessing">
+      <button (click)="addCampaignTracking()" mat-raised-button class="submit-button" color="warn"
+        [disabled]="isProcessing">
         <mat-icon>location_searching</mat-icon> GẮN MÃ TRACKING
       </button>
     </p>
