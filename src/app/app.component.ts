@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import { Subject, from } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
@@ -18,6 +18,8 @@ import { AuthService } from './shared/services/auth.service';
 import { FuseProgressBarService } from '../@fuse/components/progress-bar/progress-bar.service';
 import { SessionService } from './shared/services/session.service';
 import { PageBaseComponent } from './shared/components/base/page-base.component';
+import { Meta } from '@angular/platform-browser';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app',
@@ -54,9 +56,12 @@ export class AppComponent extends PageBaseComponent implements OnInit, OnDestroy
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _translateService: TranslateService,
         private _platform: Platform,
-        private _sessionService: SessionService
+        private _sessionService: SessionService,
+        private _meta: Meta
     ) {
         super();
+
+        this._meta.addTag({ name: 'google-signin-client_id', content: environment.googleAuth2ClientID});
 
         // Get default navigation
         this.navigation = navigation;
