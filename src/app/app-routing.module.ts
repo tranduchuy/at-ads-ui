@@ -51,7 +51,7 @@ const appRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/them-tai-khoan-moi'
+    redirectTo: '/danh-sach-tai-khoan'
   },
 ];
 

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
-import { Validators } from '@angular/forms';
 import { BanIpsService } from '../ban-ips.service';
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -8,21 +6,24 @@ import { FuseProgressBarService } from '../../../../@fuse/components/progress-ba
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 @Component({
   selector: 'app-auto-ban-ip',
   templateUrl: './auto-ban-ip.component.html',
   styleUrls: ['./auto-ban-ip.component.scss']
 })
-export class AutoBanIPComponent extends EditableFormBaseComponent implements OnInit {
+export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
 
   isProcessing: boolean = false;
+  selectedMaxClick: number;
+  selectedAutoRemove: boolean;
 
   itemsSource = {
     maxClick: [
       {
         text: 'Không kích hoạt',
-        value: 0
+        value: -1
       },
       {
         text: '1 lần',
@@ -68,33 +69,56 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
   }
 
   ngOnInit(): void {
-    this.initForm();
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+
+        if (accountId) {
+          this.getBlockingIPSettting();
+        }
+
+      });
+    this.subscriptions.push(sub);
   }
 
-  initForm(): void {
-    this.form = this.fb.group({
-      maxClick: [this.itemsSource.maxClick[0], [Validators.required]],
-      autoRemove: [this.itemsSource.autoRemove[0], [Validators.required]]
-    });
+  getBlockingIPSettting() {
+    this._fuseProgressiveBarService.show();
+
+    const getSettingsSub = this._banIpsService.getBlockingIPSettings()
+      .subscribe(res => {
+        this._fuseProgressiveBarService.hide();
+
+        this.selectedMaxClick = res.data.setting.autoBlockByMaxClick;
+        this.selectedAutoRemove = res.data.setting.autoRemoveBlocking;
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+        });
+    this.subscriptions.push(getSettingsSub);
   }
 
-  onSubmitForm(): void {
-    this.onSubmit();
-  }
+  setAutoBlockingIP() {
+    const params = this.generateAutoBlockingIpParams();
 
-  post(): void {
-    const params = this.generatePostObject();
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
+
     const sub = this._banIpsService.autoBlockingIP(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-      this.isProcessing = false;
+
+      this.getBlockingIPSettting();
+
+      setTimeout(() => {
+        this._dialogService._openSuccessDialog(res);
+        this._fuseProgressiveBarService.hide();
+        this.isProcessing = false;
+      }, 0);
     },
       (error: HttpErrorResponse) => {
+
         if (error.error.messages) {
           this._dialogService._openErrorDialog(error.error);
         }
+
         this._fuseProgressiveBarService.hide();
         this.isProcessing = false;
       }
@@ -102,12 +126,12 @@ export class AutoBanIPComponent extends EditableFormBaseComponent implements OnI
     this.subscriptions.push(sub);
   }
 
-  private generatePostObject(): any {
-    const selections = { ...this.form.value };
+  private generateAutoBlockingIpParams(): any {
     const params = {
-      maxClick: selections.maxClick.value,
-      autoRemove: selections.autoRemove.value
+      maxClick: this.selectedMaxClick,
+      autoRemove: this.selectedAutoRemove
     };
+
     return params;
   }
 }

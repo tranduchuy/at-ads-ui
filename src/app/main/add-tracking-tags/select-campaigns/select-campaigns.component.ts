@@ -99,28 +99,35 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   }
 
   getOriginalCampaigns() {
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
+
     const sub = this._addTrackingTagsService.getOriginalCampaigns()
       .subscribe(res => {
         this.campaignList = res.data.campaignList;
         const sub1 = this._addTrackingTagsService.getTrackingCampaigns()
           .subscribe(res => {
-            this._fuseProgressiveBarService.hide();
             this.trackingCampaignList = res.data.campaignIds;
             this.selectedCampaigns = this.trackingCampaignList;
+            setTimeout(() => {
+              this._fuseProgressiveBarService.hide();
+              this.isProcessing = false;
+            }, 0);
           },
             (error: HttpErrorResponse) => {
+              this.trackingCampaignList = [];
               this._fuseProgressiveBarService.hide();
               this._dialogService._openErrorDialog(error.error);
-              this.trackingCampaignList = [];
+              this.isProcessing = false;
             });
         this.subscriptions.push(sub1);
       },
         (error: HttpErrorResponse) => {
           if (error.error.messages) {
-            this._dialogService._openErrorDialog(error.error);
             this.campaignList = [];
             this.trackingCampaignList = [];
+            this._dialogService._openErrorDialog(error.error);
+            this.isProcessing = false;
           }
           this._fuseProgressiveBarService.hide();
         }

@@ -1,30 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
-import { Validators } from '@angular/forms';
 import { BanIpsService } from '../ban-ips.service';
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
-import { Router } from '@angular/router';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 @Component({
   selector: 'app-auto-blocking-range-ips',
   templateUrl: './auto-blocking-range-ips.component.html',
   styleUrls: ['./auto-blocking-range-ips.component.scss']
 })
-export class AutoBlockingRangeIpsComponent extends EditableFormBaseComponent implements OnInit {
-
-  form;
+export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements OnInit {
 
   isProcessing: boolean = false;
+  classC: boolean;
+  classD: boolean;
 
   constructor(private _banIpsService: BanIpsService,
     public _sessionService: SessionService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _router: Router
   ) {
     super();
   }
@@ -53,50 +50,64 @@ export class AutoBlockingRangeIpsComponent extends EditableFormBaseComponent imp
   };
 
   ngOnInit(): void {
-    this.initForm();
-  }
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
 
-  initForm(): void {
-    this.form = this.fb.group({
-      classC: [this.itemsSource.classC[0], [Validators.required]],
-      classD: [this.itemsSource.classD[0], [Validators.required]]
-    });
-  }
+        if (accountId)
+          this.getAutoBLockingIPRangeSetting();
 
-  post(): void {
-    const params = this.generatePostObject();
-    this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
-    const sub = this._banIpsService.autoBlockingRangeIP(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-      this.isProcessing = false;
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
-        }
-        this._fuseProgressiveBarService.hide();
-        this.isProcessing = false;
-      }
-    );
+      });
     this.subscriptions.push(sub);
   }
 
+  getAutoBLockingIPRangeSetting() {
+    this._fuseProgressiveBarService.show();
 
-  onClickBtnSubmit(): void {
-    this.onSubmit();
+    const sub = this._banIpsService.getBlockingIPSettings()
+      .subscribe(res => {
+        this._fuseProgressiveBarService.hide();
+
+        this.classC = res.data.setting.autoBlackListIpRanges.classC;
+        this.classD = res.data.setting.autoBlackListIpRanges.classD;
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+        });
+    this.subscriptions.push(sub);
   }
 
-  private generatePostObject(): any {
-    const params = { ...this.form.value };
+  setAutoBlockingIPRange() {
+    this.isProcessing = true;
+    const params = this.generateAutoBlockingIPRangeParams();
+    this._fuseProgressiveBarService.show();
 
-    params.classC = params.classC.value;
-    params.classD = params.classD.value;
+    const sub = this._banIpsService.autoBlockingRangeIP(params)
+      .subscribe((res: ILoginSuccess) => {
 
+        this.getAutoBLockingIPRangeSetting();
+
+        setTimeout(() => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openSuccessDialog(res);
+          this.isProcessing = false;
+        }, 0);
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
+  }
+
+  private generateAutoBlockingIPRangeParams(): any {
+    const params = {
+      classC: this.classC,
+      classD: this.classD
+    }
 
     return params;
   }
-
 
 }

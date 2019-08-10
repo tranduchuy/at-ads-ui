@@ -27,7 +27,7 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
 
         if (!activeAdsAccountId) {
             this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
-            this._router.navigateByUrl('/them-tai-khoan');
+            this._router.navigateByUrl('/them-tai-khoan-moi');
             return false;
         }
 
@@ -35,7 +35,7 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
             .subscribe(res => {
                 if (!res.data.isConnected) {
                     this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
-                    this._router.navigateByUrl('/them-tai-khoan');
+                    this._router.navigateByUrl('/them-tai-khoan-moi');
                     return false;
                 }
             });

@@ -37,6 +37,8 @@ export namespace API {
     export const autoBlockingDevice = environment.hostApi + '/api/account-adwords/{account_id}/auto-blocking-device';
     export const getDeviceReport = environment.hostApi + '/api/account-adwords/{account_id}/report/device';
     export const setDeviceCampaignRunning = environment.hostApi + '/api/account-adwords/{account_id}/report/device';
+
+    export const getBlockingIPSettings = environment.hostApi + '/api/account-adwords/{account_id}/setting';
   }
   export namespace Website {
     export const getWebsites = environment.hostApi + '/api/websites?accountId={accountId}';

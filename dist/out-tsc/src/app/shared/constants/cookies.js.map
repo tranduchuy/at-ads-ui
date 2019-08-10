@@ -1,0 +1,1 @@
+{"version":3,"file":"cookies.js","sourceRoot":"","sources":["../../../../../../src/app/shared/constants/cookies.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,GAAG,SAAS,CAAC;AAEzB,MAAM,WAAW,GAAG;IAClB,KAAK,EAAE,MAAM,GAAG,QAAQ;IACxB,IAAI,EAAE,MAAM,GAAG,OAAO;IACtB,eAAe,EAAE,MAAM,GAAG,oBAAoB;IAC9C,kBAAkB,EAAG,MAAM,GAAG,wBAAwB;CACvD,CAAC;AAEF,eAAe,WAAW,CAAC"}

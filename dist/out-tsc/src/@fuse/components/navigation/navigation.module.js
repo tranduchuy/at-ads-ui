@@ -1,0 +1,41 @@
+import * as tslib_1 from "tslib";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatRippleModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
+import { FuseNavigationComponent } from './navigation.component';
+import { FuseNavVerticalItemComponent } from './vertical/item/item.component';
+import { FuseNavVerticalCollapsableComponent } from './vertical/collapsable/collapsable.component';
+import { FuseNavVerticalGroupComponent } from './vertical/group/group.component';
+import { FuseNavHorizontalItemComponent } from './horizontal/item/item.component';
+import { FuseNavHorizontalCollapsableComponent } from './horizontal/collapsable/collapsable.component';
+import { AdsAccountIdModule } from '../../../app/shared/pipes/ads-account-id/ads-account-id.module';
+let FuseNavigationModule = class FuseNavigationModule {
+};
+FuseNavigationModule = tslib_1.__decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            RouterModule,
+            MatIconModule,
+            MatRippleModule,
+            TranslateModule.forChild(),
+            AdsAccountIdModule,
+        ],
+        exports: [
+            FuseNavigationComponent
+        ],
+        declarations: [
+            FuseNavigationComponent,
+            FuseNavVerticalGroupComponent,
+            FuseNavVerticalItemComponent,
+            FuseNavVerticalCollapsableComponent,
+            FuseNavHorizontalItemComponent,
+            FuseNavHorizontalCollapsableComponent
+        ]
+    })
+], FuseNavigationModule);
+export { FuseNavigationModule };
+//# sourceMappingURL=navigation.module.js.map

@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
-import { Validators } from '@angular/forms';
 import { BanIpsService } from '../ban-ips.service';
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
-import { Router } from '@angular/router';
-import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 export interface DeviceReport {
   device: string;
   cost: number;
-  impresstions: number;
+  impressions: number;
   clicks: number;
   avgPosition: number;
   ctr: number;
@@ -24,14 +21,18 @@ export interface DeviceReport {
   templateUrl: './ban-device.component.html',
   styleUrls: ['./ban-device.component.scss']
 })
-export class BanDeviceComponent extends EditableFormBaseComponent implements OnInit {
+export class BanDeviceComponent extends PageBaseComponent implements OnInit {
 
   displayedColumns: string[] = ['device', 'cost', 'impressions', 'clicks', 'avgPosition', 'ctr', 'optimization'];
   deviceReports: DeviceReport[];
-  hasReport: boolean;
-  activeAdsAccountId: string;
+  isProcessing: boolean = false;
+  deviceSettings: any = {
+    mobile: false,
+    tablet: false,
+    computer: false
+  };
 
-  optimizationItemsSource = {
+  deviceSettingsItemsSource = {
     mobile: [
       {
         text: 'Chạy quảng cáo',
@@ -52,7 +53,7 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
         value: false
       }
     ],
-    pc: [
+    computer: [
       {
         text: 'Chạy quảng cáo',
         value: true
@@ -67,17 +68,14 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
   constructor(
     private _banIpsService: BanIpsService,
     private _fuseProgressiveBarService: FuseProgressBarService,
-    private _sessionService: SessionService,
+    public _sessionService: SessionService,
     public _dialogService: DialogService,
-    private _router: Router,
-    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
     this.deviceReports = [];
   }
 
   ngOnInit(): void {
-    this.initForm();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
@@ -88,60 +86,100 @@ export class BanDeviceComponent extends EditableFormBaseComponent implements OnI
     this.subscriptions.push(sub);
   }
 
-  initForm(): void {
-    this.form = this.fb.group({
-      mobile: [this.optimizationItemsSource.mobile[0]],
-      tablet: [this.optimizationItemsSource.tablet[0]],
-      pc: [this.optimizationItemsSource.pc[0]]
-    });
-  }
+  getDeviceSettings() {
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
 
-  submitForm(): void {
-    this.onSubmit();
+    const sub = this._banIpsService.getBlockingIPSettings()
+      .subscribe(res => {
+
+        this.deviceSettings = res.data.setting.devices;
+
+        setTimeout(() => {
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+        }, 0);
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+        });
+    this.subscriptions.push(sub);
   }
 
   getDeviceReport() {
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.getDeviceReport()
       .subscribe(res => {
-        this._fuseProgressiveBarService.hide();
         this.deviceReports = res.data.reportDevice;
-        this.activeAdsAccountId = this._sessionService.activeAdsAccountId;
 
-        if (this.deviceReports.length > 0)
-          this.hasReport = true;
-        else this.hasReport = false;
+        // this.deviceReports = [
+        //   {
+        //     device: 'Điện thoại',
+        //     cost: 123,
+        //     impressions: 123,
+        //     clicks: 123,
+        //     avgPosition: 123,
+        //     ctr: 123
+        //   },
+        //   {
+        //     device: 'Máy tính bảng',
+        //     cost: 123,
+        //     impressions: 123,
+        //     clicks: 123,
+        //     avgPosition: 123,
+        //     ctr: 123
+        //   },
+        //   {
+        //     device: 'Máy tính',
+        //     cost: 123,
+        //     impressions: 123,
+        //     clicks: 123,
+        //     avgPosition: 123,
+        //     ctr: 123
+        //   },
+        // ];
+
+        this.getDeviceSettings();
+
+        setTimeout(() => {
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+        }, 0);
       },
         (error: HttpErrorResponse) => {
-          if (error.error.messages) {
-            this._dialogService._openErrorDialog(error.error);
-          }
           this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.deviceReports = [];
+          this.isProcessing = false;
         }
       );
     this.subscriptions.push(sub);
   }
 
   setDeviceCampaignRunning(event, deviceId: number) {
-    const params = {
-      device: deviceId,
-      isEnabled: event.value.value
-    }
-
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
-    const sub = this._banIpsService.setDeviceCampaignRunning(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.messages) {
+
+    const sub = this._banIpsService.setDeviceCampaignRunning({ device: deviceId, isEnabled: event.value })
+      .subscribe((res: ILoginSuccess) => {
+
+        this.getDeviceSettings();
+
+        setTimeout(() => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openSuccessDialog(res);
+          this.isProcessing = false;
+        }, 0);
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
         }
-        this._fuseProgressiveBarService.hide();
-      }
-    );
+      );
     this.subscriptions.push(sub);
   }
 
-  post(): void { }
 }

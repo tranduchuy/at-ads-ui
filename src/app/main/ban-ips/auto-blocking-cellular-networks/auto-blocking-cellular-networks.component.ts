@@ -1,103 +1,85 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BanIpsService } from '../ban-ips.service';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
-import { Router } from '@angular/router';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 @Component({
   selector: 'app-auto-blocking-cellular-networks',
   templateUrl: './auto-blocking-cellular-networks.component.html',
   styleUrls: ['./auto-blocking-cellular-networks.component.scss']
 })
-export class AutoBlockingCellularNetworksComponent extends EditableFormBaseComponent implements OnInit {
+export class AutoBlockingCellularNetworksComponent extends PageBaseComponent implements OnInit {
 
   isProcessing: boolean = false;
+  mobileNetworks: any = {
+    viettel: false,
+    mobifone: false,
+    vinafone: false,
+    vietnammobile: false
+  }
 
-  networkItemsSource = [
-    {
-      text: 'Mạng VIETTEL',
-      value: 'viettel'
-    },
-    {
-      text: 'Mạng MOBI',
-      value: 'mobifone'
-    },
-    {
-      text: 'Mạng VINA',
-      value: 'vinafone'
-    },
-    {
-      text: 'Mạng VIETNAMOBILE',
-      value: 'vietnammobile'
-    }
-  ];
-
-  form;
   constructor(private _banIpsService: BanIpsService,
     public _sessionService: SessionService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _router: Router
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.initForm();
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId)
+          this.getAutoBlocking3G4GSetting();
+      });
+    this.subscriptions.push(sub);
   }
 
-  initForm(): void {
-    this.form = this.fb.group({
-      networks: [[]]
-    });
+  selectNetwork(event, network: string) {
+    if(event.checked)
+      this.mobileNetworks[network] = true;
+    else this.mobileNetworks[network] = false;
   }
 
-  onClickBtnSubmit(): void {
-    this.onSubmit();
+  getAutoBlocking3G4GSetting() {
+    this._fuseProgressiveBarService.show();
+
+    const sub = this._banIpsService.getBlockingIPSettings()
+      .subscribe(res => {
+        this._fuseProgressiveBarService.hide();
+        this.mobileNetworks = res.data.setting.mobileNetworks;
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+        });
+    this.subscriptions.push(sub);
   }
 
-  private generatePostObject(): any {
-    const params = { ...this.form.value };
-
-    const defaultObject = {
-      vinafone: false,
-      mobifone: false,
-      viettel: false,
-      vietnammobile: false
-    };
-
-    let paramsObject = {};
-    params.networks.map(key => {
-      paramsObject[key] = true;
-    });
-
-    paramsObject = Object.assign(defaultObject, paramsObject);
-
-    return paramsObject;
-  }
-
-  post(): void {
-    const params = this.generatePostObject();
+  setAutoBlocking3G4G() {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
-    const sub = this._banIpsService.autoBlocking3G4G(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-      this.isProcessing = false;
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.messages) {
+
+    const sub = this._banIpsService.autoBlocking3G4G(this.mobileNetworks)
+      .subscribe((res: ILoginSuccess) => {
+
+        this.getAutoBlocking3G4GSetting();
+
+        setTimeout(() => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openSuccessDialog(res);
+          this.isProcessing = false;
+        }, 0);
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
-        }
-        this._fuseProgressiveBarService.hide();
-        this.isProcessing = false;
-      }
-    );
+          this.isProcessing = false;
+        });
     this.subscriptions.push(sub);
   }
 

@@ -18,6 +18,12 @@
     box-shadow: 2px 2px 5px silver;
   }
 
+  .network-logo, .mobifone {
+    height: 25px;
+    width: 80px;
+    margin-left: 10px;
+  }
+
   .title2 {
     padding-top: 20px;
   }
@@ -68,5 +74,11 @@
 
   .submit-button{
     font-size: 12px;
+  }
+
+  .checkbox-group {
+    width: 90%;
+    display: table;
+    margin: 0 auto;
   }
 }

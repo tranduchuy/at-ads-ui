@@ -6,6 +6,7 @@ import { DialogService } from '../../shared/services/dialog.service';
 import { SessionService } from 'app/shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { AdwordsAccountListService } from './adwords-account-list.service';
+import { Router } from '@angular/router';
 
 export interface Website {
   domain: string;
@@ -36,8 +37,8 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _sessionService: SessionService,
-    private _adwordsAccountListService: AdwordsAccountListService
+    private _adwordsAccountListService: AdwordsAccountListService,
+    private _router: Router
   ) {
     super();
   }
@@ -86,10 +87,9 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
       }
     },
       (error: HttpErrorResponse) => {
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
-        }
         this._fuseProgressiveBarService.hide();
+        this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+        this._router.navigateByUrl('/them-tai-khoan-moi');
       });
     this.subscriptions.push(sub);
   }

@@ -21,7 +21,7 @@
 
     <p class="table-title">Chọn chiến dịch để gắn tracking (nên chọn tất cả)</p>
 
-    <div class="table-wrapper" *ngIf="campaignList.length > 0">
+    <div class="table-wrapper" *ngIf="campaignList.length > 0 && !isProcessing">
 
       <mat-table [dataSource]="campaignList" class="mat-elevation-z8">
 
@@ -60,18 +60,18 @@
 
     </div>
 
-    <p style="text-align: center" *ngIf="campaignList.length > 0">
+    <p style="text-align: center" *ngIf="campaignList.length > 0 && !isProcessing">
       <button (click)="addCampaignTracking()" mat-raised-button class="submit-button" color="warn"
         [disabled]="isProcessing">
         <mat-icon>location_searching</mat-icon> GẮN MÃ TRACKING
       </button>
     </p>
 
-  </form>
+    <p class="notification" *ngIf="campaignList.length === 0 && !isProcessing">
+      Chúng tôi không tìm thấy chiến dịch nào đang chạy. Vui lòng thử lại hoặc <span style="color: dodgerblue">liên
+        hệ</span> với hỗ trợ viên để được giúp đỡ.
+    </p>
 
-  <p class="notification" *ngIf="campaignList.length === 0">
-    Chúng tôi không tìm thấy chiến dịch nào đang chạy. Vui lòng thử lại hoặc <span style="color: dodgerblue">liên
-      hệ</span> với hỗ trợ viên để được giúp đỡ.
-  </p>
+  </form>
 
 </div>

@@ -4,19 +4,30 @@
     CẤU HÌNH CHẶN TỰ ĐỘNG 3G 4G- TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
-  <p class="title2"> Bằng việc thiết lập này quảng cáo sẽ <span style="color: red">không hiển thị</span> trên hầu hết các thiết bị sử
+  <p class="title2"> Bằng việc thiết lập này quảng cáo sẽ <span style="color: red">không hiển thị</span> trên hầu hết
+    các thiết bị sử
     dụng truy cập <span style="color: red">(3G & 4G)</span> của các mạng di động tại Việt Nam</p>
 
-  <form [formGroup]="form" novalidate>
-    <div class="checkbox-group">
-      <app-checkbox-group [itemsSource]="networkItemsSource" [direction]="'column'"
-        [errors]="getErrorMessages(form, 'networks')" [formControlName]="'networks'" [valuePath]="'value'"
-        [displayPath]="'text'"></app-checkbox-group>
-    </div>
-    <p class="text-center">
-      <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" (click)="onClickBtnSubmit()" [disabled]="isProcessing">
-        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
-      </button>
-    </p>
-  </form>
+  <div class="checkbox-group" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-around">
+    <mat-checkbox [checked]="mobileNetworks.viettel" (change)="selectNetwork($event,'viettel')">
+      <img src="https://dangky3gviettel.vn/wp-content/uploads/2018/10/cropped-logo-dang-ky-3g-viettel.png" class="network-logo" alt="">
+    </mat-checkbox>
+    <mat-checkbox [checked]="mobileNetworks.mobifone" (change)="selectNetwork($event,'mobifone')">
+      <img src="https://brasol.vn/public/uploads/1521197514-brasol.vn-logo-mobifone-mobifone-logo.svg_.png" class="network-logo" alt="">
+    </mat-checkbox>
+    <mat-checkbox [checked]="mobileNetworks.vinafone" (change)="selectNetwork($event,'vinafone')">
+      <img src="https://img2.thuthuatphanmem.vn/uploads/2018/12/13/logo-vinaphone_010429237.png" class="network-logo" alt="">
+    </mat-checkbox>
+    <mat-checkbox [checked]="mobileNetworks.vietnammobile" (change)="selectNetwork($event,'vietnammobile')">
+      <img src="https://css.vietnamobile.com.vn/images/logo.png" class="network-logo" alt="">
+    </mat-checkbox>
+  </div>
+
+  <p class="text-center">
+    <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" (click)="setAutoBlocking3G4G()"
+      [disabled]="isProcessing">
+      <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+    </button>
+  </p>
+
 </div>
