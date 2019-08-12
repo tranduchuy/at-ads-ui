@@ -14,8 +14,8 @@
 
         <ng-container matColumnDef="task">
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
-          <mat-cell *matCellDef>
-            <button mat-icon-button color="accent" matTooltip="Cập nhật dữ liệu">
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" matTooltip="Cập nhật dữ liệu" *ngIf="element.isConnected">
               <mat-icon>update</mat-icon>
             </button>
           </mat-cell>
@@ -23,23 +23,26 @@
 
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Ngày </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/yyyy HH:mm'}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="adwords">
           <mat-header-cell *matHeaderCellDef> AdWords ID </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div fxLayout="row">
-              <p style="width: 120px">
+              <p style="width: 120px; color: #4bb543; font-weight: bold" *ngIf="element.isConnected">
                 {{element.adsId | adsAccountId}}
               </p>
-              <div>
+              <p style="width: 120px; color: silver; font-weight: bold" *ngIf="!element.isConnected">
+                {{element.adsId | adsAccountId}}
+              </p>
+              <div fxLayout="row" *ngIf="element.isConnected">
                 <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan">
                   <mat-icon>notifications</mat-icon>
                 </button>
                 <a *ngIf="element.websites.length > 0"
-                  [routerLink]="['/gan-tracking/website', element.id,element.adsId,element.key]" mat-icon-button color="accent"
-                  matTooltip="Gắn mã tracking website" style="color: red">
+                  [routerLink]="['/gan-tracking/website', element.id,element.adsId,element.key]" mat-icon-button
+                  color="accent" matTooltip="Gắn mã tracking cho các website" style="color: red">
                   <mat-icon>code</mat-icon>
                 </a>
                 <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
@@ -53,13 +56,25 @@
           </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="accepted">
+          <mat-header-cell *matHeaderCellDef> Quyền quản lý </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" matTooltip="Đã được chấp nhận" *ngIf="element.isConnected">
+              <mat-icon style="color: #4bb543">check_circle</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" matTooltip="Chưa được chấp nhận" *ngIf="!element.isConnected">
+              <mat-icon style="color: crimson">highlight_off</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="website">
           <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <ul style="width: 100%">
+            <ul style="width: 100%" *ngIf="element.isConnected">
               <li *ngFor="let website of element.websites, let i = index" fxLayout="row">
                 <p style="padding-left: 5px" fxFlex="90">
-                  <span>{{i+1}}</span>. 
+                  <span>{{i+1}}</span>.
                   <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
                 </p>
                 <div fxFlex="10">
@@ -73,7 +88,8 @@
                 </div>
               </li>
               <li>
-                <a [routerLink]="['/quan-ly-website', element.adsId]" mat-button color="accent" style="padding-left: 0">
+                <a [routerLink]="['/quan-ly-website', element.id, element.adsId]"
+                   mat-button color="accent" style="padding-left: 0">
                   <mat-icon>add_circle_outline</mat-icon> Thêm Website
                 </a>
               </li>
@@ -155,11 +171,11 @@
 
     </div>
 
-    <div class="button-area">
+    <!-- <div class="button-area">
       <button mat-raised-button color="accent" style="border-radius: 0">
         <mat-icon>wifi</mat-icon> KẾT NỐI TÀI KHOẢN ADWORDS
       </button>
-    </div>
+    </div> -->
 
   </form>
 

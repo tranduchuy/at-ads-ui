@@ -7,6 +7,8 @@ import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 
+import { distinctUntilChanged } from 'rxjs/operators';
+
 @Component({
   selector: 'app-spam-click-report',
   templateUrl: './spam-click-report.component.html',
@@ -69,7 +71,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   }
 
   onApplyDateRange(event) {
-    if(moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 60) {
+    if (moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 60) {
       this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 60 ngày trở lại');
       return false;
     }

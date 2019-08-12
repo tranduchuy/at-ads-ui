@@ -47,7 +47,7 @@
       <img src="./assets/images/adwords-caidat-b3-moi.jpg?v=1">
     </p>
     <p class="text-center">
-      <button mat-raised-button color="warn" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI" (click)="completeAccountConnection()">
+      <button mat-raised-button color="warn" [disabled]="isProcessing" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI" (click)="completeAccountConnection()">
         <mat-icon matSuffix class="done_outline">done_outline</mat-icon>
         TÔI ĐÃ HOÀN TẤT KẾT NỐI
       </button>

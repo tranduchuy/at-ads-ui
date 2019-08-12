@@ -22,6 +22,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   form;
   isConnected = false;
   connectedAccountId: string;
+  connectedAdsId: string;
   _adsAccountIdPipe = new AdsAccountIdPipe();
   isProcessing: boolean = false;
 
@@ -42,7 +43,29 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   completeAccountConnection() {
-    this._router.navigateByUrl('/gan-tracking/chien-dich');
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
+
+    const sub = this._addAdwordsAccountsService.getAdwordsAccountDetail(this.connectedAccountId)
+      .subscribe(res => {
+        this._fuseProgressiveBarService.hide();
+        if (res.data.isConnected) {
+          this._sessionService.setActiveAccountId(this.connectedAccountId);
+          this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
+          this._fuseNavigationService.reloadNavigation();
+          this._router.navigateByUrl('/gan-tracking/chien-dich');
+        }
+        else {
+          this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+          this.isProcessing = false;
+        }
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog({ messages: ['Tài khoản AdWords không tồn tại'] });
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
   }
 
   post(): void {
@@ -52,17 +75,16 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res) => {
       this._dialogService._openInfoDialog(res.messages[0]);
       this.isConnected = true;
-      this._sessionService.setActiveAccountId(res.data.account._id);
-      this._sessionService.setActiveAdsAccountId(this._adsAccountIdPipe.transform(res.data.account.adsId));
-      this._fuseNavigationService.reloadNavigation();
+
+      this.connectedAccountId = res.data.account._id;
+      this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
+
       this._fuseProgressiveBarService.hide();
       this.isProcessing = false;
     },
       (error: HttpErrorResponse) => {
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
-        }
         this._fuseProgressiveBarService.hide();
+        this._dialogService._openErrorDialog(error.error);
         this.isProcessing = false;
       }
     );

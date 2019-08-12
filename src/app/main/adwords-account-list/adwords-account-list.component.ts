@@ -8,21 +8,6 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { AdwordsAccountListService } from './adwords-account-list.service';
 import { Router } from '@angular/router';
 
-export interface Website {
-  domain: string;
-  code: string;
-  expiredAt: Date | null;
-  status: number;
-}
-
-export interface Account {
-  id: string;
-  adsId: string;
-  createdAt: Date;
-  numberOfWebsites: number;
-  websites: Website[];
-}
-
 @Component({
   selector: 'app-adwords-account-list',
   templateUrl: './adwords-account-list.component.html',
@@ -31,8 +16,8 @@ export interface Account {
 export class AdwordsAccountListComponent extends PageBaseComponent implements OnInit {
 
   // displayedColumns: string[] = ['task', 'date', 'adwords', 'website', 'service', 'cost', 'display', 'click', 'spamClick'];
-  displayedColumns: string[] = ['task', 'date', 'adwords', 'website'];
-  accounts: Account[];
+  displayedColumns: string[] = ['task', 'date', 'adwords', 'accepted', 'website'];
+  accounts = []
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -49,8 +34,8 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
   openRemoveWebsiteDialog(websiteId: string) {
     const confirmDialogSub = this._dialogService._openConfirmDialog('Xóa website này khỏi tài khoản AdWords?')
-      .subscribe((result) => {
-        if (result) {
+      .subscribe((isAccepted) => {
+        if (isAccepted) {
           this._fuseProgressiveBarService.show();
           const sub = this._adwordsAccountListService.removeWebsite(websiteId).subscribe((res: ILoginSuccess) => {
             this._fuseProgressiveBarService.hide();
@@ -72,25 +57,16 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   getAccounts() {
     this.accounts = [];
     this._fuseProgressiveBarService.show();
-    const sub = this._adwordsAccountListService.getAccounts().subscribe(res => {
-      this.accounts = res.data.accounts;
-      
-      if (this.accounts.length > 0) {
-        for (const item of this.accounts) {
-          item.websites = [];
-          const getWebsiteSub = this._adwordsAccountListService.getWebsites(item.id).subscribe(res => {
-            this._fuseProgressiveBarService.hide();
-            item.websites = res.data.website;
-          });
-          this.subscriptions.push(getWebsiteSub);
-        }
-      }
-    },
-      (error: HttpErrorResponse) => {
+    const sub = this._adwordsAccountListService.getAccounts()
+      .subscribe(res => {
         this._fuseProgressiveBarService.hide();
-        this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
-        this._router.navigateByUrl('/them-tai-khoan-moi');
-      });
+        this.accounts = res.data.accounts;
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+          this._router.navigateByUrl('/them-tai-khoan-moi');
+        });
     this.subscriptions.push(sub);
   }
 }

@@ -14,7 +14,7 @@ import { environment } from '../../../../environments/environment';
 export class TrackingWebsiteComponent extends PageBaseComponent implements OnInit {
 
   adsId: string;
-  id: string;
+  accountId: string;
   key: string;
   hostTracking: string = environment.hostTracking;
 
@@ -31,7 +31,7 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
 
     const sub = this._activatedRoute.params
       .subscribe((params: any) => {
-        this.id = params.id;
+        this.accountId = params.accountId;
         this.adsId = this.adsAccountIdPipe.transform(params.adsId);
         this.key = params.key;
       });
@@ -50,6 +50,6 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
 
   checkWebsiteTracking() {
     const dialogRef = this._matDialog.open(CheckWebsiteTrackingDialogComponent);
-    return dialogRef.componentInstance.accountId = this.id;
+    return dialogRef.componentInstance.accountId = this.accountId;
   }
 }

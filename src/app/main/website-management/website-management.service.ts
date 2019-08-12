@@ -32,4 +32,9 @@ export class WebsiteManagementService {
     const url =  API.Website.getWebsiteTrackingInfo.replace('{account_id}', accountId);
     return this._http.get(url);
   }
+
+  getAdwordAccountDetail(accountId: string): Observable<any> {
+    const url = API.AdwordsAccount.getAwordsAccountDetail.replace('{account_id}', accountId);
+    return this._http.get(url);
+  }
 }

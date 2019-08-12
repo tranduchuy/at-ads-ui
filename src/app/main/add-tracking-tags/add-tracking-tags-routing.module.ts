@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.component';
 import { TrackingWebsiteComponent } from './tracking-website/tracking-website.component';
+import { AccountAcceptanceGuardService } from 'app/shared/services/guard/account-acceptance-guard.service';
 
 @NgModule({
   imports: [RouterModule.forChild([
@@ -12,9 +13,10 @@ import { TrackingWebsiteComponent } from './tracking-website/tracking-website.co
       component: SelectCampaignsComponent
     },
     {
-      path: 'website/:id/:adsId/:key',
+      path: 'website/:accountId/:adsId/:key',
       pathMatch: 'full',
-      component: TrackingWebsiteComponent
+      component: TrackingWebsiteComponent,
+      canActivate: [AccountAcceptanceGuardService]
     },
   ])],
   exports: [RouterModule]

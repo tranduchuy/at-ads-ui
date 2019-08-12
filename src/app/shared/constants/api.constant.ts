@@ -39,6 +39,8 @@ export namespace API {
     export const setDeviceCampaignRunning = environment.hostApi + '/api/account-adwords/{account_id}/report/device';
 
     export const getBlockingIPSettings = environment.hostApi + '/api/account-adwords/{account_id}/setting';
+
+    export const getAwordsAccountDetail = environment.hostApi + '/api/account-adwords/{account_id}';
   }
   export namespace Website {
     export const getWebsites = environment.hostApi + '/api/websites?accountId={accountId}';

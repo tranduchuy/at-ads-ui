@@ -14,4 +14,9 @@ export class AdwordsAccountsService {
   public getAdwordsAccount(): Observable<any> {
     return this._http.get(API.AdwordsAccount.getAccounts);
   }
+
+  public getAccountAdwordsDetail(accountId: string): Observable<any> {
+    const url = API.AdwordsAccount.getAwordsAccountDetail.replace('{account_id}', accountId);
+    return this._http.get(url);
+  } 
 }

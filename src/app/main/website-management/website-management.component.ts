@@ -184,9 +184,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
       this.getWebsites();
     },
       (error: HttpErrorResponse) => {
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
-        }
+        this._dialogService._openErrorDialog(error.error);
         this._fuseProgressiveBarService.hide();
         this.onAddingDomain = false;
       }
