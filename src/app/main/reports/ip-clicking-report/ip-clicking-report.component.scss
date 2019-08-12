@@ -12,54 +12,38 @@
     font-weight: bold;
 
     padding-left: 25px;
+    box-shadow: 2px 2px 5px silver;
+  }
+
+  .pagination-buttons {
+    display: table;
+    margin: 0 auto;
   }
 
   .footer {
     text-align: center;
     margin-top: 20px;
-    background-color: #eee;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-
-  :host ::ng-deep .page-number {
-    margin-top: -18px;
-  }
-
-  ::ng-deep .mat-tab-list .mat-tab-labels {
-    display: flex;
-    justify-content: center;
-  }
-
-  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label {
-    min-width: 50px !important;
-  }
-
-  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
-    min-width: 50px !important;
-  }
-
-  ::ng-deep .mat-ink-bar {
-    background-color: dodgerblue !important;
+    padding-top: 10px;
   }
 
   .table-wrapper {
-    height: 400px;
+    height: auto;
     background-color: white;
-    margin-bottom: 20px;
+    box-shadow: 2px 2px 5px silver;
+    margin-top: -18px;
     overflow: auto;
 
     mat-table {
       box-shadow: none;
 
-      mat-header-cell:nth-child(7),
-      mat-cell:nth-child(7) {
-        flex: 0 0 10%;
+      mat-header-cell:nth-child(1),
+      mat-cell:nth-child(1) {
+        flex: 0 0 15%;
       }
 
       mat-header-row,
       mat-row {
-        min-width: 2000px;
+        min-width: 1000px;
         width: 100%;
       }
 

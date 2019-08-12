@@ -1,87 +1,65 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'app/shared/services/session.service';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import { ReportService } from '../report.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { DialogService } from 'app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-ip-clicking-report',
   templateUrl: './ip-clicking-report.component.html',
   styleUrls: ['./ip-clicking-report.component.scss']
 })
-export class IpClickingReportComponent implements OnInit {
+export class IpClickingReportComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['time', 'ip', 'clicks', 'status', 'location', 'os', 'browser', 'network', 'connection', 'keyword', 'matching', 'page', 'position'];
+  displayedColumns: string[] = ['time', 'ip', 'clicks', 'location', 'os', 'browser', 'network', 'keyword'];
 
-  pages = [];
-
-  dataSource = [
-    {
-      time: '09:56 10/06/2019',
-      ip: '192.168.1.1',
-      clicks: 1,
-      status: true,
-      location: 'Ho Chi Minh City',
-      os: 'Android 7.0 (Lolipop)',
-      browser: 'Chrome 73.0.5663.90',
-      network: 'VIETTEL',
-      connection: '4G',
-      keyword: 'sửa tủ lạnh',
-      matching: 'Rộng',
-      page: 1,
-      position: 2
-    },
-    {
-      time: '09:56 10/06/2019',
-      ip: '192.168.1.1',
-      clicks: 1,
-      status: true,
-      location: 'Ho Chi Minh City',
-      os: 'Firefox 67.0',
-      browser: 'Chrome 73.0.5663.90',
-      network: 'VNPT',
-      connection: '4G',
-      keyword: 'sửa tủ lạnh',
-      matching: 'Rộng',
-      page: 1,
-      position: 2
-    },
-    {
-      time: '09:56 10/06/2019',
-      ip: '192.168.1.1',
-      clicks: 1,
-      status: true,
-      location: 'Ho Chi Minh City',
-      os: 'Opera 12.1.1',
-      browser: 'Chrome 73.0.5663.90',
-      network: 'FPT',
-      connection: '3G',
-      keyword: '"bảo hành tủ lạnh Toshiba"',
-      matching: 'Cụm từ',
-      page: 1,
-      position: 2
-    },
-    {
-      time: '09:56 10/06/2019',
-      ip: '192.168.1.1',
-      clicks: 1,
-      status: true,
-      location: 'Ho Chi Minh City',
-      os: 'Opera 12.1.1',
-      browser: 'Chrome 73.0.5663.90',
-      network: 'SCTV',
-      connection: '3G',
-      keyword: '"bảo hành tủ lạnh Toshiba"',
-      matching: 'Cụm từ',
-      page: 1,
-      position: 2
-    },
-  ]
+  dataSource = [];
 
   constructor(
-    public _sessionService: SessionService
+    public _sessionService: SessionService,
+    private _fuseProgressBarService: FuseProgressBarService,
+    private _reportService: ReportService,
+    private _dialogService: DialogService
   ) {
-    this.pages = Array.from({ length: 5 }, (v, k) => k + 1);
+    super();
   }
 
+  isProcessing: boolean = false;
+  total: number;
+
   ngOnInit() {
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId)
+          this.getDailyClickingReport(1);
+      });
+    this.subscriptions.push(sub);
+  }
+
+  getDailyClickingReport(page: number) {
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+
+    const sub = this._reportService.getDailyClickingReport({ page, limit: 10 })
+      .subscribe(res => {
+        this.dataSource = res.data.entries;
+        this.total = res.data.totalItems;
+        this._fuseProgressBarService.hide();
+        this.isProcessing = false;
+      },
+        (error: HttpErrorResponse) => {
+          this.dataSource = [];
+          this._fuseProgressBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
+  }
+
+  changePage(event) {
+    this.getDailyClickingReport(event);
   }
 
 }

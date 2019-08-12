@@ -9,6 +9,11 @@ export interface IAccountReportParams {
   to: string;
 }
 
+export interface IDailyClickingReport {
+  page?: number;
+  limit?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +29,16 @@ export class ReportService {
     let url = API.Report.getAccountReport.replace('{account_id}', activeAccountId);
     url = url.replace('{from}', params.from);
     url = url.replace('{to}', params.to);
+
+    return this._http.get(url);
+  }
+
+  getDailyClickingReport(params: IDailyClickingReport): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    let url = API.Report.getDailyClickingReport.replace('{account_id}', activeAccountId);
+    url = url.replace('{page}', params.page.toString());
+    url = url.replace('{limit}', params.limit.toString());
+
     return this._http.get(url);
   }
 

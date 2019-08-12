@@ -31,6 +31,8 @@ import { BlockedIpListComponent } from './blocked-ip-list/blocked-ip-list.compon
 import {getVietnamesePaginatorIntl} from './vietnamese-paginator-intl';
 import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-report.component';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent],
   imports: [
@@ -58,6 +60,7 @@ import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-repo
     FuseWidgetModule,
     ChartsModule,
     NgxDaterangepickerMd,
+    NgxPaginationModule,
 
     FuseSharedModule,
 

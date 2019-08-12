@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { SessionService } from '../session.service';
 import { DialogService } from '../dialog.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BanIpsService } from 'app/main/ban-ips/ban-ips.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
@@ -23,7 +23,7 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-        const activeAdsAccountId = this._sessionService.activeAdsAccountId;
+        let activeAdsAccountId = this._sessionService.activeAdsAccountId.match(/\d+/g).join('');
 
         if (!activeAdsAccountId) {
             this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
@@ -31,15 +31,15 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
             return false;
         }
 
-        const sub = this._blockIPService.checkAccountAcceptance({ adWordId: activeAdsAccountId })
-            .subscribe(res => {
-                if (!res.data.isConnected) {
-                    this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
-                    this._router.navigateByUrl('/them-tai-khoan-moi');
-                    return false;
-                }
-            });
-        this.subscriptions.push(sub);
+        // const sub = this._blockIPService.checkAccountAcceptance({ adWordId: activeAdsAccountId })
+        //     .subscribe((error: HttpErrorResponse) => {
+        //         if (!error.error.data.isConnected) {
+        //             this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+        //             this._router.navigateByUrl('/them-tai-khoan-moi');
+        //             return false;
+        //         }
+        //     });
+        // this.subscriptions.push(sub);
 
         return true;
     }
