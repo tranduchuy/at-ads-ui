@@ -28,6 +28,7 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
 
   isProcessing: boolean = false;
   total: number;
+  currentPageNumber: number;
 
   ngOnInit() {
     const sub = this._sessionService.getAccountId()

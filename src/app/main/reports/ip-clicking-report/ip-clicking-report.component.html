@@ -7,7 +7,7 @@
 
   <div class="table-wrapper">
 
-    <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }" class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: total }" class="mat-elevation-z8">
 
       <ng-container matColumnDef="time">
         <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
@@ -100,7 +100,7 @@
 
   </div>
   <div class="pagination-buttons">
-    <pagination-controls (pageChange)="changePage($event); p = $event"
+    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event"
                          previousLabel="Trang trước"
                          nextLabel="Trang sau"></pagination-controls>
   </div>
