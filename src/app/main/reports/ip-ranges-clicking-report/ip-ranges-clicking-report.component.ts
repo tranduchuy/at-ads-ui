@@ -29,12 +29,12 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
 
   dataSource = [];
 
-  currentPageNumber: number;
+  currentPageNumber: number = 0;
   pageTotal: number;
   isProcessing: boolean = false;
 
   constructor(
-    private _sessionService: SessionService,
+    public _sessionService: SessionService,
     private _dialogService: DialogService,
     private _reportService: ReportService,
     private _fuseProgressBarService: FuseProgressBarService
@@ -52,6 +52,7 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
   }
 
   getClassDClickingReport(page: number) {
+
     this.isProcessing = true;
     this._fuseProgressBarService.show();
 
@@ -66,7 +67,6 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
 
         if (this.pageTotal > 0)
           this.currentPageNumber = 1;
-        else this.currentPageNumber = 0;
 
         setTimeout(() => {
           this._fuseProgressBarService.hide();
@@ -91,7 +91,6 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
       this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 60 ngày trở lại');
       return false;
     }
-    this.getClassDClickingReport(this.currentPageNumber);
     return true;
   }
 }

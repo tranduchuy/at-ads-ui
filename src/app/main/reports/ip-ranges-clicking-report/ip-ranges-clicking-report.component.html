@@ -1,21 +1,16 @@
 <div class="container">
 
-  <div class="title1" fxLayout="row">
-    <p class="title2" fxFlex="80">BÁO CÁO NHÓM IP ĐANG CLICK</p>
-    <mat-form-field class="datePicker" fxFlex="20">
+  <div class="title1" fxLayout="row" fxLayout.xs="column">
+    <p class="title2" fxFlex="80">BÁO CÁO NHÓM IP ĐANG CLICK TÀI KHOẢN <span style="color:black">{{_sessionService.activeAdsAccountId}}</span></p>
+    <mat-form-field class=" datePicker" fxFlex="20">
         <input type="text" ngxDaterangepickerMd matInput placeholder="Khoảng thời gian thống kê" readonly
-               [locale]="locale"
-               [(ngModel)]="selectedDateRange"
-               startKey="start" 
-               endKey="end" 
-               (datesUpdated)="onApplyDateRange($event)"
-               ngDefaultControl/>
-      </mat-form-field>
+          [locale]="locale" [(ngModel)]="selectedDateRange" startKey="start" endKey="end"
+          (datesUpdated)="onApplyDateRange($event)" (change)="getClassDClickingReport(1)" ngDefaultControl />
+        </mat-form-field>
   </div>
 
   <div class="mat-elevation-z8 table-wrapper">
-    <mat-table
-      [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber }">
+    <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber }">
 
       <ng-container matColumnDef="time">
         <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
@@ -37,21 +32,21 @@
       <ng-container matColumnDef="keyword">
         <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
         <mat-cell *matCellDef="let element">
-            <span *ngFor="let item of element.keywords" style="margin-right: 5px">{{item}}</span>
+          <span *ngFor="let item of element.keywords" style="margin-right: 5px">{{item}}</span>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="location">
         <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
         <mat-cell *matCellDef="let element">
-            <span *ngFor="let item of element.locations" style="margin-right: 5px">{{item?.city}}</span>
+          <span *ngFor="let item of element.locations" style="margin-right: 5px">{{item?.city}}</span>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="network">
         <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
         <mat-cell *matCellDef="let element">
-            <span *ngFor="let item of element.networks" style="margin-right: 5px">{{item?.name}}</span>
+          <span *ngFor="let item of element.networks" style="margin-right: 5px">{{item?.name}}</span>
         </mat-cell>
       </ng-container>
 
@@ -75,7 +70,9 @@
   </div>
 
   <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
-    <p>Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span> trong tổng {{pageTotal}} trang</p>
+    <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span> trong tổng
+      {{pageTotal}} trang</p>
+    <p *ngIf="pageTotal === 0">Không có trang nào</p>
     <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
       nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
   </div>

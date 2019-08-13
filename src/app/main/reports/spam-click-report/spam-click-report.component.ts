@@ -65,7 +65,6 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
       this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 60 ngày trở lại');
       return false;
     }
-    this.getAccountReport();
     return true;
   }
 
