@@ -32,6 +32,7 @@
     box-shadow: 2px 2px 5px silver;
     margin-top: -18px;
     overflow: auto;
+    overflow-y: hidden;
 
     mat-table {
       box-shadow: none;

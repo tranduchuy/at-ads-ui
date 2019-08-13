@@ -32,9 +32,10 @@ import {getVietnamesePaginatorIntl} from './vietnamese-paginator-intl';
 import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-report.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-ranges-clicking-report.component';
 
 @NgModule({
-  declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent],
+  declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent, IpRangesClickingReportComponent],
   imports: [
 
     MatButtonModule,

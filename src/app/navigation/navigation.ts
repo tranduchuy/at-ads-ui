@@ -31,7 +31,7 @@ export const navigation: FuseNavigation[] = [
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'blur_linear',
-        url: '**'
+        url: 'bao-cao/nhom-ip-dang-click'
       },
       {
         id: 'blocked-ip-list',

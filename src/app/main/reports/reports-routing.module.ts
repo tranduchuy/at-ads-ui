@@ -5,6 +5,7 @@ import { SpamClickReportComponent } from './spam-click-report/spam-click-report.
 import { IpDetailComponent } from './ip-detail/ip-detail.component';
 import { BlockedIpListComponent } from './blocked-ip-list/blocked-ip-list.component';
 import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-report.component';
+import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-ranges-clicking-report.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,11 @@ import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-repo
         path: 'ip-dang-click',
         pathMatch: 'full',
         component: IpClickingReportComponent
+      },
+      {
+        path: 'nhom-ip-dang-click',
+        pathMatch: 'full',
+        component: IpRangesClickingReportComponent
       },
       {
         path: 'danh-sach-ip-da-chan',

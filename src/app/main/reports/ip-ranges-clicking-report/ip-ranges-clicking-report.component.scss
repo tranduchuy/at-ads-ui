@@ -13,20 +13,19 @@
     text-align: center;
   }
 
-  .network-logo {
-    height: 20px;
-    width: 70px;
-  }
-
   .pagination-buttons {
     display: table;
     margin: 0 auto;
   }
 
+  .device-symbol {
+    height: 50px;
+    width: 50px;
+  }
+
   .table-wrapper {
     margin-top: -18px;
-    background-color: white;
-    height: auto;
+    box-shadow: 2px 2px 5px silver;
     overflow: auto;
     overflow-y: hidden;
 
@@ -34,34 +33,19 @@
       box-shadow: none;
     }
 
-    mat-header-cell:nth-child(1),
-    mat-cell:nth-child(1) {
-      flex: 0 0 5%;
-    }
-
-    mat-header-cell:nth-child(2),
-    mat-cell:nth-child(2) {
-      flex: 0 0 10%;
-      display: flex;
-      justify-content: center;
-    }
-
-    mat-header-cell:nth-child(6),
-    mat-cell:nth-child(6) {
-      flex: 0 0 45%;
-    }
-
     mat-header-row,
     mat-row {
       min-width: 1000px;
       width: 100%;
-    }
-
-    mat-row {
       transition: 0.2s;
     }
-    
-    mat-row:hover{
+
+    mat-header-cell:nth-child(1),
+    mat-cell:nth-child(1) {
+      flex: 0 0 18%;
+    }
+
+    mat-row:hover {
       background-color: #eee;
     }
   }

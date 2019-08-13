@@ -1,117 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-
-export interface blockedIP {
-  ip: string;
-  network: string;
-  blockingOver: number;
-  campaign: string;
-}
-
-const ELEMENT_DATA: blockedIP[] = [
-  {
-    ip: '192.168.1.1',
-    network: 'MOBIFONE',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'VNPT',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'VIETTEL',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'SCTV',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'FPT',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'MOBIFONE',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'VNPT',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'MOBIFONE',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'VNPT',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'MOBIFONE',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'VNPT',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'MOBIFONE',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'VNPT',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'MOBIFONE',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'VNPT',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'MOBIFONE',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-  {
-    ip: '192.168.1.1',
-    network: 'VNPT',
-    blockingOver: 20,
-    campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
-  },
-];
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-blocked-ip-list',
@@ -122,14 +9,121 @@ export class BlockedIpListComponent implements OnInit {
 
   displayedColumns: string[] = ['order', 'task', 'ip', 'network', 'blockingOver', 'campaign'];
 
-  dataSource = new MatTableDataSource<blockedIP>(ELEMENT_DATA);
+  dataSource = [
+    {
+      ip: '192.168.1.1',
+      network: 'MOBIFONE',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'VNPT',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'VIETTEL',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'SCTV',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'FPT',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'MOBIFONE',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'VNPT',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'MOBIFONE',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'VNPT',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'MOBIFONE',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'VNPT',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'MOBIFONE',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'VNPT',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'MOBIFONE',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'VNPT',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'MOBIFONE',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+    {
+      ip: '192.168.1.1',
+      network: 'VNPT',
+      blockingOver: 20,
+      campaign: '1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,1.Bảo hành tivi, 1. Tivi - chung - không xác định,'
+    },
+  ];
 
-  // @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  currentPageNumber: number;
 
   ngOnInit() {
-    //this.dataSource.paginator = this.paginator;
+
   }
 
   constructor() { }
+
+  changePage(event) {
+
+  }
 
 }

@@ -4,7 +4,7 @@
   </p>
 
   <div class="mat-elevation-z8 table-wrapper">
-    <mat-table [dataSource]="dataSource">
+    <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber }">
 
       <!-- Position Column -->
       <ng-container matColumnDef="order">
@@ -47,7 +47,12 @@
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-
-    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
   </div>
+
+  <div class="pagination-buttons">
+    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event"
+                         previousLabel="Trang trước"
+                         nextLabel="Trang sau"></pagination-controls>
+  </div>
+
 </div>
