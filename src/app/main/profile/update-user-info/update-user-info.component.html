@@ -11,7 +11,10 @@
 			[errors]="getMessageErrors('name')"></app-input-text>
 		<app-input-text [formControlName]="'phone'" [title]="'Số điện thoại'" [pristine]="true" [icon]="'phone'"
 			[errors]="getMessageErrors('phone')"></app-input-text>
-		<div class="text-center title1"><strong>CẬP NHẬT MẬT KHẨU</strong></div>
+
+		<mat-divider></mat-divider>
+
+		<div class="text-center title2"><strong>CẬP NHẬT MẬT KHẨU</strong></div>
 		<app-input-text [formControlName]="'password'" [title]="'Mật khẩu cũ'" [pristine]="true" [type]="'password'"
 			[icon]="'vpn_key'" [errors]="getMessageErrors('password')"></app-input-text>
 

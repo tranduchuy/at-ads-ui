@@ -13,10 +13,21 @@
     font-weight: bold;
   }
 
+  mat-divider{
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .title2 {
+    padding-bottom: 10px;
+  }
+
   .form {
     width: 60%;
     display: table;
     margin: 0 auto;
+    box-shadow: 2px 2px 5px silver;
+    padding: 20px;
   }
 
   .table-container {
