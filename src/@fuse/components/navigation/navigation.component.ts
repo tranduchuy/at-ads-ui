@@ -117,7 +117,7 @@ export class FuseNavigationComponent implements OnInit {
 
         if (accounts.length > 0) {
 
-          accounts = accounts.filter(item => item.isConnected);
+          accounts = accounts.filter(item => item.isConnected === true);
 
           if (!activeAccountId) {
             this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(accounts[0].adsId.toString()));

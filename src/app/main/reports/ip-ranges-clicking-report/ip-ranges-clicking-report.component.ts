@@ -213,6 +213,7 @@ export class IpRangesClickingReportComponent implements OnInit {
   ];
 
   currentPageNumber: number;
+  total: number;
 
   constructor() { }
 
