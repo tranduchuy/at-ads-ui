@@ -1,43 +1,27 @@
 <div class="container">
 
-  <div class="title1 text-center">
-    THAY ĐỔI THÔNG TIN TÀI KHOẢN
-  </div>
+	<form [formGroup]="form" novalidate class="form">
+		<div class="title1 text-center">
+			THAY ĐỔI THÔNG TIN TÀI KHOẢN
+		</div>
 
-   <form [formGroup]="form" novalidate>
-     <app-input-text [formControlName]="'email'"
-                     [title]="'Email(*)'"
-                     [pristine]="true"
-                     [errors]="getMessageErrors('email')"
-     ></app-input-text>
-     <app-input-text [formControlName]="'name'"
-                     [title]="'Họ và Tên'"
-                     [pristine]="true"
-                     [errors]="getMessageErrors('name')"
-     ></app-input-text>
-     <app-input-text [formControlName]="'phone'"
-                     [title]="'Số điện thoại'"
-                     [pristine]="true"
-                     [errors]="getMessageErrors('phone')"
-     ></app-input-text>
-     <div class="text-center title1"><strong>CẬP NHẬT MẬT KHẨU</strong></div>
-     <app-input-text [formControlName]="'password'"
-                     [title]="'Mật khẩu'"
-                     [pristine]="true"
-                     [errors]="getMessageErrors('password')"
-     ></app-input-text>
+		<app-input-text [formControlName]="'email'" [title]="'Email(*)'" [pristine]="true" [icon]="'mail'"
+			[errors]="getMessageErrors('email')"></app-input-text>
+		<app-input-text [formControlName]="'name'" [title]="'Họ và Tên'" [pristine]="true" [icon]="'person_outline'"
+			[errors]="getMessageErrors('name')"></app-input-text>
+		<app-input-text [formControlName]="'phone'" [title]="'Số điện thoại'" [pristine]="true" [icon]="'phone'"
+			[errors]="getMessageErrors('phone')"></app-input-text>
+		<div class="text-center title1"><strong>CẬP NHẬT MẬT KHẨU</strong></div>
+		<app-input-text [formControlName]="'password'" [title]="'Mật khẩu cũ'" [pristine]="true" [type]="'password'"
+			[icon]="'vpn_key'" [errors]="getMessageErrors('password')"></app-input-text>
 
-     <app-input-text [formControlName]="'confirmedPassword'"
-                     [title]="'Nhập lại mật khẩu'"
-                     [pristine]="true"
-                     [errors]="getMessageErrors('confirmedPassword')"
-     ></app-input-text>
-    <p class="text-center">
-      <button mat-raised-button
-              color="accent"
-              class="submit-button"
-              aria-label="Cập nhật"
-              (click)="onClickBtnSubmit()">Cập nhật</button>
-    </p>
-  </form>
+		<app-input-text [formControlName]="'confirmedPassword'" [title]="'Mật khẩu mới'" [pristine]="true"
+			[type]="'password'" [icon]="'vpn_key'" [errors]="getMessageErrors('confirmedPassword')"></app-input-text>
+		<p class="text-center">
+			<button mat-raised-button color="accent" class="submit-button" aria-label="Cập nhật"
+				(click)="onClickBtnSubmit()">
+				<mat-icon>update</mat-icon> CẬP NHẬT
+			</button>
+		</p>
+	</form>
 </div>

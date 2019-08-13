@@ -60,8 +60,8 @@
     mat-row {
       transition: 0.2s;
     }
-    
-    mat-row:hover{
+
+    mat-row:hover {
       background-color: #eee;
     }
   }
@@ -71,5 +71,11 @@
   .container {
     padding: 15px;
     padding-top: 0;
+
+    pagination-controls {
+      display: flex !important;
+      justify-content: center !important;
+      margin-left: -50px;
+    }
   }
 }

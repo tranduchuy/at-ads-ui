@@ -1,16 +1,20 @@
 .container {
-  padding: 0px 30px 15px 30px;
+  padding: 15px 30px 15px 30px;
   width: 100%;
 
   .title1 {
     padding: 15px;
+    padding-left: 30px;
     background-color: #eee;
     color: gray;
     font-size: 16px;
     font-weight: bold;
 
     box-shadow: 2px 2px 5px silver;
-    text-align: center;
+  }
+
+  .datePicker {
+    width: 250px;
   }
 
   .pagination-buttons {
@@ -55,5 +59,11 @@
   .container {
     padding: 15px;
     padding-top: 0;
+
+    pagination-controls {
+      display: flex !important;
+      justify-content: center !important;
+      margin-left: -50px;
+    }
   }
 }

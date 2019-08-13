@@ -49,10 +49,11 @@
     </mat-table>
   </div>
 
-  <div class="pagination-buttons">
-    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event"
-                         previousLabel="Trước"
-                         nextLabel="Sau"></pagination-controls>
+  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
+    <p>Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span> trong tổng
+      {{pageTotal}} trang</p>
+    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
+      nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
   </div>
 
 </div>

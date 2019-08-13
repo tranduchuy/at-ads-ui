@@ -9,7 +9,14 @@ export interface IAccountReportParams {
   to: string;
 }
 
-export interface IDailyClickingReport {
+export interface IDailyClickingReportParams {
+  page?: number;
+  limit?: number;
+}
+
+export interface IClassDClickingReportParams {
+  from: string;
+  to: string;
   page?: number;
   limit?: number;
 }
@@ -33,9 +40,20 @@ export class ReportService {
     return this._http.get(url);
   }
 
-  getDailyClickingReport(params: IDailyClickingReport): Observable<any> {
+  getDailyClickingReport(params: IDailyClickingReportParams): Observable<any> {
     const activeAccountId = this._sessionService.getValueOfAccountId();
     let url = API.Report.getDailyClickingReport.replace('{account_id}', activeAccountId);
+    url = url.replace('{page}', params.page.toString());
+    url = url.replace('{limit}', params.limit.toString());
+
+    return this._http.get(url);
+  }
+
+  getClassDClickingReport(params: IClassDClickingReportParams): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    let url = API.Report.getClassDClickingReport.replace('{account_id}', activeAccountId);
+    url = url.replace('{from}', params.from);
+    url = url.replace('{to}', params.to);
     url = url.replace('{page}', params.page.toString());
     url = url.replace('{limit}', params.limit.toString());
 

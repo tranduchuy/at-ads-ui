@@ -7,8 +7,6 @@ import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 
-import { distinctUntilChanged } from 'rxjs/operators';
-
 @Component({
   selector: 'app-spam-click-report',
   templateUrl: './spam-click-report.component.html',
@@ -32,14 +30,6 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     applyLabel: 'Áp dụng',
     cancelLabel: 'Đóng',
   };
-  dateRangeOptions: any = {
-    'Hôm nay': [moment(), moment()],
-    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    '7 ngày trước': [moment().subtract(6, 'days'), moment()],
-    '30 ngày trước': [moment().subtract(29, 'days'), moment()],
-    'Tháng này': [moment().startOf('month'), moment().endOf('month')],
-    'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-  }
 
   ngOnInit() {
 

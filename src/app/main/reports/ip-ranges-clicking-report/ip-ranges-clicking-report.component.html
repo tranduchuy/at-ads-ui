@@ -1,51 +1,61 @@
 <div class="container">
 
-  <p class="title1">
-    BÁO CÁO NHÓM IP ĐANG CLICK
-  </p>
+  <div class="title1" fxLayout="row">
+    <p class="title2" fxFlex="80">BÁO CÁO NHÓM IP ĐANG CLICK</p>
+    <mat-form-field class="datePicker" fxFlex="20">
+        <input type="text" ngxDaterangepickerMd matInput placeholder="Khoảng thời gian thống kê" readonly
+               [locale]="locale"
+               [(ngModel)]="selectedDateRange"
+               startKey="start" 
+               endKey="end" 
+               (datesUpdated)="onApplyDateRange($event)"
+               ngDefaultControl/>
+      </mat-form-field>
+  </div>
 
   <div class="mat-elevation-z8 table-wrapper">
     <mat-table
-      [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: total }">
+      [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber }">
 
       <ng-container matColumnDef="time">
         <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.logTime | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="ip">
         <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span style="color: dodgerblue; font-weight: bold">{{element.ip}}</span>
+          <span style="color: dodgerblue; font-weight: bold">{{element._id}}</span>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="clicks">
         <mat-header-cell *matHeaderCellDef> Số lần click </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.clicks}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.totalClick}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="keyword">
         <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+            <span *ngFor="let item of element.keywords" style="margin-right: 5px">{{item}}</span>
+        </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="realPosition">
-        <mat-header-cell *matHeaderCellDef> Vị trí thật </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.realPosition}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="clickPosition">
-        <mat-header-cell *matHeaderCellDef> Vị trí click </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.clickPosition}} </mat-cell>
+      <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span *ngFor="let item of element.locations" style="margin-right: 5px">{{item?.city}}</span>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="network">
         <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.network}}</mat-cell>
+        <mat-cell *matCellDef="let element">
+            <span *ngFor="let item of element.networks" style="margin-right: 5px">{{item?.name}}</span>
+        </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="device">
+      <!-- <ng-container matColumnDef="device">
         <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <img src="https://cdn.freebiesupply.com/logos/large/2x/wifi-1-logo-png-transparent.png" alt=""
@@ -57,16 +67,15 @@
               matTooltip="{{element.device}}">help_outline</mat-icon>
           </p>
         </mat-cell>
-      </ng-container>
+      </ng-container> -->
 
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </div>
 
-  <div class="pagination-buttons" fxLayout="row">
-    <p>Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span> trong tổng <span
-        [(ngModel)]="total" ngDefaultControl>{{total}}</span> </p>
+  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
+    <p>Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span> trong tổng {{pageTotal}} trang</p>
     <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
       nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
   </div>

@@ -7,7 +7,9 @@
 
   <div class="table-wrapper">
 
-    <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: total }" class="mat-elevation-z8">
+    <mat-table
+      [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: total }"
+      class="mat-elevation-z8">
 
       <ng-container matColumnDef="time">
         <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
@@ -18,8 +20,8 @@
         <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
-                style="font-weight: bold; padding-left: 0" mat-button color="accent">
-                {{element._id}}
+            style="font-weight: bold; padding-left: 0" mat-button color="accent">
+            {{element._id}}
           </a>
           <!-- <span *ngIf="element.status">
             <mat-icon style="color: silver; margin-right: 5px; margin-left: -3px">beenhere</mat-icon><span
@@ -58,7 +60,8 @@
 
       <ng-container matColumnDef="browser">
         <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.info[0].browser?.name + ' ' + element.info[0].browser?.version}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.info[0].browser?.name + ' ' + element.info[0].browser?.version}}
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="network">
@@ -99,10 +102,12 @@
     </mat-table>
 
   </div>
-  <div class="pagination-buttons">
-    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event"
-                         previousLabel="Trước"
-                         nextLabel="Sau"></pagination-controls>
+  
+  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
+    <!-- <p>Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span> trong tổng
+      {{pageTotal}} trang</p> -->
+    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
+      nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
   </div>
 
   <div class="footer">

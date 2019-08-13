@@ -43,7 +43,9 @@ export class InputTextComponent extends InputTextBaseComponent implements Contro
   matcher;
 
   @Input() pristine = false;
-
+  @Input() type = 'text';
+  @Input() icon = '';
+  
   @Input()
   set value(val: any) {
     this.innerValue = val;
