@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainGuardService } from './shared/services/guard/main-guard.service';
 import { AccountAcceptanceGuardService } from './shared/services/guard/account-acceptance-guard.service';
+import { environment } from 'environments/environment';
 
 const appRoutes: Routes = [
   {
@@ -56,7 +57,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, { useHash: true, onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(appRoutes, { useHash: environment.production, onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

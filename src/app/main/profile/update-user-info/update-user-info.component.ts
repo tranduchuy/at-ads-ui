@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
 import { Validators } from '@angular/forms';
+import { SessionService } from 'app/shared/services/session.service';
 
 @Component({
   selector: 'app-update-user-info',
@@ -9,12 +10,18 @@ import { Validators } from '@angular/forms';
 })
 export class UpdateUserInfoComponent extends EditableFormBaseComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private _sessionService: SessionService
+  ) {
     super();
   }
 
+  userInfo: any;
+
   ngOnInit(): void {
     this.initForm();
+    this.userInfo = JSON.parse(this._sessionService.user);
+    console.log(this.userInfo);
   }
 
   post(): void {
