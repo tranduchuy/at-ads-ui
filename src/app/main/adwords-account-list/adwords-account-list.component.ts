@@ -86,7 +86,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   navigateToWebsiteManagement(accountId: string, campaignNumber: number) {
     if(campaignNumber > 0)
       this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
-    else this._dialogService._openInfoDialog('Tài khoản hiện chưa có chiến dịch');
+    else this._dialogService._openErrorDialog({messages: ['Tài khoản hiện chưa được thêm chiến dịch.']});
   }
 
 }
