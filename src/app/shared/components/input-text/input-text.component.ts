@@ -45,6 +45,7 @@ export class InputTextComponent extends InputTextBaseComponent implements Contro
   @Input() pristine = false;
   @Input() type = 'text';
   @Input() icon = '';
+  @Input() readonly = false;
   
   @Input()
   set value(val: any) {

@@ -120,24 +120,30 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           // }
         };
 
-        //------------------------------------------------------------
+        let lineChartData = [];
+
+        for (const item of res.data.lineChart)
+          lineChartData[moment(item._id, 'DD-MM-YYYY').format('DD-MM')] = {
+            realClick: item.realClick,
+            spamClick: item.spamClick
+          };
+
         const lineChartLabels = this.getReportDates();
-        const realClicks = res.data.lineChart.map(item => item.realClick);
-        const spamClicks = res.data.lineChart.map(item => item.spamClick);
         const realClickDataSets = [];
         const spamClickDataSets = [];
 
-        for (const index in lineChartLabels) {
-          
-          if (realClicks[index] !== undefined)
-            realClickDataSets.push(realClicks[index]);
-          else realClickDataSets.push(0);
+        lineChartLabels.forEach((item, index) => {
 
-          if (spamClicks[index] !== undefined)
-            spamClickDataSets.push(spamClicks[index]);
-          else spamClickDataSets.push(0);
-        }
-        //-------------------------------------------------------------
+          if (lineChartData[item] !== undefined) {
+            realClickDataSets[index] = lineChartData[item].realClick;
+            spamClickDataSets[index] = lineChartData[item].spamClick;
+          } 
+          else {
+            realClickDataSets[index] = 0;
+            spamClickDataSets[index] = 0;
+          }
+
+        });
 
         this.lineChart = {
           chartType: 'line',
@@ -238,7 +244,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   }
 
   constructor(
-    private _sessionService: SessionService,
+    public _sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _reportService: ReportService,
     private _dialogService: DialogService,

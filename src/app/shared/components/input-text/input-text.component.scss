@@ -13,3 +13,7 @@ mat-form-field {
 mat-icon {
   color: gray;
 }
+
+input:read-only {
+  color: gray;
+}

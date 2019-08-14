@@ -19,7 +19,8 @@ export class AutoBlockingCellularNetworksComponent extends PageBaseComponent imp
     viettel: false,
     mobifone: false,
     vinafone: false,
-    vietnammobile: false
+    vietnammobile: false,
+    fpt: false
   }
 
   constructor(private _banIpsService: BanIpsService,

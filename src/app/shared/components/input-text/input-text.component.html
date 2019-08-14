@@ -8,7 +8,7 @@
          [errorStateMatcher]="matcher"
          (focus)="onFocus()"
          (blur)="onLostFocus()"
-         (ngModelChange)="onInputChange()">
+         (ngModelChange)="onInputChange()" [readonly]="readonly">
   <mat-icon matSuffix *ngIf="icon">{{icon}}</mat-icon>
   <mat-error *ngIf="!pristine && ngControl.invalid">
     <div *ngFor="let m of errors" class="error">{{m}}</div>

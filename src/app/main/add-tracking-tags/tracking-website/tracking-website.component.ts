@@ -62,6 +62,7 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
         CheckWebsiteTrackingDialogComponent,
         {
           autoFocus: false,
+          maxWidth: '100vw !important'
         },
       );
     return dialogRef.componentInstance.account = { accountId: this.accountId, adsId: this.adsId };

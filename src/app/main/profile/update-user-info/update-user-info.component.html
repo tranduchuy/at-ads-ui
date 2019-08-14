@@ -6,7 +6,7 @@
 		</div>
 
 		<app-input-text [formControlName]="'email'" [title]="'Email(*)'" [pristine]="true" [icon]="'mail'"
-			[errors]="getMessageErrors('email')" [(ngModel)]="userInfo.email"></app-input-text>
+			[errors]="getMessageErrors('email')" [(ngModel)]="userInfo.email" [readonly]="true"></app-input-text>
 			
 		<app-input-text [formControlName]="'name'" [title]="'Họ và Tên'" [pristine]="true" [icon]="'person_outline'"
 			[errors]="getMessageErrors('name')" [(ngModel)]="userInfo.name"></app-input-text>
@@ -27,7 +27,7 @@
 		<p class="text-center">
 			<button mat-raised-button color="accent" class="submit-button" aria-label="Cập nhật"
 				(click)="onClickBtnSubmit()">
-				<mat-icon>check</mat-icon> CẬP NHẬT
+				<mat-icon>sync</mat-icon> CẬP NHẬT
 			</button>
 		</p>
 	</form>

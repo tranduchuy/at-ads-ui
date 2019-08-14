@@ -18,10 +18,15 @@
     box-shadow: 2px 2px 5px silver;
   }
 
-  .network-logo, .mobifone {
+  .network-logo, .mobifone, .fpt {
     height: 25px;
     width: 80px;
     margin-left: 10px;
+  }
+
+  .fpt {
+    height: 35px;
+    margin-top: -10px;
   }
 
   .title2 {
@@ -80,5 +85,8 @@
     width: 90%;
     display: table;
     margin: 0 auto;
+    line-height: 50px;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
