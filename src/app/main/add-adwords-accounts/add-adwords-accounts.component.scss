@@ -29,6 +29,17 @@
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
+
+    &:disabled {
+      img {
+        opacity: 0.4;
+      }
+    } 
+  }
+
+  .note {
+    font-size: 12px;
+    font-style: italic;
   }
 }
 .g-sign-in-button {
