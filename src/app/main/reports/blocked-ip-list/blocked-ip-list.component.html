@@ -1,6 +1,6 @@
 <div class="container">
   <p class="title1">
-    BÁO CÁO IP ĐANG CHẠY QUẢNG CÁO
+    BÁO CÁO IP ĐANG CHẠY QUẢNG CÁO TÀI KHOẢN <span style="color: black">{{_sessionService.activeAdsAccountId}}</span>
   </p>
 
   <div class="mat-elevation-z8 table-wrapper">
@@ -23,25 +23,25 @@
       <!-- Weight Column -->
       <ng-container matColumnDef="ip">
         <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="network">
         <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.network}}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.network | uppercase}}</mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="blockingOver">
         <mat-header-cell *matHeaderCellDef> Khóa trên </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.blockingOver}} chiến dịch </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.numberOfCampaigns}} chiến dịch </mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="campaign">
         <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.campaign}} </mat-cell>
+        <mat-cell *matCellDef="let element">{{element.campaignIds.join('. ')}}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
@@ -50,8 +50,9 @@
   </div>
 
   <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
-    <p>Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span> trong tổng
+    <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span> trong tổng
       {{pageTotal}} trang</p>
+    <p *ngIf="pageTotal === 0">Không có trang nào</p>
     <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
       nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
   </div>

@@ -7,6 +7,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 
+export interface AdwordsAccount {
+  accountId: string;
+  adsId: string;
+}
+
 @Component({
   selector: 'app-check-website-tracking-dialog',
   templateUrl: './check-website-tracking-dialog.component.html',
@@ -16,7 +21,7 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
 
   displayedColumns: string[] = ['order', 'website', 'tracking'];
   websites: any = [];
-  accountId: string;
+  account: AdwordsAccount;
 
   constructor(
     public dialogRef: MatDialogRef<CheckWebsiteTrackingDialogComponent>,
@@ -29,10 +34,14 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
   }
 
   ngOnInit() {
+    this.getWebsiteTrackingInfo();
+  }
+
+  getWebsiteTrackingInfo() {
     setTimeout(() => {
       this._fuseProgressBarService.show();
     }, 0);
-    const sub = this._addTrackingTagsService.getWebsiteTrackingInfo(this.accountId)
+    const sub = this._addTrackingTagsService.getWebsiteTrackingInfo(this.account.accountId)
       .subscribe(res => {
         this._fuseProgressBarService.hide();
         this.websites = res.data.websites;

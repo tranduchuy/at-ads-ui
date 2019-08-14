@@ -49,7 +49,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     const sub = this._addAdwordsAccountsService.getAdwordsAccountDetail(this.connectedAccountId)
       .subscribe(res => {
         this._fuseProgressiveBarService.hide();
-        if (res.data.isConnected) {
+        if (res.data.adsAccount.isConnected) {
           this._sessionService.setActiveAccountId(this.connectedAccountId);
           this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
           this._fuseNavigationService.reloadNavigation();

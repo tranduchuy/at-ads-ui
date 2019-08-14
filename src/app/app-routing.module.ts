@@ -37,7 +37,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'quan-ly-website',
-    canActivate: [MainGuardService],
+    canActivate: [MainGuardService, AccountAcceptanceGuardService],
     loadChildren: './main/website-management/website-management.module#WebsiteManagementModule'
   },
   {

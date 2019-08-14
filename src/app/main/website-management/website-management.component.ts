@@ -72,9 +72,9 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
         this.selectedAdsId = this._sessionService.activeAdsAccountId;
       }
       else {
-        const detailSub = this._websiteManagementService.getAdwordAccountDetail(params.accountId)
+        const detailSub = this._websiteManagementService.getAdwordsAccountDetail(params.accountId)
           .subscribe(res => {
-            this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsId);
+            this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsAccount.adsId);
           });
         this.subscriptions.push(detailSub);
       }

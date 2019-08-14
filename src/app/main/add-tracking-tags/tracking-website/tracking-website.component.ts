@@ -36,8 +36,8 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
 
         const detailSub = this._addTrackingTagsService.getAdwordsAccountDetail(this.accountId)
           .subscribe(res => {
-            this.adsId = this.adsAccountIdPipe.transform(res.data.adsId);
-            this.key = res.data.key;
+            this.adsId = this.adsAccountIdPipe.transform(res.data.adsAccount.adsId);
+            this.key = res.data.adsAccount.key;
           });
         this.subscriptions.push(detailSub);
 
@@ -57,7 +57,13 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
   }
 
   checkWebsiteTracking() {
-    const dialogRef = this._matDialog.open(CheckWebsiteTrackingDialogComponent);
-    return dialogRef.componentInstance.accountId = this.accountId;
+    const dialogRef = this._matDialog
+      .open(
+        CheckWebsiteTrackingDialogComponent,
+        {
+          autoFocus: false,
+        },
+      );
+    return dialogRef.componentInstance.account = { accountId: this.accountId, adsId: this.adsId };
   }
 }

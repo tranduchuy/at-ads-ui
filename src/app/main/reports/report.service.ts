@@ -64,4 +64,10 @@ export class ReportService {
     return this._http.get(url);
   }
 
+  getBlockedIPsListReport(): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    const url = API.Report.getBlockedIPsListReport.replace('{account_id}', activeAccountId);
+    return this._http.get(url);
+  }
+
 }

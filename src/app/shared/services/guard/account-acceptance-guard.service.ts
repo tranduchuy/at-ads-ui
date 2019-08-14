@@ -38,7 +38,14 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
             return this.adwordsAccountService.getAccountAdwordsDetail(route.params.accountId)
                 .pipe(
                     map((res: any) => {
-                        const isConnected = res.data.isConnected;
+
+                        if(route.routeConfig.path.includes('quan-ly-website') && res.data.campaignNumber !== undefined && res.data.campaignNumber === 0){
+                            this._dialogService._openErrorDialog({messages: ['Tài khoản hiện chưa được thêm chiến dịch.']});
+                            this._router.navigateByUrl('/danh-sach-tai-khoan');
+                            return false;
+                        }
+
+                        const isConnected = res.data.adsAccount.isConnected;
                         if (!isConnected)
                             this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
                         return isConnected;
@@ -52,7 +59,7 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
         return this.adwordsAccountService.getAccountAdwordsDetail(activeAccountId)
             .pipe(
                 map((res: any) => {
-                    const isConnected = res.data.isConnected;
+                    const isConnected = res.data.adsAccount.isConnected;
                     if (!isConnected)
                         this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
                     return isConnected;

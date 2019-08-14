@@ -1,40 +1,46 @@
-<div mat-dialog-content style="min-width: 550px">
-  <div class="container">
-
-    <mat-table [dataSource]="websites" class="mat-elevation-z8">
-
-      <ng-container matColumnDef="order">
-        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-        <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="website">
-        <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <a href="{{element.domain}}" target="_blank">{{element.domain}}</a>
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="tracking">
-        <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
-        <mat-cell *matCellDef="let element; let i = index">
-          <button *ngIf="element.isTracking" mat-stroked-button color="accent" style="border: 0; padding-left: 0">
-            <mat-icon>check</mat-icon> Hoàn thành
-          </button>
-          <button *ngIf="!element.isTracking" mat-stroked-button matTooltip="Nhấn để tiến hành gắn tracking"
-            style="border: 0; padding-left: 0; color: crimson">
-            <mat-icon>close</mat-icon> Chưa có
-          </button>
-        </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-
+<div class="container">
+  <div class="dialog-title" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center">
+    <h4 matDialogTitle style="font-weight: bold" fxFlex="80">CÁC WEBSITE TRONG TÀI KHOẢN <span
+        style="color: dodgerblue">{{account.adsId}}</span></h4>
+    <button mat-button class="update-table-button" color="accent" (click)="getWebsiteTrackingInfo()">
+      <mat-icon>sync</mat-icon> Cập nhật
+    </button>
   </div>
-</div>
-<div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">
-  <button mat-raised-button color="basic" (click)="dialogRef.close(true)">Đóng
-  </button>
+  <div mat-dialog-content>
+    <div class="table-wrapper">
+      <mat-table [dataSource]="websites" class="mat-elevation-z8">
+        <ng-container matColumnDef="order">
+          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="website">
+          <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a href="{{element.domain}}" target="_blank">{{element.domain}}</a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tracking">
+          <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index">
+            <button *ngIf="element.isTracking" mat-stroked-button color="accent" style="border: 0; padding-left: 0">
+              <mat-icon>check</mat-icon> Hoàn thành
+            </button>
+            <button *ngIf="!element.isTracking" mat-stroked-button matTooltip="Nhấn để tiến hành gắn tracking"
+              style="border: 0; padding-left: 0; color: crimson">
+              <mat-icon>close</mat-icon> Chưa có
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+  <div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">
+    <button mat-raised-button color="basic" (click)="dialogRef.close(true)">Đóng
+    </button>
+  </div>
 </div>

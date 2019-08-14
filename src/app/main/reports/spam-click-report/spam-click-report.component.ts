@@ -51,7 +51,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   setSelectedAdsId(accountId: string) {
     const sub = this._reportService.getAdwordsAccountDetail(accountId)
       .subscribe(res => {
-        this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsId);
+        this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsAccount.adsId);
       });
     this.subscriptions.push(sub);
   }
