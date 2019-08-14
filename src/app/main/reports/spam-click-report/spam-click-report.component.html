@@ -3,7 +3,7 @@
   <div class="section">
     <div class="title1 pie-chart-report-title">
       <div class="title2">
-        BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">{{_sessionService.activeAdsAccountId}}</span>
+        BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">{{selectedAdsId}}</span>
         TỪ <span style="color:black" [(ngModel)]="selectedDateRange"
           ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span>
         ĐẾN <span style="color: black" [(ngModel)]="selectedDateRange"

@@ -59,4 +59,9 @@ export class ReportService {
     return this._http.get(url);
   }
 
+  getAdwordsAccountDetail(accountId): Observable<any> {
+    const url = API.AdwordsAccount.getAwordsAccountDetail.replace('{account_id}', accountId);
+    return this._http.get(url);
+  }
+
 }

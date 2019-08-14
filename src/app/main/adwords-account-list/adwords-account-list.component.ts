@@ -7,6 +7,8 @@ import { SessionService } from 'app/shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { AdwordsAccountListService } from './adwords-account-list.service';
 import { Router } from '@angular/router';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 
 @Component({
   selector: 'app-adwords-account-list',
@@ -17,13 +19,17 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
   // displayedColumns: string[] = ['task', 'date', 'adwords', 'website', 'service', 'cost', 'display', 'click', 'spamClick'];
   displayedColumns: string[] = ['task', 'date', 'adwords', 'accepted', 'website'];
-  accounts = []
+  accounts = [];
+
+  adsAccountIdPipe = new AdsAccountIdPipe();
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
     private _adwordsAccountListService: AdwordsAccountListService,
-    private _router: Router
+    private _router: Router,
+    private _sessionService: SessionService,
+    private _fuseNavigationService: FuseNavigationService
   ) {
     super();
   }
@@ -68,5 +74,12 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
           this._router.navigateByUrl('/them-tai-khoan-moi');
         });
     this.subscriptions.push(sub);
+  }
+
+  navigateToSpamClickReport(accountId: string, adsId: string) {
+    this._sessionService.setActiveAccountId(accountId);
+    this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(adsId));
+    this._fuseNavigationService.reloadNavigation();
+    this._router.navigateByUrl('/bao-cao/click-ao');
   }
 }

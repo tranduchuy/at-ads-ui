@@ -37,9 +37,10 @@
                 {{element.adsId | adsAccountId}}
               </p>
               <div fxLayout="row" *ngIf="element.isConnected">
-                <a mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan" [routerLink]="['/bao-cao/click-ao', element.id]">
+                <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan"
+                       (click)="navigateToSpamClickReport(element.id, element.adsId)">
                   <mat-icon>notifications</mat-icon>
-                </a>
+                </button>
                 <a *ngIf="element.websites.length > 0"
                   [routerLink]="['/gan-tracking/website', element.id]" mat-icon-button
                   color="accent" matTooltip="Gắn mã tracking cho các website" style="color: red">

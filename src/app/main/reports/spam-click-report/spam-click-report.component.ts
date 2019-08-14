@@ -7,6 +7,7 @@ import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { ActivatedRoute } from '@angular/router';
+import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 
 @Component({
   selector: 'app-spam-click-report',
@@ -32,21 +33,27 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     cancelLabel: 'Đóng',
   };
 
+  selectedAdsId: string;
+
+  adsAccountIdPipe = new AdsAccountIdPipe();
+
   ngOnInit() {
-    const routeParamsSub = this._activatedRoute.params
-      .subscribe((params: any) => {
-        if (params.accountId !== undefined)
-          this.getAccountReport(params.accountId);
-        else {
-          const sub = this._sessionService.getAccountId()
-            .subscribe((accountId: string) => {
-              if (accountId)
-                this.getAccountReport(accountId);
-            });
-          this.subscriptions.push(sub);
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
+          this.setSelectedAdsId(accountId);
+          this.getAccountReport(accountId);
         }
       });
-    this.subscriptions.push(routeParamsSub);
+    this.subscriptions.push(sub);
+  }
+
+  setSelectedAdsId(accountId: string) {
+    const sub = this._reportService.getAdwordsAccountDetail(accountId)
+      .subscribe(res => {
+        this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsId);
+      });
+    this.subscriptions.push(sub);
   }
 
   getReportDates() {
@@ -113,6 +120,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           // }
         };
 
+        //------------------------------------------------------------
         const lineChartLabels = this.getReportDates();
         const realClicks = res.data.lineChart.map(item => item.realClick);
         const spamClicks = res.data.lineChart.map(item => item.spamClick);
@@ -120,6 +128,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         const spamClickDataSets = [];
 
         for (const index in lineChartLabels) {
+          
           if (realClicks[index] !== undefined)
             realClickDataSets.push(realClicks[index]);
           else realClickDataSets.push(0);
@@ -128,7 +137,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             spamClickDataSets.push(spamClicks[index]);
           else spamClickDataSets.push(0);
         }
-
+        //-------------------------------------------------------------
 
         this.lineChart = {
           chartType: 'line',
@@ -229,7 +238,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   }
 
   constructor(
-    public _sessionService: SessionService,
+    private _sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _reportService: ReportService,
     private _dialogService: DialogService,
