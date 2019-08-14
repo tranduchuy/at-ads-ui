@@ -42,13 +42,18 @@
     </div>
   </form>
 
-  <br><span><b><span style="color: red">*</span>Lưu ý:</b> Tên miền phải kèm theo <span style="color: dodgerblue">http://</span> hoặc <span
-      style="color: dodgerblue">https://</span></span>
+  <br><span><b><span style="color: red">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
+      style="color: dodgerblue">http://</span> hoặc <span style="color: dodgerblue">https://</span></span>
 
   <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
 
-  <p><strong>CÁC WEBSITE CỦA BẠN TRONG TÀI KHOẢN: <span [(ngModel)]="selectedAdsId" ngDefaultControl
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
+    <p><strong>CÁC WEBSITE CỦA BẠN TRONG TÀI KHOẢN: <span [(ngModel)]="selectedAdsId" ngDefaultControl
         style="color: dodgerblue">{{selectedAdsId}}</span></strong></p>
+    <button mat-raised-button class="update-website-list-button" (click)="getWebsites()">
+      <mat-icon>sync</mat-icon> Cập nhật
+    </button>
+  </div>
 
   <div class="table-wrapper">
     <mat-table [dataSource]="websites" class="mat-elevation-z8">

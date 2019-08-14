@@ -19,6 +19,15 @@
     color: green;
   }
 
+  .update-website-list-button {
+    border-radius: 15px;
+    max-height: 40px;
+    max-width: 120px;
+    padding-left: 5px;
+    padding-right: 10px;
+    color: gray;
+  }
+
   .add-website-button {
     height: 60px;
     margin: 2px;
@@ -30,6 +39,7 @@
     background-color: white;
     box-shadow: 2px 2px 5px silver;
     height: 500px;
+    margin-top: 10px;
     overflow: auto;
 
     mat-table {
