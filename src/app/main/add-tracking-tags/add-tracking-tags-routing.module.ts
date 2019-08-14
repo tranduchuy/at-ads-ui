@@ -13,7 +13,7 @@ import { AccountAcceptanceGuardService } from 'app/shared/services/guard/account
       component: SelectCampaignsComponent
     },
     {
-      path: 'website/:accountId/:adsId/:key',
+      path: 'website/:accountId',
       pathMatch: 'full',
       component: TrackingWebsiteComponent,
       canActivate: [AccountAcceptanceGuardService]

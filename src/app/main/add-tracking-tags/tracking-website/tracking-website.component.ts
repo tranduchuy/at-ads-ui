@@ -5,6 +5,7 @@ import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id
 import { MatDialog } from '@angular/material';
 import { CheckWebsiteTrackingDialogComponent } from '../check-website-tracking-dialog/check-website-tracking-dialog.component';
 import { environment } from '../../../../environments/environment';
+import { AddTrackingTagsService } from '../add-tracking-tags.service';
 
 @Component({
   selector: 'app-tracking-website',
@@ -22,21 +23,28 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private _addTrackingTagsService: AddTrackingTagsService
   ) {
     super();
   }
 
   ngOnInit() {
-
     const sub = this._activatedRoute.params
       .subscribe((params: any) => {
         this.accountId = params.accountId;
+
+        const detailSub = this._addTrackingTagsService.getAdwordsAccountDetail(this.accountId)
+          .subscribe(res => {
+            this.adsId = this.adsAccountIdPipe.transform(res.data.adsId);
+            this.key = res.data.key;
+          });
+        this.subscriptions.push(detailSub);
+
         this.adsId = this.adsAccountIdPipe.transform(params.adsId);
         this.key = params.key;
       });
     this.subscriptions.push(sub);
-
   }
 
   copyKey(item) {

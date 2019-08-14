@@ -38,17 +38,6 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
             return this.adwordsAccountService.getAccountAdwordsDetail(route.params.accountId)
                 .pipe(
                     map((res: any) => {
-
-                        if (route.params.adsId !== undefined && route.params.adsId !== res.data.adsId) {
-                            this._router.navigateByUrl('/danh-sach-tai-khoan');
-                            return false;
-                        }
-
-                        if (route.params.key !== undefined && route.params.key !== res.data.key) {
-                            this._router.navigateByUrl('/danh-sach-tai-khoan');
-                            return false;
-                        }
-
                         const isConnected = res.data.isConnected;
                         if (!isConnected)
                             this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
