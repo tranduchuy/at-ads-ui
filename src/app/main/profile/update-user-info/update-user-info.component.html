@@ -5,30 +5,53 @@
 			THAY ĐỔI THÔNG TIN TÀI KHOẢN
 		</div>
 
-		<app-input-text [formControlName]="'email'" [title]="'Email(*)'" [pristine]="true" [icon]="'mail'"
-			[errors]="getMessageErrors('email')" [(ngModel)]="userInfo.email" [readonly]="true"></app-input-text>
-			
-		<app-input-text [formControlName]="'name'" [title]="'Họ và Tên'" [pristine]="true" [icon]="'person_outline'"
-			[errors]="getMessageErrors('name')" [(ngModel)]="userInfo.name"></app-input-text>
+		<div class="user-info" fxLayout="row" fxLayout.xs="column">
+			<div class="avatar" fxFlex="25">
 
-		<app-input-text [formControlName]="'phone'" [title]="'Số điện thoại'" [pristine]="true" [icon]="'phone'"
-			[errors]="getMessageErrors('phone')"></app-input-text>
+				<img [src]="userInfo.avatar" alt="">
+				<button mat-button color="accent" style="margin-left: -10px">
+					<mat-icon style="font-size: 18px">sync</mat-icon>Thay đổi
+				</button>
+				
+			</div>
+
+			<div class="info" fxFlex="75">
+				<app-input-text [formControlName]="'name'" [title]="'Họ và Tên'" [pristine]="true"
+					[icon]="'person_outline'" [errors]="getMessageErrors('name')" [(ngModel)]="userInfo.name">
+				</app-input-text>
+
+				<div fxLayout="row" fxLayoutGap="15px" fxLayout.xs="column">
+					<app-input-text [formControlName]="'email'" [title]="'Email'" [pristine]="true" [icon]="'mail'"
+						[(ngModel)]="userInfo.email" [readonly]="true"></app-input-text>
+
+					<app-input-number [formControlName]="'phone'" [title]="'Số điện thoại'" [pristine]="true"
+						[icon]="'phone'">
+					</app-input-number>
+				</div>
+			</div>
+		</div>
 
 		<mat-divider></mat-divider>
 
-		<p class="text-center title2"><strong>CẬP NHẬT MẬT KHẨU</strong></p>
+		<div class="change-password">
+			<p class="text-center title2"><strong>
+			 	CẬP NHẬT MẬT KHẨU
+			</strong></p>
 
-		<app-input-text [formControlName]="'password'" [title]="'Mật khẩu cũ'" [pristine]="true" [type]="'password'"
-			[icon]="'vpn_key'" [errors]="getMessageErrors('password')"></app-input-text>
+			<app-input-text [formControlName]="'password'" [title]="'Mật khẩu cũ'" [pristine]="true" [type]="'password'"
+				[icon]="'vpn_key'" [errors]="getMessageErrors('password')"></app-input-text>
 
-		<app-input-text [formControlName]="'confirmedPassword'" [title]="'Mật khẩu mới'" [pristine]="true"
-			[type]="'password'" [icon]="'vpn_key'" [errors]="getMessageErrors('confirmedPassword')"></app-input-text>
+			<app-input-text [formControlName]="'confirmedPassword'" [title]="'Mật khẩu mới'" [pristine]="true"
+				[type]="'password'" [icon]="'vpn_key'" [errors]="getMessageErrors('confirmedPassword')">
+			</app-input-text>
+		</div>
 
 		<p class="text-center">
 			<button mat-raised-button color="accent" class="submit-button" aria-label="Cập nhật"
 				(click)="onClickBtnSubmit()">
-				<mat-icon>sync</mat-icon> CẬP NHẬT
+				<mat-icon style="font-size: 20px">check</mat-icon> CẬP NHẬT
 			</button>
 		</p>
+
 	</form>
 </div>

@@ -45,7 +45,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
   selectedAdsId: string;
   selectedAccountId: string;
-  onAddingDomain: boolean;
+  isProcessing: boolean = false;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -62,7 +62,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     this.accountItemsSource = [];
     this.selectedAdsId = '';
     this.selectedAccountId = '';
-    this.onAddingDomain = false;
+    this.isProcessing = false;
   }
 
   ngOnInit() {
@@ -97,16 +97,19 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   getWebsites() {
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     const sub = this._websiteManagementService.getWebsiteTrackingInfo(this.selectedAccountId)
       .subscribe(res => {
         this._fuseProgressiveBarService.hide();
         this.websites = res.data.websites;
+        this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.websites = [];
+          this.isProcessing = false;
         });
     this.subscriptions.push(sub);
   }
@@ -179,20 +182,20 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   post() {
+    this.isProcessing = true;
     const params = this.generatePostObject();
-    this.onAddingDomain = true;
     this._fuseProgressiveBarService.show();
     const sub = this._websiteManagementService.addWebsite(params)
       .subscribe((res: ILoginSuccess) => {
         this._dialogService._openSuccessDialog(res);
         this._fuseProgressiveBarService.hide();
-        this.onAddingDomain = false;
+        this.isProcessing = false;
         this.getWebsites();
       },
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);
           this._fuseProgressiveBarService.hide();
-          this.onAddingDomain = false;
+          this.isProcessing = false;
         }
       );
     this.subscriptions.push(sub);

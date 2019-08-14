@@ -8,15 +8,15 @@
   </p>
   <ul style="list-style: none">
     <li>
-      <mat-icon class="list-check">check</mat-icon> Theo dõi khách đang truy cập website thông qua <span
+      <mat-icon class="list-check">check_circle</mat-icon> Theo dõi khách đang truy cập website thông qua <span
         style="color: red; font-weight: bold">Khách Đang Truy Cập</span>
     </li>
     <li>
-      <mat-icon class="list-check">check</mat-icon> Tích hợp tất cả các công cụ thu thập thông tin khách hàng, giúp bạn
+      <mat-icon class="list-check">check_circle</mat-icon> Tích hợp tất cả các công cụ thu thập thông tin khách hàng, giúp bạn
       có nhiều thông tin khách hàng hơn
     </li>
     <li>
-      <mat-icon class="list-check">check</mat-icon> Đồng bộ thông tin khách hàng vào tập khách hàng "<span
+      <mat-icon class="list-check">check_circle</mat-icon> Đồng bộ thông tin khách hàng vào tập khách hàng "<span
         style="color: red; font-weight: bold">THEO DÕI</span>", dễ dàng triển khai
       quảng cáo "<span style="color: red; font-weight: bold">BÁM ĐUÔI</span>"
     </li>
@@ -28,7 +28,7 @@
 
     <p><strong>Tài Khoản AdWords Đang Quảng Cáo Cho Website Này</strong></p>
     <app-select-text (valueChanged)="onSelectAdsId($event)" [itemsSource]="accountItemsSource" [displayPath]="'text'"
-      [valuePath]="'value'" [title]="'Chọn tài khoản AdWords'" [formControlName]="'adsId'"></app-select-text>
+      [valuePath]="'value'" [title]="'Chọn tài khoản AdWords'" [formControlName]="'adsId'" [isDisabled]="isProcessing"></app-select-text>
 
     <p>
       <strong>Tên miền (domain) website của bạn vào ô bên dưới</strong>
@@ -36,7 +36,7 @@
     <div fxLayout="row" fxLayout.xs="column">
       <app-input-text [formControlName]="'domain'" [errors]="getMessageErrors('domain')"
         [title]="'Nhập tên miền của bạn'"></app-input-text>
-      <button type="submit" mat-raised-button color="accent" class="add-website-button" [disabled]="onAddingDomain">
+      <button type="submit" mat-raised-button color="accent" class="add-website-button" [disabled]="isProcessing">
         THÊM WEBSITE
       </button>
     </div>
@@ -48,10 +48,10 @@
   <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
 
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center">
-    <p><strong>CÁC WEBSITE CỦA BẠN TRONG TÀI KHOẢN: <span [(ngModel)]="selectedAdsId" ngDefaultControl
+    <p><strong>CÁC WEBSITE TRONG TÀI KHOẢN <span [(ngModel)]="selectedAdsId" ngDefaultControl
         style="color: dodgerblue">{{selectedAdsId}}</span></strong></p>
-    <button mat-button class="update-website-list-button" color="accent" (click)="getWebsites()">
-      <mat-icon>sync</mat-icon> Cập nhật
+    <button mat-button class="update-website-list-button" color="accent" (click)="getWebsites()" [disabled]="isProcessing">
+      <mat-icon style="font-size: 18px">sync</mat-icon>Cập nhật
     </button>
   </div>
 

@@ -29,9 +29,9 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
 
   private initForm(): void {
     this.form = this.fb.group({
-      email:  ['', [Validators.required, Validators.email]],
+      email:  [''],
       name: ['', [Validators.required]],
-      phone: ['', [Validators.required, this.validatorService.checkNumber]],
+      phone: ['0933704455'],
       password: ['', []],
       confirmedPassword: ['', []]
     }, {validators: this.validatorService.checkConfirmPassword()});

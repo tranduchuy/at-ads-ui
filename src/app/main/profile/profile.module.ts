@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UpdateUserInfoComponent } from './update-user-info/update-user-info.component';
 import { ProfileRoutingModule } from './profile-routing.module';
-import { MatButtonModule, MatGridListModule, MatIconModule, MatFormFieldModule, MatDividerModule } from '@angular/material';
+import { MatButtonModule, MatGridListModule, MatIconModule, MatFormFieldModule, MatDividerModule, MatCardModule } from '@angular/material';
 import { FuseSharedModule } from '../../../@fuse/shared.module';
 import { InputTextModule } from '../../shared/components/input-text/input-text.module';
 import { ProfileService } from './profile.service';
+import { InputNumberModule } from 'app/shared/components/input-number/input-number.module';
 
 @NgModule({
   declarations: [UpdateUserInfoComponent],
@@ -18,7 +19,9 @@ import { ProfileService } from './profile.service';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatDividerModule
+    MatDividerModule,
+    InputNumberModule,
+    MatCardModule
   ],
   providers: [
     ProfileService

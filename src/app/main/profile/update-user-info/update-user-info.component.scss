@@ -5,7 +5,7 @@
 
   .title1 {
     padding: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 
     background-color: #eee;
     color: gray;
@@ -13,7 +13,21 @@
     font-weight: bold;
   }
 
-  mat-divider{
+  .avatar {
+
+    text-align: center;
+    width: 100%;
+
+    img {
+      border-radius: 50%;
+      height: 122px;
+      width: 122px;
+      display: table;
+      margin: 0 auto;
+    }
+  }
+
+  mat-divider {
     margin-top: 30px;
     margin-bottom: 40px;
   }
@@ -23,13 +37,18 @@
   }
 
   .form {
-    width: 60%;
+    width: 70%;
     display: table;
     margin: 0 auto;
     box-shadow: 2px 2px 5px silver;
+    background-color: white;
     padding: 50px;
-    padding-top: 30px;
+    padding-top: 20px;
     padding-bottom: 30px;
+  }
+
+  .change-password {
+    
   }
 
   .table-container {
@@ -107,6 +126,14 @@
     .form {
       width: 100%;
       padding: 10px;
+    }
+
+    .title1 {
+      margin-bottom: 30px;
+    }
+
+    .avatar {
+      margin-bottom: 20px;
     }
   }
 }

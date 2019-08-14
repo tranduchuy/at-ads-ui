@@ -30,7 +30,7 @@ export class DialogService {
   }
 
   public _openConfirmDialog(message: string): Observable<boolean> {
-    const dialogRef = this._matDialog.open(ConfirmDialogComponent);
+    const dialogRef = this._matDialog.open(ConfirmDialogComponent, { autoFocus: false });
     dialogRef.componentInstance.confirmMessage = message;
     return dialogRef.afterClosed();
   }
