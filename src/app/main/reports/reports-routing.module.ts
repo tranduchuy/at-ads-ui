@@ -16,6 +16,11 @@ import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-
         component: SpamClickReportComponent
       },
       {
+        path: 'click-ao/:accountId',
+        pathMatch: 'full',
+        component: SpamClickReportComponent
+      },
+      {
         path: 'chi-tiet-ip/:ip',
         pathMatch: 'full',
         component: IpDetailComponent

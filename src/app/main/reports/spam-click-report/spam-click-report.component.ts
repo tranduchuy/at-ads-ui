@@ -6,6 +6,7 @@ import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-b
 import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-spam-click-report',
@@ -32,16 +33,20 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   };
 
   ngOnInit() {
-
-    this._fuseProgressBarService.show();
-    const sub = this._sessionService.getAccountId()
-      .subscribe((accountId: string) => {
-        if (accountId) {
-          this._fuseProgressBarService.hide();
-          this.getAccountReport();
+    const routeParamsSub = this._activatedRoute.params
+      .subscribe((params: any) => {
+        if (params.accountId !== undefined)
+          this.getAccountReport(params.accountId);
+        else {
+          const sub = this._sessionService.getAccountId()
+            .subscribe((accountId: string) => {
+              if (accountId)
+                this.getAccountReport(accountId);
+            });
+          this.subscriptions.push(sub);
         }
       });
-    this.subscriptions.push(sub);
+    this.subscriptions.push(routeParamsSub);
   }
 
   getReportDates() {
@@ -68,13 +73,13 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     return true;
   }
 
-  getAccountReport() {
+  getAccountReport(accountId: string) {
     this._fuseProgressBarService.show();
 
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
 
-    const sub = this._reportService.getAccountReport({ from: start, to: end })
+    const sub = this._reportService.getAccountReport({ from: start, to: end }, accountId)
       .subscribe(res => {
         this.clickTotal = res.data.pieChart.realClick + res.data.pieChart.spamClick;
 
@@ -227,7 +232,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     public _sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _reportService: ReportService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _activatedRoute: ActivatedRoute
   ) {
 
     super();

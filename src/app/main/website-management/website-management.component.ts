@@ -67,13 +67,16 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
   ngOnInit() {
     const sub = this._activatedRoute.params.subscribe((params: any) => {
-      const adsId = params.adsId;
 
-      if (!adsId || isNaN(Number(adsId))) {
+      if (params.accountId === undefined) {
         this.selectedAdsId = this._sessionService.activeAdsAccountId;
       }
       else {
-        this.selectedAdsId = this.adsAccountIdPipe.transform(adsId);
+        const detailSub = this._websiteManagementService.getAdwordAccountDetail(params.accountId)
+          .subscribe(res => {
+            this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsId);
+          });
+        this.subscriptions.push(detailSub);
       }
 
       this.getAccounts();
@@ -110,57 +113,59 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
   getAccounts() {
     this._fuseProgressiveBarService.show();
-    const sub = this._websiteManagementService.getAccounts().subscribe(res => {
-      this.accounts = res.data.accounts;
+    const sub = this._websiteManagementService.getAccounts()
+      .subscribe(res => {
+        this.accounts = res.data.accounts;
 
-      if (this.accounts.length > 0) {
+        if (this.accounts.length > 0) {
 
-        for (const item of this.accounts) {
-          item.websites = [];
-          const getWebsiteSub = this._websiteManagementService.getWebsites(item.id).subscribe(res => {
-            this._fuseProgressiveBarService.hide();
-            item.websites = res.data.website;
-
-            if (this.adsAccountIdPipe.transform(item.adsId) !== this.selectedAdsId) {
-              this.accountItemsSource.push({
-                text: this.adsAccountIdPipe.transform(item.adsId),
-                value: item.id
-              });
-            } else {
-              this.accountItemsSource.unshift({
-                text: this.selectedAdsId,
-                value: item.id
-              });
-              this.selectedAccountId = item.id;
-              this.getWebsites();
-            }
-
-            if (this.accountItemsSource.length === 1) {
-              this.form.controls['adsId'].setValue(this.accountItemsSource[0]);
-            }
-          },
-            (error: HttpErrorResponse) => {
-              if (error.error.messages) {
+          for (const item of this.accounts) {
+            item.websites = [];
+            const getWebsiteSub = this._websiteManagementService.getWebsites(item.id)
+              .subscribe(res => {
                 this._fuseProgressiveBarService.hide();
-                this._dialogService._openErrorDialog(error.error);
-              }
-            });
-          this.subscriptions.push(getWebsiteSub);
-        }
-      } else {
-        this._dialogService._openErrorDialog({
-          messages: ['Vui lòng thêm tài khoản AdWords']
-        });
-        this._router.navigateByUrl('/them-tai-khoan-moi');
-      }
-    },
-      (error: HttpErrorResponse) => {
+                item.websites = res.data.website;
 
-        if (error.error.messages) {
-          this._dialogService._openErrorDialog(error.error);
+                if (this.adsAccountIdPipe.transform(item.adsId) !== this.selectedAdsId) {
+                  this.accountItemsSource.push({
+                    text: this.adsAccountIdPipe.transform(item.adsId),
+                    value: item.id
+                  });
+                } else {
+                  this.accountItemsSource.unshift({
+                    text: this.selectedAdsId,
+                    value: item.id
+                  });
+                  this.selectedAccountId = item.id;
+                  this.getWebsites();
+                }
+
+                if (this.accountItemsSource.length === 1) {
+                  this.form.controls['adsId'].setValue(this.accountItemsSource[0]);
+                }
+              },
+                (error: HttpErrorResponse) => {
+                  if (error.error.messages) {
+                    this._fuseProgressiveBarService.hide();
+                    this._dialogService._openErrorDialog(error.error);
+                  }
+                });
+            this.subscriptions.push(getWebsiteSub);
+          }
+        } else {
+          this._dialogService._openErrorDialog({
+            messages: ['Vui lòng thêm tài khoản AdWords']
+          });
+          this._router.navigateByUrl('/them-tai-khoan-moi');
         }
-        this._fuseProgressiveBarService.hide();
-      });
+      },
+        (error: HttpErrorResponse) => {
+
+          if (error.error.messages) {
+            this._dialogService._openErrorDialog(error.error);
+          }
+          this._fuseProgressiveBarService.hide();
+        });
     this.subscriptions.push(sub);
   }
 
@@ -177,18 +182,19 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     const params = this.generatePostObject();
     this.onAddingDomain = true;
     this._fuseProgressiveBarService.show();
-    const sub = this._websiteManagementService.addWebsite(params).subscribe((res: ILoginSuccess) => {
-      this._dialogService._openSuccessDialog(res);
-      this._fuseProgressiveBarService.hide();
-      this.onAddingDomain = false;
-      this.getWebsites();
-    },
-      (error: HttpErrorResponse) => {
-        this._dialogService._openErrorDialog(error.error);
+    const sub = this._websiteManagementService.addWebsite(params)
+      .subscribe((res: ILoginSuccess) => {
+        this._dialogService._openSuccessDialog(res);
         this._fuseProgressiveBarService.hide();
         this.onAddingDomain = false;
-      }
-    );
+        this.getWebsites();
+      },
+        (error: HttpErrorResponse) => {
+          this._dialogService._openErrorDialog(error.error);
+          this._fuseProgressiveBarService.hide();
+          this.onAddingDomain = false;
+        }
+      );
     this.subscriptions.push(sub);
   }
 

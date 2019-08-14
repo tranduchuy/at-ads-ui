@@ -31,9 +31,8 @@ export class ReportService {
     private _sessionService: SessionService
   ) { }
 
-  getAccountReport(params: IAccountReportParams): Observable<any> {
-    const activeAccountId = this._sessionService.getValueOfAccountId();
-    let url = API.Report.getAccountReport.replace('{account_id}', activeAccountId);
+  getAccountReport(params: IAccountReportParams, accountId: string): Observable<any> {
+    let url = API.Report.getAccountReport.replace('{account_id}', accountId);
     url = url.replace('{from}', params.from);
     url = url.replace('{to}', params.to);
 

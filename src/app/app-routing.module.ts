@@ -31,7 +31,7 @@ const appRoutes: Routes = [
     loadChildren: './main/add-tracking-tags/add-tracking-tags.module#AddTrackingTagsModule'
   },
   {
-    path: 'quan-ly-website/:accountId/:adsId',
+    path: 'quan-ly-website/:accountId',
     canActivate: [MainGuardService, AccountAcceptanceGuardService],
     loadChildren: './main/website-management/website-management.module#WebsiteManagementModule'
   },
