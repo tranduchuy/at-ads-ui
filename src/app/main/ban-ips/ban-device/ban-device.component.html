@@ -66,7 +66,8 @@
 
           <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Điện thoại'">
             <mat-label>Chọn hình thức</mat-label>
-            <mat-select [(value)]="deviceSettings.mobile" [disabled]="isProcessing" (selectionChange)="setDeviceCampaignRunning($event,30001)">
+            <mat-select [(value)]="deviceSettings.mobile" [disabled]="isProcessing"
+              (selectionChange)="setDeviceCampaignRunning($event,30001)">
               <mat-option *ngFor="let item of deviceSettingsItemsSource.mobile" [value]="item.value">{{item.text}}
               </mat-option>
             </mat-select>
@@ -74,7 +75,8 @@
 
           <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Máy tính bảng'">
             <mat-label>Chọn hình thức</mat-label>
-            <mat-select [(value)]="deviceSettings.tablet" [disabled]="isProcessing" (selectionChange)="setDeviceCampaignRunning($event,30002)">
+            <mat-select [(value)]="deviceSettings.tablet" [disabled]="isProcessing"
+              (selectionChange)="setDeviceCampaignRunning($event,30002)">
               <mat-option *ngFor="let item of deviceSettingsItemsSource.tablet" [value]="item.value">{{item.text}}
               </mat-option>
             </mat-select>
@@ -82,7 +84,8 @@
 
           <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Máy tính'">
             <mat-label>Chọn hình thức</mat-label>
-            <mat-select [(value)]="deviceSettings.computer" [disabled]="isProcessing" (selectionChange)="setDeviceCampaignRunning($event,30000)">
+            <mat-select [(value)]="deviceSettings.computer" [disabled]="isProcessing"
+              (selectionChange)="setDeviceCampaignRunning($event,30000)">
               <mat-option *ngFor="let item of deviceSettingsItemsSource.computer" [value]="item.value">{{item.text}}
               </mat-option>
             </mat-select>

@@ -89,10 +89,10 @@
                 </div>
               </li>
               <li>
-                <a [routerLink]="['/quan-ly-website', element.id]"
+                <button (click)="navigateToWebsiteManagement(element.id, element.campaignNumber)"
                    mat-button color="accent" style="padding-left: 0">
                   <mat-icon>add_circle_outline</mat-icon> Thêm Website
-                </a>
+                </button>
               </li>
             </ul>
           </mat-cell>

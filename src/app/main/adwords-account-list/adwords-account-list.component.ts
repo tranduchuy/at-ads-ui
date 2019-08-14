@@ -82,4 +82,11 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     this._fuseNavigationService.reloadNavigation();
     this._router.navigateByUrl('/bao-cao/click-ao');
   }
+
+  navigateToWebsiteManagement(accountId: string, campaignNumber: number) {
+    if(campaignNumber > 0)
+      this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
+    else this._dialogService._openInfoDialog('Tài khoản hiện chưa có chiến dịch');
+  }
+
 }
