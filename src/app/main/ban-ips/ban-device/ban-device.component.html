@@ -42,12 +42,12 @@
 
       <ng-container matColumnDef="impressions">
         <mat-header-cell *matHeaderCellDef> Hiển thị </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.impressions}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.impressions | number: '1.0-0'}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="clicks">
         <mat-header-cell *matHeaderCellDef> Click </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.clicks}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.clicks | number: '1.0-0'}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="avgPosition">
