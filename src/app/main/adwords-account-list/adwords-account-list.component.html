@@ -37,20 +37,20 @@
                 {{element.adsId | adsAccountId}}
               </p>
               <div fxLayout="row" *ngIf="element.isConnected">
-                <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan">
+                <a mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan" [routerLink]="['/bao-cao/click-ao', element.id]">
                   <mat-icon>notifications</mat-icon>
-                </button>
+                </a>
                 <a *ngIf="element.websites.length > 0"
                   [routerLink]="['/gan-tracking/website', element.id,element.adsId,element.key]" mat-icon-button
                   color="accent" matTooltip="Gắn mã tracking cho các website" style="color: red">
                   <mat-icon>code</mat-icon>
                 </a>
-                <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
+                <!-- <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
                   <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button color="accent" matTooltip="Xóa">
                   <mat-icon>delete</mat-icon>
-                </button>
+                </button> -->
               </div>
             </div>
           </mat-cell>
