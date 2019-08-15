@@ -94,8 +94,10 @@
 
       <ng-container matColumnDef="unlockButton">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef>
-          <button mat-icon-button color="accent" matTooltip="Nhấn để mở chặn" class="unlock-button">
+        <mat-cell *matCellDef="let element">
+          <button (click)="unblockSampleIP(element)"
+                  [disabled]="isProcessing"
+                  mat-icon-button color="accent" matTooltip="Nhấn để mở chặn" class="unlock-button">
             <mat-icon>lock_open</mat-icon>
           </button>
         </mat-cell>

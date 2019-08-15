@@ -70,8 +70,8 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
-          this._router.navigateByUrl('/them-tai-khoan-moi');
+          // this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+          // this._router.navigateByUrl('/them-tai-khoan-moi');
         });
     this.subscriptions.push(sub);
   }

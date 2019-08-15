@@ -50,9 +50,12 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
       .subscribe(res => {
         this._fuseProgressiveBarService.hide();
         if (res.data.adsAccount.isConnected) {
+
           this._sessionService.setActiveAccountId(this.connectedAccountId);
           this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
+          
           this._fuseNavigationService.reloadNavigation();
+
           this._router.navigateByUrl('/gan-tracking/chien-dich');
         }
         else {

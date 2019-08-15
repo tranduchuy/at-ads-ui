@@ -39,7 +39,7 @@
   .button-area {
     margin-top: 15px;
 
-    button{
+    button {
       border-radius: 0;
     }
   }
@@ -51,7 +51,7 @@
   .banned-ip-info {
     margin-top: 30px;
     padding: 20px;
-    
+
     background-color: #eee;
     border-left: 5px solid darkorange;
 
@@ -59,25 +59,24 @@
 
     box-shadow: 2px 2px 5px silver;
 
-    button{
+    button {
       border-radius: 0;
     }
   }
 
-  .success-button{
+  .success-button {
     background-color: #4bb543;
     color: white;
   }
 
-  .next-icon{
+  .next-icon {
     font-size: 18px;
     margin-left: 5px;
   }
 }
 
-@media screen and (max-width: 600px){
-
-  .container{
+@media screen and (max-width: 600px) {
+  .container {
     padding: 15px;
   }
 }

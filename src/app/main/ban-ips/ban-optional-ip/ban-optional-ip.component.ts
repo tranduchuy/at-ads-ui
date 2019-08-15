@@ -100,4 +100,41 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
     return params;
   }
+
+  unblockSampleIP(ip: string) {
+
+    const openCofirmDialogSub = this._dialogService._openConfirmDialog('Mở chặn IP này?')
+      .subscribe((res: boolean) => {
+        if (res) {
+          this.isProcessing = true;
+          this._fuseProgressiveBarService.show();
+
+          const sub = this._banIpsService.removeBlockedIPs({
+            action: 'REMOVE',
+            ips: [ip]
+          })
+            .subscribe((res: ILoginSuccess) => {
+
+              this.getBlockedCustomIPs();
+
+              setTimeout(() => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openSuccessDialog(res);
+                this.isProcessing = false;
+              }, 0);
+            },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+
+                if (error.status === 404)
+                  this._dialogService._openErrorDialog({ messages: [`${error.error.data.ips[0]} không nằm trong danh sách IP đã bị chặn`] });
+                else this._dialogService._openErrorDialog(error.error);
+
+                this.isProcessing = false;
+              });
+          this.subscriptions.push(sub);
+        }
+      });
+    this.subscriptions.push(openCofirmDialogSub);
+  }
 }

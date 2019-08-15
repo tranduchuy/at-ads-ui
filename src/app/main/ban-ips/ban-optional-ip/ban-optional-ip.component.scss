@@ -96,7 +96,7 @@
       box-shadow: none;
     }
 
-    mat-row{
+    mat-row {
       transition: 0.2s;
     }
 
@@ -104,20 +104,14 @@
       background-color: #eeee;
     }
 
-    mat-cell,
-    mat-header-cell {
-      display: flex;
-      justify-content: center;
+    mat-header-cell:nth-child(1),
+    mat-cell:nth-child(1) {
+      flex: 0 0 10%;
     }
 
     mat-header-cell:nth-child(3),
     mat-cell:nth-child(3) {
       flex: 0 0 40%;
-    }
-
-    mat-header-cell:nth-child(1),
-    mat-cell:nth-child(1) {
-      flex: 0 0 10%;
     }
 
     mat-row,
@@ -152,10 +146,9 @@
   }
 
   .task {
-    color: #4bb543;
+    color: crimson
   }
 
-  .task,
   .unlock-button {
     display: table;
     margin: 0 auto;
@@ -177,7 +170,7 @@
       font-size: 12px;
     }
   }
-  .container{
+  .container {
     padding: 15px;
   }
 }
