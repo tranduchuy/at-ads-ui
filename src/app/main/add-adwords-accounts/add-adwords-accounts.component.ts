@@ -46,14 +46,16 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
 
-    const sub = this._addAdwordsAccountsService.getAdwordsAccountDetail(this.connectedAccountId)
+    const sub = this._addAdwordsAccountsService.checkAccountAcceptance({
+      adWordId: this.connectedAdsId.replace(/\D+/g, '')
+    })
       .subscribe(res => {
         this._fuseProgressiveBarService.hide();
-        if (res.data.adsAccount.isConnected) {
+        if (res.data.isConnected) {
 
           this._sessionService.setActiveAccountId(this.connectedAccountId);
           this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
-          
+
           this._fuseNavigationService.reloadNavigation();
 
           this._router.navigateByUrl('/gan-tracking/chien-dich');
@@ -75,22 +77,23 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     const params = this.generatePostObject();
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
-    const sub = this._addAdwordsAccountsService.addAdwordsAccount(params).subscribe((res) => {
-      this._dialogService._openInfoDialog(res.messages[0]);
-      this.isConnected = true;
+    const sub = this._addAdwordsAccountsService.addAdwordsAccount(params)
+      .subscribe((res) => {
+        this._dialogService._openInfoDialog(res.messages[0]);
+        this.isConnected = true;
 
-      this.connectedAccountId = res.data.account._id;
-      this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
+        this.connectedAccountId = res.data.account._id;
+        this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
-      this._fuseProgressiveBarService.hide();
-      this.isProcessing = false;
-    },
-      (error: HttpErrorResponse) => {
         this._fuseProgressiveBarService.hide();
-        this._dialogService._openErrorDialog(error.error);
         this.isProcessing = false;
-      }
-    );
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
+        }
+      );
     this.subscriptions.push(sub);
   }
 

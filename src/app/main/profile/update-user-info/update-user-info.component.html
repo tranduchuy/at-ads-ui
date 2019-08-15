@@ -8,8 +8,8 @@
 		<div class="user-info" fxLayout="row" fxLayout.xs="column">
 			<div class="avatar" fxFlex="25">
 
-				<img [src]="userInfo.avatar" alt="">
-				<button mat-button color="accent" style="margin-left: -10px">
+				<img [src]="userInfo.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" alt="">
+				<button mat-button color="accent" style="padding-left: 0">
 					<mat-icon style="font-size: 18px">sync</mat-icon>Thay đổi
 				</button>
 				

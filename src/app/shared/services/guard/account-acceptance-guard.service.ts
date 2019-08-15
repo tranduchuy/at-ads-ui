@@ -25,14 +25,16 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
         state: RouterStateSnapshot,
     ): Observable<boolean> | boolean {
 
-        let activeAdsAccountId = this._sessionService.activeAdsAccountId.match(/\d+/g).join('');
-        let activeAccountId = this._sessionService.activeAccountId;
+        let activeAdsAccountId = this._sessionService.activeAdsAccountId;
 
         if (!activeAdsAccountId) {
             this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
             this._router.navigateByUrl('/them-tai-khoan-moi');
             return false;
         }
+
+        activeAdsAccountId = activeAdsAccountId.match(/\d+/g).join('');
+        let activeAccountId = this._sessionService.activeAccountId;
 
         if (route.params.accountId !== undefined)
             return this.adwordsAccountService.getAccountAdwordsDetail(route.params.accountId)

@@ -67,11 +67,12 @@ export class ValidatorsService {
   }
 
   public checkDomain(control: AbstractControl): any {
-    const regex = new RegExp(/(https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9])(:?\d*)\/?([a-z_\/0-9\-#.]*)\??([a-z_\/0-9\-#=&]*)/g);
+    const regex = new RegExp(/^(https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9])$/);
 
     if (!regex.test(control.value)) {
       return { [ErrorNames.invalidDomain[0]]: true };
     }
+    
   }
 
   public checkUrlSeo(control: AbstractControl): any {

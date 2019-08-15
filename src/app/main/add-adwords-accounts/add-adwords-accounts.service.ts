@@ -7,6 +7,10 @@ export interface IAddAccount {
   accountId: string;
 }
 
+export interface ICheckAccountAcceptanceParams {
+  adWordId: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +29,10 @@ export class AddAdwordsAccountsService {
   public getAdwordsAccountDetail(accountId): Observable<any> {
     const url = API.AdwordsAccount.getAwordsAccountDetail.replace('{account_id}', accountId);
     return this._http.get(url);
+  }
+
+  public checkAccountAcceptance(params: ICheckAccountAcceptanceParams): Observable<any> {
+    return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
 
 }

@@ -63,6 +63,7 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
       .subscribe(res => {
 
         this.dataSource = res.data.rangeIps;
+
         this.pageTotal = Math.ceil(res.data.totalItems / 10);
 
         if (this.pageTotal > 0)

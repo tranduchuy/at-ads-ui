@@ -40,9 +40,6 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
             this.key = res.data.adsAccount.key;
           });
         this.subscriptions.push(detailSub);
-
-        this.adsId = this.adsAccountIdPipe.transform(params.adsId);
-        this.key = params.key;
       });
     this.subscriptions.push(sub);
   }

@@ -20,6 +20,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   // displayedColumns: string[] = ['task', 'date', 'adwords', 'website', 'service', 'cost', 'display', 'click', 'spamClick'];
   displayedColumns: string[] = ['task', 'date', 'adwords', 'accepted', 'website'];
   accounts = [];
+  isProcessing: boolean = false;
 
   adsAccountIdPipe = new AdsAccountIdPipe();
 
@@ -29,7 +30,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     private _adwordsAccountListService: AdwordsAccountListService,
     private _router: Router,
     private _sessionService: SessionService,
-    private _fuseNavigationService: FuseNavigationService
+    private _fuseNavigationService: FuseNavigationService,
   ) {
     super();
   }
@@ -84,9 +85,39 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   navigateToWebsiteManagement(accountId: string, campaignNumber: number) {
-    if(campaignNumber > 0)
+    if (campaignNumber > 0)
       this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
-    else this._dialogService._openErrorDialog({messages: ['Tài khoản hiện chưa được thêm chiến dịch.']});
+    else this._dialogService._openErrorDialog({ messages: ['Tài khoản hiện chưa được thêm chiến dịch.'] });
+  }
+
+  checkAccountAcceptance(adsId: string, isConnected: boolean) {
+
+    if (isConnected) {
+      this._dialogService._openSuccessDialog({ messages: ['Cập nhật dữ liệu thành công'] });
+      return;
+    }
+
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
+
+    const sub = this._adwordsAccountListService.checkAccountAcceptance({ adWordId: adsId })
+      .subscribe(res => {
+
+        this.getAccounts();
+
+        setTimeout(() => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openSuccessDialog({ messages: ['Cập nhật dữ liệu thành công'] });
+          this._fuseNavigationService.reloadNavigation();
+          this.isProcessing = false;
+        }, 0);
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
   }
 
 }

@@ -104,7 +104,7 @@ export class FuseNavigationComponent implements OnInit {
     this._adwordsAccountsService.getAdwordsAccount()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(res => {
-        let accounts = res.data.accounts;
+        let accounts = res.data.accounts.filter(item => item.isConnected === true);
         let activeAdsAccountId = '';
         let activeAccountId = '';
 
@@ -116,8 +116,6 @@ export class FuseNavigationComponent implements OnInit {
         }
 
         if (accounts.length > 0) {
-
-          accounts = accounts.filter(item => item.isConnected === true);
 
           if (!activeAccountId) {
             this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(accounts[0].adsId.toString()));

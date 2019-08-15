@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { API } from '../../shared/constants/api.constant';
 import { HttpClient } from '@angular/common/http';
 
+export interface ICheckAccountAcceptanceParams {
+  adWordId: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,5 +25,9 @@ export class AdwordsAccountListService {
   removeWebsite(websiteId: string): Observable<any> {
     const url = API.Website.removeWebsite.replace('{website_id}', websiteId);
     return this._http.delete(url);
+  }
+
+  public checkAccountAcceptance(params: ICheckAccountAcceptanceParams): Observable<any> {
+    return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
 }

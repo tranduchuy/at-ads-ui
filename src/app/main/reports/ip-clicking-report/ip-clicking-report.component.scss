@@ -6,13 +6,19 @@
   .title1 {
     padding: 15px;
 
-    background-color: #eee;
+    background-color: whitesmoke;
     color: gray;
     font-size: 16px;
     font-weight: bold;
 
     padding-left: 25px;
     box-shadow: 2px 2px 5px silver;
+  }
+
+  .icon {
+    height: 22px;
+    width: 22px;
+    margin-right: 5px;
   }
 
   .pagination-buttons {
@@ -53,7 +59,7 @@
       }
 
       mat-row:hover {
-        background-color: #eee;
+        background-color: whitesmoke;
       }
     }
   }

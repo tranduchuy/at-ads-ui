@@ -15,7 +15,7 @@
         <ng-container matColumnDef="task">
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <button mat-icon-button color="accent" matTooltip="Cập nhật dữ liệu" *ngIf="element.isConnected">
+            <button mat-icon-button color="accent" matTooltip="Cập nhật dữ liệu" (click)="checkAccountAcceptance(element.adsId, element.isConnected)">
               <mat-icon>sync</mat-icon>
             </button>
           </mat-cell>

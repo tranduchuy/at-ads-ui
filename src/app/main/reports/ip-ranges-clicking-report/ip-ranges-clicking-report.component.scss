@@ -5,12 +5,22 @@
   .title1 {
     padding: 15px;
     padding-left: 30px;
-    background-color: #eee;
+    background-color: whitesmoke;
     color: gray;
     font-size: 16px;
     font-weight: bold;
 
     box-shadow: 2px 2px 5px silver;
+  }
+
+  .keywords {
+    background-color: whitesmoke;
+    margin: 3px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 2px;
+    transition: 0.2s;
   }
 
   .datePicker {
@@ -49,8 +59,38 @@
       flex: 0 0 18%;
     }
 
+    mat-header-cell:nth-child(3),
+    mat-cell:nth-child(3) {
+      flex: 0 0 10%;
+    }
+
+    mat-header-cell:nth-child(4),
+    mat-cell:nth-child(4) {
+      padding-right: 20px;
+      flex: 0 0 20%;
+      flex-wrap: wrap;
+  
+      span {
+        flex-grow: 1;
+      }
+    }
+
+    mat-cell:nth-child(4) {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
     mat-row:hover {
-      background-color: #eee;
+      background-color: whitesmoke;
+
+      .keywords {
+        background-color: #eee;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
     }
   }
 }
