@@ -83,11 +83,13 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     this.isProcessing = true;
     const sub = this._addTrackingTagsService.addCampaignTracking(params)
       .subscribe((res: ILoginSuccess) => {
+
         this.getOriginalCampaigns();
-        this.isProcessing = false;
+
         setTimeout(() => {
           this._dialogService._openSuccessDialog(res);
           this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
         }, 0);
       },
         (error: HttpErrorResponse) => {
@@ -104,18 +106,24 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
     const sub = this._addTrackingTagsService.getOriginalCampaigns()
       .subscribe(res => {
+        
         this.campaignList = res.data.campaignList;
+
         const sub1 = this._addTrackingTagsService.getTrackingCampaigns()
           .subscribe(res => {
+
             this.trackingCampaignList = res.data.campaignIds;
             this.selectedCampaigns = this.trackingCampaignList;
+
             setTimeout(() => {
               this._fuseProgressiveBarService.hide();
               this.isProcessing = false;
             }, 0);
           },
             (error: HttpErrorResponse) => {
+
               this.trackingCampaignList = [];
+
               this._fuseProgressiveBarService.hide();
               this._dialogService._openErrorDialog(error.error);
               this.isProcessing = false;
@@ -123,9 +131,12 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         this.subscriptions.push(sub1);
       },
         (error: HttpErrorResponse) => {
+
           if (error.error.messages) {
+
             this.campaignList = [];
             this.trackingCampaignList = [];
+
             this._dialogService._openErrorDialog(error.error);
             this.isProcessing = false;
           }
