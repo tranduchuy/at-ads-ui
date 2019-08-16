@@ -12,13 +12,9 @@
 
       <mat-form-field class="datePicker">
         <input type="text" ngxDaterangepickerMd matInput placeholder="Khoảng thời gian thống kê" readonly
-               [locale]="locale"
-               [(ngModel)]="selectedDateRange"
-               startKey="start" 
-               endKey="end" 
-               (datesUpdated)="onApplyDateRange($event)"
-               (change)="getAccountReport(_sessionService.activeAccountId)"
-               ngDefaultControl/>
+          [locale]="locale" [(ngModel)]="selectedDateRange" startKey="start" endKey="end"
+          (datesUpdated)="onApplyDateRange($event)" (change)="getAccountReport(_sessionService.activeAccountId)"
+          ngDefaultControl />
       </mat-form-field>
 
       <div class="clear"></div>
@@ -65,8 +61,8 @@
     </div>
 
     <div class="position-relative h-368 pb-16">
-      <canvas baseChart [datasets]="lineChart.datasets.report" [labels]="lineChart.labels"
-        [colors]="lineChart.colors" [options]="lineChart.options" [chartType]="lineChart.chartType">
+      <canvas baseChart [datasets]="lineChart.datasets.report" [labels]="lineChart.labels" [colors]="lineChart.colors"
+        [options]="lineChart.options" [chartType]="lineChart.chartType">
       </canvas>
     </div>
 
@@ -89,24 +85,31 @@
           <ng-container matColumnDef="ip">
             <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px">not_interested
-              </mat-icon>
-              <mat-icon *ngIf="!element.isSpam" style="color:silver; margin-right: 5px">not_interested
-              </mat-icon>
-              <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
+              <!-- <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
                 style="font-weight: bold; padding-left: 0" mat-button color="accent">
+                <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px">not_interested
+                </mat-icon>
+                <mat-icon *ngIf="!element.isSpam" style="color:silver; margin-right: 5px">not_interested
+                </mat-icon>
+                {{element.ip}}
+              </a> -->
+
+              <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
+                <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px">not_interested
+                </mat-icon>
+                <mat-icon *ngIf="!element.isSpam" style="color:silver; margin-right: 5px">not_interested
+                </mat-icon>
                 {{element.ip}}
               </a>
+
             </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <span *ngIf="element.isSpam"
-                style="color: red; font-weight: bold">Đã chặn</span>
-              <span *ngIf="!element.isSpam"
-                style="color: dodgerblue; font-weight: bold">Hợp lệ</span>
+              <span *ngIf="element.isSpam" style="color: red; font-weight: bold">Đã chặn</span>
+              <span *ngIf="!element.isSpam" style="color: dodgerblue; font-weight: bold">Hợp lệ</span>
             </mat-cell>
           </ng-container>
 

@@ -60,7 +60,7 @@ export class RegisterComponent extends PageBaseComponent implements OnInit, OnDe
     this.registerForm = this._formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, checkValidPassword]],
       confirmedPassword: ['', [Validators.required, confirmPasswordValidator]]
     });
 
@@ -115,5 +115,24 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
     return null;
   }
 
-  return {passwordsNotMatching: true};
+  return { passwordsNotMatching: true };
+};
+
+/**
+ * Confirm password validator
+ *
+ * @param {AbstractControl} control
+ * @returns {ValidationErrors | null}
+ */
+export const checkValidPassword: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+
+  if (!control.parent || !control) {
+    return null;
+  }
+
+  const password = control.parent.get('password');
+  const reg = new RegExp(/^[a-zA-Z0-9]*$/);
+
+  if (!reg.test(password.value))
+    return { invalidPassword: true };
 };

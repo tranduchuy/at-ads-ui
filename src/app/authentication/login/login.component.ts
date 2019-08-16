@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation, NgZone } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
@@ -14,6 +14,7 @@ import { ILoginSuccess } from './models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { ValidatorsService } from 'app/shared/services/validator.service';
 
 declare var gapi: any;
 @Component({
@@ -44,7 +45,8 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     private _dialogService: DialogService,
     private _sessionService: SessionService,
     private _ngZone: NgZone,
-    private _navigationService: FuseNavigationService
+    private _navigationService: FuseNavigationService,
+    private _validatorService: ValidatorsService
   ) {
     super();
     // Configure the layout
@@ -76,7 +78,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, checkValidPassword]]
     });
   }
 
@@ -96,6 +98,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
       const token = res.data.meta.token;
       const user = res.data.user;
       this._sessionService.set(token, user);
+      this._sessionService.setUser(user);
       this._fuseSplashScreenService.hide();
       this._router.navigateByUrl('/');
     },
@@ -136,6 +139,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     // const googleId: number = profile.getId();
     // const name: string = profile.getName();
     // const email: string = profile.getEmail();
+
     const accessToken: string = googleUser.Zi.access_token;
 
     this._fuseSplashScreenService.show();
@@ -146,6 +150,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
       const user = res.data.user;
       user.avatar = googleUser.w3.Paa;
       this._sessionService.set(token, user);
+      this._sessionService.setUser(user);
       this._ngZone.run(() => this._router.navigateByUrl('/')
         .then(resolve => { this._fuseSplashScreenService.hide(); }));
     },
@@ -157,3 +162,21 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     this.subscriptions.push(sub);
   }
 }
+/**
+ * Confirm password validator
+ *
+ * @param {AbstractControl} control
+ * @returns {ValidationErrors | null}
+ */
+export const checkValidPassword: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+
+  if (!control.parent || !control) {
+    return null;
+  }
+
+  const password = control.parent.get('password');
+  const reg = new RegExp(/^[a-zA-Z0-9]*$/);
+
+  if (!reg.test(password.value))
+    return { invalidPassword: true };
+};

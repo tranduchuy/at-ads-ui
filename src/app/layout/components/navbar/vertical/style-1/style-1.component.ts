@@ -8,6 +8,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { SessionService } from '../../../../../shared/services/session.service';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 @Component({
   selector: 'navbar-vertical-style-1',
@@ -15,7 +16,7 @@ import { SessionService } from '../../../../../shared/services/session.service';
   styleUrls: ['./style-1.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
+export class NavbarVerticalStyle1Component extends PageBaseComponent implements OnInit, OnDestroy {
   fuseConfig: any;
   navigation: any;
   user = {
@@ -43,6 +44,9 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
     private _router: Router,
     private _sessionService: SessionService
   ) {
+
+    super();
+
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
@@ -122,10 +126,18 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
         this.navigation = this._fuseNavigationService.getCurrentNavigation();
       });
 
-    if (this._sessionService.user) {
+    if (this._sessionService.user)
+      this._sessionService.setUser(JSON.parse(this._sessionService.user));
 
-      this.user = JSON.parse(this._sessionService.user);
-    }
+    const sub = this._sessionService.getUser()
+      .subscribe((user: any) => {
+        if (user) {
+          this.user.name = user.name;
+          this.user.avatar = user.avatar;
+          this.user.email = user.email;
+        }
+      });
+    this.subscriptions.push(sub);
   }
 
   /**

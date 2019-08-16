@@ -123,9 +123,18 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {id: this._translateService.currentLang});
 
-        if (this._sessionService.user) {
-            this.user = JSON.parse(this._sessionService.user);
-        }
+        if(this._sessionService.user)
+            this._sessionService.setUser(JSON.parse(this._sessionService.user));
+
+        const sub = this._sessionService.getUser()
+            .subscribe((user: any) => {
+                if(user) {
+                    this.user.name = user.name;
+                    this.user.avatar = user.avatar;
+                    this.user.email = user.email;
+                }
+            });
+        this.subscriptions.push(sub);
     }
 
     /**

@@ -19,18 +19,16 @@
       <ng-container matColumnDef="ip">
         <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
+
+          <!-- <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
             style="font-weight: bold; padding-left: 0" mat-button color="accent">
             {{element._id}}
+          </a> -->
+
+          <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
+            {{element._id}}
           </a>
-          <!-- <span *ngIf="element.status">
-            <mat-icon style="color: silver; margin-right: 5px; margin-left: -3px">beenhere</mat-icon><span
-              style="color: dodgerblue; font-weight: bold">{{element.ip}}</span>
-          </span>
-          <span *ngIf="!element.status">
-            <mat-icon style="color: crimson; margin-right: 5px; margin-left: -3px">beenhere</mat-icon><span
-              style="color: crimson; font-weight: bold; text-decoration: line-through">{{element.ip}}</span>
-          </span> -->
+
         </mat-cell>
       </ng-container>
 
@@ -38,15 +36,6 @@
         <mat-header-cell *matHeaderCellDef> Lần click </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
       </ng-container>
-
-      <!-- <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span *ngIf="element.status" style="color: dodgerblue; font-weight: bold">Hợp lệ</span>
-          <span *ngIf="!element.status" style="color: crimson; font-weight: bold; text-decoration: line-through">Đã
-            chặn</span>
-        </mat-cell>
-      </ng-container> -->
 
       <ng-container matColumnDef="location">
         <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
@@ -85,32 +74,10 @@
         <mat-cell *matCellDef="let element"> {{element.info[0].networkCompany?.name | uppercase}} </mat-cell>
       </ng-container>
 
-      <!-- <ng-container matColumnDef="connection">
-        <mat-header-cell *matHeaderCellDef> Kết nối </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          {{element.connection}}
-        </mat-cell>
-      </ng-container> -->
-
       <ng-container matColumnDef="keyword">
         <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.info[0].keyword}} </mat-cell>
       </ng-container>
-
-      <!-- <ng-container matColumnDef="matching">
-        <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.matching}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="page">
-        <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.page}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="position">
-        <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-      </ng-container> -->
 
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -134,12 +101,12 @@
         style="color: red; font-weight: bold">Tính Năng Hạn Chế Click Ảo</span>
     </p>
     <div class="button-area" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center center">
-      <button mat-raised-button color="accent" style="border-radius: 0">
+      <!-- <button mat-raised-button color="accent" style="border-radius: 0">
         <mat-icon>beenhere</mat-icon> HẠN CHẾ IP CLICK NHIỀU
-      </button>
-      <button mat-raised-button color="warn" style="border-radius: 0">
+      </button> -->
+      <a [routerLink]="'/bao-cao/click-ao'" mat-raised-button color="warn" style="border-radius: 0">
         <mat-icon>data_usage</mat-icon> XEM BÁO CÁO THEO NGÀY
-      </button>
+      </a>
     </div>
   </div>
 

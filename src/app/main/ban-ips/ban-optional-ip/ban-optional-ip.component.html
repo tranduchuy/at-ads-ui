@@ -70,7 +70,7 @@
       <ng-container matColumnDef="ip">
         <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span style="color: dodgerblue; font-weight: bold">{{element}}</span>
+          <span style="color: dodgerblue; font-weight: bold">{{element._id}}</span>
         </mat-cell>
       </ng-container>
 
@@ -78,7 +78,8 @@
         <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <p class="status">
-            Chặn thành công <span style="color: gray; font-weight: bold">{{element}}</span> vào tổng <span style="color: crimson; font-weight: bold">20</span> chiến dịch.
+            Chặn thành công <span style="color: gray; font-weight: bold">{{element._id}}</span> vào tổng <span
+              style="color: crimson; font-weight: bold">{{element.campaignNumber}}</span> chiến dịch.
           </p>
         </mat-cell>
       </ng-container>
@@ -95,9 +96,8 @@
       <ng-container matColumnDef="unlockButton">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button (click)="unblockSampleIP(element)"
-                  [disabled]="isProcessing"
-                  mat-icon-button color="accent" matTooltip="Nhấn để mở chặn" class="unlock-button">
+          <button (click)="unblockSampleIP(element)" [disabled]="isProcessing" mat-icon-button color="accent"
+            matTooltip="Nhấn để mở chặn" class="unlock-button">
             <mat-icon>lock_open</mat-icon>
           </button>
         </mat-cell>

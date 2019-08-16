@@ -29,7 +29,7 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
     this.buildObjectError(this.form);
 
     if (this.errors.length !== 0) {
-      this._dialogService._openErrorDialog({messages: ['Đã xảy ra lỗi vui lòng kiểm tra lại thông tin.']});
+      this._dialogService._openErrorDialog({ messages: ['Đã xảy ra lỗi vui lòng kiểm tra lại thông tin.'] });
       return;
     }
 
@@ -54,12 +54,12 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
       if (control instanceof FormGroup) {
         this.markAsTouched(control);
       } else {
-        control.markAsTouched({onlySelf: true});
+        control.markAsTouched({ onlySelf: true });
       }
     });
   }
 
-  buildObjectError(form: FormGroup): void  {
+  buildObjectError(form: FormGroup): void {
     const controls = Object.keys(form.controls);
     controls.forEach((controlName: string) => {
       const control = form.controls[controlName];
@@ -117,6 +117,9 @@ export abstract class EditableFormBaseComponent extends PageBaseComponent {
 
       case ErrorNames.wrongPassword[0]:
         return ErrorNames.wrongPassword[1];
+
+      case ErrorNames.wrongConfirmedPassword[0]:
+        return ErrorNames.wrongConfirmedPassword[1]
 
       case ErrorNames.email[0]:
         return ErrorNames.email[1];

@@ -1,6 +1,6 @@
 <div class="container">
 
-	<form [formGroup]="form" novalidate class="form">
+	<form [formGroup]="form" novalidate class="form" (ngSubmit)="submitForm()">
 		<div class="title1 text-center">
 			THAY ĐỔI THÔNG TIN TÀI KHOẢN
 		</div>
@@ -9,9 +9,9 @@
 			<div class="avatar" fxFlex="25">
 
 				<img [src]="userInfo.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" alt="">
-				<button mat-button color="accent" style="padding-left: 0">
+				<!-- <button mat-button color="accent" style="padding-left: 0">
 					<mat-icon style="font-size: 18px">sync</mat-icon>Thay đổi
-				</button>
+				</button> -->
 				
 			</div>
 
@@ -24,10 +24,10 @@
 					<app-input-text [formControlName]="'email'" [title]="'Email'" [pristine]="true" [icon]="'mail'"
 						[(ngModel)]="userInfo.email" [readonly]="true"></app-input-text>
 
-					<app-input-number [formControlName]="'phone'" [title]="'Số điện thoại'" [pristine]="true"
-						[icon]="'phone'">
+					<app-input-number [formControlName]="'phone'" [title]="'Số điện thoại'" [icon]="'phone'" [(ngModel)]="userInfo.phone">
 					</app-input-number>
 				</div>
+				
 			</div>
 		</div>
 
@@ -38,17 +38,22 @@
 			 	CẬP NHẬT MẬT KHẨU
 			</strong></p>
 
-			<app-input-text [formControlName]="'password'" [title]="'Mật khẩu cũ'" [pristine]="true" [type]="'password'"
-				[icon]="'vpn_key'" [errors]="getMessageErrors('password')"></app-input-text>
+			<app-input-text [formControlName]="'oldPassword'" [title]="'Mật khẩu cũ'" [pristine]="true" [type]="'password'"
+				[icon]="'vpn_key'" [errors]="getMessageErrors('oldPassword')"></app-input-text>
 
-			<app-input-text [formControlName]="'confirmedPassword'" [title]="'Mật khẩu mới'" [pristine]="true"
+			<app-input-text [formControlName]="'password'" [title]="'Mật khẩu mới'" [pristine]="true"
+				[type]="'password'" [icon]="'vpn_key'" [errors]="getMessageErrors('password')">
+			</app-input-text>
+
+			<app-input-text [formControlName]="'confirmedPassword'" [title]="'Nhập lại mật khẩu'" [pristine]="true"
 				[type]="'password'" [icon]="'vpn_key'" [errors]="getMessageErrors('confirmedPassword')">
 			</app-input-text>
+
 		</div>
 
 		<p class="text-center">
 			<button mat-raised-button color="accent" class="submit-button" aria-label="Cập nhật"
-				(click)="onClickBtnSubmit()">
+				[disabled]="isProcessing" type="submit">
 				<mat-icon style="font-size: 20px">check</mat-icon> CẬP NHẬT
 			</button>
 		</p>

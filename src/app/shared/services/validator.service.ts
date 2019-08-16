@@ -16,7 +16,8 @@ export namespace ErrorNames {
   export const areStoreSelected = ['areaStore', 'Chưa chọn store nào'];
   export const invalidIP = ['invalidIP', 'IP không hợp lệ'];
   export const invalidListIP = ['invalidListIP', 'Danh sách IP không hợp lệ'];
-  export const wrongPassword = ['wrongPassword', 'Mật khẩu không khớp'];
+  export const wrongPassword = ['wrongPassword', 'Mật khẩu không hợp lệ'];
+  export const wrongConfirmedPassword = ['wrongConfirmedPassword', 'Mật khẩu nhập lại không đúng'];
   export const invalidAdwordsAccountId = ['invalidAdwordsAccountId', 'ID không hợp lệ'];
   export const invalidDomain = ['invalidDomain', 'Tên miền không hợp lệ'];
 }
@@ -72,7 +73,7 @@ export class ValidatorsService {
     if (!regex.test(control.value)) {
       return { [ErrorNames.invalidDomain[0]]: true };
     }
-    
+
   }
 
   public checkUrlSeo(control: AbstractControl): any {
@@ -180,8 +181,39 @@ export class ValidatorsService {
       const confirmedPassword = control.get('confirmedPassword').value;
 
       if (password !== confirmedPassword) {
-        return { [ErrorNames.wrongPassword[0]]: true };
+        return { [ErrorNames.wrongConfirmedPassword[0]]: true };
       }
     };
   }
+
+  public checkValidPassword(control: AbstractControl): any {
+    const reg = new RegExp(/^[a-zA-Z0-9]*$/);
+    if (!reg.test(control.value)) {
+      return { [ErrorNames.wrongPassword[0]]: true };
+    }
+  }
+
+  public checkUpdatedConfirmPassword: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+
+    if (!control.parent || !control) {
+      return null;
+    }
+
+    const password = control.parent.get('password');
+    const passwordConfirm = control.parent.get('confirmedPassword');
+
+    if (!password || !passwordConfirm) {
+      return null;
+    }
+
+    if (passwordConfirm.value === '') {
+      return null;
+    }
+
+    if (password.value === passwordConfirm.value) {
+      return null;
+    }
+
+    return { [ErrorNames.wrongConfirmedPassword[0]]: true };
+  };
 }
