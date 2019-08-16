@@ -102,6 +102,14 @@
     color: orange;
   }
 
+  .tracking-button {
+    color: red;
+
+    &:disabled {
+      color: gray;
+    }
+  }
+
   .no-tracking {
     color: dodgerblue;
   }

@@ -30,10 +30,13 @@
           <mat-header-cell *matHeaderCellDef> AdWords ID </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div fxLayout="row">
-              <p style="width: 120px; color: #4bb543; font-weight: bold" *ngIf="element.isConnected">
+              <p style="width: 120px; color: #4bb543; font-weight: bold" *ngIf="element.isConnected && element.websites.length > 0"  matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">
                 {{element.adsId | adsAccountId}}
               </p>
-              <p style="width: 120px; color: silver; font-weight: bold" *ngIf="!element.isConnected">
+              <p style="width: 120px;color: orange; font-weight: bold" *ngIf="element.isConnected && element.websites.length === 0"  matTooltip="Tài khoản chưa có website nào.">
+                {{element.adsId | adsAccountId}}
+              </p>
+              <p style="width: 120px; color: silver; font-weight: bold" *ngIf="!element.isConnected" matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
                 {{element.adsId | adsAccountId}}
               </p>
               <div fxLayout="row" *ngIf="element.isConnected">
@@ -43,7 +46,12 @@
                 </button>
                 <a *ngIf="element.websites.length > 0"
                   [routerLink]="['/gan-tracking/website', element.id]" mat-icon-button
-                  color="accent" matTooltip="Gắn mã tracking cho các website" style="color: red">
+                  color="accent" matTooltip="Gắn mã tracking cho các website" class="tracking-button">
+                  <mat-icon>code</mat-icon>
+                </a>
+                <a *ngIf="element.websites.length === 0"
+                  mat-icon-button
+                  color="accent" matTooltip="Vui lòng thêm website để tiến hành gắn mã tracking" class="tracking-button" disabled>
                   <mat-icon>code</mat-icon>
                 </a>
                 <!-- <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">

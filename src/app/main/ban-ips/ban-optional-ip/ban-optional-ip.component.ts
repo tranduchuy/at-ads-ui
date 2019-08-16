@@ -98,6 +98,8 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
       ips: { ...this.form.value }.listBannedIP.split(/\r?\n/)
     };
 
+    params.ips = params.ips.filter(item => item);
+
     return params;
   }
 
