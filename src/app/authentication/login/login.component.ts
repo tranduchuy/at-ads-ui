@@ -78,7 +78,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, checkValidPassword]]
+      password: ['', [Validators.required, checkValidPassword, Validators.minLength(6)]]
     });
   }
 

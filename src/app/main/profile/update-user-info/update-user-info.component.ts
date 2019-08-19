@@ -68,9 +68,13 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
       email: [''],
       name: ['', [Validators.required]],
       phone: [''],
-      oldPassword: ['', [this.validatorService.checkValidPassword]],
-      password: ['', [this.validatorService.checkValidPassword]],
-      confirmedPassword: ['', [this.validatorService.checkValidPassword, this.validatorService.checkUpdatedConfirmPassword]]
+      oldPassword: ['', [this.validatorService.checkValidPassword, this.validatorService.checkMinLength(6)]],
+      password: ['', [this.validatorService.checkValidPassword, this.validatorService.checkMinLength(6)]],
+      confirmedPassword: ['', [
+        this.validatorService.checkValidPassword,
+        this.validatorService.checkMinLength(6),
+        this.validatorService.checkUpdatedConfirmPassword
+      ]]
     });
   }
 
@@ -89,5 +93,9 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
         delete params[key];
 
     return params;
+  }
+
+  onPressPhoneNumber(keyCode: number) {
+    return (keyCode >= 48 && keyCode <= 57);
   }
 }

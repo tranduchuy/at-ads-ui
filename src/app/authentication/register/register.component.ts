@@ -60,8 +60,8 @@ export class RegisterComponent extends PageBaseComponent implements OnInit, OnDe
     this.registerForm = this._formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, checkValidPassword]],
-      confirmedPassword: ['', [Validators.required, confirmPasswordValidator]]
+      password: ['', [Validators.required, checkValidPassword, Validators.minLength(6)]],
+      confirmedPassword: ['', [Validators.required, confirmPasswordValidator, Validators.minLength(6)]]
     });
 
     // Update the validity of the 'passwordConfirm' field

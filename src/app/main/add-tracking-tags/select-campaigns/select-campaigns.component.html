@@ -39,12 +39,12 @@
           <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
-        "let element"
+  
         <ng-container matColumnDef="tracking">
           <mat-header-cell *matHeaderCellDef>
             <p>
               <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px"
-                matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="selectedCampaigns.length === campaignList.length">
+                matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="checkAll">
               </mat-checkbox> Gắn mã
             </p>
           </mat-header-cell>
@@ -61,7 +61,7 @@
     </div>
 
     <p style="text-align: center" *ngIf="campaignList.length > 0 && !isProcessing">
-      <button (click)="addCampaignTracking()" mat-raised-button class="submit-button" color="warn"
+      <button (click)="addCampaignTracking()" mat-raised-button class="submit-button"
         [disabled]="isProcessing">
         <mat-icon>location_searching</mat-icon> GẮN MÃ TRACKING
       </button>

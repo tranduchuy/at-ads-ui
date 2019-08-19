@@ -34,8 +34,14 @@
             Vui lòng nhập mật khẩu
           </mat-error>
           <mat-error *ngIf="!loginForm.get('password').hasError('required') &&
-                                       loginForm.get('password').hasError('invalidPassword')">
+                                       loginForm.get('password').hasError('invalidPassword') &&
+                                       !loginForm.get('password').hasError('minLength')">
             Mật khẩu không hợp lệ
+          </mat-error>
+          <mat-error *ngIf="!loginForm.get('password').hasError('required') ||
+                                       !loginForm.get('password').hasError('invalidPassword') &&
+                                       loginForm.get('password').hasError('minLength')">
+            Quá ngắn
           </mat-error>
 
         </mat-form-field>

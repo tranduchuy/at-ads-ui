@@ -109,12 +109,11 @@ export class ValidatorsService {
 
   public checkMinLength(minLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors => {
-      const errors: ValidationErrors = {};
+
       const value = control.value || '';
-      if (value.toString().length < minLength) {
-        errors[ErrorNames.minLength[0]] = true;
-      }
-      return errors;
+
+      if (value.toString().length > 0 && value.toString().length < minLength)
+        return { [ErrorNames.minLength[0]]: true };
     };
   }
 

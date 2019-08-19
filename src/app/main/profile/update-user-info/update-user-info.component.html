@@ -24,8 +24,8 @@
 					<app-input-text [formControlName]="'email'" [title]="'Email'" [pristine]="true" [icon]="'mail'"
 						[(ngModel)]="userInfo.email" [readonly]="true"></app-input-text>
 
-					<app-input-number [formControlName]="'phone'" [title]="'Số điện thoại'" [icon]="'phone'" [(ngModel)]="userInfo.phone">
-					</app-input-number>
+					<app-input-text [type]="'number'" [pristine]="true" (keypress)="onPressPhoneNumber($event.keyCode)" [formControlName]="'phone'" [title]="'Số điện thoại'" [icon]="'phone'" [(ngModel)]="userInfo.phone">
+					</app-input-text>
 				</div>
 				
 			</div>

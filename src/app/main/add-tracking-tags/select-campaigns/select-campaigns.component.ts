@@ -29,6 +29,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   selectedCampaigns: string[];
   activatedAdsId: string;
   isProcessing: boolean = false;
+  checkAll: boolean;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -72,6 +73,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     else {
       this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId);
     }
+    
+    this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
   }
 
   addCampaignTracking() {
@@ -114,6 +117,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
             this.trackingCampaignList = res.data.campaignIds;
             this.selectedCampaigns = this.trackingCampaignList;
+
+            this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
 
             setTimeout(() => {
               this._fuseProgressiveBarService.hide();
