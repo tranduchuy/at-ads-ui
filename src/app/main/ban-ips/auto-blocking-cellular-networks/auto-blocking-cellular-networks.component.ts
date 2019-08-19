@@ -6,6 +6,7 @@ import { FuseProgressBarService } from '../../../../@fuse/components/progress-ba
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auto-blocking-cellular-networks',
@@ -27,6 +28,7 @@ export class AutoBlockingCellularNetworksComponent extends PageBaseComponent imp
     public _sessionService: SessionService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
+    private _router: Router
   ) {
     super();
   }
@@ -34,14 +36,36 @@ export class AutoBlockingCellularNetworksComponent extends PageBaseComponent imp
   ngOnInit(): void {
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
-        if (accountId)
-          this.getAutoBlocking3G4GSetting();
+        if (accountId) {
+          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+            .subscribe(
+              (res) => {
+
+                if (res.data.adsAccount.isConnected) {
+                  this._fuseProgressiveBarService.hide();
+                  this.getAutoBlocking3G4GSetting();
+                }
+                else {
+                  this._fuseProgressiveBarService.hide();
+                  this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                  this._router.navigateByUrl('/danh-sach-tai-khoan');
+                }
+
+              },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error);
+                this._router.navigateByUrl('/danh-sach-tai-khoan');
+              }
+            );
+          this.subscriptions.push(accountDetailSub);
+        }
       });
     this.subscriptions.push(sub);
   }
 
   selectNetwork(event, network: string) {
-    if(event.checked)
+    if (event.checked)
       this.mobileNetworks[network] = true;
     else this.mobileNetworks[network] = false;
   }

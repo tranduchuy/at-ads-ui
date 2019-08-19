@@ -29,6 +29,7 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
   isProcessing: boolean = false;
   pageTotal: number;
   currentPageNumber: number;
+  totalItems: number;
 
   ngOnInit() {
     const sub = this._sessionService.getAccountId()
@@ -48,15 +49,15 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
         this.dataSource = res.data.entries;
         
         this.pageTotal = Math.ceil(res.data.totalItems / 10);
-
-        if (this.pageTotal > 0)
-          this.currentPageNumber = 1;
+        this.totalItems = res.data.totalItems;
 
         this._fuseProgressBarService.hide();
         this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
           this.dataSource = [];
+          this.pageTotal = 0;
+          this.totalItems = 0;
           this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;

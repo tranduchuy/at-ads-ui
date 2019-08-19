@@ -103,85 +103,96 @@ export class FuseNavigationComponent implements OnInit {
     this._fuseSplashScreenService.show();
     this._adwordsAccountsService.getAdwordsAccount()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(res => {
-        let accounts = res.data.accounts.filter(item => item.isConnected === true);
-        let activeAdsAccountId = '';
-        let activeAccountId = '';
+      .subscribe(
+        (res) => {
+          //let accounts = res.data.accounts.filter(item => item.isConnected === true);
+          let accounts = res.data.accounts;
+          let activeAdsAccountId = '';
+          let activeAccountId = '';
 
-        if (this._sessionService.activeAccountId) {
-          activeAccountId = this._sessionService.activeAccountId;
-          activeAdsAccountId = this._sessionService.activeAdsAccountId;
-          this._sessionService.setAdwordId(activeAdsAccountId);
-          this._sessionService.setAccountId(activeAccountId);
-        }
-
-        if (accounts.length > 0) {
-
-          if (!activeAccountId) {
-            this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(accounts[0].adsId.toString()));
-            this._sessionService.setActiveAccountId(accounts[0].id.toString());
-            this._sessionService.setAdwordId(accounts[0].adsId.toString());
-            this._sessionService.setAccountId(accounts[0].id.toString());
-
-            activeAdsAccountId = this.adsAccountIdPipe.transform(accounts[0].adsId.toString());
-            activeAccountId = accounts[0].id.toString();
+          if (this._sessionService.activeAccountId) {
+            activeAccountId = this._sessionService.activeAccountId;
+            activeAdsAccountId = this._sessionService.activeAdsAccountId;
+            this._sessionService.setAdwordId(activeAdsAccountId);
+            this._sessionService.setAccountId(activeAccountId);
           }
 
-          accounts = accounts.filter(account => {
-            return this.adsAccountIdPipe.transform(account.adsId) !== activeAdsAccountId;
-          });
+          if (accounts.length > 0) {
 
-          accounts = accounts.map(account => {
-            return {
-              id: account.id,
-              title: this.adsAccountIdPipe.transform(account.adsId),
-              translate: 'NAV.SAMPLE.TITLE',
-              type: 'item',
-              icon: 'remove',
-              isAdsAccount: true
-            };
-          });
+            if (!activeAccountId) {
+              this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(accounts[0].adsId.toString()));
+              this._sessionService.setActiveAccountId(accounts[0].id.toString());
+              this._sessionService.setAdwordId(accounts[0].adsId.toString());
+              this._sessionService.setAccountId(accounts[0].id.toString());
 
-          this.accounts.children[0] = {
-            id: activeAdsAccountId,
-            title: activeAdsAccountId,
-            translate: 'NAV.APPLICATIONS',
-            icon: 'more_vert',
-            type: 'collapsable',
-            children: [
-              {
-                id: 'add-accounts',
-                title: 'Thêm tài khoản mới',
+              activeAdsAccountId = this.adsAccountIdPipe.transform(accounts[0].adsId.toString());
+              activeAccountId = accounts[0].id.toString();
+            }
+
+            accounts = accounts.filter(account => {
+              return this.adsAccountIdPipe.transform(account.adsId) !== activeAdsAccountId;
+            });
+
+            accounts = accounts.map(account => {
+              return {
+                id: account.id,
+                title: this.adsAccountIdPipe.transform(account.adsId),
                 translate: 'NAV.SAMPLE.TITLE',
                 type: 'item',
-                icon: 'person_add',
-                url: '/them-tai-khoan-moi'
-              },
-            ]
-          };
+                icon: 'remove',
+                isAdsAccount: true
+              };
+            });
 
-          this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
+            this.accounts.children[0] = {
+              id: activeAdsAccountId,
+              title: activeAdsAccountId,
+              translate: 'NAV.APPLICATIONS',
+              icon: 'more_vert',
+              type: 'collapsable',
+              children: [
+                {
+                  id: 'add-accounts',
+                  title: 'Thêm tài khoản mới',
+                  translate: 'NAV.SAMPLE.TITLE',
+                  type: 'item',
+                  icon: 'person_add',
+                  url: '/them-tai-khoan-moi'
+                },
+              ]
+            };
 
-          this.accounts.children[2] = {
-            id: 'add-tracking-tags',
-            title: 'Gắn Tracking Chiến Dịch',
-            type: 'item',
-            icon: 'location_searching',
-            url: '/gan-tracking/chien-dich'
+            this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
+
+            this.accounts.children[2] = {
+              id: 'add-tracking-tags',
+              title: 'Gắn Tracking Chiến Dịch',
+              type: 'item',
+              icon: 'location_searching',
+              url: '/gan-tracking/chien-dich'
+            }
           }
-        } else {
-          this.accounts.children[0].title = 'Thêm tài khoản mới';
-          this.accounts.children[0].id = null;
-          this.accounts.children[0].url = '/them-tai-khoan-moi';
-        }
-        this.loadRecentNavigation();
-        this._fuseSplashScreenService.hide();
-      },
+          else {
+            this.accounts.children[0].title = 'Thêm tài khoản mới';
+            this.accounts.children[0].id = null;
+            this.accounts.children[0].url = '/them-tai-khoan-moi';
+          }
+
+          this.loadRecentNavigation();
+          this._fuseSplashScreenService.hide();
+        },
         error => {
+
+          //reset cookie
           this._sessionService.setActiveAdsAccountId('');
           this._sessionService.setActiveAccountId('');
+
+          //emit changed value to all observer
           this._sessionService.setAdwordId('');
           this._sessionService.setAccountId('');
+
+          //reset navbar displaying
+          this.accounts.children = [];
           this.accounts.children[0] = {
             id: 'add-accounts',
             title: 'Thêm tài khoản mới',
@@ -189,6 +200,14 @@ export class FuseNavigationComponent implements OnInit {
             icon: 'person_add',
             url: '/them-tai-khoan-moi'
           };
+          this.accounts.children[1] = {
+            id: 'account-list',
+            title: 'Quản lý tài khoản Adwords',
+            type: 'item',
+            icon: 'dashboard',
+            url: '/danh-sach-tai-khoan'
+          };
+
           this.loadRecentNavigation();
           this._fuseSplashScreenService.hide();
         });

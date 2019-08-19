@@ -6,6 +6,7 @@ import { FuseProgressBarService } from '../../../../@fuse/components/progress-ba
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { Router } from '@angular/router';
 
 export interface DeviceReport {
   device: string;
@@ -70,6 +71,7 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _sessionService: SessionService,
     public _dialogService: DialogService,
+    private _router: Router
   ) {
     super();
     this.deviceReports = [];
@@ -79,7 +81,28 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          this.getDeviceReport();
+          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+            .subscribe(
+              (res) => {
+
+                if (res.data.adsAccount.isConnected) {
+                  this._fuseProgressiveBarService.hide();
+                  this.getDeviceReport();
+                }
+                else {
+                  this._fuseProgressiveBarService.hide();
+                  this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                  this._router.navigateByUrl('/danh-sach-tai-khoan');
+                }
+
+              },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error);
+                this._router.navigateByUrl('/danh-sach-tai-khoan');
+              }
+            );
+          this.subscriptions.push(accountDetailSub);
         }
       });
 

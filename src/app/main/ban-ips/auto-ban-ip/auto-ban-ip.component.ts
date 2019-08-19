@@ -73,7 +73,28 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
       .subscribe((accountId: string) => {
 
         if (accountId) {
-          this.getBlockingIPSettting();
+          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+            .subscribe(
+              (res) => {
+
+                if (res.data.adsAccount.isConnected) {
+                  this._fuseProgressiveBarService.hide();
+                  this.getBlockingIPSettting();
+                }
+                else {
+                  this._fuseProgressiveBarService.hide();
+                  this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                  this._router.navigateByUrl('/danh-sach-tai-khoan');
+                }
+
+              },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error);
+                this._router.navigateByUrl('/danh-sach-tai-khoan');
+              }
+            );
+          this.subscriptions.push(accountDetailSub);
         }
 
       });

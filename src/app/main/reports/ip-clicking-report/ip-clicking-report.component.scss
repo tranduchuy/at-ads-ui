@@ -48,6 +48,13 @@
         flex: 0 0 15%;
       }
 
+      mat-header-cell:nth-child(5),
+      mat-cell:nth-child(5),
+      mat-header-cell:nth-child(6),
+      mat-cell:nth-child(6) {
+        flex: 0 0 13%;
+      }
+
       mat-header-row,
       mat-row {
         min-width: 1000px;

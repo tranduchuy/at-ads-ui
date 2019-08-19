@@ -44,7 +44,7 @@
           <mat-header-cell *matHeaderCellDef>
             <p>
               <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px"
-                matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="checkAll">
+                matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="campaignList.length === selectedCampaigns.length">
               </mat-checkbox> Gắn mã
             </p>
           </mat-header-cell>

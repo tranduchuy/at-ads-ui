@@ -39,28 +39,45 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
     this.hasBlockedIP = false;
     this.initForm();
     const sub = this._sessionService.getAccountId()
-      .subscribe((accountId: string) => {
-        if (accountId) {
-          const blockedIPsSub = this._banIpsService.getBlockedSampleIP()
-            .subscribe(res => {
-              this.blockedIPs = res.data.ips;
+      .subscribe(
+        (accountId: string) => {
+          if (accountId) {
+            const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+              .subscribe(
+                (res) => {
 
-              if (this.blockedIPs.length > 0)
-                this.hasBlockedIP = true;
-              else this.hasBlockedIP = false;
+                  if (res.data.adsAccount.isConnected) {
+                    const blockedIPsSub = this._banIpsService.getBlockedSampleIP()
+                      .subscribe(res => {
+                        this.blockedIPs = res.data.ips;
 
-              setTimeout(() => {
-                this._fuseProgressiveBarService.hide();
-              }, 0);
-            },
-              (error: HttpErrorResponse) => {
-                this._fuseProgressiveBarService.hide();
-                this._dialogService._openErrorDialog(error.error);
-                this.hasBlockedIP = false;
-              });
-          this.subscriptions.push(blockedIPsSub);
-        }
-      });
+                        if (this.blockedIPs.length > 0)
+                          this.hasBlockedIP = true;
+                        else this.hasBlockedIP = false;
+
+                        this._fuseProgressiveBarService.hide();
+                      },
+                        (error: HttpErrorResponse) => {
+                          this._fuseProgressiveBarService.hide();
+                          this._dialogService._openErrorDialog(error.error);
+                          this.hasBlockedIP = false;
+                        });
+                    this.subscriptions.push(blockedIPsSub);
+                  }
+                  else {
+                    this._fuseProgressiveBarService.hide();
+                    this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                    this._router.navigateByUrl('/danh-sach-tai-khoan');
+                  }
+                },
+                (error: HttpErrorResponse) => {
+                  this._fuseProgressiveBarService.hide();
+                  this._dialogService._openErrorDialog(error.error);
+                  this._router.navigateByUrl('/danh-sach-tai-khoan');
+                });
+            this.subscriptions.push(accountDetailSub);
+          }
+        });
     this.subscriptions.push(sub);
   }
 

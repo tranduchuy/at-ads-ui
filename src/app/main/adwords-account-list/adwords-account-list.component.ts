@@ -40,7 +40,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   openRemoveAccountConfirmDialog(accountId: string) {
-    const openConfirmDialogSub = this._dialogService._openConfirmDialog('Ngắt kết nối tài khoản Adwords này?')
+    const openConfirmDialogSub = this._dialogService._openConfirmDialog('Ngắt kết nối tài khoản AdWords này?')
       .subscribe((isAccepted: boolean) => {
 
         if (isAccepted) {
@@ -53,7 +53,23 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
                 this.getAccounts();
 
+                if (this.accounts.length > 0) {
+                  if (accountId === this._sessionService.activeAccountId) {
+                    this._sessionService.setActiveAccountId(this.accounts[0].id);
+                    this._sessionService.setActiveAdsAccountId(this.accounts[0].adsId);
+                    this._sessionService.setAccountId(this.accounts[0].id);
+                    this._sessionService.setAdwordId(this.accounts[0].adsId);
+                  }
+                }
+                else {
+                  this._sessionService.setActiveAccountId('');
+                  this._sessionService.setActiveAdsAccountId('');
+                  this._sessionService.setAccountId('');
+                  this._sessionService.setAdwordId('');
+                }
+
                 setTimeout(() => {
+                  this._fuseNavigationService.reloadNavigation();
                   this._fuseProgressiveBarService.hide();
                   this._dialogService._openSuccessDialog({ messages: ['Ngắt kết nối tài khoản AdWords thành công'] });
                   this.isProcessing = false;
@@ -73,36 +89,45 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
   openRemoveWebsiteConfirmDialog(websiteId: string) {
     const confirmDialogSub = this._dialogService._openConfirmDialog('Xóa website này khỏi tài khoản AdWords?')
-      .subscribe((isAccepted) => {
-        if (isAccepted) {
-          this._fuseProgressiveBarService.show();
-          const sub = this._adwordsAccountListService.removeWebsite(websiteId).subscribe((res: ILoginSuccess) => {
-            this._fuseProgressiveBarService.hide();
-            this._dialogService._openSuccessDialog(res);
-            this.getAccounts();
-          },
-            (error: HttpErrorResponse) => {
-              if (error.error.messages) {
-                this._dialogService._openErrorDialog(error.error);
-              }
-              this._fuseProgressiveBarService.hide();
-            });
-          this.subscriptions.push(sub);
-        }
-      });
+      .subscribe(
+        (isAccepted) => {
+          if (isAccepted) {
+            this._fuseProgressiveBarService.show();
+            const sub = this._adwordsAccountListService.removeWebsite(websiteId)
+              .subscribe(
+                (res: ILoginSuccess) => {
+
+                  this.getAccounts();
+
+                  setTimeout(() => {
+                    this._fuseNavigationService.reloadNavigation();
+                    this._fuseProgressiveBarService.hide();
+                    this._dialogService._openSuccessDialog(res);
+                  }, 0);
+                },
+                (error: HttpErrorResponse) => {
+                  if (error.error.messages) {
+                    this._dialogService._openErrorDialog(error.error);
+                  }
+                  this._fuseProgressiveBarService.hide();
+                });
+            this.subscriptions.push(sub);
+          }
+        });
     this.subscriptions.push(confirmDialogSub);
   }
 
   getAccounts() {
-    this.accounts = [];
     this._fuseProgressiveBarService.show();
     const sub = this._adwordsAccountListService.getAccounts()
-      .subscribe(res => {
-        this._fuseProgressiveBarService.hide();
-        this.accounts = res.data.accounts;
-      },
+      .subscribe(
+        (res) => {
+          this._fuseProgressiveBarService.hide();
+          this.accounts = res.data.accounts;
+        },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
+          this.accounts = [];
         });
     this.subscriptions.push(sub);
   }
@@ -110,14 +135,17 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   navigateToSpamClickReport(accountId: string, adsId: string) {
     this._sessionService.setActiveAccountId(accountId);
     this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(adsId));
+    this._sessionService.setAccountId(accountId);
+    this._sessionService.setAdwordId(this.adsAccountIdPipe.transform(adsId));
     this._fuseNavigationService.reloadNavigation();
     this._router.navigateByUrl('/bao-cao/click-ao');
   }
 
   navigateToWebsiteManagement(accountId: string, campaignNumber: number) {
-    if (campaignNumber > 0)
-      this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
-    else this._dialogService._openErrorDialog({ messages: ['Tài khoản hiện chưa được thêm chiến dịch.'] });
+    // if (campaignNumber > 0)
+    //   this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
+    // else this._dialogService._openErrorDialog({ messages: ['Tài khoản hiện chưa được thêm chiến dịch.'] });
+    this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
   }
 
   checkAccountAcceptance(adsId: string, isConnected: boolean) {

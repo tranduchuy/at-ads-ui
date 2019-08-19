@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ban-optional-ip',
@@ -24,16 +25,39 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _sessionService: SessionService,
     public _dialogService: DialogService,
+    private _router: Router
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this._fuseProgressiveBarService.show();
     this.initForm();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          this.getBlockedCustomIPs();
+          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+            .subscribe(
+              (res) => {
+
+                if (res.data.adsAccount.isConnected) {
+                  this._fuseProgressiveBarService.hide();
+                  this.getBlockedCustomIPs();
+                }
+                else {
+                  this._fuseProgressiveBarService.hide();
+                  this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                  this._router.navigateByUrl('/danh-sach-tai-khoan');
+                }
+
+              },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error);
+                this._router.navigateByUrl('/danh-sach-tai-khoan');
+              }
+            );
+          this.subscriptions.push(accountDetailSub);
         }
       });
     this.subscriptions.push(sub);

@@ -2,6 +2,11 @@ import { FuseNavigation } from '@fuse/types';
 
 export const NotConnectedAccountNavigation: FuseNavigation[] = [];
 
+export const getCookieValue = name => {
+  let found = document.cookie.split(';').filter(c => c.trim().split("=")[0] === name);
+  return found.length > 0 ? found[0].split("=")[1] : null;
+}
+
 export const navigation: FuseNavigation[] = [
   {
     id: 'report',
@@ -98,5 +103,53 @@ export const navigation: FuseNavigation[] = [
         url: '/chan-ip/chan-ip-theo-thiet-bi',
       },
     ]
-  }
+  },
+  {
+    id: 'support',
+    title: 'NHÂN VIÊN HỖ TRỢ BẠN',
+    translate: 'NAV.APPLICATIONS',
+    type: 'group',
+    children: [
+      {
+        id: 'supporter',
+        title: 'Sơn Hà',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'contact_support',
+        url: '**',
+      },
+      {
+        id: 'supporter_phone',
+        title: '+84 984 946 946',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'phone',
+        url: '**',
+      },
+    ]
+  },
+  {
+    id: 'user_info',
+    title: 'THÔNG TIN KHÁCH HÀNG',
+    translate: 'NAV.APPLICATIONS',
+    type: 'group',
+    children: [
+      {
+        id: 'user_profile',
+        title: 'Thông tin cá nhân',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'person_outline',
+        url: '/thong-tin-ca-nhan',
+      },
+      {
+        id: 'user_logout',
+        title: 'Đăng xuất',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'exit_to_app',
+        url: '/auth/logout',
+      },
+    ]
+  },
 ];

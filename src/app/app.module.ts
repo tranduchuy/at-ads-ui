@@ -37,6 +37,7 @@ import { AccountConfirmModule } from './authentication/account-confirm/account-c
 import { ResendEmailModule } from './authentication/resend-email/resend-email.module';
 import { CheckWebsiteTrackingDialogComponent } from './main/add-tracking-tags/check-website-tracking-dialog/check-website-tracking-dialog.component';
 import { MatTableModule } from '@angular/material';
+import { LogoutModule } from './authentication/logout/logout.module';
 
 export function init_app(appInitService: AppInitService): any {
   return () => appInitService.initializeApp();
@@ -45,7 +46,7 @@ export function init_app(appInitService: AppInitService): any {
 @NgModule({
   declarations: [
     AppComponent,
-    CheckWebsiteTrackingDialogComponent
+    CheckWebsiteTrackingDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +82,7 @@ export function init_app(appInitService: AppInitService): any {
     MailConfirmModule,
     AccountConfirmModule,
     ResendEmailModule,
+    LogoutModule,
 
     MatTableModule,
 

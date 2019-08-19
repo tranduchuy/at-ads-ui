@@ -11,7 +11,7 @@
   </div>
 
   <div class="mat-elevation-z8 table-wrapper">
-    <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber }">
+    <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }">
 
       <ng-container matColumnDef="time">
         <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
@@ -67,7 +67,7 @@
   </div>
 
   <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
-    <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber}}</span>
+    <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
       trong tổng
       {{pageTotal}} trang</p>
     <p *ngIf="pageTotal === 0">Không có trang nào</p>

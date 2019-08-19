@@ -27,6 +27,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
   currentPageNumber: number;
   pageTotal: number;
   isProcessing: boolean = false;
+  totalItems: number;
 
   ngOnInit() {
     const sub = this._sessionService.getAccountId()
@@ -45,15 +46,12 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
       .subscribe(res => {
 
         this.dataSource = res.data.ips;
- 
-        if (this.dataSource.length > 0) {
-          this.currentPageNumber = 1;
+
+        if (this.dataSource.length > 0)
           this.pageTotal = Math.ceil(this.dataSource.length / 10);
-        }
-        else {
-          this.currentPageNumber = 0;
-          this.pageTotal = 0;
-        }
+        else this.pageTotal = 0;
+
+        this.totalItems = this.dataSource.length
 
         setTimeout(() => {
           this._fuseProgressBarService.hide();
@@ -62,6 +60,8 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
       },
         (error: HttpErrorResponse) => {
           this.dataSource = [];
+          this.pageTotal = 0;
+          this.totalItems = 0;
           this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;

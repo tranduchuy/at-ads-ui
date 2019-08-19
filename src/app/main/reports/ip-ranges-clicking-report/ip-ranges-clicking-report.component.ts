@@ -32,6 +32,7 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
   currentPageNumber: number = 0;
   pageTotal: number;
   isProcessing: boolean = false;
+  totalItems: number;
 
   constructor(
     public _sessionService: SessionService,
@@ -65,9 +66,7 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
         this.dataSource = res.data.rangeIps;
 
         this.pageTotal = Math.ceil(res.data.totalItems / 10);
-
-        if (this.pageTotal > 0)
-          this.currentPageNumber = 1;
+        this.totalItems = res.data.totalItems;
 
         setTimeout(() => {
           this._fuseProgressBarService.hide();
@@ -78,6 +77,8 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
           this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.dataSource = [];
+          this.pageTotal = 0;
+          this.totalItems = 0;
           this.isProcessing = false;
         });
     this.subscriptions.push(sub);

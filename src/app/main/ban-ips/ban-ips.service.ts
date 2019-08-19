@@ -144,4 +144,9 @@ export class BanIpsService {
     const url = API.AdwordsAccount.getBlockingIPSettings.replace('{account_id}', activeAccountId);
     return this._http.get(url);
   }
+
+  public getAdwordsAccountDetail(accountId): Observable<any> {
+    const url = API.AdwordsAccount.getAwordsAccountDetail.replace('{account_id}', accountId);
+    return this._http.get(url);
+  }
 }

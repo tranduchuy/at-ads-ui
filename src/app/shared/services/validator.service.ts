@@ -68,7 +68,11 @@ export class ValidatorsService {
   }
 
   public checkDomain(control: AbstractControl): any {
+    //not allows '/' at the end of domain
     const regex = new RegExp(/^(https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9])$/);
+
+    //allows '/' at the end of domain
+    //const regex = new RegExp(/^(https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9])/g);
 
     if (!regex.test(control.value)) {
       return { [ErrorNames.invalidDomain[0]]: true };

@@ -6,6 +6,7 @@ import { FuseProgressBarService } from '../../../../@fuse/components/progress-ba
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auto-blocking-range-ips',
@@ -22,6 +23,7 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
     public _sessionService: SessionService,
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
+    private _router: Router
   ) {
     super();
   }
@@ -50,12 +52,33 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
   };
 
   ngOnInit(): void {
+    this._fuseProgressiveBarService.show();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
+        if (accountId) {
+          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+            .subscribe(
+              (res) => {
 
-        if (accountId)
-          this.getAutoBLockingIPRangeSetting();
+                if (res.data.adsAccount.isConnected) {
+                  this._fuseProgressiveBarService.hide();
+                  this.getAutoBLockingIPRangeSetting();
+                }
+                else {
+                  this._fuseProgressiveBarService.hide();
+                  this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                  this._router.navigateByUrl('/danh-sach-tai-khoan');
+                }
 
+              },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error);
+                this._router.navigateByUrl('/danh-sach-tai-khoan');
+              }
+            );
+          this.subscriptions.push(accountDetailSub);
+        }
       });
     this.subscriptions.push(sub);
   }

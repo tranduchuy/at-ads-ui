@@ -174,31 +174,40 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
   generatePostObject() {
     const body = { ...this.form.value };
+
+    //body.domain = body.domain.replace(/\/$/,'');
+
     const params = {
       domain: body.domain,
       accountId: this.selectedAccountId
-    }
+    };
+
     return params;
   }
 
   post() {
     this.isProcessing = true;
     const params = this.generatePostObject();
-    this._fuseProgressiveBarService.show();
-    const sub = this._websiteManagementService.addWebsite(params)
-      .subscribe((res: ILoginSuccess) => {
-        this._dialogService._openSuccessDialog(res);
-        this._fuseProgressiveBarService.hide();
-        this.isProcessing = false;
-        this.getWebsites();
-      },
-        (error: HttpErrorResponse) => {
-          this._dialogService._openErrorDialog(error.error);
-          this._fuseProgressiveBarService.hide();
-          this.isProcessing = false;
-        }
-      );
-    this.subscriptions.push(sub);
+
+    console.log(params);
+
+    this.isProcessing = false;
+
+    // this._fuseProgressiveBarService.show();
+    // const sub = this._websiteManagementService.addWebsite(params)
+    //   .subscribe((res: ILoginSuccess) => {
+    //     this._dialogService._openSuccessDialog(res);
+    //     this._fuseProgressiveBarService.hide();
+    //     this.isProcessing = false;
+    //     this.getWebsites();
+    //   },
+    //     (error: HttpErrorResponse) => {
+    //       this._dialogService._openErrorDialog(error.error);
+    //       this._fuseProgressiveBarService.hide();
+    //       this.isProcessing = false;
+    //     }
+    //   );
+    // this.subscriptions.push(sub);
   }
 
   onSelectAdsId(event) {
