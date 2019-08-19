@@ -39,7 +39,39 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     this.getAccounts();
   }
 
-  openRemoveWebsiteDialog(websiteId: string) {
+  openRemoveAccountConfirmDialog(accountId: string) {
+    const openConfirmDialogSub = this._dialogService._openConfirmDialog('Ngắt kết nối tài khoản Adwords này?')
+      .subscribe((isAccepted: boolean) => {
+
+        if (isAccepted) {
+          this.isProcessing = true;
+          this._fuseProgressiveBarService.show();
+
+          const removeAccountSub = this._adwordsAccountListService.removeAccount(accountId)
+            .subscribe(
+              (res: ILoginSuccess) => {
+
+                this.getAccounts();
+
+                setTimeout(() => {
+                  this._fuseProgressiveBarService.hide();
+                  this._dialogService._openSuccessDialog({ messages: ['Ngắt kết nối tài khoản AdWords thành công'] });
+                  this.isProcessing = false;
+                }, 0);
+              },
+              (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this._dialogService._openErrorDialog(error.error);
+                this.isProcessing = false;
+              });
+          this.subscriptions.push(removeAccountSub);
+        }
+
+      });
+    this.subscriptions.push(openConfirmDialogSub);
+  }
+
+  openRemoveWebsiteConfirmDialog(websiteId: string) {
     const confirmDialogSub = this._dialogService._openConfirmDialog('Xóa website này khỏi tài khoản AdWords?')
       .subscribe((isAccepted) => {
         if (isAccepted) {
@@ -71,8 +103,6 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
-          // this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
-          // this._router.navigateByUrl('/them-tai-khoan-moi');
         });
     this.subscriptions.push(sub);
   }

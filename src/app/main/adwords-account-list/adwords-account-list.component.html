@@ -15,7 +15,9 @@
         <ng-container matColumnDef="task">
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <button mat-icon-button color="accent" matTooltip="Cập nhật dữ liệu" (click)="checkAccountAcceptance(element.adsId, element.isConnected)">
+            <button mat-icon-button color="accent" matTooltip="Cập nhật dữ liệu"
+                    (click)="checkAccountAcceptance(element.adsId, element.isConnected)"
+                    [disabled]="isProcessing">
               <mat-icon>sync</mat-icon>
             </button>
           </mat-cell>
@@ -39,27 +41,30 @@
               <p style="width: 120px; color: silver; font-weight: bold" *ngIf="!element.isConnected" matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
                 {{element.adsId | adsAccountId}}
               </p>
-              <div fxLayout="row" *ngIf="element.isConnected">
+              <div fxLayout="row">
                 <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan"
-                       (click)="navigateToSpamClickReport(element.id, element.adsId)">
+                       (click)="navigateToSpamClickReport(element.id, element.adsId)"
+                       *ngIf="element.isConnected">
                   <mat-icon>notifications</mat-icon>
                 </button>
-                <a *ngIf="element.websites.length > 0"
+                <a *ngIf="element.websites.length > 0 && element.isConnected"
                   [routerLink]="['/gan-tracking/website', element.id]" mat-icon-button
                   color="accent" matTooltip="Gắn mã tracking cho các website" class="tracking-button">
                   <mat-icon>code</mat-icon>
                 </a>
-                <a *ngIf="element.websites.length === 0"
+                <a *ngIf="element.websites.length === 0 && element.isConnected"
                   mat-icon-button
                   color="accent" matTooltip="Vui lòng thêm website để tiến hành gắn mã tracking" class="tracking-button" disabled>
                   <mat-icon>code</mat-icon>
                 </a>
                 <!-- <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
                   <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="accent" matTooltip="Xóa">
-                  <mat-icon>delete</mat-icon>
                 </button> -->
+                <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản AdWords"
+                        (click)="openRemoveAccountConfirmDialog(element.id)"
+                        [disabled]="isProcessing">
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
             </div>
           </mat-cell>
@@ -87,8 +92,8 @@
                   <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
                 </p>
                 <div fxFlex="10">
-                  <button (click)="openRemoveWebsiteDialog(website.code)" mat-icon-button color="accent"
-                    matTooltip="Xóa website">
+                  <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
+                    matTooltip="Xóa website" [disabled]="isProcessing">
                     <mat-icon>delete</mat-icon>
                   </button>
                   <!-- <button mat-icon-button color="accent" matTooltip="Kết nối AdWords">

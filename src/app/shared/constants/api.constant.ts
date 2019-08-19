@@ -15,6 +15,7 @@ export namespace API {
   export namespace AdwordsAccount {
     export const getAccounts = environment.hostApi + '/api/account-adwords';
     export const addAccount = environment.hostApi + '/api/account-adwords';
+    export const removeAccount = environment.hostApi + '/api/account-adwords/{account_id}';
     export const checkAccountAcceptance = environment.hostApi + '/api/account-adwords/connection-confirmation';
     
     export const getOriginalCampaigns = environment.hostApi + '/api/account-adwords/{account_id}/original-campaigns';

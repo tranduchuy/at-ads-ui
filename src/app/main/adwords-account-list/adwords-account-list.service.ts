@@ -18,16 +18,22 @@ export class AdwordsAccountListService {
     return this._http.get(API.AdwordsAccount.getAccounts);
   }
 
+  removeAccount(accountId: string): Observable<any> {
+    const url = API.AdwordsAccount.removeAccount.replace('{account_id}', accountId);
+    return this._http.delete(url);
+  }
+
   getWebsites(accountId: string): Observable<any> {
     const url = API.Website.getWebsites.replace('{accountId}', accountId);
     return this._http.get(url);
   }
+
   removeWebsite(websiteId: string): Observable<any> {
     const url = API.Website.removeWebsite.replace('{website_id}', websiteId);
     return this._http.delete(url);
   }
 
-  public checkAccountAcceptance(params: ICheckAccountAcceptanceParams): Observable<any> {
+  checkAccountAcceptance(params: ICheckAccountAcceptanceParams): Observable<any> {
     return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
 }
