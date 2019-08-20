@@ -86,7 +86,7 @@
         <ng-container matColumnDef="website">
           <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
           <mat-cell *matCellDef="let element" fxLayout="column" fxLayoutAlign="start">
-            <ul class="website-list">
+            <ul class="website-list" *ngIf="element.websites.length > 0">
               <li *ngFor="let website of element.websites, let i = index" fxLayout="row" fxLayoutAlign="center center">
                 <div style="padding-left: 5px" fxFlex="90">
                   <span>{{i+1}}</span>.

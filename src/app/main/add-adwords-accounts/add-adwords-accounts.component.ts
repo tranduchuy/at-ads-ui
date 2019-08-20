@@ -43,46 +43,29 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   completeAccountConnection() {
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
 
-    this._sessionService.setActiveAccountId(this.connectedAccountId);
-    this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
-    this._sessionService.setAccountId(this.connectedAccountId);
-    this._sessionService.setAdwordId(this.connectedAdsId);
+    const sub = this._addAdwordsAccountsService.checkAccountAcceptance({
+      adWordId: this.connectedAdsId.replace(/\D+/g, '')
+    })
+      .subscribe(
+        res => {
+          this._sessionService.setActiveAccountId(this.connectedAccountId);
+          this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
+          this._sessionService.setAccountId(this.connectedAccountId);
+          this._sessionService.setAdwordId(this.connectedAdsId);
 
-    this._fuseNavigationService.reloadNavigation();
-
-    this._router.navigateByUrl('/gan-tracking/chien-dich');
-
-    // this.isProcessing = true;
-    // this._fuseProgressiveBarService.show();
-
-    // const sub = this._addAdwordsAccountsService.checkAccountAcceptance({
-    //   adWordId: this.connectedAdsId.replace(/\D+/g, '')
-    // })
-    //   .subscribe(res => {
-    //     this._fuseProgressiveBarService.hide();
-    //     if (res.data.isConnected) {
-
-    //       this._sessionService.setActiveAccountId(this.connectedAccountId);
-    //       this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
-    //       this._sessionService.setAccountId(this.connectedAccountId);
-    //       this._sessionService.setAdwordId(this.connectedAdsId);
-
-    //       this._fuseNavigationService.reloadNavigation();
-
-    //       this._router.navigateByUrl('/gan-tracking/chien-dich');
-    //     }
-    //     else {
-    //       this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
-    //       this.isProcessing = false;
-    //     }
-    //   },
-    //     (error: HttpErrorResponse) => {
-    //       this._fuseProgressiveBarService.hide();
-    //       this._dialogService._openErrorDialog({ messages: ['Tài khoản AdWords không tồn tại'] });
-    //       this.isProcessing = false;
-    //     });
-    // this.subscriptions.push(sub);
+          this._fuseProgressiveBarService.hide();
+          this._fuseNavigationService.reloadNavigation();
+          this._router.navigateByUrl('/gan-tracking/chien-dich');
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog({ messages: ['Tài khoản AdWords không tồn tại'] });
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
   }
 
   post(): void {

@@ -20,8 +20,13 @@
 
   .usage {
     text-align: justify;
-    color: gray;
     padding-top: 20px;
+  }
+
+  .link-button {
+    color: dodgerblue;
+    cursor: pointer;
+    text-decoration: underline !important;
   }
 
   .tracking-example {

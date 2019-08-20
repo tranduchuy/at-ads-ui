@@ -116,7 +116,7 @@ export const navigation: FuseNavigation[] = [
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'contact_support',
-        url: '**',
+        function: () => {}
       },
       {
         id: 'supporter_phone',
@@ -124,7 +124,7 @@ export const navigation: FuseNavigation[] = [
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'phone',
-        url: '**',
+        function: () => {}
       },
     ]
   },

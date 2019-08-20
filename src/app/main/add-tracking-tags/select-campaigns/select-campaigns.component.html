@@ -43,11 +43,13 @@
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span *ngIf="element.status === 'Hoạt động'" style="color: dodgerblue; font-weight: bold">{{element.status}}</span>
-            <span *ngIf="element.status !== 'Hoạt động'" style="color: silver; font-weight: bold">{{element.status}}</span>
+            <span *ngIf="element.status === 'Hoạt động'"
+              style="color: dodgerblue; font-weight: bold">{{element.status}}</span>
+            <span *ngIf="element.status !== 'Hoạt động'"
+              style="color: silver; font-weight: bold">{{element.status}}</span>
           </mat-cell>
         </ng-container>
-  
+
         <ng-container matColumnDef="tracking">
           <mat-header-cell *matHeaderCellDef>
             <p>
@@ -69,15 +71,15 @@
     </div>
 
     <p style="text-align: center" *ngIf="campaignList.length > 0 && !isProcessing">
-      <button (click)="addCampaignTracking()" mat-raised-button class="submit-button"
-        [disabled]="isProcessing">
+      <button (click)="addCampaignTracking()" mat-raised-button class="submit-button" [disabled]="isProcessing">
         <mat-icon>location_searching</mat-icon> GẮN MÃ TRACKING
       </button>
     </p>
 
     <p class="notification" *ngIf="campaignList.length === 0 && !isProcessing">
-      Chúng tôi không tìm thấy chiến dịch nào đang chạy. Vui lòng thử lại hoặc <span style="color: dodgerblue">liên
-        hệ</span> với hỗ trợ viên để được giúp đỡ.
+      Chúng tôi không tìm thấy chiến dịch nào đang chạy. Vui lòng <a (click)="getOriginalCampaigns()"
+        class="link-button">thử lại</a> hoặc <a class="link-button" (click)="showSupportInfoDialog()">liên
+        hệ</a> với hỗ trợ viên để được giúp đỡ.
     </p>
 
   </form>

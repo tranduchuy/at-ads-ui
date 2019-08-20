@@ -150,4 +150,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
       );
     this.subscriptions.push(sub);
   }
+
+  showSupportInfoDialog() {
+    this._dialogService._openInfoDialog('Vui lòng liên hệ hotline 0984 66 80 60 hoặc 0901 47 48 46 để được hỗ trợ thêm.');
+  }
 }
