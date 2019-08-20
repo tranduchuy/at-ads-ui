@@ -79,11 +79,11 @@
 
     mat-header-cell:nth-child(3),
     mat-cell:nth-child(3) {
-      flex: 0 0 50%;
+      flex: 0 0 40%;
     }
 
-    mat-header-cell:nth-child(4),
-    mat-cell:nth-child(4) {
+    mat-header-cell:nth-child(5),
+    mat-cell:nth-child(5) {
       flex: 0 0 20%;
       padding-left: 20px
     }

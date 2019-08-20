@@ -39,6 +39,14 @@
           <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.status === 'Hoạt động'" style="color: dodgerblue; font-weight: bold">{{element.status}}</span>
+            <span *ngIf="element.status !== 'Hoạt động'" style="color: silver; font-weight: bold">{{element.status}}</span>
+          </mat-cell>
+        </ng-container>
   
         <ng-container matColumnDef="tracking">
           <mat-header-cell *matHeaderCellDef>

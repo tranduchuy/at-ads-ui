@@ -66,22 +66,37 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   ngOnInit() {
-    const sub = this._activatedRoute.params.subscribe((params: any) => {
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
+    this.initForm();
 
-      if (params.accountId === undefined) {
-        this.selectedAdsId = this._sessionService.activeAdsAccountId;
-      }
-      else {
-        const detailSub = this._websiteManagementService.getAdwordsAccountDetail(params.accountId)
-          .subscribe(res => {
-            this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsAccount.adsId);
-          });
-        this.subscriptions.push(detailSub);
-      }
+    const sub = this._activatedRoute.params.subscribe(
+      (params: any) => {
 
-      this.getAccounts();
-      this.initForm();
-    });
+        if (params.accountId === undefined) {
+          this.selectedAccountId = this._sessionService.activeAccountId;
+          this.selectedAdsId = this._sessionService.activeAdsAccountId;
+
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+        }
+        else {
+          this.selectedAccountId = params.accountId;
+
+          const detailSub = this._websiteManagementService.getAdwordsAccountDetail(this.selectedAccountId)
+            .subscribe(
+              res => {
+                this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsAccount.adsId);
+
+                this.getAccounts();
+
+                this._fuseProgressiveBarService.hide();
+                this.isProcessing = false;
+              });
+          this.subscriptions.push(detailSub);
+        }
+
+      });
     this.subscriptions.push(sub);
   }
 
@@ -99,12 +114,15 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   getWebsites() {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
-    const sub = this._websiteManagementService.getWebsiteTrackingInfo(this.selectedAccountId)
-      .subscribe(res => {
-        this._fuseProgressiveBarService.hide();
-        this.websites = res.data.websites;
-        this.isProcessing = false;
-      },
+
+    const sub = this._websiteManagementService.getWebsites(this.selectedAccountId)
+      .subscribe(
+        res => {
+          this.websites = res.data.website;
+
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+        },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
@@ -115,59 +133,51 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   getAccounts() {
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
+
     const sub = this._websiteManagementService.getAccounts()
-      .subscribe(res => {
-        this.accounts = res.data.accounts;
+      .subscribe(
+        res => {
+          this.accounts = res.data.accounts;
 
-        if (this.accounts.length > 0) {
+          if (this.accounts.length > 0) {
 
-          for (const item of this.accounts) {
-            item.websites = [];
-            const getWebsiteSub = this._websiteManagementService.getWebsites(item.id)
-              .subscribe(res => {
-                this._fuseProgressiveBarService.hide();
-                item.websites = res.data.website;
+            for (const item of this.accounts) {
 
-                if (this.adsAccountIdPipe.transform(item.adsId) !== this.selectedAdsId) {
-                  this.accountItemsSource.push({
-                    text: this.adsAccountIdPipe.transform(item.adsId),
-                    value: item.id
-                  });
-                } else {
-                  this.accountItemsSource.unshift({
-                    text: this.selectedAdsId,
-                    value: item.id
-                  });
-                  this.selectedAccountId = item.id;
-                  this.getWebsites();
-                }
-
-                if (this.accountItemsSource.length === 1) {
-                  this.form.controls['adsId'].setValue(this.accountItemsSource[0]);
-                }
-              },
-                (error: HttpErrorResponse) => {
-                  if (error.error.messages) {
-                    this._fuseProgressiveBarService.hide();
-                    this._dialogService._openErrorDialog(error.error);
-                  }
+              if (this.adsAccountIdPipe.transform(item.adsId) !== this.selectedAdsId) {
+                this.accountItemsSource.push({
+                  text: this.adsAccountIdPipe.transform(item.adsId),
+                  value: item.id
                 });
-            this.subscriptions.push(getWebsiteSub);
-          }
-        } else {
-          this._dialogService._openErrorDialog({
-            messages: ['Vui lòng thêm tài khoản AdWords']
-          });
-          this._router.navigateByUrl('/them-tai-khoan-moi');
-        }
-      },
-        (error: HttpErrorResponse) => {
+              }
+              else {
+                this.accountItemsSource.unshift({
+                  text: this.selectedAdsId,
+                  value: item.id
+                });
+                this.selectedAccountId = item.id;
+                this.getWebsites();
+              }
 
-          if (error.error.messages) {
-            this._dialogService._openErrorDialog(error.error);
+              if (this.accountItemsSource.length === 1) {
+                this.form.controls['adsId'].setValue(this.accountItemsSource[0]);
+              }
+
+            }
+
           }
+          else {
+            this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+            this._router.navigateByUrl('/them-tai-khoan-moi');
+          }
+
+          this.isProcessing = false;
+        },
+        (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
         });
     this.subscriptions.push(sub);
   }
@@ -186,16 +196,20 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   post() {
     this.isProcessing = true;
     const params = this.generatePostObject();
-    this.isProcessing = false;
-
     this._fuseProgressiveBarService.show();
+
     const sub = this._websiteManagementService.addWebsite(params)
-      .subscribe((res: ILoginSuccess) => {
-        this._dialogService._openSuccessDialog(res);
-        this._fuseProgressiveBarService.hide();
-        this.isProcessing = false;
-        this.getWebsites();
-      },
+      .subscribe(
+        (res: ILoginSuccess) => {
+
+          this.getWebsites();
+
+          setTimeout(() => {
+            this._fuseProgressiveBarService.hide();
+            this._dialogService._openSuccessDialog(res);
+            this.isProcessing = false;
+          }, 0);
+        },
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);
           this._fuseProgressiveBarService.hide();
@@ -208,6 +222,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   onSelectAdsId(event) {
     this.selectedAdsId = event.value.text;
     this.selectedAccountId = event.value.value;
+
     this.getWebsites();
   }
 

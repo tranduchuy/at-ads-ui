@@ -25,11 +25,10 @@
           <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
           <mat-cell *matCellDef="let element; let i = index">
             <button *ngIf="element.isTracking" mat-stroked-button color="accent" style="border: 0; padding-left: 0">
-              <mat-icon>check</mat-icon> Hoàn thành
+              <mat-icon style="font-size: 20px">check</mat-icon> Hoàn thành
             </button>
-            <button *ngIf="!element.isTracking" mat-stroked-button matTooltip="Nhấn để tiến hành gắn tracking"
-              style="border: 0; padding-left: 0; color: crimson">
-              <mat-icon>close</mat-icon> Chưa có
+            <button *ngIf="!element.isTracking" mat-stroked-button style="border: 0; padding-left: 0; color: crimson">
+              <mat-icon style="font-size: 20px">close</mat-icon> Chưa có
             </button>
           </mat-cell>
         </ng-container>

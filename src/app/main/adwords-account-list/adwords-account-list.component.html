@@ -16,8 +16,7 @@
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <button mat-icon-button color="accent" matTooltip="Cập nhật dữ liệu"
-                    (click)="checkAccountAcceptance(element.adsId, element.isConnected)"
-                    [disabled]="isProcessing">
+              (click)="checkAccountAcceptance(element.adsId, element.isConnected)" [disabled]="isProcessing">
               <mat-icon>sync</mat-icon>
             </button>
           </mat-cell>
@@ -32,23 +31,27 @@
           <mat-header-cell *matHeaderCellDef> AdWords ID </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div fxLayout="row">
-              <p style="width: 120px; color: #4bb543; font-weight: bold" *ngIf="element.isConnected && element.websites.length > 0"  matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">
+              <p style="width: 120px; color: #4bb543; font-weight: bold"
+                *ngIf="element.isConnected && element.websites.length > 0"
+                matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">
                 {{element.adsId | adsAccountId}}
               </p>
-              <p style="width: 120px;color: orange; font-weight: bold" *ngIf="element.isConnected && element.websites.length === 0"  matTooltip="Tài khoản chưa có website nào.">
+              <p style="width: 120px;color: orange; font-weight: bold"
+                *ngIf="element.isConnected && element.websites.length === 0"
+                matTooltip="Tài khoản chưa có website nào.">
                 {{element.adsId | adsAccountId}}
               </p>
-              <p style="width: 120px; color: silver; font-weight: bold" *ngIf="!element.isConnected" matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
+              <p style="width: 120px; color: silver; font-weight: bold" *ngIf="!element.isConnected"
+                matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
                 {{element.adsId | adsAccountId}}
               </p>
               <div fxLayout="row">
                 <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan"
-                       (click)="navigateToSpamClickReport(element.id, element.adsId)">
+                  (click)="navigateToSpamClickReport(element.id, element.adsId)">
                   <mat-icon>notifications</mat-icon>
                 </button>
-                <a
-                  [routerLink]="['/gan-tracking/website', element.id]" mat-icon-button
-                  color="accent" matTooltip="Gắn mã tracking cho các website" class="tracking-button">
+                <a [routerLink]="['/gan-tracking/website', element.id]" mat-icon-button color="accent"
+                  matTooltip="Gắn mã tracking cho các website" class="tracking-button">
                   <mat-icon>code</mat-icon>
                 </a>
                 <!-- <a *ngIf="element.websites.length === 0 && element.isConnected"
@@ -60,8 +63,7 @@
                   <mat-icon>edit</mat-icon>
                 </button> -->
                 <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản AdWords"
-                        (click)="openRemoveAccountConfirmDialog(element.id)"
-                        [disabled]="isProcessing">
+                  (click)="openRemoveAccountConfirmDialog(element.id)" [disabled]="isProcessing">
                   <mat-icon style="color: silver">delete</mat-icon>
                 </button>
               </div>
@@ -83,30 +85,27 @@
 
         <ng-container matColumnDef="website">
           <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <ul style="width: 100%">
-              <li *ngFor="let website of element.websites, let i = index" fxLayout="row">
-                <p style="padding-left: 5px" fxFlex="90">
+          <mat-cell *matCellDef="let element" fxLayout="column" fxLayoutAlign="start">
+            <ul class="website-list">
+              <li *ngFor="let website of element.websites, let i = index" fxLayout="row" fxLayoutAlign="center center">
+                <div style="padding-left: 5px" fxFlex="90">
                   <span>{{i+1}}</span>.
                   <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
-                </p>
+                </div>
                 <div fxFlex="10">
                   <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
                     matTooltip="Xóa website" [disabled]="isProcessing">
-                    <mat-icon style="color: silver">delete</mat-icon>
+                    <mat-icon style="color: silver; font-size: 20px">delete</mat-icon>
                   </button>
-                  <!-- <button mat-icon-button color="accent" matTooltip="Kết nối AdWords">
-                    <mat-icon>add_circle_outline</mat-icon>
-                  </button> -->
                 </div>
               </li>
-              <li>
-                <button (click)="navigateToWebsiteManagement(element.id, element.campaignNumber)"
-                   mat-button color="accent" style="padding-left: 0">
-                  <mat-icon>add_circle_outline</mat-icon> Thêm Website
-                </button>
-              </li>
             </ul>
+            <button 
+              (click)="navigateToWebsiteManagement(element.id, element.campaignNumber)" 
+              mat-button color="accent"
+              class="add-domain-button">
+              <mat-icon>add_circle_outline</mat-icon> Thêm Website
+            </button>
           </mat-cell>
         </ng-container>
 

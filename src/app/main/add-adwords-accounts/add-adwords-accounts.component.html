@@ -17,6 +17,7 @@
           href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
         khoản adwords của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
         tài khoản Adwords của bạn</p>
+
       <form [formGroup]="form" novalidate>
         <div fxLayout="row">
           <app-input-text [formControlName]="'adWordId'" [title]="'Adwords ID'" [placeholder]="'5456445193'"
@@ -29,6 +30,7 @@
           </button>
         </div>
       </form>
+      
     </div>
   </div>
   <div gdArea="content" *ngIf="isConnected">

@@ -74,12 +74,12 @@
         <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <button *ngIf="element.isTracking" mat-stroked-button color="accent">
-            <mat-icon>check</mat-icon> Hoàn
+            <mat-icon style="font-size: 20px">check</mat-icon> Hoàn
             thành
           </button>
           <a *ngIf="!element.isTracking" mat-stroked-button matTooltip="Nhấn để tiến hành gắn tracking"
-            style="color: crimson; border: 0; padding-left: 0">
-            <mat-icon>close</mat-icon> Chưa có
+            style="color: crimson; border: 0; padding-left: 0" [routerLink]="['/gan-tracking/website', selectedAccountId]">
+            <mat-icon style="font-size: 20px">close</mat-icon> Chưa có
           </a>
         </mat-cell>
       </ng-container>

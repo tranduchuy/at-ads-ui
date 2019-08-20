@@ -9,6 +9,7 @@ import { AdwordsAccountListService } from './adwords-account-list.service';
 import { Router } from '@angular/router';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-adwords-account-list',
@@ -20,6 +21,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   // displayedColumns: string[] = ['task', 'date', 'adwords', 'website', 'service', 'cost', 'display', 'click', 'spamClick'];
   displayedColumns: string[] = ['task', 'date', 'adwords', 'accepted', 'website'];
   accounts = [];
+  getAccountsDone$ = new BehaviorSubject(false);
   isProcessing: boolean = false;
 
   adsAccountIdPipe = new AdsAccountIdPipe();
@@ -53,20 +55,28 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
                 this.getAccounts();
 
-                if (this.accounts.length > 0) {
-                  if (accountId === this._sessionService.activeAccountId) {
-                    this._sessionService.setActiveAccountId(this.accounts[0].id);
-                    this._sessionService.setActiveAdsAccountId(this.accounts[0].adsId);
-                    this._sessionService.setAccountId(this.accounts[0].id);
-                    this._sessionService.setAdwordId(this.accounts[0].adsId);
-                  }
-                }
-                else {
-                  this._sessionService.setActiveAccountId('');
-                  this._sessionService.setActiveAdsAccountId('');
-                  this._sessionService.setAccountId('');
-                  this._sessionService.setAdwordId('');
-                }
+                const getAccountDoneSub = this.getAccountsDone$
+                  .subscribe(
+                    isDone => {
+                      if (this.accounts.length > 0) {
+
+                        if (accountId === this._sessionService.activeAccountId) {
+                          this._sessionService.setActiveAccountId(this.accounts[0].id);
+                          this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(this.accounts[0].adsId));
+                          this._sessionService.setAccountId(this.accounts[0].id);
+                          this._sessionService.setAdwordId(this.accounts[0].adsId);
+                        }
+
+                      }
+                      else {
+                        this._sessionService.setActiveAccountId('');
+                        this._sessionService.setActiveAdsAccountId('');
+                        this._sessionService.setAccountId('');
+                        this._sessionService.setAdwordId('');
+                      }
+                    }
+                  );
+                this.subscriptions.push(getAccountDoneSub);
 
                 setTimeout(() => {
                   this._fuseNavigationService.reloadNavigation();
@@ -74,6 +84,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
                   this._dialogService._openSuccessDialog({ messages: ['Ngắt kết nối tài khoản AdWords thành công'] });
                   this.isProcessing = false;
                 }, 0);
+
               },
               (error: HttpErrorResponse) => {
                 this._fuseProgressiveBarService.hide();
@@ -124,10 +135,12 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
         (res) => {
           this._fuseProgressiveBarService.hide();
           this.accounts = res.data.accounts;
+          this.getAccountsDone$.next(true);
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
           this.accounts = [];
+          this.getAccountsDone$.next(true);
         });
     this.subscriptions.push(sub);
   }
@@ -149,12 +162,6 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   checkAccountAcceptance(adsId: string, isConnected: boolean) {
-
-    if (isConnected) {
-      this._dialogService._openSuccessDialog({ messages: ['Cập nhật dữ liệu thành công'] });
-      return;
-    }
-
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
 
@@ -165,7 +172,6 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
         setTimeout(() => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openSuccessDialog({ messages: ['Cập nhật dữ liệu thành công'] });
           this._fuseNavigationService.reloadNavigation();
           this.isProcessing = false;
         }, 0);

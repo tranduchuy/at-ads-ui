@@ -139,7 +139,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Thông tin cá nhân',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'person_outline',
+        icon: 'account_circle',
         url: '/thong-tin-ca-nhan',
       },
       {

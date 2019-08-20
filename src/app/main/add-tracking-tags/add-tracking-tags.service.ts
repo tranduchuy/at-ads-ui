@@ -8,7 +8,7 @@ export interface IAddCampaignTrackingParams {
   campaignIds: string[];
 }
 
-export interface ICheckAccountAcceptance{
+export interface ICheckAccountAcceptance {
   adWordId: string;
 }
 
@@ -24,13 +24,13 @@ export class AddTrackingTagsService {
 
   public getOriginalCampaigns(): Observable<any> {
     const activeAccountId = this._sessionService.getValueOfAccountId();
-    const url =  API.AdwordsAccount.getOriginalCampaigns.replace('{account_id}', activeAccountId);
+    const url = API.AdwordsAccount.getOriginalCampaigns.replace('{account_id}', activeAccountId);
     return this._http.get(url);
   }
 
   public getTrackingCampaigns(): Observable<any> {
     const activeAccountId = this._sessionService.getValueOfAccountId();
-    const url =  API.AdwordsAccount.getTrackingCampaigns.replace('{account_id}', activeAccountId);
+    const url = API.AdwordsAccount.getTrackingCampaigns.replace('{account_id}', activeAccountId);
     return this._http.get(url);
   }
 
@@ -40,12 +40,12 @@ export class AddTrackingTagsService {
     return this._http.post(url, params);
   }
 
-  public checkAccountAcceptance(params: ICheckAccountAcceptance): Observable<any>{
+  public checkAccountAcceptance(params: ICheckAccountAcceptance): Observable<any> {
     return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
 
   public getWebsiteTrackingInfo(accountId: string): Observable<any> {
-    const url =  API.Website.getWebsiteTrackingInfo.replace('{account_id}', accountId);
+    const url = API.Website.getWebsiteTrackingInfo.replace('{account_id}', accountId);
     return this._http.get(url);
   }
 
@@ -53,5 +53,10 @@ export class AddTrackingTagsService {
     const url = API.AdwordsAccount.getAwordsAccountDetail.replace('{account_id}', accountId);
     return this._http.get(url);
   }
-  
+
+  public getWebsites(accountId: string): Observable<any> {
+    const url = API.Website.getWebsites.replace('{accountId}', accountId);
+    return this._http.get(url);
+  }
+
 }
