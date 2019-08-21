@@ -103,7 +103,8 @@
             <button 
               (click)="navigateToWebsiteManagement(element.id, element.campaignNumber)" 
               mat-button color="accent"
-              class="add-domain-button">
+              class="add-domain-button"
+              [disabled]="isProcessing">
               <mat-icon>add_circle_outline</mat-icon> Thêm Website
             </button>
           </mat-cell>

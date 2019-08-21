@@ -69,20 +69,23 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   post(): void {
-    const params = this.generatePostObject();
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
+
+    const params = this.generatePostObject();
+
     const sub = this._addAdwordsAccountsService.addAdwordsAccount(params)
-      .subscribe((res) => {
-        this._dialogService._openInfoDialog(res.messages[0]);
-        this.isConnected = true;
+      .subscribe(
+        (res) => {
+          this._dialogService._openInfoDialog(res.messages[0]);
+          this.isConnected = true;
 
-        this.connectedAccountId = res.data.account._id;
-        this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
+          this.connectedAccountId = res.data.account._id;
+          this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
-        this._fuseProgressiveBarService.hide();
-        this.isProcessing = false;
-      },
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+        },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
