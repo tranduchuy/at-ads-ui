@@ -84,6 +84,7 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
   }
 
   getAutoBLockingIPRangeSetting() {
+    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
 
     const sub = this._banIpsService.getBlockingIPSettings()
@@ -92,10 +93,17 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
 
         this.classC = res.data.setting.autoBlackListIpRanges.classC;
         this.classD = res.data.setting.autoBlackListIpRanges.classD;
+
+        this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
+
+          if (error.status === 404) {
+            this._dialogService._openInfoDialog('Tài khoản hiện chưa có chiến dịch nào được gắn tracking! Vui lòng gắn tracking cho các chiến dịch.');
+          }
+          else this._dialogService._openErrorDialog(error.error);
+
         });
     this.subscriptions.push(sub);
   }

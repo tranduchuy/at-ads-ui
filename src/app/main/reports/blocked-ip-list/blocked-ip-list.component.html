@@ -41,7 +41,12 @@
       <!-- Symbol Column -->
       <ng-container matColumnDef="campaign">
         <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.campaignIds.join('. ')}}</mat-cell>
+        <mat-cell *matCellDef="let element">
+          <span *ngFor="let item of element.campaigns">
+            <span *ngIf="item.campaignName" style="margin-right: 5px">{{item.campaignName}}.</span>
+            <span *ngIf="!item.campaignName" style="margin-right: 5px">{{item.campaignId}}.</span>
+          </span>
+        </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>

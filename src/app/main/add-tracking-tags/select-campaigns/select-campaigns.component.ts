@@ -109,7 +109,6 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
     const sub = this._addTrackingTagsService.getOriginalCampaigns()
       .subscribe(res => {
-        
         this.campaignList = res.data.campaignList;
 
         const sub1 = this._addTrackingTagsService.getTrackingCampaigns()

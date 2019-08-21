@@ -59,8 +59,11 @@
             </p>
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
+
             <mat-checkbox (change)="onSelectCampaign($event, element.id)"
-              [checked]="selectedCampaigns.includes(element.id)"></mat-checkbox>
+              [checked]="selectedCampaigns.includes(element.id)" *ngIf="element.status === 'Hoạt động'"></mat-checkbox>
+
+            <mat-checkbox *ngIf="element.status !== 'Hoạt động'" disabled></mat-checkbox>
           </mat-cell>
         </ng-container>
 

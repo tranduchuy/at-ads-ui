@@ -20,7 +20,7 @@
       <div fxFlex="60">
 
         <app-input-textarea [formControlName]="'listBannedIP'" [errors]="getMessageErrors('listBannedIP')"
-          title="Nhập danh sách IP cần chặn" height="260px"></app-input-textarea>
+          title="Nhập danh sách IP cần chặn" height="260px" [isDisabled]="isProcessing"></app-input-textarea>
 
       </div>
       <div class="input-example" fxFlex="auto">

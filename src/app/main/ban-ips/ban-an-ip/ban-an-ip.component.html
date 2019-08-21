@@ -16,7 +16,7 @@
 
   <form class="ban-ip-form" [formGroup]="form" (ngSubmit)="onSubmitForm()">
 
-    <app-input-text [formControlName]="'bannedIP'" [errors]="getMessageErrors('bannedIP')" title="IP của bạn">
+    <app-input-text [formControlName]="'bannedIP'" [errors]="getMessageErrors('bannedIP')" title="IP của bạn" [isDisabled]="isProcessing">
     </app-input-text>
 
     <div class="button-area">

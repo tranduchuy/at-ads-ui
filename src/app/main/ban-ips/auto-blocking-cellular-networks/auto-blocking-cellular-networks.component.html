@@ -9,19 +9,19 @@
     dụng truy cập <span style="color: red">(3G & 4G)</span> của các mạng di động tại Việt Nam</p>
 
   <div class="checkbox-group" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-around">
-    <mat-checkbox [checked]="mobileNetworks.viettel" (change)="selectNetwork($event,'viettel')">
+    <mat-checkbox [checked]="mobileNetworks.viettel" (change)="selectNetwork($event,'viettel')" [disabled]="isProcessing">
       <img src="https://dangky3gviettel.vn/wp-content/uploads/2018/10/cropped-logo-dang-ky-3g-viettel.png" class="network-logo" alt="">
     </mat-checkbox>
-    <mat-checkbox [checked]="mobileNetworks.mobifone" (change)="selectNetwork($event,'mobifone')">
+    <mat-checkbox [checked]="mobileNetworks.mobifone" (change)="selectNetwork($event,'mobifone')" [disabled]="isProcessing">
       <img src="https://brasol.vn/public/uploads/1521197514-brasol.vn-logo-mobifone-mobifone-logo.svg_.png" class="network-logo" alt="">
     </mat-checkbox>
-    <mat-checkbox [checked]="mobileNetworks.vinafone" (change)="selectNetwork($event,'vinafone')">
+    <mat-checkbox [checked]="mobileNetworks.vinafone" (change)="selectNetwork($event,'vinafone')" [disabled]="isProcessing">
       <img src="https://img2.thuthuatphanmem.vn/uploads/2018/12/13/logo-vinaphone_010429237.png" class="network-logo" alt="">
     </mat-checkbox>
-    <mat-checkbox [checked]="mobileNetworks.vietnammobile" (change)="selectNetwork($event,'vietnammobile')">
+    <mat-checkbox [checked]="mobileNetworks.vietnammobile" (change)="selectNetwork($event,'vietnammobile')" [disabled]="isProcessing">
       <img src="https://css.vietnamobile.com.vn/images/logo.png" class="network-logo" alt="">
     </mat-checkbox>
-    <mat-checkbox [checked]="mobileNetworks.fpt" (change)="selectNetwork($event,'fpt')">
+    <mat-checkbox [checked]="mobileNetworks.fpt" (change)="selectNetwork($event,'fpt')" [disabled]="isProcessing">
       <img src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png" class="fpt" alt="">
     </mat-checkbox>
   </div>

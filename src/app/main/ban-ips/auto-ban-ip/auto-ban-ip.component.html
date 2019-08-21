@@ -21,7 +21,7 @@
 
   <mat-form-field style="width: 100%" appearance="outline">
     <mat-label>Chọn hình thức</mat-label>
-    <mat-select [(value)]="selectedMaxClick">
+    <mat-select [(value)]="selectedMaxClick" [disabled]="isProcessing">
       <mat-option *ngFor="let item of itemsSource.maxClick" [value]="item.value">{{item.text}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -34,7 +34,7 @@
 
   <mat-form-field style="width: 100%" appearance="outline">
     <mat-label>Chọn hình thức</mat-label>
-    <mat-select [(value)]="selectedAutoRemove">
+    <mat-select [(value)]="selectedAutoRemove" [disabled]="isProcessing">
       <mat-option *ngFor="let item of itemsSource.autoRemove" [value]="item.value">{{item.text}}</mat-option>
     </mat-select>
   </mat-form-field>

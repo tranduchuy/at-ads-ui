@@ -23,7 +23,7 @@
 
     <mat-form-field style="width: 100%" appearance="outline">
         <mat-label>Chọn hình thức</mat-label>
-        <mat-select [(value)]="classC">
+        <mat-select [(value)]="classC" [disabled]="isProcessing">
             <mat-option *ngFor="let item of itemsSource.classC" [value]="item.value">{{item.text}}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -36,7 +36,7 @@
 
     <mat-form-field style="width: 100%" appearance="outline">
         <mat-label>Chọn hình thức</mat-label>
-        <mat-select [(value)]="classD">
+        <mat-select [(value)]="classD" [disabled]="isProcessing">
             <mat-option *ngFor="let item of itemsSource.classD" [value]="item.value">{{item.text}}</mat-option>
         </mat-select>
     </mat-form-field>
