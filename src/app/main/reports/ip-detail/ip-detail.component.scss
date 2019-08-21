@@ -1,7 +1,12 @@
 .container {
-  padding: 30px 30px 15px 30px;
-
+  padding: 20px 30px 30px 20px;
   width: 100%;
+
+  .inner {
+    padding: 30px 30px 15px 30px;
+    background-color: white;
+    box-shadow: 2px 2px 5px silver;
+  }
 
   .title1 {
     padding: 15px;
@@ -18,7 +23,6 @@
     padding-bottom: 15px;
     background-color: white;
     text-align: center;
-    box-shadow: 2px 2px 5px silver;
 
     .avatar {
       height: 110px;
@@ -30,7 +34,7 @@
   }
 
   .right {
-    box-shadow: 2px 2px 5px silver;
+    box-shadow: 1px 1px 4px silver;
     height: 350px;
     overflow: auto;
 
@@ -95,5 +99,9 @@
 @media screen and (max-width: 600px) {
   .container {
     padding: 15px;
+
+    .inner {
+      padding: 10px;
+    }
   }
 }

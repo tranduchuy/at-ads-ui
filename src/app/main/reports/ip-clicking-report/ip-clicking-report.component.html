@@ -20,14 +20,14 @@
         <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
         <mat-cell *matCellDef="let element">
 
-          <!-- <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
+          <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
             style="font-weight: bold; padding-left: 0" mat-button color="accent">
             {{element._id}}
-          </a> -->
-
-          <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
-            {{element._id}}
           </a>
+
+          <!-- <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
+            {{element._id}}
+          </a> -->
 
         </mat-cell>
       </ng-container>

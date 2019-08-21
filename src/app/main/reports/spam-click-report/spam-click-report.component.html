@@ -85,22 +85,23 @@
           <ng-container matColumnDef="ip">
             <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <!-- <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
+              
+              <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
                 style="font-weight: bold; padding-left: 0" mat-button color="accent">
                 <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px">not_interested
                 </mat-icon>
                 <mat-icon *ngIf="!element.isSpam" style="color:silver; margin-right: 5px">not_interested
                 </mat-icon>
                 {{element.ip}}
-              </a> -->
+              </a>
 
-              <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
+              <!-- <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
                 <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px">not_interested
                 </mat-icon>
                 <mat-icon *ngIf="!element.isSpam" style="color:silver; margin-right: 5px">not_interested
                 </mat-icon>
                 {{element.ip}}
-              </a>
+              </a> -->
 
             </mat-cell>
           </ng-container>

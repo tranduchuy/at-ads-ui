@@ -1,100 +1,100 @@
 <div class="container">
+  <div class="inner">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
+      <div class="left" fxFlex="20">
+        <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
+        <p style="color: dodgerblue; font-weight: bold">IP: {{ip}}</p>
+      </div>
 
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
-    <div class="left" fxFlex="20">
-      <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
-      <p style="color: dodgerblue; font-weight: bold">IP: {{ip}}</p>
+      <div class="right">
+
+        <mat-table [dataSource]="rightTable" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="adwords">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span class="adwords-badge">ADWORDS</span>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="accessTime">
+            <mat-header-cell *matHeaderCellDef>Truy cập</mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index">
+
+              <mat-icon color="warn" *ngIf="i % 2 !== 0" style="margin-right: 10px"
+                matTooltip="Đã chặn và không bị tính tiền">verified_user</mat-icon>
+
+              <mat-icon *ngIf="i % 2 == 0" style="margin-right: 10px; color: gold"
+                matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
+
+              {{element.accessTime}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="control">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-icon color="accent" *ngIf="element.device === 'phone'" matTooltip="Di động">smartphone</mat-icon>
+              <mat-icon color="accent" *ngIf="element.device === 'pc'" matTooltip="Laptop">laptop_chromebook</mat-icon>
+              <mat-icon color="accent" *ngIf="element.device === 'tablet'" matTooltip="Máy tính bảng">tablet_mac
+              </mat-icon>
+              <mat-icon style="color: silver" matTooltip="Hệ điều hành Android">help_outline</mat-icon>
+              <mat-icon style="color: #4bb543" matTooltip="Trình duyệt Chrome">open_in_browser</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="keyword">
+            <mat-header-cell *matHeaderCellDef>Từ khóa</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="website">
+            <mat-header-cell *matHeaderCellDef>Xem gì</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <a href="https://{{element.website}}">{{element.website}}</a>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="rightTableColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: rightTableColumns"></mat-row>
+        </mat-table>
+
+      </div>
     </div>
 
-    <div class="right">
-
-      <mat-table [dataSource]="rightTable" class="mat-elevation-z8">
-
-        <ng-container matColumnDef="adwords">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span class="adwords-badge">ADWORDS</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="accessTime">
-          <mat-header-cell *matHeaderCellDef>Truy cập</mat-header-cell>
-          <mat-cell *matCellDef="let element; let i = index">
-
-            <mat-icon color="warn" *ngIf="i % 2 !== 0" style="margin-right: 10px"
-              matTooltip="Đã chặn và không bị tính tiền">verified_user</mat-icon>
-
-            <mat-icon *ngIf="i % 2 == 0" style="margin-right: 10px; color: gold"
-              matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
-              
-            {{element.accessTime}}
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="control">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <mat-icon color="accent" *ngIf="element.device === 'phone'" matTooltip="Di động">smartphone</mat-icon>
-            <mat-icon color="accent" *ngIf="element.device === 'pc'" matTooltip="Laptop">laptop_chromebook</mat-icon>
-            <mat-icon color="accent" *ngIf="element.device === 'tablet'" matTooltip="Máy tính bảng">tablet_mac
-            </mat-icon>
-            <mat-icon style="color: silver" matTooltip="Hệ điều hành Android">help_outline</mat-icon>
-            <mat-icon style="color: #4bb543" matTooltip="Trình duyệt Chrome">open_in_browser</mat-icon>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="keyword">
-          <mat-header-cell *matHeaderCellDef>Từ khóa</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="website">
-          <mat-header-cell *matHeaderCellDef>Xem gì</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <a href="https://{{element.website}}">{{element.website}}</a>
-          </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="rightTableColumns; sticky: true"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: rightTableColumns"></mat-row>
-      </mat-table>
-
+    <div class="bottom">
+      <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
+        <p class="icon">
+          <mat-icon color="accent">calendar_today</mat-icon>
+        </p>
+        <p class="title">
+          Ngày ghi nhận cuối
+          <br>
+          06-06-2019 20:25:41
+        </p>
+      </div>
+      <div class="access-location" fxLayout="row" fxLayoutGap="12px">
+        <p class="icon">
+          <mat-icon color="accent">location_on</mat-icon>
+        </p>
+        <p class="title">
+          Vị trí truy cập
+          <br>
+          Ho Chi Minh City
+        </p>
+      </div>
+      <div class="last-access-device" fxLayout="row" fxLayoutGap="12px">
+        <p class="icon">
+          <mat-icon color="accent">speaker_phone</mat-icon>
+        </p>
+        <p class="title">
+          Thiết bị truy cập cuối
+          <br>
+          2019-06-06 20:25:41
+        </p>
+      </div>
     </div>
   </div>
-
-  <div class="bottom">
-    <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
-      <p class="icon">
-        <mat-icon color="accent">calendar_today</mat-icon>
-      </p>
-      <p class="title">
-        Ngày ghi nhận cuối
-        <br>
-        06-06-2019 20:25:41
-      </p>
-    </div>
-    <div class="access-location" fxLayout="row" fxLayoutGap="12px">
-      <p class="icon">
-        <mat-icon color="accent">location_on</mat-icon>
-      </p>
-      <p class="title">
-        Vị trí truy cập
-        <br>
-        Ho Chi Minh City
-      </p>
-    </div>
-    <div class="last-access-device" fxLayout="row" fxLayoutGap="12px">
-      <p class="icon">
-        <mat-icon color="accent">speaker_phone</mat-icon>
-      </p>
-      <p class="title">
-        Thiết bị truy cập cuối
-        <br>
-        2019-06-06 20:25:41
-      </p>
-    </div>
-  </div>
-
 </div>
