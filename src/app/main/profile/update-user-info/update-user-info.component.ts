@@ -46,13 +46,19 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
       .subscribe(
         (res) => {
 
-          this._sessionService.setUserProfile(res.data.info.name, res.data.info.phone);
+          this._sessionService.setUserProfile(res.data.info.name, res.data.info.phone, res.data.info.usePassword);
           this.userInfo = JSON.parse(this._sessionService.user);
           this.userInfo.email = this.email;
           this._sessionService.setUser(this.userInfo);
 
           this._fuseProgressBarService.hide();
           this._dialogService._openSuccessDialog({ messages: ['Cập nhật thông tin thành công'] });
+
+          this.form.patchValue({
+            oldPassword: '',
+            password: '',
+            confirmedPassword: ''
+          });
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {

@@ -39,7 +39,9 @@
 			</strong></p>
 
 			<app-input-text [formControlName]="'oldPassword'" [title]="'Mật khẩu cũ'" [pristine]="true" [type]="'password'"
-				[icon]="'vpn_key'" [errors]="getMessageErrors('oldPassword')"></app-input-text>
+				[icon]="'vpn_key'" [errors]="getMessageErrors('oldPassword')" 
+				[isDisplayed]="userInfo.usePassword" 
+				[(ngModel)]="form.controls['oldPassword'].value" ngDefaultControl></app-input-text>
 
 			<app-input-text [formControlName]="'password'" [title]="'Mật khẩu mới'" [pristine]="true"
 				[type]="'password'" [icon]="'vpn_key'" [errors]="getMessageErrors('password')">

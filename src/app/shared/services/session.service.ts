@@ -48,13 +48,14 @@ export class SessionService {
     this.cookieService.remove(CookieNames.activeAdsAccountId);
   }
 
-  setUserProfile(name: string, phone: string): any {
+  setUserProfile(name: string, phone: string, usePassword: boolean): any {
     const today = new Date();
     today.setHours(today.getHours() + 8);
     const newUser = JSON.parse(this.user);
 
     newUser.name = name;
     newUser.phone = phone;
+    newUser.usePassword = usePassword;
 
     this.cookieService.put(CookieNames.user, JSON.stringify(newUser), { expires: today });
   }
