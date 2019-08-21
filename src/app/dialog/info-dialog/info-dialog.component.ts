@@ -8,6 +8,8 @@ import { MatDialogRef } from '@angular/material';
 export class InfoDialogComponent {
 
   public confirmMessage: string;
+  public linkUrl?: string = '';
+  public linkName?: string = '';
 
   /**
    * Constructor

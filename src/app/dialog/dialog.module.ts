@@ -5,6 +5,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatButtonModule,
     MatDialogModule,
     FlexLayoutModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   entryComponents: [
     InfoDialogComponent,

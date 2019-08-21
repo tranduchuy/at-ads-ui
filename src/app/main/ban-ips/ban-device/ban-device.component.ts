@@ -127,7 +127,11 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
           this._fuseProgressiveBarService.hide();
 
           if (error.status === 404) {
-            this._dialogService._openInfoDialog('Tài khoản hiện chưa có chiến dịch nào được gắn tracking! Vui lòng gắn tracking cho các chiến dịch.');
+            this._dialogService._openInfoDialog(
+              'Tài khoản hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ',
+              'tại đây',
+              '/gan-tracking/chien-dich'
+            );
           }
           else this._dialogService._openErrorDialog(error.error);
 

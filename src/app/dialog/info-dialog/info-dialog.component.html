@@ -2,12 +2,13 @@
 <div style="text-align: center; margin-bottom: 15px">
   <mat-icon class="s-60" style="color: #039be5">info</mat-icon>
 </div>
-<div mat-dialog-content style="text-align: center">{{confirmMessage}}</div>
-<div mat-dialog-actions
-     [fxLayoutAlign]="'center center'"
-     class="pt-24">
-  <button mat-raised-button
-          color="basic"
-          (click)="dialogRef.close(true)">Đóng
+<div mat-dialog-content style="text-align: center">
+  <p>
+    {{confirmMessage}} 
+    <a routerLink="{{linkUrl}}" (click)="dialogRef.close(true)"><span style="text-decoration: underline">{{linkName}}</span></a>
+  </p>
+</div>
+<div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">
+  <button mat-raised-button color="basic" (click)="dialogRef.close(true)">Đóng
   </button>
 </div>

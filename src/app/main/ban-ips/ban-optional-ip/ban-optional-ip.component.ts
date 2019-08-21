@@ -76,8 +76,13 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
           this._fuseProgressiveBarService.hide();
 
           if (error.status === 404) {
-            this._dialogService._openInfoDialog('Tài khoản hiện chưa có chiến dịch nào được gắn tracking! Vui lòng gắn tracking cho các chiến dịch.');
+            this._dialogService._openInfoDialog(
+              'Tài khoản hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ',
+              'tại đây',
+              '/gan-tracking/chien-dich'
+            );
           }
+          else this._dialogService._openErrorDialog(error.error);
 
           this.blockedIPs = [];
         }
@@ -109,13 +114,14 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
     },
       (error: HttpErrorResponse) => {
         this._fuseProgressiveBarService.hide();
+
         if (error.status === 409) {
           this._dialogService._openErrorDialog({
             messages: [`${error.error.data.ips.join(', ')} đã có trong blacklist.`]
           });
-        } else {
-          this._dialogService._openErrorDialog(error.error);
         }
+        else this._dialogService._openErrorDialog(error.error);
+
         this.isProcessing = false;
       }
     );

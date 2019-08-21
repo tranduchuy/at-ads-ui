@@ -14,9 +14,14 @@ export class DialogService {
   constructor(private _matDialog: MatDialog) {
   }
 
-  public _openInfoDialog(message: string): void {
+  public _openInfoDialog(message: string, linkName?: string, linkUrl?: string): void {
     const dialogRef = this._matDialog.open(InfoDialogComponent);
     dialogRef.componentInstance.confirmMessage = message;
+
+    if(linkName !== undefined)
+      dialogRef.componentInstance.linkName = linkName;
+    if(linkUrl !== undefined)
+      dialogRef.componentInstance.linkUrl = linkUrl;
   }
 
   public _openSuccessDialog(res: ISuccess): void {
