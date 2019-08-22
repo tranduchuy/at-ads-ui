@@ -7,6 +7,7 @@ import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-bl
 import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
 import { BanDeviceComponent } from './ban-device/ban-device.component';
+import { WhitelistIpComponent } from './whitelist-ip/whitelist-ip.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,11 @@ import { BanDeviceComponent } from './ban-device/ban-device.component';
         path: 'chan-ip-tuy-chinh',
         pathMatch: 'full',
         component: BanOptionalIPComponent
+      },
+      {
+        path: 'whitelist-ip',
+        pathMatch: 'full',
+        component: WhitelistIpComponent
       },
       {
         path: 'chan-ip-tu-dong',

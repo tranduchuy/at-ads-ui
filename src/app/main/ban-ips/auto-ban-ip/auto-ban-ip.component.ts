@@ -15,7 +15,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 })
 export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
 
-  isProcessing: boolean = false;
+  isProcessing: boolean = true;
   selectedMaxClick: number;
   selectedAutoRemove: boolean;
 

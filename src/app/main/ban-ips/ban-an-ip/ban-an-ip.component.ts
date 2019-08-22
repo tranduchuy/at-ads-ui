@@ -21,7 +21,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
 
   blockedIPs: string[];
   hasBlockedIP: boolean;
-  isProcessing: boolean = false;
+  isProcessing: boolean = true;
 
   constructor(
     private _banIpsService: BanIpsService,
@@ -35,7 +35,6 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
   }
 
   ngOnInit(): void {
-    this.isProcessing = true;
     this._fuseProgressiveBarService.show();
     this.hasBlockedIP = false;
     this.initForm();

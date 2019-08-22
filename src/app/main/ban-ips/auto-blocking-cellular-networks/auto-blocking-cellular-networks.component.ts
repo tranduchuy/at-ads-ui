@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class AutoBlockingCellularNetworksComponent extends PageBaseComponent implements OnInit {
 
-  isProcessing: boolean = false;
+  isProcessing: boolean = true;
   mobileNetworks: any = {
     viettel: false,
     mobifone: false,

@@ -1,0 +1,140 @@
+.container {
+  padding: 15px 30px 15px 30px;
+
+  width: 100%;
+
+  .title1 {
+    padding: 15px;
+
+    background-color: whitesmoke;
+    color: gray;
+    font-size: 16px;
+    font-weight: bold;
+
+    .account-id {
+      color: black;
+    }
+
+    box-shadow: 2px 2px 5px silver;
+  }
+
+  .title2 {
+    padding-top: 30px;
+    padding-bottom: 15px;
+
+    font-weight: bold;
+  }
+
+  .title3 {
+    font-weight: bold;
+    font-size: 12px !important;
+  }
+
+  .notification {
+    text-align: justify;
+  }
+
+  .ban-ip-form {
+    margin-top: 10px;
+    padding: 15px;
+
+    box-shadow: 2px 2px 5px silver;
+  }
+
+  .list-ip {
+    width: 100%;
+
+    textarea {
+      height: 360px;
+    }
+
+    mat-form-field {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .flex-box {
+    display: flex;
+
+    .flex-item {
+      margin: 5px;
+    }
+
+    .list {
+      width: 60%;
+    }
+  }
+
+  .input-example {
+    margin-top: -10px;
+    color: gray;
+    font-size: 12px !important;
+  }
+
+  .button-area {
+    margin-top: 15px;
+
+    button {
+      border-radius: 0;
+    }
+  }
+
+  .table-title {
+    margin-top: 30px;
+    color: gray;
+  }
+
+  .step {
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+
+  .banned-ip-info {
+    margin-top: 30px;
+    padding: 20px;
+
+    background-color: #eee;
+    border-left: 5px solid darkorange;
+  }
+
+  .success-button {
+    background-color: #4bb543;
+    color: white;
+  }
+
+  .status {
+    text-align: justify;
+  }
+
+  .task {
+    color: crimson;
+  }
+
+  .unlock-button {
+    display: table;
+    margin: 0 auto;
+  }
+
+  .new {
+    background-color: crimson;
+    color: white;
+    padding: 4px;
+    box-shadow: 1px 1px 5px silver;
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .button-area {
+    button {
+      font-size: 12px;
+    }
+  }
+  .container {
+    padding: 15px;
+  }
+}

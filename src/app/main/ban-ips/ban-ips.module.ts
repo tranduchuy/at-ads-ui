@@ -25,6 +25,7 @@ import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-bl
 import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
 import { BanDeviceComponent } from './ban-device/ban-device.component';
 import { MatSelectModule, MatCheckboxModule } from '@angular/material';
+import { WhitelistIpComponent } from './whitelist-ip/whitelist-ip.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatSelectModule, MatCheckboxModule } from '@angular/material';
     AutoBlockingRangeIpsComponent,
     AutoBanIPComponent,
     AutoBlockingCellularNetworksComponent,
-    BanDeviceComponent
+    BanDeviceComponent,
+    WhitelistIpComponent
   ],
   imports: [
 

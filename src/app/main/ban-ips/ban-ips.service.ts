@@ -13,6 +13,10 @@ export interface IBlockIPsParams {
   ips: string[];
 }
 
+export interface IUpdateWhitelistParams {
+  ips: string[];
+}
+
 export interface IAutoBlockingRangeIPParams {
   classC: boolean;
   classD: boolean;
@@ -148,5 +152,11 @@ export class BanIpsService {
   public getAdwordsAccountDetail(accountId): Observable<any> {
     const url = API.AdwordsAccount.getAwordsAccountDetail.replace('{account_id}', accountId);
     return this._http.get(url);
+  }
+
+  public updateWhiteList(param: IUpdateWhitelistParams): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    const url = API.AdwordsAccount.updateWhitelist.replace('{account_id}', activeAccountId);
+    return this._http.put(url, param);
   }
 }

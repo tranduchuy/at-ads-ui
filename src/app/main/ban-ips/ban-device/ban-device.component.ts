@@ -26,7 +26,7 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
 
   displayedColumns: string[] = ['device', 'cost', 'impressions', 'clicks', 'avgPosition', 'ctr', 'optimization'];
   deviceReports: DeviceReport[];
-  isProcessing: boolean = false;
+  isProcessing: boolean = true;
   deviceSettings: any = {
     mobile: false,
     tablet: false,

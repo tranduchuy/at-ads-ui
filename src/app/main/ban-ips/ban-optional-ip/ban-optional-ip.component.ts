@@ -18,7 +18,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
   displayedColumns: string[] = ['order', 'ip', 'status', 'task', 'unlockButton'];
   blockedIPs: string[] = [];
-  isProcessing: boolean = false;
+  isProcessing: boolean = true;
 
   constructor(
     private _banIpsService: BanIpsService,

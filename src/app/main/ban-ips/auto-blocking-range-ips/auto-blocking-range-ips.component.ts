@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements OnInit {
 
-  isProcessing: boolean = false;
+  isProcessing: boolean = true;
   classC: boolean;
   classD: boolean;
 
