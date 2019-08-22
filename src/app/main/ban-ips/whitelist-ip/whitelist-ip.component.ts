@@ -70,7 +70,7 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
         this.whiteList = res.data.setting.customWhiteList;
 
         this.form.patchValue({
-          whitelistIPs: this.getNormalizedWhiteList(this.whiteList)
+          whitelistIPs: this.getNormalizedWhiteList(res.data.setting.customWhiteList)
         })
 
         this.isProcessing = false;
@@ -92,7 +92,7 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
   }
 
   getNormalizedWhiteList(list: any) {
-    return list.map(item => {
+    return (list || []).map(item => {
 
       if(item.includes('.0.0/16'))
         return item.replace('.0.0/16','.*.*');
