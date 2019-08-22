@@ -83,7 +83,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Chặn Tự Động IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'security',
+        icon: 'verified_user',
         url: '/chan-ip/chan-ip-tu-dong',
       },
       {
@@ -109,6 +109,14 @@ export const navigation: FuseNavigation[] = [
         type: 'item',
         icon: 'phonelink_lock',
         url: '/chan-ip/chan-ip-theo-thiet-bi',
+      },
+      {
+        id: 'ban-anonymous',
+        title: 'Chặn Trình Duyệt Ẩn Danh',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'vpn_lock',
+        url: '/chan-ip/chan-trinh-duyet-an-danh',
       },
     ]
   },

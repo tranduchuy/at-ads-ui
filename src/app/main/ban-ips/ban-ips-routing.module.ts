@@ -8,6 +8,7 @@ import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
 import { BanDeviceComponent } from './ban-device/ban-device.component';
 import { WhitelistIpComponent } from './whitelist-ip/whitelist-ip.component';
+import { AnonymousBrowserComponent } from './anonymous-browser/anonymous-browser.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,11 @@ import { WhitelistIpComponent } from './whitelist-ip/whitelist-ip.component';
         path: 'chan-ip-theo-thiet-bi',
         pathMatch: 'full',
         component: BanDeviceComponent
+      },
+      {
+        path: 'chan-trinh-duyet-an-danh',
+        pathMatch: 'full',
+        component: AnonymousBrowserComponent
       }
     ])
   ]

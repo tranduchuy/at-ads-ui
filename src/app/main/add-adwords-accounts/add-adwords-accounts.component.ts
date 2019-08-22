@@ -77,13 +77,19 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     const sub = this._addAdwordsAccountsService.addAdwordsAccount(params)
       .subscribe(
         (res) => {
+          this._fuseProgressiveBarService.hide();
           this._dialogService._openInfoDialog(res.messages[0]);
-          this.isConnected = true;
 
+          if (res.data.isRefresh) {
+            this._fuseNavigationService.reloadNavigation();
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+            return;
+          }
+
+          this.isConnected = true;
           this.connectedAccountId = res.data.account._id;
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
-          this._fuseProgressiveBarService.hide();
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {

@@ -45,6 +45,10 @@ export interface ISetDeviceCampaignRunningParams {
   isEnabled: boolean;
 }
 
+export interface ISetBlockingAnonymousBrowserParams {
+  blockByPrivate: boolean;
+}
+
 export interface ICheckAccountAcceptance {
   adWordId: string;
 }
@@ -131,6 +135,12 @@ export class BanIpsService {
     const activeAccountId = this._sessionService.getValueOfAccountId();
     const url = API.AdwordsAccount.getDeviceReport.replace('{account_id}', activeAccountId);
     return this._http.get(url);
+  }
+
+  public setBlockingAnonymousBrowser(param: ISetBlockingAnonymousBrowserParams): Observable<any> {
+    const activeAccountId = this.getActiveAccountId();
+    const url = API.AdwordsAccount.setBlockingAnonymousBrowser.replace('{account_id}', activeAccountId);
+    return this._http.put(url, param);
   }
 
   public checkAccountAcceptance(params: ICheckAccountAcceptance): Observable<any> {

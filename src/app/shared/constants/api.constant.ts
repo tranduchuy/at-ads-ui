@@ -42,6 +42,8 @@ export namespace API {
     export const getDeviceReport = environment.hostApi + '/api/account-adwords/{account_id}/report/device';
     export const setDeviceCampaignRunning = environment.hostApi + '/api/account-adwords/{account_id}/report/device';
 
+    export const setBlockingAnonymousBrowser = environment.hostApi + '/api/account-adwords/{account_id}/block-by-private-browser'
+
     export const getBlockingIPSettings = environment.hostApi + '/api/account-adwords/{account_id}/setting';
 
     export const getAwordsAccountDetail = environment.hostApi + '/api/account-adwords/{account_id}';

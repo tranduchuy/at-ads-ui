@@ -26,6 +26,7 @@ import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-
 import { BanDeviceComponent } from './ban-device/ban-device.component';
 import { MatSelectModule, MatCheckboxModule } from '@angular/material';
 import { WhitelistIpComponent } from './whitelist-ip/whitelist-ip.component';
+import { AnonymousBrowserComponent } from './anonymous-browser/anonymous-browser.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { WhitelistIpComponent } from './whitelist-ip/whitelist-ip.component';
     AutoBanIPComponent,
     AutoBlockingCellularNetworksComponent,
     BanDeviceComponent,
-    WhitelistIpComponent
+    WhitelistIpComponent,
+    AnonymousBrowserComponent
   ],
   imports: [
 
