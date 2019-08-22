@@ -16,7 +16,8 @@ import { Router } from '@angular/router';
 })
 export class WhitelistIpComponent extends EditableFormBaseComponent implements OnInit {
 
-  isProcessing: boolean = false;
+  isProcessing: boolean = true;
+  whiteList = [];
 
   constructor(
     public _sessionService: SessionService,
@@ -28,6 +29,7 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
   }
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
     this.initForm();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
@@ -35,12 +37,11 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
           const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
             .subscribe(
               (res) => {
+                this._fuseProgressBarService.hide();
 
                 if (res.data.adsAccount.isConnected)
-                  this._fuseProgressBarService.hide();
-
+                  this.getWhitelistIPs();
                 else {
-                  this._fuseProgressBarService.hide();
                   this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
                   this._router.navigateByUrl('/danh-sach-tai-khoan');
                 }
@@ -56,6 +57,51 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  getWhitelistIPs() {
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+
+    const sub = this._banIpsService.getBlockingIPSettings()
+      .subscribe(res => {
+        this._fuseProgressBarService.hide();
+
+        this.whiteList = res.data.setting.customWhiteList;
+
+        this.form.patchValue({
+          whitelistIPs: this.getNormalizedWhiteList(this.whiteList)
+        })
+
+        this.isProcessing = false;
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+
+          if (error.status === 404) {
+            this._dialogService._openInfoDialog(
+              'Tài khoản hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ',
+              'tại đây',
+              '/gan-tracking/chien-dich'
+            );
+          }
+          else this._dialogService._openErrorDialog(error.error);
+
+        });
+    this.subscriptions.push(sub);
+  }
+
+  getNormalizedWhiteList(list: any) {
+    return list.map(item => {
+
+      if(item.includes('.0.0/16'))
+        return item.replace('.0.0/16','.*.*');
+
+      if(item.includes('.0/24'))
+        return item.replace('.0/24','.*');
+
+      return item;
+    }).join('\n');
   }
 
   onSubmitForm() {
@@ -76,6 +122,9 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
     const sub = this._banIpsService.updateWhiteList(param)
       .subscribe(
         (res: ILoginSuccess) => {
+
+          this.getWhitelistIPs();
+
           this._fuseProgressBarService.hide();
           this._dialogService._openSuccessDialog(res);
           this.isProcessing = false;

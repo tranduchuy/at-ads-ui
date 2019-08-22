@@ -25,12 +25,12 @@
 
           <ng-container matColumnDef="accessTime">
             <mat-header-cell *matHeaderCellDef>Truy cập</mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index">
+            <mat-cell *matCellDef="let element">
 
-              <mat-icon color="warn" *ngIf="i % 2 !== 0" style="margin-right: 10px"
+              <mat-icon *ngIf="element.isSpam" style="margin-right: 10px; color: crimson"
                 matTooltip="Đã chặn và không bị tính tiền">verified_user</mat-icon>
 
-              <mat-icon *ngIf="i % 2 == 0" style="margin-right: 10px; color: gold"
+              <mat-icon *ngIf="!element.isSpam" style="margin-right: 10px; color: gold"
                 matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
 
               {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}}
@@ -110,7 +110,7 @@
           <ng-container matColumnDef="website">
             <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <a href="{{element.href}}" target="_blank">{{element.href}}</a>
+              <a href="{{element.href}}" target="_blank"><span style="text-decoration: underline">Link</span></a>
             </mat-cell>
           </ng-container>
 
