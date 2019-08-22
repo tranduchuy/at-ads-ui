@@ -51,18 +51,28 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     })
       .subscribe(
         res => {
-          this._sessionService.setActiveAccountId(this.connectedAccountId);
-          this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
-          this._sessionService.setAccountId(this.connectedAccountId);
-          this._sessionService.setAdwordId(this.connectedAdsId);
+          if (res.data.isConnected) {
+            this._dialogService._openSuccessDialog({messages: ['Kết nối tài khoản Google Ads thành công']});
+            setTimeout(() => {
+              this._sessionService.setActiveAccountId(this.connectedAccountId);
+              this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
+              this._sessionService.setAccountId(this.connectedAccountId);
+              this._sessionService.setAdwordId(this.connectedAdsId);
 
-          this._fuseProgressiveBarService.hide();
-          this._fuseNavigationService.reloadNavigation();
-          this._router.navigateByUrl('/gan-tracking/chien-dich');
+              this._fuseProgressiveBarService.hide();
+              this._fuseNavigationService.reloadNavigation();
+              this._router.navigateByUrl('/gan-tracking/chien-dich');
+            }, 2000);
+          } else {
+            this.isProcessing = false;
+            this._fuseProgressiveBarService.hide();
+            this._dialogService._openErrorDialog({messages: ['Kết nối tài khoản Google Ads không thành công. Vui lòng kiếm tra lại']});
+          }
+
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog({ messages: ['Tài khoản AdWords không tồn tại'] });
+          this._dialogService._openErrorDialog({messages: ['Tài khoản Google Ads không tồn tại']});
           this.isProcessing = false;
         });
     this.subscriptions.push(sub);
@@ -112,7 +122,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   private generatePostObject(): any {
-    const params = { ...this.form.value };
+    const params = {...this.form.value};
 
     // required
     params.adWordId = params.adWordId.replace(/[^a-zA-Z0-9 ]/g, '');
