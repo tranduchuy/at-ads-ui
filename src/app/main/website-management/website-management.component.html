@@ -43,13 +43,13 @@
   </form>
 
   <br><span><b><span style="color: red">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
-      style="color: dodgerblue">http://</span> hoặc <span style="color: dodgerblue">https://</span></span>
+      style="color: #039be5">http://</span> hoặc <span style="color: #039be5">https://</span></span>
 
   <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
 
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center">
     <p><strong>CÁC WEBSITE TRONG TÀI KHOẢN <span [(ngModel)]="selectedAdsId" ngDefaultControl
-        style="color: dodgerblue">{{selectedAdsId}}</span></strong></p>
+        style="color: #039be5">{{selectedAdsId}}</span></strong></p>
     <button mat-button class="update-website-list-button" color="accent" (click)="getWebsites()" [disabled]="isProcessing">
       <mat-icon style="font-size: 18px">sync</mat-icon>Cập nhật
     </button>

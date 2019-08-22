@@ -25,6 +25,12 @@ export interface IRemoveAutoBlockedIPParmas {
   ips: string[];
 }
 
+export interface IGetIPHistoryParams {
+  ip: string;
+  page?: number;
+  limit?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -86,6 +92,19 @@ export class ReportService {
     };
 
     return this._http.delete(url, options);
+  }
+
+  getIPHistory(params: IGetIPHistoryParams): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    let url = API.Report.getIPHistory.replace('{account_id}', activeAccountId);
+    url = url.replace('{ip}', params.ip);
+
+    if (params.page !== undefined)
+      url += `&page=${params.page}`;
+    if (params.limit !== undefined)
+      url += `&limit=${params.limit}`;
+
+    return this._http.get(url);
   }
 
 }

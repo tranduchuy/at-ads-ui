@@ -1,25 +1,27 @@
 .container {
-  padding: 20px 30px 30px 20px;
+  padding: 20px 30px 20px 30px;
   width: 100%;
 
   .inner {
-    padding: 30px 30px 15px 30px;
+    padding: 50px 30px 15px 30px;
     background-color: white;
     box-shadow: 2px 2px 5px silver;
+    margin-top: -18px;
   }
 
   .title1 {
     padding: 15px;
-
+    padding-left: 30px;
     background-color: whitesmoke;
     color: gray;
     font-size: 16px;
     font-weight: bold;
+    box-shadow: 2px 2px 5px silver;
   }
 
   .left {
-    height: 350px;
     padding: 40px;
+    padding-top: 10px;
     padding-bottom: 15px;
     background-color: white;
     text-align: center;
@@ -34,8 +36,9 @@
   }
 
   .right {
-    box-shadow: 1px 1px 4px silver;
-    height: 350px;
+    height: auto;
+    background-color: white;
+    box-shadow: 1px 1px 3px silver;
     overflow: auto;
 
     mat-table {
@@ -43,21 +46,18 @@
 
       mat-header-cell:nth-child(1),
       mat-cell:nth-child(1) {
-        flex: 0 0 15%;
+        flex: 0 0 10%;
       }
 
       mat-header-cell:nth-child(2),
       mat-cell:nth-child(2) {
-        flex: 0 0 25%;
+        flex: 0 0 17%;
       }
 
       mat-header-cell:nth-child(3),
       mat-cell:nth-child(3) {
-        display: flex;
-        justify-content: center;
-
         mat-icon {
-          margin-right: 20px;
+          font-size: 20px;
         }
       }
 
@@ -70,7 +70,7 @@
 
       mat-row,
       mat-header-row {
-        min-width: 1000px;
+        min-width: 1400px;
         width: 100%;
       }
     }
@@ -82,11 +82,21 @@
     }
   }
 
+  .icon {
+    height: 22px;
+    width: 22px;
+    margin-right: 5px;
+  }
+
+  .pagination-buttons {
+    width: 100%;
+  }
+
   .bottom {
     margin-top: 15px;
     padding: 15px;
 
-    .icon {
+    .last-history-icon {
       text-align: center;
 
       mat-icon {
@@ -99,6 +109,11 @@
 @media screen and (max-width: 600px) {
   .container {
     padding: 15px;
+    padding-top: 0;
+
+    .title1 {
+      text-align: center;
+    }
 
     .inner {
       padding: 10px;

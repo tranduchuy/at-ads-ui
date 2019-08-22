@@ -30,6 +30,8 @@ export namespace API {
     export const blockIPs = environment.hostApi + '/api/account-adwords/{account_id}/ips';
     export const removeBlockedIPs = environment.hostApi + '/api/account-adwords/{account_id}/ips';
 
+    export const updateWhitelist = environment.hostApi + '/api/account-adwords/{account_id}/white-list';
+
     export const autoBlockingIP = environment.hostApi + '/api/account-adwords/{account_id}/auto-blocking-ip';
 
     export const autoBlockingRangeIP = environment.hostApi + '/api/account-adwords/{account_id}/auto-blocking-range-ip';
@@ -56,5 +58,6 @@ export namespace API {
     export const getClassDClickingReport = environment.hostApi + '/api/account-adwords/{account_id}/report/clicking-class-d-ips?from={from}&to={to}&page={page}&limit={limit}';
     export const getBlockedIPsListReport = environment.hostApi + '/api/account-adwords/{account_id}/blocked-ips';
     export const removeAutoBLockedIP = environment.hostApi + '/api/account-adwords/{account_id}/blocked-ips';
+    export const getIPHistory = environment.hostApi + '/api/account-adwords/{account_id}/ip-history?ip={ip}';
   }
 }

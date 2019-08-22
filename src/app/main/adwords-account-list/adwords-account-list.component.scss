@@ -29,10 +29,13 @@
   }
 
   .add-domain-button {
-    background-color: rgba(3, 155, 229, 0.1);
+    background-color: #44b543;
+    color: white;
+    width: 40%;
+    border-radius: 0;
 
     mat-icon {
-      font-size: 20px;
+      font-size: 22px;
     }
   }
 
@@ -113,7 +116,7 @@
   }
 
   .vip-service {
-    color: dodgerblue;
+    color: #039be5;
     font-weight: bold;
   }
 
@@ -141,7 +144,7 @@
   }
 
   .no-tracking {
-    color: dodgerblue;
+    color: #039be5;
   }
 
   .clear {

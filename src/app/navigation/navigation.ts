@@ -71,6 +71,14 @@ export const navigation: FuseNavigation[] = [
         url: '/chan-ip/chan-ip-tuy-chinh',
       },
       {
+        id: 'whitelist-ip',
+        title: 'Whitelist IP',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'playlist_add_check',
+        url: '/chan-ip/whitelist-ip',
+      },
+      {
         id: 'auto-ban-ip',
         title: 'Chặn Tự Động IP',
         translate: 'NAV.SAMPLE.TITLE',

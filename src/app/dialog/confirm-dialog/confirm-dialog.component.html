@@ -1,13 +1,12 @@
-<h1 matDialogTitle>Xác nhận</h1>
-<div mat-dialog-content>{{confirmMessage}}</div>
-<div mat-dialog-actions
-     [fxLayoutAlign]="'center center'"
-     fxLayout="row"
-     class="pt-24">
-     <button mat-raised-button color="basic" (click)="dialogRef.close(true)">
+<div style="text-align: center; margin-bottom: 15px">
+    <mat-icon class="s-60" color="warn">error_outline</mat-icon>
+</div>
+<div mat-dialog-content style="text-align: center">{{confirmMessage}}</div>
+<div mat-dialog-actions [fxLayoutAlign]="'center center'" fxLayout="row" class="pt-24">
+    <button mat-raised-button (click)="dialogRef.close(true)">
         Đồng ý
     </button>
-    <button mat-raised-button color="accent" (click)="dialogRef.close(false)">
+    <button mat-raised-button color="warn" (click)="dialogRef.close(false)">
         Hủy
     </button>
 </div>

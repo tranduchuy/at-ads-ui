@@ -11,16 +11,16 @@ import { navigation, NotConnectedAccountNavigation } from 'app/navigation/naviga
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { DialogService } from 'app/shared/services/dialog.service';
 
 @Component({
-    selector     : 'toolbar',
-    templateUrl  : './toolbar.component.html',
-    styleUrls    : ['./toolbar.component.scss'],
+    selector: 'toolbar',
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 
-export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDestroy
-{
+export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDestroy {
     user = {
         avatar: '',
         name: '',
@@ -49,50 +49,50 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
         private _sessionService: SessionService,
-        private _router: Router
-    )
-    {
+        private _router: Router,
+        private _dialogService: DialogService
+    ) {
         super();
 
         // Set the defaults
         this.userStatusOptions = [
             {
                 title: 'Online',
-                icon : 'icon-checkbox-marked-circle',
+                icon: 'icon-checkbox-marked-circle',
                 color: '#4CAF50'
             },
             {
                 title: 'Away',
-                icon : 'icon-clock',
+                icon: 'icon-clock',
                 color: '#FFC107'
             },
             {
                 title: 'Do not Disturb',
-                icon : 'icon-minus-circle',
+                icon: 'icon-minus-circle',
                 color: '#F44336'
             },
             {
                 title: 'Invisible',
-                icon : 'icon-checkbox-blank-circle-outline',
+                icon: 'icon-checkbox-blank-circle-outline',
                 color: '#BDBDBD'
             },
             {
                 title: 'Offline',
-                icon : 'icon-checkbox-blank-circle-outline',
+                icon: 'icon-checkbox-blank-circle-outline',
                 color: '#616161'
             }
         ];
 
         this.languages = [
             {
-                id   : 'en',
+                id: 'en',
                 title: 'English',
-                flag : 'us'
+                flag: 'us'
             },
             {
-                id   : 'tr',
+                id: 'tr',
                 title: 'Turkish',
-                flag : 'tr'
+                flag: 'tr'
             }
         ];
 
@@ -109,8 +109,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Subscribe to the config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
@@ -121,14 +120,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             });
 
         // Set the selected language from default languages
-        this.selectedLanguage = _.find(this.languages, {id: this._translateService.currentLang});
+        this.selectedLanguage = _.find(this.languages, { id: this._translateService.currentLang });
 
-        if(this._sessionService.user)
+        if (this._sessionService.user)
             this._sessionService.setUser(JSON.parse(this._sessionService.user));
 
         const sub = this._sessionService.getUser()
             .subscribe((user: any) => {
-                if(user) {
+                if (user) {
                     this.user.name = user.name;
                     this.user.avatar = user.avatar;
                     this.user.email = user.email;
@@ -140,8 +139,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -156,8 +154,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      *
      * @param key
      */
-    toggleSidebarOpen(key): void
-    {
+    toggleSidebarOpen(key): void {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
     }
 
@@ -166,8 +163,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      *
      * @param value
      */
-    search(value): void
-    {
+    search(value): void {
         // Do your search here...
         console.log(value);
     }
@@ -177,8 +173,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      *
      * @param lang
      */
-    setLanguage(lang): void
-    {
+    setLanguage(lang): void {
         // Set the selected language for the toolbar
         this.selectedLanguage = lang;
 
@@ -187,7 +182,15 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     }
 
     logout(): void {
-        this._sessionService.remove();
-        this._router.navigate(['auth/login']);
+        const openConfirmDialogSub = this._dialogService._openConfirmDialog('Thoát khỏi hệ thống?')
+            .subscribe(
+                (isAccepted: boolean) => {
+                    if (isAccepted) {
+                        this._sessionService.remove();
+                        this._router.navigate(['auth/login']);
+                    }
+                }
+            );
+        this.subscriptions.push(openConfirmDialogSub);
     }
 }

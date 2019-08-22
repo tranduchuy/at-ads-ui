@@ -24,9 +24,9 @@
       <p style="text-align: center">
         Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold" [(ngModel)]="selectedDateRange"
           ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>
-        từ <span style="color:dodgerblue; font-weight: bold" [(ngModel)]="selectedDateRange"
+        từ <span style="color:#039be5; font-weight: bold" [(ngModel)]="selectedDateRange"
           ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
-        ngày <span style="color: dodgerblue; font-weight: bold" [(ngModel)]="selectedDateRange"
+        ngày <span style="color: #039be5; font-weight: bold" [(ngModel)]="selectedDateRange"
           ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
         hạn chế chiến dịch ảo
       </p>
@@ -110,7 +110,7 @@
             <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <span *ngIf="element.isSpam" style="color: red; font-weight: bold">Đã chặn</span>
-              <span *ngIf="!element.isSpam" style="color: dodgerblue; font-weight: bold">Hợp lệ</span>
+              <span *ngIf="!element.isSpam" style="color: #039be5; font-weight: bold">Hợp lệ</span>
             </mat-cell>
           </ng-container>
 
