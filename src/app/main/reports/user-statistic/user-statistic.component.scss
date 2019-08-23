@@ -1,0 +1,120 @@
+.container {
+  padding: 15px 30px 15px 30px;
+  width: 100%;
+
+  .title1 {
+    padding: 15px;
+    padding-left: 30px;
+    background-color: whitesmoke;
+    color: gray;
+    font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 2px 2px 5px silver;
+  }
+
+  .user-image {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+
+  .keywords {
+    background-color: whitesmoke;
+    margin: 3px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 2px;
+    transition: 0.2s;
+  }
+
+  .datePicker {
+    width: 250px;
+  }
+
+  .pagination-buttons {
+    display: table;
+    margin: 0 auto;
+  }
+
+  .device-symbol {
+    height: 50px;
+    width: 50px;
+  }
+
+  .table-wrapper {
+    margin-top: -18px;
+    box-shadow: 2px 2px 5px silver;
+    overflow: auto;
+    overflow-y: hidden;
+
+    mat-table {
+      box-shadow: none;
+    }
+
+    mat-header-row,
+    mat-row {
+      min-width: 1100px;
+      width: 100%;
+      transition: 0.2s;
+    }
+
+    mat-header-cell:nth-child(1),
+    mat-cell:nth-child(1) {
+      flex: 0 0 16%;
+    }
+
+    mat-header-cell:nth-child(2),
+    mat-cell:nth-child(2) {
+      flex: 0 0 25%;
+    }
+
+    mat-header-cell:nth-child(3),
+    mat-cell:nth-child(3) {
+      flex: 0 0 10%;
+    }
+
+    mat-header-cell:nth-child(4),
+    mat-cell:nth-child(4) {
+      padding-right: 20px;
+      flex-wrap: wrap;
+
+      // span {
+      //   flex-grow: 1;
+      // }
+    }
+
+    mat-cell:nth-child(4) {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    mat-row:hover {
+      background-color: whitesmoke;
+
+      .keywords {
+        background-color: #eee;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 15px;
+    padding-top: 0;
+
+    pagination-controls {
+      display: flex !important;
+      justify-content: center !important;
+      margin-left: -50px;
+    }
+  }
+}

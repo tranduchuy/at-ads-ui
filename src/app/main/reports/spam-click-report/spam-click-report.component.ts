@@ -21,6 +21,10 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   clickTotal: number;
   advertisementClickReportColumns = ['time', 'ip', 'status', 'keyword', 'location'];
   advertisementClickReport = [];
+  pageTotal: number;
+  currentPageNumber: number;
+  totalItems: number;
+  selectedAccountId: string;
 
   selectedDateRange: any = {
     start: moment().subtract(6, 'days'),
@@ -41,11 +45,17 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
+          this.selectedAccountId = accountId;
           this.setSelectedAdsId(accountId);
-          this.getAccountReport(accountId);
+          this.getAccountStatisticReport(accountId);
+          this.getAccountReport(accountId, 1, 20);
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  changePage(event) {
+    this.getAccountReport(this.selectedAccountId, event, 20);
   }
 
   setSelectedAdsId(accountId: string) {
@@ -80,165 +90,186 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     return true;
   }
 
-  getAccountReport(accountId: string) {
+  getAccountReport(accountId: string, page?: number, limit?: number) {
     this._fuseProgressBarService.show();
 
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
 
-    const sub = this._reportService.getAccountReport({ from: start, to: end }, accountId)
-      .subscribe(res => {
-        this.clickTotal = res.data.pieChart.realClick + res.data.pieChart.spamClick;
-
-        const realClickPercentage = res.data.pieChart.realClick * 100 / this.clickTotal;
-        const spamClickPercentage = 100 - realClickPercentage;
-
-        this.pieChart = {
-          legend: false,
-          explodeSlices: false,
-          labels: true,
-          doughnut: true,
-          gradient: false,
-          scheme: {
-            domain: ['#039be5', '#f44336']
-          },
-          dataSource: [
-            {
-              name: 'Click thật: ' + res.data.pieChart.realClick,
-              value: Math.round(realClickPercentage * 100) / 100
-            },
-            {
-              name: 'Click ảo: ' + res.data.pieChart.spamClick,
-              value: Math.round(spamClickPercentage * 100) / 100
-            },
-          ],
-          onSelect: (ev) => {
-            console.log(ev);
-          },
-          // setLabelFormatting(name): any {
-          //   return `${name}`;
-          // }
-        };
-
-        let lineChartData = [];
-
-        for (const item of res.data.lineChart)
-          lineChartData[moment(item._id, 'DD-MM-YYYY').format('DD-MM')] = {
-            realClick: item.realClick,
-            spamClick: item.spamClick
-          };
-
-        const lineChartLabels = this.getReportDates();
-        const realClickDataSets = [];
-        const spamClickDataSets = [];
-
-        lineChartLabels.forEach((item, index) => {
-
-          if (lineChartData[item] !== undefined) {
-            realClickDataSets[index] = lineChartData[item].realClick;
-            spamClickDataSets[index] = lineChartData[item].spamClick;
-          } 
-          else {
-            realClickDataSets[index] = 0;
-            spamClickDataSets[index] = 0;
-          }
-
-        });
-
-        this.lineChart = {
-          chartType: 'line',
-          datasets: {
-            report: [
-              {
-                label: 'Hợp lệ',
-                data: realClickDataSets,
-                fill: 'start'
-
-              },
-              {
-                label: 'Không hợp lệ',
-                data: spamClickDataSets,
-                fill: 'start'
-              }
-            ],
-          },
-          labels: lineChartLabels,
-          colors: [
-            {
-              borderColor: '#35afea',
-              backgroundColor: 'rgba(0,0,0,0)',
-              pointBackgroundColor: 'white',
-              pointHoverBackgroundColor: '#35afea',
-              pointBorderColor: '#35afea',
-              pointHoverBorderColor: '#35afea'
-            },
-            {
-              borderColor: '#f44336',
-              backgroundColor: 'rgba(0,0,0,0)',
-              pointBackgroundColor: 'white',
-              pointHoverBackgroundColor: '#f44336',
-              pointBorderColor: '#f44336',
-              pointHoverBorderColor: '#f44336'
-            }
-          ],
-          options: {
-            spanGaps: false,
-            legend: {
-              display: true
-            },
-            maintainAspectRatio: false,
-            tooltips: {
-              position: 'nearest',
-              mode: 'index',
-              intersect: false
-            },
-            layout: {
-              padding: {
-                left: 24,
-                right: 32,
-                top: 20
-              }
-            },
-            elements: {
-              point: {
-                radius: 4,
-                borderWstatusth: 2,
-                hoverRadius: 4,
-                hoverBorderWstatusth: 2
-              },
-              line: {
-                tension: 0
-              }
-            },
-            scales: {
-              xAxes: [{}],
-              yAxes: [
-                {
-                  status: 'y-axis-0',
-                  position: 'left',
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }
-              ]
-            },
-            plugins: {
-              filler: {
-                propagate: false
-              }
-            }
-          }
-        }
-
-        this.advertisementClickReport = res.data.lineChart.map(item => item.logs);
-        this.advertisementClickReport = [].concat.apply([], this.advertisementClickReport);
-
-        this._fuseProgressBarService.hide();
-      },
+    const sub = this._reportService.getAccountReport({ from: start, to: end, page, limit }, accountId)
+      .subscribe(
+        res => {
+          this.advertisementClickReport = res.data.logs;
+          this.totalItems = res.data.totalItems;
+          this.pageTotal = Math.ceil(this.totalItems / 20);
+          this._fuseProgressBarService.hide();
+        },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.advertisementClickReport = [];
+          this.totalItems = 0;
+          this.pageTotal = 0;
+        }
+      );
+    this.subscriptions.push(sub);
+  }
+
+  getAccountStatisticReport(accountId: string) {
+    this._fuseProgressBarService.show();
+
+    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
+    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
+
+    const sub = this._reportService.getAccountStatisticReport({ from: start, to: end }, accountId)
+      .subscribe(
+        res => {
+          this.clickTotal = res.data.pieChart.realClick + res.data.pieChart.spamClick;
+
+          const realClickPercentage = res.data.pieChart.realClick * 100 / this.clickTotal;
+          const spamClickPercentage = 100 - realClickPercentage;
+
+          this.pieChart = {
+            legend: false,
+            explodeSlices: false,
+            labels: true,
+            doughnut: true,
+            gradient: false,
+            scheme: {
+              domain: ['#039be5', '#f44336']
+            },
+            dataSource: [
+              {
+                name: 'Click thật: ' + res.data.pieChart.realClick,
+                value: Math.round(realClickPercentage * 100) / 100
+              },
+              {
+                name: 'Click ảo: ' + res.data.pieChart.spamClick,
+                value: Math.round(spamClickPercentage * 100) / 100
+              },
+            ],
+            onSelect: (ev) => {
+              console.log(ev);
+            },
+            // setLabelFormatting(name): any {
+            //   return `${name}`;
+            // }
+          };
+
+          let lineChartData = [];
+
+          for (const item of res.data.lineChart)
+            lineChartData[moment(item._id, 'DD-MM-YYYY').format('DD-MM')] = {
+              realClick: item.realClick,
+              spamClick: item.spamClick
+            };
+
+          const lineChartLabels = this.getReportDates();
+          const realClickDataSets = [];
+          const spamClickDataSets = [];
+
+          lineChartLabels.forEach((item, index) => {
+
+            if (lineChartData[item] !== undefined) {
+              realClickDataSets[index] = lineChartData[item].realClick;
+              spamClickDataSets[index] = lineChartData[item].spamClick;
+            }
+            else {
+              realClickDataSets[index] = 0;
+              spamClickDataSets[index] = 0;
+            }
+
+          });
+
+          this.lineChart = {
+            chartType: 'line',
+            datasets: {
+              report: [
+                {
+                  label: 'Hợp lệ',
+                  data: realClickDataSets,
+                  fill: 'start'
+
+                },
+                {
+                  label: 'Không hợp lệ',
+                  data: spamClickDataSets,
+                  fill: 'start'
+                }
+              ],
+            },
+            labels: lineChartLabels,
+            colors: [
+              {
+                borderColor: '#35afea',
+                backgroundColor: 'rgba(0,0,0,0)',
+                pointBackgroundColor: 'white',
+                pointHoverBackgroundColor: '#35afea',
+                pointBorderColor: '#35afea',
+                pointHoverBorderColor: '#35afea'
+              },
+              {
+                borderColor: '#f44336',
+                backgroundColor: 'rgba(0,0,0,0)',
+                pointBackgroundColor: 'white',
+                pointHoverBackgroundColor: '#f44336',
+                pointBorderColor: '#f44336',
+                pointHoverBorderColor: '#f44336'
+              }
+            ],
+            options: {
+              spanGaps: false,
+              legend: {
+                display: true
+              },
+              maintainAspectRatio: false,
+              tooltips: {
+                position: 'nearest',
+                mode: 'index',
+                intersect: false
+              },
+              layout: {
+                padding: {
+                  left: 24,
+                  right: 32,
+                  top: 20
+                }
+              },
+              elements: {
+                point: {
+                  radius: 4,
+                  borderWstatusth: 2,
+                  hoverRadius: 4,
+                  hoverBorderWstatusth: 2
+                },
+                line: {
+                  tension: 0
+                }
+              },
+              scales: {
+                xAxes: [{}],
+                yAxes: [
+                  {
+                    status: 'y-axis-0',
+                    position: 'left',
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  }
+                ]
+              },
+              plugins: {
+                filler: {
+                  propagate: false
+                }
+              }
+            }
+          }
+          this._fuseProgressBarService.hide();
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
         });
     this.subscriptions.push(sub);
   }

@@ -67,6 +67,27 @@ export class ValidatorsService {
     }
   }
 
+  public checkWhiteListIP(control: AbstractControl): any {
+
+    if (control.value) {
+      const listIP = control.value.trim().split('\n');
+
+      //127.0.0.1
+      const regex1 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})$/);
+      //127.0.0.*
+      const regex2 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([0-9]{1,3})[.]([*])$/);
+      //127.0.*.*
+      const regex3 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([*])[.]([*])$/);
+
+      for (const ip of listIP) {
+        if (!regex1.test(ip) && !regex2.test(ip) && !regex3.test(ip)) {
+          return { [ErrorNames.invalidListIP[0]]: true };
+        }
+      }
+    }
+
+  }
+
   public checkDomain(control: AbstractControl): any {
     //not allows '/' at the end of domain
     const regex = new RegExp(/^(https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9])$/);

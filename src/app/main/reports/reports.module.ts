@@ -23,7 +23,7 @@ import { SpamClickReportComponent } from './spam-click-report/spam-click-report.
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { ChartsModule } from 'ng2-charts';
-import { MatRadioModule, MatDatepickerModule, MatPaginatorModule, MatPaginator, MatPaginatorIntl, MatDividerModule, MatTabsModule } from '@angular/material';
+import { MatRadioModule, MatDatepickerModule, MatPaginatorModule, MatPaginatorIntl, MatDividerModule, MatTabsModule } from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
 import { IpDetailComponent } from './ip-detail/ip-detail.component';
 import { BlockedIpListComponent } from './blocked-ip-list/blocked-ip-list.component';
@@ -33,9 +33,10 @@ import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-repo
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-ranges-clicking-report.component';
+import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 
 @NgModule({
-  declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent, IpRangesClickingReportComponent],
+  declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent, IpRangesClickingReportComponent, UserStatisticComponent],
   imports: [
 
     MatButtonModule,

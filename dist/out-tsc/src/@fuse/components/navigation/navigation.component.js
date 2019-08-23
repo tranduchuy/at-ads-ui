@@ -43,7 +43,7 @@ let FuseNavigationComponent = class FuseNavigationComponent {
                         },
                         {
                             id: 'account-list',
-                            title: 'Quản lý tài khoản Adwords',
+                            title: 'Quản lý tài khoản Google Ads',
                             type: 'item',
                             icon: 'dashboard',
                             url: '/account-list'
@@ -52,7 +52,7 @@ let FuseNavigationComponent = class FuseNavigationComponent {
                 },
                 {
                     id: 'account-list',
-                    title: 'Quản Lý Tài Khoản AdWords',
+                    title: 'Quản Lý Tài Khoản Google Ads',
                     type: 'item',
                     icon: 'dashboard',
                     url: '/danh-sach-tai-khoan'

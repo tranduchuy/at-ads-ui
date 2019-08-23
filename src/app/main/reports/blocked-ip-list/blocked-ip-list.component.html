@@ -1,6 +1,6 @@
 <div class="container">
   <p class="title1">
-    BÁO CÁO IP ĐANG CHẠY QUẢNG CÁO TÀI KHOẢN <span style="color: black">{{_sessionService.activeAdsAccountId}}</span>
+    BÁO CÁO IP ĐÃ CHẶN QUẢNG CÁO TÀI KHOẢN <span style="color: black">{{_sessionService.activeAdsAccountId}}</span>
   </p>
 
   <div class="mat-elevation-z8 table-wrapper">
@@ -67,7 +67,7 @@
     </mat-table>
   </div>
 
-  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
+  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal > 1">
     <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
         ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
       trong tổng

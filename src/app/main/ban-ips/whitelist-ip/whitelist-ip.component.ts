@@ -42,7 +42,7 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
                 if (res.data.adsAccount.isConnected)
                   this.getWhitelistIPs();
                 else {
-                  this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                  this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
                   this._router.navigateByUrl('/danh-sach-tai-khoan');
                 }
 
@@ -67,10 +67,10 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
       .subscribe(res => {
         this._fuseProgressBarService.hide();
 
-        this.whiteList = res.data.setting.customWhiteList;
+        this.whiteList = Array.from(new Set(res.data.setting.customWhiteList));
 
         this.form.patchValue({
-          whitelistIPs: this.getNormalizedWhiteList(res.data.setting.customWhiteList)
+          whitelistIPs: this.getNormalizedWhiteList(Array.from(new Set(res.data.setting.customWhiteList)))
         })
 
         this.isProcessing = false;
@@ -110,7 +110,7 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
 
   initForm() {
     this.form = this.fb.group({
-      whitelistIPs: ['', [Validators.required, this.validatorService.checkListIP]]
+      whitelistIPs: ['', [this.validatorService.checkWhiteListIP]]
     });
   }
 
@@ -140,8 +140,10 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
 
   generatePostObject() {
     const param = {
-      ips: { ...this.form.value }.whitelistIPs.split(/\r?\n/)
+      ips: { ...this.form.value }.whitelistIPs.split('\n')
     }
+
+    param.ips = param.ips.filter(item => item);
 
     return param;
   }

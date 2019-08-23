@@ -1,6 +1,6 @@
 <div class="container">
   <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
-    <span fxFlex="75">QUẢN LÝ TÀI KHOẢN ADWORDS VÀ WEBSITE</span>
+    <span fxFlex="75">QUẢN LÝ TÀI KHOẢN GOOGLE ADS VÀ WEBSITE</span>
     <a [routerLink]="'/them-tai-khoan-moi'" mat-button color="accent" class="add-account-button">
       <mat-icon>person_add</mat-icon> Thêm tài khoản mới
     </a>
@@ -28,7 +28,7 @@
         </ng-container>
 
         <ng-container matColumnDef="adwords">
-          <mat-header-cell *matHeaderCellDef> AdWords ID </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Google Ads ID </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div fxLayout="row">
               <p style="width: 120px; color: #4bb543; font-weight: bold"
@@ -62,7 +62,7 @@
                 <!-- <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
                   <mat-icon>edit</mat-icon>
                 </button> -->
-                <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản AdWords"
+                <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản Google Ads"
                   (click)="openRemoveAccountConfirmDialog(element.id)" [disabled]="isProcessing">
                   <mat-icon style="color: silver">delete</mat-icon>
                 </button>
@@ -119,10 +119,10 @@
                 *ngIf="element.tracking" style="color: red">
                 <mat-icon>code</mat-icon>
               </button>
-              <button mat-icon-button color="accent" matTooltip="Ngắt kết nối Adwords cho website này">
+              <button mat-icon-button color="accent" matTooltip="Ngắt kết nối Google Ads cho website này">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button mat-icon-button color="accent" matTooltip="Kết nối AdWords cho website này">
+              <button mat-icon-button color="accent" matTooltip="Kết nối Google Ads cho website này">
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
             </p>
@@ -186,7 +186,7 @@
 
     <!-- <div class="button-area">
       <button mat-raised-button color="accent" style="border-radius: 0">
-        <mat-icon>wifi</mat-icon> KẾT NỐI TÀI KHOẢN ADWORDS
+        <mat-icon>wifi</mat-icon> KẾT NỐI TÀI KHOẢN GOOGLE ADS
       </button>
     </div> -->
 

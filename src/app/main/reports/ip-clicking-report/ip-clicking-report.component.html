@@ -85,7 +85,7 @@
 
   </div>
   
-  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
+  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal > 1">
     <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
       {{pageTotal}} trang</p>
     <p *ngIf="pageTotal === 0">Không có trang nào</p>

@@ -47,7 +47,7 @@ export class AutoBlockingCellularNetworksComponent extends PageBaseComponent imp
                 }
                 else {
                   this._fuseProgressiveBarService.hide();
-                  this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                  this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
                   this._router.navigateByUrl('/danh-sach-tai-khoan');
                 }
 

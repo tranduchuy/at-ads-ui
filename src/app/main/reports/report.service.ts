@@ -4,9 +4,23 @@ import { API } from '../../shared/constants/api.constant';
 import { SessionService } from 'app/shared/services/session.service';
 import { Observable } from 'rxjs';
 
+export interface IAccountStatisticReportParams {
+  from: string;
+  to: string;
+}
+
 export interface IAccountReportParams {
   from: string;
   to: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface IGetStatisticUserReport {
+  startDate: string;
+  endDate: string;
+  page?: number;
+  limit?: number;
 }
 
 export interface IDailyClickingReportParams {
@@ -41,10 +55,39 @@ export class ReportService {
     private _sessionService: SessionService
   ) { }
 
+  getAccountStatisticReport(params: IAccountStatisticReportParams, accountId: string): Observable<any> {
+
+    let url = API.Report.getAccountStatisticReport.replace('{account_id}', accountId);
+    url = url.replace('{from}', params.from);
+    url = url.replace('{to}', params.to);
+
+    return this._http.get(url);
+  }
+
   getAccountReport(params: IAccountReportParams, accountId: string): Observable<any> {
+
     let url = API.Report.getAccountReport.replace('{account_id}', accountId);
     url = url.replace('{from}', params.from);
     url = url.replace('{to}', params.to);
+
+    if (params.page !== undefined)
+      url += `&page=${params.page}`;
+    if (params.limit !== undefined)
+      url += `&limit=${params.limit}`;
+
+    return this._http.get(url);
+  }
+
+  getStatisticUserReport(params: IGetStatisticUserReport, accountId: string): Observable<any> {
+
+    let url = API.Report.getStatisticUserReport.replace('{account_id}', accountId);
+    url = url.replace('{from}', params.startDate);
+    url = url.replace('{to}', params.endDate);
+
+    if (params.page !== undefined)
+      url += `&page=${params.page}`;
+    if (params.limit !== undefined)
+      url += `&limit=${params.limit}`;
 
     return this._http.get(url);
   }

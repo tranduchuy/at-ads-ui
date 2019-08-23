@@ -76,7 +76,9 @@
       </div>
 
       <div class="left-table">
-        <mat-table [dataSource]="advertisementClickReport" class="mat-elevation-z8">
+        <mat-table
+          [dataSource]="advertisementClickReport | paginate: { itemsPerPage: 20, currentPage: currentPageNumber, totalItems: totalItems }"
+          class="mat-elevation-z8">
           <ng-container matColumnDef="time">
             <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
@@ -85,7 +87,7 @@
           <ng-container matColumnDef="ip">
             <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              
+
               <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
                 style="font-weight: bold; padding-left: 0" mat-button color="accent">
                 <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px">not_interested
@@ -131,6 +133,15 @@
 
       <!-- <button mat-raised-button color="accent" class="table-button" style="background-color:#4bb453">BÁO CÁO TOÀN BỘ
         IP</button> -->
+
+      <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal > 1">
+        <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
+            ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
+          {{pageTotal}} trang</p>
+        <p *ngIf="pageTotal === 0">Không có trang nào</p>
+        <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
+          nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
+      </div>
 
     </div>
 

@@ -1,0 +1,37 @@
+<div class="container">
+
+  <p class="title1">LỊCH SỬ THAO TÁC</p>
+
+  <div class="table-wrapper">
+
+    <mat-table
+      [dataSource]="history | paginate: { itemsPerPage: 20, currentPage: currentPageNumber, totalItems: totalItems }"
+      class="mat-elevation-z8">
+
+      <ng-container matColumnDef="datetime">
+        <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.datetime}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Nội dung </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.action}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="historyColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: historyColumns;"></mat-row>
+
+    </mat-table>
+
+  </div>
+
+  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal > 1">
+    <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
+        ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
+      {{pageTotal}} trang</p>
+    <p *ngIf="pageTotal === 0">Không có trang nào</p>
+    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
+      nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
+  </div>
+
+</div>

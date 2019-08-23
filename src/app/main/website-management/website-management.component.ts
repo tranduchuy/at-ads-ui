@@ -168,7 +168,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
           }
           else {
-            this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+            this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
             this._router.navigateByUrl('/them-tai-khoan-moi');
           }
 

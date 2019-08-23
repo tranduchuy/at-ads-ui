@@ -28,7 +28,7 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
         let activeAdsAccountId = this._sessionService.activeAdsAccountId;
 
         if (!activeAdsAccountId) {
-            this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản AdWords');
+            this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
             this._router.navigateByUrl('/them-tai-khoan-moi');
             return false;
         }
@@ -49,7 +49,7 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
 
         //                 const isConnected = res.data.adsAccount.isConnected;
         //                 if (!isConnected)
-        //                     this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+        //                     this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
         //                 return isConnected;
         //             }),
         //             catchError(err => {
@@ -64,7 +64,7 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
                     const isConnected = res.data.adsAccount.isConnected;
 
                     if (route.routeConfig.path.includes('chan-ip') && isConnected === false) {
-                        this._dialogService._openInfoDialog('Tài khoản AdWords chưa được chấp nhận quyền quản lý hệ thống');
+                        this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
                         this._router.navigateByUrl('/danh-sach-tai-khoan');
                         return false;
                     }

@@ -55,11 +55,13 @@ export namespace API {
     export const getWebsiteTrackingInfo = environment.hostApi + '/api/account-adwords/{account_id}/verify-acctached-code-domains'
   }
   export namespace Report {
+    export const getAccountStatisticReport = environment.hostApi + '/api/account-adwords/{account_id}/report-statistic?from={from}&to={to}';
     export const getAccountReport = environment.hostApi + '/api/account-adwords/{account_id}/report?from={from}&to={to}';
     export const getDailyClickingReport = environment.hostApi + '/api/account-adwords/{account_id}/report/daily-clicking?page={page}&limit={limit}';
     export const getClassDClickingReport = environment.hostApi + '/api/account-adwords/{account_id}/report/clicking-class-d-ips?from={from}&to={to}&page={page}&limit={limit}';
     export const getBlockedIPsListReport = environment.hostApi + '/api/account-adwords/{account_id}/blocked-ips';
     export const removeAutoBLockedIP = environment.hostApi + '/api/account-adwords/{account_id}/blocked-ips';
     export const getIPHistory = environment.hostApi + '/api/account-adwords/{account_id}/ip-history?ip={ip}';
+    export const getStatisticUserReport = environment.hostApi + '/api/account-adwords/{account_id}/statistic-user?startDate={from}&endDate={to}';
   }
 }

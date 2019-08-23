@@ -42,7 +42,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   openRemoveAccountConfirmDialog(accountId: string) {
-    const openConfirmDialogSub = this._dialogService._openConfirmDialog('Ngắt kết nối tài khoản AdWords này?')
+    const openConfirmDialogSub = this._dialogService._openConfirmDialog('Ngắt kết nối tài khoản Google Ads này?')
       .subscribe((isAccepted: boolean) => {
 
         if (isAccepted) {
@@ -81,7 +81,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
                 setTimeout(() => {
                   this._fuseNavigationService.reloadNavigation();
                   this._fuseProgressiveBarService.hide();
-                  this._dialogService._openSuccessDialog({ messages: ['Ngắt kết nối tài khoản AdWords thành công'] });
+                  this._dialogService._openSuccessDialog({ messages: ['Ngắt kết nối tài khoản Google Ads thành công'] });
                   this.isProcessing = false;
                 }, 0);
 
@@ -99,7 +99,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   openRemoveWebsiteConfirmDialog(websiteId: string) {
-    const confirmDialogSub = this._dialogService._openConfirmDialog('Xóa website này khỏi tài khoản AdWords?')
+    const confirmDialogSub = this._dialogService._openConfirmDialog('Xóa website này khỏi tài khoản Google Ads?')
       .subscribe(
         (isAccepted) => {
           if (isAccepted) {

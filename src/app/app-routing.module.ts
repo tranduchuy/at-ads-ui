@@ -41,7 +41,7 @@ const appRoutes: Routes = [
     loadChildren: './main/website-management/website-management.module#WebsiteManagementModule'
   },
   {
-    path: 'thong-tin-ca-nhan',
+    path: 'nguoi-dung',
     canActivate: [MainGuardService],
     loadChildren: './main/profile/profile.module#ProfileModule'
   },

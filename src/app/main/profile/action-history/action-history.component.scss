@@ -1,0 +1,61 @@
+.container {
+  padding: 15px 30px 15px 30px;
+  width: 100%;
+
+  .title1 {
+    padding: 15px;
+    padding-left: 30px;
+    background-color: whitesmoke;
+    color: gray;
+    font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 2px 2px 5px silver;
+  }
+
+  .pagination-buttons {
+    display: table;
+    margin: 0 auto;
+  }
+
+  .table-wrapper {
+    height: auto;
+    background-color: white;
+    box-shadow: 2px 2px 5px silver;
+    margin-top: -18px;
+    overflow: auto;
+    overflow-y: hidden;
+
+    mat-table {
+      box-shadow: none;
+      width: 100%;
+    }
+
+    mat-header-cell:nth-child(2),
+    mat-cell:nth-child(2) {
+      flex: 0 0 80%;
+    }
+
+    mat-row {
+      transition: 0.2s;
+    }
+
+    mat-row:hover {
+      background-color: whitesmoke;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 15px;
+    padding-top: 0;
+
+    mat-table {
+      mat-header-cell:nth-child(2),
+      mat-cell:nth-child(2) {
+        flex: 0 0 60%;
+      }
+    }
+  }
+}

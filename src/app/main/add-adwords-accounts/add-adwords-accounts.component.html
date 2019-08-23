@@ -12,15 +12,15 @@
       </div>
     </div>
     <div gdArea="input-side" class="input-side">
-      <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ ADWORDS CID</strong></h3>
+      <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h3>
       <p style="text-align: justify"><strong>Bước 1: </strong> Đăng nhập <a
           href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
-        khoản adwords của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
-        tài khoản Adwords của bạn</p>
+        khoản Google Ads của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
+        tài khoản Google Ads của bạn</p>
 
       <form [formGroup]="form" novalidate>
         <div fxLayout="row">
-          <app-input-text [formControlName]="'adWordId'" [title]="'Adwords ID'" [placeholder]="'5456445193'"
+          <app-input-text [formControlName]="'adWordId'" [title]="'Google Ads ID'" [placeholder]="'Ví dụ: 5456445193 hoặc 545-644-5193'"
             [pristine]="true" [errors]="getMessageErrors('adWordId')" (keypress)="onPressId($event.keyCode)">
           </app-input-text>
           <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"

@@ -46,6 +46,14 @@ export const navigation: FuseNavigation[] = [
         icon: 'block',
         url: '/bao-cao/danh-sach-ip-da-chan'
       },
+      {
+        id: 'user-statistic',
+        title: 'Thống Kê Người Dùng',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'people',
+        url: '/bao-cao/thong-ke-nguoi-dung'
+      },
     ]
   },
   {
@@ -64,7 +72,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'ban-optional-ip',
-        title: 'Chặn IP Tùy Chỉnh',
+        title: 'Blacklist IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'format_list_bulleted',
@@ -135,11 +143,11 @@ export const navigation: FuseNavigation[] = [
         function: () => {}
       },
       {
-        id: 'supporter_phone',
-        title: '+84 984 946 946',
+        id: 'supporter_email',
+        title: 'ha@appnet.edu.vn',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'phone',
+        icon: 'email',
         function: () => {}
       },
     ]
@@ -156,7 +164,15 @@ export const navigation: FuseNavigation[] = [
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'account_circle',
-        url: '/thong-tin-ca-nhan',
+        url: '/nguoi-dung/thong-tin-ca-nhan',
+      },
+      {
+        id: 'user_history',
+        title: 'Lịch sử thao tác',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'history',
+        url: '/nguoi-dung/lich-su-thao-tac',
       },
       {
         id: 'user_logout',
