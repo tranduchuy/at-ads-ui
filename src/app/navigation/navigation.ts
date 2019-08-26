@@ -174,14 +174,14 @@ export const navigation: FuseNavigation[] = [
         icon: 'account_circle',
         url: '/nguoi-dung/thong-tin-ca-nhan',
       },
-      {
-        id: 'user_history',
-        title: 'Lịch sử thao tác',
-        translate: 'NAV.SAMPLE.TITLE',
-        type: 'item',
-        icon: 'history',
-        url: '/nguoi-dung/lich-su-thao-tac',
-      },
+      // {
+      //   id: 'user_history',
+      //   title: 'Lịch sử thao tác',
+      //   translate: 'NAV.SAMPLE.TITLE',
+      //   type: 'item',
+      //   icon: 'history',
+      //   url: '/nguoi-dung/lich-su-thao-tac',
+      // },
       {
         id: 'user_logout',
         title: 'Đăng xuất',

@@ -10,24 +10,19 @@ export class FirebaseMessagingService {
   messaging = firebase.messaging();
   currentMessage$ = new BehaviorSubject<any>({});
 
-  tokens = [
-    'dbb7O8KSKxo:APA91bH5F7JhfC5sYWDNTEJKn-O6Ik1IJNNfgQF8O8EZLEftZcQhBNVE29Qvfw2f98mpJeZ9F5k7tJcXyRw6ncb_1VPucdPvhh9A1elOSmzwZ6CRDOXIqLEQVgSlC_ldHkExkxbv9v6f',
-    'c6cyfBEx-BA:APA91bGtGDVVSDeRTzN-rELkjdqxuVj4XHDdZhCz3TuUNqKNEuh-X2s45z-3T5r9hTOnd1W_psbp84A697lXcxlYt4PNfKPSgLsfqR7ly8E74Dke-cRgE0iweP7YH68JCuTkTmfld71i'
-  ];
-  
+  constructor() {}
+
   getPermission() {
     this.messaging.requestPermission()
       .then(() => {
-        console.log('Have permisson');
+        console.log('Firebase has permisson :)');
         return this.messaging.getToken();
       })
       .then((currentToken) => {
-        if(currentToken) {
-
-        }
+        console.log(currentToken);
       })
       .catch((err) => {
-        console.log('Error occured');
+        console.error('Firebase get permisson error :(');
       });
   }
 
@@ -37,7 +32,7 @@ export class FirebaseMessagingService {
 
   recieveMessage() {
     this.messaging.onMessage((payload: any) => {
-      //console.log('Message recieved', payload);
+      console.log('Message recieved', payload);
       this.currentMessage$.next(payload);
     });
   }

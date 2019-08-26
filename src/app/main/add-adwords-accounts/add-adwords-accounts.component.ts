@@ -45,7 +45,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   ngOnInit(): void {
     this.initForm();
 
-    //this._firebaseMessagingService.getToken();
     this._firebaseMessagingService.getPermission();
     this._firebaseMessagingService.recieveMessage();
 
