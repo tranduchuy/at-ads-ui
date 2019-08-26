@@ -83,7 +83,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Blacklist IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'format_list_bulleted',
+        icon: 'report_problem',
         url: '/chan-ip/chan-ip-tuy-chinh',
       },
       {
@@ -91,7 +91,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Whitelist IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'playlist_add_check',
+        icon: 'done_outline',
         url: '/chan-ip/whitelist-ip',
       },
       {
@@ -187,7 +187,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Đăng xuất',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'exit_to_app',
+        icon: 'power_settings_new',
         url: '/auth/logout',
       },
     ]
