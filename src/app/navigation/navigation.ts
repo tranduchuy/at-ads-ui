@@ -54,6 +54,14 @@ export const navigation: FuseNavigation[] = [
         icon: 'people',
         url: '/bao-cao/thong-ke-nguoi-dung'
       },
+      // {
+      //   id: 'uuid-history',
+      //   title: 'UUID History',
+      //   translate: 'NAV.SAMPLE.TITLE',
+      //   type: 'item',
+      //   icon: 'devices',
+      //   url: '/bao-cao/uuid-history'
+      // },
     ]
   },
   {
@@ -115,7 +123,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Chặn Theo Mobile/PC/Tablet',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'phonelink_lock',
+        icon: 'phonelink_off',
         url: '/chan-ip/chan-ip-theo-thiet-bi',
       },
       {

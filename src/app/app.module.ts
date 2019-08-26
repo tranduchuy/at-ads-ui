@@ -38,9 +38,16 @@ import { ResendEmailModule } from './authentication/resend-email/resend-email.mo
 import { CheckWebsiteTrackingDialogComponent } from './main/add-tracking-tags/check-website-tracking-dialog/check-website-tracking-dialog.component';
 import { MatTableModule } from '@angular/material';
 import { LogoutModule } from './authentication/logout/logout.module';
+import { HomepageModule } from './homepage/homepage.module';
+
+import * as firebase from 'firebase';
+import { firebaseConfig } from 'firebase-messaging-sw';
 
 export function init_app(appInitService: AppInitService): any {
-  return () => appInitService.initializeApp();
+  return () => {
+    appInitService.initializeApp();
+    firebase.initializeApp(firebaseConfig);
+  }
 }
 
 @NgModule({
@@ -83,6 +90,7 @@ export function init_app(appInitService: AppInitService): any {
     AccountConfirmModule,
     ResendEmailModule,
     LogoutModule,
+    HomepageModule,
 
     MatTableModule,
 

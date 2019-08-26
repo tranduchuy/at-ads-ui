@@ -11,6 +11,7 @@ import { SessionService } from 'app/shared/services/session.service';
 import { Router } from '@angular/router';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
+import { FirebaseMessagingService } from 'app/shared/services/firebase-messaging.service';
 
 @Component({
   selector: 'app-add-adwords-accounts',
@@ -33,13 +34,27 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     private _addAdwordsAccountsService: AddAdwordsAccountsService,
     private _sessionService: SessionService,
     private _router: Router,
-    private _fuseSlashScreenService: FuseSplashScreenService
+    private _fuseSlashScreenService: FuseSplashScreenService,
+    private _firebaseMessagingService: FirebaseMessagingService
   ) {
     super();
   }
 
+  messages = [];
+
   ngOnInit(): void {
     this.initForm();
+
+    //this._firebaseMessagingService.getToken();
+    this._firebaseMessagingService.getPermission();
+    this._firebaseMessagingService.recieveMessage();
+
+    const sub = this._firebaseMessagingService.getMessage()
+      .subscribe((payload: any) => {
+        if (payload.notification !== undefined)
+          this.messages.push(payload);
+      });
+    this.subscriptions.push(sub);
   }
 
   completeAccountConnection() {
@@ -52,7 +67,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
       .subscribe(
         res => {
           if (res.data.isConnected) {
-            this._dialogService._openSuccessDialog({messages: ['Kết nối tài khoản Google Ads thành công']});
+            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
             setTimeout(() => {
               this._sessionService.setActiveAccountId(this.connectedAccountId);
               this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
@@ -66,13 +81,13 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           } else {
             this.isProcessing = false;
             this._fuseProgressiveBarService.hide();
-            this._dialogService._openErrorDialog({messages: ['Kết nối tài khoản Google Ads không thành công. Vui lòng kiếm tra lại']});
+            this._dialogService._openErrorDialog({ messages: ['Kết nối tài khoản Google Ads không thành công. Vui lòng kiếm tra lại'] });
           }
 
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog({messages: ['Tài khoản Google Ads không tồn tại']});
+          this._dialogService._openErrorDialog({ messages: ['Tài khoản Google Ads không tồn tại'] });
           this.isProcessing = false;
         });
     this.subscriptions.push(sub);
@@ -122,7 +137,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   private generatePostObject(): any {
-    const params = {...this.form.value};
+    const params = { ...this.form.value };
 
     // required
     params.adWordId = params.adWordId.replace(/[^a-zA-Z0-9 ]/g, '');

@@ -9,7 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { InputTextModule } from '../../shared/components/input-text/input-text.module';
 import { InputNumberModule } from '../../shared/components/input-number/input-number.module';
 
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatDividerModule } from '@angular/material';
 import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 @NgModule({
   declarations: [AddAdwordsAccountsComponent],
@@ -22,6 +22,7 @@ import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
     MatButtonModule,
     MatIconModule,
     InputNumberModule,
+    MatDividerModule
   ],
   providers: [
     AddAdwordsAccountsService

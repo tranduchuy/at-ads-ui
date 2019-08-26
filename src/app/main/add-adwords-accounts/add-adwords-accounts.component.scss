@@ -11,6 +11,31 @@
   margin-right: 0;
   width: 120px;
 }
+
+.message {
+  border: 1px solid #d2d2d2;
+  box-shadow: 1px 1px 2px silver;
+  background-color: white;
+  min-width: 350px;
+  margin-bottom: 10px;
+
+  .message-title {
+    padding: 10px;
+    font-size: 18px;
+    font-style: tahoma;
+
+    img {
+      height: 40px;
+      width: 40px;
+      margin-right: 10px;
+    }
+  }
+
+  .message-text {
+    padding: 10px;
+  }
+}
+
 .step {
   color: #039be5;
 }
@@ -25,7 +50,7 @@
 
   button {
     color: darkred;
-    background: #ffffff; 
+    background: #ffffff;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -34,7 +59,7 @@
       img {
         opacity: 0.4;
       }
-    } 
+    }
   }
 
   .note {
@@ -79,7 +104,7 @@
 }
 
 @media screen and(max-width: 600px) {
-  .container{
+  .container {
     padding: 15px;
   }
   .submit-button {

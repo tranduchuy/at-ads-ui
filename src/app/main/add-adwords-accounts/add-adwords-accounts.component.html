@@ -9,19 +9,35 @@
           <img src="https://image.flaticon.com/icons/png/512/281/281769.png" alt=""
             style="height: 20px; width:20px; margin-top: -5px; margin-right: 8px">Kết nối nhanh bằng Gmail</button>
         <p class="note"><span style="color: red">*</span> Sắp ra mắt</p>
+
+        <ul *ngIf="messages.length > 0" style="list-style: none; padding-left: 0" [(ngModel)]="messages" ngDefaultControl>
+          <li *ngFor="let item of messages">
+            <div class="message">
+              <div class="message-title" fxLayoutAlign="start center">
+                <img src="{{item.notification.icon}}" alt="">
+                <span>{{item.notification.title}}</span>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="message-text">{{item.notification.body}}</div>
+            </div>
+          </li>
+        </ul>
+
       </div>
     </div>
     <div gdArea="input-side" class="input-side">
       <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h3>
       <p style="text-align: justify"><strong>Bước 1: </strong> Đăng nhập <a
           href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
-        khoản Google Ads của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
+        khoản Google Ads của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là
+        ID
         tài khoản Google Ads của bạn</p>
 
       <form [formGroup]="form" novalidate>
         <div fxLayout="row">
-          <app-input-text [formControlName]="'adWordId'" [title]="'Google Ads ID'" [placeholder]="'Ví dụ: 5456445193 hoặc 545-644-5193'"
-            [pristine]="true" [errors]="getMessageErrors('adWordId')" (keypress)="onPressId($event.keyCode)">
+          <app-input-text [formControlName]="'adWordId'" [title]="'Google Ads ID'"
+            [placeholder]="'Ví dụ: 5456445193 hoặc 545-644-5193'" [pristine]="true"
+            [errors]="getMessageErrors('adWordId')" (keypress)="onPressId($event.keyCode)">
           </app-input-text>
           <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
             (click)="onClickBtnSubmit()" [disabled]="isProcessing">
@@ -30,7 +46,7 @@
           </button>
         </div>
       </form>
-      
+
     </div>
   </div>
   <div gdArea="content" *ngIf="isConnected">
@@ -50,8 +66,8 @@
       <img src="./assets/images/adwords-caidat-b3-moi.jpg?v=1">
     </p>
     <p class="text-center" style="padding-top: 20px">
-      <button mat-raised-button color="warn" [disabled]="isProcessing" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI" 
-              (click)="completeAccountConnection()" style="border-radius: 0">
+      <button mat-raised-button color="warn" [disabled]="isProcessing" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI"
+        (click)="completeAccountConnection()" style="border-radius: 0">
         <mat-icon matSuffix class="done_outline">done_outline</mat-icon>
         TÔI ĐÃ HOÀN TẤT KẾT NỐI
       </button>

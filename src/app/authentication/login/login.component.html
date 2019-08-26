@@ -5,6 +5,7 @@
 
       <div class="logo">
         <img src="../../../assets/images/app-logo.png">
+        <!-- <a routerLink="/gioi-thieu"></a> -->
       </div>
 
       <div class="title">ĐĂNG NHẬP</div>
@@ -67,7 +68,7 @@
         <span class="text">HOẶC</span>
       </div>
 
-      <button #googleBtn mat-raised-button id="googleBtn" label="Google" class="google">
+      <button #googleBtn mat-raised-button id="googleBtn" label="Google" class="google" color="warn">
         <img src="../../../assets/icons/google-icon.png" alt=""
           style="height: 18px; width:18px; margin-top: -5px; margin-right: 5px">Đăng nhập bằng Google
       </button>
@@ -79,6 +80,8 @@
 
       <div class="register" fxLayout="column" fxLayoutAlign="center center">
         <a class="link" [routerLink]="'/resend-email'">Kích hoạt tài khoản</a>
+        <!-- <br>
+        <a class="link" [routerLink]="'/gioi-thieu'">GIỚI THIỆU</a> -->
       </div>
 
     </div>

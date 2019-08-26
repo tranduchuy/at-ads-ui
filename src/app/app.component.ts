@@ -61,7 +61,7 @@ export class AppComponent extends PageBaseComponent implements OnInit, OnDestroy
     ) {
         super();
 
-        this._meta.addTag({ name: 'google-signin-client_id', content: environment.googleAuth2ClientID});
+        this._meta.addTag({ name: 'google-signin-client_id', content: environment.googleAuth2ClientID });
 
         // Get default navigation
         this.navigation = navigation;

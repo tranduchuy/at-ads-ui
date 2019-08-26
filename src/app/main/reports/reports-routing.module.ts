@@ -7,6 +7,7 @@ import { BlockedIpListComponent } from './blocked-ip-list/blocked-ip-list.compon
 import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-report.component';
 import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-ranges-clicking-report.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
+import { UuidHistoryComponent } from './uuid-history/uuid-history.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,11 @@ import { UserStatisticComponent } from './user-statistic/user-statistic.componen
         path: 'thong-ke-nguoi-dung',
         pathMatch: 'full',
         component: UserStatisticComponent
+      },
+      {
+        path: 'uuid-history',
+        pathMatch: 'full',
+        component: UuidHistoryComponent
       }
     ])
   ],
