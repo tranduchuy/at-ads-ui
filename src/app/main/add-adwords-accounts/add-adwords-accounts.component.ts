@@ -11,7 +11,6 @@ import { SessionService } from 'app/shared/services/session.service';
 import { Router } from '@angular/router';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
-import { FirebaseMessagingService } from 'app/shared/services/firebase-messaging.service';
 
 @Component({
   selector: 'app-add-adwords-accounts',
@@ -35,25 +34,12 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     private _sessionService: SessionService,
     private _router: Router,
     private _fuseSlashScreenService: FuseSplashScreenService,
-    private _firebaseMessagingService: FirebaseMessagingService
   ) {
     super();
   }
 
-  messages = [];
-
   ngOnInit(): void {
     this.initForm();
-
-    this._firebaseMessagingService.getPermission();
-    this._firebaseMessagingService.recieveMessage();
-
-    const sub = this._firebaseMessagingService.getMessage()
-      .subscribe((payload: any) => {
-        if (payload.notification !== undefined)
-          this.messages.push(payload);
-      });
-    this.subscriptions.push(sub);
   }
 
   completeAccountConnection() {

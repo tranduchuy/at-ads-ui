@@ -30,6 +30,9 @@ let AuthService = class AuthService {
     confirmEmail(param) {
         return this.httpClient.post(API.User.confirmEmail, param);
     }
+    saveFirebaseToken(firebaseToken) {
+        return this.httpClient.post(API.User.saveFirebaseToken, firebaseToken);
+    }
 };
 AuthService = tslib_1.__decorate([
     Injectable(),

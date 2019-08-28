@@ -10,19 +10,6 @@
             style="height: 20px; width:20px; margin-top: -5px; margin-right: 8px">Kết nối nhanh bằng Gmail</button>
         <p class="note"><span style="color: red">*</span> Sắp ra mắt</p>
 
-        <ul *ngIf="messages.length > 0" style="list-style: none; padding-left: 0" [(ngModel)]="messages" ngDefaultControl>
-          <li *ngFor="let item of messages">
-            <div class="message">
-              <div class="message-title" fxLayoutAlign="start center">
-                <img src="{{item.notification.icon}}" alt="">
-                <span>{{item.notification.title}}</span>
-              </div>
-              <mat-divider></mat-divider>
-              <div class="message-text">{{item.notification.body}}</div>
-            </div>
-          </li>
-        </ul>
-
       </div>
     </div>
     <div gdArea="input-side" class="input-side">

@@ -1,6 +1,9 @@
 import { environment } from 'environments/environment';
 
 export namespace API {
+  export namespace Homepage {
+    export const saveFirebaseToken = environment.hostApi + '/api/fire-base-tokens';
+  }
   export namespace User {
     export const Login = environment.hostApi + '/api/users/login';
     export const Register = environment.hostApi + '/api/users/register';

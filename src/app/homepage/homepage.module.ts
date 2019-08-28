@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { MatButtonModule, MatTableModule, MatDividerModule } from '@angular/material';
+import { MatButtonModule, MatTableModule, MatDividerModule, MatTooltipModule } from '@angular/material';
 import { HomepageComponent } from './homepage.component';
 
 const routes = [
@@ -26,6 +26,7 @@ const routes = [
     MatTableModule,
     MatDividerModule,
     MatIconModule,
+    MatTooltipModule,
 
     FuseSharedModule
   ]
