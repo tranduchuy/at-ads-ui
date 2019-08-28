@@ -86,7 +86,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         {
           grant_type: 'authorization_code',
           client_id: environment.googleAuth2ClientID,
-          client_secret: 'snI55GsvvlDMEM7gPejRsYFm',
+          client_secret: 'mcIBWUsnOJ92Knb1fYYtiYSL',
           code: googleUser['code'],
           redirect_uri: environment.oauth2RedirectUri
         } as any)
