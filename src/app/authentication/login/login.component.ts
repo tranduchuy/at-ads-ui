@@ -134,10 +134,6 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
   }
 
   onSignIn(googleUser: any): void {
-    console.log('googleUser');
-    console.log(googleUser);
-
-
     if (googleUser && googleUser['code']) {
       this.http.post('https://www.googleapis.com/oauth2/v4/token',
         {
@@ -149,6 +145,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
         } as any)
         .subscribe(
           (val) => {
+            console.log(val['access_token'], val['refresh_token']);
             this.submitGoogleLoginForm(val['access_token'], val['refresh_token']);
           },
           response => {
@@ -157,6 +154,8 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
           () => {
             console.log('The POST observable is now completed.');
           });
+    } else {
+      this._dialogService._openErrorDialog({messages: ['Lấy thông tin tài khoản từ google ko thành công']});
     }
   }
 
