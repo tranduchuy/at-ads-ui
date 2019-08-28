@@ -141,7 +141,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
           client_id: environment.googleAuth2ClientID,
           client_secret: 'snI55GsvvlDMEM7gPejRsYFm',
           code: googleUser['code'],
-          redirect_uri: 'http://localhost:4200'
+          redirect_uri: environment.oauth2RedirectUri
         } as any)
         .subscribe(
           (val) => {
