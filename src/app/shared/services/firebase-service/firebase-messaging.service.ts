@@ -3,29 +3,28 @@ import * as firebase from 'firebase';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HomepageService } from 'app/homepage/homepage.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 @Injectable()
-export class FirebaseMessagingService extends PageBaseComponent {
+export class FirebaseMessagingService {
 
   messaging = firebase.messaging();
   currentMessage$ = new BehaviorSubject<any>({});
 
   constructor(
     private _homepageService: HomepageService
-  ) {
-    super();
-  }
+  ) {}
 
   getPermission() {
+    
+
     this.messaging.requestPermission()
       .then(() => {
-        //console.log('Firebase permission succeeded');
+        console.log('Firebase permission granted.');
         return this.messaging.getToken();
       })
       .then(currentToken => {
         if (currentToken) {
-          //console.log('new token', currentToken);       
+          console.log('new token', currentToken);
           const sub = this._homepageService.saveFirebaseToken(currentToken)
             .subscribe(
               res => {
@@ -34,11 +33,11 @@ export class FirebaseMessagingService extends PageBaseComponent {
               (error: HttpErrorResponse) => {
                 
               });
-          this.subscriptions.push(sub);
+          sub.unsubscribe();
         }
       })
       .catch((err) => {
-        console.error('Firebase permission failed');
+        console.error('Firebase permission denied.');
       });
   }
 
