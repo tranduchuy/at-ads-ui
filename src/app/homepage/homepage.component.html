@@ -36,9 +36,7 @@
          </div> -->
 
          <div class="login-with-google">
-            <button mat-raised-button color="warn"
-                    (click)="loginByGG()"
-                    class="google-login-button">
+            <button mat-raised-button color="warn" (click)="loginByGG()" class="google-login-button">
                <img src="../../assets/icons/google-icon.png"
                   style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
                Google
@@ -99,13 +97,14 @@
                         src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
                         alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Android'"
-                        src="https://source.android.com/setup/images/Android_greenrobot.png"
-                        alt="" class="icon">
+                        src="https://source.android.com/setup/images/Android_greenrobot.png" alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Mac OS'"
                         src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
                         alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Linux'"
                         src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
+                     <img *ngIf="element.os?.name === 'Ubuntu'"
+                        src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
                      {{element.os?.name + ' ' + element.os?.version}}
                   </mat-cell>
                </ng-container>
@@ -122,11 +121,14 @@
                      <img *ngIf="element.browser?.name === 'Chrome'"
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png"
                         alt="" class="icon">
-                     <img *ngIf="element.browser?.name === 'Safari'"
+                     <img *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png"
                         alt="" class="icon">
                      <img *ngIf="element.browser?.name === 'IE'"
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png"
+                        alt="" class="icon">
+                     <img *ngIf="element.browser?.name === 'Chromium'"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Chromium_11_Logo.svg/1024px-Chromium_11_Logo.svg.png"
                         alt="" class="icon">
                      <img *ngIf="element.browser?.name === 'Cốc Cốc'"
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png"

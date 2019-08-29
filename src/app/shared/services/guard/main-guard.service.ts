@@ -23,11 +23,11 @@ export class MainGuardService implements CanActivate {
 
     if (!this._sessionService.user || !this._sessionService.token) {
 
-      if (this._router.url !== '/gioi-thieu' && route.routeConfig.path !== '') {
-        this._router.navigateByUrl('/auth/login');
-        //this._dialogService._openInfoDialog('Vui lòng đăng nhập tài khoản');
-        return false;
-      }
+      // if (this._router.url !== '/gioi-thieu' && route.routeConfig.path !== '') {
+      //   this._router.navigateByUrl('/auth/login');
+      //   this._dialogService._openInfoDialog('Vui lòng đăng nhập tài khoản');
+      //   return false;
+      // }
       
       this._router.navigateByUrl('/gioi-thieu');
 

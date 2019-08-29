@@ -5,14 +5,22 @@
       <p style="text-align: justify"> Sử dụng tài khoản Gmail quản lý Google AdWords, bấm kết nối nhanh để hoàn tất quá
         trình kết nối</p>
       <div class="loginWithGoogle">
-        <button mat-raised-button disabled>
-          <img src="https://image.flaticon.com/icons/png/512/281/281769.png" alt=""
-            style="height: 20px; width:20px; margin-top: -5px; margin-right: 8px">Kết nối nhanh bằng Gmail</button>
-        <p class="note"><span style="color: red">*</span> Sắp ra mắt</p>
+
+        <button mat-raised-button (click)="getAdsAccounts()" [disabled]="isProcessing" *ngIf="!isAccountListShown"
+          class="connect-by-email-button">
+          <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt="">Kết nối nhanh bằng
+          Gmail</button>
+
+        <button mat-raised-button (click)="isAccountListShown = false; selectedAccount = ''" [disabled]="isProcessing" *ngIf="isAccountListShown"
+          class="disconnect-by-email-button">
+          <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt="">Hủy kết nối nhanh
+          bằng Gmail</button>
 
       </div>
     </div>
+
     <div gdArea="input-side" class="input-side">
+
       <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h3>
       <p style="text-align: justify"><strong>Bước 1: </strong> Đăng nhập <a
           href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
@@ -36,6 +44,64 @@
 
     </div>
   </div>
+
+  <div class="ads-account-list" *ngIf="isAccountListShown">
+
+    <div class="ads-account-list-title">
+      VUI LÒNG LỰA CHỌN TÀI KHOẢN GOOGLE ADS CỦA BẠN
+    </div>
+
+    <div class="ads-account-list-wrapper">
+
+      <mat-table [dataSource]="adsAccounts" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="order">
+          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index" [class.disabled-cell]="!element.availableToConnect">
+            {{i + 1}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="adsId">
+          <mat-header-cell *matHeaderCellDef> Google Ads ID </mat-header-cell>
+          <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
+            {{element.googleAdId}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Tên </mat-header-cell>
+          <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
+            {{element.name}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="selection">
+          <mat-header-cell *matHeaderCellDef> Chọn tại đây </mat-header-cell>
+          <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
+
+            <mat-radio-button value="{{element.googleAdId}}" *ngIf="!element.availableToConnect"
+              matTooltip="{{element.reason}}" disabled></mat-radio-button>
+
+            <mat-radio-button value="{{element.googleAdId}}" *ngIf="element.availableToConnect"
+              (change)="selectAccount($event)"></mat-radio-button>
+
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="adsAccountColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: adsAccountColumns;"></mat-row>
+      </mat-table>
+
+    </div>
+
+    <p class="div-connect-account-button">
+      <button mat-raised-button color="accent" [disabled]="!selectedAccount || isProcessing" (click)="connectAccountByEmail()">
+        <mat-icon>wifi</mat-icon> Kết nối tài khoản
+      </button>
+    </p>
+  </div>
+
   <div gdArea="content" *ngIf="isConnected">
     <hr>
     <h3><strong><span class="step">[3]</span> VUI LÒNG ĐỒNG Ý YÊU CẦU KẾT NỐI</strong></h3>

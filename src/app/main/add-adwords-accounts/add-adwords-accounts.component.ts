@@ -26,6 +26,11 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   _adsAccountIdPipe = new AdsAccountIdPipe();
   isProcessing: boolean = false;
 
+  isAccountListShown: boolean = false;
+  adsAccounts = [];
+  adsAccountColumns: string[] = ['order', 'adsId', 'name', 'selection'];
+  selectedAccount: string = '';
+
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
@@ -42,6 +47,85 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     this.initForm();
   }
 
+  selectAccount(event) {
+    this.selectedAccount = event.value;
+  }
+
+  getAdsAccounts() {
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
+
+    const sub = this._addAdwordsAccountsService.getAdsAccounts()
+      .subscribe(res => {
+
+        this.adsAccounts = res.data.googleAds;
+        this.adsAccounts = (this.adsAccounts || []).map(item => {
+          item.googleAdId = this._adsAccountIdPipe.transform(item.googleAdId);
+          return item;
+        });
+
+        this._fuseProgressiveBarService.hide();
+        this.isAccountListShown = true;
+        this.isProcessing = false;
+      },
+        (error: HttpErrorResponse) => {
+          this.isAccountListShown = false;
+          this.isProcessing = false;
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openInfoDialog('Chúng tôi không tìm thấy tài khoản Google Ads nào trong tài khoản Google của bạn!');
+        });
+    this.subscriptions.push(sub);
+  }
+
+  generateConnectAccountByEmailParam(): any {
+    return { adWordId: this.selectedAccount.replace(/[^a-zA-Z0-9 ]/g, '') };
+  }
+
+  connectAccountByEmail() {
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
+
+    const param = this.generateConnectAccountByEmailParam();
+
+    const sub = this._addAdwordsAccountsService.addAdwordsAccount(param)
+      .subscribe(
+        (res) => {
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openInfoDialog(res.messages[0]);
+
+          if (res.data.isRefresh) {
+            this._fuseNavigationService.reloadNavigation();
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+            return;
+          }
+
+          this.isConnected = true;
+          this.connectedAccountId = res.data.account._id;
+          this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
+
+          this._sessionService.setActiveAccountId(this.connectedAccountId);
+          this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
+          this._sessionService.setAccountId(this.connectedAccountId);
+          this._sessionService.setAdwordId(this.connectedAdsId);
+          this._fuseNavigationService.reloadNavigation();
+          this.getAdsAccounts();
+
+          this.isProcessing = false;
+        },
+        (error: HttpErrorResponse) => {
+
+          this.isConnected = false;
+          this.connectedAccountId = '';
+          this.connectedAdsId = '';
+
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
+        }
+      );
+    this.subscriptions.push(sub);
+  }
+
   completeAccountConnection() {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
@@ -53,14 +137,16 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
         res => {
           if (res.data.isConnected) {
             this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
+
             setTimeout(() => {
-              this._sessionService.setActiveAccountId(this.connectedAccountId);
-              this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
-              this._sessionService.setAccountId(this.connectedAccountId);
-              this._sessionService.setAdwordId(this.connectedAdsId);
+
+              // this._sessionService.setActiveAccountId(this.connectedAccountId);
+              // this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
+              // this._sessionService.setAccountId(this.connectedAccountId);
+              // this._sessionService.setAdwordId(this.connectedAdsId);
+              // this._fuseNavigationService.reloadNavigation();
 
               this._fuseProgressiveBarService.hide();
-              this._fuseNavigationService.reloadNavigation();
               this._router.navigateByUrl('/gan-tracking/chien-dich');
             }, 2000);
           } else {
@@ -100,9 +186,23 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this.connectedAccountId = res.data.account._id;
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
+          this._sessionService.setActiveAccountId(this.connectedAccountId);
+          this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
+          this._sessionService.setAccountId(this.connectedAccountId);
+          this._sessionService.setAdwordId(this.connectedAdsId);
+          this._fuseNavigationService.reloadNavigation();
+
+          if(this.isAccountListShown)
+            this.getAdsAccounts();
+
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
+
+          this.isConnected = false;
+          this.connectedAccountId = '';
+          this.connectedAdsId = '';
+
           this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;

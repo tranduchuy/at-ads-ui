@@ -187,7 +187,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 (isAccepted: boolean) => {
                     if (isAccepted) {
                         this._sessionService.remove();
-                        this._router.navigate(['auth/login']);
+                        this._router.navigate(['/gioi-thieu']);
                     }
                 }
             );
