@@ -3,6 +3,8 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { FirebaseMessagingService } from 'app/shared/services/firebase-service/firebase-messaging.service';
 import { MatTableDataSource } from '@angular/material';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import { HomepageService } from './homepage.service';
 
 @Component({
   selector: 'app-homepage',
@@ -19,7 +21,9 @@ export class HomepageComponent extends PageBaseComponent implements OnInit {
 
   constructor(
     private _fuseConfigService: FuseConfigService,
-    private _firebaseMessagingService: FirebaseMessagingService
+    private _firebaseMessagingService: FirebaseMessagingService,
+    private _fuseProgressBarService: FuseProgressBarService,
+    private _homepageService: HomepageService
   ) {
 
     super();
@@ -66,16 +70,17 @@ export class HomepageComponent extends PageBaseComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.logs = [];
-
     this._firebaseMessagingService.getPermission();
+    this.get30FirstIPLogs();
+  }
 
+  recieveMessage() {
     const sub = this._firebaseMessagingService.getMessage()
       .subscribe((payload: any) => {
         if (Object.keys(payload).length > 0) {
 
-          const log = JSON.parse(payload.data.log);
+          let log = JSON.parse(payload.data.log);
+
           this.logs.unshift(log);
 
           if (this.logs.length > 30)
@@ -83,6 +88,45 @@ export class HomepageComponent extends PageBaseComponent implements OnInit {
 
           this.dataSource = new MatTableDataSource<Element>(this.logs);
         }
+      });
+    this.subscriptions.push(sub);
+  }
+
+  get30FirstIPLogs() {
+    this._fuseProgressBarService.show();
+    const sub = this._homepageService.get30FirstIPLogs()
+      .subscribe(res => {
+
+        this.logs = (res.data.logs || [])
+          .map(item => {
+            return {
+              createdAt: item.createdAt,
+              ip: item.ip,
+              device: {
+                name: item.device !== undefined ? item.device.vendor : null
+              },
+              os: {
+                name: item.os !== undefined ? item.os.name : null,
+                version: item.os !== undefined ? item.os.version : null
+              },
+              browser: {
+                name: item.browser !== undefined ? item.browser.name : null,
+                version: item.browser !== undefined ? item.browser.version : null
+              },
+              network: {
+                name: item.networkCompany !== undefined ? item.networkCompany.name : null
+              },
+              location: {
+                city: item.location !== undefined ? item.location.city : null
+              },
+            }
+          })
+
+        this.dataSource = new MatTableDataSource<Element>(this.logs);
+
+        this.recieveMessage();
+
+        this._fuseProgressBarService.hide();
       });
     this.subscriptions.push(sub);
   }

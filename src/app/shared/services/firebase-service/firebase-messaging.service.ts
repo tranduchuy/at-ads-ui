@@ -27,10 +27,11 @@ export class FirebaseMessagingService extends PageBaseComponent {
       })
       .then(currentToken => {
         if (currentToken) {
-          console.log('new token', currentToken);
+          //console.log('new token', currentToken);
           const sub = this._homepageService.saveFirebaseToken(currentToken)
             .subscribe(
               res => {
+                //console.log('Client is listening on message from server...');
                 this.recieveMessage();
               },
               (error: HttpErrorResponse) => {

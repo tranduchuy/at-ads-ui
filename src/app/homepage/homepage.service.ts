@@ -14,4 +14,8 @@ export class HomepageService {
   saveFirebaseToken(fireBaseToken: string): Observable<any> {
     return this._http.post(API.Homepage.saveFirebaseToken, { fireBaseToken });
   }
+
+  get30FirstIPLogs(): Observable<any> {
+    return this._http.get(API.Homepage.get30FirstIPLogs);
+  }
 }
