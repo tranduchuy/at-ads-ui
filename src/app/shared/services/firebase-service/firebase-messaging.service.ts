@@ -3,16 +3,19 @@ import * as firebase from 'firebase';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HomepageService } from 'app/homepage/homepage.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 
 @Injectable()
-export class FirebaseMessagingService {
+export class FirebaseMessagingService extends PageBaseComponent {
 
   messaging = firebase.messaging();
   currentMessage$ = new BehaviorSubject<any>({});
 
   constructor(
     private _homepageService: HomepageService
-  ) {}
+  ) {
+    super();
+  }
 
   getPermission() {
     
@@ -33,7 +36,7 @@ export class FirebaseMessagingService {
               (error: HttpErrorResponse) => {
                 
               });
-          sub.unsubscribe();
+            this.subscriptions.push(sub);
         }
       })
       .catch((err) => {
