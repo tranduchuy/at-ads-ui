@@ -18,14 +18,16 @@ export class FirebaseMessagingService extends PageBaseComponent {
   }
 
   getPermission() {
+    
+
     this.messaging.requestPermission()
       .then(() => {
-        //console.log('Firebase permission succeeded');
+        console.log('Firebase permission granted.');
         return this.messaging.getToken();
       })
       .then(currentToken => {
         if (currentToken) {
-          //console.log('new token', currentToken);       
+          console.log('new token', currentToken);
           const sub = this._homepageService.saveFirebaseToken(currentToken)
             .subscribe(
               res => {
@@ -34,11 +36,11 @@ export class FirebaseMessagingService extends PageBaseComponent {
               (error: HttpErrorResponse) => {
                 
               });
-          this.subscriptions.push(sub);
+            this.subscriptions.push(sub);
         }
       })
       .catch((err) => {
-        console.error('Firebase permission failed');
+        console.error('Firebase permission denied.');
       });
   }
 

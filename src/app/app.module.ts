@@ -41,8 +41,8 @@ import { LogoutModule } from './authentication/logout/logout.module';
 import { HomepageModule } from './homepage/homepage.module';
 
 import * as firebase from 'firebase';
-import { firebaseConfig } from './shared/services/firebase-service/firebase-messaging-sw';
 import { FirebaseMessagingService } from './shared/services/firebase-service/firebase-messaging.service';
+import { firebaseConfig } from './shared/services/firebase-service/firebase-config';
 
 export function init_app(appInitService: AppInitService): any {
   return () => {
