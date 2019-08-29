@@ -57,8 +57,12 @@
           </a>
         </div>
 
-        <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN" (click)="onSubmit()"
-          [disabled]="loginForm.invalid">
+        <button mat-raised-button
+                color="accent"
+                class="submit-button"
+                aria-label="LOG IN"
+                (click)="onSubmit()"
+                [disabled]="loginForm.invalid">
           ĐĂNG NHẬP
         </button>
 
@@ -68,9 +72,9 @@
         <span class="text">HOẶC</span>
       </div>
 
-      <button #googleBtn mat-raised-button id="googleBtn" label="Google" class="google" color="warn">
+      <button #googleBtn mat-raised-button id="googleBtn" label="Google" class="google" color="warn" (click)="loginByGG()">
         <img src="../../../assets/icons/google-icon.png" alt=""
-          style="height: 18px; width:18px; margin-top: -5px; margin-right: 5px">Đăng nhập bằng Google
+             style="height: 18px; width:18px; margin-top: -5px; margin-right: 5px">Đăng nhập bằng Google
       </button>
 
       <div class="register" fxLayout="column" fxLayoutAlign="center center">

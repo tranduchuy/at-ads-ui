@@ -11,12 +11,13 @@ import { Router } from '@angular/router';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
 import { SessionService } from '../../shared/services/session.service';
 import { ILoginSuccess } from './models/i-login-success';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { ValidatorsService } from 'app/shared/services/validator.service';
 
 declare var gapi: any;
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -26,15 +27,9 @@ declare var gapi: any;
 })
 export class LoginComponent extends PageBaseComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup;
-  @ViewChild('googleBtn', { static: true }) googleBtn;
+  @ViewChild('googleBtn', {static: true}) googleBtn;
   auth2: any;
 
-  /**
-   * Constructor
-   *
-   * @param {FuseConfigService} _fuseConfigService
-   * @param {FormBuilder} _formBuilder
-   */
   constructor(
     private _fuseConfigService: FuseConfigService,
     private _formBuilder: FormBuilder,
@@ -46,7 +41,8 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     private _sessionService: SessionService,
     private _ngZone: NgZone,
     private _navigationService: FuseNavigationService,
-    private _validatorService: ValidatorsService
+    private _validatorService: ValidatorsService,
+    private http: HttpClient
   ) {
     super();
     // Configure the layout
@@ -83,7 +79,9 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
   }
 
   ngAfterViewInit(): void {
-    this.googleInit();
+    setTimeout(() => {
+      this.googleInit();
+    }, 500);
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -95,13 +93,13 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     };
     this._fuseSplashScreenService.show();
     const sub = this._authService.login(userInfo).subscribe((res: ILoginSuccess) => {
-      const token = res.data.meta.token;
-      const user = res.data.user;
-      this._sessionService.set(token, user);
-      this._sessionService.setUser(user);
-      this._fuseSplashScreenService.hide();
-      this._router.navigateByUrl('/');
-    },
+        const token = res.data.meta.token;
+        const user = res.data.user;
+        this._sessionService.set(token, user);
+        this._sessionService.setUser(user);
+        this._fuseSplashScreenService.hide();
+        this._router.navigateByUrl('/');
+      },
       (error: HttpErrorResponse) => {
         this._fuseSplashScreenService.hide();
         this._dialogService._openErrorDialog(error.error);
@@ -115,10 +113,8 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
       this.auth2 = gapi.auth2.init({
         client_id: environment.googleAuth2ClientID,
         cookiepolicy: 'single_host_origin',
-        scope: 'profile email'
+        scope: 'profile email https://www.googleapis.com/auth/adwords'
       });
-
-      this.attachSignIn(this.googleBtn._elementRef.nativeElement);
     });
   }
 
@@ -127,7 +123,10 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
       element,
       {},
       (googleUser: any) => {
-        this.onSignIn(googleUser);
+        this.auth2.grantOfflineAccess({
+          access_type: 'offline',
+          prompt:      'consent',
+        }).then(this.onSignIn(googleUser));
       },
       (error: any) => {
         console.log('google error:' + error.error);
@@ -135,27 +134,52 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
   }
 
   onSignIn(googleUser: any): void {
-    // const profile = googleUser.getBasicProfile();
-    // const googleId: number = profile.getId();
-    // const name: string = profile.getName();
-    // const email: string = profile.getEmail();
+    if (googleUser && googleUser['code']) {
+      this.http.post('https://www.googleapis.com/oauth2/v4/token',
+        {
+          grant_type: 'authorization_code',
+          client_id: environment.googleAuth2ClientID,
+          client_secret: 'mcIBWUsnOJ92Knb1fYYtiYSL',
+          code: googleUser['code'],
+          redirect_uri: environment.oauth2RedirectUri
+        } as any)
+        .subscribe(
+          (val) => {
+            console.log(val['access_token'], val['refresh_token']);
+            this.submitGoogleLoginForm(val['access_token'], val['refresh_token']);
+          },
+          response => {
+            console.log('POST call in error', response);
+          },
+          () => {
+            console.log('The POST observable is now completed.');
+          });
+    } else {
+      this._dialogService._openErrorDialog({messages: ['Lấy thông tin tài khoản từ google ko thành công']});
+    }
+  }
 
-    const accessToken: string = googleUser.Zi.access_token;
+  loginByGG(): void {
+    this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
+  }
 
+  private submitGoogleLoginForm(accessToken: string, refreshToken: string): void {
     this._fuseSplashScreenService.show();
     const sub = this._authService.loginByGoogle({
-      accessToken
+      accessToken,
+      refreshToken
     }).subscribe((res: ILoginSuccess) => {
-      const token = res.data.meta.token;
-      const user = res.data.user;
-      user.avatar = googleUser.w3.Paa;
-      
-      this._sessionService.set(token, user);
-      this._sessionService.setUser(user);
-      
-      this._ngZone.run(() => this._router.navigateByUrl('/')
-        .then(resolve => { this._fuseSplashScreenService.hide(); }));
-    },
+        const token = res.data.meta.token;
+        const user = res.data.user;
+
+        this._sessionService.set(token, user);
+        this._sessionService.setUser(user);
+
+        this._ngZone.run(() => this._router.navigateByUrl('/')
+          .then(resolve => {
+            this._fuseSplashScreenService.hide();
+          }));
+      },
       (error: HttpErrorResponse) => {
         this._fuseSplashScreenService.hide();
         this._dialogService._openErrorDialog(error.error);
@@ -164,6 +188,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
     this.subscriptions.push(sub);
   }
 }
+
 /**
  * Confirm password validator
  *
@@ -179,6 +204,7 @@ export const checkValidPassword: ValidatorFn = (control: AbstractControl): Valid
   const password = control.parent.get('password');
   const reg = new RegExp(/^[a-zA-Z0-9]*$/);
 
-  if (!reg.test(password.value))
-    return { invalidPassword: true };
+  if (!reg.test(password.value)) {
+    return {invalidPassword: true};
+  }
 };
