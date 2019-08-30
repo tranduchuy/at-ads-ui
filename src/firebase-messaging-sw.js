@@ -15,6 +15,8 @@ messaging.setBackgroundMessageHandler(function (payload) {
   //   icon: 'assets/images/app-logo.png'
   // };
 
-  // return self.registration.showNotification(notificationTitle,
+  // return self.registration.hideNotification(notificationTitle,
   //   notificationOptions);
+
+  return new Promise(function(resolve, reject) {});
 });
