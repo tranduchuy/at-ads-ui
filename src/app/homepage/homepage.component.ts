@@ -26,6 +26,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   logs = [];
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);
+  isOnLogin: boolean;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
@@ -63,7 +64,9 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   ngOnInit(): void {
 
-    this.logs = [];
+    if(this._sessionService.user)
+      this.isOnLogin = true;
+    else this.isOnLogin = false;
 
     this._firebaseMessagingService.getPermission();
     this.get30FirstIPLogs();
@@ -126,6 +129,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
       });
     this.subscriptions.push(sub);
   }
+
   onSignIn(googleUser: any): void {
     if (googleUser && googleUser['code']) {
       this.http.post('https://www.googleapis.com/oauth2/v4/token',

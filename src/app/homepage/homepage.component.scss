@@ -76,21 +76,25 @@
           width: 24px;
         }
 
-        .register-button {
-          background-color: #44b643;
+        .login-google-button {
+          transition: 0.2s;
+          border-radius: 0;
+
+          &:hover {
+            transform: scale(1.05, 1.05);
+          }
+        }
+
+        .access-system-button {
+          background: #44b543;
           color: white;
-          padding-left: 0;
-          min-width: 225px;
-        }
+          border-radius: 0;
+          transition: 0.2s;
 
-        .google-login-button {
-          max-width: 225px;
+          &:hover {
+            transform: scale(1.05, 1.05);
+          }
         }
-      }
-
-      .login {
-        text-align: center;
-        font-size: 16px;
       }
     }
 
@@ -124,9 +128,9 @@
             transition: 0.2s;
             -webkit-animation: rowAppearance 0.4s linear;
 
-            &:nth-child(odd) {
-              background-color: whitesmoke;
-            }
+            // &:nth-child(odd) {
+            //   background-color: whitesmoke;
+            // }
 
             &:hover {
               background-color: rgba(3, 155, 229, 0.1);
@@ -136,8 +140,8 @@
           @keyframes rowAppearance {
             from {
               opacity: 0;
-
-            } to {
+            }
+            to {
               opacity: 1;
             }
           }
@@ -237,7 +241,7 @@
           padding-top: 20px;
 
           button {
-            background-color: #44b643;
+            background-color: #44b543;
             color: white;
             border-radius: 15px;
           }
@@ -353,7 +357,7 @@
       .instruction {
         padding: 10px;
         padding-top: 20px;
-        
+
         .steps-main-title {
           padding: 10px 10px 0 20px;
           font-size: 18px;

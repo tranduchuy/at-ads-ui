@@ -36,11 +36,13 @@
          </div> -->
 
          <div class="login-with-google">
-            <button mat-raised-button color="warn" (click)="loginByGG()" class="google-login-button">
+            <button mat-raised-button color="warn" (click)="loginByGG()" *ngIf="!isOnLogin" class="login-google-button">
                <img src="../../assets/icons/google-icon.png"
-                  style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
-               Google
+                  style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng Google
             </button>
+            <a mat-raised-button class="access-system-button" routerLink="/them-tai-khoan-moi" *ngIf="isOnLogin">
+               TRUY CẬP HỆ THỐNG CHỐNG CLICK TẶC<mat-icon style="font-size: 20px">navigate_next</mat-icon>
+            </a>
          </div>
 
          <!-- <div class="login">
@@ -232,7 +234,7 @@
                <div class="trial">
                   <a>
                      <button mat-raised-button color="accent">
-                        DÙNG THỬ NGAY <mat-icon>arrow_right</mat-icon>
+                        DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
                      </button>
                   </a>
                </div>
@@ -415,7 +417,7 @@
             với chúng tôi.
             <div class="view-more-button">
                <button mat-raised-button color="accent">
-                  XEM THÊM <mat-icon style="color: white">arrow_right</mat-icon>
+                  XEM THÊM <mat-icon style="font-size: 20px; color: white">navigate_next</mat-icon>
                </button>
             </div>
          </div>

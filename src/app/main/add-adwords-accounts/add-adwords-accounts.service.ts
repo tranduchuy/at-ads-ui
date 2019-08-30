@@ -11,6 +11,11 @@ export interface ICheckAccountAcceptanceParams {
   adWordId: string;
 }
 
+export interface IGetAdsAccountsParams {
+  accessToken: string;
+  refreshToken: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,8 +40,11 @@ export class AddAdwordsAccountsService {
     return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
 
-  public getAdsAccounts(): Observable<any> {
-    return this._http.get(API.AdwordsAccount.getAdsAccounts);
+  public getAdsAccounts(params: IGetAdsAccountsParams): Observable<any> {
+    let url = API.AdwordsAccount.getAdsAccounts.replace('{accessToken}', params.accessToken);
+    url = url.replace('{refreshToken}', params.refreshToken);
+
+    return this._http.get(url);
   }
 
 }
