@@ -4,6 +4,10 @@
 
   .main-content {
     background-color: whitesmoke;
+    background: url("../../assets/images/backgrounds/NCgp0Mo.png");
+    background-size: 100% 100%;
+    background-position: center center;
+    background-attachment: fixed;
 
     button {
       transition: 0.2s;
@@ -15,11 +19,12 @@
 
     .banner {
       background-image: url("../../assets/images/backgrounds/dark-material-bg.jpg");
+      background-size: 100% 100%;
       color: white;
       padding: 70px 30px 50px 30px;
-      box-shadow: 0px 2px 8px black;
       position: relative;
       z-index: 100;
+      box-shadow: 0 2px 8px black;
 
       .app-title {
         font-size: 35px !important;
@@ -99,7 +104,8 @@
     .table {
       padding: 30px;
       padding-top: 50px;
-      background-color: #282E3C;
+      padding-bottom: 50px;
+      background-color: rgba(0, 0, 0, 0.6);
 
       .table-title {
         padding: 20px;
@@ -110,8 +116,7 @@
 
       .table-wrapper {
         overflow: auto;
-        filter: drop-shadow(0px 1px 5px black);
-        background-color: white;
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.9));
 
         .network-logo,
         .mobifone,
@@ -149,9 +154,15 @@
 
         mat-table {
           width: 100%;
+          background: rgba(0, 0, 0, 0.2);
 
           mat-header-cell {
-            background-color: #039be5;
+            //background-color: rgba(0, 0, 0, 0.2);
+            background: rgba(3, 155, 229, 0.4);
+            color: white;
+          }
+
+          mat-cell {
             color: white;
           }
 
@@ -164,7 +175,8 @@
             // }
 
             &:hover {
-              background-color: rgba(3, 155, 229, 0.1);
+              //background-color: rgba(3, 155, 229, 0.1);
+              background: rgba(255, 255, 255, 0.1);
             }
           }
 
@@ -188,12 +200,14 @@
 
     .instruction {
       padding: 30px;
+      background-color: rgba(0, 0, 0, 0.4);
 
       .steps-main-title {
         font-size: 25px;
         width: 100%;
         text-align: center;
-        color: rgba(0, 0, 0, 0.6);
+        color: white;
+        text-shadow: 1px 1px 4px black;
         font-weight: bold;
       }
 
@@ -207,16 +221,29 @@
 
       .step-wrapper {
         padding-top: 30px;
+        padding-bottom: 30px;
 
         .step {
-          background-color: white;
+          //background-color: rgba(0, 0, 0, 0.4);
+          color: white;
           height: 400px;
-          border: 1px solid #d2d2d2;
           border-radius: 5px;
-          box-shadow: 1px 1px 4px silver;
+          filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.9));
           padding: 20px;
           padding-bottom: 0;
           transition: 0.2s;
+
+          &:nth-child(1) {
+            background: rgba(68, 181, 67, 0.6);
+          }
+
+          &:nth-child(2) {
+            background: rgba(3, 155, 229, 0.6);
+          }
+
+          &:nth-child(3) {
+            background: rgba(255, 69, 0, 0.6);
+          }
 
           .step-image {
             height: 60%;
@@ -240,17 +267,21 @@
       }
 
       .step:hover {
-        transform: scale(1.02, 1.02);
+        transform: scale(1.01, 1.01);
       }
     }
 
     .feature {
       padding: 30px;
       padding-top: 70px;
+      padding-bottom: 70px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
 
       .overview {
         padding-top: 40px;
         padding-right: 80px;
+        text-shadow: 1px 1px 4px black;
 
         .overview-title {
           font-size: 25px;
@@ -281,10 +312,10 @@
     }
 
     .feature-item {
-      background-color: white;
-      border: 1px solid #d2d2d2;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: white;
       border-radius: 5px;
-      box-shadow: 1px 1px 4px silver;
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.9));
       padding: 20px;
       padding-bottom: 30px;
       transition: 0.2s;
@@ -292,15 +323,16 @@
     }
 
     .feature-item:hover {
-      transform: scale(1.02, 1.02);
+      transform: scale(1.01, 1.01);
     }
 
     .benefit {
-      background: url("../../assets/images/backgrounds/dark-material-bg.jpg");
-      color: white !important;
-      margin-top: 30px;
       text-align: center;
       padding: 60px 30px 100px 30px;
+      color: white;
+      background: rgba(18, 75, 93, 0.9);
+      // background: rgba(0, 0, 0, 0.8);
+      text-shadow: 1px 1px 4px black;
 
       .main-benefit {
         padding-top: 60px;
@@ -315,6 +347,7 @@
           width: 150px;
           height: 150px;
           transition: 0.2s;
+          filter: drop-shadow(0px 1px 5px black);
 
           &:hover {
             transform: scale(1.05, 1.05);
@@ -328,16 +361,19 @@
     padding: 60px;
     padding-bottom: 40px;
     padding-top: 100px;
-    background-color: #eee;
+    background: url("../../assets/images/backgrounds/dark-material-bg.jpg");
+    color: white;
     text-align: justify;
 
     .footer-title1 {
       font-size: 25px;
+      font-family: "Segoe UI";
     }
 
     .footer-divider {
       margin-top: 30px;
       margin-bottom: 30px;
+      border: 0.5px solid #eee;
     }
 
     .view-more-button {
@@ -354,7 +390,8 @@
     }
 
     mat-icon {
-      color: gray;
+      color: white;
+      font-size: 20px;
     }
 
     .footer-col {
@@ -415,7 +452,7 @@
 
       .feature {
         padding: 10px;
-        padding-top: 30px;
+        padding-bottom: 30px;
 
         .overview {
           padding: 0;

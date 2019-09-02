@@ -40,7 +40,7 @@
                <img src="../../assets/icons/google-icon.png"
                   style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng Google
             </button>
-            <a mat-raised-button class="access-system-button" routerLink="/them-tai-khoan-moi" *ngIf="isOnLogin">
+            <a mat-raised-button class="access-system-button" routerLink="/" *ngIf="isOnLogin">
                TRUY CẬP HỆ THỐNG CHỐNG CLICK TẶC<mat-icon style="font-size: 20px">navigate_next</mat-icon>
             </a>
          </div>
@@ -54,7 +54,7 @@
       <div class="table">
 
          <!-- <div class="table-title">
-            Trong 30 ngày qua đã có <span style="color: #039be5; font-weight: bold">19,227,560</span> click quảng
+            Trong 30 ngày qua đã có <span style="color: skyblue; font-weight: bold">19,227,560</span> click quảng
             cáo, tỉ
             lệ <span style="color: red; font-weight: bold">17.50%</span>
          </div> -->
@@ -70,14 +70,14 @@
                <ng-container matColumnDef="ip">
                   <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <span style="color: #039be5; font-weight: bold">{{element.ip}}</span>
+                     <span style="color: skyblue; font-weight: bold">{{element.ip}}</span>
                   </mat-cell>
                </ng-container>
 
                <!-- <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <mat-icon *ngIf="element.isSpam" style="margin-right: 10px; color: crimson"
+                     <mat-icon *ngIf="element.isSpam" style="margin-right: 10px; color: red"
                         matTooltip="Đã chặn và không bị tính tiền">verified_user</mat-icon>
 
                      <mat-icon *ngIf="!element.isSpam" style="margin-right: 10px; color: gold"
@@ -189,7 +189,7 @@
          </p>
 
          <div class="demo-video">
-            <button mat-raised-button style="background-color: crimson; color: white" matTooltip="Sắp ra mắt">
+            <button mat-raised-button style="background-color: red; color: white" matTooltip="Sắp ra mắt">
                <mat-icon>ondemand_video</mat-icon> VIDEO DEMO CÔNG CỤ
             </button>
          </div>
@@ -203,7 +203,7 @@
                <div class="step-description">
                   <span class="step-name">Bước 1: Liên kết Google Ads</span>
                   <p>
-                     Liên kết tài khoản quảng cáo <span style="color:#039be5">Google Ads</span> của bạn với hệ thống
+                     Liên kết tài khoản quảng cáo <span style="color:skyblue">Google Ads</span> của bạn với hệ thống
                      của 3f
                      solutions.
                   </p>
@@ -237,7 +237,7 @@
          </div>
       </div>
 
-      <div class="feature" fxLayout="row" fxLayout.xs="column">
+      <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
          <div class="overview" fxFlex="30">
             <p class="overview-title">
                <img src="http://icons.iconarchive.com/icons/vexels/office/512/bulb-icon.png" alt="">
@@ -262,7 +262,7 @@
             </div>
          </div>
          <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
-            <div class="feature-left" fxLayout="column">
+            <div class="feature-left" fxLayout="column" fxLayoutGap="5px">
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
                      <mat-icon color="accent" class="s-60" style="color: #44b543">verified_user</mat-icon>
@@ -272,7 +272,7 @@
                      <br>
                      <br>
                      Giải pháp chặn click ảo theo IP này được cải tiến hơn nhờ sự đồng bộ với toàn bộ mạng lưới <span
-                        style="color: #039be5">Big Data</span> giúp chặn chính xác hơn.
+                        style="color: skyblue">Big Data</span> giúp chặn chính xác hơn.
                   </div>
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
@@ -284,19 +284,19 @@
                      <br>
                      <br>
                      Theo dõi diến biến quảng cáo theo các khung giờ trong ngày, chặn ngay khung giờ bị <span
-                        style="color: crimson">Click ảo</span> hoặc khung giờ không có nhân viên làm việc.
+                        style="color: red">Click ảo</span> hoặc khung giờ không có nhân viên làm việc.
                   </div>
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: #039be5">wifi</mat-icon>
+                     <mat-icon color="accent" class="s-60" style="color: skyblue">wifi</mat-icon>
                   </div>
                   <div class="feature-description">
                      <strong>Chặn theo 3G & 4G</strong>
                      <br>
                      <br>
                      Chỉ với 1 thao tác bạn có thể chặn quảng cáo trên toàn bộ mạng 3G & 4G, giúp ngăn chặn <span
-                        style="color: crimson">Click ảo</span> hiệu quả.
+                        style="color: red">Click ảo</span> hiệu quả.
                   </div>
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
@@ -307,7 +307,7 @@
                      <strong>Chặn theo Big Data</strong>
                      <br>
                      <br>
-                     Dựa vào thống kê các IP đang phá hoại bằng <span style="color: crimson">Click ảo</span> trên
+                     Dựa vào thống kê các IP đang phá hoại bằng <span style="color: red">Click ảo</span> trên
                      toàn bộ
                      mạng
                      lưới, bạn có thể thiết lập chặn toàn bộ các IP này.
@@ -315,31 +315,31 @@
                </div>
             </div>
          </div>
-         <div class="feature-right" fxLayout="column">
+         <div class="feature-right" fxLayout="column" fxLayoutGap="5px">
             <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: crimson">phonelink</mat-icon>
+                  <mat-icon color="accent" class="s-60" style="color: white">phonelink</mat-icon>
                </div>
                <div class="feature-description">
                   <strong>Chặn theo thiết bị</strong>
                   <br>
                   <br>
-                  Dễ dàng theo dõi tình trạng bật/tắt quảng cáo theo từng thiết bị: <span style="color: #039be5">Mobile,
+                  Dễ dàng theo dõi tình trạng bật/tắt quảng cáo theo từng thiết bị: <span style="color: skyblue">Mobile,
                      Tablet, PC</span>. Nếu bạn muốn tắt quảng cáo trên các thiết bị này chỉ cần bấm là xong.
                </div>
             </div>
             <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: gray">grid_on</mat-icon>
+                  <mat-icon color="accent" class="s-60" style="color: silver">grid_on</mat-icon>
                </div>
                <div class="feature-description">
                   <strong>Chặn theo mạng lưới</strong>
                   <br>
                   <br>
-                  Xem xét quảng cáo đang hiển thị ở đâu trên <span style="color: #039be5">Google Search</span> hay
+                  Xem xét quảng cáo đang hiển thị ở đâu trên <span style="color: skyblue">Google Search</span> hay
                   trên
-                  <span style="color: #039be5">đối tác</span> của Google. Liều thuốc đơn giản nhưng tiết kiệm đến
-                  <span style="color: crimson; font-weight: bold">30%</span> chi phí.
+                  <span style="color: skyblue">đối tác</span> của Google. Liều thuốc đơn giản nhưng tiết kiệm đến
+                  <span style="color: red; font-weight: bold">30%</span> chi phí.
                </div>
             </div>
             <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
@@ -350,23 +350,23 @@
                   <strong>Tỉnh-Thành quảng cáo</strong>
                   <br>
                   <br>
-                  Biết chính xác các <span style="color: #039be5">tỉnh, thành</span> đang hiện quảng cáo. Bạn có thể
-                  <span style="color: crimson">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
+                  Biết chính xác các <span style="color: skyblue">tỉnh, thành</span> đang hiện quảng cáo. Bạn có thể
+                  <span style="color: red">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
                </div>
             </div>
             <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: #1a65bd">device_unknown</mat-icon>
+                  <mat-icon color="accent" class="s-60" style="color: #039be5">device_unknown</mat-icon>
                </div>
                <div class="feature-description">
                   <strong>Nhận diện số di động</strong>
                   <br>
                   <br>
-                  Nhận diện các số di động truy cập bằng <span style="color: #039be5">3G & 4G</span> đang thực hiện
-                  <span style="color: crimson">Click ảo</span> với bạn. Từ đó có thể liên lạc trực tiếp với đối tượng
+                  Nhận diện các số di động truy cập bằng <span style="color: skyblue">3G & 4G</span> đang thực hiện
+                  <span style="color: red">Click ảo</span> với bạn. Từ đó có thể liên lạc trực tiếp với đối tượng
                   để trao
                   đổi
-                  và ngăn chặn <span style="color: crimson">Click ảo</span>.
+                  và ngăn chặn <span style="color: red">Click ảo</span>.
                </div>
             </div>
          </div>
@@ -429,7 +429,7 @@
          <div class="footer-title1">FAQ</div>
          <mat-divider class="footer-divider"></mat-divider>
          <div class="footer-col1-info">
-            <span style="color: rgba(0,0,0,0.8); font-weight: bold">
+            <span style="color: white; font-weight: bold">
                Mỗi đóng góp ý kiến của bạn là động lực giúp chúng tôi tồn tại và phát triển
             </span>
             <br><br>
@@ -449,7 +449,7 @@
          <div class="footer-col footer-col2-1" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: rgba(0,0,0,0.8); font-weight: bold">
+               <span style="color: white; font-weight: bold">
                   Chặn click ảo là gì?
                </span>
                <p>
@@ -462,7 +462,7 @@
          <div class="footer-col footer-col2-2" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: rgba(0,0,0,0.8); font-weight: bold">
+               <span style="color: white; font-weight: bold">
                   Thật sự giảm được 50% chi phí?
                </span>
                <p>
@@ -476,7 +476,7 @@
          <div class="footer-col footer-col2-3" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: rgba(0,0,0,0.8); font-weight: bold">
+               <span style="color: white; font-weight: bold">
                   Thời gian dùng thử bao lâu?
                </span>
                <p>
@@ -495,7 +495,7 @@
          <div class="footer-col footer-col3-1" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: rgba(0,0,0,0.8); font-weight: bold">
+               <span style="color: white; font-weight: bold">
                   Chi phí là bao nhiêu?
                </span>
                <p>
@@ -508,7 +508,7 @@
          <div class="footer-col footer-col3-2" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: rgba(0,0,0,0.8); font-weight: bold">
+               <span style="color: white; font-weight: bold">
                   Bảo mật tài khoản Google Ads?
                </span>
                <p>
@@ -524,7 +524,7 @@
          <div class="footer-col footer-col3-3">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: rgba(0,0,0,0.8); font-weight: bold">
+               <span style="color: white; font-weight: bold">
                   Tôi phải làm gì khi cần trợ giúp thêm?
                </span>
                <p>
