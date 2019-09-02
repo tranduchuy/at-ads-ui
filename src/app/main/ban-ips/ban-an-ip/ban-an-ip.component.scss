@@ -1,82 +1,86 @@
 .container {
-  padding: 15px 30px 15px 30px;
-
-  width: 100%;
-
   .title1 {
-    padding: 15px;
+    padding: 100px 60px 30px 30px;
 
-    background-color: whitesmoke;
-    color: gray;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
     font-size: 16px;
     font-weight: bold;
 
     .account-id {
-      color: black;
-    }
-
-    box-shadow: 2px 2px 5px silver;
-  }
-
-  .title2 {
-    padding-top: 30px;
-    padding-bottom: 15px;
-
-    font-weight: bold;
-  }
-
-  .notification {
-    text-align: justify;
-  }
-
-  .ban-ip-form {
-    margin-top: 30px;
-    padding: 15px;
-
-    box-shadow: 2px 2px 5px silver;
-  }
-
-  .button-area {
-    margin-top: 15px;
-
-    button {
-      border-radius: 0;
+      color: yellow;
     }
   }
 
-  .step {
-    font-weight: bold;
-  }
+  width: 100%;
 
-  .banned-ip-info {
-    margin-top: 30px;
-    padding: 20px;
+  .inner {
+    padding: 15px 30px 15px 30px;
 
-    background-color: #eee;
-    border-left: 5px solid darkorange;
+    .title2 {
+      padding-top: 30px;
+      padding-bottom: 15px;
 
-    text-align: justify;
-
-    box-shadow: 2px 2px 5px silver;
-
-    button {
-      border-radius: 0;
+      font-weight: bold;
     }
-  }
 
-  .success-button {
-    background-color: #4bb543;
-    color: white;
-  }
+    .notification {
+      text-align: justify;
+    }
 
-  .next-icon {
-    font-size: 18px;
-    margin-left: 5px;
+    .ban-ip-form {
+      margin-top: 30px;
+      padding: 15px;
+
+      box-shadow: 1px 1px 5px silver;
+      background-color: white;
+    }
+
+    .button-area {
+      margin-top: 15px;
+
+      button {
+        border-radius: 0;
+      }
+    }
+
+    .step {
+      font-weight: bold;
+    }
+
+    .banned-ip-info {
+      margin-top: 30px;
+      padding: 20px;
+
+      background-color: #eee;
+      border-left: 5px solid darkorange;
+
+      text-align: justify;
+
+      box-shadow: 2px 2px 5px silver;
+
+      button {
+        border-radius: 0;
+      }
+    }
+
+    .success-button {
+      background-color: #4bb543;
+      color: white;
+    }
+
+    .next-icon {
+      font-size: 18px;
+      margin-left: 5px;
+    }
   }
 }
 
 @media screen and (max-width: 600px) {
-  .container {
-    padding: 15px;
+  .container{
+    .inner {
+      padding: 15px;
+    }
   }
 }

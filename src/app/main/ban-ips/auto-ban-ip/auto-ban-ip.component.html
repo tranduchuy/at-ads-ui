@@ -4,48 +4,50 @@
       class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
-  <div class="title2">
-    CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP
+  <div class="inner">
+    <div class="title2">
+      CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP
+    </div>
+
+    <p class="notification">
+      Thông thường 1 người dùng chỉ click quảng cáo từ 1 đến 2 lần trước khi mua hàng. Chặn người dùng click quảng cáo
+      liên tục
+      giúp bạn tiết kiệm được chi phí lãng phí do những hành vi phá hoại gây ra
+    </p>
+
+    <p>
+      <b>
+        Chặn sau khi 1 IP nhấn quảng cáo (<span style="color: red">thường là 2 lần</span>)
+      </b>
+    </p>
+
+    <mat-form-field style="width: 100%" appearance="outline">
+      <mat-label>Chọn hình thức</mat-label>
+      <mat-select [(value)]="selectedMaxClick" [disabled]="isProcessing">
+        <mat-option *ngFor="let item of itemsSource.maxClick" [value]="item.value">{{item.text}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <p>
+      <b>
+        Xóa hết IP đã chặn khi qua ngày mới (<span style="color: red">xóa vào lúc 0h-1h sáng</span>)
+      </b>
+    </p>
+
+    <mat-form-field style="width: 100%" appearance="outline">
+      <mat-label>Chọn hình thức</mat-label>
+      <mat-select [(value)]="selectedAutoRemove" [disabled]="isProcessing">
+        <mat-option *ngFor="let item of itemsSource.autoRemove" [value]="item.value">{{item.text}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <p class="text-center">
+      <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" (click)="setAutoBlockingIP()"
+        [disabled]="isProcessing">
+        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+      </button>
+    </p>
   </div>
-
-  <p class="notification">
-    Thông thường 1 người dùng chỉ click quảng cáo từ 1 đến 2 lần trước khi mua hàng. Chặn người dùng click quảng cáo liên tục
-    giúp bạn tiết kiệm được chi phí lãng phí do những hành vi phá hoại gây ra
-  </p>
-
-  <p>
-    <b>
-      Chặn sau khi 1 IP nhấn quảng cáo (<span style="color: red">thường là 2 lần</span>)
-    </b>
-  </p>
-
-  <mat-form-field style="width: 100%" appearance="outline">
-    <mat-label>Chọn hình thức</mat-label>
-    <mat-select [(value)]="selectedMaxClick" [disabled]="isProcessing">
-      <mat-option *ngFor="let item of itemsSource.maxClick" [value]="item.value">{{item.text}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <p>
-    <b>
-      Xóa hết IP đã chặn khi qua ngày mới (<span style="color: red">xóa vào lúc 0h-1h sáng</span>)
-    </b>
-  </p>
-
-  <mat-form-field style="width: 100%" appearance="outline">
-    <mat-label>Chọn hình thức</mat-label>
-    <mat-select [(value)]="selectedAutoRemove" [disabled]="isProcessing">
-      <mat-option *ngFor="let item of itemsSource.autoRemove" [value]="item.value">{{item.text}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <p class="text-center">
-    <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
-            (click)="setAutoBlockingIP()"
-            [disabled]="isProcessing">
-      <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
-    </button>
-  </p>
 
 
 </div>

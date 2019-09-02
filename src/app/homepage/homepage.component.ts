@@ -13,6 +13,7 @@ import { DialogService } from '../shared/services/dialog.service';
 import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
+import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
 
 declare var gapi: any;
 
@@ -39,7 +40,8 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private _authService: AuthService,
     private _router: Router,
     private _fuseProgressBarService: FuseProgressBarService,
-    private _homepageService: HomepageService
+    private _homepageService: HomepageService,
+    private _adwordsAccountsService: AdwordsAccountsService
   ) {
 
     super();
@@ -64,7 +66,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   ngOnInit(): void {
 
-    if(this._sessionService.user)
+    if (this._sessionService.user)
       this.isOnLogin = true;
     else this.isOnLogin = false;
 
@@ -142,11 +144,11 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         } as any)
         .subscribe(
           (val) => {
-            console.log(val['access_token'], val['refresh_token']);
+            //console.log(val['access_token'], val['refresh_token']);
             this.submitGoogleLoginForm(val['access_token'], val['refresh_token']);
           },
           response => {
-            console.log('POST call in error', response);
+            console.error('POST call in error', response);
           },
           () => {
             console.log('The POST observable is now completed.');
@@ -187,17 +189,30 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
       this._sessionService.set(token, user);
       this._sessionService.setUser(user);
+      this._sessionService.setGoogleAccountToken(accessToken, refreshToken);
 
-      this._ngZone.run(() => this._router.navigateByUrl('/')
-        .then(resolve => {
-          this._fuseSplashScreenService.hide();
-        }));
+      this._ngZone.run(() => this.checkAccountList());
     },
       (error: HttpErrorResponse) => {
         this._fuseSplashScreenService.hide();
         this._dialogService._openErrorDialog(error.error);
       }
     );
+    this.subscriptions.push(sub);
+  }
+
+  checkAccountList(): any {
+    const sub = this._adwordsAccountsService.getAdwordsAccount()
+      .subscribe(
+        res => {
+          this._fuseSplashScreenService.hide();
+          return this._router.navigateByUrl('/danh-sach-tai-khoan');
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseSplashScreenService.hide();
+          return this._router.navigateByUrl('/them-tai-khoan-moi')
+        }
+      );
     this.subscriptions.push(sub);
   }
 

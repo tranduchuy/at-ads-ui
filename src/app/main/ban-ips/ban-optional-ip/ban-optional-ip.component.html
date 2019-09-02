@@ -5,107 +5,111 @@
       class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
-  <div class="title2">
-    TÍNH NĂNG CHẶN THEO DANH SÁCH IP TÙY CHỈNH
-  </div>
-
-  <p class="notification">
-    Hệ thống kiểm tra IP máy tính của bạn và chặn quảng cáo <span style="color: red">không cho hiển thị</span> trên máy
-    của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
-  </p>
-
-  <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
-
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
-      <div fxFlex="60">
-
-        <app-input-textarea [formControlName]="'listBannedIP'" [errors]="getMessageErrors('listBannedIP')"
-          title="Nhập danh sách IP cần chặn" height="260px" [isDisabled]="isProcessing"></app-input-textarea>
-
-      </div>
-      <div class="input-example" fxFlex="auto">
-        <p class="title3">Hướng Dẫn Chặn IP Tùy Chỉnh</p>
-        <p>
-          Bạn có thể chặn <b>từng IP riêng lẻ</b>, vui lòng điền mỗi IP 1 dòng
-        </p>
-        <b>Ví dụ IP riêng lẻ:</b>
-        <p>
-          127.0.0.1
-          <br>127.0.0.2
-          <br>127.0.0.3
-        </p>
-        <p>
-          Hoặc chặn <b>từng nhóm IP</b>, thêm dấu <span style="color: red">(*)</span> tượng trưng cho nhóm IP muốn chặn
-        </p>
-        <b>Ví dụ nhóm IP:</b>
-        <p>
-          IP4: 127.0.0.*
-          <br>IP4: 127.0.*.*
-        </p>
-        <span>
-          Hệ thống sẽ tự động chuyển đổi IP và chặn trong Google Ads, thời gian thực hiện từ 50-60s
-        </span>
-      </div>
+  <div class="inner">
+    <div class="title2">
+      TÍNH NĂNG CHẶN THEO DANH SÁCH IP TÙY CHỈNH
     </div>
 
-    <div class="button-area">
-      <button type="submit" mat-raised-button color="warn" [disabled]="isProcessing">
-        <mat-icon>block</mat-icon> CHẶN THỦ CÔNG DANH SÁCH IP
-      </button>
-    </div>
-  </form>
+    <p class="notification">
+      Hệ thống kiểm tra IP máy tính của bạn và chặn quảng cáo <span style="color: red">không cho hiển thị</span> trên
+      máy
+      của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
+    </p>
 
-  <p class="table-title"><b>Danh Sách IP Đã Chặn Gần Đây</b></p>
+    <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
 
-  <div class="table-wrapper">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
+        <div fxFlex="60">
 
-    <mat-table [dataSource]="blockedIPs" class="mat-elevation-z8">
+          <app-input-textarea [formControlName]="'listBannedIP'" [errors]="getMessageErrors('listBannedIP')"
+            title="Nhập danh sách IP cần chặn" height="260px" [isDisabled]="isProcessing"></app-input-textarea>
 
-      <ng-container matColumnDef="order">
-        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-        <mat-cell *matCellDef="let element; let i = index"> <span [class.new]="element.order === 'MỚI'">{{i+1}}</span>
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="ip">
-        <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span style="color: #039be5; font-weight: bold">{{element._id}}</span>
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <p class="status">
-            Chặn thành công <span style="color: gray; font-weight: bold">{{element._id}}</span> vào tổng <span
-              style="color: crimson; font-weight: bold">{{element.campaignNumber}}</span> chiến dịch.
+        </div>
+        <div class="input-example" fxFlex="auto">
+          <p class="title3">Hướng Dẫn Chặn IP Tùy Chỉnh</p>
+          <p>
+            Bạn có thể chặn <b>từng IP riêng lẻ</b>, vui lòng điền mỗi IP 1 dòng
           </p>
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="task">
-        <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
-        <mat-cell *matCellDef>
-          <span class="task">
-            <mat-icon>verified_user</mat-icon> đã chặn
+          <b>Ví dụ IP riêng lẻ:</b>
+          <p>
+            127.0.0.1
+            <br>127.0.0.2
+            <br>127.0.0.3
+          </p>
+          <p>
+            Hoặc chặn <b>từng nhóm IP</b>, thêm dấu <span style="color: red">(*)</span> tượng trưng cho nhóm IP muốn
+            chặn
+          </p>
+          <b>Ví dụ nhóm IP:</b>
+          <p>
+            IP4: 127.0.0.*
+            <br>IP4: 127.0.*.*
+          </p>
+          <span>
+            Hệ thống sẽ tự động chuyển đổi IP và chặn trong Google Ads, thời gian thực hiện từ 50-60s
           </span>
-        </mat-cell>
-      </ng-container>
+        </div>
+      </div>
 
-      <ng-container matColumnDef="unlockButton">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <button (click)="unblockSampleIP(element._id)" [disabled]="isProcessing" mat-icon-button color="accent"
-            matTooltip="Nhấn để mở chặn" class="unlock-button">
-            <mat-icon>lock_open</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
+      <div class="button-area">
+        <button type="submit" mat-raised-button color="warn" [disabled]="isProcessing">
+          <mat-icon>block</mat-icon> CHẶN THỦ CÔNG DANH SÁCH IP
+        </button>
+      </div>
+    </form>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+    <p class="table-title">Danh Sách IP Đã Chặn Gần Đây</p>
 
+    <div class="table-wrapper">
+
+      <mat-table [dataSource]="blockedIPs" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="order">
+          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index"> <span [class.new]="element.order === 'MỚI'">{{i+1}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ip">
+          <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span style="color: #039be5; font-weight: bold">{{element._id}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <p class="status">
+              Chặn thành công <span style="color: gray; font-weight: bold">{{element._id}}</span> vào tổng <span
+                style="color: crimson; font-weight: bold">{{element.campaignNumber}}</span> chiến dịch.
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="task">
+          <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
+          <mat-cell *matCellDef>
+            <span class="task">
+              <mat-icon>verified_user</mat-icon> đã chặn
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="unlockButton">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button (click)="unblockSampleIP(element._id)" [disabled]="isProcessing" mat-icon-button color="accent"
+              matTooltip="Nhấn để mở chặn" class="unlock-button">
+              <mat-icon>lock_open</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>
   </div>
 </div>

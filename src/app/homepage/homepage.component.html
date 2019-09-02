@@ -70,7 +70,7 @@
                <ng-container matColumnDef="ip">
                   <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <span style="color: #039be5">{{element.ip}}</span>
+                     <span style="color: #039be5; font-weight: bold">{{element.ip}}</span>
                   </mat-cell>
                </ng-container>
 
@@ -154,17 +154,26 @@
                                  && element.network?.name !== 'VNPT'
                                  && element.network?.name !== 'FPT'">{{element.network?.name}}</span>
 
-                     <img class="mobifone" src="https://brasol.vn/public/uploads/1521197514-brasol.vn-logo-mobifone-mobifone-logo.svg_.png" *ngIf="element.network?.name === 'MOBIFONE'" alt="">
-                     <img class="network-logo" src="https://dangky3gviettel.vn/wp-content/uploads/2018/10/cropped-logo-dang-ky-3g-viettel.png" *ngIf="element.network?.name === 'VIETTEL'" alt="">
-                     <img class="vietnamobile" src="https://css.vietnamobile.com.vn/images/logo.png" *ngIf="element.network?.name === 'VIETNAMOBILE'" alt="">
-                     <img class="vnpt" src="https://www.sunocean.com.vn/wp-content/uploads/2018/08/logo-vnpt.png" *ngIf="element.network?.name === 'VNPT'" alt="">
-                     <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png" *ngIf="element.network?.name === 'FPT'" alt="">
+                     <img class="mobifone"
+                        src="https://brasol.vn/public/uploads/1521197514-brasol.vn-logo-mobifone-mobifone-logo.svg_.png"
+                        *ngIf="element.network?.name === 'MOBIFONE'" alt="">
+                     <img class="network-logo"
+                        src="https://dangky3gviettel.vn/wp-content/uploads/2018/10/cropped-logo-dang-ky-3g-viettel.png"
+                        *ngIf="element.network?.name === 'VIETTEL'" alt="">
+                     <img class="vietnamobile" src="https://css.vietnamobile.com.vn/images/logo.png"
+                        *ngIf="element.network?.name === 'VIETNAMOBILE'" alt="">
+                     <img class="vnpt" src="https://www.sunocean.com.vn/wp-content/uploads/2018/08/logo-vnpt.png"
+                        *ngIf="element.network?.name === 'VNPT'" alt="">
+                     <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
+                        *ngIf="element.network?.name === 'FPT'" alt="">
                   </mat-cell>
                </ng-container>
 
                <ng-container matColumnDef="location">
                   <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-                  <mat-cell *matCellDef="let element">{{element.location?.city}}</mat-cell>
+                  <mat-cell *matCellDef="let element">
+                     <img src="../../assets/icons/location.svg" alt="" class="location-icon"> {{element.location?.city}}
+                  </mat-cell>
                </ng-container>
 
                <mat-header-row *matHeaderRowDef="logColumns"></mat-header-row>
@@ -180,7 +189,7 @@
          </p>
 
          <div class="demo-video">
-            <button mat-raised-button style="background-color: crimson; color: white">
+            <button mat-raised-button style="background-color: crimson; color: white" matTooltip="Sắp ra mắt">
                <mat-icon>ondemand_video</mat-icon> VIDEO DEMO CÔNG CỤ
             </button>
          </div>
@@ -245,7 +254,7 @@
                <br>
                <div class="trial">
                   <a>
-                     <button mat-raised-button color="accent">
+                     <button mat-raised-button color="accent" (click)="loginByGG()">
                         DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
                      </button>
                   </a>
@@ -376,10 +385,10 @@
          <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="60px">
             <div class="main-benefit-item">
                <div class="benefit-symbol">
-                  <img src="../../assets/images/save-money.png" alt="">
+                  <img src="../../assets/images/save-money.svg" alt="">
                </div>
                <div class="benefit-description">
-                  <p>Tiết Kiệm Chi Phí <mat-icon style="color: lime">arrow_downward</mat-icon>
+                  <p>TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
                   </p>
                   Giảm thiểu đến 50% chi phí quảng cáo <span style="color: yellow">lãng phí vô ích</span> do đối thủ phá
                   hoại
@@ -388,10 +397,10 @@
             </div>
             <div class="main-benefit-item">
                <div class="benefit-symbol">
-                  <img src="../../assets/images/save-time.png" alt="">
+                  <img src="../../assets/images/timer.svg" alt="">
                </div>
                <div class="benefit-description">
-                  <p>Giảm Thời Gian <mat-icon style="color: lime">arrow_downward</mat-icon>
+                  <p>GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward</mat-icon>
                   </p>
                   Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn 24h/ngày và 7
                   ngày/tuần.
@@ -399,10 +408,10 @@
             </div>
             <div class="main-benefit-item">
                <div class="benefit-symbol">
-                  <img src="../../assets/images/shake-hand.png" alt="">
+                  <img src="../../assets/images/customer.png" alt="">
                </div>
                <div class="benefit-description">
-                  <p>Tăng Khách Hàng <mat-icon style="color: lime">arrow_upward</mat-icon>
+                  <p>TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward</mat-icon>
                   </p>
                   Giảm các chi phí <span style="color: yellow">lãng phí</span> do click ảo, bạn sẽ có thêm chi phí quảng
                   cáo.
@@ -428,7 +437,7 @@
             hệ
             với chúng tôi.
             <div class="view-more-button">
-               <button mat-raised-button color="accent">
+               <button mat-raised-button color="accent" matTooltip="Sắp ra mắt">
                   XEM THÊM <mat-icon style="font-size: 20px; color: white">navigate_next</mat-icon>
                </button>
             </div>

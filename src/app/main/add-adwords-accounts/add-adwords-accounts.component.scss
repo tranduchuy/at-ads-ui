@@ -1,195 +1,215 @@
-.input-side {
-}
 .container {
-  padding: 30px;
   width: 100%;
-}
-.submit-button {
-  height: 58px;
-  margin: 2px;
-  margin-top: 4px;
-  margin-right: 0;
-  width: 120px;
-}
-
-.message {
-  border: 1px solid #d2d2d2;
-  box-shadow: 1px 1px 2px silver;
-  background-color: white;
-  min-width: 350px;
-  margin-bottom: 10px;
-
-  .message-title {
-    padding: 10px;
-    font-size: 18px;
-    font-style: tahoma;
-
-    img {
-      height: 40px;
-      width: 40px;
-      margin-right: 10px;
-    }
-  }
-
-  .message-text {
-    padding: 10px;
-  }
-}
-
-.step {
-  color: #039be5;
-}
-.box {
-  padding: 30px;
-}
-.loginWithGoogle {
-  display: table;
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
-
-  button {
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 0;
-
-    img {
-      height: 24px;
-      width: 24px;
-      margin-top: -5px;
-      margin-right: 5px;
-    }
-
-    &:disabled {
-      img {
-        opacity: 0.4;
-      }
-    }
-  }
-
-  .connect-by-emai-button {
-    background: white;
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  .disconnect-by-email-button {
-    background: #cf493c;
-    color: white;
-  }
-
-  .note {
-    font-size: 12px;
-    font-style: italic;
-  }
-}
-
-.ads-account-list {
-  padding-top: 20px;
-
-  .div-connect-account-button {
-    text-align: center;
-    padding-top: 10px;
-
-    button {
-      border-radius: 0;
-
-      mat-icon {
-        font-size: 20px;
-      }
-    }
-  }
-
-  .ads-account-list-title {
-    background-color: rgba(3, 155, 229, 1);
-    color: white;
-    box-shadow: 1px 1px 4px silver;
+  
+  .title {
+    background: url("../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    font-size: 16px;
     font-weight: bold;
-    padding: 20px;
+    color: white;
+    padding: 100px 30px 30px 30px;
   }
 
-  .ads-account-list-wrapper {
-    max-height: 300px;
-    overflow: auto;
-    background-color: white;
-    box-shadow: 1px 1px 4px silver;
+  .inner {
+    padding: 30px;
+    padding-top: 15px;
 
-    mat-table {
-      box-shadow: none;
+    .input-side {
+    }
+    .submit-button {
+      height: 58px;
+      margin: 2px;
+      margin-top: 4px;
+      margin-right: 0;
+      width: 120px;
+    }
 
-      mat-row {
-        transition: 0.2s;
+    .message {
+      border: 1px solid #d2d2d2;
+      box-shadow: 1px 1px 2px silver;
+      background-color: white;
+      min-width: 350px;
+      margin-bottom: 10px;
 
-        &:hover {
-          background-color: rgba(3, 155, 229, 0.1);
+      .message-title {
+        padding: 10px;
+        font-size: 18px;
+        font-style: tahoma;
+
+        img {
+          height: 40px;
+          width: 40px;
+          margin-right: 10px;
         }
       }
 
-      mat-cell {
-        color: #039be5;
-      }
-
-      .disabled-cell {
-        color: silver;
-      }
-
-      mat-header-cell:nth-child(1),
-      mat-cell:nth-child(1) {
-        flex: 0 0 12%;
-      }
-
-      mat-header-cell:last-child,
-      mat-cell:last-child {
-        display: flex;
-        justify-content: center;
+      .message-text {
+        padding: 10px;
       }
     }
+
+    .step {
+      color: #039be5;
+    }
+    .box {
+      padding: 30px;
+    }
+    .loginWithGoogle {
+      display: table;
+      margin: 0 auto;
+      margin-top: 20px;
+      margin-bottom: 10px;
+
+      button {
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 0;
+
+        img {
+          height: 24px;
+          width: 24px;
+          margin-top: -5px;
+          margin-right: 5px;
+        }
+
+        &:disabled {
+          img {
+            opacity: 0.4;
+          }
+        }
+      }
+
+      .connect-by-emai-button {
+        background: white;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      .disconnect-by-email-button {
+        background: #cf493c;
+        color: white;
+      }
+
+      .note {
+        font-size: 12px;
+        font-style: italic;
+      }
+    }
+
+    .ads-account-list {
+      padding-top: 20px;
+
+      .div-connect-account-button {
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        button {
+          border-radius: 0;
+
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+      }
+
+      .ads-account-list-title {
+        font-weight: bold;
+        font-size: 16px;
+        padding-bottom: 10px;
+      }
+
+      .ads-account-list-wrapper {
+        max-height: 300px;
+        overflow: auto;
+        background-color: white;
+        box-shadow: 1px 1px 4px silver;
+
+        mat-table {
+          box-shadow: none;
+
+          mat-row {
+            transition: 0.2s;
+
+            &:hover {
+              background-color: rgba(3, 155, 229, 0.1);
+            }
+          }
+
+          mat-cell {
+            color: #039be5;
+          }
+
+          .disabled-cell {
+            color: silver;
+          }
+
+          mat-header-cell:nth-child(1),
+          mat-cell:nth-child(1) {
+            flex: 0 0 12%;
+          }
+
+          mat-header-cell:last-child,
+          mat-cell:last-child {
+            display: flex;
+            justify-content: center;
+          }
+
+          mat-header-cell {
+            background: #039be5;
+            color: white;
+          }
+        }
+      }
+    }
+
+    .g-sign-in-button {
+      width: 250px;
+      background: #2d77f3;
+    }
+    .g-sign-in-button {
+      height: 40px;
+      border-width: 0;
+      border-radius: 2px;
+      white-space: nowrap;
+      /* box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05); */
+      /* transition-property: background-color, box-shadow; */
+      /* transition-duration: 150ms; */
+      /* transition-timing-function: ease-in-out; */
+      padding: 0;
+      margin: 10px;
+      display: inline-block;
+      width: 210px;
+      background-color: #4285f4;
+      color: #fff;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+      transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+    }
+
+    .text-container {
+      display: inline-block;
+      vertical-align: middle;
+      font-family: "Roboto", arial, sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.21px;
+      font-size: 14px;
+      border: none;
+      text-align: center;
+      width: 166px;
+      padding-top: 10px;
+    }
   }
-}
-
-.g-sign-in-button {
-  width: 250px;
-  background: #2d77f3;
-}
-.g-sign-in-button {
-  height: 40px;
-  border-width: 0;
-  border-radius: 2px;
-  white-space: nowrap;
-  /* box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05); */
-  /* transition-property: background-color, box-shadow; */
-  /* transition-duration: 150ms; */
-  /* transition-timing-function: ease-in-out; */
-  padding: 0;
-  margin: 10px;
-  display: inline-block;
-  width: 210px;
-  background-color: #4285f4;
-  color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-  transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
-}
-
-.text-container {
-  display: inline-block;
-  vertical-align: middle;
-  font-family: "Roboto", arial, sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.21px;
-  font-size: 14px;
-  border: none;
-  text-align: center;
-  width: 166px;
-  padding-top: 10px;
 }
 
 @media screen and(max-width: 600px) {
   .container {
-    padding: 15px;
-  }
-  .submit-button {
-    padding: 0;
-    padding-right: 5px;
-    font-size: 12px;
+    .inner {
+      padding: 15px;
+    }
+    .submit-button {
+      padding: 0;
+      padding-right: 5px;
+      font-size: 12px;
+    }
   }
 }

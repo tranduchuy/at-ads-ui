@@ -1,116 +1,123 @@
 .container {
-  padding: 15px 30px 15px 30px;
   width: 100%;
 
   .title1 {
-    padding: 15px;
-    padding-left: 30px;
-    background-color: whitesmoke;
-    color: gray;
+    padding: 85px 30px 25px 30px;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
     font-size: 16px;
     font-weight: bold;
 
-    box-shadow: 2px 2px 5px silver;
+    .datePicker {
+      color: #039be5;
+
+      input {
+        color: white;
+      }
+    }
   }
 
-  .user-image {
-    height: 30px;
-    width: 30px;
-    margin-right: 10px;
-    border-radius: 50%;
-  }
-
-  .keywords {
-    background-color: whitesmoke;
-    margin: 3px;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 2px;
-    transition: 0.2s;
-  }
-
-  .datePicker {
-    width: 250px;
-  }
-
-  .pagination-buttons {
-    display: table;
-    margin: 0 auto;
-  }
-
-  .device-symbol {
-    height: 50px;
-    width: 50px;
-  }
-
-  .table-wrapper {
-    margin-top: -18px;
-    box-shadow: 2px 2px 5px silver;
-    overflow: auto;
-    overflow-y: hidden;
-
-    mat-table {
-      box-shadow: none;
+  .inner {
+    .user-image {
+      height: 30px;
+      width: 30px;
+      margin-right: 10px;
+      border-radius: 50%;
     }
 
-    mat-header-row,
-    mat-row {
-      min-width: 1100px;
-      width: 100%;
+    .keywords {
+      background-color: whitesmoke;
+      margin: 3px;
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 2px;
       transition: 0.2s;
     }
 
-    mat-header-cell:nth-child(1),
-    mat-cell:nth-child(1) {
-      flex: 0 0 16%;
+    .datePicker {
+      width: 250px;
     }
 
-    mat-header-cell:nth-child(2),
-    mat-cell:nth-child(2) {
-      flex: 0 0 25%;
+    .pagination-buttons {
+      display: table;
+      margin: 0 auto;
+      padding-left: 10px;
+      color: gray;
     }
 
-    mat-header-cell:nth-child(3),
-    mat-cell:nth-child(3) {
-      flex: 0 0 10%;
+    .device-symbol {
+      height: 50px;
+      width: 50px;
     }
 
-    mat-header-cell:nth-child(4),
-    mat-cell:nth-child(4) {
-      padding-right: 20px;
-      flex-wrap: wrap;
+    .table-wrapper {
+      margin-top: -18px;
+      box-shadow: 1px 1px 4px silver;
+      overflow: auto;
+      overflow-y: hidden;
 
-      // span {
-      //   flex-grow: 1;
-      // }
-    }
-
-    mat-cell:nth-child(4) {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-
-    mat-row:hover {
-      background-color: whitesmoke;
-
-      .keywords {
-        background-color: #eee;
+      mat-table {
+        box-shadow: none;
       }
-    }
 
-    ul {
-      list-style: none;
-      padding-left: 0;
+      mat-header-row,
+      mat-row {
+        min-width: 1100px;
+        width: 100%;
+        transition: 0.2s;
+      }
+
+      mat-header-cell:nth-child(1),
+      mat-cell:nth-child(1) {
+        flex: 0 0 16%;
+      }
+
+      mat-header-cell:nth-child(2),
+      mat-cell:nth-child(2) {
+        flex: 0 0 25%;
+      }
+
+      mat-header-cell:nth-child(3),
+      mat-cell:nth-child(3) {
+        flex: 0 0 10%;
+      }
+
+      mat-header-cell:nth-child(4),
+      mat-cell:nth-child(4) {
+        padding-right: 20px;
+        flex-wrap: wrap;
+
+        // span {
+        //   flex-grow: 1;
+        // }
+      }
+
+      mat-cell:nth-child(4) {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      mat-header-cell {
+        background: #039be5;
+        color: white;
+      }
+
+      mat-row:hover {
+        background-color: rgba(3, 155, 229, 0.1);
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
     }
   }
 }
 
 @media screen and (max-width: 600px) {
   .container {
-    padding: 15px;
-    padding-top: 0;
-
     pagination-controls {
       display: flex !important;
       justify-content: center !important;

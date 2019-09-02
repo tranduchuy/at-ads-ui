@@ -1,106 +1,112 @@
 .container {
-  padding: 20px 30px 20px 30px;
   width: 100%;
 
-  .inner {
-    padding: 50px 30px 15px 30px;
-    background-color: white;
-    box-shadow: 2px 2px 5px silver;
-    margin-top: -18px;
-  }
-
   .title1 {
-    padding: 15px;
-    padding-left: 30px;
-    background-color: whitesmoke;
-    color: gray;
+    padding: 95px 30px 45px 40px;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
     font-size: 16px;
     font-weight: bold;
-    box-shadow: 2px 2px 5px silver;
   }
 
-  .left {
-    padding: 40px;
-    padding-top: 10px;
-    padding-bottom: 15px;
-    background-color: white;
-    text-align: center;
-
-    .avatar {
-      height: 110px;
-      width: 110px;
-      display: table;
-      margin: 0 auto;
-      margin-bottom: 15px;
+  .main-inner {
+    .inner {
+      padding: 50px 30px 30px 30px;
+      background-color: white;
+      box-shadow: 1px 1px 4px silver;
+      margin-top: -18px;
     }
-  }
 
-  .right {
-    height: auto;
-    background-color: white;
-    box-shadow: 1px 1px 3px silver;
-    overflow: auto;
+    .left {
+      padding: 40px;
+      padding-top: 10px;
+      padding-bottom: 15px;
+      background-color: white;
+      text-align: center;
 
-    mat-table {
-      box-shadow: none;
-
-      mat-header-cell:nth-child(1),
-      mat-cell:nth-child(1) {
-        flex: 0 0 10%;
+      .avatar {
+        height: 110px;
+        width: 110px;
+        display: table;
+        margin: 0 auto;
+        margin-bottom: 15px;
       }
+    }
 
-      mat-header-cell:nth-child(2),
-      mat-cell:nth-child(2) {
-        flex: 0 0 17%;
-      }
+    .right {
+      height: auto;
+      background-color: white;
+      box-shadow: 1px 1px 3px silver;
+      overflow: auto;
 
-      mat-header-cell:nth-child(3),
-      mat-cell:nth-child(3) {
-        mat-icon {
-          font-size: 20px;
+      mat-table {
+        box-shadow: none;
+
+        mat-header-cell:nth-child(1),
+        mat-cell:nth-child(1) {
+          flex: 0 0 10%;
+        }
+
+        mat-header-cell:nth-child(2),
+        mat-cell:nth-child(2) {
+          flex: 0 0 17%;
+        }
+
+        mat-header-cell:nth-child(3),
+        mat-cell:nth-child(3) {
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+
+        mat-row {
+          transition: 0.2s;
+        }
+        mat-row:hover {
+          background-color: rgba(3, 155, 229, 0.1);
+        }
+
+        mat-header-cell {
+          background: #039be5;
+          color: white;
+        }
+
+        mat-row,
+        mat-header-row {
+          min-width: 1400px;
+          width: 100%;
         }
       }
 
-      mat-row {
-        transition: 0.2s;
-      }
-      mat-row:hover {
-        background-color: whitesmoke;
-      }
-
-      mat-row,
-      mat-header-row {
-        min-width: 1400px;
-        width: 100%;
+      .adwords-badge {
+        border: 1px solid #4bb543;
+        border-radius: 5px;
+        padding: 5px;
       }
     }
 
-    .adwords-badge {
-      border: 1px solid #4bb543;
-      border-radius: 5px;
-      padding: 5px;
+    .icon {
+      height: 22px;
+      width: 22px;
+      margin-right: 5px;
     }
-  }
 
-  .icon {
-    height: 22px;
-    width: 22px;
-    margin-right: 5px;
-  }
+    .pagination-buttons {
+      width: 100%;
+      color: gray;
+    }
 
-  .pagination-buttons {
-    width: 100%;
-  }
+    .bottom {
+      margin-top: 15px;
+      padding: 15px;
 
-  .bottom {
-    margin-top: 15px;
-    padding: 15px;
+      .last-history-icon {
+        text-align: center;
 
-    .last-history-icon {
-      text-align: center;
-
-      mat-icon {
-        font-size: 30px;
+        mat-icon {
+          font-size: 30px;
+        }
       }
     }
   }
@@ -108,15 +114,8 @@
 
 @media screen and (max-width: 600px) {
   .container {
-    padding: 15px;
-    padding-top: 0;
-
     .title1 {
       text-align: center;
-    }
-
-    .inner {
-      padding: 10px;
     }
   }
 }

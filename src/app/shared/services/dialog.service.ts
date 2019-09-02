@@ -29,9 +29,12 @@ export class DialogService {
     dialogRef.componentInstance.messages = res.messages;
   }
 
-  public _openErrorDialog(error: IError): void {
+  public _openErrorDialog(error: IError, contact?: boolean): void {
     const dialogRef = this._matDialog.open(ErrorDialogComponent);
     dialogRef.componentInstance.errorMessages = error.messages;
+
+    if(contact !== undefined)
+      dialogRef.componentInstance.contact = contact;
   }
 
   public _openConfirmDialog(message: string): Observable<boolean> {

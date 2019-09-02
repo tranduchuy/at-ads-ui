@@ -47,7 +47,7 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
     const sub = this._reportService.getDailyClickingReport({ page, limit: 10 })
       .subscribe(res => {
         this.dataSource = res.data.entries;
-        
+
         this.pageTotal = Math.ceil(res.data.totalItems / 10);
         this.totalItems = res.data.totalItems;
 

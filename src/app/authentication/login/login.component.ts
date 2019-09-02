@@ -174,6 +174,7 @@ export class LoginComponent extends PageBaseComponent implements OnInit, AfterVi
 
         this._sessionService.set(token, user);
         this._sessionService.setUser(user);
+        this._sessionService.setGoogleAccountToken(accessToken, refreshToken);
 
         this._ngZone.run(() => this._router.navigateByUrl('/')
           .then(resolve => {

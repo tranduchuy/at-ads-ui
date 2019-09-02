@@ -131,7 +131,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Chặn Trình Duyệt Ẩn Danh',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'public',
+        icon: 'vpn_lock',
         url: '/chan-ip/chan-trinh-duyet-an-danh',
       },
     ]

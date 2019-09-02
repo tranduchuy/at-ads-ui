@@ -29,7 +29,7 @@ export class FuseNavigationComponent implements OnInit {
   accounts =
     {
       id: 'adwords-accounts',
-      title: 'Tài Khoản',
+      title: 'TÀI KHOẢN GOOGLE ADS',
       type: 'group',
       children: [
         {

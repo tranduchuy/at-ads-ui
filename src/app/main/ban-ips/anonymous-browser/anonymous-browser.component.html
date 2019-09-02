@@ -3,22 +3,24 @@
     CẤU HÌNH CHẶN TRÌNH DUYỆT ẨN DANH - TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId}}</span>
   </div>
 
-  <p class="title2">
-    Bằng việc cấu hình này, các quảng cáo sẽ <span style="color: red">không hiển thị</span> trên các thiết bị sử dụng
-    <span style="color: #039be5">trình duyệt ẩn danh</span>, giúp tiết kiệm chi phí với những người dùng muốn <span
-      style="color: red">dấu thông tin</span> truy cập vào quảng cáo.
-  </p>
+  <div class="inner">
+    <p class="title2">
+      Bằng việc cấu hình này, các quảng cáo sẽ <span style="color: red">không hiển thị</span> trên các thiết bị sử dụng
+      <span style="color: #039be5">trình duyệt ẩn danh</span>, giúp tiết kiệm chi phí với những người dùng muốn <span
+        style="color: red">dấu thông tin</span> truy cập vào quảng cáo.
+    </p>
 
-  <div class="config-checking">
-    <mat-checkbox [checked]="checked" (change)="checkSetting($event)" [disabled]="isProcessing">
-      Chặn trình duyệt ẩn danh
-    </mat-checkbox>
+    <div class="config-checking">
+      <mat-checkbox [checked]="checked" (change)="checkSetting($event)" [disabled]="isProcessing">
+        Chặn trình duyệt ẩn danh
+      </mat-checkbox>
+    </div>
+
+    <p class="button-area">
+      <button mat-raised-button color="accent" [disabled]="isProcessing" (click)="setBlockingAnonymousBrowser()">
+        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+      </button>
+    </p>
   </div>
-
-  <p class="button-area">
-    <button mat-raised-button color="accent" [disabled]="isProcessing" (click)="setBlockingAnonymousBrowser()">
-      <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
-    </button>
-  </p>
 
 </div>

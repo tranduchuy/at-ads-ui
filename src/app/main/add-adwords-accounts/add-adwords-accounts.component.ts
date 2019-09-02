@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef, AfterViewInit, Renderer } from '@angular/core';
 import { EditableFormBaseComponent } from '../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { Validators } from '@angular/forms';
@@ -13,6 +13,7 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { environment } from 'environments/environment';
 import { AuthService } from 'app/shared/services/auth.service';
+import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
 
 declare var gapi: any;
 
@@ -21,8 +22,7 @@ declare var gapi: any;
   templateUrl: './add-adwords-accounts.component.html',
   styleUrls: ['./add-adwords-accounts.component.scss']
 })
-export class AddAdwordsAccountsComponent extends EditableFormBaseComponent implements OnInit {
-
+export class AddAdwordsAccountsComponent extends EditableFormBaseComponent implements OnInit, AfterViewInit {
   form;
   isConnected = false;
   connectedAccountId: string;
@@ -42,6 +42,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     public _dialogService: DialogService,
     private _fuseNavigationService: FuseNavigationService,
     private _addAdwordsAccountsService: AddAdwordsAccountsService,
+    private _adwordsAccountsService: AdwordsAccountsService,
     private _sessionService: SessionService,
     private _router: Router,
     private _fuseSlashScreenService: FuseSplashScreenService,
@@ -54,12 +55,29 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   ngOnInit(): void {
     this.initForm();
+    this.checkAccountList();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.googleInit();
     }, 500);
+  }
+
+  checkAccountList(): any {
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
+    const sub = this._adwordsAccountsService.getAdwordsAccount()
+      .subscribe(
+        res => {
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+        },
+        (error: HttpErrorResponse) => {
+          this.getAdsAccounts();
+        }
+      );
+    this.subscriptions.push(sub);
   }
 
   private googleInit(): void {
@@ -72,12 +90,13 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     });
   }
 
-  loginByGG(): void {
+  showAccountListByEmail(): void {
     const googleAccountToken = this._sessionService.getGoogleAccountToken();
 
     if (!googleAccountToken.accessToken || !googleAccountToken.refreshToken)
       this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
     else this.getAdsAccounts();
+
   }
 
   onSignIn(googleUser: any): void {
@@ -136,7 +155,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this.isAccountListShown = false;
           this.isProcessing = false;
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openInfoDialog('Chúng tôi không tìm thấy tài khoản Google Ads nào trong tài khoản Google của bạn!');
+          this._dialogService._openErrorDialog(error.error, true);
         });
     this.subscriptions.push(sub);
   }

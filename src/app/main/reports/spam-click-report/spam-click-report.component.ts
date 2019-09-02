@@ -82,12 +82,17 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     return dates;
   }
 
-  onApplyDateRange(event) {
+  onSelectDateRange(event) {
     if (moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 60) {
       this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 60 ngày trở lại');
       return false;
     }
     return true;
+  }
+
+  onApplyDateRange() {
+    this.getAccountStatisticReport(this._sessionService.activeAccountId);
+    this.getAccountReport(this._sessionService.activeAccountId, 1, 20);
   }
 
   getAccountReport(accountId: string, page?: number, limit?: number) {
@@ -100,8 +105,10 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
       .subscribe(
         res => {
           this.advertisementClickReport = res.data.logs;
+
           this.totalItems = res.data.totalItems;
           this.pageTotal = Math.ceil(this.totalItems / 20);
+
           this._fuseProgressBarService.hide();
         },
         (error: HttpErrorResponse) => {

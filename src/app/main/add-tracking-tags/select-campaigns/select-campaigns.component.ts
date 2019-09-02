@@ -151,6 +151,6 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   }
 
   showSupportInfoDialog() {
-    this._dialogService._openInfoDialog('Vui lòng liên hệ hotline 0984 66 80 60 hoặc 0901 47 48 46 để được hỗ trợ thêm.');
+    this._dialogService._openInfoDialog('Vui lòng liên hệ email ha@appnet.edu.vn để được hỗ trợ thêm.');
   }
 }

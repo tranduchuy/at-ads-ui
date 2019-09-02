@@ -1,135 +1,145 @@
 <div class="container">
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
-    <div gdArea="connect-button" class="connect-button">
-      <h3><strong><span class="step">[1]</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h3>
-      <p style="text-align: justify"> Sử dụng tài khoản Gmail quản lý Google AdWords, bấm kết nối nhanh để hoàn tất quá
-        trình kết nối</p>
-      <div class="loginWithGoogle">
+  <div class="title">
+    KẾT NỐI TÀI KHOẢN GOOGLE ADS VỚI TÀI KHOẢN CỦA BẠN
+  </div>
+  <div class="inner">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+      <div gdArea="connect-button" class="connect-button">
+        <h3><strong><span class="step">[1]</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h3>
+        <p style="text-align: justify"> Sử dụng tài khoản Gmail quản lý Google AdWords, bấm kết nối nhanh để hoàn tất
+          quá
+          trình kết nối</p>
+        <div class="loginWithGoogle">
 
-        <button mat-raised-button (click)="loginByGG()" [disabled]="isProcessing" *ngIf="!isAccountListShown"
-          class="connect-by-email-button">
-          <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt="">Kết nối nhanh bằng
-          Gmail</button>
+          <button mat-raised-button (click)="showAccountListByEmail()" [disabled]="isProcessing"
+            *ngIf="!isAccountListShown" class="connect-by-email-button">
+            <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt="">Kết nối nhanh
+            bằng
+            Gmail</button>
 
-        <button mat-raised-button (click)="isAccountListShown = false; selectedAccount = ''" [disabled]="isProcessing" *ngIf="isAccountListShown"
-          class="disconnect-by-email-button">
-          <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt="">Hủy kết nối nhanh
-          bằng Gmail</button>
+          <button mat-raised-button (click)="isAccountListShown = false; selectedAccount = ''" [disabled]="isProcessing"
+            *ngIf="isAccountListShown" class="disconnect-by-email-button">
+            <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt="">Hủy kết nối nhanh
+            bằng Gmail</button>
+
+        </div>
+      </div>
+
+      <div gdArea="input-side" class="input-side">
+
+        <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h3>
+        <p style="text-align: justify"><strong>Bước 1: </strong> Đăng nhập <a
+            href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
+          khoản Google Ads của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span>
+          là
+          ID
+          tài khoản Google Ads của bạn</p>
+
+        <form [formGroup]="form" novalidate>
+          <div fxLayout="row">
+            <app-input-text [formControlName]="'adWordId'" [title]="'Google Ads ID'"
+              [placeholder]="'Ví dụ: 5456445193 hoặc 545-644-5193'" [pristine]="true"
+              [errors]="getMessageErrors('adWordId')" (keypress)="onPressId($event.keyCode)">
+            </app-input-text>
+            <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
+              (click)="onClickBtnSubmit()" [disabled]="isProcessing">
+              <mat-icon matSuffix class="add_box" style="font-size: 20px">wifi</mat-icon>
+              Kết nối
+            </button>
+          </div>
+        </form>
 
       </div>
     </div>
 
-    <div gdArea="input-side" class="input-side">
+    <div class="ads-account-list" *ngIf="isAccountListShown">
 
-      <h3><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h3>
-      <p style="text-align: justify"><strong>Bước 1: </strong> Đăng nhập <a
-          href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
-        khoản Google Ads của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là
-        ID
-        tài khoản Google Ads của bạn</p>
+      <div class="ads-account-list-title">
+        VUI LÒNG LỰA CHỌN TÀI KHOẢN GOOGLE ADS CỦA BẠN
+      </div>
 
-      <form [formGroup]="form" novalidate>
-        <div fxLayout="row">
-          <app-input-text [formControlName]="'adWordId'" [title]="'Google Ads ID'"
-            [placeholder]="'Ví dụ: 5456445193 hoặc 545-644-5193'" [pristine]="true"
-            [errors]="getMessageErrors('adWordId')" (keypress)="onPressId($event.keyCode)">
-          </app-input-text>
-          <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
-            (click)="onClickBtnSubmit()" [disabled]="isProcessing">
-            <mat-icon matSuffix class="add_box" style="font-size: 20px">wifi</mat-icon>
-            Kết nối
-          </button>
-        </div>
-      </form>
+      <div class="ads-account-list-wrapper">
 
-    </div>
-  </div>
+        <mat-table [dataSource]="adsAccounts" class="mat-elevation-z8">
 
-  <div class="ads-account-list" *ngIf="isAccountListShown">
+          <ng-container matColumnDef="order">
+            <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index" [class.disabled-cell]="!element.availableToConnect">
+              {{i + 1}}
+            </mat-cell>
+          </ng-container>
 
-    <div class="ads-account-list-title">
-      VUI LÒNG LỰA CHỌN TÀI KHOẢN GOOGLE ADS CỦA BẠN
-    </div>
+          <ng-container matColumnDef="adsId">
+            <mat-header-cell *matHeaderCellDef> Google Ads ID </mat-header-cell>
+            <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
+              {{element.googleAdId}}
+            </mat-cell>
+          </ng-container>
 
-    <div class="ads-account-list-wrapper">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Tên </mat-header-cell>
+            <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
+              {{element.name}}
+            </mat-cell>
+          </ng-container>
 
-      <mat-table [dataSource]="adsAccounts" class="mat-elevation-z8">
+          <ng-container matColumnDef="selection">
+            <mat-header-cell *matHeaderCellDef> Chọn tại đây </mat-header-cell>
+            <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
 
-        <ng-container matColumnDef="order">
-          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-          <mat-cell *matCellDef="let element; let i = index" [class.disabled-cell]="!element.availableToConnect">
-            {{i + 1}}
-          </mat-cell>
-        </ng-container>
+              <mat-radio-button value="{{element.googleAdId}}" *ngIf="!element.availableToConnect"
+                matTooltip="{{element.reason}}" disabled></mat-radio-button>
 
-        <ng-container matColumnDef="adsId">
-          <mat-header-cell *matHeaderCellDef> Google Ads ID </mat-header-cell>
-          <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
-            {{element.googleAdId}}
-          </mat-cell>
-        </ng-container>
+              <mat-radio-button value="{{element.googleAdId}}" *ngIf="element.availableToConnect"
+                (change)="selectAccount($event)"></mat-radio-button>
 
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Tên </mat-header-cell>
-          <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
-            {{element.name}}
-          </mat-cell>
-        </ng-container>
+            </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="selection">
-          <mat-header-cell *matHeaderCellDef> Chọn tại đây </mat-header-cell>
-          <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
+          <mat-header-row *matHeaderRowDef="adsAccountColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: adsAccountColumns;"></mat-row>
+        </mat-table>
 
-            <mat-radio-button value="{{element.googleAdId}}" *ngIf="!element.availableToConnect"
-              matTooltip="{{element.reason}}" disabled></mat-radio-button>
+      </div>
 
-            <mat-radio-button value="{{element.googleAdId}}" *ngIf="element.availableToConnect"
-              (change)="selectAccount($event)"></mat-radio-button>
-
-          </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="adsAccountColumns; sticky: true"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: adsAccountColumns;"></mat-row>
-      </mat-table>
-
+      <p class="div-connect-account-button">
+        <button mat-raised-button color="accent" [disabled]="!selectedAccount || isProcessing"
+          (click)="connectAccountByEmail()">
+          <mat-icon>wifi</mat-icon> Kết nối tài khoản
+        </button>
+      </p>
     </div>
 
-    <p class="div-connect-account-button">
-      <button mat-raised-button color="accent" [disabled]="!selectedAccount || isProcessing" (click)="connectAccountByEmail()">
-        <mat-icon>wifi</mat-icon> Kết nối tài khoản
-      </button>
-    </p>
-  </div>
+    <div gdArea="content" *ngIf="isConnected">
+      <mat-divider></mat-divider>
+      <h3><strong><span class="step">[3]</span> VUI LÒNG ĐỒNG Ý YÊU CẦU KẾT NỐI</strong></h3>
+      <p><strong>Bước 1: </strong> Truy cập lại tài khoản AdWords của bạn <a
+          href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a> và bấm vào icon ở menu
+        bên
+        trái </p>
+      <p class="text-center"><img src="/assets/images/adwords-caidat-b1-moi.jpg?v=1"></p>
+      <p><strong>Bước 2: </strong> Sau đó bấm vào <code> Người Quản Lý </code> và bấm <code>Chấp Thuận</code> (nếu bạn
+        không thấy người quản lý vui lòng chờ khoảng 5 phút)</p>
+      <p class="text-center">
+        <img src="./assets/images/adwords-caidat-b2-moi.jpg?v=1">
+      </p>
+      <p><strong>Bước 3: </strong>Một thông báo hiện ra, bạn chọn <code>Cấp Quyền Truy Cập</code></p>
+      <p class="text-center">
+        <img src="./assets/images/adwords-caidat-b3-moi.jpg?v=1">
+      </p>
+      <p class="text-center" style="padding-top: 20px">
+        <button mat-raised-button color="warn" [disabled]="isProcessing" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI"
+          (click)="completeAccountConnection()" style="border-radius: 0">
+          <mat-icon matSuffix class="done_outline">done_outline</mat-icon>
+          TÔI ĐÃ HOÀN TẤT KẾT NỐI
+        </button>
 
-  <div gdArea="content" *ngIf="isConnected">
-    <hr>
-    <h3><strong><span class="step">[3]</span> VUI LÒNG ĐỒNG Ý YÊU CẦU KẾT NỐI</strong></h3>
-    <p><strong>Bước 1: </strong> Truy cập lại tài khoản AdWords của bạn <a
-        href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a> và bấm vào icon ở menu bên
-      trái </p>
-    <p class="text-center"><img src="/assets/images/adwords-caidat-b1-moi.jpg?v=1"></p>
-    <p><strong>Bước 2: </strong> Sau đó bấm vào <code> Người Quản Lý </code> và bấm <code>Chấp Thuận</code> (nếu bạn
-      không thấy người quản lý vui lòng chờ khoảng 5 phút)</p>
-    <p class="text-center">
-      <img src="./assets/images/adwords-caidat-b2-moi.jpg?v=1">
-    </p>
-    <p><strong>Bước 3: </strong>Một thông báo hiện ra, bạn chọn <code>Cấp Quyền Truy Cập</code></p>
-    <p class="text-center">
-      <img src="./assets/images/adwords-caidat-b3-moi.jpg?v=1">
-    </p>
-    <p class="text-center" style="padding-top: 20px">
-      <button mat-raised-button color="warn" [disabled]="isProcessing" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI"
-        (click)="completeAccountConnection()" style="border-radius: 0">
-        <mat-icon matSuffix class="done_outline">done_outline</mat-icon>
-        TÔI ĐÃ HOÀN TẤT KẾT NỐI
-      </button>
-
-    </p>
-    <!-- <div gdArea="content">
-    <h3><strong><span class="step">[2]</span>  Vui lòng đồng ý yêu cầu kết nối</strong></h3>
-    <p><strong>Bước 1: </strong> Đăng nhập <a href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
-      khoản adwords của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
-      tài khoản Adwords của bạn</p>
-  </div> -->
+      </p>
+      <!-- <div gdArea="content">
+            <h3><strong><span class="step">[2]</span>  Vui lòng đồng ý yêu cầu kết nối</strong></h3>
+            <p><strong>Bước 1: </strong> Đăng nhập <a href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
+              khoản adwords của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span> là ID
+              tài khoản Adwords của bạn</p>
+          </div> -->
+    </div>
   </div>
