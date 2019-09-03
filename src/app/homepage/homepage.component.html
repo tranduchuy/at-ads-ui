@@ -2,53 +2,57 @@
 
    <div class="main-content">
 
-      <div class="banner">
+      <div class="banner-container">
+         <div class="banner">
 
-         <div class="title1 app-title">
-            CÔNG CỤ CHỐNG CLICK TẶC 2019
-         </div>
+            <div class="title1 app-title">
+               CÔNG CỤ CHỐNG CLICK TẶC 2019
+            </div>
 
-         <div class="logo">
-            <img src="../../assets/images/app-logo.png" alt="">
-         </div>
+            <div class="logo">
+               <img src="../../assets/images/app-logo.png" alt="">
+            </div>
 
-         <p class="title2">
-            <span style="color: skyblue; font-weight: bold">Giải Pháp Chống Click Ảo</span> sử dụng Công nghệ <span
-               style="color: skyblue; font-weight: bold">AI</span> và
-            <span style="color: skyblue; font-weight: bold">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
-            giản và
-            hiệu
-            quả.
-         </p>
+            <p class="title2">
+               <span style="color: skyblue; font-weight: bold">Giải Pháp Chống Click Ảo</span> sử dụng Công nghệ <span
+                  style="color: skyblue; font-weight: bold">AI</span> và
+               <span style="color: skyblue; font-weight: bold">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
+               giản và
+               hiệu
+               quả.
+            </p>
 
-         <!-- <div class="login-with-google" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px"
-            fxLayoutAlign="center center">
-            <a routerLink="/auth/register">
-               <button mat-raised-button class="register-button">
-                  <mat-icon>arrow_right</mat-icon> Đăng ký ngay
+            <!-- <div class="login-with-google" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px"
+               fxLayoutAlign="center center">
+               <a routerLink="/auth/register">
+                  <button mat-raised-button class="register-button">
+                     <mat-icon>arrow_right</mat-icon> Đăng ký ngay
+                  </button>
+               </a>
+               <button mat-raised-button color="warn" class="google-login-button">
+                  <img src="../../assets/icons/google-icon.png"
+                     style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
+                  Google
                </button>
-            </a>
-            <button mat-raised-button color="warn" class="google-login-button">
-               <img src="../../assets/icons/google-icon.png"
-                  style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
-               Google
-            </button>
-         </div> -->
+            </div> -->
 
-         <div class="login-with-google">
-            <button mat-raised-button color="warn" (click)="loginByGG()" *ngIf="!isOnLogin" class="login-google-button">
-               <img src="../../assets/icons/google-icon.png"
-                  style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng Google
-            </button>
-            <a mat-raised-button class="access-system-button" routerLink="/" *ngIf="isOnLogin">
-               TRUY CẬP HỆ THỐNG CHỐNG CLICK TẶC<mat-icon style="font-size: 20px">navigate_next</mat-icon>
-            </a>
+            <div class="login-with-google">
+               <button mat-raised-button color="warn" (click)="loginByGG()" *ngIf="!isOnLogin"
+                  class="login-google-button">
+                  <img src="../../assets/icons/google-icon.png"
+                     style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
+                  Google
+               </button>
+               <a mat-raised-button class="access-system-button" routerLink="/" *ngIf="isOnLogin">
+                  TRUY CẬP HỆ THỐNG CHỐNG CLICK TẶC<mat-icon style="font-size: 20px">navigate_next</mat-icon>
+               </a>
+            </div>
+
+            <!-- <div class="login">
+               <a routerLink="/auth/login" style="color: skyblue">Đăng nhập tài khoản</a>
+            </div> -->
+
          </div>
-
-         <!-- <div class="login">
-            <a routerLink="/auth/login" style="color: skyblue">Đăng nhập tài khoản</a>
-         </div> -->
-
       </div>
 
       <div class="table">
@@ -70,7 +74,7 @@
                <ng-container matColumnDef="ip">
                   <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <span style="color: orange">{{element.ip}}</span>
+                     <span style="font-weight: bold">{{element.ip}}</span>
                   </mat-cell>
                </ng-container>
 
@@ -200,7 +204,8 @@
 
             <div class="step step1" fxFlex="33.33">
                <div class="step-image">
-                  <img src="../../assets/images/step1.PNG" alt="" matTooltip="Phóng to ảnh" (click)="showImageDialog('../../assets/images/step1.PNG')">
+                  <img src="../../assets/images/step1.PNG" alt="" matTooltip="Phóng to ảnh"
+                     (click)="showImageDialog('../../assets/images/step1.PNG')">
                </div>
                <div class="step-description">
                   <span class="step-name">Bước 1: Liên kết Google Ads</span>
@@ -214,7 +219,8 @@
 
             <div class="step step2" fxFlex="33.33">
                <div class="step-image">
-                  <img src="../../assets/images/step2.PNG" alt="" matTooltip="Phóng to ảnh" (click)="showImageDialog('../../assets/images/step2.PNG')">
+                  <img src="../../assets/images/step2.PNG" alt="" matTooltip="Phóng to ảnh"
+                     (click)="showImageDialog('../../assets/images/step2.PNG')">
                </div>
                <div class="step-description">
                   <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
@@ -226,7 +232,8 @@
 
             <div class="step step3" fxFlex="33.33">
                <div class="step-image">
-                  <img src="../../assets/images/step3.PNG" alt="" matTooltip="Phóng to ảnh" (click)="showImageDialog('../../assets/images/step3.PNG')">
+                  <img src="../../assets/images/step3.PNG" alt="" matTooltip="Phóng to ảnh"
+                     (click)="showImageDialog('../../assets/images/step3.PNG')">
                </div>
                <div class="step-description">
                   <span class="step-name">Bước 3: Chặn click ảo</span>
