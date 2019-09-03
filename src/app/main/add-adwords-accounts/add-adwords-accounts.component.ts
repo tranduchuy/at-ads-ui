@@ -111,7 +111,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
         } as any)
         .subscribe(
           (val) => {
-            this._sessionService.setGoogleAccountToken(val['access_token'], val['refresh_token'])
+            this._sessionService.setGoogleAccountToken(val['access_token'], val['refresh_token']);
             setTimeout(() => {
               this.getAdsAccounts();
             }, 500);
