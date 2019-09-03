@@ -43,12 +43,13 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
   getDailyClickingReport(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
+    const limit = 10;
 
-    const sub = this._reportService.getDailyClickingReport({ page, limit: 10 })
+    const sub = this._reportService.getDailyClickingReport({ page, limit })
       .subscribe(res => {
         this.dataSource = res.data.entries;
 
-        this.pageTotal = Math.ceil(res.data.totalItems / 10);
+        this.pageTotal = Math.ceil(res.data.totalItems / limit);
         this.totalItems = res.data.totalItems;
 
         this._fuseProgressBarService.hide();

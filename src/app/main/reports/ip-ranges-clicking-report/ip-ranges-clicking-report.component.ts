@@ -59,13 +59,14 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
 
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
+    const limit = 10;
 
-    const sub = this._reportService.getClassDClickingReport({ from: start, to: end, page, limit: 10 })
+    const sub = this._reportService.getClassDClickingReport({ from: start, to: end, page, limit })
       .subscribe(res => {
 
         this.dataSource = res.data.rangeIps;
 
-        this.pageTotal = Math.ceil(res.data.totalItems / 10);
+        this.pageTotal = Math.ceil(res.data.totalItems / limit);
         this.totalItems = res.data.totalItems;
 
         setTimeout(() => {

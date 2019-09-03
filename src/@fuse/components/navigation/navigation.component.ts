@@ -100,7 +100,7 @@ export class FuseNavigationComponent implements OnInit {
     this.loadNavigation();
   }
   loadNavigation(): void {
-    this._fuseSplashScreenService.show();
+    //this._fuseSplashScreenService.show();
     this._adwordsAccountsService.getAdwordsAccount()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(
@@ -179,7 +179,7 @@ export class FuseNavigationComponent implements OnInit {
           }
 
           this.loadRecentNavigation();
-          this._fuseSplashScreenService.hide();
+          //this._fuseSplashScreenService.hide();
         },
         error => {
 
@@ -209,7 +209,7 @@ export class FuseNavigationComponent implements OnInit {
           };
 
           this.loadRecentNavigation();
-          this._fuseSplashScreenService.hide();
+          //this._fuseSplashScreenService.hide();
         });
   }
 

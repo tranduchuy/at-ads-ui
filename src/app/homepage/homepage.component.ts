@@ -41,7 +41,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private _router: Router,
     private _fuseProgressBarService: FuseProgressBarService,
     private _homepageService: HomepageService,
-    private _adwordsAccountsService: AdwordsAccountsService
+    private _adwordsAccountsService: AdwordsAccountsService,
   ) {
 
     super();
@@ -166,6 +166,10 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     setTimeout(() => {
       this.googleInit();
     }, 500);
+  }
+
+  showImageDialog(imgSrc: string) {
+    this._dialogService._openImageDialog(imgSrc);
   }
 
   private googleInit(): void {

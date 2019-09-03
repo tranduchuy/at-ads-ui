@@ -4,8 +4,11 @@
   </div>
   <div class="inner">
     <div class="mat-elevation-z8 table-wrapper">
+      <!-- <mat-table
+        [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }"> -->
+
       <mat-table
-        [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }">
+        [dataSource]="dataSource">
 
         <!-- Position Column -->
         <ng-container matColumnDef="order">
@@ -71,7 +74,7 @@
       </mat-table>
     </div>
 
-    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
+    <!-- <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
       <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
           ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
         trong tổng
@@ -79,7 +82,7 @@
       <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
       <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
         nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
-    </div>
+    </div> -->
   </div>
 
 </div>

@@ -8,13 +8,15 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
+import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 
 @NgModule({
   declarations: [
     InfoDialogComponent,
     ErrorDialogComponent,
     SuccessDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ImageDialogComponent
   ],
   providers: [],
   imports: [

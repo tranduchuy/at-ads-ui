@@ -56,7 +56,7 @@
          <!-- <div class="table-title">
             Trong 30 ngày qua đã có <span style="color: skyblue; font-weight: bold">19,227,560</span> click quảng
             cáo, tỉ
-            lệ <span style="color: red; font-weight: bold">17.50%</span>
+            lệ <span style="color: orange; font-weight: bold">17.50%</span>
          </div> -->
 
          <div class="table-wrapper">
@@ -70,14 +70,14 @@
                <ng-container matColumnDef="ip">
                   <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <span style="color: skyblue; font-weight: bold">{{element.ip}}</span>
+                     <span style="color: orange">{{element.ip}}</span>
                   </mat-cell>
                </ng-container>
 
                <!-- <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <mat-icon *ngIf="element.isSpam" style="margin-right: 10px; color: red"
+                     <mat-icon *ngIf="element.isSpam" style="margin-right: 10px; color: orange"
                         matTooltip="Đã chặn và không bị tính tiền">verified_user</mat-icon>
 
                      <mat-icon *ngIf="!element.isSpam" style="margin-right: 10px; color: gold"
@@ -101,8 +101,8 @@
                      <img *ngIf="element.os?.name === 'Android'"
                         src="https://source.android.com/setup/images/Android_greenrobot.png" alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Mac OS'"
-                        src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
-                        alt="" class="icon">
+                        src="https://www.pinclipart.com/picdir/big/204-2040230_post-mac-os-7-logo-clipart.png" alt=""
+                        class="icon">
                      <img *ngIf="element.os?.name === 'Linux'"
                         src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Ubuntu'"
@@ -172,7 +172,9 @@
                <ng-container matColumnDef="location">
                   <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <img src="../../assets/icons/location.svg" alt="" class="location-icon"> {{element.location?.city}}
+                     <img src="../../assets/icons/location.svg" alt="" class="location-icon"
+                        *ngIf="element.location?.city">
+                     <span *ngIf="element.location?.city">{{element.location?.city}}</span>
                   </mat-cell>
                </ng-container>
 
@@ -189,7 +191,7 @@
          </p>
 
          <div class="demo-video">
-            <button mat-raised-button style="background-color: red; color: white" matTooltip="Sắp ra mắt">
+            <button mat-raised-button style="background-color:crimson; color: white" matTooltip="Sắp ra mắt">
                <mat-icon>ondemand_video</mat-icon> VIDEO DEMO CÔNG CỤ
             </button>
          </div>
@@ -198,7 +200,7 @@
 
             <div class="step step1" fxFlex="33.33">
                <div class="step-image">
-                  <img src="../../assets/images/step1.PNG" alt="">
+                  <img src="../../assets/images/step1.PNG" alt="" matTooltip="Phóng to ảnh" (click)="showImageDialog('../../assets/images/step1.PNG')">
                </div>
                <div class="step-description">
                   <span class="step-name">Bước 1: Liên kết Google Ads</span>
@@ -212,7 +214,7 @@
 
             <div class="step step2" fxFlex="33.33">
                <div class="step-image">
-                  <img src="../../assets/images/step2.PNG" alt="">
+                  <img src="../../assets/images/step2.PNG" alt="" matTooltip="Phóng to ảnh" (click)="showImageDialog('../../assets/images/step2.PNG')">
                </div>
                <div class="step-description">
                   <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
@@ -224,7 +226,7 @@
 
             <div class="step step3" fxFlex="33.33">
                <div class="step-image">
-                  <img src="../../assets/images/step3.PNG" alt="">
+                  <img src="../../assets/images/step3.PNG" alt="" matTooltip="Phóng to ảnh" (click)="showImageDialog('../../assets/images/step3.PNG')">
                </div>
                <div class="step-description">
                   <span class="step-name">Bước 3: Chặn click ảo</span>
@@ -254,10 +256,17 @@
                <br>
                <div class="trial">
                   <a>
-                     <button mat-raised-button color="accent" (click)="loginByGG()">
+                     <button mat-raised-button color="accent" (click)="loginByGG()" *ngIf="!isOnLogin">
                         DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
                      </button>
                   </a>
+
+                  <a routerLink="/chan-ip/chan-1-ip">
+                     <button mat-raised-button color="accent" *ngIf="isOnLogin">
+                        DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
+                     </button>
+                  </a>
+
                </div>
             </div>
          </div>
@@ -265,7 +274,7 @@
             <div class="feature-left" fxLayout="column" fxLayoutGap="5px">
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: #44b543">verified_user</mat-icon>
+                     <mat-icon color="accent" class="s-60" style="color:lightgreen">verified_user</mat-icon>
                   </div>
                   <div class="feature-description">
                      <strong>Chặn theo IP</strong>
@@ -284,7 +293,7 @@
                      <br>
                      <br>
                      Theo dõi diến biến quảng cáo theo các khung giờ trong ngày, chặn ngay khung giờ bị <span
-                        style="color: red">Click ảo</span> hoặc khung giờ không có nhân viên làm việc.
+                        style="color: orange">Click ảo</span> hoặc khung giờ không có nhân viên làm việc.
                   </div>
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
@@ -296,7 +305,7 @@
                      <br>
                      <br>
                      Chỉ với 1 thao tác bạn có thể chặn quảng cáo trên toàn bộ mạng 3G & 4G, giúp ngăn chặn <span
-                        style="color: red">Click ảo</span> hiệu quả.
+                        style="color: orange">Click ảo</span> hiệu quả.
                   </div>
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
@@ -307,7 +316,7 @@
                      <strong>Chặn theo Big Data</strong>
                      <br>
                      <br>
-                     Dựa vào thống kê các IP đang phá hoại bằng <span style="color: red">Click ảo</span> trên
+                     Dựa vào thống kê các IP đang phá hoại bằng <span style="color: orange">Click ảo</span> trên
                      toàn bộ
                      mạng
                      lưới, bạn có thể thiết lập chặn toàn bộ các IP này.
@@ -318,7 +327,7 @@
          <div class="feature-right" fxLayout="column" fxLayoutGap="5px">
             <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: white">phonelink</mat-icon>
+                  <mat-icon color="accent" class="s-60" style="color: #039be5">phonelink</mat-icon>
                </div>
                <div class="feature-description">
                   <strong>Chặn theo thiết bị</strong>
@@ -339,7 +348,7 @@
                   Xem xét quảng cáo đang hiển thị ở đâu trên <span style="color: skyblue">Google Search</span> hay
                   trên
                   <span style="color: skyblue">đối tác</span> của Google. Liều thuốc đơn giản nhưng tiết kiệm đến
-                  <span style="color: red; font-weight: bold">30%</span> chi phí.
+                  <span style="color: orange; font-weight: bold">30%</span> chi phí.
                </div>
             </div>
             <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
@@ -351,22 +360,22 @@
                   <br>
                   <br>
                   Biết chính xác các <span style="color: skyblue">tỉnh, thành</span> đang hiện quảng cáo. Bạn có thể
-                  <span style="color: red">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
+                  <span style="color: orange">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
                </div>
             </div>
             <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: #039be5">device_unknown</mat-icon>
+                  <mat-icon color="accent" class="s-60" style="color: whitesmoke">device_unknown</mat-icon>
                </div>
                <div class="feature-description">
                   <strong>Nhận diện số di động</strong>
                   <br>
                   <br>
                   Nhận diện các số di động truy cập bằng <span style="color: skyblue">3G & 4G</span> đang thực hiện
-                  <span style="color: red">Click ảo</span> với bạn. Từ đó có thể liên lạc trực tiếp với đối tượng
+                  <span style="color: orange">Click ảo</span> với bạn. Từ đó có thể liên lạc trực tiếp với đối tượng
                   để trao
                   đổi
-                  và ngăn chặn <span style="color: red">Click ảo</span>.
+                  và ngăn chặn <span style="color: orange">Click ảo</span>.
                </div>
             </div>
          </div>

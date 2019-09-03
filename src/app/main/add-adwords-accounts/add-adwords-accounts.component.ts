@@ -64,6 +64,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     }, 500);
   }
 
+  loginByGG(): void {
+    this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
+  }
+
   checkAccountList(): any {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
@@ -155,7 +159,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this.isAccountListShown = false;
           this.isProcessing = false;
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog(error.error, true);
+
+          if (error.error.messages[0] === 'unauthorized_client')
+            this.loginByGG();
+          else this._dialogService._openErrorDialog(error.error, true);
         });
     this.subscriptions.push(sub);
   }

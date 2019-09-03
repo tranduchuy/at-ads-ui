@@ -61,7 +61,7 @@ export class ValidatorsService {
     const regex3 = new RegExp(/^([0-9]{1,3})[.]([0-9]{1,3})[.]([*])[.]([*])$/);
 
     for (const ip of listIP) {
-      if (!regex1.test(ip) && !regex2.test(ip) && !regex3.test(ip)) {
+      if (!regex1.test(ip)) {
         return { [ErrorNames.invalidListIP[0]]: true };
       }
     }

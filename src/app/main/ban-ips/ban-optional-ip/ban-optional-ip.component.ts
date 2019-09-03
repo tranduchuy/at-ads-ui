@@ -116,9 +116,15 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
         this._fuseProgressiveBarService.hide();
 
         if (error.status === 409) {
-          this._dialogService._openErrorDialog({
-            messages: [`${error.error.data.ips.join(', ')} đã có trong blacklist.`]
-          });
+
+          if (error.error.messages[0] === 'Ip đang nằm trong whiteList.')
+            this._dialogService._openErrorDialog({
+              messages: [`${error.error.data.ips.join(', ')} đã có trong whitelist.`]
+            });
+          else
+            this._dialogService._openErrorDialog({
+              messages: [`${error.error.data.ips.join(', ')} đã có trong blacklist.`]
+            });
         }
         else this._dialogService._openErrorDialog(error.error);
 
