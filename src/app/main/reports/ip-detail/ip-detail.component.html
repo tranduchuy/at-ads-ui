@@ -65,8 +65,7 @@
                   src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
                   alt="" class="icon">
                 <img *ngIf="element.os?.name === 'Android'"
-                  src="https://source.android.com/setup/images/Android_greenrobot.png"
-                  alt="" class="icon">
+                  src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
                 <img *ngIf="element.os?.name === 'Mac OS'"
                   src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
                   alt="" class="icon">
@@ -101,6 +100,16 @@
                   src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
                   alt="" class="icon">
                 {{element.browser?.name + ' ' + element.browser?.version}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="isPrivateBrowsing">
+              <mat-header-cell *matHeaderCellDef>Ẩn danh</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span *ngIf="!element.isPrivateBrowsing" style="color: orange; font-weight: bold">
+                  <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+                </span>
+                <span *ngIf="element.isPrivateBrowsing" style="color:silver">Không</span>
               </mat-cell>
             </ng-container>
 

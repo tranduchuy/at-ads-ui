@@ -32,7 +32,8 @@
 
     <div class="banned-ip-info" *ngIf="hasBlockedIP === true">
       <p>
-        IP <b><span [(ngModel)]="blockedIPs[0]" ngDefaultControl>{{blockedIPs[0]}}</span></b> đã được chặn thành công
+        IP <span [(ngModel)]="blockedIPs[0]" ngDefaultControl
+          style="color: #039be5; font-weight: bold">{{blockedIPs[0]}}</span> đã được chặn thành công
         trong hệ thống Google Ads.
         <br><br><b>Cách kiểm tra hệ thống hoạt động:</b>
         <br><b>Bước 1:</b> Truy cập vào tài khoản Google Ads tại trang <a href="https://ads.google.com/intl/vi_VN/home/"

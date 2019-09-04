@@ -21,7 +21,7 @@ export interface BlockedIP {
 })
 export class BlockedIpListComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'task', 'ip', 'network', 'blockingOver', 'campaign'];
+  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing','network', 'blockingOver', 'campaign'];
 
   dataSource: BlockedIP[] = [];
 

@@ -60,6 +60,11 @@
           }
         }
 
+        mat-header-cell:nth-child(6),
+        mat-cell:nth-child(6) {
+          justify-content: center;
+        }
+
         mat-row {
           transition: 0.2s;
         }
@@ -74,7 +79,7 @@
 
         mat-row,
         mat-header-row {
-          min-width: 1400px;
+          min-width: 1500px;
           width: 100%;
         }
       }

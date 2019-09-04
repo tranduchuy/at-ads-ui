@@ -14,6 +14,7 @@ import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
+import { userInfo } from 'os';
 
 declare var gapi: any;
 
@@ -172,6 +173,15 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     this._dialogService._openImageDialog(imgSrc);
   }
 
+  checkLogin() {
+    if (this._sessionService.user)
+      this._router.navigateByUrl('/');
+    else {
+      this.isOnLogin = false;
+      this.loginByGG();
+    }
+  }
+
   private googleInit(): void {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
@@ -214,7 +224,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         },
         (error: HttpErrorResponse) => {
           this._fuseSplashScreenService.hide();
-          return this._router.navigateByUrl('/them-tai-khoan-moi')
+          return this._router.navigateByUrl('/them-tai-khoan-moi');
         }
       );
     this.subscriptions.push(sub);

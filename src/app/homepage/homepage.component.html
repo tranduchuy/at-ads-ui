@@ -14,9 +14,9 @@
             </div>
 
             <p class="title2">
-               <span style="color: skyblue; font-weight: bold">Giải Pháp Chống Click Ảo</span> sử dụng Công nghệ <span
-                  style="color: skyblue; font-weight: bold">AI</span> và
-               <span style="color: skyblue; font-weight: bold">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
+               <span style="color: orange; font-weight: bold">Giải Pháp Chống Click Ảo</span> sử dụng Công nghệ <span
+                  style="color:orange; font-weight: bold">AI</span> và
+               <span style="color:orange; font-weight: bold">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
                giản và
                hiệu
                quả.
@@ -37,15 +37,15 @@
             </div> -->
 
             <div class="login-with-google">
-               <button mat-raised-button color="warn" (click)="loginByGG()" *ngIf="!isOnLogin"
+               <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
                   class="login-google-button">
                   <img src="../../assets/icons/google-icon.png"
                      style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
                   Google
                </button>
-               <a mat-raised-button class="access-system-button" routerLink="/" *ngIf="isOnLogin">
+               <button mat-raised-button class="access-system-button" (click)="checkLogin()" *ngIf="isOnLogin">
                   TRUY CẬP HỆ THỐNG CHỐNG CLICK TẶC<mat-icon style="font-size: 20px">navigate_next</mat-icon>
-               </a>
+               </button>
             </div>
 
             <!-- <div class="login">
@@ -74,7 +74,7 @@
                <ng-container matColumnDef="ip">
                   <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <span style="font-weight: bold">{{element.ip}}</span>
+                     <span style="font-weight: bold; color: lightblue">{{element.ip}}</span>
                   </mat-cell>
                </ng-container>
 
@@ -103,7 +103,7 @@
                         src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
                         alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Android'"
-                        src="https://source.android.com/setup/images/Android_greenrobot.png" alt="" class="icon">
+                        src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Mac OS'"
                         src="https://www.pinclipart.com/picdir/big/204-2040230_post-mac-os-7-logo-clipart.png" alt=""
                         class="icon">
@@ -246,143 +246,140 @@
          </div>
       </div>
 
-      <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
-         <div class="overview" fxFlex="30">
-            <p class="overview-title">
-               <img src="http://icons.iconarchive.com/icons/vexels/office/512/bulb-icon.png" alt="">
-               <span>Thông minh hơn</span>
-            </p>
-            <mat-divider style="border: 0.5px solid gray"></mat-divider>
-            <div class="overview-info">
-               Tích hợp 10 công cụ giảm chi phí trong 1 tool duy nhất.
-               <br>
-               Tất cả các công cụ hoạt động theo cơ chế tự động hóa, không chỉ cung cấp báo cáo trực quan mà còn có
-               thể
-               tương
-               tác trực tiếp đến quảng cáo của bạn, cải thiện nó giúp bạn tiết kiệm đáng kể chi phí và thời gian.
-               <br>
-               <div class="trial">
-                  <a>
-                     <button mat-raised-button color="accent" (click)="loginByGG()" *ngIf="!isOnLogin">
+      <div class="feature-container">
+         <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+            <div class="overview" fxFlex="30">
+               <p class="overview-title">
+                  <img src="http://icons.iconarchive.com/icons/vexels/office/512/bulb-icon.png" alt="">
+                  <span>Thông minh hơn</span>
+               </p>
+               <mat-divider style="border: 0.5px solid gray"></mat-divider>
+               <div class="overview-info">
+                  Tích hợp 10 công cụ giảm chi phí trong 1 tool duy nhất.
+                  <br>
+                  Tất cả các công cụ hoạt động theo cơ chế tự động hóa, không chỉ cung cấp báo cáo trực quan mà còn có
+                  thể
+                  tương
+                  tác trực tiếp đến quảng cáo của bạn, cải thiện nó giúp bạn tiết kiệm đáng kể chi phí và thời gian.
+                  <br>
+                  <div class="trial">
+                     <button mat-raised-button color="accent" (click)="checkLogin()">
                         DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
                      </button>
-                  </a>
-
-                  <a routerLink="/chan-ip/chan-1-ip">
-                     <button mat-raised-button color="accent" *ngIf="isOnLogin">
-                        DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
-                     </button>
-                  </a>
-
+                  </div>
                </div>
             </div>
-         </div>
-         <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
-            <div class="feature-left" fxLayout="column" fxLayoutGap="5px">
+            <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
+               <div class="feature-left" fxLayout="column" fxLayoutGap="5px">
+                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
+                     <div class="icon">
+                        <mat-icon color="accent" class="s-60" style="color:lightgreen">verified_user</mat-icon>
+                     </div>
+                     <div class="feature-description">
+                        <strong>Chặn theo IP</strong>
+                        <p>
+                           Giải pháp chặn click ảo theo IP này được cải tiến hơn nhờ sự đồng bộ với toàn bộ mạng lưới
+                           <span style="color: skyblue">Big Data</span> giúp chặn chính xác hơn.
+                        </p>
+                     </div>
+                  </div>
+                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
+                     <div class="icon">
+                        <mat-icon color="accent" class="s-60" style="color: deeppink">timer</mat-icon>
+                     </div>
+                     <div class="feature-description">
+                        <strong>Chặn theo thời gian</strong>
+                        <p>
+                           Theo dõi diến biến quảng cáo theo các khung giờ trong ngày, chặn ngay khung giờ bị <span
+                              style="color: orange">Click ảo</span> hoặc khung giờ không có nhân viên làm việc.
+                        </p>
+                     </div>
+                  </div>
+                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
+                     <div class="icon">
+                        <mat-icon color="accent" class="s-60" style="color: skyblue">wifi</mat-icon>
+                     </div>
+                     <div class="feature-description">
+                        <strong>Chặn theo 3G & 4G</strong>
+                        <p>
+                           Chỉ với 1 thao tác bạn có thể chặn quảng cáo trên toàn bộ mạng 3G & 4G, giúp ngăn chặn <span
+                              style="color: orange">Click ảo</span> hiệu quả.
+                        </p>
+                     </div>
+                  </div>
+                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
+                     <div class="icon">
+                        <mat-icon color="accent" class="s-60" style="color: gold">timeline</mat-icon>
+                     </div>
+                     <div class="feature-description">
+                        <strong>Chặn theo Big Data</strong>
+                        <p>
+                           Dựa vào thống kê các IP đang phá hoại bằng <span style="color: orange">Click ảo</span> trên
+                           toàn bộ
+                           mạng
+                           lưới, bạn có thể thiết lập chặn toàn bộ các IP này.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="feature-right" fxLayout="column" fxLayoutGap="5px">
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color:lightgreen">verified_user</mat-icon>
+                     <mat-icon color="accent" class="s-60" style="color: #039be5">phonelink</mat-icon>
                   </div>
                   <div class="feature-description">
-                     <strong>Chặn theo IP</strong>
-                     <br>
-                     <br>
-                     Giải pháp chặn click ảo theo IP này được cải tiến hơn nhờ sự đồng bộ với toàn bộ mạng lưới <span
-                        style="color: skyblue">Big Data</span> giúp chặn chính xác hơn.
+                     <strong>Chặn theo thiết bị</strong>
+                     <p>
+                        Dễ dàng theo dõi tình trạng bật/tắt quảng cáo theo từng thiết bị: <span
+                           style="color: skyblue">Mobile,
+                           Tablet, PC</span>. Nếu bạn muốn tắt quảng cáo trên các thiết bị này chỉ cần bấm là xong.
+                     </p>
                   </div>
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: deeppink">timer</mat-icon>
+                     <mat-icon color="accent" class="s-60" style="color: silver">grid_on</mat-icon>
                   </div>
                   <div class="feature-description">
-                     <strong>Chặn theo thời gian</strong>
-                     <br>
-                     <br>
-                     Theo dõi diến biến quảng cáo theo các khung giờ trong ngày, chặn ngay khung giờ bị <span
-                        style="color: orange">Click ảo</span> hoặc khung giờ không có nhân viên làm việc.
+                     <strong>Chặn theo mạng lưới</strong>
+                     <p>
+                        Xem xét quảng cáo đang hiển thị ở đâu trên <span style="color: skyblue">Google Search</span> hay
+                        trên
+                        <span style="color: skyblue">đối tác</span> của Google. Liều thuốc đơn giản nhưng tiết kiệm đến
+                        <span style="color: orange; font-weight: bold">30%</span> chi phí.
+                     </p>
                   </div>
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: skyblue">wifi</mat-icon>
+                     <mat-icon color="accent" class="s-60" style="color: orangered">location_on</mat-icon>
                   </div>
                   <div class="feature-description">
-                     <strong>Chặn theo 3G & 4G</strong>
-                     <br>
-                     <br>
-                     Chỉ với 1 thao tác bạn có thể chặn quảng cáo trên toàn bộ mạng 3G & 4G, giúp ngăn chặn <span
-                        style="color: orange">Click ảo</span> hiệu quả.
+                     <strong>Tỉnh-Thành quảng cáo</strong>
+                     <p>
+                        Biết chính xác các <span style="color: skyblue">tỉnh, thành</span> đang hiện quảng cáo. Bạn có
+                        thể
+                        <span style="color: orange">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
+                     </p>
                   </div>
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: gold">timeline</mat-icon>
+                     <mat-icon color="accent" class="s-60" style="color: whitesmoke">device_unknown</mat-icon>
                   </div>
                   <div class="feature-description">
-                     <strong>Chặn theo Big Data</strong>
-                     <br>
-                     <br>
-                     Dựa vào thống kê các IP đang phá hoại bằng <span style="color: orange">Click ảo</span> trên
-                     toàn bộ
-                     mạng
-                     lưới, bạn có thể thiết lập chặn toàn bộ các IP này.
+                     <strong>Nhận diện số di động</strong>
+                     <p>
+                        Nhận diện các số di động truy cập bằng <span style="color: skyblue">3G & 4G</span> đang thực
+                        hiện
+                        <span style="color: orange">Click ảo</span> với bạn. Từ đó có thể liên lạc trực tiếp với đối
+                        tượng
+                        để trao
+                        đổi
+                        và ngăn chặn <span style="color: orange">Click ảo</span>.
+                     </p>
                   </div>
-               </div>
-            </div>
-         </div>
-         <div class="feature-right" fxLayout="column" fxLayoutGap="5px">
-            <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
-               <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: #039be5">phonelink</mat-icon>
-               </div>
-               <div class="feature-description">
-                  <strong>Chặn theo thiết bị</strong>
-                  <br>
-                  <br>
-                  Dễ dàng theo dõi tình trạng bật/tắt quảng cáo theo từng thiết bị: <span style="color: skyblue">Mobile,
-                     Tablet, PC</span>. Nếu bạn muốn tắt quảng cáo trên các thiết bị này chỉ cần bấm là xong.
-               </div>
-            </div>
-            <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
-               <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: silver">grid_on</mat-icon>
-               </div>
-               <div class="feature-description">
-                  <strong>Chặn theo mạng lưới</strong>
-                  <br>
-                  <br>
-                  Xem xét quảng cáo đang hiển thị ở đâu trên <span style="color: skyblue">Google Search</span> hay
-                  trên
-                  <span style="color: skyblue">đối tác</span> của Google. Liều thuốc đơn giản nhưng tiết kiệm đến
-                  <span style="color: orange; font-weight: bold">30%</span> chi phí.
-               </div>
-            </div>
-            <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
-               <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: orangered">location_on</mat-icon>
-               </div>
-               <div class="feature-description">
-                  <strong>Tỉnh-Thành quảng cáo</strong>
-                  <br>
-                  <br>
-                  Biết chính xác các <span style="color: skyblue">tỉnh, thành</span> đang hiện quảng cáo. Bạn có thể
-                  <span style="color: orange">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
-               </div>
-            </div>
-            <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
-               <div class="icon">
-                  <mat-icon color="accent" class="s-60" style="color: whitesmoke">device_unknown</mat-icon>
-               </div>
-               <div class="feature-description">
-                  <strong>Nhận diện số di động</strong>
-                  <br>
-                  <br>
-                  Nhận diện các số di động truy cập bằng <span style="color: skyblue">3G & 4G</span> đang thực hiện
-                  <span style="color: orange">Click ảo</span> với bạn. Từ đó có thể liên lạc trực tiếp với đối tượng
-                  để trao
-                  đổi
-                  và ngăn chặn <span style="color: orange">Click ảo</span>.
                </div>
             </div>
          </div>
@@ -406,7 +403,7 @@
                <div class="benefit-description">
                   <p>TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
                   </p>
-                  Giảm thiểu đến 50% chi phí quảng cáo <span style="color: yellow">lãng phí vô ích</span> do đối thủ phá
+                  Giảm thiểu đến 50% chi phí quảng cáo <span style="color: orange">lãng phí vô ích</span> do đối thủ phá
                   hoại
                   hay virus, bot click quảng cáo.
                </div>
@@ -429,7 +426,7 @@
                <div class="benefit-description">
                   <p>TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward</mat-icon>
                   </p>
-                  Giảm các chi phí <span style="color: yellow">lãng phí</span> do click ảo, bạn sẽ có thêm chi phí quảng
+                  Giảm các chi phí <span style="color:orange">lãng phí</span> do click ảo, bạn sẽ có thêm chi phí quảng
                   cáo.
                   Từ
                   đó có thêm tiềm năng.
