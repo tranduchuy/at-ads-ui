@@ -4,9 +4,9 @@
 
   <div class="inner">
 
-    <div class="highline" fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px">
+    <div class="highline" fxLayout="row" fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="20px">
 
-      <div class="left" fxFlex="30">
+      <div class="left" fxFlex="26">
 
         <div class="visitor">
 
@@ -29,13 +29,14 @@
             <ngx-charts-bar-horizontal-stacked [view]="view" [scheme]="colorScheme" [results]="multi"
               [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
               [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel">
+              [yAxisLabel]="yAxisLabel" style="max-width: 100%">
 
               <ng-template #tooltipTemplate let-model="model">
                 <pre>{{model.value}}%</pre>
               </ng-template>
 
             </ngx-charts-bar-horizontal-stacked>
+
           </div>
 
         </div>
@@ -76,7 +77,7 @@
               </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="highlinePagesCols; sticky: true"></mat-header-row>
+            <mat-header-row *matHeaderRowDef="highlinePagesCols"></mat-header-row>
             <mat-row *matRowDef="let row; columns: highlinePagesCols;"></mat-row>
 
           </mat-table>

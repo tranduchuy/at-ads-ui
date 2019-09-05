@@ -61,12 +61,13 @@ export class OverviewReportComponent implements OnInit {
     }
   ];
 
-  single = [
-    {
-      "name": "Thiết bị",
-      "value": 100
-    },
-  ]
+  // single = [
+  //   {
+  //     "name": "Thiết bị",
+  //     "value": 100
+  //   },
+  // ]
+  
   multi = [
     {
       "name": "Thiết bị",
@@ -87,7 +88,7 @@ export class OverviewReportComponent implements OnInit {
     },
   ];
 
-  view: any[] = [350, 50];
+  view: any[] = [325, 50];
 
   // options
   showXAxis = false;
