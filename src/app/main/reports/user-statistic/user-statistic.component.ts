@@ -34,6 +34,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
   isProcessing: boolean = false;
   totalItems: number;
   selectedAccountId: string;
+  pageLimit: number = 10;
 
   constructor(
     public _sessionService: SessionService,
@@ -62,15 +63,14 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
 
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
-    const limit = 10;
 
-    const sub = this._reportService.getStatisticUserReport({ startDate: start, endDate: end, page, limit}, accountId)
+    const sub = this._reportService.getStatisticUserReport({ startDate: start, endDate: end, page, limit: this.pageLimit }, accountId)
       .subscribe(res => {
 
         this.dataSource = res.data.users;
 
         this.totalItems = res.data.meta.totalItems;
-        this.pageTotal = Math.ceil(this.totalItems / limit);
+        this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
         this._fuseProgressBarService.hide();
         this.isProcessing = false;

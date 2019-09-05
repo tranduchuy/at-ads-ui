@@ -30,6 +30,7 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
   pageTotal: number;
   currentPageNumber: number;
   totalItems: number;
+  pageLimit: number = 10;
 
   ngOnInit() {
     const sub = this._sessionService.getAccountId()
@@ -43,13 +44,12 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
   getDailyClickingReport(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-    const limit = 10;
 
-    const sub = this._reportService.getDailyClickingReport({ page, limit })
+    const sub = this._reportService.getDailyClickingReport({ page, limit: this.pageLimit })
       .subscribe(res => {
         this.dataSource = res.data.entries;
 
-        this.pageTotal = Math.ceil(res.data.totalItems / limit);
+        this.pageTotal = Math.ceil(res.data.totalItems / this.pageLimit);
         this.totalItems = res.data.totalItems;
 
         this._fuseProgressBarService.hide();

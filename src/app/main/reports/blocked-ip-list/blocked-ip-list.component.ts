@@ -21,7 +21,7 @@ export interface BlockedIP {
 })
 export class BlockedIpListComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing','network', 'blockingOver', 'campaign'];
+  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'campaign'];
 
   dataSource: BlockedIP[] = [];
 
@@ -29,6 +29,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
   pageTotal: number;
   isProcessing: boolean = false;
   totalItems: number;
+  pageLimit: number = 10;
 
   constructor(
     public _sessionService: SessionService,
@@ -43,25 +44,22 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId)
-          this.getBlockedIPsListReport();
+          this.getBlockedIPsListReport(1);
       });
     this.subscriptions.push(sub);
   }
 
-  getBlockedIPsListReport() {
+  getBlockedIPsListReport(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
 
-    const sub = this._reportService.getBlockedIPsListReport()
+    const sub = this._reportService.getBlockedIPsListReport({ page, limit: this.pageLimit })
       .subscribe(res => {
 
         this.dataSource = res.data.ips;
 
-        // if (this.dataSource.length > 0)
-        //   this.pageTotal = Math.ceil(this.dataSource.length / 10);
-        // else this.pageTotal = 0;
-
-        // this.totalItems = this.dataSource.length
+        this.totalItems = res.data.totalItems;
+        this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
         setTimeout(() => {
           this._fuseProgressBarService.hide();
@@ -70,8 +68,8 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
       },
         (error: HttpErrorResponse) => {
           this.dataSource = [];
-          // this.pageTotal = 0;
-          // this.totalItems = 0;
+          this.pageTotal = 0;
+          this.totalItems = 0;
           this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
@@ -97,7 +95,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
       .subscribe(
         (res: ILoginSuccess) => {
 
-          this.getBlockedIPsListReport();
+          this.getBlockedIPsListReport(this.currentPageNumber);
 
           setTimeout(() => {
             this._fuseProgressBarService.hide();
@@ -122,7 +120,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
   }
 
   changePage(event) {
-
+    this.getBlockedIPsListReport(event);
   }
 
 }

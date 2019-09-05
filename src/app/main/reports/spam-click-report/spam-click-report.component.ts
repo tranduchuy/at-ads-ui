@@ -25,6 +25,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   currentPageNumber: number;
   totalItems: number;
   selectedAccountId: string;
+  pageLimit: number = 20;
 
   selectedDateRange: any = {
     start: moment().subtract(6, 'days'),
@@ -100,15 +101,14 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
-    const limit = 20;
 
-    const sub = this._reportService.getAccountReport({ from: start, to: end, page, limit }, accountId)
+    const sub = this._reportService.getAccountReport({ from: start, to: end, page, limit: this.pageLimit }, accountId)
       .subscribe(
         res => {
           this.advertisementClickReport = res.data.logs;
 
           this.totalItems = res.data.totalItems;
-          this.pageTotal = Math.ceil(this.totalItems / limit);
+          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
           this._fuseProgressBarService.hide();
         },

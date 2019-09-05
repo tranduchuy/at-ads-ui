@@ -2,7 +2,7 @@
 
   <div class="main-title">
     <div class="main-title-text">
-      BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color: yellow">{{selectedAdsId}}</span>
+      BÁO CÁO CLICK QUẢNG CÁO - TÀI KHOẢN <span style="color: yellow">{{selectedAdsId}}</span>
       <!-- TỪ <span style="color:skyblue" [(ngModel)]="selectedDateRange"
         ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span>
       ĐẾN <span style="color:skyblue" [(ngModel)]="selectedDateRange"
@@ -79,7 +79,7 @@
 
       <div class="left-table">
         <mat-table
-          [dataSource]="advertisementClickReport | paginate: { itemsPerPage: 20, currentPage: currentPageNumber, totalItems: totalItems }"
+          [dataSource]="advertisementClickReport | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }"
           class="mat-elevation-z8">
           <ng-container matColumnDef="time">
             <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>

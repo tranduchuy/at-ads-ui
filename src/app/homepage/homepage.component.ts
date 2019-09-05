@@ -24,7 +24,7 @@ declare var gapi: any;
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit {
-  logColumns = ['datetime', 'ip', 'device', 'os', 'browser', 'network', 'location'];
+  logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location'];
   logs = [];
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);

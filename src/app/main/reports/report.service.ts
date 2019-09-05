@@ -45,6 +45,19 @@ export interface IGetIPHistoryParams {
   limit?: number;
 }
 
+export interface IGetUserStatisticDetailParams {
+  id: string;
+  startDate: string;
+  endDate: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface IGetBlockedIpListParams {
+  page?: number;
+  limit?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -117,9 +130,15 @@ export class ReportService {
     return this._http.get(url);
   }
 
-  getBlockedIPsListReport(): Observable<any> {
+  getBlockedIPsListReport(params: IGetBlockedIpListParams): Observable<any> {
     const activeAccountId = this._sessionService.getValueOfAccountId();
-    const url = API.Report.getBlockedIPsListReport.replace('{account_id}', activeAccountId);
+    let url = API.Report.getBlockedIPsListReport.replace('{account_id}', activeAccountId);
+
+    if (params.page !== undefined)
+      url += `?page=${params.page}`;
+    if (params.limit !== undefined)
+      url += `&limit=${params.limit}`;
+
     return this._http.get(url);
   }
 
@@ -141,6 +160,21 @@ export class ReportService {
     const activeAccountId = this._sessionService.getValueOfAccountId();
     let url = API.Report.getIPHistory.replace('{account_id}', activeAccountId);
     url = url.replace('{ip}', params.ip);
+
+    if (params.page !== undefined)
+      url += `&page=${params.page}`;
+    if (params.limit !== undefined)
+      url += `&limit=${params.limit}`;
+
+    return this._http.get(url);
+  }
+
+  getUserStatisticDetail(params: IGetUserStatisticDetailParams): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    let url = API.Report.getUserStatisticDetail.replace('{account_id}', activeAccountId);
+    url = url.replace('{id}', params.id);
+    url = url.replace('{from}', params.startDate);
+    url = url.replace('{to}', params.endDate);
 
     if (params.page !== undefined)
       url += `&page=${params.page}`;

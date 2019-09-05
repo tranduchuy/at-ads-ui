@@ -58,6 +58,13 @@
       overflow: auto;
       overflow-y: hidden;
 
+      .table-uuid {
+        padding-left: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
       mat-table {
         box-shadow: none;
       }

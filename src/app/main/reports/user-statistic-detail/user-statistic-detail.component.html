@@ -1,8 +1,14 @@
 <div class="container">
 
-  <div class="title1">
-    LỊCH SỬ IP CLICK QUẢNG CÁO - TÀI KHOẢN <span
-      style="color:yellow">{{_sessionService.activeAdsAccountId}}</span>
+  <div class="title1" fxLayout="row" fxLayout.xs="column">
+    <p class="title2" fxFlex="80">CHI TIẾT NGƯỜI DÙNG CLICK QUẢNG CÁO - TÀI KHOẢN <span
+        style="color:yellow">{{_sessionService.activeAdsAccountId}}</span></p>
+    <mat-form-field class=" datePicker" fxFlex="20">
+      <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
+      <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
+        startKey="start" endKey="end" (datesUpdated)="onApplyDateRange($event)"
+        (change)="getUserStatisticDetail(uuid, 1, pageLimit)" ngDefaultControl />
+    </mat-form-field>
   </div>
 
   <div class="main-inner">
@@ -10,7 +16,7 @@
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
         <div class="left" fxFlex="20">
           <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
-          <p style="color: #039be5; font-weight: bold">IP: {{ip}}</p>
+          <p style="color: #039be5; font-weight: bold">Người dùng: {{uuid}}</p>
         </div>
 
         <div class="right">
@@ -138,10 +144,10 @@
         </div>
       </div>
 
-      <div fxLayout="row" fxLayoutGap="15px" *ngIf="pageTotal !== 1">
-        <div fxFlex="20"></div>
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.xs="0" *ngIf="pageTotal !== 1">
+        <div fxFlex="20" fxFlex.xs="0"></div>
         <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
-          <div fxFlex="70">
+          <div fxFlex="70" fxFlex.xs="100">
             <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
                 ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
               {{pageTotal}} trang</p>
@@ -152,44 +158,5 @@
         </div>
       </div>
 
-      <div class="bottom">
-        <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
-          <p class="last-history-icon">
-            <mat-icon color="accent">calendar_today</mat-icon>
-          </p>
-          <p class="title">
-            Ngày ghi nhận cuối
-            <br>
-            <span style="color: gray" *ngFor="let item of lastHistory">
-              {{item.createdAt | date: 'HH:mm dd/MM/yyyy'}}
-            </span>
-          </p>
-        </div>
-        <div class="access-location" fxLayout="row" fxLayoutGap="12px">
-          <p class="last-history-icon">
-            <mat-icon color="accent">location_on</mat-icon>
-          </p>
-          <p class="title">
-            Vị trí truy cập
-            <br>
-            <span style="color: gray" *ngFor="let item of lastHistory">
-              {{item.location?.city}}
-            </span>
-          </p>
-        </div>
-        <div class="last-access-device" fxLayout="row" fxLayoutGap="12px">
-          <div class="last-history-icon">
-            <mat-icon color="accent">speaker_phone</mat-icon>
-          </div>
-          <div class="title">
-            Thiết bị truy cập cuối
-            <div style="color: gray" *ngFor="let item of lastHistory">
-              <span *ngIf="item.device === undefined">Không xác định</span>
-              <span *ngIf="item.device !== undefined">{{item.device?.vendor}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-</div>
