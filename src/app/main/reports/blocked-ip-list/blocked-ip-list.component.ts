@@ -21,7 +21,7 @@ export interface BlockedIP {
 })
 export class BlockedIpListComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'task', 'ip', 'network', 'blockingOver', 'campaign'];
+  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing','network', 'blockingOver', 'campaign'];
 
   dataSource: BlockedIP[] = [];
 
@@ -57,11 +57,11 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
 
         this.dataSource = res.data.ips;
 
-        if (this.dataSource.length > 0)
-          this.pageTotal = Math.ceil(this.dataSource.length / 10);
-        else this.pageTotal = 0;
+        // if (this.dataSource.length > 0)
+        //   this.pageTotal = Math.ceil(this.dataSource.length / 10);
+        // else this.pageTotal = 0;
 
-        this.totalItems = this.dataSource.length
+        // this.totalItems = this.dataSource.length
 
         setTimeout(() => {
           this._fuseProgressBarService.hide();
@@ -70,8 +70,8 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
       },
         (error: HttpErrorResponse) => {
           this.dataSource = [];
-          this.pageTotal = 0;
-          this.totalItems = 0;
+          // this.pageTotal = 0;
+          // this.totalItems = 0;
           this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;

@@ -182,7 +182,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     }
 
     logout(): void {
-        const openConfirmDialogSub = this._dialogService._openConfirmDialog('Thoát khỏi ứng dụng?')
+        const openConfirmDialogSub = this._dialogService._openConfirmDialog('Thoát khỏi hệ thống?')
             .subscribe(
                 (isAccepted: boolean) => {
                     if (isAccepted) {

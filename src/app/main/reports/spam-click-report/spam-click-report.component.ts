@@ -19,7 +19,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   pieChart: any = {};
   lineChart: any = {};
   clickTotal: number;
-  advertisementClickReportColumns = ['time', 'ip', 'status', 'keyword', 'location'];
+  advertisementClickReportColumns = ['time', 'ip', 'status', 'keyword', 'location', 'isPrivateBrowsing'];
   advertisementClickReport = [];
   pageTotal: number;
   currentPageNumber: number;
@@ -48,14 +48,14 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           this.selectedAccountId = accountId;
           this.setSelectedAdsId(accountId);
           this.getAccountStatisticReport(accountId);
-          this.getAccountReport(accountId, 1, 20);
+          this.getAccountReport(accountId, 1);
         }
       });
     this.subscriptions.push(sub);
   }
 
   changePage(event) {
-    this.getAccountReport(this.selectedAccountId, event, 20);
+    this.getAccountReport(this.selectedAccountId, event);
   }
 
   setSelectedAdsId(accountId: string) {
@@ -82,7 +82,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     return dates;
   }
 
-  onApplyDateRange(event) {
+  onSelectDateRange(event) {
     if (moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 60) {
       this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 60 ngày trở lại');
       return false;
@@ -90,18 +90,26 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     return true;
   }
 
-  getAccountReport(accountId: string, page?: number, limit?: number) {
+  onApplyDateRange() {
+    this.getAccountStatisticReport(this._sessionService.activeAccountId);
+    this.getAccountReport(this._sessionService.activeAccountId, 1);
+  }
+
+  getAccountReport(accountId: string, page?: number) {
     this._fuseProgressBarService.show();
 
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
+    const limit = 20;
 
     const sub = this._reportService.getAccountReport({ from: start, to: end, page, limit }, accountId)
       .subscribe(
         res => {
           this.advertisementClickReport = res.data.logs;
+
           this.totalItems = res.data.totalItems;
-          this.pageTotal = Math.ceil(this.totalItems / 20);
+          this.pageTotal = Math.ceil(this.totalItems / limit);
+
           this._fuseProgressBarService.hide();
         },
         (error: HttpErrorResponse) => {

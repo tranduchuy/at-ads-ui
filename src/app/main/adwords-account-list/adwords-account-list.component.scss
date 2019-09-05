@@ -1,168 +1,165 @@
 .container {
-  padding: 30px 30px 15px 30px;
-
   width: 100%;
 
   .title1 {
-    padding: 15px;
-    padding-left: 0;
-
-    background-color: whitesmoke;
-    color: gray;
+    padding: 95px 20px 25px 0px;
+    background: url("../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
     font-size: 16px;
     font-weight: bold;
-
-    box-shadow: 2px 2px 5px silver;
   }
 
-  .add-account-button {
-  }
+  .inner {
 
-  .website-list {
-    width: 100%;
-    max-height: 250px;
-    overflow: auto;
-    border-left: 0.5px solid #d2d2d2;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px silver;
-    padding: 10px;
-  }
-
-  .add-domain-button {
-    background-color: #44b543;
-    color: white;
-    width: 40%;
-    border-radius: 0;
-
-    mat-icon {
-      font-size: 22px;
-    }
-  }
-
-  .table-container {
-    max-height: 500px;
-    box-shadow: 2px 2px 5px silver;
-    background-color: white;
-    overflow: auto;
-
-    li {
-      transition: 0.2s;
-      height: 25px;
+    .add-account-button {
     }
 
-    li:hover {
-      background-color: rgba(3, 155, 229, 0.1);
-    }
-
-    mat-table {
+    .website-list {
       width: 100%;
-      box-shadow: none;
+      max-height: 250px;
+      overflow: auto;
+      border-left: 0.5px solid #d2d2d2;
+      border-radius: 5px;
+      box-shadow: 1px 1px 5px silver;
+      padding: 10px;
     }
 
-    ​mat-header-cell,
-    mat-cell {
+    .add-domain-button {
+      background-color: #44b543;
+      color: white;
+      width: 40%;
+      border-radius: 0;
+
+      mat-icon {
+        font-size: 22px;
+      }
+    }
+
+    .table-container {
+      max-height: 500px;
+      box-shadow: 1px 1px 4px silver;
+      background-color: white;
+      overflow: auto;
+
+      li {
+        transition: 0.2s;
+        height: 25px;
+      }
+
+      li:hover {
+        background-color: rgba(3, 155, 229, 0.1);
+      }
+
+      mat-table {
+        width: 100%;
+        box-shadow: none;
+      }
+
+      ​mat-header-cell,
+      mat-cell {
+        display: flex;
+        justify-content: center;
+      }
+
+      mat-row,
+      mat-header-row {
+        min-width: 1000px;
+        width: 100%;
+      }
+
+      mat-header-cell,
+      mat-cell {
+        justify-content: left;
+      }
+
+      mat-header-cell:nth-child(1),
+      mat-cell:nth-child(1) {
+        flex: 0 0 8%;
+      }
+
+      mat-header-cell:nth-child(2),
+      mat-cell:nth-child(2) {
+        flex: 0 0 15%;
+      }
+
+      mat-header-cell:nth-child(3),
+      mat-cell:nth-child(3) {
+        flex: 0 0 23%;
+      }
+
+      mat-header-cell:nth-child(4),
+      mat-cell:nth-child(4) {
+        justify-content: center;
+        flex: 0 0 15%;
+      }
+
+      mat-cell:nth-child(5) {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      mat-header-cell {
+        background: #039be5;
+        color: white;
+      }
+
+      mat-row {
+        transition: 0.2s;
+      }
+    }
+
+    .info-button {
+      cursor: pointer;
+    }
+
+    .vip-service {
+      color: #039be5;
+      font-weight: bold;
+    }
+
+    .free-service {
+      color: coral;
+      font-weight: bold;
+    }
+
+    .button-area {
+      padding-top: 30px;
       display: flex;
       justify-content: center;
     }
 
-    mat-row,
-    mat-header-row {
-      min-width: 1000px;
-      width: 100%;
+    .tracking {
+      color: orange;
     }
 
-    mat-header-cell,
-    mat-cell {
-      justify-content: left;
+    .tracking-button {
+      color: red;
+
+      &:disabled {
+        color: gray;
+      }
     }
 
-    mat-header-cell:nth-child(1),
-    mat-cell:nth-child(1) {
-      flex: 0 0 8%;
+    .no-tracking {
+      color: #039be5;
     }
 
-    mat-header-cell:nth-child(2),
-    mat-cell:nth-child(2) {
-      flex: 0 0 15%;
+    .clear {
+      clear: both;
     }
 
-    mat-header-cell:nth-child(3),
-    mat-cell:nth-child(3) {
-      flex: 0 0 23%;
-    }
-
-    mat-header-cell:nth-child(4),
-    mat-cell:nth-child(4) {
+    .footer {
+      padding-top: 15px;
+      display: flex;
       justify-content: center;
-      flex: 0 0 15%;
     }
-
-    mat-cell:nth-child(5) {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-
-    mat-row {
-      transition: 0.2s;
-    }
-
-    mat-row:hover {
-      background-color: whitesmoke;
-    }
-  }
-
-  .info-button {
-    cursor: pointer;
-  }
-
-  .vip-service {
-    color: #039be5;
-    font-weight: bold;
-  }
-
-  .free-service {
-    color: coral;
-    font-weight: bold;
-  }
-
-  .button-area {
-    padding-top: 30px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .tracking {
-    color: orange;
-  }
-
-  .tracking-button {
-    color: red;
-
-    &:disabled {
-      color: gray;
-    }
-  }
-
-  .no-tracking {
-    color: #039be5;
-  }
-
-  .clear {
-    clear: both;
-  }
-
-  .footer {
-    padding-top: 15px;
-    display: flex;
-    justify-content: center;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .container {
-    padding: 15px;
-  }
   .title1 {
     text-align: center;
+    font-size: 14px !important;
   }
 }

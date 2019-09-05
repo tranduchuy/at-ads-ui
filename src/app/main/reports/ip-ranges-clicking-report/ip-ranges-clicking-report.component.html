@@ -2,77 +2,82 @@
 
   <div class="title1" fxLayout="row" fxLayout.xs="column">
     <p class="title2" fxFlex="80">BÁO CÁO NHÓM IP ĐANG CLICK TÀI KHOẢN <span
-        style="color:black">{{_sessionService.activeAdsAccountId}}</span></p>
+        style="color:yellow">{{_sessionService.activeAdsAccountId}}</span></p>
     <mat-form-field class=" datePicker" fxFlex="20">
-      <input type="text" ngxDaterangepickerMd matInput placeholder="Khoảng thời gian thống kê" readonly
-        [locale]="locale" [(ngModel)]="selectedDateRange" startKey="start" endKey="end"
-        (datesUpdated)="onApplyDateRange($event)" (change)="getClassDClickingReport(1)" ngDefaultControl />
+      <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
+      <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
+        startKey="start" endKey="end" (datesUpdated)="onApplyDateRange($event)" (change)="getClassDClickingReport(1)"
+        ngDefaultControl />
     </mat-form-field>
   </div>
 
-  <div class="mat-elevation-z8 table-wrapper">
-    <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }">
+  <div class="inner">
+    <div class="mat-elevation-z8 table-wrapper">
+      <mat-table
+        [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }">
 
-      <ng-container matColumnDef="time">
-        <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.logTime | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="time">
+          <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.logTime | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="ip">
-        <mat-header-cell *matHeaderCellDef> Nhóm IP </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span style="color: #039be5; font-weight: bold">{{element._id}}</span>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="ip">
+          <mat-header-cell *matHeaderCellDef> Nhóm IP </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span style="color: #039be5; font-weight: bold">{{element._id}}</span>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="clicks">
-        <mat-header-cell *matHeaderCellDef> Số lần click </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.totalClick}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="clicks">
+          <mat-header-cell *matHeaderCellDef> Số lần click </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.totalClick}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="keyword">
-        <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span *ngFor="let item of element.keywords" [class.keywords]="item">{{item}}</span>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="keyword">
+          <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngFor="let item of element.keywords" [class.keywords]="item">{{item}}</span>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="location">
-        <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.locations[0]?.city}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.locations[0]?.city}}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="network">
-        <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.networks[0]?.name}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="network">
+          <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.networks[0]?.name}}</mat-cell>
+        </ng-container>
 
-      <!-- <ng-container matColumnDef="device">
-        <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <img src="https://cdn.freebiesupply.com/logos/large/2x/wifi-1-logo-png-transparent.png" alt=""
-            class="device-symbol" *ngIf="element.device === 'Click bằng mạng Wifi'" matTooltip="{{element.device}}">
-          <img src="https://peoplepng.com/wp-content/uploads/2019/05/3g-png-4.png" alt="" class="device-symbol"
-            *ngIf="element.device === 'Click bằng mạng 3G'" matTooltip="{{element.device}}">
-          <p style="width: 50px; text-align: center">
-            <mat-icon *ngIf="element.device === '80% mạng 3G - 20% mạng Wifi'" color="accent"
-              matTooltip="{{element.device}}">help_outline</mat-icon>
-          </p>
-        </mat-cell>
-      </ng-container> -->
+        <!-- <ng-container matColumnDef="device">
+              <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <img src="https://cdn.freebiesupply.com/logos/large/2x/wifi-1-logo-png-transparent.png" alt=""
+                  class="device-symbol" *ngIf="element.device === 'Click bằng mạng Wifi'" matTooltip="{{element.device}}">
+                <img src="https://peoplepng.com/wp-content/uploads/2019/05/3g-png-4.png" alt="" class="device-symbol"
+                  *ngIf="element.device === 'Click bằng mạng 3G'" matTooltip="{{element.device}}">
+                <p style="width: 50px; text-align: center">
+                  <mat-icon *ngIf="element.device === '80% mạng 3G - 20% mạng Wifi'" color="accent"
+                    matTooltip="{{element.device}}">help_outline</mat-icon>
+                </p>
+              </mat-cell>
+            </ng-container> -->
 
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </div>
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
 
-  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal > 1">
-    <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
-      trong tổng
-      {{pageTotal}} trang</p>
-    <p *ngIf="pageTotal === 0">Không có trang nào</p>
-    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
-      nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
+    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
+      <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
+          ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
+        trong tổng
+        {{pageTotal}} trang</p>
+      <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+      <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
+        nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
+    </div>
   </div>
 
 </div>

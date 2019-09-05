@@ -7,6 +7,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class ErrorDialogComponent {
   public errorMessages: string[];
+  public contact: boolean = false;
 
   /**
    * Constructor
@@ -16,6 +17,5 @@ export class ErrorDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ErrorDialogComponent>
   )
-  {
-  }
+  {}
 }

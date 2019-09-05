@@ -2,12 +2,35 @@
   clear: both;
 }
 .container {
-  padding: 0 30px 15px 30px;
   width: 100%;
 
+  .main-title {
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
+    font-size: 16px;
+    padding: 90px 30px 5px 30px;
+    font-weight: bold;
+
+    .main-title-text {
+      float: left;
+      padding-top: 15px;
+    }
+
+    .datePicker {
+      width: 250px;
+      float: right;
+      color: black;
+
+      input {
+        color: white;
+      }
+    }
+  }
+
   .section {
-    box-shadow: 2px 2px 5px silver;
-    margin-top: 20px;
+    box-shadow: 1px 1px 4px silver;
+    border-radius: 0;
     padding-bottom: 30px;
     background-color: white;
 
@@ -55,18 +78,28 @@
     }
 
     .title1 {
-      padding: 15px;
-      background-color: whitesmoke;
-      color: gray;
+      padding: 30px;
+      background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+      background-size: 100% 100%;
+      color: white;
       font-size: 16px;
       font-weight: bold;
+
+      .datePicker {
+        color: #039be5;
+
+        input {
+          color: white;
+        }
+      }
     }
 
     .pagination-buttons {
       padding: 10px;
+      color: gray;
     }
 
-    .pie-chart-report-title{
+    .pie-chart-report-title {
       padding-bottom: 0;
     }
 
@@ -103,8 +136,7 @@
   .right {
     margin: 10px;
     margin-bottom: 0;
-    box-shadow: 1px 1px 5px silver;
-    border-radius: 5px;
+    border-radius: 0;
   }
 
   .left {
@@ -121,8 +153,9 @@
       mat-row {
         transition: 0.2s;
       }
+
       mat-row:hover {
-        background-color: whitesmoke;
+        background-color: rgba(3, 155, 229, 0.1);
       }
 
       mat-row,
@@ -131,9 +164,27 @@
         width: 100%;
       }
 
+      mat-header-cell:last-child,
+      mat-cell:last-child {
+        justify-content: center;
+      }
+
       mat-icon {
         font-size: 20px;
         margin-left: -2px;
+      }
+
+      a {
+        transition: 0.2s;
+
+        &:hover {
+          background: rgba(125, 125, 125, 0.1);
+        }
+      }
+
+      mat-header-cell {
+        background-color: #039be5;
+        color: white;
       }
     }
   }
@@ -161,21 +212,25 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 600px) {
   .container {
-    padding: 15px;
-    padding-top: 0;
+    .main-title {
+      text-align: center;
+
+      .main-title-text {
+        padding-bottom: 10px;
+      }
+    }
 
     .section {
       padding: 0;
 
       .datePicker {
-        margin-top: 10px;
         width: 100%;
       }
 
       .title1 {
-        font-size: 14px;
+        padding: 20px;
       }
 
       .click-number {

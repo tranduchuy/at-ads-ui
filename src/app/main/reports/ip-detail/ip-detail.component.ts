@@ -15,7 +15,7 @@ import { DialogService } from 'app/shared/services/dialog.service';
 export class IpDetailComponent extends PageBaseComponent implements OnInit {
 
   ip: string;
-  historyColumns: string[] = ['adwords', 'accessTime', 'device', 'os', 'browser', 'keyword', 'website', 'location'];
+  historyColumns: string[] = ['adwords', 'accessTime', 'device', 'os', 'browser', 'isPrivateBrowsing','keyword', 'website', 'location'];
   history = [];
   lastHistory = [];
   isProcessing: boolean = false;

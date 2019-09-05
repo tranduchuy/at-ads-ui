@@ -4,50 +4,54 @@
     CẤU HÌNH WHITELIST IP - TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
-  <div class="title2">
-    TÍNH NĂNG KHÔNG CHO PHÉP CHẶN THEO DANH SÁCH IP TÙY CHỈNH
+  <div class="inner">
+    <div class="title2">
+      TÍNH NĂNG KHÔNG CHO PHÉP CHẶN THEO DANH SÁCH IP TÙY CHỈNH
+    </div>
+
+    <!-- <p class="notification">
+          Hệ thống kiểm tra IP máy tính của bạn và chặn quảng cáo <span style="color: red">không cho hiển thị</span> trên máy
+          của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
+        </p> -->
+
+    <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
+        <div fxFlex="60">
+
+          <app-input-textarea [formControlName]="'whitelistIPs'" [errors]="getMessageErrors('whitelistIPs')"
+            title="Nhập danh sách IP không cho phép chặn" height="260px" [isDisabled]="isProcessing">
+          </app-input-textarea>
+
+        </div>
+        <div class="input-example" fxFlex="auto">
+          <p class="title3">Hướng Dẫn Không Cho Phép Chặn IP Tùy Chỉnh</p>
+          <p>
+            Bạn có thể nhập <b>từng IP riêng lẻ</b>, vui lòng điền mỗi IP 1 dòng
+          </p>
+          <b>Ví dụ IP riêng lẻ:</b>
+          <p>
+            127.0.0.1
+            <br>127.0.0.2
+            <br>127.0.0.3
+          </p>
+          <p>
+            Hoặc nhập <b>từng nhóm IP</b>, thêm dấu <span style="color: red">(*)</span> tượng trưng cho nhóm IP không
+            muốn chặn
+          </p>
+          <b>Ví dụ nhóm IP:</b>
+          <p>
+            IP4: 127.0.0.*
+            <br>IP4: 127.0.*.*
+          </p>
+        </div>
+      </div>
+
+      <div class="button-area">
+        <button type="submit" mat-raised-button color="accent" [disabled]="isProcessing">
+          <mat-icon>sync</mat-icon> CẬP NHẬT WHITELIST
+        </button>
+      </div>
+    </form>
   </div>
-
-  <!-- <p class="notification">
-    Hệ thống kiểm tra IP máy tính của bạn và chặn quảng cáo <span style="color: red">không cho hiển thị</span> trên máy
-    của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
-  </p> -->
-
-  <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
-
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
-      <div fxFlex="60">
-
-        <app-input-textarea [formControlName]="'whitelistIPs'" [errors]="getMessageErrors('whitelistIPs')"
-          title="Nhập danh sách IP không cho phép chặn" height="260px" [isDisabled]="isProcessing"></app-input-textarea>
-
-      </div>
-      <div class="input-example" fxFlex="auto">
-        <p class="title3">Hướng Dẫn Không Cho Phép Chặn IP Tùy Chỉnh</p>
-        <p>
-          Bạn có thể nhập <b>từng IP riêng lẻ</b>, vui lòng điền mỗi IP 1 dòng
-        </p>
-        <b>Ví dụ IP riêng lẻ:</b>
-        <p>
-          127.0.0.1
-          <br>127.0.0.2
-          <br>127.0.0.3
-        </p>
-        <p>
-          Hoặc nhập <b>từng nhóm IP</b>, thêm dấu <span style="color: red">(*)</span> tượng trưng cho nhóm IP không muốn chặn
-        </p>
-        <b>Ví dụ nhóm IP:</b>
-        <p>
-          IP4: 127.0.0.*
-          <br>IP4: 127.0.*.*
-        </p>
-      </div>
-    </div>
-
-    <div class="button-area">
-      <button type="submit" mat-raised-button color="accent" [disabled]="isProcessing">
-        <mat-icon>sync</mat-icon> CẬP NHẬT WHITELIST
-      </button>
-    </div>
-  </form>
 </div>

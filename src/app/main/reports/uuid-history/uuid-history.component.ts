@@ -43,12 +43,13 @@ export class UuidHistoryComponent extends PageBaseComponent implements OnInit {
   getDailyClickingReport(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
+    const limit = 20;
 
-    const sub = this._reportService.getDailyClickingReport({ page, limit: 20 })
+    const sub = this._reportService.getDailyClickingReport({ page, limit })
       .subscribe(res => {
         this.dataSource = res.data.entries;
 
-        this.pageTotal = Math.ceil(res.data.totalItems / 20);
+        this.pageTotal = Math.ceil(res.data.totalItems / limit);
         this.totalItems = res.data.totalItems;
 
         this._fuseProgressBarService.hide();

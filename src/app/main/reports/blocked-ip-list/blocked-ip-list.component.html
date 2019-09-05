@@ -1,80 +1,97 @@
 <div class="container">
-  <p class="title1">
-    BÁO CÁO IP ĐÃ CHẶN QUẢNG CÁO TÀI KHOẢN <span style="color: black">{{_sessionService.activeAdsAccountId}}</span>
-  </p>
-
-  <div class="mat-elevation-z8 table-wrapper">
-    <mat-table
-      [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }">
-
-      <!-- Position Column -->
-      <ng-container matColumnDef="order">
-        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-        <mat-cell *matCellDef="let element; let i = index"> {{i+1}} </mat-cell>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="task">
-        <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <button mat-icon-button color="accent" matTooltip="Nhấn để mở chặn" [disabled]="isProcessing"
-                  (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
-            <mat-icon>lock_openk</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="ip">
-        <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-
-          <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
-            style="font-weight: bold; padding-left: 0" mat-button color="accent">
-            {{element._id}}
-          </a>
-
-        </mat-cell>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="network">
-        <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.network | uppercase}}</mat-cell>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="blockingOver">
-        <mat-header-cell *matHeaderCellDef> Khóa trên </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.numberOfCampaigns}} chiến dịch </mat-cell>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="campaign">
-        <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span *ngFor="let item of element.campaigns; let i = index">
-            <span *ngIf="item.campaignName && i < element.campaigns.length-1" style="margin-right: 5px">{{item.campaignName}},</span>
-            <span *ngIf="!item.campaignName && i < element.campaigns.length-1" style="margin-right: 5px">{{item.campaignId}},</span>
-            <span *ngIf="item.campaignName && i === element.campaigns.length-1" style="margin-right: 5px">{{item.campaignName}}</span>
-            <span *ngIf="!item.campaignName && i === element.campaigns.length-1" style="margin-right: 5px">{{item.campaignId}}</span>
-          </span>
-        </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+  <div class="title1">
+    BÁO CÁO IP ĐÃ CHẶN CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:yellow">{{_sessionService.activeAdsAccountId}}</span>
   </div>
+  <div class="inner">
+    <div class="mat-elevation-z8 table-wrapper">
+      <!-- <mat-table
+        [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }"> -->
 
-  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal > 1">
-    <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
-        ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
-      trong tổng
-      {{pageTotal}} trang</p>
-    <p *ngIf="pageTotal === 0">Không có trang nào</p>
-    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
-      nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
+      <mat-table [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="order">
+          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index"> {{i+1}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="task">
+          <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" matTooltip="Nhấn để mở chặn" [disabled]="isProcessing"
+              (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
+              <mat-icon>lock_openk</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="ip">
+          <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+
+            <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
+              style="font-weight: bold; padding-left: 0" mat-button color="accent">
+              {{element._id}}
+            </a>
+
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isPrivateBrowsing">
+          <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.isPrivateBrowsing" style="color: orange; font-weight: bold">
+              <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+            </span>
+            <span *ngIf="!element.isPrivateBrowsing" style="color:silver">Không</span>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="network">
+          <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.network | uppercase}}</mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="blockingOver">
+          <mat-header-cell *matHeaderCellDef> Khóa trên </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.numberOfCampaigns}} chiến dịch </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="campaign">
+          <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngFor="let item of element.campaigns; let i = index">
+              <span *ngIf="item.campaignName && i < element.campaigns.length-1"
+                style="margin-right: 5px">{{item.campaignName}},</span>
+              <span *ngIf="!item.campaignName && i < element.campaigns.length-1"
+                style="margin-right: 5px">{{item.campaignId}},</span>
+              <span *ngIf="item.campaignName && i === element.campaigns.length-1"
+                style="margin-right: 5px">{{item.campaignName}}</span>
+              <span *ngIf="!item.campaignName && i === element.campaigns.length-1"
+                style="margin-right: 5px">{{item.campaignId}}</span>
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+
+    <!-- <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
+      <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
+          ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
+        trong tổng
+        {{pageTotal}} trang</p>
+      <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+      <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
+        nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
+    </div> -->
   </div>
 
 </div>

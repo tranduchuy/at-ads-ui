@@ -1,25 +1,27 @@
 <div class="container">
 
-  <div class="section">
-    <div class="title1 pie-chart-report-title">
-      <div class="title2">
-        BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color:black">{{selectedAdsId}}</span>
-        TỪ <span style="color:black" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span>
-        ĐẾN <span style="color: black" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span>
-      </div>
-
-      <mat-form-field class="datePicker">
-        <input type="text" ngxDaterangepickerMd matInput placeholder="Khoảng thời gian thống kê" readonly
-          [locale]="locale" [(ngModel)]="selectedDateRange" startKey="start" endKey="end"
-          (datesUpdated)="onApplyDateRange($event)" (change)="getAccountReport(_sessionService.activeAccountId)"
-          ngDefaultControl />
-      </mat-form-field>
-
-      <div class="clear"></div>
-
+  <div class="main-title">
+    <div class="main-title-text">
+      BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN <span style="color: yellow">{{selectedAdsId}}</span>
+      <!-- TỪ <span style="color:skyblue" [(ngModel)]="selectedDateRange"
+        ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span>
+      ĐẾN <span style="color:skyblue" [(ngModel)]="selectedDateRange"
+        ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> -->
     </div>
+
+    <mat-form-field class="datePicker">
+      <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
+      <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
+        startKey="start" endKey="end" (datesUpdated)="onSelectDateRange($event)" (change)="onApplyDateRange()"
+        ngDefaultControl />
+    </mat-form-field>
+
+    <div class="clear"></div>
+
+  </div>
+
+  <div class="section">
+
     <div class="div-pie-chart">
       <p style="text-align: center">
         Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold" [(ngModel)]="selectedDateRange"
@@ -56,7 +58,7 @@
 
   <div class="section div-line-chart">
     <div class="title1">
-      <span style="margin-right: 20px">BÁO CÁO TỔNG THỂ THEO NGÀY</span>
+      <span>BÁO CÁO TỔNG THỂ THEO NGÀY</span>
       <!--<button mat-raised-button color="accent" style="border-radius: 15px">Xem Đầy Đủ</button>-->
     </div>
 
@@ -71,8 +73,8 @@
   <div class="section tables">
 
     <div class="left">
-      <div class="title1" style="text-align: center">
-        BÁO CÁO CLICK QUẢNG CÁO TÀI KHOẢN
+      <div class="title1">
+        BÁO CÁO IP CLICK QUẢNG CÁO
       </div>
 
       <div class="left-table">
@@ -126,6 +128,16 @@
             <mat-cell *matCellDef="let element"> {{element.location?.city}} </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="isPrivateBrowsing">
+            <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span *ngIf="element.isPrivateBrowsing" style="color: orange; font-weight: bold">
+                <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+              </span>
+              <span *ngIf="!element.isPrivateBrowsing" style="color:silver">Không</span>
+            </mat-cell>
+          </ng-container>
+
           <mat-header-row *matHeaderRowDef="advertisementClickReportColumns; sticky: true"></mat-header-row>
           <mat-row *matRowDef="let row; columns: advertisementClickReportColumns;"></mat-row>
         </mat-table>
@@ -134,13 +146,13 @@
       <!-- <button mat-raised-button color="accent" class="table-button" style="background-color:#4bb453">BÁO CÁO TOÀN BỘ
         IP</button> -->
 
-      <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal > 1">
+      <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
         <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
             ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
           {{pageTotal}} trang</p>
-        <p *ngIf="pageTotal === 0">Không có trang nào</p>
+        <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
         <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
-          nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
+          nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
       </div>
 
     </div>

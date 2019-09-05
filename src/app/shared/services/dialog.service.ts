@@ -7,6 +7,7 @@ import { IError } from '../../dialog/models/i-error';
 import { ConfirmDialogComponent } from 'app/dialog/confirm-dialog/confirm-dialog.component';
 import { Observable } from 'rxjs';
 import { InfoDialogComponent } from 'app/dialog/info-dialog/info-dialog.component';
+import { ImageDialogComponent } from 'app/dialog/image-dialog/image-dialog.component';
 
 @Injectable()
 export class DialogService {
@@ -18,9 +19,9 @@ export class DialogService {
     const dialogRef = this._matDialog.open(InfoDialogComponent);
     dialogRef.componentInstance.confirmMessage = message;
 
-    if(linkName !== undefined)
+    if (linkName !== undefined)
       dialogRef.componentInstance.linkName = linkName;
-    if(linkUrl !== undefined)
+    if (linkUrl !== undefined)
       dialogRef.componentInstance.linkUrl = linkUrl;
   }
 
@@ -29,14 +30,31 @@ export class DialogService {
     dialogRef.componentInstance.messages = res.messages;
   }
 
-  public _openErrorDialog(error: IError): void {
+  public _openErrorDialog(error: IError, contact?: boolean): void {
     const dialogRef = this._matDialog.open(ErrorDialogComponent);
     dialogRef.componentInstance.errorMessages = error.messages;
+
+    if (contact !== undefined)
+      dialogRef.componentInstance.contact = contact;
   }
 
   public _openConfirmDialog(message: string): Observable<boolean> {
     const dialogRef = this._matDialog.open(ConfirmDialogComponent, { autoFocus: false });
     dialogRef.componentInstance.confirmMessage = message;
+    return dialogRef.afterClosed();
+  }
+
+  public _openImageDialog(imgSrc: string): Observable<boolean> {
+    const dialogRef = this._matDialog.open(ImageDialogComponent, {
+      autoFocus: false,
+      // maxWidth: '100vw',
+      // maxHeight: '100vh',
+      // height: '100%',
+      // width: '100%',
+      panelClass: 'image-dialog'
+    });
+
+    dialogRef.componentInstance.imgSrc = imgSrc;
     return dialogRef.afterClosed();
   }
 }

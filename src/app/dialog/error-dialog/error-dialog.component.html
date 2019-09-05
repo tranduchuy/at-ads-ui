@@ -2,8 +2,11 @@
 <div style="text-align: center; margin-bottom: 15px">
   <mat-icon class="s-60" style="color: crimson">highlight_off</mat-icon>
 </div>
-<div mat-dialog-content
+<div mat-dialog-content style="text-align: center"
      [innerHTML]="errorMessages.join('<br/>')">
+</div>
+<div mat-dialog-content style="text-align: center" *ngIf="contact">
+  Vui lòng liên hệ email <span style="font-weight: bold; color: #039be5">ha@appnet.edu.vn</span> để được hỗ trợ thêm.
 </div>
 <div mat-dialog-actions
      [fxLayoutAlign]="'center center'"

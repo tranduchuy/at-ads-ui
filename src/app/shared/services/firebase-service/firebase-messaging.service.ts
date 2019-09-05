@@ -18,8 +18,6 @@ export class FirebaseMessagingService extends PageBaseComponent {
   }
 
   getPermission() {
-    
-
     this.messaging.requestPermission()
       .then(() => {
         console.log('Firebase permission granted.');

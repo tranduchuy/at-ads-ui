@@ -5,47 +5,50 @@
             class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
     </div>
 
-    <div class="title2">
-        CHẶN TỰ ĐỘNG THEO NHÓM IP (<span style="color: #2d77f3">NÂNG CAO</span>)
+    <div class="inner">
+        <div class="title2">
+            CHẶN TỰ ĐỘNG THEO NHÓM IP (<span style="color: #2d77f3">NÂNG CAO</span>)
+        </div>
+
+        <p class="notification">
+            Nhóm IP là danh sách các IP có tiền tố giống nhau. Ví dụ IP 127.0.0.1 và 127.0.0.2 sẽ thuộc nhóm IP
+            127.0.0.*
+            Bạn chỉ nên chọn chặn theo nhóm khi bị phá hoại với số lượng lớn, vì chặn theo nhóm có thể sẽ <span
+                style="color: red"> chặn nhầm khách hàng</span> của bạn.
+        </p>
+
+        <p>
+            <b>
+                Chọn nhóm IP 127.0.0.* (255 IP)
+            </b>
+        </p>
+
+        <mat-form-field style="width: 100%" appearance="outline">
+            <mat-label>Chọn hình thức</mat-label>
+            <mat-select [(value)]="classC" [disabled]="isProcessing">
+                <mat-option *ngFor="let item of itemsSource.classC" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <p>
+            <b>
+                Chọn nhóm IP 127.0.*.* (65.026 IP)
+            </b>
+        </p>
+
+        <mat-form-field style="width: 100%" appearance="outline">
+            <mat-label>Chọn hình thức</mat-label>
+            <mat-select [(value)]="classD" [disabled]="isProcessing">
+                <mat-option *ngFor="let item of itemsSource.classD" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <p class="text-center">
+            <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
+                (click)="setAutoBlockingIPRange()" [disabled]="isProcessing">
+                <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+            </button>
+        </p>
     </div>
-
-    <p class="notification">
-        Nhóm IP là danh sách các IP có tiền tố giống nhau. Ví dụ IP 127.0.0.1 và 127.0.0.2 sẽ thuộc nhóm IP 127.0.0.*
-        Bạn chỉ nên chọn chặn theo nhóm khi bị phá hoại với số lượng lớn, vì chặn theo nhóm có thể sẽ <span
-            style="color: red"> chặn nhầm khách hàng</span> của bạn.
-    </p>
-
-    <p>
-        <b>
-            Chọn nhóm IP 127.0.0.* (255 IP)
-        </b>
-    </p>
-
-    <mat-form-field style="width: 100%" appearance="outline">
-        <mat-label>Chọn hình thức</mat-label>
-        <mat-select [(value)]="classC" [disabled]="isProcessing">
-            <mat-option *ngFor="let item of itemsSource.classC" [value]="item.value">{{item.text}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <p>
-        <b>
-            Chọn nhóm IP 127.0.*.* (65.026 IP)
-        </b>
-    </p>
-
-    <mat-form-field style="width: 100%" appearance="outline">
-        <mat-label>Chọn hình thức</mat-label>
-        <mat-select [(value)]="classD" [disabled]="isProcessing">
-            <mat-option *ngFor="let item of itemsSource.classD" [value]="item.value">{{item.text}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <p class="text-center">
-        <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
-            (click)="setAutoBlockingIPRange()" [disabled]="isProcessing">
-            <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
-        </button>
-    </p>
 
 </div>

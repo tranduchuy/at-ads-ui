@@ -43,6 +43,7 @@ import { HomepageModule } from './homepage/homepage.module';
 import * as firebase from 'firebase';
 import { FirebaseMessagingService } from './shared/services/firebase-service/firebase-messaging.service';
 import { firebaseConfig } from './shared/services/firebase-service/firebase-config';
+import { ImageDialogComponent } from './dialog/image-dialog/image-dialog.component';
 
 export function init_app(appInitService: AppInitService): any {
   return () => {
@@ -102,7 +103,8 @@ export function init_app(appInitService: AppInitService): any {
     CookieModule.forRoot(),
   ],
   entryComponents: [
-    CheckWebsiteTrackingDialogComponent
+    CheckWebsiteTrackingDialogComponent,
+    ImageDialogComponent
   ],
   providers: [
     {

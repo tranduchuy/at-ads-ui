@@ -5,52 +5,58 @@
       class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
-  <div class="title2">
-    KIỂM THỬ TÍNH NĂNG CHẶN THEO IP
-  </div>
+  <div class="inner">
 
-  <p class="notification">
-    Hệ thống kiểm tra IP máy tính của bạn và chặn quảng cáo <span style="color: red">không cho hiển thị</span> trên máy
-    của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
-  </p>
-
-  <form class="ban-ip-form" [formGroup]="form" (ngSubmit)="onSubmitForm()">
-
-    <app-input-text [formControlName]="'bannedIP'" [errors]="getMessageErrors('bannedIP')" title="IP của bạn" [isDisabled]="isProcessing">
-    </app-input-text>
-
-    <div class="button-area">
-      <button type="submit" mat-raised-button color="warn" [disabled]="isProcessing">
-        <mat-icon>block</mat-icon> THỬ CHẶN IP CỦA BẠN
-      </button>
+    <div class="title2">
+      KIỂM THỬ TÍNH NĂNG CHẶN THEO IP
     </div>
-  </form>
 
-  <div class="banned-ip-info" *ngIf="hasBlockedIP === true">
-    <p>
-      IP <b><span [(ngModel)]="blockedIPs[0]" ngDefaultControl>{{blockedIPs[0]}}</span></b> đã được chặn thành công trong hệ thống Google Ads.
-      <br><br><b>Cách kiểm tra hệ thống hoạt động:</b>
-      <br><b>Bước 1:</b> Truy cập vào tài khoản Google Ads tại trang <a href="https://ads.google.com/intl/vi_VN/home/"
-        target="blank">Ads.google.com</a>
-      nhấn vào
-      <span class="step">1 Chiến dịch</span>
-      <mat-icon class="next-icon">arrow_forward</mat-icon>
-      <span class="step">Cài đặt</span>
-      <mat-icon class="next-icon">arrow_forward</mat-icon>
-      <span class="step">Loại trừ 1 IP</span>
-      <br><b>Bước 2:</b> Truy cập vào trang <a href="https:/google.com.vn" target="blank">Google.com.vn</a> và tìm kiếm
-      website của
-      bạn. Nếu bạn không thấy quảng cáo, hệ thống hoạt động tốt.
-      <br>Sau khi kiểm tra, bạn có thể bỏ IP đang bị chặn. Bấm vào nút dưới đây
+    <p class="notification">
+      Hệ thống kiểm tra IP máy tính của bạn và chặn quảng cáo <span style="color: red">không cho hiển thị</span> trên
+      máy
+      của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
     </p>
-    <div>
-      <button mat-raised-button 
-              style="background-color: #4bb353; color: white"
-              (click)="unblockSampleIP()" class="unblock-ip-button" 
-              [disabled]="isProcessing">
-        <mat-icon>lock_open</mat-icon>
-        MỞ CHẶN IP CỦA BẠN
-      </button>
+
+    <form class="ban-ip-form" [formGroup]="form" (ngSubmit)="onSubmitForm()">
+
+      <app-input-text [formControlName]="'bannedIP'" [errors]="getMessageErrors('bannedIP')" title="IP của bạn"
+        [isDisabled]="isProcessing">
+      </app-input-text>
+
+      <div class="button-area">
+        <button type="submit" mat-raised-button color="warn" [disabled]="isProcessing">
+          <mat-icon>block</mat-icon> THỬ CHẶN IP CỦA BẠN
+        </button>
+      </div>
+    </form>
+
+    <div class="banned-ip-info" *ngIf="hasBlockedIP === true">
+      <p>
+        IP <span [(ngModel)]="blockedIPs[0]" ngDefaultControl
+          style="color: #039be5; font-weight: bold">{{blockedIPs[0]}}</span> đã được chặn thành công
+        trong hệ thống Google Ads.
+        <br><br><b>Cách kiểm tra hệ thống hoạt động:</b>
+        <br><b>Bước 1:</b> Truy cập vào tài khoản Google Ads tại trang <a href="https://ads.google.com/intl/vi_VN/home/"
+          target="blank">Ads.google.com</a>
+        nhấn vào
+        <span class="step">1 Chiến dịch</span>
+        <mat-icon class="next-icon">arrow_forward</mat-icon>
+        <span class="step">Cài đặt</span>
+        <mat-icon class="next-icon">arrow_forward</mat-icon>
+        <span class="step">Loại trừ 1 IP</span>
+        <br><b>Bước 2:</b> Truy cập vào trang <a href="https:/google.com.vn" target="blank">Google.com.vn</a> và tìm
+        kiếm
+        website của
+        bạn. Nếu bạn không thấy quảng cáo, hệ thống hoạt động tốt.
+        <br>Sau khi kiểm tra, bạn có thể bỏ IP đang bị chặn. Bấm vào nút dưới đây
+      </p>
+      <div>
+        <button mat-raised-button style="background-color: #4bb353; color: white" (click)="unblockSampleIP()"
+          class="unblock-ip-button" [disabled]="isProcessing">
+          <mat-icon>lock_open</mat-icon>
+          MỞ CHẶN IP CỦA BẠN
+        </button>
+      </div>
     </div>
   </div>
 

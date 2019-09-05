@@ -1,127 +1,135 @@
 .container {
-  padding: 15px 30px 15px 30px;
   width: 100%;
-  box-shadow: 2px 2px 5px silver;
 
   .title1 {
-    padding: 15px;
-    background-color: whitesmoke;
-    color: gray;
+    padding: 100px 60px 30px 30px;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
     font-size: 16px;
     font-weight: bold;
-    box-shadow: 2px 2px 5px silver;
   }
 
-  .title2 {
-    margin-top: 50px;
-    font-weight: bold;
-    text-align: justify;
-  }
+  .inner {
+    padding: 15px 30px 15px 30px;
 
-  .usage {
-    text-align: justify;
-    padding-top: 20px;
-  }
-
-  .link-button {
-    color: #039be5;
-    cursor: pointer;
-    text-decoration: underline !important;
-  }
-
-  .tracking-example {
-    margin-top: 20px;
-
-    img {
-      width: 100%;
-      box-shadow: 2px 2px 5px silver;
-    }
-  }
-
-  .table-title {
-    font-weight: bold;
-    text-align: center;
-    padding: 10px;
-    padding-top: 20px;
-  }
-
-  .notification{
-    display: table;
-    margin: 0 auto;
-    text-align: center;
-    background-color: #eee;
-    width: 80%;
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-left: 5px solid darkorange;
-  }
-
-  .table-wrapper {
-    height: 500px;
-    box-shadow: 2px 2px 5px silver;
-    background-color: white;
-    overflow: auto;
-
-    mat-table {
-      width: 100%;
-      box-shadow: none;
+    .title2 {
+      margin-top: 50px;
+      font-weight: bold;
+      text-align: justify;
     }
 
-    mat-row{
-      transition: 0.2s;
+    .usage {
+      text-align: justify;
+      padding-top: 20px;
     }
 
-    mat-row:hover {
-      background-color: whitesmoke;
+    .link-button {
+      color: #039be5;
+      cursor: pointer;
+      text-decoration: underline !important;
     }
 
-    mat-header-cell:nth-child(1),
-    mat-cell:nth-child(1) {
-      flex: 0 0 10%;
+    .tracking-example {
+      margin-top: 20px;
+
+      img {
+        width: 100%;
+        box-shadow: 1px 1px 4px silver;
+      }
     }
 
-
-    mat-header-cell:nth-child(3),
-    mat-cell:nth-child(3) {
-      flex: 0 0 40%;
+    .table-title {
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      padding-top: 20px;
     }
 
-    mat-header-cell:nth-child(5),
-    mat-cell:nth-child(5) {
-      flex: 0 0 20%;
-      padding-left: 20px
+    .notification {
+      display: table;
+      margin: 0 auto;
+      text-align: center;
+      background-color: #eee;
+      width: 80%;
+      margin-top: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border-left: 5px solid darkorange;
     }
 
-    mat-row,
-    mat-header-row {
-      min-width: 1000px;
-      width: 100%;
+    .table-wrapper {
+      max-height: 500px;
+      box-shadow: 1px 1px 4px silver;
+      background-color: white;
+      overflow: auto;
+
+      mat-table {
+        width: 100%;
+        box-shadow: none;
+      }
+
+      mat-row {
+        transition: 0.2s;
+      }
+
+      mat-row:hover {
+        background-color: rgba(3, 155, 229, 0.1);
+      }
+
+      mat-header-cell:nth-child(1),
+      mat-cell:nth-child(1) {
+        flex: 0 0 10%;
+      }
+
+      mat-header-cell:nth-child(3),
+      mat-cell:nth-child(3) {
+        flex: 0 0 40%;
+      }
+
+      mat-header-cell:nth-child(5),
+      mat-cell:nth-child(5) {
+        flex: 0 0 20%;
+        padding-left: 20px;
+      }
+
+      mat-header-cell {
+        background: #039be5;
+        color: white;
+      }
+
+      mat-row,
+      mat-header-row {
+        min-width: 1000px;
+        width: 100%;
+      }
     }
-  }
 
-  .submit-button {
-    margin: 0 auto;
-    margin-top: 10px;
-    background-color: #44b543;
-    color: white;
-  }
+    .submit-button {
+      margin: 0 auto;
+      margin-top: 10px;
+      background-color: #44b543;
+      color: white;
+    }
 
-  .enable-status {
-    color: #039be5;
-  }
+    .enable-status {
+      color: #039be5;
+    }
 
-  .disabled-status {
-    color: silver;
+    .disabled-status {
+      color: silver;
+    }
   }
 }
 
 @media screen and (max-width: 600px) {
   .container {
-    padding: 15px;
-  }
+    .inner {
+      padding: 15px;
 
-  .submit-button {
-    font-size: 12px;
+      .submit-button {
+        font-size: 12px;
+      }
+    }
   }
 }

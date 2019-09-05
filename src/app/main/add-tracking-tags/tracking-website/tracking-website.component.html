@@ -1,35 +1,39 @@
 <div class="container">
 
-  <p class="title1">
-    GẮN MÃ TRACKING VÀO WEBSITE TÀI KHOẢN <span style="color: black">{{adsId}}</span>
-  </p>
+  <div class="title1">
+    GẮN MÃ TRACKING VÀO WEBSITE TÀI KHOẢN <span style="color: yellow">{{adsId}}</span>
+  </div>
 
-  <p class="info">
-    <b>Tại sao cần gắn mã:</b> Hệ thống đưa vào mã tracking để phát hiện số điện thoại truy cập vào website của bạn. Bạn
-    có thể bỏ mã vào bất cứ vị trí nào trong website. Tuy nhiên tốt nhất hãy bỏ mã vào trong
-    <span class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span>
-  </p>
-
-  <div>
-    <b>Bước 1:</b> Copy mã tracking
-    <div fxLayout="row" style="padding-top: 10px">
-      <input class="key" type="text" #inputKey
-        value='&lt;script type="text/javascript" src="{{hostTracking}}?key={{key}}"&gt;&lt;/script&gt;'
-        readonly>
-      <button mat-stroked-button (click)="copyKey(inputKey.value)" class="copy-button">copy</button>
-    </div>
-    <p style="padding-top: 20px; line-height: 30px">
-      <b>Bước 2:</b> Mở website <a href="https://hecta.vn/">hecta.vn</a> và gắn mã vào trong thẻ <span
-        class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span>
+  <div class="inner">
+    <p class="info">
+      <b>Tại sao cần gắn mã:</b> Hệ thống đưa vào mã tracking để phát hiện số điện thoại truy cập vào website của bạn.
+      Bạn
+      có thể bỏ mã vào bất cứ vị trí nào trong website. Tuy nhiên tốt nhất hãy bỏ mã vào trong
+      <span class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span>
     </p>
-    <div style="padding-top: 20px">
-      <b>Bước 3:</b> Kiểm tra mã
-      <p>
-        <button mat-raised-button color="accent" style="border-radius: 0" (click)="checkWebsiteTracking()">
-          BẤM ĐỂ KIỂM TRA MÃ
+
+    <div style="padding-top: 10px">
+      <span class="step"><b>Bước 1:</b> Copy mã tracking</span>
+      <div fxLayout="row" style="padding-top: 10px">
+        <input class="key" type="text" #inputKey
+          value='&lt;script type="text/javascript" src="{{hostTracking}}?key={{key}}"&gt;&lt;/script&gt;' readonly>
+        <button mat-icon-button (click)="copyKey(inputKey.value)" class="copy-button" matTooltip="Nhấn vào để sao chép">
+          <mat-icon style="font-size: 20px">file_copy</mat-icon>
         </button>
+      </div>
+      <p style="padding-top: 10px; line-height: 30px">
+        <span class="step"><b>Bước 2:</b> Mở website <a href="https://hecta.vn/">hecta.vn</a> và gắn mã vào trong thẻ
+          <span class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span></span>
       </p>
+      <div style="padding-top: 10px">
+        <span class="step"><b>Bước 3:</b> Kiểm tra mã</span>
+        <p>
+          <button mat-raised-button color="accent" style="border-radius: 0" (click)="checkWebsiteTracking()">
+            BẤM ĐỂ KIỂM TRA MÃ
+          </button>
+        </p>
+      </div>
     </div>
   </div>
-  
+
 </div>

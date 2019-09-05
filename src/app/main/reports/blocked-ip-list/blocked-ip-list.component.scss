@@ -1,78 +1,83 @@
 .container {
-  padding: 0px 30px 15px 30px;
   width: 100%;
 
   .title1 {
-    padding: 15px;
-    padding-left: 30px;
-    background-color: whitesmoke;
-    color: gray;
+    padding: 95px 30px 45px 30px;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
     font-size: 16px;
     font-weight: bold;
 
-    box-shadow: 2px 2px 5px silver;
   }
 
-  .network-logo {
-    height: 20px;
-    width: 70px;
-  }
-
-  .pagination-buttons {
-    display: table;
-    margin: 0 auto;
-  }
-
-  .table-wrapper {
-    margin-top: -17px;
-    background-color: white;
-    box-shadow: 2px 2px 5px silver;
-    height: auto;
-    overflow: auto;
-    overflow-y: hidden;
-
-    mat-table {
-      box-shadow: none;
+  .inner {
+    .network-logo {
+      height: 20px;
+      width: 70px;
     }
 
-    mat-header-cell:nth-child(1),
-    mat-cell:nth-child(1) {
-      flex: 0 0 5%;
+    .pagination-buttons {
+      display: table;
+      margin: 0 auto;
+      padding-left: 10px;
+      color: gray;
     }
 
-    mat-header-cell:nth-child(2),
-    mat-cell:nth-child(2) {
-      flex: 0 0 10%;
-      display: flex;
-      justify-content: center;
-    }
+    .table-wrapper {
+      margin-top: -17px;
+      background-color: white;
+      box-shadow: 1px 1px 4px silver;
+      height: auto;
+      overflow: auto;
+      overflow-y: hidden;
 
-    mat-header-cell:nth-child(6),
-    mat-cell:nth-child(6) {
-      flex: 0 0 45%;
-    }
+      mat-table {
+        box-shadow: none;
+      }
 
-    mat-header-row,
-    mat-row {
-      min-width: 1000px;
-      width: 100%;
-    }
+      mat-header-cell:nth-child(1),
+      mat-cell:nth-child(1) {
+        flex: 0 0 5%;
+      }
 
-    mat-row {
-      transition: 0.2s;
-    }
+      mat-header-cell:nth-child(2),
+      mat-cell:nth-child(2),
+      mat-header-cell:nth-child(4),
+      mat-cell:nth-child(4) {
+        flex: 0 0 10%;
+        justify-content: center;
+      }
 
-    mat-row:hover {
-      background-color: whitesmoke;
+      mat-header-cell:nth-child(7),
+      mat-cell:nth-child(7) {
+        flex: 0 0 45%;
+      }
+
+      mat-header-row,
+      mat-row {
+        min-width: 1000px;
+        width: 100%;
+      }
+
+      mat-header-cell {
+        background: #039be5;
+        color: white;
+      }
+
+      mat-row {
+        transition: 0.2s;
+      }
+
+      mat-row:hover {
+        background-color: rgba(3, 155, 229, 0.1);
+      }
     }
   }
 }
 
 @media screen and (max-width: 600px) {
   .container {
-    padding: 15px;
-    padding-top: 0;
-
     pagination-controls {
       display: flex !important;
       justify-content: center !important;

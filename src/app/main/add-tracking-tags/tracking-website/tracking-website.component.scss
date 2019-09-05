@@ -1,49 +1,71 @@
 .container {
-  padding: 15px 30px 15px 30px;
   width: 100%;
-  box-shadow: 2px 2px 5px silver;
 
   .title1 {
-    padding: 15px;
-    background-color: whitesmoke;
-    color: gray;
+    padding: 100px 30px 30px 30px;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
     font-size: 16px;
     font-weight: bold;
-    box-shadow: 2px 2px 5px silver;
   }
 
-  .info {
-    margin-top: 25px;
-    line-height: 30px;
-  }
+  .inner {
+    padding: 15px 30px 15px 30px;
 
-  .hightline {
-    padding: 5px;
-    background-color: #eee;
-    color: deeppink;
-  }
+    .info {
+      line-height: 30px;
+    }
 
-  .key {
-    padding: 10px;
-    width: 100%;
-    border: 0.5px solid silver;
-    border-right: 0;
-    border-radius: 5px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
+    .hightline {
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 5px;
+      background-color: #eee;
+      color: deeppink;
+      font-family: 'consolas'
+    }
 
-  .copy-button {
-    border-radius: 0;
-    border: 0.5px solid silver;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    .step {
+      
+    }
+
+    .key {
+      padding: 10px;
+      padding-right: 0;
+      width: 100%;
+      border-right: 0;
+      border-radius: 3px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      font-family: 'consolas';
+      // background-color: rgba(0,0,0,0.8);
+      // color: skyblue;
+      background: #eee;
+      color: deeppink;
+    }
+
+    .code {
+      font-family: 'consolas';
+    }
+
+    .copy-button {
+      border-radius: 0;
+      color: gray;
+      padding-left: 5px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      border: 0;
+      background: #eee;
+    }
   }
 }
 
 @media screen and (max-width: 600px) {
   .container {
-    padding: 15px;
-    padding-top: 0;
+    .inner {
+      padding: 15px;
+    }
   }
 }

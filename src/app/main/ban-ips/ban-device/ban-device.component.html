@@ -3,100 +3,102 @@
     CẤU HÌNH CHẶN THEO THIẾT BỊ - TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId}}</span>
   </div>
 
-  <div class="title2">
-    <p>
-      Kết quả có được theo thống kê từ ngày <b>25/05/2019</b> đến ngày <b>08/06/2019</b>
+  <div class="inner">
+    <div class="title2">
+      <p>
+        Kết quả có được theo thống kê từ ngày <b>25/05/2019</b> đến ngày <b>08/06/2019</b>
+      </p>
+      <p class="advise">
+        <span class="success-badge">MẸO</span> Bạn có thể dừng quảng cáo trên các thiết bị mang lại hiệu quả quảng cáo
+        thấp
+      </p>
+    </div>
+
+    <p *ngIf="deviceReports.length === 0 && !isProcessing" class="empty-report-notification">
+      Chúng tôi không tìm thấy thiết bị nào trên tài khoản Google Ads này.
     </p>
-    <p class="advise">
-      <span class="success-badge">MẸO</span> Bạn có thể dừng quảng cáo trên các thiết bị mang lại hiệu quả quảng cáo
-      thấp
-    </p>
-  </div>
 
-  <p *ngIf="deviceReports.length === 0 && !isProcessing" class="empty-report-notification">
-    Không tìm thấy thiết bị nào trên tài khoản Google Ads này.
-  </p>
+    <div class="table-wrapper" *ngIf="deviceReports.length > 0">
+      <mat-table [dataSource]="deviceReports" class="mat-elevation-z8">
 
-  <div class="table-wrapper" *ngIf="deviceReports.length > 0">
-    <mat-table [dataSource]="deviceReports" class="mat-elevation-z8">
+        <ng-container matColumnDef="device">
+          <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.device === 'Điện thoại'">
+              <mat-icon color="accent">smartphone</mat-icon> {{element.device}}
+            </span>
+            <span *ngIf="element.device === 'Máy tính bảng'">
+              <mat-icon color="accent">tablet_mac</mat-icon> {{element.device}}
+            </span>
+            <span *ngIf="element.device === 'Máy tính'">
+              <mat-icon color="accent">laptop_chromebook</mat-icon> {{element.device}}
+            </span>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="device">
-        <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span *ngIf="element.device === 'Điện thoại'">
-            <mat-icon color="accent">smartphone</mat-icon> {{element.device}}
-          </span>
-          <span *ngIf="element.device === 'Máy tính bảng'">
-            <mat-icon color="accent">tablet_mac</mat-icon> {{element.device}}
-          </span>
-          <span *ngIf="element.device === 'Máy tính'">
-            <mat-icon color="accent">laptop_chromebook</mat-icon> {{element.device}}
-          </span>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="cost">
+          <mat-header-cell *matHeaderCellDef> Chi phí </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.cost | number: '1.0-0'}} VNĐ</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="cost">
-        <mat-header-cell *matHeaderCellDef> Chi phí </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.cost | number: '1.0-0'}} VNĐ</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="impressions">
+          <mat-header-cell *matHeaderCellDef> Hiển thị </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.impressions | number: '1.0-0'}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="impressions">
-        <mat-header-cell *matHeaderCellDef> Hiển thị </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.impressions | number: '1.0-0'}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="clicks">
+          <mat-header-cell *matHeaderCellDef> Click </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.clicks | number: '1.0-0'}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="clicks">
-        <mat-header-cell *matHeaderCellDef> Click </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.clicks | number: '1.0-0'}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="avgPosition">
+          <mat-header-cell *matHeaderCellDef> Vị trí trung bình </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.avgPosition}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="avgPosition">
-        <mat-header-cell *matHeaderCellDef> Vị trí trung bình </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.avgPosition}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="ctr">
+          <mat-header-cell *matHeaderCellDef> CTR </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ctr}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="ctr">
-        <mat-header-cell *matHeaderCellDef> CTR </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.ctr}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="optimization">
+          <mat-header-cell *matHeaderCellDef>Tối ưu</mat-header-cell>
+          <mat-cell *matCellDef="let element">
 
-      <ng-container matColumnDef="optimization">
-        <mat-header-cell *matHeaderCellDef>Tối ưu</mat-header-cell>
-        <mat-cell *matCellDef="let element">
+            <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Điện thoại'">
+              <mat-label>Chọn hình thức</mat-label>
+              <mat-select [(value)]="deviceSettings.mobile" [disabled]="isProcessing"
+                (selectionChange)="setDeviceCampaignRunning($event,30001)">
+                <mat-option *ngFor="let item of deviceSettingsItemsSource.mobile" [value]="item.value">{{item.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-          <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Điện thoại'">
-            <mat-label>Chọn hình thức</mat-label>
-            <mat-select [(value)]="deviceSettings.mobile" [disabled]="isProcessing"
-              (selectionChange)="setDeviceCampaignRunning($event,30001)">
-              <mat-option *ngFor="let item of deviceSettingsItemsSource.mobile" [value]="item.value">{{item.text}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Máy tính bảng'">
+              <mat-label>Chọn hình thức</mat-label>
+              <mat-select [(value)]="deviceSettings.tablet" [disabled]="isProcessing"
+                (selectionChange)="setDeviceCampaignRunning($event,30002)">
+                <mat-option *ngFor="let item of deviceSettingsItemsSource.tablet" [value]="item.value">{{item.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-          <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Máy tính bảng'">
-            <mat-label>Chọn hình thức</mat-label>
-            <mat-select [(value)]="deviceSettings.tablet" [disabled]="isProcessing"
-              (selectionChange)="setDeviceCampaignRunning($event,30002)">
-              <mat-option *ngFor="let item of deviceSettingsItemsSource.tablet" [value]="item.value">{{item.text}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Máy tính'">
+              <mat-label>Chọn hình thức</mat-label>
+              <mat-select [(value)]="deviceSettings.computer" [disabled]="isProcessing"
+                (selectionChange)="setDeviceCampaignRunning($event,30000)">
+                <mat-option *ngFor="let item of deviceSettingsItemsSource.computer" [value]="item.value">{{item.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-          <mat-form-field style="width: 100%" appearance="outline" *ngIf="element.device === 'Máy tính'">
-            <mat-label>Chọn hình thức</mat-label>
-            <mat-select [(value)]="deviceSettings.computer" [disabled]="isProcessing"
-              (selectionChange)="setDeviceCampaignRunning($event,30000)">
-              <mat-option *ngFor="let item of deviceSettingsItemsSource.computer" [value]="item.value">{{item.text}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          </mat-cell>
+        </ng-container>
 
-        </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
   </div>
 
 </div>

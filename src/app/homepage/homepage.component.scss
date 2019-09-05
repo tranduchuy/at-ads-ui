@@ -1,10 +1,12 @@
 .homepage {
   font-size: 16px;
   width: 100%;
+  background: url("../../assets/images/backgrounds/security-wallpaper_1549203.png");
+  background-size: 100% 100%;
+  background-position: center center;
+  background-attachment: fixed;
 
   .main-content {
-    background-color: whitesmoke;
-
     button {
       transition: 0.2s;
 
@@ -13,91 +15,113 @@
       }
     }
 
-    .banner {
-      background-image: url("../../assets/images/backgrounds/dark-material-bg.jpg");
-      color: white;
-      padding: 70px 30px 50px 30px;
-      box-shadow: 0px 2px 8px black;
-      position: relative;
-      z-index: 100;
+    .banner-container {
+      background-image: url("../../assets/images/backgrounds/shutterstock_503902966-Converted-01x1200.jpg");
+      //background-attachment: fixed;
+      background-position: center center;
+      background-size: 100% 100%;
+      box-shadow: 0 2px 8px black;
 
-      .app-title {
-        font-size: 35px !important;
-        text-shadow: 1px 2px 2px black;
-        font-weight: bolder;
-        color: skyblue;
-        font-family: "Segoe UI";
-      }
+      .banner {
+        background: rgba(0, 0, 0, 0.55);
+        color: white;
+        padding: 90px 30px 70px 30px;
+        position: relative;
+        z-index: 100;
 
-      .logo {
-        width: 180px;
-        margin: 32px auto;
-        -webkit-animation: logoScale 0.2s linear;
-        transition: 0.2s;
-
-        &:hover {
-          transform: scale(1.05, 1.05);
+        .app-title {
+          font-size: 35px !important;
+          text-shadow: 1px 2px 2px black;
+          font-weight: bolder;
+          color: skyblue;
+          font-family: "Segoe UI";
+          -webkit-animation: titleAppearance 0.8s linear;
         }
 
-        @keyframes logoScale {
+        @keyframes titleAppearance {
           from {
-            -webkit-transform: scale(0, 0);
+            opacity: 0
+          } to {
+            opacity: 1;
           }
-          to {
-            -webkit-transform: scale(1, 1);
+        }
+
+        .logo {
+          width: 180px;
+          margin: 32px auto;
+          -webkit-animation: logoScale 0.2s linear;
+          transition: 0.2s;
+
+          &:hover {
+            transform: scale(1.05, 1.05);
+          }
+
+          @keyframes logoScale {
+            from {
+              -webkit-transform: scale(0, 0);
+            }
+            to {
+              -webkit-transform: scale(1, 1);
+            }
+          }
+
+          img {
+            filter: drop-shadow(0px 1px 5px black);
           }
         }
 
-        img {
-          filter: drop-shadow(0px 1px 5px black);
-        }
-      }
-
-      .title0 {
-        padding-top: 30px;
-      }
-
-      .title1 {
-        font-size: 25px;
-        width: 100%;
-        text-align: center;
-      }
-
-      .title2 {
-        width: 100%;
-        text-align: center;
-      }
-
-      .login-with-google {
-        text-align: center;
-        padding: 20px;
-
-        img {
-          width: 24px;
+        .title0 {
+          padding-top: 30px;
         }
 
-        .register-button {
-          background-color: #44b643;
-          color: white;
-          padding-left: 0;
-          min-width: 225px;
+        .title1 {
+          font-size: 25px;
+          width: 100%;
+          text-align: center;
         }
 
-        .google-login-button {
-          max-width: 225px;
+        .title2 {
+          width: 100%;
+          text-align: center;
+          text-shadow: 1px 1px 4px black;
+          font-size: 18px;
+          -webkit-animation: titleAppearance 0.8s linear;
         }
-      }
 
-      .login {
-        text-align: center;
-        font-size: 16px;
+        .login-with-google {
+          text-align: center;
+          padding: 20px;
+
+          img {
+            width: 24px;
+          }
+
+          .login-google-button {
+            transition: 0.2s;
+
+            &:hover {
+              transform: scale(1.05, 1.05);
+            }
+          }
+
+          .access-system-button {
+            background: #44b543;
+            color: white;
+            transition: 0.2s;
+
+            &:hover {
+              transform: scale(1.05, 1.05);
+            }
+          }
+        }
       }
     }
 
     .table {
       padding: 30px;
       padding-top: 50px;
-      background-color: rgba(3, 155, 229, 1);
+      padding-bottom: 50px;
+      background: rgba(0, 0, 0, 0.5);
 
       .table-title {
         padding: 20px;
@@ -108,8 +132,29 @@
 
       .table-wrapper {
         overflow: auto;
-        filter: drop-shadow(0px 1px 2px gray);
-        background-color: white;
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.8));
+
+        .network-logo,
+        .mobifone,
+        .fpt {
+          height: 20px;
+          width: 80px;
+        }
+
+        .vietnamobile {
+          height: 25px;
+        }
+
+        .vnpt {
+          height: 45px;
+          width: 100px;
+          margin-left: -15px;
+          margin-top: -10px;
+        }
+
+        .fpt {
+          height: 30px;
+        }
 
         .icon {
           height: 22px;
@@ -117,29 +162,54 @@
           margin-right: 5px;
         }
 
+        .location-icon {
+          height: 36px;
+          width: 36px;
+          margin-left: -10px;
+        }
+
         mat-table {
           width: 100%;
+          background: rgba(3, 155, 229, 0.1);
+
+          mat-header-row {
+            background: rgba(3, 155, 229, 0.3);
+          }
+
+          mat-header-cell {
+            color: white;
+          }
+
+          mat-cell {
+            color: white;
+          }
 
           mat-row {
             transition: 0.2s;
             -webkit-animation: rowAppearance 0.4s linear;
 
-            &:nth-child(odd) {
-              background-color: whitesmoke;
-            }
+            // &:nth-child(odd) {
+            //   background-color: whitesmoke;
+            // }
 
             &:hover {
-              background-color: rgba(3, 155, 229, 0.1);
+              //background-color: rgba(3, 155, 229, 0.1);
+              background: rgba(3, 155, 229, 0.18);
             }
           }
 
           @keyframes rowAppearance {
             from {
               opacity: 0;
-
-            } to {
+            }
+            to {
               opacity: 1;
             }
+          }
+
+          mat-header-cell:nth-child(5),
+          mat-cell:nth-child(5) {
+            flex: 0 0 17%;
           }
 
           mat-header-row,
@@ -153,13 +223,14 @@
 
     .instruction {
       padding: 30px;
+      background: rgba(3, 155, 229, 0.3);
 
       .steps-main-title {
         font-size: 25px;
         width: 100%;
         text-align: center;
-        color: rgba(0, 0, 0, 0.6);
-        font-weight: bold;
+        color: white;
+        text-shadow: 1px 1px 4px black;
       }
 
       .demo-video {
@@ -172,24 +243,39 @@
 
       .step-wrapper {
         padding-top: 30px;
+        padding-bottom: 30px;
 
         .step {
-          background-color: white;
+          background: rgba(0, 0, 0, 0.4);
+          text-shadow: 1px 1px 4px black;
+          color: white;
           height: 400px;
-          border: 1px solid #d2d2d2;
           border-radius: 5px;
-          box-shadow: 1px 1px 4px silver;
+          box-shadow: 1px 1px 4px black;
           padding: 20px;
           padding-bottom: 0;
           transition: 0.2s;
 
+          // &:nth-child(1) {
+          //   background: rgba(68, 181, 67, 0.4);
+          // }
+
+          // &:nth-child(2) {
+          //   background: rgba(3, 155, 229, 0.4);
+          // }
+
+          // &:nth-child(3) {
+          //   background: rgba(255, 69, 0, 0.4);
+          // }
+
           .step-image {
-            height: 60%;
+            height: 65%;
             background-color: #eee;
 
             img {
               width: 100%;
               height: 100%;
+              cursor: pointer;
             }
           }
 
@@ -205,67 +291,82 @@
       }
 
       .step:hover {
-        transform: scale(1.02, 1.02);
+        transform: scale(1.01, 1.01);
       }
     }
 
-    .feature {
-      padding: 30px;
-      padding-top: 70px;
+    .feature-container {
+      background: url("../../assets/images/backgrounds/dell-background.jpg");
+      background-size: 100% 100%;
 
-      .overview {
-        padding-top: 40px;
-        padding-right: 80px;
+      .feature {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 30px;
+        padding-top: 70px;
+        padding-bottom: 70px;
+        color: white;
 
-        .overview-title {
-          font-size: 25px;
+        .overview {
+          padding-top: 40px;
+          padding-right: 80px;
+          text-shadow: 1px 1px 4px black;
 
-          img {
-            width: 52px;
-            height: 50px;
-            margin-right: 5px;
-            margin-top: -20px;
+          .overview-title {
+            font-size: 25px;
+
+            img {
+              width: 52px;
+              height: 48px;
+              margin-right: 5px;
+              margin-top: -20px;
+              filter: drop-shadow(0px 1px 4px gold);
+            }
           }
-        }
 
-        .overview-info {
-          line-height: 40px;
-          text-align: justify;
-        }
+          .overview-info {
+            line-height: 40px;
+            text-align: justify;
+          }
 
-        .trial {
-          padding-top: 20px;
+          .trial {
+            padding-top: 20px;
 
-          button {
-            background-color: #44b643;
-            color: white;
-            border-radius: 15px;
+            button {
+              background-color: #44b543;
+              color: white;
+              border-radius: 15px;
+            }
           }
         }
       }
     }
 
     .feature-item {
-      background-color: white;
-      border: 1px solid #d2d2d2;
+      background: rgba(3, 155, 229, 0.2);
+      color: white;
       border-radius: 5px;
-      box-shadow: 1px 1px 4px silver;
+      filter: drop-shadow(0px 1px 4px black);
+      //text-shadow: 1px 1px 4px black;
       padding: 20px;
-      padding-bottom: 30px;
+      padding-top: 30px;
       transition: 0.2s;
       text-align: justify;
+
+      mat-icon {
+      }
     }
 
     .feature-item:hover {
-      transform: scale(1.02, 1.02);
+      transform: scale(1.01, 1.01);
     }
 
     .benefit {
-      background-color: rgba(3, 155, 229, 1);
-      color: white !important;
-      margin-top: 30px;
       text-align: center;
       padding: 60px 30px 100px 30px;
+      color: white;
+      //background: rgba(43, 51, 68, 0.9);
+      background: rgba(3, 155, 229, 0.4);
+      text-shadow: 1px 1px 4px black;
 
       .main-benefit {
         padding-top: 60px;
@@ -280,6 +381,7 @@
           width: 150px;
           height: 150px;
           transition: 0.2s;
+          filter: drop-shadow(0px 1px 5px black);
 
           &:hover {
             transform: scale(1.05, 1.05);
@@ -288,21 +390,23 @@
       }
     }
   }
-
   .footer {
     padding: 60px;
     padding-bottom: 40px;
     padding-top: 100px;
-    background-color: #eee;
+    background: rgba(0, 0, 0, 0.5);
+    color: silver;
     text-align: justify;
 
     .footer-title1 {
-      font-size: 25px;
+      font-size: 35px;
+      font-family: "Courier New";
     }
 
     .footer-divider {
       margin-top: 30px;
       margin-bottom: 30px;
+      border: 0.5px solid #eee;
     }
 
     .view-more-button {
@@ -319,7 +423,8 @@
     }
 
     mat-icon {
-      color: gray;
+      color: silver;
+      font-size: 24px !important;
     }
 
     .footer-col {
@@ -334,16 +439,31 @@
     font-size: 14px;
 
     .main-content {
-      .banner {
-        .app-title {
-          font-size: 20px !important;
+      .banner-container {
+        .banner {
+          .app-title {
+            font-size: 20px !important;
+          }
+
+          .logo {
+            width: 140px;
+            margin: 32px auto;
+          }
+
+          .login-with-google {
+            .access-system-button {
+              font-size: 11px;
+              padding-left: 5px;
+              padding-right: 0;
+              margin-left: -15px;
+            }
+          }
         }
       }
 
       .table {
         padding: 10px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 30px;
 
         .table-title {
           font-size: 12px;
@@ -353,7 +473,7 @@
       .instruction {
         padding: 10px;
         padding-top: 20px;
-        
+
         .steps-main-title {
           padding: 10px 10px 0 20px;
           font-size: 18px;
@@ -366,35 +486,39 @@
                 font-size: 18px;
               }
             }
+            .step-image {
+              height: 50%;
+            }
           }
         }
       }
 
-      .feature {
-        padding: 10px;
-        padding-top: 30px;
+      .feature-container {
+        .feature {
+          padding: 10px;
+          padding-bottom: 30px;
+          padding-top: 30px;
 
-        .overview {
-          padding: 0;
+          .overview {
+            padding: 0;
 
-          .overview-title {
-            font-size: 20px;
+            .overview-title {
+              font-size: 20px;
 
-            img {
-              width: 52px;
-              height: 50px;
-              margin-right: 5px;
-              margin-top: -20px;
+              img {
+                margin-right: 5px;
+                margin-top: -20px;
+              }
             }
-          }
 
-          .overview-info {
-            line-height: 25px;
-          }
+            .overview-info {
+              line-height: 25px;
+            }
 
-          .trial {
-            padding-top: 20px;
-            padding-bottom: 20px;
+            .trial {
+              padding-top: 20px;
+              padding-bottom: 20px;
+            }
           }
         }
       }

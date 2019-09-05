@@ -1,166 +1,174 @@
 .container {
-  padding: 15px 30px 15px 30px;
-
   width: 100%;
 
   .title1 {
-    padding: 15px;
-
-    background-color: whitesmoke;
-    color: gray;
+    padding: 100px 30px 30px 30px;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
     font-size: 16px;
     font-weight: bold;
 
     .account-id {
-      color: black;
+      color: yellow;
+    }
+  }
+
+  .inner {
+    padding: 15px 30px 15px 30px;
+
+    .title2 {
+      padding-top: 30px;
+      padding-bottom: 15px;
+
+      font-weight: bold;
     }
 
-    box-shadow: 2px 2px 5px silver;
-  }
-
-  .title2 {
-    padding-top: 30px;
-    padding-bottom: 15px;
-
-    font-weight: bold;
-  }
-
-  .title3 {
-    font-weight: bold;
-    font-size: 12px !important;
-  }
-
-  .notification {
-    text-align: justify;
-  }
-
-  .ban-ip-form {
-    margin-top: 30px;
-    padding: 15px;
-
-    box-shadow: 2px 2px 5px silver;
-  }
-
-  .list-ip {
-    width: 100%;
-
-    textarea {
-      height: 360px;
+    .title3 {
+      font-weight: bold;
+      font-size: 12px !important;
+      padding-top: 10px;
     }
 
-    mat-form-field {
+    .notification {
+      text-align: justify;
+    }
+
+    .ban-ip-form {
+      margin-top: 30px;
+      padding: 15px;
+      background-color: white;
+
+      box-shadow: 1px 1px 4px silver;
+    }
+
+    .list-ip {
       width: 100%;
-      height: 100%;
-    }
-  }
 
-  .flex-box {
-    display: flex;
+      textarea {
+        height: 360px;;
+      }
 
-    .flex-item {
-      margin: 5px;
-    }
-
-    .list {
-      width: 60%;
-    }
-  }
-
-  .input-example {
-    margin-top: -10px;
-    color: gray;
-    font-size: 12px !important;
-  }
-
-  .button-area {
-    margin-top: 15px;
-
-    button {
-      border-radius: 0;
-    }
-  }
-
-  .table-title {
-    margin-top: 30px;
-    color: gray;
-  }
-
-  .table-wrapper {
-    height: 500px;
-    box-shadow: 2px 2px 5px silver;
-    background-color: white;
-    overflow: auto;
-
-    mat-table {
-      width: 100%;
-      box-shadow: none;
+      mat-form-field {
+        width: 100%;
+        height: 100%;
+      }
     }
 
-    mat-row {
-      transition: 0.2s;
+    .flex-box {
+      display: flex;
+
+      .flex-item {
+        margin: 5px;
+      }
+
+      .list {
+        width: 60%;
+      }
     }
 
-    mat-row:hover {
-      background-color: whitesmoke;
+    .input-example {
+      margin-top: -10px;
+      color: gray;
+      font-size: 12px !important;
     }
 
-    mat-header-cell:nth-child(1),
-    mat-cell:nth-child(1) {
-      flex: 0 0 10%;
+    .button-area {
+      margin-top: 15px;
+
+      button {
+        border-radius: 0;
+      }
     }
 
-    mat-header-cell:nth-child(3),
-    mat-cell:nth-child(3) {
-      flex: 0 0 40%;
+    .table-title {
+      padding-top: 20px;
+      font-weight: bold;
+      color: gray;
     }
 
-    mat-row,
-    mat-header-row {
-      min-width: 1000px;
-      width: 100%;
+    .table-wrapper {
+      max-height: 500px;
+      box-shadow: 1px 1px 4px silver;
+      background-color: white;
+      overflow: auto;
+
+      mat-table {
+        width: 100%;
+        box-shadow: none;
+      }
+
+      mat-row {
+        transition: 0.2s;
+      }
+
+      mat-row:hover {
+        background-color: rgba(3, 155, 229, 0.1);
+      }
+
+      mat-header-cell:nth-child(1),
+      mat-cell:nth-child(1) {
+        flex: 0 0 10%;
+      }
+
+      mat-header-cell:nth-child(3),
+      mat-cell:nth-child(3) {
+        flex: 0 0 40%;
+      }
+
+      mat-row,
+      mat-header-row {
+        min-width: 1000px;
+        width: 100%;
+      }
+
+      mat-header-cell {
+        background: #039be5;
+        color: white;
+      }
     }
-  }
 
-  .step {
-    font-weight: bold;
-    font-size: 16px;
-    margin-left: 5px;
-    margin-right: 10px;
-  }
+    .step {
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: 5px;
+      margin-right: 10px;
+    }
 
-  .banned-ip-info {
-    margin-top: 30px;
-    padding: 20px;
+    .banned-ip-info {
+      margin-top: 30px;
+      padding: 20px;
 
-    background-color: #eee;
-    border-left: 5px solid darkorange;
-  }
+      background-color: #eee;
+      border-left: 5px solid darkorange;
+    }
 
-  .success-button {
-    background-color: #4bb543;
-    color: white;
-  }
+    .success-button {
+      background-color: #4bb543;
+      color: white;
+    }
 
-  .status {
-    text-align: justify;
-  }
+    .status {
+      text-align: justify;
+    }
 
-  .task {
-    color: crimson
-  }
+    .task {
+      color: crimson;
+    }
 
-  .unlock-button {
-    display: table;
-    margin: 0 auto;
-  }
+    .unlock-button {
+      display: table;
+      margin: 0 auto;
+    }
 
-  .new {
-    background-color: crimson;
-    color: white;
-    padding: 4px;
-    box-shadow: 1px 1px 5px silver;
-    font-size: 12px;
-    font-weight: bold;
+    .new {
+      background-color: crimson;
+      color: white;
+      padding: 4px;
+      box-shadow: 1px 1px 4px silver;
+      font-size: 12px;
+      font-weight: bold;
+    }
   }
 }
 
@@ -171,6 +179,8 @@
     }
   }
   .container {
-    padding: 15px;
+    .inner {
+      padding: 15px;
+    }
   }
 }

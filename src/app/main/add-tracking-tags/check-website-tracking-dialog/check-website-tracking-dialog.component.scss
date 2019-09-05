@@ -9,7 +9,7 @@
   .table-wrapper {
     height: 350px;
     overflow: auto;
-    box-shadow: 2px 2px 5px silver;
+    box-shadow: 1px 1px 4px silver;
 
     mat-table {
       box-shadow: none;
@@ -30,8 +30,14 @@
         min-width: 600px;
         width: 100%;
       }
+
+      mat-header-cell {
+        background: #039be5;
+        color: white;
+      }
+
       mat-row:hover {
-        background-color: whitesmoke;
+        background-color: rgba(3, 155, 229, 0.1);
       }
     }
   }

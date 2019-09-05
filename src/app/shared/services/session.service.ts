@@ -23,6 +23,20 @@ export class SessionService {
     this.cookieService.putObject(CookieNames.user, user, { expires: today });
   }
 
+  setGoogleAccountToken(accessToken: string, refreshToken: string): void {
+    const today = new Date();
+    today.setHours(today.getHours() + 8);
+    this.cookieService.put(CookieNames.accessToken, accessToken, { expires: today });
+    this.cookieService.put(CookieNames.refreshToken, refreshToken, { expires: today });
+  }
+
+  getGoogleAccountToken(): any {
+    return {
+      accessToken: this.cookieService.get(CookieNames.accessToken),
+      refreshToken: this.cookieService.get(CookieNames.refreshToken)
+    };
+  }
+
   setLoggedInUser(user): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
@@ -46,6 +60,8 @@ export class SessionService {
     this.cookieService.remove(CookieNames.user);
     this.cookieService.remove(CookieNames.activeAccountId);
     this.cookieService.remove(CookieNames.activeAdsAccountId);
+    this.cookieService.remove(CookieNames.accessToken);
+    this.cookieService.remove(CookieNames.refreshToken);
   }
 
   setUserProfile(name: string, phone: string, usePassword: boolean): any {

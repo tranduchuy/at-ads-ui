@@ -1,111 +1,145 @@
 <div class="container">
 
-  <p class="title1">
+  <div class="title1">
     THEO DÕI KHÁCH ĐANG CLICK QUẢNG CÁO TÀI KHOẢN <span
-      style="color: black">{{_sessionService.activeAdsAccountId}}</span>
-  </p>
-
-  <div class="table-wrapper">
-
-    <mat-table
-      [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }"
-      class="mat-elevation-z8">
-
-      <ng-container matColumnDef="time">
-        <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.info[0].createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="ip">
-        <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-
-          <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
-            style="font-weight: bold; padding-left: 0" mat-button color="accent">
-            {{element._id}}
-          </a>
-
-          <!-- <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
-            {{element._id}}
-          </a> -->
-
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="clicks">
-        <mat-header-cell *matHeaderCellDef> Lần click </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="location">
-        <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.info[0].location?.city}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="os">
-        <mat-header-cell *matHeaderCellDef> Bằng </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <img *ngIf="element.info[0].os?.name === 'Windows'" src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
-          <img *ngIf="element.info[0].os?.name === 'iOS'" src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115" alt="" class="icon">
-          <img *ngIf="element.info[0].os?.name === 'Android'" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADuCAMAAAB24dnhAAAAb1BMVEWkxjn///+fwybi7MmhxC6cwhvK3ZfF2oyewyLt893g68SjxjeixTOgxCvN35+cwRfm79Cqykvw9eOxzl6+1n6603Xd6b/2+e7q8de40nDC2IbQ4aS20WvZ5rb0+OqnyEKty1PG25DU5K37/fesy1BioLbNAAAJKklEQVR4nO2d63qrKhBAkUBqA4Tc0+be2Pd/xqNJ23gBnNFo3N+Z9W93J4SliIgDwyI4Kz1BfPqpTPQK8WkG/+jCqjhBV+cpJLGy7/CPI6QipsQOXZ+nsBMKVVHEZ0cxswtsfZ7BwrJ4hPg8Ripaar3E1md2nJY4jrBHBvu7KKlTesTAfcV2tF+fZcyNEQWM4bE8r6ejLbSkCbaFoKSiN2DbTja7s+RGK+ZBacPlebcBdTzptfyGqiZOKuLM7Os+s9hfLBden5yZ4Payrz0He8M4rpZIqStnMnh0t/uzNAChPzEjz/tgQ0wk41dcLZFS0VmJwG1wcrAYo18vewhcqSuhzshKYqVmknlvg3sda6zRHc21r1W/WyZnyEpipaKD1hfX35NxjD9J+dMVj53t+qL1AVtHtNQ27dY31T+PY9Hc6I6Ix9VyN2l3fupcKvoySpf/duWmrVKGqfYIWpkvdBXxUpFhZlr4w8ecP0Mpg88/CkVP0x/D17CB1JEzm++EV7bFtVRG2XznmrZ1fuxFKporvf77x0y0vpiKCPHo7NZazRtUsInUh2Tyt5W8PfM03VH2zfFDXUs9DuB2/pQOooyZ35t3oUl0LZV161lTnzW92dah46wJHuPixdutVNopqbRT2ttulDJsOsJIf8Rx5+pMKr19iPFX3J0TY/HXWFRviJ1KpTf6Z/d6ZdLyXUOXDqXSJ+xulTIUdu6grdShByn8SLad1KGTrryMaWjVTGrldtLCiEZnMP2icX3RYOZlW0qNnf2eidf76/Qg0R2Ilsvpdb9yjfRdTyPdSG2ko2ZK/gzdk53rvwPEq5877DWuDrlskw6wgdTCec/lj4f8CcpKPobhJ8ccVJM54QZSzDWEtfmB5xFxW+b5yYlF9XCgJtEbS61d10xpthF+Fys9WkyrhQv8mBYttXGeBVmcRxiBH4VN8ZpJHC0XP67ASiVOp8rMHPiqikvD8KWjbaPfimGlPp0NS3+Wi4U+OsrSF1eO8iulP1lq5j4Fz5PauQ4adjYTKXV2V7bS/MDdX6X5uaSw8844qauvA5DFus3AHQWv7yiyT+HeEOCkvBPL4qvwOfgYXhXnsPfuQaUS3Uld/WPzwlsDd7fvpnASTr4vGtSpQkkF3qQp8xjOeHoTD/LRALfe/gV3qjBSx9CVouLfgzlGzsfIXfJbvv+goSZqMVLzcD9tzO56vK7xrz+E/NwfrzsRPGaYmVqE1HvtlaKN+1mvluyLNW+J424iXt46nj4Kg3lBj5B62vuaZiDe0MOlZp3OXdYTw8dKcKnXtj5U+4NL+cNX+gExBw2WWry49aXtDzxbAZY69jJ9GcKA779gqdWLL6n0ogJHUIKlPE9SPQJ/qgJLIWcou8A+W6p+jNQ94JESVGry4vFEBodGhUKlAs+HvQF+UoRKjV/e+aXdH/QVCFTKNR/XN+BVBFAp9yRmz1LQSU2o1JKLl8OhL7ahUvvxAKgNtEZK/VOQ1L8CSf0r/J+lZlYOAAucUAJKwd9MdwkHLncjqVdDUiT1Qkjql4/J0bMId8hSi9HxOCmsnnhIHZc2W5TLY76q3uMGKzVb8Xut7fIxK/0rdeX874Fdx/PyspGBSn3MHwszNP+LXrhLbUvLupQtzVsPU6q8JIj/LHy5Sb1XF6KY5fCllpW5SH2fxM2kFtIx+S8uQ5e6OKYi1S3kNpNyv+wvxIQPUModG38LjWGeoNgUORqy1MjzGiYLuWXZGjk3+Tjj4Ul5w5jkRyrlD2PLxeINTmrjrZA+RGzrD4/KbdcxOKlAkLjdstALapsMVSoJRKqZI3NG4lYKGZpUqD56x1yB4L88dgkZmpQnLPWGWrJzoJDHW66hSQXfAYaU8uFAQ5NqEShFUj1AUj5IqgdIygdJ9QBJ+SCpHiApHyTVAyTlg6R6gKR8kFQPkJQPkuoBkvJBUj1AUj5IqgdIygdJ9QBJ+SCpHiApHyTVAyTlg6R6gKR8kFQPkJQPkuoBkvJBUj1AUj5IqgdIygdJ9QBJ+SCpHiApHyTVAyTl45EuYWhSX2Gp78DyPTEdqpQjUdAf6puFtlh8bDw8NKnQmlf9yULOj41fhyYV2hZXTFlob/dHfuChSUWBMxXPWOC/c9uuD04q0P2ZiGUZmz3kMm4PTurkXZJtptnWDT4pkduQYnBS/q3OzW0/Ck+yPGWSIUslnmREcnLfOWTnrHEhn97wpKIPd2bDbMed20Yan44qF7MuDlAq2jis+G1T4fvuILvy1jVaFr4/SKloJEsDByXvOyP9bHkyMfkmquJlKSsZPPVXl/DS1lvbZT6xpzLmZ0P1v31cpiIWWeoOpY28VHZbf30CjIxqEozRRZp7rdPq/41Uc5vTzMaHMzfz9dW1xVqHOb7huJIQLK7rueHnwzh3FqFbttbknuoFcA4qqFTNA0wvlLLhtZf6GMBFFZf3smsrBc9R2RnwJLjwXDkv79Thuergezu/+lQhshUjMoW9uFeHbuyMkop2L81XYsA5jXBbi7t2CeyL4h6KT5SK5i+zEpjcj8hN4Jcv6gLBGT2aSEVj+4JMLNpCk+Q0k4oWl+pOqB0rxRdEhs5GUmnX/mm56Ce/YPpAwe0nMkF2I6koSibjw1yHT5iGJL+pKULPD+MJNj17U6k7wedG2H7ZwUkCeFrECs2lglneYJnKgjnVMLluS5BUAZJyQ1IISKoASbkhKQQkVYCk3JAUApIqQFJuSAoBSRUgKTckhYCkCpCUG5JCQFIFSMoNSSEgqQIk5YakEJBUAZJyQ1IISKrAKSgFiugIhvDHp/oCPDSXinyJWOE1Ch4X2bxmLaRCoeoxrIiAFDgI3UELqUACRr2GFbH2B/IIZORYnhZS7/72F4P6ibSn8J8q2byfaCMVXXzHWWloEcrXhDUmvLRMGyn3WrPsRIEjyDe+U2WhqwVctJHy5N7OJzeuxZNsuJB1HE0rqWjuqlJhhWYdiTOVuj63qlY7qYRVrRQuUG/Bq1aaNQldfNBOKkq+yy1QMORI4MTKtwbz3c6prVQW/5yvk7YNLoZVIYRaYGObq7SWik4ry28XhtLGHhrdXd4/7W1lIVOC21XzMd8v7aXSNrj5OpzZebk7bus/7Cni+LZMizh8bVq2vBv/AdNlsFq9Eq3UAAAAAElFTkSuQmCC" alt="" class="icon">
-          <img *ngIf="element.info[0].os?.name === 'Mac OS'" src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg" alt="" class="icon">
-          <img *ngIf="element.info[0].os?.name === 'Linux'" src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">          
-          {{element.info[0].os?.name + ' ' + element.info[0].os?.version}}
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="browser">
-        <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <img *ngIf="element.info[0].browser?.name === 'Firefox'" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png" alt="" class="icon">
-          <img *ngIf="element.info[0].browser?.name === 'Chrome'" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png" alt="" class="icon">
-          <img *ngIf="element.info[0].browser?.name === 'Safari'" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png" alt="" class="icon">
-          <img *ngIf="element.info[0].browser?.name === 'IE'" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png" alt="" class="icon">
-          <img *ngIf="element.info[0].browser?.name === 'Cốc Cốc'" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png" alt="" class="icon">
-          <img *ngIf="element.info[0].browser?.name === 'Opera'" src="https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png" alt="" class="icon">
-          <img *ngIf="element.info[0].browser?.name === 'Tor'" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png" alt="" class="icon">
-          {{element.info[0].browser?.name + ' ' + element.info[0].browser?.version}}
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="network">
-        <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.info[0].networkCompany?.name | uppercase}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="keyword">
-        <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.info[0].keyword}} </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-    </mat-table>
-
-  </div>
-  
-  <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal > 1">
-    <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber" ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
-      {{pageTotal}} trang</p>
-    <p *ngIf="pageTotal === 0">Không có trang nào</p>
-    <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
-      nextLabel="Sau" fxFlex fxLayoutAlign="end start"></pagination-controls>
+      style="color: yellow">{{_sessionService.activeAdsAccountId}}</span>
   </div>
 
-  <div class="footer">
+  <div class="inner">
+    <div class="table-wrapper">
+
+      <mat-table
+        [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }"
+        class="mat-elevation-z8">
+
+        <ng-container matColumnDef="time">
+          <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ip">
+          <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+
+            <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
+              style="font-weight: bold; padding-left: 0" mat-button color="accent">
+              {{element._id}}
+            </a>
+
+            <!-- <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
+                  {{element._id}}
+                </a> -->
+
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="clicks">
+          <mat-header-cell *matHeaderCellDef> Lần click </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].location?.city}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="os">
+          <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img *ngIf="element.info[0].os?.name === 'Windows'"
+              src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
+            <img *ngIf="element.info[0].os?.name === 'iOS'"
+              src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
+              alt="" class="icon">
+            <img *ngIf="element.info[0].os?.name === 'Android'"
+              src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
+            <img *ngIf="element.info[0].os?.name === 'Mac OS'"
+              src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
+              alt="" class="icon">
+            <img *ngIf="element.info[0].os?.name === 'Linux'"
+              src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
+            {{element.info[0].os?.name + ' ' + element.info[0].os?.version}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="browser">
+          <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img *ngIf="element.info[0].browser?.name === 'Firefox'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.info[0].browser?.name === 'Chrome'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.info[0].browser?.name === 'Safari' || element.info[0].browser?.name === 'Mobile Safari'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.info[0].browser?.name === 'IE'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.info[0].browser?.name === 'Cốc Cốc'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.info[0].browser?.name === 'Opera'"
+              src="https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png" alt="" class="icon">
+            <img *ngIf="element.info[0].browser?.name === 'Tor'"
+              src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
+              alt="" class="icon">
+            {{element.info[0].browser?.name + ' ' + element.info[0].browser?.version}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isPrivateBrowsing">
+          <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.isPrivateBrowsing" style="color: orange; font-weight: bold">
+              <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+            </span>
+            <span *ngIf="!element.isPrivateBrowsing" style="color:silver">Không</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="network">
+          <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].networkCompany?.name | uppercase}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="keyword">
+          <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].keyword}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      </mat-table>
+
+    </div>
+
+    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
+      <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
+          ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
+        {{pageTotal}} trang</p>
+      <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+      <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
+        nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
+    </div>
+
     <mat-divider></mat-divider>
-    <p>
-      Để thực hiện giới hạn 1 IP click quảng cáo nhiều lần hay gọi là click ảo, Bạn có thể hạn chế bằng <span
-        style="color: red; font-weight: bold">Tính Năng Hạn Chế Click Ảo</span>
-    </p>
-    <div class="button-area" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center center">
-      <!-- <button mat-raised-button color="accent" style="border-radius: 0">
-        <mat-icon>verified_user</mat-icon> HẠN CHẾ IP CLICK NHIỀU
-      </button> -->
-      <a [routerLink]="'/bao-cao/click-ao'" mat-raised-button color="warn" style="border-radius: 0">
-        <mat-icon>data_usage</mat-icon> XEM BÁO CÁO THEO NGÀY
-      </a>
+
+    <div class="footer">
+      <p>
+        Để thực hiện giới hạn 1 IP click quảng cáo nhiều lần hay gọi là click ảo, Bạn có thể hạn chế bằng <span
+          style="color: red; font-weight: bold">Tính Năng Hạn Chế Click Ảo</span>
+      </p>
+      <div class="button-area" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center center">
+        <!-- <button mat-raised-button color="accent" style="border-radius: 0">
+              <mat-icon>verified_user</mat-icon> HẠN CHẾ IP CLICK NHIỀU
+            </button> -->
+        <a [routerLink]="'/bao-cao/click-ao'" mat-raised-button color="warn" style="border-radius: 0">
+          <mat-icon>data_usage</mat-icon> XEM BÁO CÁO THEO NGÀY
+        </a>
+      </div>
     </div>
   </div>
 

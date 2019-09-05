@@ -94,11 +94,11 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
   getNormalizedWhiteList(list: any) {
     return (list || []).map(item => {
 
-      if(item.includes('.0.0/16'))
-        return item.replace('.0.0/16','.*.*');
+      if (item.includes('.0.0/16'))
+        return item.replace('.0.0/16', '.*.*');
 
-      if(item.includes('.0/24'))
-        return item.replace('.0/24','.*');
+      if (item.includes('.0/24'))
+        return item.replace('.0/24', '.*');
 
       return item;
     }).join('\n');
@@ -131,7 +131,14 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
+
+          if (error.status === 409) {
+            this._dialogService._openErrorDialog({
+              messages: [`${error.error.data.ips.join(', ')} đã nằm trong blacklist.`]
+            });
+          }
+          else this._dialogService._openErrorDialog(error.error);
+
           this.isProcessing = false;
         }
       );

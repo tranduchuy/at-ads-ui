@@ -49,27 +49,28 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
       .subscribe((accountId: string) => {
         if (accountId) {
           this.selectedAccountId = accountId;
-          this.getStatisticUserReport(accountId, 1, 20);
+          this.getStatisticUserReport(accountId, 1);
         }
       });
     this.subscriptions.push(sub);
   }
 
-  getStatisticUserReport(accountId: string, page?: number, limit?: number) {
+  getStatisticUserReport(accountId: string, page?: number) {
 
     this.isProcessing = true;
     this._fuseProgressBarService.show();
 
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
+    const limit = 10;
 
-    const sub = this._reportService.getStatisticUserReport({ startDate: start, endDate: end, page, limit }, accountId)
+    const sub = this._reportService.getStatisticUserReport({ startDate: start, endDate: end, page, limit}, accountId)
       .subscribe(res => {
 
         this.dataSource = res.data.users;
 
         this.totalItems = res.data.meta.totalItems;
-        this.pageTotal = Math.ceil(this.totalItems / 10);
+        this.pageTotal = Math.ceil(this.totalItems / limit);
 
         this._fuseProgressBarService.hide();
         this.isProcessing = false;
@@ -86,7 +87,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
   }
 
   changePage(event) {
-    this.getStatisticUserReport(this.selectedAccountId, event, 20);
+    this.getStatisticUserReport(this.selectedAccountId, event);
   }
 
   onApplyDateRange(event) {

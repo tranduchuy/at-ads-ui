@@ -15,13 +15,14 @@ export namespace API {
     export const getLoggedInInfo = environment.hostApi + '/api/users/info';
     export const confirmEmail = environment.hostApi + '/api/users/confirm';
     export const updateProfile = environment.hostApi + '/api/users/';
+    export const getActionHistory = environment.hostApi + '/api/users/actions-history?page={page}&limit={limit}';
   }
   export namespace AdwordsAccount {
     export const getAccounts = environment.hostApi + '/api/account-adwords';
     export const addAccount = environment.hostApi + '/api/account-adwords';
     export const removeAccount = environment.hostApi + '/api/account-adwords/{account_id}';
     export const checkAccountAcceptance = environment.hostApi + '/api/account-adwords/connection-confirmation';
-    export const getAdsAccounts = environment.hostApi + '/api/account-adwords/google-ads';
+    export const getAdsAccounts = environment.hostApi + '/api/account-adwords/google-ads?accessToken={accessToken}&refreshToken={refreshToken}';
     
     export const getOriginalCampaigns = environment.hostApi + '/api/account-adwords/{account_id}/original-campaigns';
     export const getTrackingCampaigns = environment.hostApi + '/api/account-adwords/{account_id}/campaigns';
