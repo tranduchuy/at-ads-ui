@@ -1,7 +1,28 @@
 <div class="homepage">
 
-   <div class="contact">
+   <!-- <div class="contact" [class.none-displayed]="!isContactDisplayed">
       Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
+   </div> -->
+
+   <div class="topbar-container">
+      <div class="topbar" [class.none-displayed]="!isTopbarDisplayed">
+         <div fxLayout="row" fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+               <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
+               <span class="topbar-title" fxFlex>CÔNG CỤ CHỐNG CLICK TẶC 2019</span>
+            </div>
+            <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
+               class="topbar-google-button" fxFlex="nogrow">
+               <img src="../../assets/icons/google-icon.png"
+                  style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
+               Google
+            </button>
+            <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()" *ngIf="isOnLogin"
+               fxFlex="nogrow" fxFlex.xs="column">
+               TRUY CẬP HỆ THỐNG CHỐNG CLICK TẶC<mat-icon style="font-size: 20px">navigate_next</mat-icon>
+            </button>
+         </div>
+      </div>
    </div>
 
    <div class="main-content">
@@ -579,8 +600,10 @@
       </div>
    </div>
 
-   <!-- <div class="footer-contact">
-      Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
-   </div> -->
+   <div class="footer-contact-container">
+      <div class="footer-contact">
+         Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
+      </div>
+   </div>
 
 </div>

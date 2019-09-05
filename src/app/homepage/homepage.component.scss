@@ -401,7 +401,7 @@
     padding: 60px;
     padding-bottom: 40px;
     padding-top: 100px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     color: silver;
     text-align: justify;
 
@@ -440,12 +440,16 @@
     }
   }
 
-  .footer-contact {
-    background: rgba(125, 125, 125, 0.2);
-    color: silver;
-    padding: 15px;
-    text-align: center;
-    font-weight: bold;
+  .footer-contact-container {
+    background-color: rgba(0, 0, 0, 0.4);
+    filter: drop-shadow(0px 1px 4px black);
+    .footer-contact {
+      background: rgba(3, 155, 229, 0.4);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
   }
 
   .contact {
@@ -460,6 +464,54 @@
     bottom: 0;
     text-align: center;
     padding: 15px;
+    -webkit-animation: contactAppearance 0.4s linear;
+  }
+
+  .topbar-container {
+    //background: rgba(0, 0, 0, 0.6);
+
+    .topbar {
+      //background: #1E2129;
+      //background: rgba(3, 155, 229, 0.4);
+      background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
+      background-size: 100% 100%;
+      filter: drop-shadow(0px 1px 4px black);
+      color: #eee;
+      text-shadow: 1px 1px 4px black;
+      font-weight: bold;
+      position: fixed;
+      z-index: 200;
+      width: 100%;
+      top: 0;
+      padding: 15px;
+      padding-right: 30px;
+      -webkit-animation: contactAppearance 0.2s linear;
+
+      .topbar-logo {
+        height: 50px;
+        width: 50px;
+        margin-right: 5px;
+        filter: drop-shadow(0px 1px 2px black);
+      }
+
+      .topbar-access-system-button {
+        background: #44b543;
+        color: white;
+      }
+    }
+  }
+
+  @keyframes contactAppearance {
+    from {
+      top: -100px;
+    }
+    to {
+      top: 0;
+    }
+  }
+
+  .none-displayed {
+    display: none;
   }
 }
 
@@ -467,7 +519,20 @@
   .homepage {
     font-size: 14px;
 
+    .topbar-container {
+      .topbar {
+        .topbar-logo {
+          height: 36px;
+          width: 36px;
+        }
+      }
+    }
+
     .contact {
+      font-size: 12px;
+    }
+
+    .footer-contact {
       font-size: 12px;
     }
 

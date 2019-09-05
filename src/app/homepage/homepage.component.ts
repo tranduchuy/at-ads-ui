@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
@@ -14,7 +14,6 @@ import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
-import { userInfo } from 'os';
 
 declare var gapi: any;
 
@@ -29,6 +28,8 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);
   isOnLogin: boolean;
+
+  scrollPoint: number = 235;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
@@ -63,6 +64,37 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         }
       }
     };
+  }
+
+  lastOffset: number = 0;
+  isContactDisplayed: boolean = false;
+  isTopbarDisplayed: boolean = false;
+
+  scroll = (event: any): void => {
+    const currentOffset = event.srcElement.scrollTop;
+
+    if (currentOffset < this.lastOffset)
+      this.isContactDisplayed = false;
+    else this.isContactDisplayed = true;
+
+    if(currentOffset > 480)
+      this.isTopbarDisplayed = true;
+    else this.isTopbarDisplayed = false;
+
+    this.lastOffset = currentOffset;
+  };
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.scroll, true);
+  }
+
+  ngAfterViewInit(): void {
+
+    window.addEventListener('scroll', this.scroll, true);
+
+    setTimeout(() => {
+      this.googleInit();
+    }, 500);
   }
 
   ngOnInit(): void {
@@ -161,12 +193,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   loginByGG(): void {
     this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.googleInit();
-    }, 500);
   }
 
   showImageDialog(imgSrc: string) {
