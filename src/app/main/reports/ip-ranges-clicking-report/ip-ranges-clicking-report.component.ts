@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment'
+import * as moment from 'moment';
 import { SessionService } from 'app/shared/services/session.service';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { ReportService } from '../report.service';

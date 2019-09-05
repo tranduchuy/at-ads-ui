@@ -9,10 +9,16 @@ import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { UuidHistoryComponent } from './uuid-history/uuid-history.component';
 import { UserStatisticDetailComponent } from './user-statistic-detail/user-statistic-detail.component';
+import { OverviewReportComponent } from './overview-report/overview-report.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
+      {
+        path: 'luu-luong-truy-cap',
+        pathMatch: 'full',
+        component: OverviewReportComponent
+      },
       {
         path: 'click-ao',
         pathMatch: 'full',
