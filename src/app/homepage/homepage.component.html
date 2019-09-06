@@ -1,13 +1,14 @@
 <div class="homepage">
 
-   <!-- <div class="contact" [class.none-displayed]="!isContactDisplayed">
+   <div class="contact" *ngIf="isContactDisplayed">
       Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
-   </div> -->
+   </div>
 
-   <div class="topbar-container">
-      <div class="topbar" [class.none-displayed]="!isTopbarDisplayed">
-         <div fxLayout="row" fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutGap="10px">
-            <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+   <div class="topbar-container" *ngIf="isTopbarDisplayed">
+      <div class="topbar">
+         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayout.xs="column"
+            fxLayoutGap="10px" fxLayoutGap.xs="30px">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxFlex>
                <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
                <span class="topbar-title" fxFlex>CÔNG CỤ CHỐNG CLICK TẶC 2019</span>
             </div>
@@ -600,7 +601,7 @@
       </div>
    </div>
 
-   <div class="footer-contact-container">
+   <div class="footer-contact-container" *ngIf="isContactFooterDisplayed">
       <div class="footer-contact">
          Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
       </div>

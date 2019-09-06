@@ -67,18 +67,19 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   lastOffset: number = 0;
-  isContactDisplayed: boolean = false;
+  isContactFooterDisplayed: boolean = window.innerWidth > 600;
   isTopbarDisplayed: boolean = false;
+  isContactDisplayed: boolean = window.innerWidth <= 600;
 
   scroll = (event: any): void => {
     const currentOffset = event.srcElement.scrollTop;
 
-    if (currentOffset < this.lastOffset)
-      this.isContactDisplayed = false;
-    else this.isContactDisplayed = true;
+    // if (currentOffset < this.lastOffset)
+    //   this.isContactFooterDisplayed = false;
+    // else this.isContactFooterDisplayed = true;
 
-    if(currentOffset > 480)
-      this.isTopbarDisplayed = true;
+    if(currentOffset > 470)
+      this.isTopbarDisplayed = true && (window.innerWidth > 600);
     else this.isTopbarDisplayed = false;
 
     this.lastOffset = currentOffset;

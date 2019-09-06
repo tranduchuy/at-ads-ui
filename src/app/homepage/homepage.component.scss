@@ -4,7 +4,7 @@
   background: url("../../assets/images/backgrounds/Abstract-Blue-Futuristic-Wallpaper.jpg");
   background-size: 100% 100%;
   background-attachment: fixed;
-  background-position: center;
+  background-position: center center;
 
   .main-content {
     button {
@@ -441,10 +441,10 @@
   }
 
   .footer-contact-container {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.3);
     filter: drop-shadow(0px 1px 4px black);
     .footer-contact {
-      background: rgba(3, 155, 229, 0.4);
+      background: rgba(38, 61, 67, 0.4);
       color: white;
       padding: 15px;
       text-align: center;
@@ -453,8 +453,9 @@
   }
 
   .contact {
-    //background: #1E2129;
-    background: #013a55;
+    background: #002c45;
+    // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
+    // background-size: 100% 100%;
     filter: drop-shadow(0px 1px 4px black);
     color: silver;
     font-weight: bold;
@@ -485,7 +486,7 @@
       top: 0;
       padding: 15px;
       padding-right: 30px;
-      -webkit-animation: contactAppearance 0.2s linear;
+      -webkit-animation: topbarAppearance 0.2s linear;
 
       .topbar-logo {
         height: 50px;
@@ -501,12 +502,21 @@
     }
   }
 
-  @keyframes contactAppearance {
+  @keyframes topbarAppearance {
     from {
       top: -100px;
     }
     to {
       top: 0;
+    }
+  }
+
+  @keyframes contactAppearance {
+    from {
+      bottom: -100px;
+    }
+    to {
+      bottom: 0;
     }
   }
 
@@ -519,8 +529,15 @@
   .homepage {
     font-size: 14px;
 
+    background: url("../../assets/images/backgrounds/QL5I0O.jpg");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: center center;
+
     .topbar-container {
       .topbar {
+        padding-top: 20px;
+
         .topbar-logo {
           height: 36px;
           width: 36px;
@@ -539,6 +556,9 @@
     .main-content {
       .banner-container {
         .banner {
+          padding-bottom: 30px;
+          padding-top: 60px;
+
           .app-title {
             font-size: 20px !important;
           }
@@ -546,9 +566,16 @@
           .logo {
             width: 140px;
             margin: 32px auto;
+            margin-bottom: 16px;
+          }
+
+          .title2 {
+            font-size: 14px;
           }
 
           .login-with-google {
+            padding-top: 10px;
+
             .access-system-button {
               font-size: 11px;
               padding-left: 5px;
@@ -580,6 +607,7 @@
 
           .step-wrapper {
             .step {
+              padding-bottom: 0;
               .step-description {
                 .step-name {
                   font-size: 18px;
@@ -594,6 +622,9 @@
       }
 
       .feature-container {
+        background: url("../../assets/images/backgrounds/20597.jpg");
+        background-size: 100% 100%;
+
         .feature {
           padding: 10px;
           padding-bottom: 30px;
