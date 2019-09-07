@@ -1,6 +1,6 @@
 <mat-toolbar class="p-0 mat-elevation-z1">
 
-    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex fxFill fxLayout="row wrap" fxLayoutAlign="start center" [class.padding]="false">
 
         <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
 
@@ -27,8 +27,9 @@
 
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="avatar mr-0 mr-sm-16" [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
-                    <span class="username mr-12" fxHide fxShow.gt-sm >{{ user.name || '' }}</span>
+                    <img class="avatar mr-0 mr-sm-16"
+                        [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                    <span class="username mr-12" fxHide fxShow.gt-sm>{{ user.name || '' }}</span>
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
             </button>
@@ -91,6 +92,11 @@
             </button> -->
 
         </div>
+
+        
+        <p class="alert" *ngIf="isAlertDisplayed">
+            Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống hoặc vui lòng cập nhật quyền <span style="color: skyblue; text-decoration: underline" (click)="checkAccountAcceptance()">tại đây</span>!
+        </p>
 
     </div>
 

@@ -1,13 +1,12 @@
 @import "src/@fuse/scss/fuse";
 
 toolbar {
-  //position: relative;
+  position: absolute;
   display: flex;
   flex: 0 0 auto;
   z-index: 4;
 
-  position: absolute;
-  background-color: inherit;
+  background-color: #1e2129;
   color: white;
 
   width: 100%;
@@ -21,6 +20,25 @@ toolbar {
     position: relative;
     background: inherit !important;
     color: inherit !important;
+    padding-top: 30px;
+  }
+
+  .padding {
+    padding-top: 30px;
+  }
+
+  .alert {
+    background: darkred;
+    color: white;
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    left: 2px;
+    z-index: 100;
+
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
   }
 
   .logo {
@@ -67,4 +85,12 @@ toolbar {
 
 a {
   text-decoration: none !important;
+}
+
+@media screen and (max-width: 600px) {
+  toolbar {
+    .alert {
+      color: red;
+    }
+  }
 }

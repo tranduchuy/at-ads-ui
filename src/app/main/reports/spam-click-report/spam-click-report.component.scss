@@ -215,19 +215,20 @@
 @media screen and (max-width: 600px) {
   .container {
     .main-title {
-      text-align: center;
 
       .main-title-text {
         padding-bottom: 10px;
+        clear: both;
+      }
+
+      .datePicker {
+        width: 100%;
+        clear: both;
       }
     }
 
     .section {
       padding: 0;
-
-      .datePicker {
-        width: 100%;
-      }
 
       .title1 {
         padding: 20px;

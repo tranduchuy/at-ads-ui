@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  
+
   .title {
     background: url("../../../assets/images/backgrounds/dark-material-bg.jpg");
     background-size: 100% 100%;
@@ -198,6 +198,16 @@
       width: 166px;
       padding-top: 10px;
     }
+
+    .instruction-step3 {
+      height: 50%;
+      width: 50%;
+    }
+
+    .instruction-step {
+      font-size: 16px;
+      padding-top: 20px;
+    }
   }
 }
 
@@ -205,6 +215,11 @@
   .container {
     .inner {
       padding: 15px;
+
+      .instruction-step3 {
+        height: 100%;
+        width: 100%;
+      }
     }
     .submit-button {
       padding: 0;
