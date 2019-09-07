@@ -45,21 +45,16 @@
               </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="device">
-              <mat-header-cell *matHeaderCellDef>Thiết bị</mat-header-cell>
-              <mat-cell *matCellDef="let element; let i = index">
-                <!-- <span *ngIf="i % 2 === 0">
-                      <mat-icon color="accent">smartphone</mat-icon> Điện thoại
-                    </span>
-                    <span *ngIf="i % 2 !== 0">
-                      <mat-icon color="accent">laptop_chromebook</mat-icon> Máy tính
-                    </span>
-                    <span *ngIf="false">
-                      <mat-icon color="accent">tablet_mac
-                      </mat-icon> Máy tính bảng
-                    </span> -->
-                <span *ngIf="element.device === undefined">Không xác định</span>
-                <span *ngIf="element.device !== undefined">{{element.device?.vendor}}</span>
+            <ng-container matColumnDef="ip">
+              <mat-header-cell *matHeaderCellDef>IP</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.ip}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="website">
+              <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <a href="{{element.href}}" target="_blank"><span style="text-decoration: underline">Link tại
+                    đây</span></a>
               </mat-cell>
             </ng-container>
 
@@ -78,7 +73,7 @@
                   alt="" class="icon">
                 <img *ngIf="element.os?.name === 'Linux'"
                   src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
-                {{element.os?.name + ' ' + element.os?.version}}
+                {{element.os?.name ? element.os?.name : 'Unknown' + ' ' + element.os?.version ? element.os?.version : ''}}
               </mat-cell>
             </ng-container>
 
@@ -125,17 +120,9 @@
               <mat-cell *matCellDef="let element"></mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="website">
-              <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <a href="{{element.href}}" target="_blank"><span style="text-decoration: underline">Link tại
-                    đây</span></a>
-              </mat-cell>
-            </ng-container>
-
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef>Tại (địa điểm)</mat-header-cell>
-              <mat-cell *matCellDef="let element">{{element.location?.city}}</mat-cell>
+              <mat-cell *matCellDef="let element">{{element.location?.city ? element.location?.city : 'Unknown'}}</mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="historyColumns; sticky: true"></mat-header-row>

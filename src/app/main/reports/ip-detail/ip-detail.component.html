@@ -52,7 +52,7 @@
                       <mat-icon color="accent">tablet_mac
                       </mat-icon> Máy tính bảng
                     </span> -->
-                <span *ngIf="element.device === undefined">Không xác định</span>
+                <span *ngIf="element.device === undefined">Unknown</span>
                 <span *ngIf="element.device !== undefined">{{element.device?.vendor}}</span>
               </mat-cell>
             </ng-container>
@@ -129,7 +129,7 @@
 
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef>Tại (địa điểm)</mat-header-cell>
-              <mat-cell *matCellDef="let element">{{element.location?.city}}</mat-cell>
+              <mat-cell *matCellDef="let element">{{element.location?.city ? element.location?.city : 'Unknown'}}</mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="historyColumns; sticky: true"></mat-header-row>
