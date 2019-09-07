@@ -348,7 +348,7 @@
       border-radius: 5px;
       filter: drop-shadow(0px 1px 4px black);
       //text-shadow: 1px 1px 4px black;
-      padding: 20px;
+      padding: 10px;
       padding-top: 30px;
       transition: 0.2s;
       text-align: justify;
@@ -356,10 +356,14 @@
       mat-icon {
         color: skyblue;
       }
+
+      p {
+        font-size: 14px;
+      }
     }
 
     .feature-item:hover {
-      transform: scale(1.01, 1.01);
+      //transform: scale(1.01, 1.01);
     }
 
     .benefit-container {
@@ -442,7 +446,7 @@
 
   .footer-contact-container {
     background-color: rgba(0, 0, 0, 0.3);
-    filter: drop-shadow(0px 1px 4px black);
+    //filter: drop-shadow(0px 1px 4px black);
     .footer-contact {
       background: rgba(38, 61, 67, 0.4);
       color: white;
