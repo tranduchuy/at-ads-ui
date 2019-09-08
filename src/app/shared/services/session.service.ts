@@ -10,7 +10,7 @@ export class SessionService {
   private _adsId$ = new BehaviorSubject<string>('');
   private _accountId$ = new BehaviorSubject<string>('');
   private _user$ = new BehaviorSubject<any>({});
-  private _accountAcceptance$ = new BehaviorSubject<boolean>(false);
+  private _accountAcceptance$ = new BehaviorSubject<boolean>(true);
   private _acceptedAdsId$ = new BehaviorSubject<string>('');
 
   constructor(private cookieService: CookieService) {

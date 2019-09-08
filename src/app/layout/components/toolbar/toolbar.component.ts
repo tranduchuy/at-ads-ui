@@ -15,6 +15,7 @@ import { DialogService } from 'app/shared/services/dialog.service';
 import { ToolbarService } from './toolbar.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
     selector: 'toolbar',
@@ -57,7 +58,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         private _router: Router,
         private _dialogService: DialogService,
         private _toolbarService: ToolbarService,
-        private _fuseProgressiveBarService: FuseProgressBarService
+        private _fuseProgressiveBarService: FuseProgressBarService,
+        private _fuseSplashScreenService: FuseSplashScreenService
     ) {
         super();
 
@@ -117,6 +119,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      * On init
      */
     ngOnInit(): void {
+
         // Subscribe to the config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
@@ -145,20 +148,20 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         const getAdsIdSub = this._sessionService.getAdwordId()
             .subscribe((adsId: string) => {
                 if (adsId) {
+                    this.isProcessing = true;
                     const checkAccountSub = this._toolbarService.checkAccountAcceptance()
                         .subscribe(res => {
-                            this._fuseProgressiveBarService.hide();
                             this.isAlertDisplayed = !res.data.isConnected;
                             this.isProcessing = false;
                         },
                             (error: HttpErrorResponse) => {
-                                this._fuseProgressiveBarService.hide();
                                 //this._dialogService._openErrorDialog(error.error);
                                 this.isAlertDisplayed = false;
                                 this.isProcessing = false;
                             });
                     this.subscriptions.push(checkAccountSub);
                 }
+                else this.isAlertDisplayed = false;
             });
         this.subscriptions.push(getAdsIdSub);
 
