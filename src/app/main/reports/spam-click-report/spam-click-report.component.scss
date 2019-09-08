@@ -9,7 +9,7 @@
     background-size: 100% 100%;
     color: white;
     font-size: 16px;
-    padding: 90px 30px 5px 30px;
+    padding: 127px 30px 10px 30px;
     font-weight: bold;
 
     .main-title-text {
@@ -215,19 +215,20 @@
 @media screen and (max-width: 600px) {
   .container {
     .main-title {
-      text-align: center;
 
       .main-title-text {
         padding-bottom: 10px;
+        clear: both;
+      }
+
+      .datePicker {
+        width: 100%;
+        clear: both;
       }
     }
 
     .section {
       padding: 0;
-
-      .datePicker {
-        width: 100%;
-      }
 
       .title1 {
         padding: 20px;

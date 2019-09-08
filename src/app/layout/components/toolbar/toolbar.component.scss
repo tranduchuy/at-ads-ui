@@ -1,26 +1,58 @@
 @import "src/@fuse/scss/fuse";
 
 toolbar {
-  //position: relative;
-  display: flex;
-  flex: 0 0 auto;
-  z-index: 4;
+  // position: absolute;
+  // display: flex;
+  // flex: 0 0 auto;
+  // z-index: 4;
+  //justify-content: flex-end;
 
-  position: absolute;
-  background-color: inherit;
+  background: #1E2129;
   color: white;
-
   width: 100%;
-  justify-content: flex-end;
-
+  
   &.below {
     z-index: 2;
   }
 
   .mat-toolbar {
-    position: relative;
+    position: absolute;
     background: inherit !important;
     color: inherit !important;
+    padding-top: 30px;
+    z-index: 100;
+  }
+
+  .bottom-distance {
+    margin-bottom: 50px;
+  }
+
+  .alert {
+    background: darkred;
+    color: white;
+    width: 100%;
+
+    font-size: 14px;
+    padding: 10px;
+    padding-left: 30px;
+    cursor: pointer;
+
+    position: absolute;
+    white-space: initial !important;
+    top: 100%;
+
+    line-height: 2rem;
+
+    //-webkit-animation: alert 0.4s linear;
+  }
+
+  @keyframes alert {
+    from {
+      margin-top: -100px;
+    }
+    to {
+      margin-top: 0;
+    }
   }
 
   .logo {
@@ -67,4 +99,13 @@ toolbar {
 
 a {
   text-decoration: none !important;
+}
+
+@media screen and (max-width: 600px) {
+  toolbar {
+    .alert {
+      padding: 10px;
+      text-align: center;
+    }
+  }
 }
