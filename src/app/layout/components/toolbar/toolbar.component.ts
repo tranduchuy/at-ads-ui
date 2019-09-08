@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
@@ -148,24 +148,25 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     const checkAccountSub = this._toolbarService.checkAccountAcceptance()
                         .subscribe(res => {
                             this._fuseProgressiveBarService.hide();
-
-                            if (res.data.isConnected)
-                                this.isAlertDisplayed = false;
-                            else
-                                this.isAlertDisplayed = true;
-
+                            this.isAlertDisplayed = !res.data.isConnected;
                             this.isProcessing = false;
                         },
                             (error: HttpErrorResponse) => {
                                 this._fuseProgressiveBarService.hide();
                                 //this._dialogService._openErrorDialog(error.error);
                                 this.isAlertDisplayed = false;
-                                this.isProcessing = false;                              
+                                this.isProcessing = false;
                             });
                     this.subscriptions.push(checkAccountSub);
                 }
             });
         this.subscriptions.push(getAdsIdSub);
+
+        const getAccountAcceptanceSub = this._sessionService.getAccountAcceptance()
+            .subscribe((isAccepted: boolean) => {
+                this.isAlertDisplayed = !isAccepted;
+            });
+        this.subscriptions.push(getAccountAcceptanceSub);
     }
 
     checkAccountAcceptance() {
@@ -179,12 +180,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 if (res.data.isConnected) {
                     this.isAlertDisplayed = false;
                     this._router.navigateByUrl('/gan-tracking/chien-dich');
-                    this._dialogService._openSuccessDialog({ messages: ['Cập nhật quyền tài khoản thành công'] });
+                    this._dialogService._openSuccessDialog({ messages: ['Cập nhật quyền quản lý tài khoản thành công'] });
                 }
                 else {
                     this.isAlertDisplayed = true;
                     this._dialogService._openInfoDialog('Tài khoản chưa được chấp nhận quyền quản lý hệ thống');
                 }
+
+                this._sessionService.setAcceptedAdsId();
 
                 this.isProcessing = false;
             },

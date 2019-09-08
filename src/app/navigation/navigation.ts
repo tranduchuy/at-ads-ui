@@ -123,7 +123,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Chặn Tự Động Nhóm IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'grid_on',
+        icon: 'apps',
         url: '/chan-ip/chan-ip-theo-nhom',
       },
       {
