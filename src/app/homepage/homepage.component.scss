@@ -359,11 +359,21 @@
 
       p {
         font-size: 14px;
+        color: silver;
+      }
+
+      img {
+        height: 55px;
+        max-width: 170px;
+        margin-left: 5px;
       }
     }
 
     .feature-item:hover {
       transform: scale(1.01, 1.01);
+      p {
+        color: white;
+      }
     }
 
     .benefit-container {

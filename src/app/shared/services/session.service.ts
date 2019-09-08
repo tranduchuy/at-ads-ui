@@ -10,9 +10,27 @@ export class SessionService {
   private _adsId$ = new BehaviorSubject<string>('');
   private _accountId$ = new BehaviorSubject<string>('');
   private _user$ = new BehaviorSubject<any>({});
+  private _accountAcceptance$ = new BehaviorSubject<boolean>(true);
+  private _acceptedAdsId$ = new BehaviorSubject<string>('');
 
   constructor(private cookieService: CookieService) {
 
+  }
+
+  getAcceptedAdsId(): Observable<string> {
+    return this._acceptedAdsId$.asObservable();
+  }
+
+  setAcceptedAdsId(): void {
+    this._acceptedAdsId$.next(this.activeAdsAccountId.replace(/\D+/g, ''));
+  }
+
+  getAccountAcceptance(): Observable<boolean> {
+    return this._accountAcceptance$.asObservable();
+  }
+
+  setAccountAcceptance(isAccepted: boolean): void {
+    this._accountAcceptance$.next(isAccepted);
   }
 
   set(token, user): void {

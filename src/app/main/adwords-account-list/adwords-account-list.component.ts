@@ -39,6 +39,13 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
   ngOnInit() {
     this.getAccounts();
+
+    const sub = this._sessionService.getAcceptedAdsId()
+      .subscribe((adsId: string) => {
+        if (adsId)
+          this.checkAccountAcceptance(adsId);
+      });
+    this.subscriptions.push(sub);
   }
 
   openRemoveAccountConfirmDialog(accountId: string) {
@@ -161,7 +168,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
   }
 
-  checkAccountAcceptance(adsId: string, isConnected: boolean) {
+  checkAccountAcceptance(adsId: string, isConnected?: boolean) {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
 
@@ -170,9 +177,13 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
         this.getAccounts();
 
+        if (this.adsAccountIdPipe.transform(adsId) === this._sessionService.activeAdsAccountId)
+          this._sessionService.setAccountAcceptance(res.data.isConnected);
+
         setTimeout(() => {
           this._fuseProgressiveBarService.hide();
           this._fuseNavigationService.reloadNavigation();
+          //this._dialogService._openSuccessDialog({ messages: ['Cập nhật tài khoản Google Ads thành công'] });
           this.isProcessing = false;
         }, 0);
       },
