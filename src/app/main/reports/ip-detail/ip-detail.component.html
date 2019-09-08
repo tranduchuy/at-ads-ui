@@ -173,7 +173,7 @@
             Vị trí truy cập
             <br>
             <span style="color: gray" *ngFor="let item of lastHistory">
-              {{item.location?.city}}
+              {{item.location?.city ? item.location?.city : 'Unknown'}}
             </span>
           </p>
         </div>
