@@ -1,5 +1,31 @@
 <div class="homepage">
 
+   <div class="contact" *ngIf="isContactDisplayed">
+      Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
+   </div>
+
+   <div class="topbar-container" *ngIf="isTopbarDisplayed">
+      <div class="topbar">
+         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayout.xs="column"
+            fxLayoutGap="10px" fxLayoutGap.xs="30px">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxFlex>
+               <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
+               <span class="topbar-title" fxFlex>CÔNG CỤ CHỐNG CLICK TẶC 2019</span>
+            </div>
+            <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
+               class="topbar-google-button" fxFlex="nogrow">
+               <img src="../../assets/icons/google-icon.png"
+                  style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
+               Google
+            </button>
+            <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()" *ngIf="isOnLogin"
+               fxFlex="nogrow" fxFlex.xs="column">
+               TRUY CẬP HỆ THỐNG CHỐNG CLICK TẶC<mat-icon style="font-size: 20px">navigate_next</mat-icon>
+            </button>
+         </div>
+      </div>
+   </div>
+
    <div class="main-content">
 
       <div class="banner-container">
@@ -89,10 +115,10 @@
                   </mat-cell>
                </ng-container> -->
 
-               <ng-container matColumnDef="device">
+               <!-- <ng-container matColumnDef="device">
                   <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
                   <mat-cell *matCellDef="let element">{{element.device.name}}</mat-cell>
-               </ng-container>
+               </ng-container> -->
 
                <ng-container matColumnDef="os">
                   <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
@@ -111,7 +137,11 @@
                         src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Ubuntu'"
                         src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
-                     {{element.os?.name + ' ' + element.os?.version}}
+                     <span *ngIf="element.os?.name">{{element.os?.name + ' ' + element.os?.version}}</span>
+
+                     <mat-icon *ngIf="!element.os?.name" style="color: silver; margin-right: 5px">help_outline
+                     </mat-icon>
+                     <span *ngIf="!element.os?.name">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -145,7 +175,13 @@
                      <img *ngIf="element.browser?.name === 'Tor'"
                         src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
                         alt="" class="icon">
-                     {{element.browser?.name + ' ' + element.browser?.version}}
+                     <span
+                        *ngIf="element.browser?.name">{{element.browser?.name + ' ' + element.browser?.version}}</span>
+
+                     <mat-icon *ngIf="!element.browser?.name" style="color: silver; margin-right: 5px">help_outline
+                     </mat-icon>
+                     <span *ngIf="!element.browser?.name">Unknown</span>
+
                   </mat-cell>
                </ng-container>
 
@@ -175,10 +211,16 @@
 
                <ng-container matColumnDef="location">
                   <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
+
                   <mat-cell *matCellDef="let element">
                      <img src="../../assets/icons/location.svg" alt="" class="location-icon"
                         *ngIf="element.location?.city">
                      <span *ngIf="element.location?.city">{{element.location?.city}}</span>
+
+                     <mat-icon *ngIf="!element.location?.city"
+                        style="font-size: 20px; color: silver; margin-right: 2px">help_outline
+                     </mat-icon>
+                     <span *ngIf="!element.location?.city">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -189,60 +231,62 @@
 
       </div>
 
-      <div class="instruction">
-         <p class="steps-main-title">
-            3 BƯỚC PHÁT HIỆN VÀ CHỐNG CLICK ẢO
-         </p>
+      <div class="instruction-container">
+         <div class="instruction">
+            <p class="steps-main-title">
+               3 BƯỚC PHÁT HIỆN VÀ CHỐNG CLICK ẢO
+            </p>
 
-         <div class="demo-video">
-            <button mat-raised-button style="background-color:crimson; color: white" matTooltip="Sắp ra mắt">
-               <mat-icon>ondemand_video</mat-icon> VIDEO DEMO CÔNG CỤ
-            </button>
-         </div>
+            <!-- <div class="demo-video">
+               <button mat-raised-button style="background-color:crimson; color: white" matTooltip="Sắp ra mắt">
+                  <mat-icon>ondemand_video</mat-icon> VIDEO DEMO CÔNG CỤ
+               </button>
+            </div> -->
 
-         <div class="step-wrapper" fxLayout="row" fxLayoutGap="15px" fxLayout.xs="column">
+            <div class="step-wrapper" fxLayout="row" fxLayoutGap="15px" fxLayout.xs="column">
 
-            <div class="step step1" fxFlex="33.33">
-               <div class="step-image">
-                  <img src="../../assets/images/step1.PNG" alt="" matTooltip="Phóng to ảnh"
-                     (click)="showImageDialog('../../assets/images/step1.PNG')">
+               <div class="step step1" fxFlex="33.33">
+                  <div class="step-image">
+                     <img src="../../assets/images/step1.PNG" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step1.PNG')">
+                  </div>
+                  <div class="step-description">
+                     <span class="step-name">Bước 1: Liên kết Google Ads</span>
+                     <p>
+                        Liên kết tài khoản quảng cáo <span style="color:skyblue">Google Ads</span> của bạn với hệ thống
+                        của Appnet Technology.
+                     </p>
+                  </div>
                </div>
-               <div class="step-description">
-                  <span class="step-name">Bước 1: Liên kết Google Ads</span>
-                  <p>
-                     Liên kết tài khoản quảng cáo <span style="color:skyblue">Google Ads</span> của bạn với hệ thống
-                     của 3f
-                     solutions.
-                  </p>
+
+               <div class="step step2" fxFlex="33.33">
+                  <div class="step-image">
+                     <img src="../../assets/images/step2.PNG" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step2.PNG')">
+                  </div>
+                  <div class="step-description">
+                     <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
+                     <p>
+                        Theo dõi thiết bị, trình duyệt, vị trí đang click quảng cáo của bạn. Xác định "đối tượng" phá
+                        hoại.
+                     </p>
+                  </div>
                </div>
+
+               <div class="step step3" fxFlex="33.33">
+                  <div class="step-image">
+                     <img src="../../assets/images/step3.PNG" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step3.PNG')">
+                  </div>
+                  <div class="step-description">
+                     <span class="step-name">Bước 3: Chặn click ảo</span>
+                     <p>
+                        Thực hiện chặn những IP đang phá hoại bằng tác vụ thủ công hoặc tự động.
+                     </p>
+                  </div>
+               </div>
+
             </div>
-
-            <div class="step step2" fxFlex="33.33">
-               <div class="step-image">
-                  <img src="../../assets/images/step2.PNG" alt="" matTooltip="Phóng to ảnh"
-                     (click)="showImageDialog('../../assets/images/step2.PNG')">
-               </div>
-               <div class="step-description">
-                  <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
-                  <p>
-                     Theo dõi thiết bị, trình duyệt, vị trí đang click quảng cáo của bạn. Xác định "đối tượng" phá hoại.
-                  </p>
-               </div>
-            </div>
-
-            <div class="step step3" fxFlex="33.33">
-               <div class="step-image">
-                  <img src="../../assets/images/step3.PNG" alt="" matTooltip="Phóng to ảnh"
-                     (click)="showImageDialog('../../assets/images/step3.PNG')">
-               </div>
-               <div class="step-description">
-                  <span class="step-name">Bước 3: Chặn click ảo</span>
-                  <p>
-                     Thực hiện chặn những IP đang phá hoại bằng tác vụ thủ công hoặc tự động.
-                  </p>
-               </div>
-            </div>
-
          </div>
       </div>
 
@@ -273,7 +317,7 @@
                <div class="feature-left" fxLayout="column" fxLayoutGap="5px">
                   <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                      <div class="icon">
-                        <mat-icon color="accent" class="s-60" style="color:lightgreen">verified_user</mat-icon>
+                        <mat-icon color="accent" class="s-60">verified_user</mat-icon>
                      </div>
                      <div class="feature-description">
                         <strong>Chặn theo IP</strong>
@@ -285,19 +329,21 @@
                   </div>
                   <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                      <div class="icon">
-                        <mat-icon color="accent" class="s-60" style="color: deeppink">timer</mat-icon>
+                        <!-- <mat-icon color="accent" class="s-60">public</mat-icon> -->
+                        <img src="../../assets/icons/incognito.png" alt="">
                      </div>
                      <div class="feature-description">
-                        <strong>Chặn theo thời gian</strong>
+                        <strong>Chặn trình duyệt ẩn danh</strong>
                         <p>
-                           Theo dõi diến biến quảng cáo theo các khung giờ trong ngày, chặn ngay khung giờ bị <span
-                              style="color: orange">Click ảo</span> hoặc khung giờ không có nhân viên làm việc.
+                           Nhận diện người dùng đang sử dụng <span style="color:skyblue">Trình duyệt Ẩn danh</span>, từ
+                           đó có thể <span style="color: orange">ngừng quảng cáo</span>, giúp
+                           tiết kiệm chi phí với những người dùng muốn dấu thông tin truy cập vào quảng cáo.
                         </p>
                      </div>
                   </div>
                   <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                      <div class="icon">
-                        <mat-icon color="accent" class="s-60" style="color: skyblue">wifi</mat-icon>
+                        <mat-icon color="accent" class="s-60">wifi</mat-icon>
                      </div>
                      <div class="feature-description">
                         <strong>Chặn theo 3G & 4G</strong>
@@ -309,7 +355,7 @@
                   </div>
                   <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                      <div class="icon">
-                        <mat-icon color="accent" class="s-60" style="color: gold">timeline</mat-icon>
+                        <mat-icon color="accent" class="s-60">timeline</mat-icon>
                      </div>
                      <div class="feature-description">
                         <strong>Chặn theo Big Data</strong>
@@ -326,7 +372,7 @@
             <div class="feature-right" fxLayout="column" fxLayoutGap="5px">
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: #039be5">phonelink</mat-icon>
+                     <mat-icon color="accent" class="s-60">phonelink</mat-icon>
                   </div>
                   <div class="feature-description">
                      <strong>Chặn theo thiết bị</strong>
@@ -339,7 +385,7 @@
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: silver">grid_on</mat-icon>
+                     <mat-icon color="accent" class="s-60">apps</mat-icon>
                   </div>
                   <div class="feature-description">
                      <strong>Chặn theo mạng lưới</strong>
@@ -353,7 +399,7 @@
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: orangered">location_on</mat-icon>
+                     <mat-icon color="accent" class="s-60">location_on</mat-icon>
                   </div>
                   <div class="feature-description">
                      <strong>Tỉnh-Thành quảng cáo</strong>
@@ -366,18 +412,13 @@
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="30px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60" style="color: whitesmoke">device_unknown</mat-icon>
+                     <mat-icon color="accent" class="s-60">view_list</mat-icon>
                   </div>
                   <div class="feature-description">
-                     <strong>Nhận diện số di động</strong>
+                     <strong>Blacklist / Whitelist</strong>
                      <p>
-                        Nhận diện các số di động truy cập bằng <span style="color: skyblue">3G & 4G</span> đang thực
-                        hiện
-                        <span style="color: orange">Click ảo</span> với bạn. Từ đó có thể liên lạc trực tiếp với đối
-                        tượng
-                        để trao
-                        đổi
-                        và ngăn chặn <span style="color: orange">Click ảo</span>.
+                        Nếu bạn biết chính xác địa chỉ IP của đối thủ, hoặc của khách hàng, bạn có thể <span style="color: orange">ngưng quảng cáo</span>
+                        với đối thủ để tránh mất thêm chi phí và luôn hiển thị quảng cáo tới khách hàng của mình.
                      </p>
                   </div>
                </div>
@@ -385,51 +426,55 @@
          </div>
       </div>
 
-      <div class="benefit">
+      <div class="benefit-container">
+         <div class="benefit">
 
-         <p class="benefit-title">
-            LỢI ÍCH KHI SỬ DỤNG CHẶN CLICK ẢO
-         </p>
+            <p class="benefit-title">
+               LỢI ÍCH KHI SỬ DỤNG CHẶN CLICK ẢO
+            </p>
 
-         <p>
-            Lợi ích thấy ngay khi đăng ký và sử dụng công cụ Chặn Click Ảo
-         </p>
+            <p>
+               Lợi ích thấy ngay khi đăng ký và sử dụng công cụ Chặn Click Ảo
+            </p>
 
-         <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="60px">
-            <div class="main-benefit-item">
-               <div class="benefit-symbol">
-                  <img src="../../assets/images/save-money.svg" alt="">
+            <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="60px">
+               <div class="main-benefit-item">
+                  <div class="benefit-symbol">
+                     <img src="../../assets/images/save-money.svg" alt="">
+                  </div>
+                  <div class="benefit-description">
+                     <p>TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
+                     </p>
+                     Giảm thiểu đến 50% chi phí quảng cáo <span style="color: orange">lãng phí vô ích</span> do đối thủ
+                     phá
+                     hoại
+                     hay virus, bot click quảng cáo.
+                  </div>
                </div>
-               <div class="benefit-description">
-                  <p>TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
-                  </p>
-                  Giảm thiểu đến 50% chi phí quảng cáo <span style="color: orange">lãng phí vô ích</span> do đối thủ phá
-                  hoại
-                  hay virus, bot click quảng cáo.
+               <div class="main-benefit-item">
+                  <div class="benefit-symbol">
+                     <img src="../../assets/images/timer.svg" alt="">
+                  </div>
+                  <div class="benefit-description">
+                     <p>GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward</mat-icon>
+                     </p>
+                     Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn 24h/ngày và 7
+                     ngày/tuần.
+                  </div>
                </div>
-            </div>
-            <div class="main-benefit-item">
-               <div class="benefit-symbol">
-                  <img src="../../assets/images/timer.svg" alt="">
-               </div>
-               <div class="benefit-description">
-                  <p>GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward</mat-icon>
-                  </p>
-                  Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn 24h/ngày và 7
-                  ngày/tuần.
-               </div>
-            </div>
-            <div class="main-benefit-item">
-               <div class="benefit-symbol">
-                  <img src="../../assets/images/customer.png" alt="">
-               </div>
-               <div class="benefit-description">
-                  <p>TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward</mat-icon>
-                  </p>
-                  Giảm các chi phí <span style="color:orange">lãng phí</span> do click ảo, bạn sẽ có thêm chi phí quảng
-                  cáo.
-                  Từ
-                  đó có thêm tiềm năng.
+               <div class="main-benefit-item">
+                  <div class="benefit-symbol">
+                     <img src="../../assets/images/customer.png" alt="">
+                  </div>
+                  <div class="benefit-description">
+                     <p>TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward</mat-icon>
+                     </p>
+                     Giảm các chi phí <span style="color:orange">lãng phí</span> do click ảo, bạn sẽ có thêm chi phí
+                     quảng
+                     cáo.
+                     Từ
+                     đó có thêm tiềm năng.
+                  </div>
                </div>
             </div>
          </div>
@@ -450,7 +495,7 @@
             hệ
             với chúng tôi.
             <div class="view-more-button">
-               <button mat-raised-button color="accent" matTooltip="Sắp ra mắt">
+               <button mat-raised-button color="accent" (click)="checkLogin()">
                   XEM THÊM <mat-icon style="font-size: 20px; color: white">navigate_next</mat-icon>
                </button>
             </div>
@@ -525,7 +570,7 @@
                   Bảo mật tài khoản Google Ads?
                </span>
                <p>
-                  Toàn bộ thông tin tài khoản của bạn sẽ được bảo mật theo quy định bảo mật của công ty 3f solutions. Vì
+                  Toàn bộ thông tin tài khoản của bạn sẽ được bảo mật theo quy định bảo mật của công ty Appnet Technology. Vì
                   thế
                   bạn hãy yên tâm trong việc kết nối và tối ưu tài khoản. Khi ngừng sử dụng, vui lòng ngắt kết nối với
                   chúng
@@ -550,7 +595,12 @@
          </div>
 
       </div>
+   </div>
 
+   <div class="footer-contact-container" *ngIf="isContactFooterDisplayed">
+      <div class="footer-contact">
+         Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
+      </div>
    </div>
 
 </div>

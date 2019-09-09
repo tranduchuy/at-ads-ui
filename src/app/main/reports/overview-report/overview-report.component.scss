@@ -1,0 +1,163 @@
+.container {
+  width: 100%;
+
+  .title1 {
+    padding: 35px 30px 30px 30px;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .inner {
+    .highline {
+      padding: 60px 30px 50px 15px;
+      background: white;
+
+      .left {
+        .visitor {
+          .visitor-title {
+            font-size: 24px;
+            text-align: center;
+          }
+
+          .visitor-number {
+            color: rgba(0, 0, 0, 0.7);
+            font-size: 70px;
+            font-weight: bold;
+            text-align: center;
+          }
+
+          .visitor-number-note {
+            text-align: center;
+          }
+
+          .device-chart {
+            padding-top: 40px;
+
+            .chart-legend {
+              padding: 20px;
+              padding-bottom: 0;
+
+              .chart-label {
+                height: 12px;
+                width: 12px;
+                display: inline-block;
+                margin-right: 10px;
+                border-radius: 2px;
+              }
+            }
+          }
+        }
+      }
+
+      :host ::ng-deep .ngx-charts-bar-horizontal-stacked {
+        display: table;
+        margin: 0 auto;
+      }
+
+      .right {
+        width: 100%;
+
+        .right-table-title {
+          color: #039be5;
+          font-weight: bold;
+          font-size: 16px;
+        }
+
+        .right-table {
+          box-shadow: 1px 1px 4px silver;
+          margin-top: 12px;
+          overflow: auto;
+
+          mat-table {
+            box-shadow: none;
+            width: 100%;
+
+            mat-header-cell:nth-child(1),
+            mat-cell:nth-child(1) {
+              flex: 0 0 10%;
+            }
+
+            mat-header-cell:nth-child(3),
+            mat-cell:nth-child(3) {
+              flex: 0 0 35%;
+              justify-content: center;
+
+              .user-percentage {
+                color: #039be5;
+              }
+            }
+
+            mat-header-cell {
+              background: #039be5;
+              color: white;
+            }
+
+            mat-row {
+              transition: 0.2s;
+
+              &:hover {
+                background: rgba(3, 155, 229, 0.1);
+              }
+            }
+
+            mat-header-row,
+            mat-row {
+              min-width: 600px;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .overview {
+      .overview-title1 {
+        padding: 20px 30px 5px 30px;
+        background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+        background-size: 100% 100%;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+
+        .datePicker {
+          color: #039be5;
+
+          input {
+            color: white;
+          }
+        }
+      }
+
+      .overview-table {
+        box-shadow: 1px 1px 4px silver;
+        overflow: auto;
+
+        mat-table {
+          box-shadow: none;
+
+          mat-header-cell {
+            background: #039be5;
+            color: white;
+          }
+
+          mat-row {
+            transition: 0.2s;
+
+            &:hover {
+              background: rgba(3, 155, 229, 0.1);
+            }
+          }
+
+          mat-header-row,
+          mat-row {
+            min-width: 1000px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

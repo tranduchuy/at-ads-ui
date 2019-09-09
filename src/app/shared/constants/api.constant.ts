@@ -69,5 +69,6 @@ export namespace API {
     export const removeAutoBLockedIP = environment.hostApi + '/api/account-adwords/{account_id}/blocked-ips';
     export const getIPHistory = environment.hostApi + '/api/account-adwords/{account_id}/ip-history?ip={ip}';
     export const getStatisticUserReport = environment.hostApi + '/api/account-adwords/{account_id}/statistic-user?startDate={from}&endDate={to}';
+    export const getUserStatisticDetail = environment.hostApi + '/api/account-adwords/{account_id}/detail-user/{id}?startDate={from}&endDate={to}';
   }
 }

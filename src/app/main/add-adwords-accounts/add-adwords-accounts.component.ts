@@ -127,7 +127,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
             console.log('The POST observable is now completed.');
           });
     } else {
-      this._dialogService._openErrorDialog({ messages: ['Lấy thông tin tài khoản từ google ko thành công'] });
+      this._dialogService._openErrorDialog({ messages: ['Lấy thông tin tài khoản từ google không thành công'] });
     }
 
   }
@@ -198,7 +198,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this._sessionService.setAccountId(this.connectedAccountId);
           this._sessionService.setAdwordId(this.connectedAdsId);
           this._fuseNavigationService.reloadNavigation();
+
+          this.selectedAccount = '';
           this.getAdsAccounts();
+
 
           this.isProcessing = false;
         },
@@ -209,7 +212,12 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this.connectedAdsId = '';
 
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
+          if (error.error.messages[0] === 'Không xác định được lỗi')
+            this._dialogService._openErrorDialog(
+              { messages: ['Không thể gắn tracking vào tài khoản này!<br> Có thể bạn chưa kết nối Google Ads với Appnet Technology <br> hoặc tài khoản này đã tồn tại trong hệ thống.'] },
+              true
+            );
+          else this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
         }
       );
@@ -242,7 +250,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           } else {
             this.isProcessing = false;
             this._fuseProgressiveBarService.hide();
-            this._dialogService._openErrorDialog({ messages: ['Kết nối tài khoản Google Ads không thành công. Vui lòng kiếm tra lại'] });
+            this._dialogService._openErrorDialog(
+              { messages: ['Hoàn tất kết nối tài khoản Google Ads thất bại.'] },
+              true
+            );
           }
 
         },

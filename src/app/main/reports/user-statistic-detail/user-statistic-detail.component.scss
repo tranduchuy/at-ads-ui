@@ -1,0 +1,127 @@
+.container {
+  width: 100%;
+
+  .title1 {
+    padding: 127px 30px 8px 30px;
+    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+
+    .datePicker {
+      color: #039be5;
+
+      input {
+        color: white;
+      }
+    }
+  }
+
+  .main-inner {
+    .inner {
+      padding: 50px 30px 30px 30px;
+      margin-top: -18px;
+    }
+
+    .left {
+      padding: 40px;
+      padding-top: 10px;
+      padding-bottom: 15px;
+      text-align: center;
+
+      .avatar {
+        height: 110px;
+        width: 110px;
+        display: table;
+        margin: 0 auto;
+        margin-bottom: 15px;
+      }
+    }
+
+    .right {
+      background-color: white;
+      box-shadow: 1px 1px 3px silver;
+      overflow: auto;
+
+      mat-table {
+        box-shadow: none;
+
+        mat-header-cell:nth-child(1),
+        mat-cell:nth-child(1) {
+          flex: 0 0 17%;
+        }
+
+        mat-header-cell:nth-child(2),
+        mat-cell:nth-child(2) {
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+
+        mat-header-cell:nth-child(5),
+        mat-cell:nth-child(5) {
+          justify-content: center;
+        }
+
+        mat-row {
+          transition: 0.2s;
+        }
+        mat-row:hover {
+          background-color: rgba(3, 155, 229, 0.1);
+        }
+
+        mat-header-cell {
+          background: #039be5;
+          color: white;
+        }
+
+        mat-row,
+        mat-header-row {
+          min-width: 1500px;
+          width: 100%;
+        }
+      }
+
+      .adwords-badge {
+        border: 1px solid #4bb543;
+        border-radius: 5px;
+        padding: 5px;
+      }
+    }
+
+    .icon {
+      height: 22px;
+      width: 22px;
+      margin-right: 5px;
+    }
+
+    .pagination-buttons {
+      width: 100%;
+      color: gray;
+    }
+
+    .bottom {
+      margin-top: 15px;
+      padding: 15px;
+
+      .last-history-icon {
+        text-align: center;
+
+        mat-icon {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    .main-inner {
+      .pagination-buttons {
+        
+      }
+    }
+  }
+}

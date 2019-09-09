@@ -1,0 +1,177 @@
+<div class="container">
+
+  <div class="title1"></div>
+
+  <div class="inner">
+
+    <div class="highline" fxLayout="row" fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="20px">
+
+      <div class="left" fxFlex="26">
+
+        <div class="visitor">
+
+          <div class="visitor-title">Ngay bây giờ</div>
+
+          <div class="visitor-number">9</div>
+
+          <div class="visitor-number-note">người dùng đang hoạt động trên trang web</div>
+
+          <div class="device-chart">
+
+            <div class="chart-legend">
+              <div style="background:#F44336" class="chart-label"></div><span>Máy tính</span>
+              <br>
+              <div style="background:#44b543" class="chart-label"></div><span>Điện thoại</span>
+              <br>
+              <div style="background:#039be5" class="chart-label"></div><span>Máy tính bảng</span>
+            </div>
+
+            <ngx-charts-bar-horizontal-stacked [view]="view" [scheme]="colorScheme" [results]="multi"
+              [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel" style="max-width: 100%">
+
+              <ng-template #tooltipTemplate let-model="model">
+                <pre>{{model.value}}%</pre>
+              </ng-template>
+
+            </ngx-charts-bar-horizontal-stacked>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="right">
+        <div class="right-table-title">
+          Trang hoạt động hàng đầu
+        </div>
+
+        <div class="right-table">
+
+          <mat-table [dataSource]="highlinePages" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="order">
+              <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index"> {{i+1}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="activePage">
+              <mat-header-cell *matHeaderCellDef> Trang hoạt động </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <a href="{{element.activePage}}">{{element.activePage}}</a>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="userOnAction">
+              <mat-header-cell *matHeaderCellDef> Người dùng đang hoạt động <mat-icon
+                  style="font-size: 18px; margin-left: 5px">arrow_downward</mat-icon>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" fxLayout="row">
+                <div class="user-number" fxFlex="30">
+                  {{element.userOnAction.number}}
+                </div>
+                <div class="user-percentage">
+                  {{element.userOnAction.percentage}}%
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="highlinePagesCols"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: highlinePagesCols;"></mat-row>
+
+          </mat-table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="overview">
+
+      <div class="overview-title1" fxLayout="row" fxLayout.xs="column">
+        <p class="overview-title2" fxFlex="80">BÁO CÁO TỔNG THỂ TRUY CẬP</p>
+        <mat-form-field class="datePicker" fxFlex="20">
+          <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
+          <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
+            startKey="start" endKey="end" (datesUpdated)="onApplyDateRange($event)" ngDefaultControl />
+        </mat-form-field>
+      </div>
+
+      <div class="overview-table">
+
+        <mat-table [dataSource]="overviewTable" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="createdAt">
+            <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.createdAt}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ip">
+            <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="source">
+            <mat-header-cell *matHeaderCellDef> Nguồn/Phương tiện </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.source}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="timeOnSite">
+            <mat-header-cell *matHeaderCellDef> Time on site </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.timeOnSite}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="isPrivateBrowsing">
+            <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.isPrivateBrowsing}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.isSpam}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="location">
+            <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.location?.city}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="os">
+            <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.os?.name + ' ' + element.os?.version}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="browser">
+            <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.browser?.name + ' ' + element.browser?.version}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="networkCompany">
+            <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.networkCompany?.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="connection">
+            <mat-header-cell *matHeaderCellDef> Kết nối </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.connection?.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="keyword">
+            <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="overviewTableCols; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: overviewTableCols;"></mat-row>
+
+        </mat-table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

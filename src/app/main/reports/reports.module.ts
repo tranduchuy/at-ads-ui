@@ -35,9 +35,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-ranges-clicking-report.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { UuidHistoryComponent } from './uuid-history/uuid-history.component';
+import { UserStatisticDetailComponent } from './user-statistic-detail/user-statistic-detail.component';
+import { OverviewReportComponent } from './overview-report/overview-report.component';
 
 @NgModule({
-  declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent, IpRangesClickingReportComponent, UserStatisticComponent, UuidHistoryComponent],
+  declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent, IpRangesClickingReportComponent, UserStatisticComponent, UuidHistoryComponent, UserStatisticDetailComponent, OverviewReportComponent],
   imports: [
 
     MatButtonModule,

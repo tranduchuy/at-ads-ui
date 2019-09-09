@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment'
+import * as moment from 'moment';
 import { SessionService } from 'app/shared/services/session.service';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { ReportService } from '../report.service';
@@ -33,6 +33,7 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
   pageTotal: number;
   isProcessing: boolean = false;
   totalItems: number;
+  pageLimit: number = 20;
 
   constructor(
     public _sessionService: SessionService,
@@ -59,14 +60,13 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
 
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
-    const limit = 10;
 
-    const sub = this._reportService.getClassDClickingReport({ from: start, to: end, page, limit })
+    const sub = this._reportService.getClassDClickingReport({ from: start, to: end, page, limit: this.pageLimit })
       .subscribe(res => {
 
         this.dataSource = res.data.rangeIps;
 
-        this.pageTotal = Math.ceil(res.data.totalItems / limit);
+        this.pageTotal = Math.ceil(res.data.totalItems / this.pageLimit);
         this.totalItems = res.data.totalItems;
 
         setTimeout(() => {

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
@@ -12,6 +12,10 @@ import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { DialogService } from 'app/shared/services/dialog.service';
+import { ToolbarService } from './toolbar.service';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
     selector: 'toolbar',
@@ -33,6 +37,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     navigation: any;
     selectedLanguage: any;
     userStatusOptions: any[];
+    isProcessing: boolean = false;
+    isAlertDisplayed: boolean = false;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -50,7 +56,10 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         private _translateService: TranslateService,
         private _sessionService: SessionService,
         private _router: Router,
-        private _dialogService: DialogService
+        private _dialogService: DialogService,
+        private _toolbarService: ToolbarService,
+        private _fuseProgressiveBarService: FuseProgressBarService,
+        private _fuseSplashScreenService: FuseSplashScreenService
     ) {
         super();
 
@@ -110,6 +119,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      * On init
      */
     ngOnInit(): void {
+
         // Subscribe to the config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
@@ -133,6 +143,63 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     this.user.email = user.email;
                 }
             });
+        this.subscriptions.push(sub);
+
+        const getAdsIdSub = this._sessionService.getAdwordId()
+            .subscribe((adsId: string) => {
+                if (adsId) {
+                    this.isProcessing = true;
+                    const checkAccountSub = this._toolbarService.checkAccountAcceptance()
+                        .subscribe(res => {
+                            this.isAlertDisplayed = !res.data.isConnected;
+                            this.isProcessing = false;
+                        },
+                            (error: HttpErrorResponse) => {
+                                //this._dialogService._openErrorDialog(error.error);
+                                this.isAlertDisplayed = false;
+                                this.isProcessing = false;
+                            });
+                    this.subscriptions.push(checkAccountSub);
+                }
+                else this.isAlertDisplayed = false;
+            });
+        this.subscriptions.push(getAdsIdSub);
+
+        const getAccountAcceptanceSub = this._sessionService.getAccountAcceptance()
+            .subscribe((isAccepted: boolean) => {
+                this.isAlertDisplayed = !isAccepted;
+            });
+        this.subscriptions.push(getAccountAcceptanceSub);
+    }
+
+    checkAccountAcceptance() {
+        this.isProcessing = true;
+        this._fuseProgressiveBarService.show();
+
+        const sub = this._toolbarService.checkAccountAcceptance()
+            .subscribe(res => {
+                this._fuseProgressiveBarService.hide();
+
+                if (res.data.isConnected) {
+                    this.isAlertDisplayed = false;
+                    this._router.navigateByUrl('/gan-tracking/chien-dich');
+                    this._dialogService._openSuccessDialog({ messages: ['Cập nhật quyền quản lý tài khoản thành công'] });
+                }
+                else {
+                    this.isAlertDisplayed = true;
+                    this._dialogService._openInfoDialog('Tài khoản chưa được chấp nhận quyền quản lý hệ thống');
+                }
+
+                this._sessionService.setAcceptedAdsId();
+
+                this.isProcessing = false;
+            },
+                (error: HttpErrorResponse) => {
+                    this._fuseProgressiveBarService.hide();
+                    //this._dialogService._openErrorDialog(error.error);
+                    this.isAlertDisplayed = false;
+                    this.isProcessing = false;
+                });
         this.subscriptions.push(sub);
     }
 

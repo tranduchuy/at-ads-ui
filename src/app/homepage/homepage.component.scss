@@ -1,10 +1,10 @@
 .homepage {
   font-size: 16px;
   width: 100%;
-  background: url("../../assets/images/backgrounds/security-wallpaper_1549203.png");
+  background: url("../../assets/images/backgrounds/Abstract-Blue-Futuristic-Wallpaper.jpg");
   background-size: 100% 100%;
-  background-position: center center;
   background-attachment: fixed;
+  background-position: center center;
 
   .main-content {
     button {
@@ -40,8 +40,9 @@
 
         @keyframes titleAppearance {
           from {
-            opacity: 0
-          } to {
+            opacity: 0;
+          }
+          to {
             opacity: 1;
           }
         }
@@ -207,8 +208,8 @@
             }
           }
 
-          mat-header-cell:nth-child(5),
-          mat-cell:nth-child(5) {
+          mat-header-cell:nth-child(4),
+          mat-cell:nth-child(4) {
             flex: 0 0 17%;
           }
 
@@ -221,77 +222,77 @@
       }
     }
 
-    .instruction {
-      padding: 30px;
-      background: rgba(3, 155, 229, 0.3);
+    .instruction-container {
+      .instruction {
+        padding: 30px;
+        background: rgba(3, 155, 229, 0.2);
+        //background: rgba(125, 125, 125, 0.2);
 
-      .steps-main-title {
-        font-size: 25px;
-        width: 100%;
-        text-align: center;
-        color: white;
-        text-shadow: 1px 1px 4px black;
-      }
-
-      .demo-video {
-        text-align: center;
-
-        button {
-          border-radius: 15px;
-        }
-      }
-
-      .step-wrapper {
-        padding-top: 30px;
-        padding-bottom: 30px;
-
-        .step {
-          background: rgba(0, 0, 0, 0.4);
-          text-shadow: 1px 1px 4px black;
+        .steps-main-title {
+          font-size: 25px;
+          width: 100%;
+          text-align: center;
           color: white;
-          height: 400px;
-          border-radius: 5px;
-          box-shadow: 1px 1px 4px black;
-          padding: 20px;
-          padding-bottom: 0;
-          transition: 0.2s;
+          text-shadow: 1px 1px 4px black;
+        }
 
-          // &:nth-child(1) {
-          //   background: rgba(68, 181, 67, 0.4);
-          // }
+        .demo-video {
+          text-align: center;
 
-          // &:nth-child(2) {
-          //   background: rgba(3, 155, 229, 0.4);
-          // }
-
-          // &:nth-child(3) {
-          //   background: rgba(255, 69, 0, 0.4);
-          // }
-
-          .step-image {
-            height: 65%;
-            background-color: #eee;
-
-            img {
-              width: 100%;
-              height: 100%;
-              cursor: pointer;
-            }
+          button {
+            border-radius: 15px;
           }
+        }
 
-          .step-description {
-            padding-top: 25px;
-            text-align: justify;
+        .step-wrapper {
+          padding-bottom: 30px;
 
-            .step-name {
-              font-size: 20px;
+          .step {
+            background: rgba(0, 0, 0, 0.4);
+            text-shadow: 1px 1px 4px black;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 1px 1px 4px black;
+            padding: 20px;
+            transition: 0.2s;
+
+            // &:nth-child(1) {
+            //   background: rgba(68, 181, 67, 0.4);
+            // }
+
+            // &:nth-child(2) {
+            //   background: rgba(3, 155, 229, 0.4);
+            // }
+
+            // &:nth-child(3) {
+            //   background: rgba(255, 69, 0, 0.4);
+            // }
+
+            .step-image {
+              height: 65%;
+              background-color: #eee;
+
+              img {
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+              }
+            }
+
+            .step-description {
+              padding-top: 25px;
+              text-align: justify;
+
+              .step-name {
+                font-size: 20px;
+              }
             }
           }
         }
-      }
 
-      .step:hover {
-        transform: scale(1.01, 1.01);
+        .step:hover {
+          transform: scale(1.01, 1.01);
+        }
       }
     }
 
@@ -300,7 +301,7 @@
       background-size: 100% 100%;
 
       .feature {
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.6);
         padding: 30px;
         padding-top: 70px;
         padding-bottom: 70px;
@@ -347,44 +348,64 @@
       border-radius: 5px;
       filter: drop-shadow(0px 1px 4px black);
       //text-shadow: 1px 1px 4px black;
-      padding: 20px;
+      padding: 10px;
       padding-top: 30px;
       transition: 0.2s;
       text-align: justify;
 
       mat-icon {
+        color: skyblue;
+      }
+
+      p {
+        font-size: 14px;
+        color: silver;
+      }
+
+      img {
+        height: 55px;
+        max-width: 170px;
+        margin-left: 5px;
       }
     }
 
     .feature-item:hover {
       transform: scale(1.01, 1.01);
+      p {
+        color: white;
+      }
     }
 
-    .benefit {
-      text-align: center;
-      padding: 60px 30px 100px 30px;
-      color: white;
-      //background: rgba(43, 51, 68, 0.9);
-      background: rgba(3, 155, 229, 0.4);
-      text-shadow: 1px 1px 4px black;
+    .benefit-container {
+      // background: url("../../assets/images/backgrounds/45760598514_3da4c18fa7_b.jpg");
+      // background-size: 100% 100%;
 
-      .main-benefit {
-        padding-top: 60px;
-      }
+      .benefit {
+        text-align: center;
+        padding: 60px 30px 100px 30px;
+        color: white;
+        //background: rgba(125, 125, 125, 0.2);
+        background: rgba(3, 155, 229, 0.2);
+        text-shadow: 1px 1px 4px black;
 
-      .benefit-title {
-        font-size: 30px;
-      }
+        .main-benefit {
+          padding-top: 60px;
+        }
 
-      .benefit-symbol {
-        img {
-          width: 150px;
-          height: 150px;
-          transition: 0.2s;
-          filter: drop-shadow(0px 1px 5px black);
+        .benefit-title {
+          font-size: 30px;
+        }
 
-          &:hover {
-            transform: scale(1.05, 1.05);
+        .benefit-symbol {
+          img {
+            width: 150px;
+            height: 150px;
+            transition: 0.2s;
+            filter: drop-shadow(0px 1px 5px black);
+
+            &:hover {
+              transform: scale(1.05, 1.05);
+            }
           }
         }
       }
@@ -394,7 +415,7 @@
     padding: 60px;
     padding-bottom: 40px;
     padding-top: 100px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     color: silver;
     text-align: justify;
 
@@ -432,15 +453,126 @@
       text-align: justify;
     }
   }
+
+  .footer-contact-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    //filter: drop-shadow(0px 1px 4px black);
+    .footer-contact {
+      background: rgba(38, 61, 67, 0.4);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+
+  .contact {
+    background: #002c45;
+    // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
+    // background-size: 100% 100%;
+    filter: drop-shadow(0px 1px 4px black);
+    color: silver;
+    font-weight: bold;
+    position: fixed;
+    z-index: 200;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    padding: 15px;
+    -webkit-animation: contactAppearance 0.4s linear;
+  }
+
+  .topbar-container {
+    //background: rgba(0, 0, 0, 0.6);
+
+    .topbar {
+      //background: #1E2129;
+      //background: rgba(3, 155, 229, 0.4);
+      background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
+      background-size: 100% 100%;
+      filter: drop-shadow(0px 1px 4px black);
+      color: #eee;
+      text-shadow: 1px 1px 4px black;
+      font-weight: bold;
+      position: fixed;
+      z-index: 200;
+      width: 100%;
+      top: 0;
+      padding: 15px;
+      padding-right: 30px;
+      -webkit-animation: topbarAppearance 0.2s linear;
+
+      .topbar-logo {
+        height: 50px;
+        width: 50px;
+        margin-right: 5px;
+        filter: drop-shadow(0px 1px 2px black);
+      }
+
+      .topbar-access-system-button {
+        background: #44b543;
+        color: white;
+      }
+    }
+  }
+
+  @keyframes topbarAppearance {
+    from {
+      top: -100px;
+    }
+    to {
+      top: 0;
+    }
+  }
+
+  @keyframes contactAppearance {
+    from {
+      bottom: -100px;
+    }
+    to {
+      bottom: 0;
+    }
+  }
+
+  .none-displayed {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .homepage {
     font-size: 14px;
 
+    background: url("../../assets/images/backgrounds/QL5I0O.jpg");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: center center;
+
+    .topbar-container {
+      .topbar {
+        padding-top: 20px;
+
+        .topbar-logo {
+          height: 36px;
+          width: 36px;
+        }
+      }
+    }
+
+    .contact {
+      font-size: 12px;
+    }
+
+    .footer-contact {
+      font-size: 12px;
+    }
+
     .main-content {
       .banner-container {
         .banner {
+          padding-bottom: 30px;
+          padding-top: 60px;
+
           .app-title {
             font-size: 20px !important;
           }
@@ -448,9 +580,16 @@
           .logo {
             width: 140px;
             margin: 32px auto;
+            margin-bottom: 16px;
+          }
+
+          .title2 {
+            font-size: 14px;
           }
 
           .login-with-google {
+            padding-top: 10px;
+
             .access-system-button {
               font-size: 11px;
               padding-left: 5px;
@@ -470,30 +609,36 @@
         }
       }
 
-      .instruction {
-        padding: 10px;
-        padding-top: 20px;
+      .instruction-container {
+        .instruction {
+          padding: 10px;
+          padding-top: 20px;
 
-        .steps-main-title {
-          padding: 10px 10px 0 20px;
-          font-size: 18px;
-        }
+          .steps-main-title {
+            padding: 10px 10px 0 20px;
+            font-size: 18px;
+          }
 
-        .step-wrapper {
-          .step {
-            .step-description {
-              .step-name {
-                font-size: 18px;
+          .step-wrapper {
+            .step {
+              padding-bottom: 0;
+              .step-description {
+                .step-name {
+                  font-size: 18px;
+                }
               }
-            }
-            .step-image {
-              height: 50%;
+              .step-image {
+                height: 50%;
+              }
             }
           }
         }
       }
 
       .feature-container {
+        background: url("../../assets/images/backgrounds/20597.jpg");
+        background-size: 100% 100%;
+
         .feature {
           padding: 10px;
           padding-bottom: 30px;
@@ -523,19 +668,21 @@
         }
       }
 
-      .benefit {
-        .main-benefit {
-          padding-top: 30px;
-        }
+      .benefit-container {
+        .benefit {
+          .main-benefit {
+            padding-top: 30px;
+          }
 
-        .benefit-title {
-          font-size: 16px !important;
-        }
+          .benefit-title {
+            font-size: 16px !important;
+          }
 
-        .benefit-symbol {
-          img {
-            width: 70px;
-            height: 70px;
+          .benefit-symbol {
+            img {
+              width: 70px;
+              height: 70px;
+            }
           }
         }
       }

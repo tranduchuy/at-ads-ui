@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
@@ -14,7 +14,6 @@ import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
-import { userInfo } from 'os';
 
 declare var gapi: any;
 
@@ -24,11 +23,13 @@ declare var gapi: any;
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit {
-  logColumns = ['datetime', 'ip', 'device', 'os', 'browser', 'network', 'location'];
+  logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location'];
   logs = [];
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);
   isOnLogin: boolean;
+
+  scrollPoint: number = 235;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
@@ -63,6 +64,38 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         }
       }
     };
+  }
+
+  lastOffset: number = 0;
+  isContactFooterDisplayed: boolean = window.innerWidth > 600;
+  isTopbarDisplayed: boolean = false;
+  isContactDisplayed: boolean = window.innerWidth <= 600;
+
+  scroll = (event: any): void => {
+    const currentOffset = event.srcElement.scrollTop;
+
+    // if (currentOffset < this.lastOffset)
+    //   this.isContactFooterDisplayed = false;
+    // else this.isContactFooterDisplayed = true;
+
+    if(currentOffset > 470)
+      this.isTopbarDisplayed = true && (window.innerWidth > 600);
+    else this.isTopbarDisplayed = false;
+
+    this.lastOffset = currentOffset;
+  };
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.scroll, true);
+  }
+
+  ngAfterViewInit(): void {
+
+    window.addEventListener('scroll', this.scroll, true);
+
+    setTimeout(() => {
+      this.googleInit();
+    }, 500);
   }
 
   ngOnInit(): void {
@@ -161,12 +194,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   loginByGG(): void {
     this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.googleInit();
-    }, 500);
   }
 
   showImageDialog(imgSrc: string) {

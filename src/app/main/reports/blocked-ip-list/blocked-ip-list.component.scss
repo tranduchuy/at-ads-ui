@@ -2,7 +2,7 @@
   width: 100%;
 
   .title1 {
-    padding: 95px 30px 45px 30px;
+    padding: 142px 30px 53px 30px;
     background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
     background-size: 100% 100%;
     color: white;
@@ -78,10 +78,5 @@
 
 @media screen and (max-width: 600px) {
   .container {
-    pagination-controls {
-      display: flex !important;
-      justify-content: center !important;
-      margin-left: -50px;
-    }
   }
 }

@@ -29,7 +29,7 @@
 							[icon]="'person_outline'" [errors]="getMessageErrors('name')" [(ngModel)]="userInfo.name">
 						</app-input-text>
 
-						<div fxLayout="row" fxLayoutGap="15px" fxLayout.xs="column">
+						<div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.xs="0" fxLayout.xs="column">
 							<app-input-text [formControlName]="'email'" [title]="'Email'" [pristine]="true"
 								[icon]="'mail'" [(ngModel)]="userInfo.email" [readonly]="true"></app-input-text>
 

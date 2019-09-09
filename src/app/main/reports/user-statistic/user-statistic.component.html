@@ -3,7 +3,7 @@
   <div class="title1" fxLayout="row" fxLayout.xs="column">
     <p class="title2" fxFlex="80">BÁO CÁO THỐNG KÊ NGƯỜI DÙNG - TÀI KHOẢN <span
         style="color:yellow">{{_sessionService.activeAdsAccountId}}</span></p>
-    <mat-form-field class=" datePicker" fxFlex="20">
+    <mat-form-field class="datePicker" fxFlex="20">
       <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
       <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
         startKey="start" endKey="end" (datesUpdated)="onApplyDateRange($event)"
@@ -14,7 +14,7 @@
   <div class="inner">
     <div class="mat-elevation-z8 table-wrapper">
       <mat-table
-        [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }">
+        [dataSource]="dataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }">
 
         <ng-container matColumnDef="time">
           <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
@@ -24,8 +24,10 @@
         <ng-container matColumnDef="ip">
           <mat-header-cell *matHeaderCellDef> Người dùng </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" class="user-image">
-            <span style="color: #039be5" *ngIf="element._id">{{element._id}}</span>
+            <a mat-button color="accent" *ngIf="element._id" class="table-uuid" matTooltip="Nhấn vào để xem chi tiết"
+              [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid]">
+              <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'"
+                class="user-image"> {{element._id}}</a>
             <span style="color: #039be5" *ngIf="!element._id">Không xác định</span>
           </mat-cell>
         </ng-container>

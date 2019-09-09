@@ -8,10 +8,17 @@ import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-repo
 import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-ranges-clicking-report.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { UuidHistoryComponent } from './uuid-history/uuid-history.component';
+import { UserStatisticDetailComponent } from './user-statistic-detail/user-statistic-detail.component';
+import { OverviewReportComponent } from './overview-report/overview-report.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
+      {
+        path: 'luu-luong-truy-cap',
+        pathMatch: 'full',
+        component: OverviewReportComponent
+      },
       {
         path: 'click-ao',
         pathMatch: 'full',
@@ -43,10 +50,15 @@ import { UuidHistoryComponent } from './uuid-history/uuid-history.component';
         component: UserStatisticComponent
       },
       {
+        path: 'chi-tiet-thong-ke-nguoi-dung/:uuid',
+        pathMatch: 'full',
+        component: UserStatisticDetailComponent
+      },
+      {
         path: 'uuid-history',
         pathMatch: 'full',
         component: UuidHistoryComponent
-      }
+      },
     ])
   ],
   exports: [RouterModule]
