@@ -6,7 +6,7 @@ import { SessionService } from 'app/shared/services/session.service';
 import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-statistic-detail',
@@ -28,7 +28,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   selectedDateRange: any = {
     start: moment().subtract(6, 'days'),
     end: moment()
-  }
+  };
   locale: any = {
     format: 'DD/MM/YYYY',
     separator: ' Đến ',
@@ -56,8 +56,9 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
           const getAccountIdSub = this._sessionService.getAccountId()
             .subscribe(
               (accoundId: string) => {
-                if (accoundId)
+                if (accoundId) {
                   this.checkAccountConnection(accoundId);
+                }
               }
             );
           this.subscriptions.push(getAccountIdSub);
@@ -74,9 +75,11 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     const sub = this._reportService.getAdwordsAccountDetail(accountId)
       .subscribe(
         res => {
-          if (res.data.adsAccount.isConnected)
+          if (res.data.adsAccount.isConnected) {
             this.pageLimit = 20;
-          else this.pageLimit = 10;
+          } else {
+            this.pageLimit = 10;
+          }
 
           this.getUserStatisticDetail(this.uuid, 1, this.pageLimit);
 
@@ -99,11 +102,14 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     const startDate = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const endDate = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
 
-    const sub = this._reportService.getUserStatisticDetail({ id, startDate, endDate, page, limit })
+    const sub = this._reportService.getUserStatisticDetail({id, startDate, endDate, page, limit})
       .subscribe(
         res => {
 
-          this.history = res.data.logs;
+          this.history = res.data.logs.map(l => {
+            l.domain = l.href.replace('http://', '').replace('https://', '').split(/[/?#]/)[0];
+            return l;
+          });
 
           this.totalItems = res.data.meta.totalItems;
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
