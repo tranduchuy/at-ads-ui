@@ -110,6 +110,13 @@
             </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="click">
+            <mat-header-cell style="justify-content: center" *matHeaderCellDef> Số click </mat-header-cell>
+            <mat-cell *matCellDef="let element" style="justify-content: center">
+               {{element.click}}
+            </mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
             <mat-cell *matCellDef="let element">
