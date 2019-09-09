@@ -107,7 +107,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
         res => {
 
           this.history = res.data.logs.map(l => {
-            l.domain = l.href.replace('http://', '').replace('https://', '').split(/[/?#]/)[0];
+            l.domain = l.domain.replace('http://', '').replace('https://', '');
             return l;
           });
 
