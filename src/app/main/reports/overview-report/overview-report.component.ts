@@ -16,7 +16,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   isProcessing: boolean = false;
   pageTotal: number;
-  currentPageNumber: number;
+  currentPageNumber: number = 1;
   totalItems: number;
   pageLimit: number = 10;
 
@@ -257,6 +257,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   onApplyDateRange() {
     this.getStatisticTrafficSourceReport();
+    this.currentPageNumber = 1;
+    this.getSessionReport(1);
   }
 
   changePage(event) {
