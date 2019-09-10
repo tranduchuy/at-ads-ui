@@ -42,12 +42,12 @@
 
         <ng-container matColumnDef="location">
           <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.locations[0]?.city}}</mat-cell>
+          <mat-cell *matCellDef="let element">{{element.locations[0]?.city ? element.locations[0]?.city : 'Unknown'}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="network">
           <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.networks[0]?.name}}</mat-cell>
+          <mat-cell *matCellDef="let element">{{element.networks[0]?.name ? element.networks[0]?.name : 'Unknown'}}</mat-cell>
         </ng-container>
 
         <!-- <ng-container matColumnDef="device">

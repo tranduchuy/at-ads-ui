@@ -40,7 +40,7 @@
 
         <ng-container matColumnDef="location">
           <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].location?.city}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].location?.city ? element.info[0].location?.city : 'Unknown' }} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="os">
@@ -106,7 +106,7 @@
 
         <ng-container matColumnDef="keyword">
           <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].keyword}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].keyword ? element.info[0].keyword : 'Unknown'}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>

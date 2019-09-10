@@ -132,7 +132,7 @@
 
           <ng-container matColumnDef="location">
             <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.location?.city}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.location?.city ? element.location?.city : 'Unknown'}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="isPrivateBrowsing">

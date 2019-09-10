@@ -43,6 +43,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
   ngOnInit() {
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
+        this.currentPageNumber = 1;
         if (accountId)
           this.getBlockedIPsListReport(1);
       });
@@ -95,11 +96,12 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
       .subscribe(
         (res: ILoginSuccess) => {
 
-          this.getBlockedIPsListReport(this.currentPageNumber);
-
           setTimeout(() => {
             this._fuseProgressBarService.hide();
             this._dialogService._openSuccessDialog(res);
+
+            this.getBlockedIPsListReport(this.currentPageNumber);
+
             this.isProcessing = false;
           }, 0);
         },
