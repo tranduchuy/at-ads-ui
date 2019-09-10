@@ -73,5 +73,8 @@ export namespace API {
 
     export const getIPClicksList = environment.hostApi + '/api/reports/{account_id}/clicks/{ip}';
     export const getIPClickDetails = environment.hostApi + '/api/reports/{account_id}/clicks/{ip}/detail';
+
+    export const getStatisticTrafficSourceReport = environment.hostApi + '/api/reports/{account_id}/statistic/traffic-source?from={from}&to={to}';
+    export const getSessionReport = environment.hostApi + '/api/reports/{account_id}/sessions?from={from}&to={to}';
   }
 }

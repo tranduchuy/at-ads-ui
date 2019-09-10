@@ -8,22 +8,22 @@ export const getCookieValue = name => {
 }
 
 export const navigation: FuseNavigation[] = [
-  // {
-  //   id: 'overview-report',
-  //   title: 'BÁO CÁO TỔNG THỂ',
-  //   translate: 'NAV.APPLICATIONS',
-  //   type: 'group',
-  //   children: [
-  //     {
-  //       id: 'overview-accessing-report',
-  //       title: 'Lưu Lượng Truy Cập',
-  //       translate: 'NAV.SAMPLE.TITLE',
-  //       type: 'item',
-  //       icon: 'apps',
-  //       url: '/bao-cao/luu-luong-truy-cap'
-  //     },
-  //   ]
-  // },
+  {
+    id: 'overview-report',
+    title: 'BÁO CÁO TỔNG THỂ',
+    translate: 'NAV.APPLICATIONS',
+    type: 'group',
+    children: [
+      {
+        id: 'overview-accessing-report',
+        title: 'Lưu Lượng Truy Cập',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'bar_chart',
+        url: '/bao-cao/luu-luong-truy-cap'
+      },
+    ]
+  },
   {
     id: 'report',
     title: 'BÁO CÁO CLICK ẢO',

@@ -68,6 +68,18 @@ export interface IGetIPClickDetails {
   endId: string;
 }
 
+export interface IGetStatisticTrafficSourceParams {
+  from: string;
+  to: string;
+}
+
+export interface IGetSessionReportParams {
+  from: string;
+  to: string;
+  page?: number;
+  limit?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -211,6 +223,29 @@ export class ReportService {
       url += `?startId=${params.startId}&endId=${params.endId}`;
     else if (!params.startId && params.endId)
       url += `?endId=${params.endId}`;
+
+    return this._http.get(url);
+  }
+
+  getStatisticTrafficSourceReport(params: IGetStatisticTrafficSourceParams): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    let url = API.Report.getStatisticTrafficSourceReport.replace('{account_id}', activeAccountId);
+    url = url.replace('{from}', params.from);
+    url = url.replace('{to}', params.to);
+
+    return this._http.get(url);
+  }
+
+  getSessionReport(params: IGetSessionReportParams): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    let url = API.Report.getSessionReport.replace('{account_id}', activeAccountId);
+    url = url.replace('{from}', params.from);
+    url = url.replace('{to}', params.to);
+
+    if (params.page !== undefined)
+      url += `&page=${params.page}`;
+    if (params.limit !== undefined)
+      url += `&limit=${params.limit}`;
 
     return this._http.get(url);
   }
