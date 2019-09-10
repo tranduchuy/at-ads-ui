@@ -10,7 +10,39 @@
     font-size: 16px;
   }
 
+  ::ng-deep .ngx-charts {
+    width: 60%;
+  }
+
   .inner {
+    .highline2 {
+      background: white;
+      padding-bottom: 30px;
+
+      .hl2-title1 {
+        padding: 65px 30px 5px 30px;
+        background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
+        background-size: 100% 100%;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+
+        .datePicker {
+          color: #039be5;
+          width: 250px;
+
+          input {
+            color: white;
+          }
+        }
+      }
+
+      .hl2-title2 {
+        text-align: center;
+        padding: 40px 30px 50px 30px;
+      }
+    }
+
     .highline {
       padding: 60px 30px 50px 15px;
       background: white;
@@ -115,7 +147,7 @@
 
     .overview {
       .overview-title1 {
-        padding: 20px 30px 5px 30px;
+        padding: 20px 30px 15px 30px;
         background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
         background-size: 100% 100%;
         color: white;
