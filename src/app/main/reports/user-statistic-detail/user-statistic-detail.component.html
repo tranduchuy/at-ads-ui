@@ -120,6 +120,13 @@
               <mat-cell *matCellDef="let element"></mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="website">
+              <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <a href="{{element.href}}" target="_blank"><span style="text-decoration: underline">{{element.domain}}</span></a>
+              </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef>Tại (địa điểm)</mat-header-cell>
               <mat-cell *matCellDef="let element">{{element.location?.city ? element.location?.city : 'Unknown'}}</mat-cell>
