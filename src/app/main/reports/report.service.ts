@@ -58,6 +58,16 @@ export interface IGetBlockedIpListParams {
   limit?: number;
 }
 
+export interface IGetIPClicksListParams {
+  ip: string;
+}
+
+export interface IGetIPClickDetails {
+  ip: string;
+  startId: string;
+  endId: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -180,6 +190,27 @@ export class ReportService {
       url += `&page=${params.page}`;
     if (params.limit !== undefined)
       url += `&limit=${params.limit}`;
+
+    return this._http.get(url);
+  }
+
+  getIPClicksList(params: IGetIPClicksListParams): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    let url = API.Report.getIPClicksList.replace('{account_id}', activeAccountId);
+    url = url.replace('{ip}', params.ip);
+
+    return this._http.get(url);
+  }
+
+  getIPClickDetails(params: IGetIPClickDetails): Observable<any> {
+    const activeAccountId = this._sessionService.getValueOfAccountId();
+    let url = API.Report.getIPClickDetails.replace('{account_id}', activeAccountId);
+    url = url.replace('{ip}', params.ip);
+
+    if (params.startId && params.endId)
+      url += `?startId=${params.startId}&endId=${params.endId}`;
+    else if (!params.startId && params.endId)
+      url += `?endId=${params.endId}`;
 
     return this._http.get(url);
   }

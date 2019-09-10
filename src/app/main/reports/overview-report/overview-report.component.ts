@@ -104,6 +104,40 @@ export class OverviewReportComponent implements OnInit {
     domain: ['#F44336', '#44b543', '#039be5']
   };
 
+  pieChart = {
+    legend: true,
+    explodeSlices: false,
+    labels: false,
+    doughnut: false,
+    gradient: false,
+    scheme: {
+      domain: ['#039be5', '#44b543', '#87CEEB', '#f44336', '#FFD700']
+    },
+    dataSource: [
+      {
+        name: 'google/cpc',
+        value: 82,
+        data: 6543
+      },
+      {
+        name: 'google/organic',
+        value: 12
+      },
+      {
+        name: 'facebook.com',
+        value: 2
+      },
+      {
+        name: '[direct]/[none]',
+        value: 2
+      },
+      {
+        name: 'coccoc.com',
+        value: 1
+      }
+    ],
+  };
+
   constructor(
     private _dialogService: DialogService
 

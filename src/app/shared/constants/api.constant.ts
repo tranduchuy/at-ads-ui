@@ -70,5 +70,8 @@ export namespace API {
     export const getIPHistory = environment.hostApi + '/api/account-adwords/{account_id}/ip-history?ip={ip}';
     export const getStatisticUserReport = environment.hostApi + '/api/account-adwords/{account_id}/statistic-user?startDate={from}&endDate={to}';
     export const getUserStatisticDetail = environment.hostApi + '/api/account-adwords/{account_id}/detail-user/{id}?startDate={from}&endDate={to}';
+
+    export const getIPClicksList = environment.hostApi + '/api/reports/{account_id}/clicks/{ip}';
+    export const getIPClickDetails = environment.hostApi + '/api/reports/{account_id}/clicks/{ip}/detail';
   }
 }
