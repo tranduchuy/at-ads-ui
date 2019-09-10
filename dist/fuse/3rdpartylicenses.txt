@@ -147,6 +147,8 @@ THE SOFTWARE.
 
 @angular/material/divider
 
+@angular/material/expansion
+
 @angular/material/form-field
 
 @angular/material/icon
@@ -168,6 +170,8 @@ THE SOFTWARE.
 @angular/material/toolbar
 
 @angular/material/tooltip
+
+@angular/material/tree
 
 @angular/platform-browser
 MIT
