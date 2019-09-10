@@ -1,13 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { DialogService } from 'app/shared/services/dialog.service';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { ReportService } from '../report.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SessionService } from 'app/shared/services/session.service';
 
 @Component({
   selector: 'app-overview-report',
   templateUrl: './overview-report.component.html',
   styleUrls: ['./overview-report.component.scss']
 })
-export class OverviewReportComponent implements OnInit {
+export class OverviewReportComponent extends PageBaseComponent implements OnInit {
+
+  isProcessing: boolean = false;
+  pageTotal: number;
+  currentPageNumber: number;
+  totalItems: number;
+  pageLimit: number = 10;
+
+  TRAFFIC_SOURCE_TYPES: string[] = [
+    'google/cpc',
+    'google/organic',
+    'google/display',
+    'facebook/cpc',
+    'facebook/referral',
+    'bing/cpc',
+    'bing/organic',
+    'coccoc/cpc',
+    'coccoc/organic',
+    'direct/none',
+    'other/referral'
+  ];
 
   selectedDateRange: any = {
     start: moment().subtract(6, 'days'),
@@ -31,35 +56,8 @@ export class OverviewReportComponent implements OnInit {
     }
   ];
 
-  overviewTableCols: string[] = ['createdAt', 'ip', 'source', 'timeOnSite', 'isPrivateBrowsing', 'status', 'location', 'os', 'browser', 'networkCompany', 'connection', 'keyword'];
-  overviewTable = [
-    {
-      createdAt: '16:17 09/05/2019',
-      ip: '192.168.1.1',
-      source: 'Google/cpc',
-      timeOnSite: '00:00:14',
-      isPrivateBrowsing: true,
-      isSpam: true,
-      location: {
-        city: 'Ho Chi Minh City',
-      },
-      os: {
-        name: 'Windows',
-        version: '10'
-      },
-      browser: {
-        name: 'Firefox',
-        version: '68.80.80.0'
-      },
-      networkCompany: {
-        name: 'VNPT'
-      },
-      connection: {
-        name: '3G'
-      },
-      keyword: 'Bảo hành nguyễn kim'
-    }
-  ];
+  overviewTableCols: string[] = ['createdAt', 'ip', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'keyword', 'location'];
+  overviewTable = [];
 
   // single = [
   //   {
@@ -67,7 +65,7 @@ export class OverviewReportComponent implements OnInit {
   //     "value": 100
   //   },
   // ]
-  
+
   multi = [
     {
       "name": "Thiết bị",
@@ -111,13 +109,15 @@ export class OverviewReportComponent implements OnInit {
     doughnut: false,
     gradient: false,
     scheme: {
-      domain: ['#039be5', '#44b543', '#87CEEB', '#f44336', '#FFD700']
+      domain: [
+        '#87CEEB', '#f44336', '#039be5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
+        //'#6FAAB0','#C4C24A','#8BC652', '#E94649','#F6B53F','#FB954F','#005277','#039be5','#9370DB', '#33495D', '#FF6384'
+      ]
     },
     dataSource: [
       {
         name: 'google/cpc',
         value: 82,
-        data: 6543
       },
       {
         name: 'google/organic',
@@ -139,24 +139,127 @@ export class OverviewReportComponent implements OnInit {
   };
 
   constructor(
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _fuseProgressBarService: FuseProgressBarService,
+    private _reportService: ReportService,
+    public _sessionService: SessionService
 
   ) {
-    for (let i = 0; i < 5; i++)
-      this.highlinePages.push(this.highlinePages[0]);
+    super();
 
-    for (let i = 0; i < 5; i++)
-      this.overviewTable.push(this.overviewTable[0]);
+    // if(window.innerWidth > 600)
+    //   this.pieChart.legend = false;
   }
 
   ngOnInit() {
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
+          this.getStatisticTrafficSourceReport();
+          this.getSessionReport(1);
+        }
+      });
+    this.subscriptions.push(sub);
   }
 
-  onApplyDateRange(event) {
+  getPercentage(value: number, total: number): number {
+    const res = value * 100 / total
+    return Math.round(res * 100) / 100;
+  }
+
+  getSessionReport(page: number) {
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+
+    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
+    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
+
+    const sub = this._reportService.getSessionReport({ from: start, to: end, page, limit: this.pageLimit })
+      .subscribe(
+        res => {
+
+          this.totalItems = res.data.totalItems;
+          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
+
+          this.overviewTable = res.data.trafficSourceData;
+
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
+          this._dialogService._openErrorDialog(error.error);
+        }
+      );
+    this.subscriptions.push(sub);
+  }
+
+  getStatisticTrafficSourceReport() {
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+
+    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
+    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
+
+    const sub = this._reportService.getStatisticTrafficSourceReport({ from: start, to: end })
+      .subscribe(
+        res => {
+
+          this.totalItems = 60;
+          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
+
+          let data = JSON.parse(JSON.stringify(res.data.TrafficSourceData));
+
+          let sessionCountTotal = 0;
+          data.forEach(element => {
+            sessionCountTotal += element.sessionCount
+          });
+
+          const noIDs = data.filter(item => !item);
+          let noIDSessionCountTotal = 0;
+          noIDs.forEach(element => {
+            noIDSessionCountTotal += element.sessionCount;
+          });
+
+          data = data.filter(item => item);
+          const len = data.length;
+          const dataSource = data.map((item, index) => {
+            const sessionCount = index < len - 1 ? item.sessionCount : (item.sessionCount + noIDSessionCountTotal)
+            return {
+              name: this.TRAFFIC_SOURCE_TYPES[item._id - 1] + ` - Số phiên ${sessionCount}`,
+              value: this.getPercentage(sessionCount, sessionCountTotal)
+            }
+          });
+
+          //console.log(dataSource);
+
+          this.pieChart.dataSource = dataSource;
+
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
+          this._dialogService._openErrorDialog(error.error);
+        });
+    this.subscriptions.push(sub);
+  }
+
+  onSelectDateRange(event) {
     if (moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 60) {
       this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 60 ngày trở lại');
       return false;
     }
     return true;
+  }
+
+  onApplyDateRange() {
+    this.getStatisticTrafficSourceReport();
+  }
+
+  changePage(event) {
+    this.getSessionReport(event);
   }
 }

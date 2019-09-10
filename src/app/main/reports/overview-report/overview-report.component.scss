@@ -14,13 +14,17 @@
     width: 60%;
   }
 
+  ::ng-deep .chart-legend .legend-labels {
+    width: auto;
+  }
+
   .inner {
     .highline2 {
       background: white;
-      padding-bottom: 30px;
+      padding-bottom: 50px;
 
       .hl2-title1 {
-        padding: 65px 30px 5px 30px;
+        padding: 55px 30px 17px 30px;
         background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
         background-size: 100% 100%;
         color: white;
@@ -163,12 +167,37 @@
         }
       }
 
+      .icon {
+        height: 22px;
+        width: 22px;
+        margin-right: 5px;
+      }
+
+      .pagination-buttons {
+        padding: 10px;
+        color: gray;
+      }
+
       .overview-table {
         box-shadow: 1px 1px 4px silver;
         overflow: auto;
 
         mat-table {
           box-shadow: none;
+
+          mat-header-cell:nth-child(1),
+          mat-cell:nth-child(1),
+          mat-header-cell:nth-child(2),
+          mat-cell:nth-child(2) {
+            flex: 0 0 12%;
+          }
+
+          mat-header-cell:nth-child(5),
+          mat-cell:nth-child(5),
+          mat-header-cell:nth-child(6),
+          mat-cell:nth-child(6) {
+            flex: 0 0 14%;
+          }
 
           mat-header-cell {
             background: #039be5;
@@ -185,8 +214,31 @@
 
           mat-header-row,
           mat-row {
-            min-width: 1000px;
+            min-width: 1500px;
             width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    ::ng-deep .ngx-charts {
+      width: 100%;
+      padding-left: 35px;
+    }
+    ::ng-deep .chart-legend .legend-labels {
+      margin-left: 30px;
+      margin-top: 20px;
+    }
+    .inner {
+      .highline2 {
+        padding-bottom: 60%;
+        .hl2-title1 {
+          .datePicker {
+            margin-top: 20px;
           }
         }
       }
