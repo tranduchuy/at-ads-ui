@@ -94,6 +94,11 @@
                     <span>{{i+1}}</span>.
                     <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
                   </div>
+                  <div fxFlex="8">
+                    <a mat-icon-button routerLink="/nang-cap-vip" matTooltip="Nâng cấp VIP">
+                      <mat-icon style="color: #44b543; font-size: 20px;">arrow_upward</mat-icon>
+                    </a>
+                  </div>
                   <div fxFlex="10">
                     <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
                       matTooltip="Xóa website" [disabled]="isProcessing">

@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { AdwordsAccountListService } from '../adwords-account-list/adwords-account-list.service';
+import { SessionService } from 'app/shared/services/session.service';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-vip-payment',
   templateUrl: './vip-payment.component.html',
   styleUrls: ['./vip-payment.component.scss']
 })
-export class VipPaymentComponent implements OnInit {
+export class VipPaymentComponent extends PageBaseComponent implements OnInit {
 
   packagesCols: string[] = ['name', 'price', 'recommendance'];
 
@@ -36,9 +43,60 @@ export class VipPaymentComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  adsAccountIdPipe = new AdsAccountIdPipe();
+  accounts = [];
+  websites = [];
+  selectedAccount: string;
+  selectedWebsite: string;
+  isProcessing: boolean = false;
 
-  ngOnInit() {
+  constructor(
+    private _adwordsAccountListService: AdwordsAccountListService,
+    private _fuseProgressBarService: FuseProgressBarService
+  ) {
+    super();
   }
 
+  ngOnInit() {
+    this.getAccountList();
+  }
+
+  getAccountList() {
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+
+    const sub = this._adwordsAccountListService.getAccounts()
+      .subscribe(
+        res => {
+          const data = JSON.parse(JSON.stringify(res.data.accounts));
+
+          this.accounts = (data || [])
+            .map(item => this.adsAccountIdPipe.transform(item.adsId));
+
+          setTimeout(() => {
+
+            if (this.accounts.length > 0) {
+
+              for (const account of data)
+                this.websites[this.adsAccountIdPipe.transform(account.adsId)] = account.websites;
+
+              this.selectedAccount = this.accounts[0];
+              this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
+            }
+
+            this._fuseProgressBarService.hide();
+            this.isProcessing = false;
+          }, 0);
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
+  }
+
+  onSelectAccount(event) {
+    this.selectedAccount = event.value;
+    this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
+  }
 }
