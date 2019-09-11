@@ -66,10 +66,9 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
 
         this.dataSource = res.data.rangeIps;
 
-        this.pageTotal = Math.ceil(res.data.totalItems / this.pageLimit);
-        this.totalItems = res.data.totalItems;
-
         setTimeout(() => {
+          this.pageTotal = Math.ceil(res.data.totalItems / this.pageLimit);
+          this.totalItems = res.data.totalItems;
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
         }, 0);

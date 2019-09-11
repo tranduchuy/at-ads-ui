@@ -180,10 +180,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this.overviewTable = res.data.trafficSourceData;
 
           setTimeout(() => {
-
-            if (this.overviewTable.length > 0)
-              this.currentPageNumber = 1;
-
             this.totalItems = res.data.totalItems;
             this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
             this._fuseProgressBarService.hide();
@@ -260,6 +256,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   onApplyDateRange() {
     this.getStatisticTrafficSourceReport();
+    this.currentPageNumber = 1;
     this.getSessionReport(1);
   }
 

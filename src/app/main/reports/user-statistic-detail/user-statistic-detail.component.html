@@ -50,14 +50,6 @@
               <mat-cell *matCellDef="let element"> {{element.ip}}</mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="website">
-              <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <a href="{{element.href}}" target="_blank"><span style="text-decoration: underline">Link tại
-                    đây</span></a>
-              </mat-cell>
-            </ng-container>
-
             <ng-container matColumnDef="os">
               <mat-header-cell *matHeaderCellDef>Hệ điều hành</mat-header-cell>
               <mat-cell *matCellDef="let element">
