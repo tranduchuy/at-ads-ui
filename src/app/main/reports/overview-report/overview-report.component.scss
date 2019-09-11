@@ -192,6 +192,11 @@
             flex: 0 0 12%;
           }
 
+          mat-header-cell:nth-child(3),
+          mat-cell:nth-child(3) {
+            justify-content: center;
+          }
+
           mat-header-cell:nth-child(5),
           mat-cell:nth-child(5),
           mat-header-cell:nth-child(6),
@@ -214,7 +219,7 @@
 
           mat-header-row,
           mat-row {
-            min-width: 1000px;
+            min-width: 1200px;
             width: 100%;
           }
         }
@@ -235,7 +240,7 @@
     }
     .inner {
       .highline2 {
-        padding-bottom: 60%;
+        padding-bottom: 65%;
         .hl2-title1 {
           .datePicker {
             margin-top: 20px;
