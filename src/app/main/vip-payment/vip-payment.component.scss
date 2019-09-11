@@ -1,0 +1,124 @@
+.container {
+  width: 100%;
+
+  .main-title {
+    padding: 142px 30px 35px 30px;
+    background: url("../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+
+    .vip-label {
+      background: yellow;
+      color: darkblue;
+      padding: 2px 6px 2px 6px;
+      border-radius: 2px;
+      font-weight: bolder;
+      margin-left: 5px;
+      font-size: 14px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+  }
+
+  .inner {
+    padding: 30px;
+
+    .choose-accounts-websites {
+      width: 80%;
+      display: table;
+      margin: 0 auto;
+      margin-top: 40px;
+      padding: 50px;
+      padding-bottom: 20px;
+      background: white;
+      box-shadow: 1px 1px 4px silver;
+
+      .choose-accounts-websites-main {
+        padding-bottom: 30px;
+        ul {
+          list-style: none;
+          padding-left: 0;
+
+          li {
+            padding-top: 10px;
+          }
+        }
+      }
+
+      .payment-title {
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .payment-buttons {
+        padding-top: 10px;
+
+        button {
+          height: 45px;
+          border-radius: 15px;
+        }
+
+        .paypal-logo {
+          height: 65px;
+          margin-top: -10px;
+          width: 100px;
+        }
+      }
+    }
+
+    .instruction {
+      padding-top: 60px;
+    }
+
+    .packages {
+      .packages-title {
+        font-weight: bold;
+        padding-top: 10px;
+      }
+
+      .packages-vip-label {
+        background: yellow;
+        color: darkblue;
+        padding: 2px 6px 2px 6px;
+        border-radius: 2px;
+        font-weight: bolder;
+        margin-right: 10px;
+        font-size: 12px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        box-shadow: 1px 1px 2px silver;
+      }
+
+      mat-table {
+        box-shadow: 1px 1px 4px silver;
+
+        mat-header-cell {
+          background: #039be5;
+          color: white;
+        }
+
+        mat-row {
+          transition: 0.2s;
+
+          &:hover {
+            background: rgba(3, 155, 229, 0.1);
+          }
+        }
+      }
+    }
+
+    .casher {
+      .casher-title {
+        font-weight: bold;
+        padding-top: 40px;
+        font-size: 16px;
+      }
+
+      ul {
+        li {
+          padding-top: 5px;
+        }
+      }
+    }
+  }
+}
