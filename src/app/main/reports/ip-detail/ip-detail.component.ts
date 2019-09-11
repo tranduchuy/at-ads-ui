@@ -153,7 +153,6 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
                 }
               });
 
-
             resData = this.dataSource.data;
             this.dataSource.data = null;
             this.dataSource.data = resData;

@@ -67,6 +67,13 @@
         padding-top: 20px;
         padding-bottom: 0;
         border-radius: 5px;
+        width: 100%;
+
+        li {
+          width: 100%;
+          padding-top: 15px;
+          padding-bottom: 10px;
+        }
       }
 
       mat-table {
@@ -120,7 +127,8 @@
       }
     }
 
-    .icon, .os-icon {
+    .icon,
+    .os-icon {
       height: 20px;
       width: 20px;
       margin-top: -2px;

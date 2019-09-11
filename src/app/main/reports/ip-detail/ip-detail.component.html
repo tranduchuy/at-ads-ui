@@ -131,10 +131,10 @@
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
               <li class="mat-tree-node">
                 <button mat-icon-button disabled></button>
-                <!-- <span style="color: #039be5">{{node.name}}</span> -->
+                <span *ngIf="node.logs === undefined">Chưa tìm thấy ghi nhận nào.</span>
                 <ul *ngIf="node.logs !== undefined" class="div-uuid">
                   <li *ngFor="let element of node.logs">
-                    <mat-divider style="margin-top: 20px; margin-bottom: 20px"></mat-divider>
+                    <!-- <mat-divider style="margin-top: 20px; margin-bottom: 20px"></mat-divider> -->
                     <p style="color: #039be5">Người dùng {{node.index + 1}}</p>
                     <mat-expansion-panel>
                       <mat-expansion-panel-header>
@@ -157,9 +157,8 @@
                         </span>
                       </p>
                       <p>Thiết bị:
-                        <span *ngIf="element.device === undefined" style="margin-left: 43px">Unknown</span>
-                        <span *ngIf="element.device !== undefined"
-                          style="margin-left: 43px">{{element.device?.vendor}}</span>
+                        <span
+                          style="margin-left: 43px">{{element.device?.vendor || 'Unknown'}}</span>
                       </p>
                       <p>Hệ điều hành:
                         <img *ngIf="element.os?.name === 'Windows'"
@@ -175,7 +174,7 @@
                           alt="" class="os-icon">
                         <img *ngIf="element.os?.name === 'Linux'"
                           src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="os-icon">
-                        {{element.os?.name + ' ' + element.os?.version}}
+                        {{element.os?.name || 'Unknown' + ' ' + element.os?.version || ''}}
                       </p>
                       <p>Trình duyệt:
                         <img *ngIf="element.browser?.name === 'Firefox'"
@@ -199,10 +198,11 @@
                         <img *ngIf="element.browser?.name === 'Tor'"
                           src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
                           alt="" class="icon">
-                        {{element.browser?.name + ' ' + element.browser?.version}}
+                        {{element.browser?.name || 'Unknown' + ' ' + element.browser?.version || ''}}
                       </p>
                       <p>Mạng:
-                        <span style="margin-left: 55px">{{element.networkCompany?.name}}</span>
+                        <span
+                          style="margin-left: 55px">{{element.networkCompany?.name || 'Unknown'}}</span>
                       </p>
                       <p>Ẩn danh:
                         <span *ngIf="!element.isPrivateBrowsing" style="color: orange; font-weight: bold">
@@ -217,7 +217,8 @@
                         <a href="{{element.href}}" target="_blank" style="margin-left: 5px">Link tại đây</a>
                       </p>
                       <p>Địa điểm:
-                        <span style="margin-left: 5px">{{element.location?.city}}</span>
+                        <span
+                          style="margin-left: 5px">{{element.location?.city || 'Unknown'}}</span>
                       </p>
                     </mat-expansion-panel>
                   </li>
