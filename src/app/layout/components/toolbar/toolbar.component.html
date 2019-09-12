@@ -36,15 +36,16 @@
 
             <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
 
+                <a routerLink="/nang-cap-vip" mat-menu-item style="color: #44b543; font-weight: bold">
+                    <!-- <img src="../../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
+                    <mat-icon style="color: #44b433">arrow_upward</mat-icon>
+                    <span>Nâng cấp VIP</span>
+                </a>
+
                 <a routerLink="/nguoi-dung/thong-tin-ca-nhan" mat-menu-item>
                     <mat-icon>account_circle</mat-icon>
                     <span>Thông tin cá nhân</span>
                 </a>
-
-                <!-- <button mat-menu-item class="">
-                    <mat-icon>mail</mat-icon>
-                    <span>Inbox</span>
-                </button> -->
 
                 <button mat-menu-item class="" (click)="logout()">
                     <mat-icon>exit_to_app</mat-icon>
@@ -97,7 +98,8 @@
 
     <div class="alert" *ngIf="isAlertDisplayed">
         Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống! Vui lòng chấp nhận và <span
-            style="color: skyblue; text-decoration: underline" (click)="checkAccountAcceptance()">nhấn vào đây</span> để cập
+            style="color: skyblue; text-decoration: underline" (click)="checkAccountAcceptance()">nhấn vào đây</span> để
+        cập
         nhật.
     </div>
 

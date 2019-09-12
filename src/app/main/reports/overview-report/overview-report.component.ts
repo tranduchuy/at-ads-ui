@@ -16,7 +16,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   isProcessing: boolean = false;
   pageTotal: number;
-  currentPageNumber: number = 1;
+  currentPageNumber: number;
   totalItems: number;
   pageLimit: number = 10;
 
@@ -177,14 +177,14 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     const sub = this._reportService.getSessionReport({ from: start, to: end, page, limit: this.pageLimit })
       .subscribe(
         res => {
-
-          this.totalItems = res.data.totalItems;
-          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
-
           this.overviewTable = res.data.trafficSourceData;
 
-          this._fuseProgressBarService.hide();
-          this.isProcessing = false;
+          setTimeout(() => {
+            this.totalItems = res.data.totalItems;
+            this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
+            this._fuseProgressBarService.hide();
+            this.isProcessing = false;
+          }, 0);
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
@@ -232,12 +232,11 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
             }
           });
 
-          //console.log(dataSource);
-
-          this.pieChart.dataSource = dataSource;
-
-          this._fuseProgressBarService.hide();
-          this.isProcessing = false;
+          setTimeout(() => {
+            this.pieChart.dataSource = dataSource;
+            this._fuseProgressBarService.hide();
+            this.isProcessing = false;
+          }, 0);
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();

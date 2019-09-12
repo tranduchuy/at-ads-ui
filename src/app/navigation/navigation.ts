@@ -183,6 +183,14 @@ export const navigation: FuseNavigation[] = [
     type: 'group',
     children: [
       {
+        id: 'vip_payment',
+        title: 'Nâng cấp VIP',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'arrow_upward',
+        url: '/nang-cap-vip',
+      },
+      {
         id: 'user_profile',
         title: 'Thông tin cá nhân',
         translate: 'NAV.SAMPLE.TITLE',

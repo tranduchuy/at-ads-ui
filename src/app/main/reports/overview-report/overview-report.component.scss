@@ -2,7 +2,7 @@
   width: 100%;
 
   .title1 {
-    padding: 35px 30px 30px 30px;
+    padding: 35px 30px 28px 30px;
     background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
     background-size: 100% 100%;
     color: white;
@@ -192,6 +192,11 @@
             flex: 0 0 12%;
           }
 
+          mat-header-cell:nth-child(3),
+          mat-cell:nth-child(3) {
+            justify-content: center;
+          }
+
           mat-header-cell:nth-child(5),
           mat-cell:nth-child(5),
           mat-header-cell:nth-child(6),
@@ -214,7 +219,7 @@
 
           mat-header-row,
           mat-row {
-            min-width: 1500px;
+            min-width: 1200px;
             width: 100%;
           }
         }
@@ -235,10 +240,10 @@
     }
     .inner {
       .highline2 {
-        padding-bottom: 60%;
+        padding-bottom: 65%;
         .hl2-title1 {
           .datePicker {
-            margin-top: 20px;
+            margin-top: 25px;
           }
         }
       }

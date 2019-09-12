@@ -7,10 +7,10 @@ toolbar {
   // z-index: 4;
   //justify-content: flex-end;
 
-  background: #1E2129;
+  background: #1e2129;
   color: white;
   width: 100%;
-  
+
   &.below {
     z-index: 2;
   }
@@ -99,6 +99,13 @@ toolbar {
 
 a {
   text-decoration: none !important;
+}
+
+.vip-logo {
+  height: 26px;
+  width: 26px;
+  margin: 10px 15px 0 0;
+  filter: drop-shadow(0px 1px 1px black);
 }
 
 @media screen and (max-width: 600px) {

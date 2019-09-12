@@ -93,6 +93,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
   onApplyDateRange() {
     this.getAccountStatisticReport(this._sessionService.activeAccountId);
+    this.currentPageNumber = 1;
     this.getAccountReport(this._sessionService.activeAccountId, 1);
   }
 

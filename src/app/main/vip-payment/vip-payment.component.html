@@ -1,0 +1,136 @@
+<div class="container">
+
+  <div class="main-title">
+    HƯỚNG DẪN THANH TOÁN & NÂNG CẤP TÀI KHOẢN <span
+      style="color: yellow; font-family: 'Segoe UI'; margin-left: 3px; font-weight: bolder; font-size: 17px">VIP</span>
+  </div>
+
+  <div class="inner">
+    <p><span style="color: red; font-weight: bold; margin-right: 10px; font-size: 16px">Nâng cấp VIP</span>Vui lòng lựa
+      chọn hình thức thanh toán và
+      thực
+      hiện
+      theo hướng dẫn bên dưới.</p>
+
+    <div class="choose-accounts-websites">
+
+      <div class="choose-accounts-websites-main" fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="0"
+        fxLayoutGap="40px" fxLayoutAlign="start">
+
+        <div class="accounts" fxFlex="50">
+          <mat-radio-group aria-labelledby="accounts-label" class="example-radio-group" [(ngModel)]="selectedAccount">
+            <label id="accounts-label">Tài khoản Google Ads của bạn</label>
+            <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account"
+              (change)="onSelectAccount($event)">
+              {{account}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="websites">
+          <mat-radio-group aria-labelledby="websites-label" class="example-radio-group" [(ngModel)]="selectedWebsite">
+            <label id="websites-label">Website của bạn</label>
+            <mat-radio-button class="example-radio-button" *ngFor="let website of websites[selectedAccount]"
+              [value]="website.domain">
+              <a href="{{website.domain}}">{{website.domain}}</a>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <p class="payment-title">Vui lòng lựa chọn hình thức thanh toán</p>
+      <p class="payment-buttons" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <button mat-raised-button color="accent" matTooltip="Sắp ra mắt" disabled>CHUYỂN KHOẢN
+          VCB</button>
+        <button mat-raised-button color="basic" matTooltip="Sắp ra mắt" disabled>
+          <img src="https://seeklogo.net/wp-content/uploads/2015/11/paypal-logo-preview.png" class="paypal-logo" alt="">
+        </button>
+      </p>
+
+    </div>
+
+    <div class="instruction">
+      <p style="font-size: 16px; font-weight: bold">Hướng dẫn</p>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-icon style="font-size: 20px; margin-top: 5px">keyboard_arrow_right</mat-icon> Bấm nút <span
+        style="color: red; font-weight: bold">"Chuyển khoản VCB"</span> để lấy nội dung và chuyển khoản
+      theo nội dung đó. Hệ
+      thống sẽ tự động kiểm tra và nâng cấp VIP cho bạn.
+      <br>
+      <mat-icon style="font-size: 20px; margin-top: 5px">keyboard_arrow_right</mat-icon> Nếu gói VIP đang còn thời hạn,
+      hệ thống sẽ tự
+      động thêm thời hạn VIP cho bạn.
+    </div>
+
+    <div class="packages">
+      <p class="packages-title">
+        Vui lòng chuyển khoản nâng cấp VIP theo số tiền và thông tin sau
+      </p>
+
+      <mat-table [dataSource]="packages" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Gói </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img src="../../../assets/icons/golden-shield.png" alt="" class="vip-logo">
+            <span style="color: #039be5; font-weight: bold">{{element.name}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef> Số tiền </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.price}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="recommendance">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.recommendance" style="font-weight: bold">
+              <span *ngIf="element.recommendance === 'Khuyên dùng'" style="color: #44b543">
+                {{element.recommendance}} - {{element.discount}}
+              </span>
+              <span *ngIf="element.recommendance === 'Yêu thích'" style="color: deeppink">
+                {{element.recommendance}} - {{element.discount}}
+              </span>
+              <span *ngIf="element.recommendance === 'HOT'" style="color: crimson">
+                <span class="packages-vip-label"
+                  style="background: crimson; color: white; font-weight: bold">{{element.recommendance}}</span>{{element.discount}}
+              </span>
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="packagesCols; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: packagesCols;"></mat-row>
+      </mat-table>
+
+    </div>
+
+    <div class="casher">
+      <p class="casher-title">Thông tin tài khoản nhận tiền</p>
+      <mat-divider></mat-divider>
+      <ul>
+        <li>
+          <b>Ngân hàng:</b> Vietcombank
+        </li>
+        <li>
+          <b>Chủ tài khoản:</b> XXX
+        </li>
+        <li>
+          <b>Số tài khoản:</b> 000123123444
+        </li>
+        <li>
+          <b>Chi nhánh:</b> VCB Quận 10 Tp.HCM
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>

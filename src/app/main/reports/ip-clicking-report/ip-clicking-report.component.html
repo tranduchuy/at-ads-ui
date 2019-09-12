@@ -38,9 +38,22 @@
           <mat-cell *matCellDef="let element"> {{element.click}} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.isSpam" style="color: crimson; font-weight: bold">
+              <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
+            </span>
+            <span *ngIf="!element.isSpam" style="color: #44b543; font-weight: bold">
+              <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
+            </span>
+          </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="location">
           <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].location?.city ? element.info[0].location?.city : 'Unknown' }} </mat-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.info[0].location?.city ? element.info[0].location?.city : 'Unknown' }} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="os">
@@ -106,7 +119,8 @@
 
         <ng-container matColumnDef="keyword">
           <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].keyword ? element.info[0].keyword : 'Unknown'}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].keyword ? element.info[0].keyword : 'Unknown'}}
+          </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>

@@ -1,0 +1,201 @@
+.container {
+  width: 100%;
+
+  .main-title {
+    padding: 142px 30px 35px 30px;
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
+        #fedb37 0%,
+        #fdb931 8%,
+        #9f7928 30%,
+        #8a6e2f 40%,
+        transparent 80%
+      ),
+      radial-gradient(
+        ellipse farthest-corner at left top,
+        #ffffff 0%,
+        #ffffac 8%,
+        #d1b464 25%,
+        #5d4a1f 62.5%,
+        #5d4a1f 100%
+      );
+    background-size: 100% 100%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+
+    .vip-label {
+      background: yellow;
+      color: darkblue;
+      padding: 2px 6px 2px 6px;
+      border-radius: 2px;
+      font-weight: bolder;
+      margin-left: 5px;
+      font-size: 14px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+  }
+
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  .vip-logo {
+    height: 30px;
+    width: 30px;
+    margin: -5px 10px 0 -5px;
+    filter: drop-shadow(0px 1px 1px black);
+  }
+
+  .inner {
+    padding: 30px;
+
+    .choose-accounts-websites {
+      width: 80%;
+      display: table;
+      margin: 0 auto;
+      margin-top: 40px;
+      padding-bottom: 20px;
+      background: white;
+      box-shadow: 1px 1px 4px silver;
+      text-align: center;
+
+      .choose-accounts-websites-main {
+        padding: 50px 0 30px 0;
+        width: 60%;
+        margin: 0 auto;
+        ul {
+          list-style: none;
+          padding-left: 0;
+
+          li {
+            padding-top: 10px;
+          }
+        }
+
+        label {
+          text-align: left;
+          padding: 5px;
+        }
+      }
+
+      .payment-title {
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .payment-buttons {
+        padding-top: 10px;
+
+        button {
+          height: 45px;
+          width: 200px;
+          border-radius: 0;
+        }
+
+        .paypal-logo {
+          height: 65px;
+          margin-top: -10px;
+          width: 100px;
+        }
+      }
+    }
+
+    .instruction {
+      padding-top: 60px;
+    }
+
+    .packages {
+      .packages-title {
+        font-weight: bold;
+        padding-top: 10px;
+      }
+
+      .packages-vip-label {
+        background: yellow;
+        color: darkblue;
+        padding: 4px 6px 4px 6px;
+        border-radius: 0;
+        font-weight: bolder;
+        margin-right: 10px;
+        font-size: 12px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        box-shadow: 1px 1px 2px silver;
+      }
+
+      mat-table {
+        box-shadow: 1px 1px 4px silver;
+
+        mat-header-cell {
+          background: #039be5;
+          color: white;
+        }
+
+        mat-row {
+          transition: 0.2s;
+
+          &:hover {
+            background: rgba(3, 155, 229, 0.1);
+          }
+        }
+      }
+    }
+
+    .casher {
+      padding-top: 40px;
+
+      .casher-title {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      ul {
+        li {
+          padding-top: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    .inner {
+      padding: 15px;
+
+      .choose-accounts-websites {
+        width: 100%;
+        padding: 15px;
+
+        .choose-accounts-websites-main {
+          width: 100%;
+        }
+
+        .payment-buttons {
+          padding-top: 10px;
+  
+          button {
+            width: 150px;
+            font-size: 12px;
+            padding-left: 10px;
+          }
+        }
+      }
+
+      .instruction {
+        padding-top: 30px;
+      }
+
+      .casher {
+        padding-top: 30px;
+      }
+    }
+  }
+}

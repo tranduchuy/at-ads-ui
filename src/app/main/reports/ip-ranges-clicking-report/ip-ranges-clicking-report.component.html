@@ -6,7 +6,7 @@
     <mat-form-field class="datePicker" fxFlex="20">
       <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
       <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
-        startKey="start" endKey="end" (datesUpdated)="onApplyDateRange($event)" (change)="getClassDClickingReport(1)"
+        startKey="start" endKey="end" (datesUpdated)="onApplyDateRange($event)" (change)="getClassDClickingReport(1); currentPageNumber = 1"
         ngDefaultControl />
     </mat-form-field>
   </div>

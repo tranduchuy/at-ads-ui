@@ -51,6 +51,11 @@ const appRoutes: Routes = [
     loadChildren: './main/reports/reports.module#ReportsModule'
   },
   {
+    path: 'nang-cap-vip',
+    canActivate: [MainGuardService],
+    loadChildren: './main/vip-payment/vip-payment.module#VipPaymentModule'
+  },
+  {
     path: '**',
     redirectTo: '/danh-sach-tai-khoan'
   },
