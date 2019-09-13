@@ -15,6 +15,14 @@
       giúp bạn tiết kiệm được chi phí lãng phí do những hành vi phá hoại gây ra
     </p>
 
+    <div class="config-checking">
+      <mat-checkbox [checked]="checked" (change)="checkSetting($event)" [disabled]="isProcessing">
+        <b>
+          Tự động chặn những IP đang phá hoại sử dụng <span style="color: red">AI</span> và <span style="color: red">Big Data</span>.
+        </b>
+      </mat-checkbox>
+    </div>
+
     <p>
       <b>
         Chặn sau khi 1 IP nhấn quảng cáo (<span style="color: red">thường là 2 lần</span>)
