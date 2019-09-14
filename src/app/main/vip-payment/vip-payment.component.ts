@@ -48,6 +48,7 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
   websites = [];
   selectedAccount: string;
   selectedWebsite: string;
+  selectedWebsiteCode: string;
   isProcessing: boolean = false;
 
   constructor(
@@ -71,7 +72,12 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
           const data = JSON.parse(JSON.stringify(res.data.accounts));
 
           this.accounts = (data || [])
-            .map(item => this.adsAccountIdPipe.transform(item.adsId));
+            .map(item => {
+              return {
+                adsId: this.adsAccountIdPipe.transform(item.adsId),
+                isFree: item.isFree
+              }
+            });
 
           setTimeout(() => {
 
@@ -80,8 +86,9 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
               for (const account of data)
                 this.websites[this.adsAccountIdPipe.transform(account.adsId)] = account.websites;
 
-              this.selectedAccount = this.accounts[0];
+              this.selectedAccount = this.accounts[0].adsId;
               this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
+              this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
             }
 
             this._fuseProgressBarService.hide();
@@ -98,5 +105,10 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
   onSelectAccount(event) {
     this.selectedAccount = event.value;
     this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
+    this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
+  }
+
+  onSelectAccountWebsite(accountWebsiteIndex: number) {
+    this.selectedWebsiteCode = this.websites[this.selectedAccount][accountWebsiteIndex].code;
   }
 }

@@ -20,9 +20,11 @@
         <div class="accounts" fxFlex="50">
           <mat-radio-group aria-labelledby="accounts-label" class="example-radio-group" [(ngModel)]="selectedAccount">
             <label id="accounts-label">Tài khoản Google Ads của bạn</label>
-            <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account"
+            <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account.adsId"
               (change)="onSelectAccount($event)">
-              {{account}}
+              <span *ngIf="account.isFree == true">{{account.adsId}}</span>
+              <span *ngIf="account.isFree == false" class="vip-account">{{account.adsId}}</span>
+              <span *ngIf="account.isFree == false" class="vip-label" style="margin-left: 10px">VIP</span>
             </mat-radio-button>
           </mat-radio-group>
         </div>
@@ -30,9 +32,13 @@
         <div class="websites">
           <mat-radio-group aria-labelledby="websites-label" class="example-radio-group" [(ngModel)]="selectedWebsite">
             <label id="websites-label">Website của bạn</label>
-            <mat-radio-button class="example-radio-button" *ngFor="let website of websites[selectedAccount]"
-              [value]="website.domain">
-              <a href="{{website.domain}}">{{website.domain}}</a>
+            <mat-radio-button class="example-radio-button"
+              *ngFor="let website of websites[selectedAccount]; let i = index" [value]="website.domain"
+              (change)="onSelectAccountWebsite(i)">
+              <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
+              <span *ngIf="website.isExpired === false" class="vip-label" style="margin-left: 10px"
+                matTooltip="Hạn dùng đến: {{website.expiredAt | date: 'HH:mm dd/MM/yyyy'}}">VIP</span>
+              <span *ngIf="website.isExpired === true" class="free-label" style="margin-left: 10px">FREE</span>
             </mat-radio-button>
           </mat-radio-group>
         </div>
@@ -48,6 +54,19 @@
         <button mat-raised-button color="basic" matTooltip="Sắp ra mắt" disabled>
           <img src="https://seeklogo.net/wp-content/uploads/2015/11/paypal-logo-preview.png" class="paypal-logo" alt="">
         </button>
+      </p>
+
+      <div class="website-code" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center">
+        <div class="website-code-title">Vui lòng chuyển khoản theo nội dung sau:</div>
+        <div class="website-code-content" [(ngModel)]="selectedWebsiteCode" ngDefaultControl>{{selectedWebsiteCode}}
+        </div>
+      </div>
+
+      <p class="advisement">
+        Nếu bạn mua <span style="color: #039be5; font-weight: bold">Gói 1 tháng</span>, vui lòng chuyển khoản số tiền
+        <span style="color: crimson; font-weight: bold">500.000
+          VNĐ</span>. Các gói
+        khác vui lòng xem số tiền bên dưới.
       </p>
 
     </div>
