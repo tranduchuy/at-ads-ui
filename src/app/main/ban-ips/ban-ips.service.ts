@@ -25,6 +25,7 @@ export interface IAutoBlockingRangeIPParams {
 export interface IAutoBlockingIPParams {
   maxClick: number;
   autoRemove: boolean;
+  autoBlockWithAiAndBigData: boolean;
 }
 
 export interface IAutoBlocking3G4GParams {

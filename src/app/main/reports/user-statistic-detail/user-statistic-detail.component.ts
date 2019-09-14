@@ -18,7 +18,11 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   uuid: string;
   historyColumns: string[] = ['accessTime', 'ip', 'website', 'os', 'browser', 'isPrivateBrowsing', 'keyword', 'location'];
   history = [];
-  lastHistory = [];
+  lastHistory: any = {
+    createdAt: '',
+    location: {},
+    device: {}
+  };
   isProcessing: boolean = false;
   currentPageNumber: number;
   totalItems: number;

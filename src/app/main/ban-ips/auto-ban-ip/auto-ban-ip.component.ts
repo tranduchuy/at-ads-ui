@@ -18,6 +18,7 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
   isProcessing: boolean = true;
   selectedMaxClick: number;
   selectedAutoRemove: boolean;
+  checked: boolean;
 
   itemsSource = {
     maxClick: [
@@ -109,6 +110,7 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
       .subscribe(res => {
         this.selectedMaxClick = res.data.setting.autoBlockByMaxClick;
         this.selectedAutoRemove = res.data.setting.autoRemoveBlocking;
+        this.checked = res.data.setting.autoBlockWithAiAndBigData;
 
         this.isProcessing = false;
         this._fuseProgressiveBarService.hide();
@@ -127,6 +129,10 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
 
         });
     this.subscriptions.push(getSettingsSub);
+  }
+
+  checkSetting(e) {
+    this.checked = e.checked;
   }
 
   setAutoBlockingIP() {
@@ -161,7 +167,8 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
   private generateAutoBlockingIpParams(): any {
     const params = {
       maxClick: this.selectedMaxClick,
-      autoRemove: this.selectedAutoRemove
+      autoRemove: this.selectedAutoRemove,
+      autoBlockWithAiAndBigData: this.checked
     };
 
     return params;
