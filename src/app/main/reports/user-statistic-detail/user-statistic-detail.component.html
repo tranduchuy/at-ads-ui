@@ -35,13 +35,13 @@
               <mat-header-cell *matHeaderCellDef>Truy cập</mat-header-cell>
               <mat-cell *matCellDef="let element">
 
-                <mat-icon *ngIf="element.isSpam" style="margin-right: 10px; color: crimson"
+                <mat-icon *ngIf="element.isSpam === true" style="margin-right: 10px; color: crimson"
                   matTooltip="Đã chặn và không bị tính tiền">verified_user</mat-icon>
 
-                <mat-icon *ngIf="!element.isSpam" style="margin-right: 10px; color: gold"
+                <mat-icon *ngIf="element.isSpam === false" style="margin-right: 10px; color: gold"
                   matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
 
-                {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}}
+                {{(element.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}
               </mat-cell>
             </ng-container>
 
@@ -65,7 +65,7 @@
                   alt="" class="icon">
                 <img *ngIf="element.os?.name === 'Linux'"
                   src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
-                {{element.os?.name ? element.os?.name : 'Unknown' + ' ' + element.os?.version ? element.os?.version : ''}}
+                {{(element.os?.name || 'Unknown') + ' ' + (element.os?.version || '')}}
               </mat-cell>
             </ng-container>
 
@@ -93,7 +93,7 @@
                 <img *ngIf="element.browser?.name === 'Tor'"
                   src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
                   alt="" class="icon">
-                {{element.browser?.name + ' ' + element.browser?.version}}
+                {{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}
               </mat-cell>
             </ng-container>
 
@@ -115,13 +115,15 @@
             <ng-container matColumnDef="website">
               <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <a href="{{element.href}}" target="_blank"><span style="text-decoration: underline">{{element.domain}}</span></a>
+                <a href="{{element.href}}" target="_blank"><span
+                    style="text-decoration: underline">Link tại đây</span></a>
               </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef>Tại (địa điểm)</mat-header-cell>
-              <mat-cell *matCellDef="let element">{{element.location?.city ? element.location?.city : 'Unknown'}}</mat-cell>
+              <mat-cell *matCellDef="let element">{{element.location?.city || 'Unknown'}}
+              </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="historyColumns; sticky: true"></mat-header-row>
@@ -144,5 +146,40 @@
         </div>
       </div>
 
+      <div class="bottom" fxLayout="column" fxLayoutGap="17px" fxLayoutAlgin="start center">
+        <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
+          <div class="last-history-icon">
+            <mat-icon color="accent">calendar_today</mat-icon>
+          </div>
+          <div class="title">
+            Ngày ghi nhận cuối
+            <div style="color: gray">
+              {{(lastHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}
+            </div>
+          </div>
+        </div>
+        <div class="access-location" fxLayout="row" fxLayoutGap="12px">
+          <div class="last-history-icon">
+            <mat-icon color="accent">location_on</mat-icon>
+          </div>
+          <div class="title">
+            Vị trí truy cập
+            <div style="color: gray">
+              {{lastHistory.location?.city || 'Unknown'}}
+            </div>
+          </div>
+        </div>
+        <div class="last-access-device" fxLayout="row" fxLayoutGap="12px">
+          <div class="last-history-icon">
+            <mat-icon color="accent">speaker_phone</mat-icon>
+          </div>
+          <div class="title">
+            Thiết bị truy cập cuối
+            <div style="color: gray">
+              {{lastHistory.device?.vendor || 'Unknown'}}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>

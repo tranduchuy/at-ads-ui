@@ -88,10 +88,14 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
               res => {
                 this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsAccount.adsId);
 
-                this.getAccounts();
-
-                this._fuseProgressiveBarService.hide();
-                this.isProcessing = false;
+                setTimeout(() => {
+                  this.getAccounts();
+                  this._fuseProgressiveBarService.hide();
+                  this.isProcessing = false;
+                }, 0);
+              },
+              (error: HttpErrorResponse) => {
+                this._router.navigateByUrl('/danh-sach-tai-khoan');
               });
           this.subscriptions.push(detailSub);
         }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment'
+import * as moment from 'moment';
 import { SessionService } from 'app/shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';

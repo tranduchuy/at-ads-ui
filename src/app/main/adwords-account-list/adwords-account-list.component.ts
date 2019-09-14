@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { BehaviorSubject } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-adwords-account-list',
@@ -23,7 +24,6 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   accounts = [];
   getAccountsDone$ = new BehaviorSubject(false);
   isProcessing: boolean = false;
-
   adsAccountIdPipe = new AdsAccountIdPipe();
 
   constructor(
@@ -142,6 +142,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
         (res) => {
           this._fuseProgressiveBarService.hide();
           this.accounts = res.data.accounts;
+
           this.getAccountsDone$.next(true);
         },
         (error: HttpErrorResponse) => {

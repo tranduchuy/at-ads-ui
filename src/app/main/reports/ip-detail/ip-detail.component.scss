@@ -37,14 +37,7 @@
 
       mat-tree {
         box-shadow: 1px 1px 4px silver;
-
-        // mat-tree-node {
-        //   transition: 0.2s;
-
-        //   &:hover {
-        //     background: rgba(3, 155, 229, 0.1);
-        //   }
-        // }
+        padding-top: 20px;
       }
 
       .example-tree-invisible {
@@ -53,25 +46,23 @@
 
       .example-tree ul,
       .example-tree li {
-        margin-top: -15px;
-        margin-bottom: 10px;
         list-style-type: none;
-        display: table;
-        line-height: 10px;
+        width: 100%;
+      }
+
+      .ip-click-detail {
+        width: 100%;
       }
 
       .div-uuid {
-        margin-top: 5px;
+        margin: 10px;
         border: 0.5px solid #d2d2d2;
         padding: 15px;
-        padding-top: 20px;
-        padding-bottom: 0;
         border-radius: 5px;
         width: 100%;
 
         li {
           width: 100%;
-          padding-top: 15px;
           padding-bottom: 10px;
         }
       }
@@ -168,7 +159,8 @@
 
     .main-inner {
       .inner {
-        padding: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
       }
     }
   }

@@ -53,7 +53,7 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="network">
           <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.network | uppercase}}</mat-cell>
+          <mat-cell *matCellDef="let element">{{(element.network | uppercase) || 'Unknown'}}</mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->

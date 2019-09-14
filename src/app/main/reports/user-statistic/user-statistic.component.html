@@ -26,15 +26,78 @@
           <mat-cell *matCellDef="let element">
             <a mat-button color="accent" *ngIf="element._id" class="table-uuid" matTooltip="Nhấn vào để xem chi tiết"
               [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid]">
-              <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'"
-                class="user-image"> {{element._id}}</a>
+              <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" class="user-image">
+              {{element._id}}</a>
             <span style="color: #039be5" *ngIf="!element._id">Unknown</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="clicks">
-          <mat-header-cell *matHeaderCellDef> Số lần click </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Số click </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.count}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isPrivateBrowsing">
+          <mat-header-cell *matHeaderCellDef>Ẩn danh</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="!element.isPrivateBrowsing" style="color: orange; font-weight: bold">
+              <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+            </span>
+            <span *ngIf="element.isPrivateBrowsing" style="color:silver">Không</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="os">
+          <mat-header-cell *matHeaderCellDef>Hệ điều hành</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img *ngIf="element.os?.name === 'Windows'"
+              src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
+            <img *ngIf="element.os?.name === 'iOS'"
+              src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
+              alt="" class="icon">
+            <img *ngIf="element.os?.name === 'Android'" src="https://image.flaticon.com/icons/png/512/226/226770.png"
+              alt="" class="icon">
+            <img *ngIf="element.os?.name === 'Mac OS'"
+              src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
+              alt="" class="icon">
+            <img *ngIf="element.os?.name === 'Linux'"
+              src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
+            {{(element.os?.name || 'Unknown') + ' ' + (element.os?.version || '')}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="browser">
+          <mat-header-cell *matHeaderCellDef>Trình duyệt</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img *ngIf="element.browser?.name === 'Firefox'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.browser?.name === 'Chrome'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.browser?.name === 'IE'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.browser?.name === 'Cốc Cốc'"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png"
+              alt="" class="icon">
+            <img *ngIf="element.browser?.name === 'Opera'"
+              src="https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png" alt="" class="icon">
+            <img *ngIf="element.browser?.name === 'Tor'"
+              src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
+              alt="" class="icon">
+            {{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}
+          </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="network">
+          <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.networkCompany?.name}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="keyword">
@@ -46,27 +109,9 @@
 
         <ng-container matColumnDef="location">
           <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.location?.city ? element.location?.city : 'Unknown'}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
+          </mat-cell>
         </ng-container>
-
-        <ng-container matColumnDef="network">
-          <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.networkCompany?.name}}</mat-cell>
-        </ng-container>
-
-        <!-- <ng-container matColumnDef="device">
-              <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <img src="https://cdn.freebiesupply.com/logos/large/2x/wifi-1-logo-png-transparent.png" alt=""
-                  class="device-symbol" *ngIf="element.device === 'Click bằng mạng Wifi'" matTooltip="{{element.device}}">
-                <img src="https://peoplepng.com/wp-content/uploads/2019/05/3g-png-4.png" alt="" class="device-symbol"
-                  *ngIf="element.device === 'Click bằng mạng 3G'" matTooltip="{{element.device}}">
-                <p style="width: 50px; text-align: center">
-                  <mat-icon *ngIf="element.device === '80% mạng 3G - 20% mạng Wifi'" color="accent"
-                    matTooltip="{{element.device}}">help_outline</mat-icon>
-                </p>
-              </mat-cell>
-            </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

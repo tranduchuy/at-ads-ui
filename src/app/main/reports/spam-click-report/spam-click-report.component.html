@@ -93,21 +93,13 @@
 
               <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
                 style="font-weight: bold; padding-left: 0" mat-button color="accent">
-                <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px; font-size: 18px">not_interested
+                <mat-icon *ngIf="element.isSpam === true" style="color: red; margin-right: 5px; font-size: 18px">not_interested
                 </mat-icon>
-                <mat-icon *ngIf="!element.isSpam" style="color:silver; margin-right: 5px; font-size: 18px">
+                <mat-icon *ngIf="element.isSpam === false" style="color:silver; margin-right: 5px; font-size: 18px">
                   not_interested
                 </mat-icon>
                 {{element.ip}}
               </a>
-
-              <!-- <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
-                <mat-icon *ngIf="element.isSpam" style="color: red; margin-right: 5px">not_interested
-                </mat-icon>
-                <mat-icon *ngIf="!element.isSpam" style="color:silver; margin-right: 5px">not_interested
-                </mat-icon>
-                {{element.ip}}
-              </a> -->
 
             </mat-cell>
           </ng-container>
@@ -122,10 +114,10 @@
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <span *ngIf="element.isSpam" style="color: crimson; font-weight: bold">
+              <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold">
                 <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
               </span>
-              <span *ngIf="!element.isSpam" style="color: #44b543; font-weight: bold">
+              <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold">
                 <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
               </span>
             </mat-cell>
@@ -138,7 +130,7 @@
 
           <ng-container matColumnDef="location">
             <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.location?.city ? element.location?.city : 'Unknown'}}
+            <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
             </mat-cell>
           </ng-container>
 

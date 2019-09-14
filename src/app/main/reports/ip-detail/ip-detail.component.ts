@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
@@ -6,18 +6,17 @@ import { SessionService } from 'app/shared/services/session.service';
 import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
-import { MatTreeFlattener, MatTreeFlatDataSource, MatTreeNestedDataSource } from '@angular/material/tree';
-import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { NestedTreeControl } from '@angular/cdk/tree';
 import * as moment from 'moment'
-import { FuseThemeOptionsModule } from '@fuse/components';
-import { BehaviorSubject, Observable, merge, observable } from 'rxjs';
-import { CollectionViewer, SelectionChange } from '@angular/cdk/collections';
-import { map } from 'rxjs/operators';
 
 interface Node {
   name: string[];
   id: string;
   index: number;
+  device?: any;
+  os?: any;
+  browser?: any;
   children?: Node[];
   logs?: any[];
 }
@@ -107,6 +106,8 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
               name: [moment(item.timestamp).format('HH:mm DD/MM/YYYY')],
               index,
               id: item._id,
+              device: item.device || 'Unknown',
+              browser: item.os || 'Unknown',
               children: [
                 {
                   name: [''],
@@ -146,7 +147,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
             this.dataSource.data[index].children = (resData)
               .map((child, childIndex) => {
                 return {
-                  name: [child._id ? child._id : 'Unknown'],
+                  name: [child._id || 'Unknown'],
                   id: '',
                   index: childIndex,
                   logs: child.logs

@@ -2,7 +2,7 @@
   <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
     <span fxFlex="75">QUẢN LÝ TÀI KHOẢN GOOGLE ADS VÀ WEBSITE</span>
     <a [routerLink]="'/them-tai-khoan-moi'" mat-button class="add-account-button">
-      <mat-icon>person_add</mat-icon> Thêm tài khoản mới
+      <mat-icon>library_add</mat-icon> Thêm tài khoản mới
     </a>
   </div>
 
@@ -32,19 +32,40 @@
             <mat-header-cell *matHeaderCellDef> Google Ads ID </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <div fxLayout="row">
-                <p style="width: 120px; color: #4bb543; font-weight: bold"
-                  *ngIf="element.isConnected && element.websites.length > 0"
-                  matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">
-                  {{element.adsId | adsAccountId}}
+                <p style="width: 170px; color: #4bb543; font-weight: bold"
+                  *ngIf="element.isConnected && element.websites.length > 0">
+
+                  <span style="margin-right: 10px"
+                    matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">{{element.adsId | adsAccountId}}</span>
+
+                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip"
+                    matTooltip="Nâng cấp VIP ngay!" style="padding-left:0">
+                    FREE
+                  </a>
+
                 </p>
-                <p style="width: 120px;color: orange; font-weight: bold"
-                  *ngIf="element.isConnected && element.websites.length === 0"
-                  matTooltip="Tài khoản chưa có website nào.">
-                  {{element.adsId | adsAccountId}}
+                <p style="width: 170px;color: orange; font-weight: bold"
+                  *ngIf="element.isConnected && element.websites.length === 0">
+
+                  <span style="margin-right: 10px"
+                    matTooltip="Tài khoản chưa có website nào.">{{element.adsId | adsAccountId}}</span>
+
+                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip"
+                    matTooltip="Nâng cấp VIP ngay!" style="padding-left:0">
+                    FREE
+                  </a>
+
                 </p>
-                <p style="width: 120px; color: silver; font-weight: bold" *ngIf="!element.isConnected"
-                  matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
-                  {{element.adsId | adsAccountId}}
+                <p style="width: 170px; color: silver; font-weight: bold" *ngIf="!element.isConnected">
+
+                  <span style="margin-right: 10px"
+                    matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">{{element.adsId | adsAccountId}}</span>
+
+                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip"
+                    matTooltip="Nâng cấp VIP ngay!" style="padding-left:0">
+                    FREE
+                  </a>
+
                 </p>
                 <div fxLayout="row">
                   <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan"
@@ -55,14 +76,6 @@
                     matTooltip="Gắn mã tracking cho các website" class="tracking-button">
                     <mat-icon>code</mat-icon>
                   </a>
-                  <!-- <a *ngIf="element.websites.length === 0 && element.isConnected"
-                        mat-icon-button
-                        color="accent" matTooltip="Vui lòng thêm website để tiến hành gắn mã tracking" class="tracking-button" disabled>
-                        <mat-icon>code</mat-icon>
-                      </a> -->
-                  <!-- <button mat-icon-button color="accent" matTooltip="Chỉnh sửa">
-                        <mat-icon>edit</mat-icon>
-                      </button> -->
                   <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản Google Ads"
                     (click)="openRemoveAccountConfirmDialog(element.id)" [disabled]="isProcessing">
                     <mat-icon style="color: silver">delete</mat-icon>
@@ -92,12 +105,18 @@
                   fxLayoutAlign="center center">
                   <div style="padding-left: 5px" fxFlex="90">
                     <span>{{i+1}}</span>.
-                    <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
+                    <a href="{{website.domain}}" target="_blank">
+                      {{website.domain}}</a>
                   </div>
-                  <div fxFlex="8">
-                    <a mat-icon-button routerLink="/nang-cap-vip" matTooltip="Nâng cấp VIP">
-                      <mat-icon style="color: #44b543; font-size: 20px;">arrow_upward</mat-icon>
+                  <div fxFlex="12">
+                    <a *ngIf="website.isExpired === true" class="free-label" routerLink="/nang-cap-vip"
+                      matTooltip="Nâng cấp VIP ngay!">
+                      FREE
                     </a>
+                    <span *ngIf="website.isExpired === false" class="vip-label"
+                      matTooltip="Hạn dùng đến: {{(website.expiredAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}">
+                      VIP
+                    </span>
                   </div>
                   <div fxFlex="10">
                     <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
@@ -107,8 +126,11 @@
                   </div>
                 </li>
               </ul>
-              <button (click)="navigateToWebsiteManagement(element.id, element.campaignNumber)" mat-raised-button
-                class="add-domain-button" [disabled]="isProcessing">
+              <button (click)="navigateToWebsiteManagement(element.id, element.campaignNumber)" mat-button
+                class="add-domain-button" [disabled]="isProcessing" color="accent" *ngIf="element.websites.length < 2"> 
+                <mat-icon>add_circle_outline</mat-icon> Thêm Website
+              </button>
+              <button mat-button class="add-domain-button" color="accent" *ngIf="element.websites.length >= 2" disabled>
                 <mat-icon>add_circle_outline</mat-icon> Thêm Website
               </button>
             </mat-cell>

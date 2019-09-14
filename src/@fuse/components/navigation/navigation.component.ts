@@ -33,35 +33,19 @@ export class FuseNavigationComponent implements OnInit {
       type: 'group',
       children: [
         {
-          id: '2104087721',
-          title: '2104087721',
+          id: '',
+          title: '',
           translate: 'NAV.APPLICATIONS',
-          icon: 'more_vert',
+          icon: '',
           type: 'collapsable',
-          children: [
-            {
-              id: 'add-accounts',
-              title: 'Thêm tài khoản mới',
-              translate: 'NAV.SAMPLE.TITLE',
-              type: 'item',
-              icon: 'person_add',
-              url: '/them-tai-khoan-moi'
-            },
-            {
-              id: 'account-list',
-              title: 'Quản lý tài khoản Google Ads',
-              type: 'item',
-              icon: 'dashboard',
-              url: '/account-list'
-            }
-          ]
+          children: []
         },
         {
-          id: 'account-list',
-          title: 'Quản Lý Tài Khoản Google Ads',
-          type: 'item',
-          icon: 'dashboard',
-          url: '/danh-sach-tai-khoan'
+          id: '',
+          title: '',
+          type: '',
+          icon: '',
+          url: ''
         },
       ]
     }
@@ -93,6 +77,8 @@ export class FuseNavigationComponent implements OnInit {
   // @ Lifecycle hooks
   // -----------------------------------------------------------------------------------------------------
 
+  isFreeAccounts: boolean[] = [];
+
   /**
    * On init
    */
@@ -109,6 +95,9 @@ export class FuseNavigationComponent implements OnInit {
           let accounts = res.data.accounts;
           let activeAdsAccountId = '';
           let activeAccountId = '';
+
+          for (const item of accounts)
+            this.isFreeAccounts[this.adsAccountIdPipe.transform(item.adsId)] = item.isFree;
 
           if (this._sessionService.activeAccountId) {
             activeAccountId = this._sessionService.activeAccountId;
@@ -148,7 +137,7 @@ export class FuseNavigationComponent implements OnInit {
               id: activeAdsAccountId,
               title: activeAdsAccountId,
               translate: 'NAV.APPLICATIONS',
-              icon: 'more_vert',
+              icon: '../../../../../assets/icons/gg-ads.png',
               type: 'collapsable',
               children: [
                 {
@@ -156,11 +145,16 @@ export class FuseNavigationComponent implements OnInit {
                   title: 'Thêm tài khoản mới',
                   translate: 'NAV.SAMPLE.TITLE',
                   type: 'item',
-                  icon: 'person_add',
+                  icon: 'library_add',
                   url: '/them-tai-khoan-moi'
                 },
               ]
             };
+
+            if (this.isFreeAccounts[this.accounts.children[0].title] === false) {
+              //this.accounts.children[0].icon = '../../../../../assets/icons/golden-shield.png';
+              this.accounts.children[0].icon = '../../../../../assets/icons/gg-ads-vip.png';
+            }
 
             this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
 
@@ -173,12 +167,24 @@ export class FuseNavigationComponent implements OnInit {
             }
           }
           else {
-            this.accounts.children[0].title = 'Thêm tài khoản mới';
-            this.accounts.children[0].id = null;
-            this.accounts.children[0].url = '/them-tai-khoan-moi';
+            this.accounts.children[0] = {
+              id: 'add-accounts',
+              title: 'Thêm tài khoản mới',
+              type: 'item',
+              icon: 'library_add',
+              url: '/them-tai-khoan-moi'
+            };
           }
 
-          this.loadRecentNavigation();
+          this.accounts.children[1] = {
+            id: 'account-list',
+            title: 'Quản Lý Tài Khoản',
+            type: 'item',
+            icon: 'dashboard',
+            url: '/danh-sach-tai-khoan'
+          },
+
+            this.loadRecentNavigation();
           //this._fuseSplashScreenService.hide();
         },
         error => {
@@ -197,12 +203,12 @@ export class FuseNavigationComponent implements OnInit {
             id: 'add-accounts',
             title: 'Thêm tài khoản mới',
             type: 'item',
-            icon: 'person_add',
+            icon: 'library_add',
             url: '/them-tai-khoan-moi'
           };
           this.accounts.children[1] = {
             id: 'account-list',
-            title: 'Quản lý tài khoản Google Ads',
+            title: 'Quản Lý Tài Khoản',
             type: 'item',
             icon: 'dashboard',
             url: '/danh-sach-tai-khoan'

@@ -247,8 +247,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   }
 
   onSelectDateRange(event) {
-    if (moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 60) {
-      this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 60 ngày trở lại');
+    if (moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 14) {
+      this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 14 ngày trở lại');
       return false;
     }
     return true;

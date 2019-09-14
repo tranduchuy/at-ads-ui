@@ -36,7 +36,7 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
       discount: 'Giảm 20%'
     },
     {
-      name: '12 tháng (~30 ngày)',
+      name: '12 tháng (~365 ngày)',
       price: '3.000.000 VNĐ',
       recommendance: 'HOT',
       discount: 'Giảm 40%'

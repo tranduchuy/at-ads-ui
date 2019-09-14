@@ -183,13 +183,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this._fuseProgressiveBarService.hide();
           this._dialogService._openInfoDialog(res.messages[0]);
 
-          if (res.data.isRefresh) {
-            this._fuseNavigationService.reloadNavigation();
-            this._router.navigateByUrl('/danh-sach-tai-khoan');
-            return;
-          }
-
-          this.isConnected = true;
           this.connectedAccountId = res.data.account._id;
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
@@ -197,11 +190,18 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
           this._sessionService.setAccountId(this.connectedAccountId);
           this._sessionService.setAdwordId(this.connectedAdsId);
+
           this._fuseNavigationService.reloadNavigation();
+
+          if (res.data.isRefresh) {  
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+            return;
+          }
+
+          this.isConnected = true;
 
           this.selectedAccount = '';
           this.getAdsAccounts();
-
 
           this.isProcessing = false;
         },
