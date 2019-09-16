@@ -16,6 +16,7 @@ import * as moment from 'moment';
 export class UserStatisticDetailComponent extends PageBaseComponent implements OnInit {
 
   uuid: string;
+  shortUuid: string;
   historyColumns: string[] = ['accessTime', 'ip', 'action', 'website', 'os', 'browser', 'isPrivateBrowsing', 'location'];
   history = [];
   lastHistory: any = {
@@ -57,6 +58,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
 
         if (params.uuid) {
           this.uuid = params.uuid;
+          this.shortUuid = '*' + params.uuid.slice(-12) + '*';
           const getAccountIdSub = this._sessionService.getAccountId()
             .subscribe(
               (accoundId: string) => {
