@@ -105,10 +105,10 @@
         <ng-container matColumnDef="isPrivateBrowsing">
           <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
+            <span *ngIf="element.info[0].isPrivateBrowsing === true" style="color: orange; font-weight: bold">
               <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
             </span>
-            <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
+            <span *ngIf="element.info[0].isPrivateBrowsing === false" style="color:silver">Không</span>
           </mat-cell>
         </ng-container>
 
@@ -117,11 +117,11 @@
           <mat-cell *matCellDef="let element"> {{element.info[0].networkCompany?.name | uppercase}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="keyword">
-          <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].keyword || 'Unknown'}}
-          </mat-cell>
-        </ng-container>
+        <!--<ng-container matColumnDef="keyword">-->
+          <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->
+          <!--<mat-cell *matCellDef="let element"> {{element.info[0].keyword || 'Unknown'}}-->
+          <!--</mat-cell>-->
+        <!--</ng-container>-->
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

@@ -20,9 +20,10 @@
         <ng-container matColumnDef="task">
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <button mat-icon-button color="accent" matTooltip="Nhấn để mở chặn" [disabled]="isProcessing"
+            <button mat-icon-button color="accent" matTooltip="Nhấn để mở chặn"
+                    [disabled]="isProcessing" style="color: crimson"
               (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
-              <mat-icon>lock_openk</mat-icon>
+              <mat-icon>lock_open</mat-icon>
             </button>
           </mat-cell>
         </ng-container>

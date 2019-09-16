@@ -33,12 +33,12 @@
           <mat-cell *matCellDef="let element"> {{element.totalClick}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="keyword">
-          <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span *ngFor="let item of element.keywords" [class.keywords]="item">{{item}}</span>
-          </mat-cell>
-        </ng-container>
+        <!--<ng-container matColumnDef="keyword">-->
+          <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->
+          <!--<mat-cell *matCellDef="let element">-->
+            <!--<span *ngFor="let item of element.keywords" [class.keywords]="item">{{item}}</span>-->
+          <!--</mat-cell>-->
+        <!--</ng-container>-->
 
         <ng-container matColumnDef="browser">
           <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
