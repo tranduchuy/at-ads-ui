@@ -80,16 +80,6 @@
         justify-content: center;
       }
 
-      mat-header-cell:nth-child(4),
-      mat-cell:nth-child(4) {
-        padding-right: 20px;
-        flex-wrap: wrap;
-
-        // span {
-        //   flex-grow: 1;
-        // }
-      }
-
       mat-header-cell:nth-child(2),
       mat-cell:nth-child(2),
       mat-header-cell:nth-child(5),
@@ -98,7 +88,7 @@
       mat-cell:nth-child(6),
       mat-header-cell:nth-child(7),
       mat-cell:nth-child(7) {
-        flex: 0 0 11%;
+        flex: 0 0 12%;
       }
 
       mat-cell:nth-child(4) {

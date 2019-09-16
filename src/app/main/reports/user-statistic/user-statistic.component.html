@@ -21,13 +21,14 @@
           <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="ip">
+        <ng-container matColumnDef="uuid">
           <mat-header-cell *matHeaderCellDef> Người dùng </mat-header-cell>
           <mat-cell *matCellDef="let element">
+            <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" class="user-image">
             <a mat-button color="accent" *ngIf="element._id" class="table-uuid" matTooltip="Nhấn vào để xem chi tiết"
               [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid]">
-              <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" class="user-image">
-              {{element.uuid}}</a>
+              <span>{{element.uuid}}</span>
+            </a>
             <span style="color: #039be5" *ngIf="!element._id">Unknown</span>
           </mat-cell>
         </ng-container>
@@ -100,12 +101,12 @@
           <mat-cell *matCellDef="let element">{{element.networkCompany?.name}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="keyword">
+        <!-- <ng-container matColumnDef="keyword">
           <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>
           </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <ng-container matColumnDef="location">
           <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
