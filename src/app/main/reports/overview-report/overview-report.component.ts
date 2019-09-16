@@ -56,7 +56,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     }
   ];
 
-  overviewTableCols: string[] = ['createdAt', 'ip', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'keyword', 'location'];
+  overviewTableCols: string[] = ['createdAt', 'ip', 'trafficSource', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'location'];
   overviewTable = [];
 
   // single = [
