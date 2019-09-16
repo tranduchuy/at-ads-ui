@@ -9,7 +9,7 @@
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center start">
 
-        <div class="left" fxFlex="25">
+        <div class="left" fxFlex="29">
           <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
           <p style="color: #039be5; font-weight: bold">IP: {{ip}}</p>
 
@@ -18,7 +18,7 @@
               <div class="last-history-icon">
                 <mat-icon color="accent">calendar_today</mat-icon>
               </div>
-              <div class="title">
+              <div class="title" style="text-align: left">
                 Ngày ghi nhận cuối
                 <div style="color: gray">
                   {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>
@@ -28,9 +28,9 @@
               <div class="last-history-icon">
                 <mat-icon color="accent">location_on</mat-icon>
               </div>
-              <div class="title">
+              <div class="title" style="text-align: left">
                 Vị trí truy cập
-                <div style="color: gray">
+                <div style="color: gray" >
                   {{lastClickHistory.location?.city || 'Unknown'}}
                 </div>
               </div>
@@ -39,10 +39,22 @@
               <div class="last-history-icon">
                 <mat-icon color="accent">speaker_phone</mat-icon>
               </div>
-              <div class="title">
+              <div class="title" style="text-align: left">
                 Thiết bị truy cập cuối
                 <div style="color: gray">
-                  {{lastClickHistory.device?.vendor || 'Unknown'}}
+                  <img *ngIf="lastClickHistory.os?.name === 'Windows'"
+                       src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
+                  <img *ngIf="lastClickHistory.os?.name === 'iOS'"
+                       src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
+                       alt="" class="icon">
+                  <img *ngIf="lastClickHistory.os?.name === 'Android'"
+                       src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
+                  <img *ngIf="lastClickHistory.os?.name === 'Mac OS'"
+                       src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
+                       alt="" class="icon">
+                  <img *ngIf="lastClickHistory.os?.name === 'Linux'"
+                       src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
+                  {{(lastClickHistory.os?.name || 'Unknown') + ' ' + (lastClickHistory.os?.version || '')}}
                 </div>
               </div>
             </div>
@@ -184,10 +196,18 @@
             [dataSource]="clicksDataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }">
 
             <ng-container matColumnDef="type">
-              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-header-cell *matHeaderCellDef>Click Ads/Xem trang</mat-header-cell>
               <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
-                <mat-icon *ngIf="element.type === 1" style="color: gold"
-                  matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
+                <mat-icon *ngIf="element.type === 2" style="margin-right: 10px; color: snow"
+                          matTooltip="Xem trang">remove_red_eye</mat-icon>
+
+                <mat-icon *ngIf="element.isSpam === true && element.type === 1" style="margin-right: 10px; color: crimson"
+                          matTooltip="Đã chặn và không bị tính tiền">verified_user</mat-icon>
+
+                <mat-icon *ngIf="element.isSpam === false && element.type === 1" style="margin-right: 10px; color: gold"
+                          matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
+                <p *ngIf="element.type === 1">Click Quảng cáo</p>
+                <p *ngIf="element.type === 2">Xem trang</p>
               </mat-cell>
             </ng-container>
 
@@ -199,7 +219,7 @@
             </ng-container>
 
             <ng-container matColumnDef="uuid">
-              <mat-header-cell *matHeaderCellDef>Người dùng</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef>Người dùng (uid)</mat-header-cell>
               <mat-cell *matCellDef="let element; let i = index" [class.type1]="element.type === 1"
                 [class.type2]="element.type === 2">
                 <span style="color: #039be5">
@@ -208,17 +228,22 @@
               </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="isSpam">
-              <mat-header-cell *matHeaderCellDef>Nhận diện</mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
-                <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold">
-                  <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
-                </span>
-                <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold">
-                  <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
-                </span>
-              </mat-cell>
-            </ng-container>
+            <!--<ng-container matColumnDef="isSpam">-->
+              <!--<mat-header-cell *matHeaderCellDef>Nhận diện</mat-header-cell>-->
+              <!--<mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">-->
+                <!--<span *ngIf="element.isSpam === true && element.type === 1" style="color: crimson; font-weight: bold">-->
+                  <!--<mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn-->
+                <!--</span>-->
+                <!--<span *ngIf="element.isSpam === false && element.type === 1" style="color: #44b543; font-weight: bold">-->
+                  <!--<mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ-->
+                <!--</span>-->
+
+                <!--<span *ngIf="element.type === 2" style="color: snow;">-->
+                  <!--<mat-icon style="font-size: 18px">remove_red_eye</mat-icon> Xem trang-->
+                <!--</span>-->
+
+              <!--</mat-cell>-->
+            <!--</ng-container>-->
 
             <ng-container matColumnDef="isPrivateBrowsing">
               <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
@@ -233,7 +258,7 @@
             <ng-container matColumnDef="href">
               <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
               <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
-                <a href="{{element.href}}">Link tại đây</a>
+                <a href="{{element.href}}">{{element.href.toString().replace("https://", "").replace("http://", "").split("/")[1]}}</a>
               </mat-cell>
             </ng-container>
 

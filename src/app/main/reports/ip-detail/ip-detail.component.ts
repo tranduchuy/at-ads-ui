@@ -40,7 +40,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   collapsedNodes: string[] = [];
 
   clicksDataSource = [];
-  clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isSpam', 'isPrivateBrowsing', 'href', 'os', 'browser', 'networkCompany', 'location'];
+  clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isPrivateBrowsing', 'href', 'os', 'browser', 'networkCompany', 'location'];
   lastClickHistory: any = {
     createdAt: '',
     device: {
