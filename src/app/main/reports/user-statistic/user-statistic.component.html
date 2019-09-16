@@ -27,7 +27,7 @@
             <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" class="user-image">
             <a mat-button color="accent" *ngIf="element._id" class="table-uuid" matTooltip="Nhấn vào để xem chi tiết"
               [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid]">
-              <span>{{element.uuid}}</span>
+              <span>{{element._id}}</span>
             </a>
             <span style="color: #039be5" *ngIf="!element._id">Unknown</span>
           </mat-cell>
