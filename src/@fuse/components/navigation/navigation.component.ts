@@ -8,6 +8,7 @@ import { SessionService } from '../../../app/shared/services/session.service';
 import { FuseSplashScreenService } from '../../services/splash-screen.service';
 
 import { AdsAccountIdPipe } from '../../../app/shared/pipes/ads-account-id/ads-account-id.pipe';
+import { accessSync } from 'fs';
 
 @Component({
   selector: 'fuse-navigation',
