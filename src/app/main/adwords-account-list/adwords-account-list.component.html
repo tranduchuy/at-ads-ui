@@ -117,7 +117,7 @@
                         <span class="vip-label" matTooltip="Nhấn để gia hạn thêm VIP">VIP</span>
                       </a>
                       <span
-                        class="vip-expiration">{{(website.expiredAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</span>
+                        class="vip-expiration">({{(website.expiredAt | date: 'dd/MM/yyyy') || 'Unknown'}})</span>
                     </div>
                   </div>
                   <div fxFlex="10">
