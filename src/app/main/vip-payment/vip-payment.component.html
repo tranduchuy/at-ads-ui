@@ -6,7 +6,8 @@
   </div>
 
   <div class="inner">
-    <p><span style="color: red; font-weight: bold; margin-right: 10px; font-size: 16px">Nâng cấp VIP</span>Vui lòng lựa thực hiện theo hướng dẫn bên dưới.</p>
+    <p><span style="color: goldenrod; font-weight: bold">Nâng cấp VIP:</span> Vui lòng lựa thực hiện theo hướng dẫn bên
+      dưới.</p>
 
     <div class="choose-accounts-websites">
 
@@ -19,8 +20,12 @@
             <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account.adsId"
               (change)="onSelectAccount($event)">
               <span *ngIf="account.isFree == true">{{account.adsId}}</span>
-              <span *ngIf="account.isFree == false" class="vip-account">{{account.adsId}}</span>
-              <span *ngIf="account.isFree == false" class="vip-label" style="margin-left: 10px">VIP</span>
+              <span *ngIf="account.isFree == false" class="vip-account">
+                <span class="vip-account">{{account.adsId}}</span>
+                <span class="vip-label" style="margin-left: 10px">VIP</span>
+                <span class="vip-expiration"
+                  *ngIf="selectedAccount && websites[account.adsId].length > 0">{{websites[account.adsId][0].expiredAt | date: 'HH:mm dd/MM/yyyy'}}</span>
+              </span>
             </mat-radio-button>
           </mat-radio-group>
         </div>
@@ -32,8 +37,10 @@
               *ngFor="let website of websites[selectedAccount]; let i = index" [value]="website.domain"
               (change)="onSelectAccountWebsite(i)">
               <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
-              <span *ngIf="website.isExpired === false" class="vip-label" style="margin-left: 10px"
-                matTooltip="Hạn dùng đến: {{website.expiredAt | date: 'HH:mm dd/MM/yyyy'}}">VIP</span>
+              <span *ngIf="website.isExpired === false">
+                <span class="vip-label" style="margin-left: 10px">VIP</span>
+                <span class="vip-expiration">{{website.expiredAt | date: 'HH:mm dd/MM/yyyy'}}</span>
+              </span>
               <span *ngIf="website.isExpired === true" class="free-label" style="margin-left: 10px">FREE</span>
             </mat-radio-button>
           </mat-radio-group>
@@ -45,11 +52,11 @@
 
       <!--<p class="payment-title">Vui lòng lựa chọn hình thức thanh toán</p>-->
       <!--<p class="payment-buttons" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">-->
-        <!--<button mat-raised-button color="accent" matTooltip="Sắp ra mắt" disabled>CHUYỂN KHOẢN-->
-          <!--VCB</button>-->
-        <!--<button mat-raised-button color="basic" matTooltip="Sắp ra mắt" disabled>-->
-          <!--<img src="https://seeklogo.net/wp-content/uploads/2015/11/paypal-logo-preview.png" class="paypal-logo" alt="">-->
-        <!--</button>-->
+      <!--<button mat-raised-button color="accent" matTooltip="Sắp ra mắt" disabled>CHUYỂN KHOẢN-->
+      <!--VCB</button>-->
+      <!--<button mat-raised-button color="basic" matTooltip="Sắp ra mắt" disabled>-->
+      <!--<img src="https://seeklogo.net/wp-content/uploads/2015/11/paypal-logo-preview.png" class="paypal-logo" alt="">-->
+      <!--</button>-->
       <!--</p>-->
 
       <div class="website-code" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center">
@@ -72,8 +79,7 @@
       <mat-divider></mat-divider>
       <br>
       <mat-icon style="font-size: 20px; margin-top: 5px">keyboard_arrow_right</mat-icon>
-      <span
-        style="color: red; font-weight: bold">"Chuyển khoản"</span> theo nội dung bên trên. Hệ
+      <span style="color: red; font-weight: bold">"Chuyển khoản"</span> theo nội dung bên trên. Hệ
       thống sẽ tự động kiểm tra và nâng cấp VIP cho bạn.
       <br>
       <mat-icon style="font-size: 20px; margin-top: 5px">keyboard_arrow_right</mat-icon> Nếu gói VIP đang còn thời hạn,
@@ -92,7 +98,7 @@
           <mat-header-cell *matHeaderCellDef> Gói </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <!-- <img src="../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
-            <span class="vip-label">VIP</span>
+            <span class="vip-label" style="margin-right: 10px">VIP</span>
             <span style="color: #039be5; font-weight: bold">{{element.name}}</span>
           </mat-cell>
         </ng-container>

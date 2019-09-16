@@ -48,6 +48,7 @@
             </span>
             <span *ngIf="item.icon && item.icon.includes('vip')" class="vip-title">{{item.title}}
                 <span class="vip-label">VIP</span>
+                <span class="vip-expiration">{{item.id | date: 'dd/MM/yyyy'}}</span>
             </span>
         </span>
         <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AdwordsAccountListService } from '../adwords-account-list/adwords-account-list.service';
-import { SessionService } from 'app/shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
-import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-vip-payment',
@@ -46,9 +44,9 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
   adsAccountIdPipe = new AdsAccountIdPipe();
   accounts = [];
   websites = [];
-  selectedAccount: string;
-  selectedWebsite: string;
-  selectedWebsiteCode: string;
+  selectedAccount: string = '';
+  selectedWebsite: string = '';
+  selectedWebsiteCode: string = '';
   isProcessing: boolean = false;
 
   constructor(

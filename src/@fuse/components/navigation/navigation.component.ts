@@ -96,6 +96,7 @@ export class FuseNavigationComponent implements OnInit {
           let accounts = res.data.accounts;
           let activeAdsAccountId = '';
           let activeAccountId = '';
+          let vipExpiration = '';
 
           for (const item of accounts)
             this.isFreeAccounts[this.adsAccountIdPipe.transform(item.adsId)] = item.isFree;
@@ -105,6 +106,16 @@ export class FuseNavigationComponent implements OnInit {
             activeAdsAccountId = this._sessionService.activeAdsAccountId;
             this._sessionService.setAdwordId(activeAdsAccountId);
             this._sessionService.setAccountId(activeAccountId);
+
+            if (this.isFreeAccounts[this._sessionService.activeAdsAccountId] === false) {
+              const expirations = accounts.find(
+                item => this.adsAccountIdPipe.transform(item.adsId) === this._sessionService.activeAdsAccountId)
+                .websites.map(item => item.expiredAt);
+
+              if (expirations.length > 0)
+                vipExpiration = expirations[0];
+            }
+
           }
 
           if (accounts.length > 0) {
@@ -157,6 +168,7 @@ export class FuseNavigationComponent implements OnInit {
               this.accounts.children[0].icon = '../../../../../assets/icons/gg-ads-vip.png';
             }
 
+            this.accounts.children[0].id = vipExpiration || 'not-vip';
             this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
 
             this.accounts.children[2] = {
