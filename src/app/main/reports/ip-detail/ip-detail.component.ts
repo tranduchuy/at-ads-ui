@@ -40,8 +40,16 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   collapsedNodes: string[] = [];
 
   clicksDataSource = [];
-  clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isPrivateBrowsing', 'isSpam', 'href', 'os', 'browser', 'location'];
-  lastClickHistory: any;
+  clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isSpam', 'isPrivateBrowsing', 'href', 'os', 'browser', 'networkCompany', 'location'];
+  lastClickHistory: any = {
+    createdAt: '',
+    device: {
+      vendor: ''
+    },
+    location: {
+      city: ''
+    }
+  };
 
   treeControl = new NestedTreeControl<Node>(node => node.children);
   dataSource = new MatTreeNestedDataSource<Node>();
@@ -68,7 +76,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
             .subscribe(
               (accoundId: string) => {
                 if (accoundId)
-                  this.checkAccountConnection(accoundId);
+                  this.getIPClicksList(1);
               }
             );
           this.subscriptions.push(getAccountIdSub);
@@ -98,11 +106,11 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     }
   }
 
-  getIPClicksList() {
+  getIPClicksList(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
 
-    const sub = this._reportService.getIPClicksList({ ip: this.ip })
+    const sub = this._reportService.getIPClicksList({ ip: this.ip, page, limit: this.pageLimit })
       .subscribe(
         res => {
           // this.dataSource.data = (res.data || []).map((item, index) => {
@@ -127,7 +135,9 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
           // });
 
           this.clicksDataSource = res.data.items;
+
           this.lastClickHistory = res.data.last;
+
           this.totalItems = res.data.meta.totalItems;
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
@@ -195,7 +205,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
           else this.pageLimit = 10;
 
           //this.getIPHistory(this.ip, 1, this.pageLimit);
-          this.getIPClicksList();
+          this.getIPClicksList(1);
 
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
@@ -241,7 +251,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   }
 
   changePage(event) {
-    this.getIPHistory(this.ip, event, this.pageLimit);
+    this.getIPClicksList(event);
   }
 
 }
