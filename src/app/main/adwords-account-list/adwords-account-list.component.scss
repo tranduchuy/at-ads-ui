@@ -79,7 +79,7 @@
       background: rgba(3, 155, 229, 0.1);
       color: #039be5;
       font-weight: bold;
-      padding: 3px 4px 3px 4px; 
+      padding: 3px 4px 3px 4px;
     }
 
     .add-domain-button {
@@ -102,10 +102,10 @@
       li {
         transition: 0.2s;
         height: 30px;
-      }
 
-      li:hover {
-        background-color: rgba(3, 155, 229, 0.1);
+        &:hover {
+          background: rgba(3, 155, 229, 0.1);
+        }
       }
 
       mat-table {

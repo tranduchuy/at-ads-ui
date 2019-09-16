@@ -113,7 +113,9 @@
                       FREE - Nâng cấp VIP
                     </a>
                     <div *ngIf="website.isExpired === false">
-                      <span class="vip-label">VIP</span>
+                      <a routerLink="/nang-cap-vip">
+                        <span class="vip-label" matTooltip="Nhấn để gia hạn thêm VIP">VIP</span>
+                      </a>
                       <span
                         class="vip-expiration">{{(website.expiredAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</span>
                     </div>
