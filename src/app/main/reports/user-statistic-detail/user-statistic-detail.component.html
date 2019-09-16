@@ -116,10 +116,10 @@
             <ng-container matColumnDef="isPrivateBrowsing">
               <mat-header-cell *matHeaderCellDef>Ẩn danh</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <span *ngIf="!element.isPrivateBrowsing" style="color: orange; font-weight: bold">
+                <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
                   <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
                 </span>
-                <span *ngIf="element.isPrivateBrowsing" style="color:silver">Không</span>
+                <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
               </mat-cell>
             </ng-container>
 
