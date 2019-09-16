@@ -41,10 +41,10 @@
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold">
+            <span *ngIf="element.info[0].isSpam === true" style="color: crimson; font-weight: bold">
               <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
             </span>
-            <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold">
+            <span *ngIf="element.info[0].isSpam === false" style="color: #44b543; font-weight: bold">
               <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
             </span>
           </mat-cell>

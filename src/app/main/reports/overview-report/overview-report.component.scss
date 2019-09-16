@@ -118,7 +118,17 @@
 
             mat-header-cell:nth-child(3),
             mat-cell:nth-child(3) {
-              flex: 0 0 35%;
+              flex: 0 0 10%;
+              justify-content: left;
+
+              .user-percentage {
+                color: #039be5;
+              }
+            }
+
+            mat-header-cell:nth-child(4),
+            mat-cell:nth-child(4) {
+              flex: 0 0 5%;
               justify-content: center;
 
               .user-percentage {
@@ -194,6 +204,12 @@
 
           mat-header-cell:nth-child(3),
           mat-cell:nth-child(3) {
+            justify-content: left;
+            flex: 0 0 8%
+          }
+
+          mat-header-cell:nth-child(4),
+          mat-cell:nth-child(4) {
             justify-content: center;
           }
 

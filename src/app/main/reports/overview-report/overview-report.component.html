@@ -168,6 +168,11 @@
             </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="trafficSource">
+          <mat-header-cell *matHeaderCellDef> Nguồn/Phương tiện </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{TRAFFIC_SOURCE_TYPES[element.trafficSource - 1]}} </mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="session">
             <mat-header-cell *matHeaderCellDef> Số phiên </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.count || 0}} </mat-cell>
@@ -247,10 +252,10 @@
               {{element.networkCompany?.name || 'Unknown'}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="keyword">
-            <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>
-          </ng-container>
+          <!--<ng-container matColumnDef="keyword">-->
+            <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->
+            <!--<mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>-->
+          <!--</ng-container>-->
 
           <ng-container matColumnDef="location">
             <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
