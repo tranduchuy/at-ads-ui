@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class IpRangesClickingReportComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['time', 'ip', 'clicks', 'keyword', 'location', 'network'];
+  displayedColumns: string[] = ['time', 'ip', 'clicks', 'location', 'network'];
 
   selectedDateRange: any = {
     start: moment().subtract(6, 'days'),

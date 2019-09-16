@@ -13,7 +13,7 @@ import { DialogService } from 'app/shared/services/dialog.service';
 })
 export class IpClickingReportComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['time', 'ip', 'clicks', 'status', 'location', 'os', 'browser', 'isPrivateBrowsing', 'network', 'keyword'];
+  displayedColumns: string[] = ['time', 'ip', 'clicks', 'status', 'location', 'os', 'browser', 'isPrivateBrowsing', 'network'];
 
   dataSource = [];
 

@@ -16,7 +16,7 @@ import * as moment from 'moment';
 export class UserStatisticDetailComponent extends PageBaseComponent implements OnInit {
 
   uuid: string;
-  historyColumns: string[] = ['accessTime', 'ip', 'action', 'website', 'os', 'browser', 'isPrivateBrowsing', 'keyword', 'location'];
+  historyColumns: string[] = ['accessTime', 'ip', 'action', 'website', 'os', 'browser', 'isPrivateBrowsing', 'location'];
   history = [];
   lastHistory: any = {
     createdAt: '',
