@@ -32,42 +32,42 @@
             <mat-header-cell *matHeaderCellDef> Google Ads ID </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <div fxLayout="row">
-                <p style="width: 170px; color: #4bb543; font-weight: bold"
-                  *ngIf="element.isConnected && element.websites.length > 0">
+                <p style="color: #4bb543; font-weight: bold" *ngIf="element.isConnected && element.websites.length > 0"
+                  fxFlex="70">
 
                   <span style="margin-right: 10px"
                     matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">{{element.adsId | adsAccountId}}</span>
 
-                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip"
-                    matTooltip="Nâng cấp VIP ngay!" style="padding-left:0">
-                    FREE
+                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
+                    style="padding-left:0">
+                    FREE - Nâng cấp VIP
                   </a>
 
                 </p>
-                <p style="width: 170px;color: orange; font-weight: bold"
-                  *ngIf="element.isConnected && element.websites.length === 0">
+                <p style="color: orange; font-weight: bold" *ngIf="element.isConnected && element.websites.length === 0"
+                  fxFlex="70">
 
                   <span style="margin-right: 10px"
                     matTooltip="Tài khoản chưa có website nào.">{{element.adsId | adsAccountId}}</span>
 
-                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip"
-                    matTooltip="Nâng cấp VIP ngay!" style="padding-left:0">
-                    FREE
+                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
+                    style="padding-left:0">
+                    FREE - Nâng cấp VIP
                   </a>
 
                 </p>
-                <p style="width: 170px; color: silver; font-weight: bold" *ngIf="!element.isConnected">
+                <p style="color: silver; font-weight: bold" *ngIf="!element.isConnected" fxFlex="70">
 
                   <span style="margin-right: 10px"
                     matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">{{element.adsId | adsAccountId}}</span>
 
-                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip"
-                    matTooltip="Nâng cấp VIP ngay!" style="padding-left:0">
-                    FREE
+                  <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
+                    style="padding-left:0">
+                    FREE - Nâng cấp VIP
                   </a>
 
                 </p>
-                <div fxLayout="row">
+                <div fxLayout="row" fxFlex="30">
                   <button mat-icon-button color="accent" matTooltip="Xem báo cáo tổng quan"
                     (click)="navigateToSpamClickReport(element.id, element.adsId)">
                     <mat-icon>notifications</mat-icon>
@@ -103,20 +103,20 @@
               <ul class="website-list" *ngIf="element.websites.length > 0">
                 <li *ngFor="let website of element.websites, let i = index" fxLayout="row"
                   fxLayoutAlign="center center">
-                  <div style="padding-left: 5px" fxFlex="90">
+                  <div style="padding-left: 5px" fxFlex="55">
                     <span>{{i+1}}</span>.
                     <a href="{{website.domain}}" target="_blank">
                       {{website.domain}}</a>
                   </div>
-                  <div fxFlex="12">
-                    <a *ngIf="website.isExpired === true" class="free-label" routerLink="/nang-cap-vip"
-                      matTooltip="Nâng cấp VIP ngay!">
-                      FREE
+                  <div fxFlex="35">
+                    <a *ngIf="website.isExpired === true" class="free-label" routerLink="/nang-cap-vip" matTooltip="">
+                      FREE - Nâng cấp VIP
                     </a>
-                    <span *ngIf="website.isExpired === false" class="vip-label"
-                      matTooltip="Hạn dùng đến: {{(website.expiredAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}">
-                      VIP
-                    </span>
+                    <div *ngIf="website.isExpired === false">
+                      <span class="vip-label">VIP</span>
+                      <span
+                        class="vip-expiration">{{(website.expiredAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</span>
+                    </div>
                   </div>
                   <div fxFlex="10">
                     <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
@@ -127,7 +127,7 @@
                 </li>
               </ul>
               <button (click)="navigateToWebsiteManagement(element.id, element.campaignNumber)" mat-button
-                class="add-domain-button" [disabled]="isProcessing" color="accent" *ngIf="element.websites.length < 2"> 
+                class="add-domain-button" [disabled]="isProcessing" color="accent" *ngIf="element.websites.length < 2">
                 <mat-icon>add_circle_outline</mat-icon> Thêm Website
               </button>
               <button mat-button class="add-domain-button" color="accent" *ngIf="element.websites.length >= 2" disabled>
@@ -161,7 +161,7 @@
               <ng-container matColumnDef="service">
                 <mat-header-cell *matHeaderCellDef> Dịch vụ </mat-header-cell>
                 <mat-cell *matCellDef="let element"> <span [class.vip-service]="element.service === 'VIP (17/06/2019)'"
-                    [class.free-service]="element.service === 'MIỄN PHÍ - NÂNG VIP'">{{element.service}}</span> </mat-cell>
+                    [class.free-service]="element.service === 'MIỄN PHÍ - NÂNG VIP'">{{element.service}}</div> </mat-cell>
               </ng-container>
       
               <ng-container matColumnDef="cost">

@@ -16,7 +16,7 @@ import * as moment from 'moment';
 export class UserStatisticDetailComponent extends PageBaseComponent implements OnInit {
 
   uuid: string;
-  historyColumns: string[] = ['accessTime', 'ip', 'website', 'os', 'browser', 'isPrivateBrowsing', 'keyword', 'location'];
+  historyColumns: string[] = ['accessTime', 'ip', 'action', 'website', 'os', 'browser', 'isPrivateBrowsing', 'keyword', 'location'];
   history = [];
   lastHistory: any = {
     createdAt: '',
@@ -106,7 +106,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     const startDate = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const endDate = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
 
-    const sub = this._reportService.getUserStatisticDetail({id, startDate, endDate, page, limit})
+    const sub = this._reportService.getUserStatisticDetail({ id, startDate, endDate, page, limit })
       .subscribe(
         res => {
 

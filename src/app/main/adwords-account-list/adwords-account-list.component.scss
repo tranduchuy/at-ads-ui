@@ -69,6 +69,17 @@
       text-shadow: none;
       filter: drop-shadow(0px 1px 1px black);
       border-radius: 2px;
+      transition: 0.2s;
+    }
+
+    .vip-expiration {
+      font-size: 12px;
+      text-align: center;
+      margin-left: 5px;
+      background: rgba(3, 155, 229, 0.1);
+      color: #039be5;
+      font-weight: bold;
+      padding: 3px 4px 3px 4px; 
     }
 
     .add-domain-button {
@@ -125,13 +136,13 @@
 
       mat-header-cell:nth-child(3),
       mat-cell:nth-child(3) {
-        flex: 0 0 25%;
+        flex: 0 0 26%;
       }
 
       mat-header-cell:nth-child(4),
       mat-cell:nth-child(4) {
         justify-content: center;
-        flex: 0 0 15%;
+        flex: 0 0 17%;
       }
 
       mat-cell:nth-child(5) {
@@ -150,7 +161,7 @@
 
       mat-row,
       mat-header-row {
-        min-width: 1200px;
+        min-width: 1400px;
         width: 100%;
       }
     }
