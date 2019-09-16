@@ -60,6 +60,8 @@ export interface IGetBlockedIpListParams {
 
 export interface IGetIPClicksListParams {
   ip: string;
+  page?: number;
+  limit?: number;
 }
 
 export interface IGetIPClickDetails {
@@ -210,6 +212,11 @@ export class ReportService {
     const activeAccountId = this._sessionService.getValueOfAccountId();
     let url = API.Report.getIPClicksList.replace('{account_id}', activeAccountId);
     url = url.replace('{ip}', params.ip);
+
+    if (params.page !== undefined)
+      url += `?page=${params.page}`;
+    if (params.limit !== undefined)
+      url += `&limit=${params.limit}`;
 
     return this._http.get(url);
   }
