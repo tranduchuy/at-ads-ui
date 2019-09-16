@@ -24,7 +24,7 @@
                 <span class="vip-account">{{account.adsId}}</span>
                 <span class="vip-label" style="margin-left: 10px">VIP</span>
                 <span class="vip-expiration"
-                  *ngIf="selectedAccount && websites[account.adsId].length > 0">{{websites[account.adsId][0].expiredAt | date: 'HH:mm dd/MM/yyyy'}}</span>
+                  *ngIf="selectedAccount && websites[account.adsId].length > 0">({{websites[account.adsId][0].expiredAt | date: 'dd/MM/yyyy'}})</span>
               </span>
             </mat-radio-button>
           </mat-radio-group>
@@ -39,7 +39,7 @@
               <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
               <span *ngIf="website.isExpired === false">
                 <span class="vip-label" style="margin-left: 10px">VIP</span>
-                <span class="vip-expiration">{{website.expiredAt | date: 'HH:mm dd/MM/yyyy'}}</span>
+                <span class="vip-expiration">({{website.expiredAt | date: 'dd/MM/yyyy'}})</span>
               </span>
               <span *ngIf="website.isExpired === true" class="free-label" style="margin-left: 10px">FREE</span>
             </mat-radio-button>

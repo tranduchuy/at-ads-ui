@@ -41,15 +41,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
 
   clicksDataSource = [];
   clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isPrivateBrowsing', 'href', 'os', 'browser', 'networkCompany', 'location'];
-  lastClickHistory: any = {
-    createdAt: '',
-    device: {
-      vendor: ''
-    },
-    location: {
-      city: ''
-    }
-  };
+  lastClickHistory: any;
 
   treeControl = new NestedTreeControl<Node>(node => node.children);
   dataSource = new MatTreeNestedDataSource<Node>();

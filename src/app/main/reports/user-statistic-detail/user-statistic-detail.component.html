@@ -186,19 +186,7 @@
           <div class="title">
             Thiết bị truy cập cuối
             <div style="color: gray">
-              <img *ngIf="lastHistory.os?.name === 'Windows'"
-                   src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
-              <img *ngIf="lastHistory.os?.name === 'iOS'"
-                   src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
-                   alt="" class="icon">
-              <img *ngIf="lastHistory.os?.name === 'Android'"
-                   src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
-              <img *ngIf="lastHistory.os?.name === 'Mac OS'"
-                   src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
-                   alt="" class="icon">
-              <img *ngIf="lastHistory.os?.name === 'Linux'"
-                   src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
-              {{(lastHistory.os?.name || 'Unknown') + ' ' + (lastHistory.os?.version || '')}}
+              {{lastHistory.device?.vendor || 'Unknown'}}
             </div>
           </div>
         </div>

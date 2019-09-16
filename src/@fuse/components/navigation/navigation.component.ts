@@ -130,6 +130,15 @@ export class FuseNavigationComponent implements OnInit {
               activeAccountId = accounts[0].id.toString();
             }
 
+            if (this.isFreeAccounts[this._sessionService.activeAdsAccountId] === false) {
+              const expirations = accounts.find(
+                item => this.adsAccountIdPipe.transform(item.adsId) === this._sessionService.activeAdsAccountId)
+                .websites.map(item => item.expiredAt);
+
+              if (expirations.length > 0)
+                vipExpiration = expirations[0];
+            }
+
             accounts = accounts.filter(account => {
               return this.adsAccountIdPipe.transform(account.adsId) !== activeAdsAccountId;
             });

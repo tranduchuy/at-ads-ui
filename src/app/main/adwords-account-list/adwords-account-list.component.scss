@@ -78,13 +78,13 @@
     }
 
     .vip-expiration {
-      font-size: 12px;
+      //font-size: 12px;
       text-align: center;
       margin-left: 5px;
-      background: rgba(3, 155, 229, 0.1);
+      //background: rgba(3, 155, 229, 0.1);
       color: #039be5;
       font-weight: bold;
-      padding: 3px 4px 3px 4px;
+      //padding: 3px 4px 3px 4px;
     }
 
     .add-domain-button {
@@ -131,23 +131,23 @@
 
       mat-header-cell:nth-child(1),
       mat-cell:nth-child(1) {
-        flex: 0 0 5%;
+        flex: 0 0 8%;
       }
 
       mat-header-cell:nth-child(2),
       mat-cell:nth-child(2) {
-        flex: 0 0 9%;
+        flex: 0 0 12%;
       }
 
       mat-header-cell:nth-child(3),
       mat-cell:nth-child(3) {
-        flex: 0 0 22%;
+        flex: 0 0 30%;
       }
 
       mat-header-cell:nth-child(4),
       mat-cell:nth-child(4) {
         justify-content: center;
-        flex: 0 0 7%;
+        flex: 0 0 12%;
       }
 
       mat-cell:nth-child(5) {
@@ -166,7 +166,7 @@
 
       mat-row,
       mat-header-row {
-        min-width: 1400px;
+        min-width: 1200px;
         width: 100%;
       }
     }

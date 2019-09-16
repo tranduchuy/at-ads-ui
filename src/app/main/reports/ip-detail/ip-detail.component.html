@@ -9,9 +9,11 @@
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center start">
 
-        <div class="left" fxFlex="29">
-          <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
-          <p style="color: #039be5; font-weight: bold">IP: {{ip}}</p>
+        <div class="left" fxFlex="29" fxFlex.xs="100">
+          <div class="ip-main-info" fxLayout="column" fxLayoutAlign="center center">
+            <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
+            <p style="color: #039be5; font-weight: bold">IP: {{ip}}</p>
+          </div>
 
           <div class="bottom" fxLayout="column" fxLayoutGap="17px" fxLayoutAlign="center start">
             <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
@@ -20,17 +22,17 @@
               </div>
               <div class="title" style="text-align: left">
                 Ngày ghi nhận cuối
-                <div style="color: gray">
+                <div style="color: gray" *ngIf="lastClickHistory">
                   {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>
               </div>
             </div>
-            <div class="access-location" fxLayout="row" fxLayoutGap="12px">
+            <div class="access-location" fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="center center">
               <div class="last-history-icon">
                 <mat-icon color="accent">location_on</mat-icon>
               </div>
               <div class="title" style="text-align: left">
                 Vị trí truy cập
-                <div style="color: gray" >
+                <div style="color: gray" *ngIf="lastClickHistory">
                   {{lastClickHistory.location?.city || 'Unknown'}}
                 </div>
               </div>
@@ -41,20 +43,8 @@
               </div>
               <div class="title" style="text-align: left">
                 Thiết bị truy cập cuối
-                <div style="color: gray">
-                  <img *ngIf="lastClickHistory.os?.name === 'Windows'"
-                       src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
-                  <img *ngIf="lastClickHistory.os?.name === 'iOS'"
-                       src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
-                       alt="" class="icon">
-                  <img *ngIf="lastClickHistory.os?.name === 'Android'"
-                       src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
-                  <img *ngIf="lastClickHistory.os?.name === 'Mac OS'"
-                       src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
-                       alt="" class="icon">
-                  <img *ngIf="lastClickHistory.os?.name === 'Linux'"
-                       src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
-                  {{(lastClickHistory.os?.name || 'Unknown') + ' ' + (lastClickHistory.os?.version || '')}}
+                <div style="color: gray" *ngIf="lastClickHistory">
+                  {{lastClickHistory.device?.vendor || 'Unknown'}}
                 </div>
               </div>
             </div>
@@ -198,14 +188,15 @@
             <ng-container matColumnDef="type">
               <mat-header-cell *matHeaderCellDef>Click Ads/Xem trang</mat-header-cell>
               <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
-                <mat-icon *ngIf="element.type === 2" style="margin-right: 10px; color: snow"
-                          matTooltip="Xem trang">remove_red_eye</mat-icon>
+                <mat-icon *ngIf="element.type === 2" style="margin-right: 10px; color: white" matTooltip="Xem trang">
+                  remove_red_eye</mat-icon>
 
-                <mat-icon *ngIf="element.isSpam === true && element.type === 1" style="margin-right: 10px; color: crimson"
-                          matTooltip="Đã chặn và không bị tính tiền">verified_user</mat-icon>
+                <mat-icon *ngIf="element.isSpam === true && element.type === 1"
+                  style="margin-right: 10px; color: crimson" matTooltip="Đã chặn và không bị tính tiền">verified_user
+                </mat-icon>
 
                 <mat-icon *ngIf="element.isSpam === false && element.type === 1" style="margin-right: 10px; color: gold"
-                          matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
+                  matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
                 <p *ngIf="element.type === 1">Click Quảng cáo</p>
                 <p *ngIf="element.type === 2">Xem trang</p>
               </mat-cell>
@@ -229,20 +220,20 @@
             </ng-container>
 
             <!--<ng-container matColumnDef="isSpam">-->
-              <!--<mat-header-cell *matHeaderCellDef>Nhận diện</mat-header-cell>-->
-              <!--<mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">-->
-                <!--<span *ngIf="element.isSpam === true && element.type === 1" style="color: crimson; font-weight: bold">-->
-                  <!--<mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn-->
-                <!--</span>-->
-                <!--<span *ngIf="element.isSpam === false && element.type === 1" style="color: #44b543; font-weight: bold">-->
-                  <!--<mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ-->
-                <!--</span>-->
+            <!--<mat-header-cell *matHeaderCellDef>Nhận diện</mat-header-cell>-->
+            <!--<mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">-->
+            <!--<span *ngIf="element.isSpam === true && element.type === 1" style="color: crimson; font-weight: bold">-->
+            <!--<mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn-->
+            <!--</span>-->
+            <!--<span *ngIf="element.isSpam === false && element.type === 1" style="color: #44b543; font-weight: bold">-->
+            <!--<mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ-->
+            <!--</span>-->
 
-                <!--<span *ngIf="element.type === 2" style="color: snow;">-->
-                  <!--<mat-icon style="font-size: 18px">remove_red_eye</mat-icon> Xem trang-->
-                <!--</span>-->
+            <!--<span *ngIf="element.type === 2" style="color: snow;">-->
+            <!--<mat-icon style="font-size: 18px">remove_red_eye</mat-icon> Xem trang-->
+            <!--</span>-->
 
-              <!--</mat-cell>-->
+            <!--</mat-cell>-->
             <!--</ng-container>-->
 
             <ng-container matColumnDef="isPrivateBrowsing">
@@ -258,7 +249,8 @@
             <ng-container matColumnDef="href">
               <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
               <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
-                <a href="{{element.href}}">{{element.href.toString().replace("https://", "").replace("http://", "").split("/")[1]}}</a>
+                <a
+                  href="{{element.href}}">{{element.href.toString().replace("https://", "").replace("http://", "").split("/")[1]}}</a>
               </mat-cell>
             </ng-container>
 
@@ -330,14 +322,14 @@
 
       </div>
 
-      <div fxLayout="row" fxLayoutGap="15px" *ngIf="pageTotal !== 1">
-        <div fxFlex="20"></div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" *ngIf="pageTotal !== 1">
+        <div fxFlex="29"></div>
         <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
-          <div fxFlex="70">
+          <div fxFlex="61">
             <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
                 ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
               {{pageTotal}} trang</p>
-            <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+            <!-- <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p> -->
           </div>
           <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
             nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
