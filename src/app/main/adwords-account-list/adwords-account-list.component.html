@@ -132,9 +132,12 @@
                 class="add-domain-button" [disabled]="isProcessing" color="accent" *ngIf="element.websites.length < 2">
                 <mat-icon>add_circle_outline</mat-icon> Thêm Website
               </button>
-              <button mat-button class="add-domain-button" color="accent" *ngIf="element.websites.length >= 2" disabled>
-                <mat-icon>add_circle_outline</mat-icon> Thêm Website
-              </button>
+              <span *ngIf="element.websites.length >= 2">
+                <button mat-button class="add-domain-button" color="accent" disabled>
+                  <mat-icon>add_circle_outline</mat-icon> Thêm Website
+                </button>
+                <span class="caution"><span style="color: red">*</span><b>Chú ý:</b> Số lượng website của tài khoản này đã đạt tối đa.</span>
+              </span>
             </mat-cell>
           </ng-container>
 

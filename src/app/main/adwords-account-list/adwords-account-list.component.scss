@@ -24,6 +24,11 @@
       padding: 10px;
     }
 
+    .caution {
+      font-size: 12px;
+      color: gray;
+    }
+
     .vip-icon {
       height: 18px;
       width: 18px;
@@ -131,12 +136,12 @@
 
       mat-header-cell:nth-child(2),
       mat-cell:nth-child(2) {
-        flex: 0 0 13%;
+        flex: 0 0 11%;
       }
 
       mat-header-cell:nth-child(3),
       mat-cell:nth-child(3) {
-        flex: 0 0 26%;
+        flex: 0 0 27%;
       }
 
       mat-header-cell:nth-child(4),

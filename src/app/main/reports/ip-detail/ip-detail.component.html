@@ -13,7 +13,7 @@
           <p style="color: #039be5; font-weight: bold">IP: {{ip}}</p>
         </div>
 
-        <div class="right" *ngIf="dataSource.data.length > 0">
+        <!-- <div class="right" *ngIf="dataSource.data.length > 0">
 
           <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -125,9 +125,6 @@
                     <div fxLayout="row" fxLayoutGap="10px">
                       <span fxFlex="12" fxFlex.xs="25">Thiết bị:</span>
                       <span style="color: gray; margin-left: 5px">{{node.device.vendor || 'Unknown'}}</span></div>
-                    <!-- <div fxLayout="row" fxLayoutGap="10px">
-                      <span fxFlex="12">Hệ điều hành:</span>
-                      <span style="color: gray; margin-left: 5px">{{node.name}}</span></div> -->
                     <div fxLayout="row" fxLayoutGap="10px">
                       <span fxFlex="12" fxFlex.xs="25">Trình duyệt:</span>
                       <span
@@ -143,12 +140,91 @@
             </mat-nested-tree-node>
           </mat-tree>
 
+        </div> -->
+
+        <div class="mat-elevation-z8 table-wrapper">
+
+          <mat-table
+            [dataSource]="clicksDataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }">
+
+            <ng-container matColumnDef="type">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <mat-icon *ngIf="element.type === 1" style="color: gold">monetization_on</mat-icon>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="createdAt">
+              <mat-header-cell *matHeaderCellDef>Thời gian</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="uuid">
+              <mat-header-cell *matHeaderCellDef>Người dùng</mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index">
+                <span style="color: #039be5">Người dùng {{i + 1}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="isPrivateBrowsing">
+              <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
+                  <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+                </span>
+                <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="isSpam">
+              <mat-header-cell *matHeaderCellDef>Nhận diện</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold">
+                  <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
+                </span>
+                <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold">
+                  <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="href">
+              <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <a href="{{element.href}}">Link tại đây</a>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="os">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <img *ngIf="element.os?.name === 'Windows'"
+                  src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
+                <img *ngIf="element.os?.name === 'iOS'"
+                  src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
+                  alt="" class="icon">
+                <img *ngIf="element.os?.name === 'Android'"
+                  src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
+                <img *ngIf="element.os?.name === 'Mac OS'"
+                  src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
+                  alt="" class="icon">
+                <img *ngIf="element.os?.name === 'Linux'"
+                  src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
+                {{(element.os?.name || 'Unknown') + ' ' + (element.os?.version || '')}}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="clicksDataSourceCols; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: clicksDataSourceCols;"></mat-row>
+          </mat-table>
 
         </div>
 
       </div>
 
-      <!-- <div fxLayout="row" fxLayoutGap="15px" *ngIf="pageTotal !== 1">
+      <div fxLayout="row" fxLayoutGap="15px" *ngIf="pageTotal !== 1">
         <div fxFlex="20"></div>
         <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
           <div fxFlex="70">
@@ -160,7 +236,7 @@
           <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
             nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
         </div>
-      </div> -->
+      </div>
 
       <div class="bottom" fxLayout="column" fxLayoutGap="17px" fxLayoutAlign="center start">
         <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">

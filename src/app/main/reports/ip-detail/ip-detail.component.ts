@@ -36,8 +36,12 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   currentPageNumber: number;
   totalItems: number;
   pageTotal: number;
-  pageLimit: number;
+  pageLimit: number = 10;
   collapsedNodes: string[] = [];
+
+  clicksDataSource = [];
+  clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isPrivateBrowsing', 'isSpam', 'href', 'os', 'browser', 'location'];
+  lastClickHistory: any;
 
   treeControl = new NestedTreeControl<Node>(node => node.children);
   dataSource = new MatTreeNestedDataSource<Node>();
@@ -101,31 +105,40 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     const sub = this._reportService.getIPClicksList({ ip: this.ip })
       .subscribe(
         res => {
-          this.dataSource.data = (res.data || []).map((item, index) => {
-            return {
-              name: [moment(item.timestamp).format('HH:mm DD/MM/YYYY')],
-              index,
-              id: item._id,
-              device: item.device || 'Unknown',
-              browser: item.os || 'Unknown',
-              children: [
-                {
-                  name: [''],
-                  index,
-                  id: item._id
-                }
-              ],
-              logs: {
-                device: item.device,
-                location: item.location
-              }
-            }
-          });
+          // this.dataSource.data = (res.data || []).map((item, index) => {
+          //   return {
+          //     name: [moment(item.timestamp).format('HH:mm DD/MM/YYYY')],
+          //     index,
+          //     id: item._id,
+          //     device: item.device || 'Unknown',
+          //     browser: item.os || 'Unknown',
+          //     children: [
+          //       {
+          //         name: [''],
+          //         index,
+          //         id: item._id
+          //       }
+          //     ],
+          //     logs: {
+          //       device: item.device,
+          //       location: item.location
+          //     }
+          //   }
+          // });
+
+          this.clicksDataSource = res.data.items;
+          this.lastClickHistory = res.data.last;
+          this.totalItems = res.data.meta.totalItems;
+          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
+          this.clicksDataSource = [];
+          this.lastClickHistory = {};
+          this.totalItems = 0;
+          this.pageTotal = 0;
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
