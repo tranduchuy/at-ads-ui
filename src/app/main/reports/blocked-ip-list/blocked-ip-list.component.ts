@@ -96,12 +96,11 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
       .subscribe(
         (res: ILoginSuccess) => {
 
+          this.getBlockedIPsListReport(this.currentPageNumber);
+
           setTimeout(() => {
             this._fuseProgressBarService.hide();
             this._dialogService._openSuccessDialog(res);
-
-            this.getBlockedIPsListReport(this.currentPageNumber);
-
             this.isProcessing = false;
           }, 0);
         },

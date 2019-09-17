@@ -168,7 +168,7 @@ export class ReportService {
 
   removeAutoBlockedIP(params: IRemoveAutoBlockedIPParmas): Observable<any> {
     const activeAccountId = this._sessionService.getValueOfAccountId();
-    const url = API.Report.getBlockedIPsListReport.replace('{account_id}', activeAccountId);
+    const url = API.Report.removeAutoBLockedIP.replace('{account_id}', activeAccountId);
 
     const options = {
       headers: new HttpHeaders({
