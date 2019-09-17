@@ -118,7 +118,6 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
                   this.getAccounts();
 
                   setTimeout(() => {
-                    this._fuseNavigationService.reloadNavigation();
                     this._fuseProgressiveBarService.hide();
                     this._dialogService._openSuccessDialog(res);
                   }, 0);

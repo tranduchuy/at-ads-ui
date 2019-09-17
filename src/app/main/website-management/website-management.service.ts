@@ -19,17 +19,22 @@ export class WebsiteManagementService {
     return this._http.get(API.AdwordsAccount.getAccounts);
   }
 
+  removeWebsite(websiteId: string): Observable<any> {
+    const url = API.Website.removeWebsite.replace('{website_id}', websiteId);
+    return this._http.delete(url);
+  }
+
   getWebsites(accountId: string): Observable<any> {
     const url = API.Website.getWebsites.replace('{accountId}', accountId);
     return this._http.get(url);
   }
 
-  addWebsite(params: AddWebsiteParams): Observable<any>{
+  addWebsite(params: AddWebsiteParams): Observable<any> {
     return this._http.post(API.Website.addWebsite, params);
   }
 
   getWebsiteTrackingInfo(accountId: string): Observable<any> {
-    const url =  API.Website.getWebsiteTrackingInfo.replace('{account_id}', accountId);
+    const url = API.Website.getWebsiteTrackingInfo.replace('{account_id}', accountId);
     return this._http.get(url);
   }
 

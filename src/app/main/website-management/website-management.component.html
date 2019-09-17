@@ -35,7 +35,7 @@
         [isDisabled]="isProcessing"></app-select-text>
 
       <p>
-        <strong>Tên miền (domain) website của bạn vào ô bên dưới</strong>
+        <strong>Vui lòng nhập tên miền website của bạn vào ô bên dưới</strong>
       </p>
       <div fxLayout="row" fxLayout.xs="column">
         <app-input-text [formControlName]="'domain'" [errors]="getMessageErrors('domain')"
@@ -87,6 +87,9 @@
               [routerLink]="['/gan-tracking/website', selectedAccountId]">
               <mat-icon style="font-size: 20px">close</mat-icon> Chưa có
             </a>
+            <button (click)="openRemoveWebsiteConfirmDialog(element.code)" class="delete-button" mat-icon-button color="accent" matTooltip="Xóa website" [disabled]="isProcessing">
+              <mat-icon style="color: silver; margin-top: -5px">delete</mat-icon>
+            </button>
           </mat-cell>
         </ng-container>
 

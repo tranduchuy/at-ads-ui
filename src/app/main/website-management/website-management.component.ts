@@ -222,6 +222,39 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     this.subscriptions.push(sub);
   }
 
+  openRemoveWebsiteConfirmDialog(websiteId: string) {
+    const confirmDialogSub = this._dialogService._openConfirmDialog('Xóa website này khỏi tài khoản Google Ads?')
+      .subscribe(
+        (isAccepted) => {
+          if (isAccepted) {
+            this.isProcessing = true;
+            this._fuseProgressiveBarService.show();
+
+            const sub = this._websiteManagementService.removeWebsite(websiteId)
+              .subscribe(
+                (res: ILoginSuccess) => {
+
+                  this.getWebsites();
+
+                  setTimeout(() => {
+                    this._fuseProgressiveBarService.hide();
+                    this._dialogService._openSuccessDialog(res);
+                    this.isProcessing = false;
+                  }, 0);
+                },
+                (error: HttpErrorResponse) => {
+                  if (error.error.messages) {
+                    this._dialogService._openErrorDialog(error.error);
+                  }
+                  this._fuseProgressiveBarService.hide();
+                  this.isProcessing = false;
+                });
+            this.subscriptions.push(sub);
+          }
+        });
+    this.subscriptions.push(confirmDialogSub);
+  }
+
   onSelectAdsId(event) {
     this.selectedAdsId = event.value.text;
     this.selectedAccountId = event.value.value;
