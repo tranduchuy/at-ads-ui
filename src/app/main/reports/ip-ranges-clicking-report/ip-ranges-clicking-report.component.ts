@@ -47,8 +47,10 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
   ngOnInit() {
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
-        if (accountId)
+        if (accountId) {
+          this.pageTotal = 0;
           this.getClassDClickingReport(1);
+        }
       });
     this.subscriptions.push(sub);
   }

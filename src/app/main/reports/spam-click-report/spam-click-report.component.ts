@@ -46,6 +46,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
+          this.pageTotal = 0;
           this.selectedAccountId = accountId;
           this.setSelectedAdsId(accountId);
           this.getAccountStatisticReport(accountId);

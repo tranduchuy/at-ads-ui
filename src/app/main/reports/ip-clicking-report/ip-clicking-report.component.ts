@@ -35,8 +35,10 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
   ngOnInit() {
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
-        if (accountId)
+        if (accountId) {
+          this.pageTotal = 0;
           this.getDailyClickingReport(1);
+        }
       });
     this.subscriptions.push(sub);
   }

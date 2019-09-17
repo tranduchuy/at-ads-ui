@@ -63,6 +63,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
             .subscribe(
               (accoundId: string) => {
                 if (accoundId) {
+                  this.pageTotal = 0;
                   this.checkAccountConnection(accoundId);
                 }
               }

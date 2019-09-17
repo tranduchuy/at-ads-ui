@@ -67,8 +67,10 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
           const getAccountIdSub = this._sessionService.getAccountId()
             .subscribe(
               (accoundId: string) => {
-                if (accoundId)
+                if (accoundId) {
+                  this.pageTotal = 0;
                   this.getIPClicksList(1);
+                }
               }
             );
           this.subscriptions.push(getAccountIdSub);

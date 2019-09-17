@@ -41,9 +41,9 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
     setTimeout(() => {
       this._fuseProgressBarService.show();
     }, 0);
-    const sub = this._addTrackingTagsService.getWebsites(this.account.accountId)
+    const sub = this._addTrackingTagsService.getWebsiteTrackingInfo(this.account.accountId)
       .subscribe(res => {
-        this.websites = res.data.website;
+        this.websites = res.data.websites;
 
         this._fuseProgressBarService.hide();
       },

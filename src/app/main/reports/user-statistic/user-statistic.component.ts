@@ -49,6 +49,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
+          this.pageTotal = 0;
           this.selectedAccountId = accountId;
           this.getStatisticUserReport(accountId, 1);
         }

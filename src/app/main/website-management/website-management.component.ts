@@ -119,11 +119,10 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
 
-    const sub = this._websiteManagementService.getWebsites(this.selectedAccountId)
+    const sub = this._websiteManagementService.getWebsiteTrackingInfo(this.selectedAccountId)
       .subscribe(
         res => {
-          this.websites = res.data.website;
-
+          this.websites = res.data.websites;
           this._fuseProgressiveBarService.hide();
           this.isProcessing = false;
         },

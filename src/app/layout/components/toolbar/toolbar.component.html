@@ -1,60 +1,59 @@
-<mat-toolbar class="p-0 mat-elevation-z1" fxLayout="column">
+<mat-toolbar class="p-0 mat-elevation-z1">
 
-    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
 
-        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
 
-            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar"
-                (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
-                <mat-icon style="color: inherit">menu</mat-icon>
-            </button>
+        <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar"
+            (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+            <mat-icon style="color: inherit">menu</mat-icon>
+        </button>
 
-            <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
+        <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
 
-            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
-                <div class="logo ml-16">
-                    <img class="logo-icon" src="assets/images/logos/fuse.svg">
-                </div>
+        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
+            <div class="logo ml-16">
+                <img class="logo-icon" src="assets/images/logos/fuse.svg">
             </div>
-
-            <div class="px-8 px-md-16">
-                <!-- <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts> -->
-            </div>
-
         </div>
 
-        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+        <div class="px-8 px-md-16">
+            <!-- <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts> -->
+        </div>
 
-            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="avatar mr-0 mr-sm-16"
-                        [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
-                    <span class="username mr-12" fxHide fxShow.gt-sm>{{ user.name || '' }}</span>
-                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
-                </div>
+    </div>
+
+    <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+
+        <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <img class="avatar mr-0 mr-sm-16"
+                    [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                <span class="username mr-12" fxHide fxShow.gt-sm>{{ user.name || '' }}</span>
+                <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+            </div>
+        </button>
+
+        <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+
+            <a routerLink="/nang-cap-vip" mat-menu-item style="color: #44b543; font-weight: bold">
+                <!-- <img src="../../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
+                <mat-icon style="color: #44b433">arrow_upward</mat-icon>
+                <span>Nâng cấp <span class="vip-label" style="margin-left: 5px">VIP</span></span>
+            </a>
+
+            <a routerLink="/nguoi-dung/thong-tin-ca-nhan" mat-menu-item>
+                <mat-icon>account_circle</mat-icon>
+                <span>Thông tin cá nhân</span>
+            </a>
+
+            <button mat-menu-item class="" (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Đăng xuất</span>
             </button>
 
-            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+        </mat-menu>
 
-                <a routerLink="/nang-cap-vip" mat-menu-item style="color: #44b543; font-weight: bold">
-                    <!-- <img src="../../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
-                    <mat-icon style="color: #44b433">arrow_upward</mat-icon>
-                    <span>Nâng cấp <span class="vip-label" style="margin-left: 5px">VIP</span></span>
-                </a>
-
-                <a routerLink="/nguoi-dung/thong-tin-ca-nhan" mat-menu-item>
-                    <mat-icon>account_circle</mat-icon>
-                    <span>Thông tin cá nhân</span>
-                </a>
-
-                <button mat-menu-item class="" (click)="logout()">
-                    <mat-icon>exit_to_app</mat-icon>
-                    <span>Đăng xuất</span>
-                </button>
-
-            </mat-menu>
-
-            <!-- <div class="toolbar-separator"></div>
+        <!-- <div class="toolbar-separator"></div>
 
             <fuse-search-bar (input)="search($event)"></fuse-search-bar>
 
@@ -91,8 +90,6 @@
                 (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
                 <mat-icon class="secondary-text">menu</mat-icon>
             </button> -->
-
-        </div>
 
     </div>
 
