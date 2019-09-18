@@ -44,6 +44,22 @@
       box-shadow: 1px 1px 3px silver;
       overflow: auto;
 
+      .ip-detail-link {
+        font-weight: bold;
+        padding-left: 2px;
+        transition: 0.2s;
+
+        &:hover {
+          background: rgba(3, 155, 229, 0.1);
+        }
+      }
+
+      .user-action-icon {
+        margin-right: 10px;
+        font-size: 20px;
+        margin-top: 5px;
+      }
+
       mat-table {
         box-shadow: none;
 
@@ -60,7 +76,9 @@
         }
 
         mat-header-cell:nth-child(5),
-        mat-cell:nth-child(5) {
+        mat-cell:nth-child(5),
+        mat-header-cell:nth-child(7),
+        mat-cell:nth-child(7) {
           justify-content: center;
         }
 

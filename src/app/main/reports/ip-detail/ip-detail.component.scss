@@ -116,6 +116,24 @@
       mat-table {
         box-shadow: none;
 
+        .uuid-detail-link {
+          padding-left: 0;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          font-weight: bold;
+
+          &:hover {
+            background: rgba(3, 155, 229, 0.1);
+          }
+        }
+
+        .user-action-icon {
+          margin-right: 10px;
+          font-size: 20px;
+          margin-top: 5px;
+        }
+
         mat-row {
           transition: 0.2s;
 
@@ -145,6 +163,13 @@
           }
         }
 
+        mat-header-cell:nth-child(6),
+        mat-cell:nth-child(6),
+        mat-header-cell:nth-child(7),
+        mat-cell:nth-child(7) {
+          flex: 0 0 13%;
+        }
+
         mat-header-cell:nth-child(1),
         mat-cell:nth-child(1) {
           flex: 0 0 12%;
@@ -169,6 +194,13 @@
 
     .os-icon {
       margin-left: 3px;
+    }
+
+    .user-image {
+      height: 30px;
+      width: 30px;
+      margin-right: 10px;
+      border-radius: 50%;
     }
 
     .pagination-buttons {

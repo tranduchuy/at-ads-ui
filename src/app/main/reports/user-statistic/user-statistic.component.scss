@@ -64,66 +64,76 @@
       overflow: auto;
       overflow-y: hidden;
 
-      .table-uuid {
-        padding-left: 0;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-
       mat-table {
         box-shadow: none;
-      }
 
-      mat-header-cell:nth-child(1),
-      mat-cell:nth-child(1) {
-        flex: 0 0 14%;
-      }
+        .uuid-detail-link {
+          padding-left: 0;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          font-weight: bold;
 
-      mat-header-cell:nth-child(3),
-      mat-cell:nth-child(3) {
-        flex: 0 0 5%;
-        justify-content: center;
-      }
+          &:hover {
+            background: rgba(3, 155, 229, 0.1);
+          }
+        }
 
-      mat-header-cell:nth-child(2),
-      mat-cell:nth-child(2) {
-        flex: 0 0 17%;
-      }
+        mat-header-cell:nth-child(1),
+        mat-cell:nth-child(1) {
+          flex: 0 0 14%;
+        }
 
-      mat-header-cell:nth-child(5),
-      mat-cell:nth-child(5),
-      mat-header-cell:nth-child(6),
-      mat-cell:nth-child(6),
-      mat-header-cell:nth-child(7),
-      mat-cell:nth-child(7) {
-        flex: 0 0 12%;
-      }
+        mat-header-cell:nth-child(3),
+        mat-cell:nth-child(3) {
+          flex: 0 0 5%;
+          justify-content: center;
+        }
 
-      mat-cell:nth-child(4) {
-        padding-top: 10px;
-        padding-bottom: 10px;
-      }
+        mat-header-cell:nth-child(4),
+        mat-cell:nth-child(4) {
+          justify-content: center;
+        }
 
-      mat-header-cell {
-        background: #039be5;
-        color: white;
-      }
+        mat-header-cell:nth-child(2),
+        mat-cell:nth-child(2) {
+          flex: 0 0 17%;
+        }
 
-      mat-row:hover {
-        background-color: rgba(3, 155, 229, 0.1);
-      }
+        mat-header-cell:nth-child(5),
+        mat-cell:nth-child(5),
+        mat-header-cell:nth-child(6),
+        mat-cell:nth-child(6),
+        mat-header-cell:nth-child(7),
+        mat-cell:nth-child(7) {
+          flex: 0 0 12%;
+        }
 
-      ul {
-        list-style: none;
-        padding-left: 0;
-      }
+        mat-cell:nth-child(4) {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
 
-      mat-header-row,
-      mat-row {
-        min-width: 1100px;
-        width: 100%;
-        transition: 0.2s;
+        mat-header-cell {
+          background: #039be5;
+          color: white;
+        }
+
+        mat-row:hover {
+          background-color: rgba(3, 155, 229, 0.1);
+        }
+
+        ul {
+          list-style: none;
+          padding-left: 0;
+        }
+
+        mat-header-row,
+        mat-row {
+          min-width: 1100px;
+          width: 100%;
+          transition: 0.2s;
+        }
       }
     }
   }

@@ -5,6 +5,7 @@ import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-b
 import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-ip-clicking-report',
@@ -21,7 +22,9 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
     public _sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _reportService: ReportService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {
     super();
   }
@@ -37,7 +40,24 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
       .subscribe((accountId: string) => {
         if (accountId) {
           this.pageTotal = 0;
-          this.getDailyClickingReport(1);
+
+          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+          if (page) {
+            if(isNaN(Number(page)))
+              return;
+            this.currentPageNumber = Number(page);
+          }        
+          else {
+            this.currentPageNumber = 1;
+            this._router.navigate([], {
+              queryParams: {
+                page: this.currentPageNumber,
+              }
+            });
+          }
+
+          this.getDailyClickingReport(this.currentPageNumber);
         }
       });
     this.subscriptions.push(sub);
@@ -70,6 +90,11 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
 
   changePage(event) {
     this.getDailyClickingReport(event);
+    this._router.navigate([], {
+      queryParams: {
+        page: event,
+      }
+    });
   }
 
 }

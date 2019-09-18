@@ -48,12 +48,12 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   hasChild = (_: number, node: Node) => !!node.children && node.children.length > 0;
 
   constructor(
-    private _activatedRoute: ActivatedRoute,
-    private _router: Router,
     private _fuseProgressBarService: FuseProgressBarService,
     public _sessionService: SessionService,
     private _reportService: ReportService,
     private _dialogService: DialogService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {
     super();
   }
@@ -68,8 +68,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
             .subscribe(
               (accoundId: string) => {
                 if (accoundId) {
-                  this.pageTotal = 0;
-                  this.getIPClicksList(1);
+                  this.checkAccountAcceptance();
                 }
               }
             );
@@ -80,26 +79,6 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
-  showUUIDs(node: Node) {
-    const endId = node.id;
-    const index = node.index;
-
-    if (this.dataSource.data[index].children[0].name[0] === '') {
-      if (this.collapsedNodes.includes(endId))
-        this.collapsedNodes = this.collapsedNodes.filter(item => item !== endId);
-      else {
-        this.collapsedNodes.push(endId);
-        let startId: string;
-
-        if (this.dataSource.data[index + 1] !== undefined)
-          startId = this.dataSource.data[index + 1].id;
-        else startId = null;
-
-        this.getIPClickDetails(startId, endId, index);
-      }
-    }
-  }
-
   getIPClicksList(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
@@ -107,31 +86,8 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     const sub = this._reportService.getIPClicksList({ ip: this.ip, page, limit: this.pageLimit })
       .subscribe(
         res => {
-          // this.dataSource.data = (res.data || []).map((item, index) => {
-          //   return {
-          //     name: [moment(item.timestamp).format('HH:mm DD/MM/YYYY')],
-          //     index,
-          //     id: item._id,
-          //     device: item.device || 'Unknown',
-          //     browser: item.os || 'Unknown',
-          //     children: [
-          //       {
-          //         name: [''],
-          //         index,
-          //         id: item._id
-          //       }
-          //     ],
-          //     logs: {
-          //       device: item.device,
-          //       location: item.location
-          //     }
-          //   }
-          // });
-
           this.clicksDataSource = res.data.items;
-
           this.lastClickHistory = res.data.last;
-
           this.totalItems = res.data.meta.totalItems;
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
@@ -150,66 +106,33 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
-  getIPClickDetails(startId: string, endId: string, index: number) {
-    this.isProcessing = true;
-    this._fuseProgressBarService.show();
+  checkAccountAcceptance() {
+    const sub = this._sessionService.getAccountAcceptance()
+      .subscribe((isAccepted: boolean) => {
+        this.pageTotal = 0;
 
-    const sub = this._reportService.getIPClickDetails({ ip: this.ip, startId, endId })
-      .subscribe(
-        res => {
+        if (isAccepted === true)
+          this.pageLimit = 20;
+        else this.pageLimit = 10;
 
-          let resData = JSON.parse(JSON.stringify(res.data));
+        const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
-          if (resData.length > 0) {
-            this.dataSource.data[index].children = (resData)
-              .map((child, childIndex) => {
-                return {
-                  name: [child._id || 'Unknown'],
-                  id: '',
-                  index: childIndex,
-                  logs: child.logs
-                }
-              });
-
-            resData = this.dataSource.data;
-            this.dataSource.data = null;
-            this.dataSource.data = resData;
-          }
-
-          this._fuseProgressBarService.hide();
-          this.isProcessing = false;
-        },
-        (error: HttpErrorResponse) => {
-          this._fuseProgressBarService.hide();
-          this.isProcessing = false;
-          this._dialogService._openErrorDialog(error.error);
-        });
-    this.subscriptions.push(sub);
-  }
-
-  checkAccountConnection(accountId: string) {
-    this.isProcessing = true;
-    this._fuseProgressBarService.show();
-
-    const sub = this._reportService.getAdwordsAccountDetail(accountId)
-      .subscribe(
-        res => {
-          if (res.data.adsAccount.isConnected)
-            this.pageLimit = 20;
-          else this.pageLimit = 10;
-
-          //this.getIPHistory(this.ip, 1, this.pageLimit);
-          this.getIPClicksList(1);
-
-          this._fuseProgressBarService.hide();
-          this.isProcessing = false;
-        },
-        (error: HttpErrorResponse) => {
-          this._fuseProgressBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
-          this.isProcessing = false;
+        if (page) {
+          if (isNaN(Number(page)))
+            return;
+          this.currentPageNumber = Number(page);
         }
-      );
+        else {
+          this.currentPageNumber = 1;
+          this._router.navigate([], {
+            queryParams: {
+              page: this.currentPageNumber,
+            }
+          });
+        }
+
+        this.getIPClicksList(this.currentPageNumber);
+      });
     this.subscriptions.push(sub);
   }
 
@@ -220,13 +143,11 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     const sub = this._reportService.getIPHistory({ ip, page, limit })
       .subscribe(
         res => {
-
           this.history = res.data.history;
+          this.lastHistory = res.data.last;
 
           this.totalItems = res.data.totalItems;
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
-
-          this.lastHistory = res.data.last;
 
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
@@ -246,6 +167,11 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
 
   changePage(event) {
     this.getIPClicksList(event);
+    this._router.navigate([], {
+      queryParams: {
+        page: event,
+      }
+    });
   }
 
 }

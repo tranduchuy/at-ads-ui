@@ -32,10 +32,9 @@
             <mat-header-cell *matHeaderCellDef> Google Ads ID </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <div fxLayout="row">
-                <p style="color: #4bb543; font-weight: bold" *ngIf="element.isConnected && element.websites.length > 0"
-                  fxFlex="70">
+                <p style="color: #4bb543" *ngIf="element.isConnected && element.websites.length > 0" fxFlex="70">
 
-                  <span style="margin-right: 10px"
+                  <span class="ads-account"
                     matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">{{element.adsId | adsAccountId}}</span>
 
                   <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
@@ -44,10 +43,9 @@
                   </a>
 
                 </p>
-                <p style="color: orange; font-weight: bold" *ngIf="element.isConnected && element.websites.length === 0"
-                  fxFlex="70">
+                <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="70">
 
-                  <span style="margin-right: 10px"
+                  <span class="ads-account"
                     matTooltip="Tài khoản chưa có website nào.">{{element.adsId | adsAccountId}}</span>
 
                   <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
@@ -56,9 +54,9 @@
                   </a>
 
                 </p>
-                <p style="color: silver; font-weight: bold" *ngIf="!element.isConnected" fxFlex="70">
+                <p style="color: silver" *ngIf="!element.isConnected" fxFlex="70">
 
-                  <span style="margin-right: 10px"
+                  <span class="ads-account"
                     matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">{{element.adsId | adsAccountId}}</span>
 
                   <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
@@ -116,8 +114,7 @@
                       <a routerLink="/nang-cap-vip">
                         <span class="vip-label" matTooltip="Nhấn để gia hạn thêm VIP">VIP</span>
                       </a>
-                      <span
-                        class="vip-expiration">({{(website.expiredAt | date: 'dd/MM/yyyy') || 'Unknown'}})</span>
+                      <span class="vip-expiration">({{(website.expiredAt | date: 'dd/MM/yyyy') || 'Unknown'}})</span>
                     </div>
                   </div>
                   <div fxFlex="10">
@@ -136,7 +133,8 @@
                 <button mat-button class="add-domain-button" color="accent" disabled>
                   <mat-icon>add_circle_outline</mat-icon> Thêm Website
                 </button>
-                <span class="caution"><span style="color: red">*</span><b>Chú ý:</b> Số lượng website của tài khoản này đã đạt tối đa.</span>
+                <span class="caution"><span style="color: red">*</span><b>Chú ý:</b> Số lượng website của tài khoản này
+                  đã đạt tối đa.</span>
               </span>
             </mat-cell>
           </ng-container>

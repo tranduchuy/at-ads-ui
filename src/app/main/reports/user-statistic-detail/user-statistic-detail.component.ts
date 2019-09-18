@@ -42,12 +42,13 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   };
 
   constructor(
-    private _activatedRoute: ActivatedRoute,
-    private _router: Router,
     private _fuseProgressBarService: FuseProgressBarService,
     public _sessionService: SessionService,
     private _reportService: ReportService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
+    
   ) {
     super();
   }
@@ -59,12 +60,12 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
         if (params.uuid) {
           this.uuid = params.uuid;
           this.shortUuid = '*' + params.uuid.slice(-12) + '*';
+          
           const getAccountIdSub = this._sessionService.getAccountId()
             .subscribe(
               (accoundId: string) => {
                 if (accoundId) {
-                  this.pageTotal = 0;
-                  this.checkAccountConnection(accoundId);
+                 this.checkAccountAcceptance();
                 }
               }
             );
@@ -75,30 +76,33 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     this.subscriptions.push(sub);
   }
 
-  checkAccountConnection(accountId: string) {
-    this.isProcessing = true;
-    this._fuseProgressBarService.show();
+  checkAccountAcceptance() {
+    const sub = this._sessionService.getAccountAcceptance()
+      .subscribe((isAccepted: boolean) => {
+        this.pageTotal = 0;
 
-    const sub = this._reportService.getAdwordsAccountDetail(accountId)
-      .subscribe(
-        res => {
-          if (res.data.adsAccount.isConnected) {
-            this.pageLimit = 20;
-          } else {
-            this.pageLimit = 10;
-          }
+        if (isAccepted === true)
+          this.pageLimit = 20;
+        else this.pageLimit = 10;
 
-          this.getUserStatisticDetail(this.uuid, 1, this.pageLimit);
+        const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
-          this._fuseProgressBarService.hide();
-          this.isProcessing = false;
-        },
-        (error: HttpErrorResponse) => {
-          this._fuseProgressBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
-          this.isProcessing = false;
+        if (page) {
+          if (isNaN(Number(page)))
+            return;
+          this.currentPageNumber = Number(page);
         }
-      );
+        else {
+          this.currentPageNumber = 1;
+          this._router.navigate([], {
+            queryParams: {
+              page: this.currentPageNumber,
+            }
+          });
+        }
+
+        this.getUserStatisticDetail(this.uuid,this.currentPageNumber,this.pageLimit);
+      });
     this.subscriptions.push(sub);
   }
 
@@ -140,10 +144,15 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   }
 
   changePage(event) {
+    this._router.navigate([], {
+      queryParams: {
+        page: event,
+      }
+    });
     this.getUserStatisticDetail(this.uuid, event, this.pageLimit);
   }
 
-  onApplyDateRange(event) {
+  onSelectDateRange(event) {
     if (moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 14) {
       this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 14 ngày trở lại');
       return false;
@@ -151,5 +160,14 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     return true;
   }
 
+  onApplyDateRange() {
+    this.currentPageNumber = 1;
+    this._router.navigate([], {
+      queryParams: {
+        page: this.currentPageNumber,
+      }
+    });
+    this.getUserStatisticDetail(this.uuid, this.currentPageNumber, this.pageLimit);
+  }
 }
 

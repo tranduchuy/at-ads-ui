@@ -6,6 +6,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SessionService } from 'app/shared/services/session.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview-report',
@@ -142,7 +143,9 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     private _dialogService: DialogService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _reportService: ReportService,
-    public _sessionService: SessionService
+    public _sessionService: SessionService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
 
   ) {
     super();
@@ -155,9 +158,27 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          this.pageTotal = 0;
           this.getStatisticTrafficSourceReport();
-          this.getSessionReport(1);
+
+          this.pageTotal = 0;
+          
+          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+          if (page) {
+            if(isNaN(Number(page)))
+              return;
+            this.currentPageNumber = Number(page);
+          }        
+          else {
+            this.currentPageNumber = 1;
+            this._router.navigate([], {
+              queryParams: {
+                page: this.currentPageNumber,
+              }
+            });
+          }
+
+          this.getSessionReport(this.currentPageNumber);
         }
       });
     this.subscriptions.push(sub);
@@ -191,6 +212,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
+          this.pageTotal = 0;
         }
       );
     this.subscriptions.push(sub);
@@ -206,9 +228,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     const sub = this._reportService.getStatisticTrafficSourceReport({ from: start, to: end })
       .subscribe(
         res => {
-
-          this.totalItems = 60;
-          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
           let data = JSON.parse(JSON.stringify(res.data.TrafficSourceData));
 
@@ -256,12 +275,18 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   }
 
   onApplyDateRange() {
-    this.getStatisticTrafficSourceReport();
     this.currentPageNumber = 1;
-    this.getSessionReport(1);
+    this._router.navigate(['', { page: this.currentPageNumber }]);
+    this.getStatisticTrafficSourceReport();
+    this.getSessionReport(this.currentPageNumber);
   }
 
   changePage(event) {
     this.getSessionReport(event);
+    this._router.navigate([], {
+      queryParams: {
+        page: event,
+      }
+    });
   }
 }

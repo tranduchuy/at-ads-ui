@@ -17,7 +17,7 @@ import { OverviewReportComponent } from './overview-report/overview-report.compo
       {
         path: 'luu-luong-truy-cap',
         pathMatch: 'full',
-        component: OverviewReportComponent
+        component: OverviewReportComponent,
       },
       {
         path: 'click-ao',

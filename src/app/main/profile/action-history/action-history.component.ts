@@ -4,6 +4,7 @@ import { ProfileService } from '../profile.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface History {
   createdAt: Date;
@@ -22,26 +23,45 @@ export class ActionHistoryComponent extends PageBaseComponent implements OnInit 
   currentPageNumber: number;
   pageTotal: number;
   totalItems: number;
+  pageLimit: number = 20;
   isProcessing: boolean;
 
   constructor(
     private _profileService: ProfileService,
     private _fuseProgressBarService: FuseProgressBarService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {
     super();
   }
 
   ngOnInit() {
-    this.getActionHistory(1);
+    this.pageTotal = 0;
+    const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+    if (page) {
+      if (isNaN(Number(page)))
+        return;
+      this.currentPageNumber = Number(page);
+    }
+    else {
+      this.currentPageNumber = 1;
+      this._router.navigate([], {
+        queryParams: {
+          page: this.currentPageNumber,
+        }
+      });
+    }
+
+    this.getActionHistory(this.currentPageNumber);
   }
 
   getActionHistory(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-    const limit = 20;
 
-    const sub = this._profileService.getActionHistory({ page, limit })
+    const sub = this._profileService.getActionHistory({ page, limit: this.pageLimit })
       .subscribe(
         res => {
 
@@ -53,22 +73,28 @@ export class ActionHistoryComponent extends PageBaseComponent implements OnInit 
           });
 
           this.totalItems = res.data.totalItems;
-          this.pageTotal = Math.ceil(this.totalItems / limit);
+          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
           this.history = [];
-          this._dialogService._openErrorDialog(error.error);
+          this.pageTotal = 0;
         });
     this.subscriptions.push(sub);
   }
 
   changePage(event) {
     this.getActionHistory(event);
+    this._router.navigate([], {
+      queryParams: {
+        page: event,
+      }
+    });
   }
 
 }

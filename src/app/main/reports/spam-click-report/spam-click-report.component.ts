@@ -6,7 +6,7 @@ import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-b
 import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 
 @Component({
@@ -42,6 +42,174 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
   adsAccountIdPipe = new AdsAccountIdPipe();
 
+  constructor(
+    public _sessionService: SessionService,
+    private _fuseProgressBarService: FuseProgressBarService,
+    private _reportService: ReportService,
+    private _dialogService: DialogService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
+  ) {
+
+    super();
+
+    this.pieChart = {
+      legend: false,
+      explodeSlices: false,
+      labels: true,
+      doughnut: true,
+      gradient: false,
+      scheme: {
+        domain: ['#039be5', '#f44336']
+      },
+      dataSource: [
+        {
+          name: '',
+          value: 0
+        },
+        {
+          name: '',
+          value: 0
+        },
+      ],
+    };
+
+    this.lineChart = {
+      chartType: 'line',
+      datasets: {
+        report: [
+          {
+            label: '',
+            data: [],
+            fill: 'start'
+
+          },
+          {
+            label: '',
+            data: [],
+            fill: 'start'
+          }
+        ],
+      },
+      labels: [],
+      colors: [
+        {
+          borderColor: '#35afea',
+          backgroundColor: 'rgba(0,0,0,0)',
+          pointBackgroundColor: 'white',
+          pointHoverBackgroundColor: '#35afea',
+          pointBorderColor: '#35afea',
+          pointHoverBorderColor: '#35afea'
+        },
+        {
+          borderColor: '#f44336',
+          backgroundColor: 'rgba(0,0,0,0)',
+          pointBackgroundColor: 'white',
+          pointHoverBackgroundColor: '#f44336',
+          pointBorderColor: '#f44336',
+          pointHoverBorderColor: '#f44336'
+        }
+      ],
+      options: {
+        spanGaps: false,
+        legend: {
+          display: true
+        },
+        maintainAspectRatio: false,
+        tooltips: {
+          position: 'nearest',
+          mode: 'index',
+          intersect: false
+        },
+        layout: {
+          padding: {
+            left: 24,
+            right: 32,
+            top: 20
+          }
+        },
+        elements: {
+          point: {
+            radius: 4,
+            borderWstatusth: 2,
+            hoverRadius: 4,
+            hoverBorderWstatusth: 2
+          },
+          line: {
+            tension: 0
+          }
+        },
+        scales: {
+          xAxes: [{}],
+          yAxes: [
+            {
+              status: 'y-axis-0',
+              position: 'left',
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
+        },
+        plugins: {
+          filler: {
+            propagate: false
+          }
+        }
+      }
+    }
+
+  };
+
+  rightTableColumns = ['order', 'time', 'phone', 'network'];
+  rightTable = [
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+    {
+      time: '19:40 06/06',
+      phone: '0908xxx191',
+      network: 'VNPT'
+    },
+  ]
+
   ngOnInit() {
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
@@ -50,7 +218,24 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           this.selectedAccountId = accountId;
           this.setSelectedAdsId(accountId);
           this.getAccountStatisticReport(accountId);
-          this.getAccountReport(accountId, 1);
+
+          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+          if (page) {
+            if(isNaN(Number(page)))
+              return;
+            this.currentPageNumber = Number(page);
+          }        
+          else {
+            this.currentPageNumber = 1;
+            this._router.navigate([], {
+              queryParams: {
+                page: this.currentPageNumber,
+              }
+            });
+          }
+
+          this.getAccountReport(accountId, this.currentPageNumber);
         }
       });
     this.subscriptions.push(sub);
@@ -58,6 +243,11 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
   changePage(event) {
     this.getAccountReport(this.selectedAccountId, event);
+    this._router.navigate([], {
+      queryParams: {
+        page: event,
+      }
+    });
   }
 
   setSelectedAdsId(accountId: string) {
@@ -95,7 +285,12 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   onApplyDateRange() {
     this.getAccountStatisticReport(this._sessionService.activeAccountId);
     this.currentPageNumber = 1;
-    this.getAccountReport(this._sessionService.activeAccountId, 1);
+    this._router.navigate([], {
+      queryParams: {
+        page: this.currentPageNumber,
+      }
+    });
+    this.getAccountReport(this._sessionService.activeAccountId, this.currentPageNumber);
   }
 
   getAccountReport(accountId: string, page?: number) {
@@ -283,171 +478,4 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         });
     this.subscriptions.push(sub);
   }
-
-  constructor(
-    public _sessionService: SessionService,
-    private _fuseProgressBarService: FuseProgressBarService,
-    private _reportService: ReportService,
-    private _dialogService: DialogService,
-    private _activatedRoute: ActivatedRoute
-  ) {
-
-    super();
-
-    this.pieChart = {
-      legend: false,
-      explodeSlices: false,
-      labels: true,
-      doughnut: true,
-      gradient: false,
-      scheme: {
-        domain: ['#039be5', '#f44336']
-      },
-      dataSource: [
-        {
-          name: '',
-          value: 0
-        },
-        {
-          name: '',
-          value: 0
-        },
-      ],
-    };
-
-    this.lineChart = {
-      chartType: 'line',
-      datasets: {
-        report: [
-          {
-            label: '',
-            data: [],
-            fill: 'start'
-
-          },
-          {
-            label: '',
-            data: [],
-            fill: 'start'
-          }
-        ],
-      },
-      labels: [],
-      colors: [
-        {
-          borderColor: '#35afea',
-          backgroundColor: 'rgba(0,0,0,0)',
-          pointBackgroundColor: 'white',
-          pointHoverBackgroundColor: '#35afea',
-          pointBorderColor: '#35afea',
-          pointHoverBorderColor: '#35afea'
-        },
-        {
-          borderColor: '#f44336',
-          backgroundColor: 'rgba(0,0,0,0)',
-          pointBackgroundColor: 'white',
-          pointHoverBackgroundColor: '#f44336',
-          pointBorderColor: '#f44336',
-          pointHoverBorderColor: '#f44336'
-        }
-      ],
-      options: {
-        spanGaps: false,
-        legend: {
-          display: true
-        },
-        maintainAspectRatio: false,
-        tooltips: {
-          position: 'nearest',
-          mode: 'index',
-          intersect: false
-        },
-        layout: {
-          padding: {
-            left: 24,
-            right: 32,
-            top: 20
-          }
-        },
-        elements: {
-          point: {
-            radius: 4,
-            borderWstatusth: 2,
-            hoverRadius: 4,
-            hoverBorderWstatusth: 2
-          },
-          line: {
-            tension: 0
-          }
-        },
-        scales: {
-          xAxes: [{}],
-          yAxes: [
-            {
-              status: 'y-axis-0',
-              position: 'left',
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        },
-        plugins: {
-          filler: {
-            propagate: false
-          }
-        }
-      }
-    }
-
-  };
-
-  rightTableColumns = ['order', 'time', 'phone', 'network'];
-  rightTable = [
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-    {
-      time: '19:40 06/06',
-      phone: '0908xxx191',
-      network: 'VNPT'
-    },
-  ]
 }

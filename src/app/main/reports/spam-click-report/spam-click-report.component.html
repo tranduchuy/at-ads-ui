@@ -92,10 +92,10 @@
             <mat-cell *matCellDef="let element">
 
               <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
-                style="font-weight: bold; padding-left: 0" mat-button color="accent">
-                <mat-icon *ngIf="element.isSpam === true" style="color: red; margin-right: 5px; font-size: 18px">not_interested
+                class="ip-detail-link" mat-button color="accent">
+                <mat-icon *ngIf="element.isSpam === true" style="color: red" class="ip-symbol">not_interested
                 </mat-icon>
-                <mat-icon *ngIf="element.isSpam === false" style="color:silver; margin-right: 5px; font-size: 18px">
+                <mat-icon *ngIf="element.isSpam === false" style="color:silver" class="ip-symbol">
                   not_interested
                 </mat-icon>
                 {{element.ip}}

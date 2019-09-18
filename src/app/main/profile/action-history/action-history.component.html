@@ -6,7 +6,7 @@
     <div class="table-wrapper">
 
       <mat-table
-        [dataSource]="history | paginate: { itemsPerPage: 20, currentPage: currentPageNumber, totalItems: totalItems }"
+        [dataSource]="history | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }"
         class="mat-elevation-z8">
 
         <ng-container matColumnDef="datetime">
@@ -30,7 +30,7 @@
       <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
           ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
         {{pageTotal}} trang</p>
-      <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+      <p *ngIf="pageTotal === 0" style="color: gray">Chưa có ghi nhận nào.</p>
       <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
         nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
     </div>

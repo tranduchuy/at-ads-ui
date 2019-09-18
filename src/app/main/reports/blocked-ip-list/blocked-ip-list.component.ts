@@ -6,6 +6,7 @@ import { ReportService } from '../report.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface BlockedIP {
   _id: string;
@@ -35,7 +36,9 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
     public _sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _dialogService: DialogService,
-    private _reportService: ReportService
+    private _reportService: ReportService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {
     super();
   }
@@ -45,7 +48,24 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
       .subscribe((accountId: string) => {
         if (accountId) {
           this.pageTotal = 0;
-          this.getBlockedIPsListReport(1);
+
+          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+          if (page) {
+            if (isNaN(Number(page)))
+              return;
+            this.currentPageNumber = Number(page);
+          }
+          else {
+            this.currentPageNumber = 1;
+            this._router.navigate([], {
+              queryParams: {
+                page: this.currentPageNumber,
+              }
+            });
+          }
+
+          this.getBlockedIPsListReport(this.currentPageNumber);
         }
       });
     this.subscriptions.push(sub);
@@ -123,6 +143,11 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
 
   changePage(event) {
     this.getBlockedIPsListReport(event);
+    this._router.navigate([], {
+      queryParams: {
+        page: event,
+      }
+    });
   }
 
 }

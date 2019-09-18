@@ -6,6 +6,7 @@ import { ReportService } from '../report.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-ip-ranges-clicking-report',
@@ -39,7 +40,9 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
     public _sessionService: SessionService,
     private _dialogService: DialogService,
     private _reportService: ReportService,
-    private _fuseProgressBarService: FuseProgressBarService
+    private _fuseProgressBarService: FuseProgressBarService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {
     super();
   }
@@ -49,7 +52,24 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
       .subscribe((accountId: string) => {
         if (accountId) {
           this.pageTotal = 0;
-          this.getClassDClickingReport(1);
+
+          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+          if (page) {
+            if(isNaN(Number(page)))
+              return;
+            this.currentPageNumber = Number(page);
+          }        
+          else {
+            this.currentPageNumber = 1;
+            this._router.navigate([], {
+              queryParams: {
+                page: this.currentPageNumber,
+              }
+            });
+          }
+
+          this.getClassDClickingReport(this.currentPageNumber);
         }
       });
     this.subscriptions.push(sub);
@@ -88,13 +108,28 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
 
   changePage(event) {
     this.getClassDClickingReport(event);
+    this._router.navigate([], {
+      queryParams: {
+        page: event,
+      }
+    });
   }
 
-  onApplyDateRange(event) {
+  onSelectDateRange(event) {
     if (moment(event.endDate).diff(moment(event.startDate), 'days') + 1 > 14) {
       this._dialogService._openInfoDialog('Vui lòng chọn khoảng thời gian thống kê trong vòng 14 ngày trở lại');
       return false;
     }
     return true;
+  }
+
+  onApplyDateRange() {
+    this.currentPageNumber = 1;
+    this._router.navigate([], {
+      queryParams: {
+        page: this.currentPageNumber,
+      }
+    });
+    this.getClassDClickingReport(this.currentPageNumber);
   }
 }

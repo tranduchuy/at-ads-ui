@@ -22,7 +22,7 @@
           <mat-cell *matCellDef="let element">
 
             <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
-              style="font-weight: bold; padding-left: 0" mat-button color="accent">
+              class="ip-detail-link" mat-button color="accent">
               {{element._id}}
             </a>
 
@@ -118,9 +118,9 @@
         </ng-container>
 
         <!--<ng-container matColumnDef="keyword">-->
-          <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->
-          <!--<mat-cell *matCellDef="let element"> {{element.info[0].keyword || 'Unknown'}}-->
-          <!--</mat-cell>-->
+        <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->
+        <!--<mat-cell *matCellDef="let element"> {{element.info[0].keyword || 'Unknown'}}-->
+        <!--</mat-cell>-->
         <!--</ng-container>-->
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
