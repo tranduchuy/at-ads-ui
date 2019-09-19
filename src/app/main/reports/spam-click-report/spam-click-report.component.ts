@@ -37,6 +37,11 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     applyLabel: 'Áp dụng',
     cancelLabel: 'Đóng',
   };
+  ranges: any = {
+    'Hôm nay': [moment(), moment()],
+    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    '1 tuần': [moment().subtract(6, 'days'), moment()],
+  }
 
   selectedAdsId: string;
 

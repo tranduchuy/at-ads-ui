@@ -40,6 +40,11 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     applyLabel: 'Áp dụng',
     cancelLabel: 'Đóng',
   };
+  ranges: any = {
+    'Hôm nay': [moment(), moment()],
+    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    '1 tuần': [moment().subtract(6, 'days'), moment()],
+  }
 
   constructor(
     private _fuseProgressBarService: FuseProgressBarService,

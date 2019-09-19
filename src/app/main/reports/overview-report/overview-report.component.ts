@@ -45,6 +45,11 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     applyLabel: 'Áp dụng',
     cancelLabel: 'Đóng',
   };
+  ranges: any = {
+    'Hôm nay': [moment(), moment()],
+    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    '1 tuần': [moment().subtract(6, 'days'), moment()],
+  }
 
   highlinePagesCols: string[] = ['order', 'activePage', 'userOnAction'];
   highlinePages = [
@@ -161,14 +166,14 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this.getStatisticTrafficSourceReport();
 
           this.pageTotal = 0;
-          
+
           const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
           if (page) {
-            if(isNaN(Number(page)))
+            if (isNaN(Number(page)))
               return;
             this.currentPageNumber = Number(page);
-          }        
+          }
           else {
             this.currentPageNumber = 1;
             this._router.navigate([], {
@@ -276,7 +281,11 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   onApplyDateRange() {
     this.currentPageNumber = 1;
-    this._router.navigate(['', { page: this.currentPageNumber }]);
+    this._router.navigate([], {
+      queryParams: {
+        page: this.currentPageNumber,
+      }
+    });
     this.getStatisticTrafficSourceReport();
     this.getSessionReport(this.currentPageNumber);
   }
