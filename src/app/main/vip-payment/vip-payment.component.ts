@@ -45,6 +45,7 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
   accounts = [];
   websites = [];
   selectedAccount: string = '';
+  selectedAccountId: string = '';
   selectedWebsite: string = '';
   selectedWebsiteCode: string = '';
   isProcessing: boolean = false;
@@ -72,6 +73,7 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
           this.accounts = (data || [])
             .map(item => {
               return {
+                id: item.id,
                 adsId: this.adsAccountIdPipe.transform(item.adsId),
                 isFree: item.isFree
               }
@@ -85,6 +87,7 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
                 this.websites[this.adsAccountIdPipe.transform(account.adsId)] = account.websites;
 
               this.selectedAccount = this.accounts[0].adsId;
+              this.selectedAccountId = this.accounts.find(item => item.adsId === this.selectedAccount).id;
               this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
               this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
             }
@@ -102,8 +105,16 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
 
   onSelectAccount(event) {
     this.selectedAccount = event.value;
-    this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
-    this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
+    this.selectedAccountId = this.accounts.find(item => item.adsId === this.selectedAccount).id;
+
+    if (this.websites[this.selectedAccount].length > 0) {
+      this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
+      this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
+    }
+    else {
+      this.selectedWebsite = '';
+      this.selectedWebsiteCode = '';
+    }
   }
 
   onSelectAccountWebsite(accountWebsiteIndex: number) {
