@@ -16,8 +16,8 @@ import { Router } from '@angular/router';
 export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements OnInit {
 
   isProcessing: boolean = true;
-  classC: boolean;
-  classD: boolean;
+  classC: number;
+  classD: number;
 
   constructor(private _banIpsService: BanIpsService,
     public _sessionService: SessionService,
@@ -32,21 +32,21 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
     classC: [
       {
         text: 'Không kích hoạt (được đề nghị)',
-        value: false
+        value: 1
       },
       {
         text: 'Kích hoạt',
-        value: true
+        value: 2
       }
     ],
     classD: [
       {
         text: 'Không kích hoạt (được đề nghị)',
-        value: false
+        value: 1
       },
       {
         text: 'Kích hoạt',
-        value: true
+        value: 2
       }
     ]
   };
@@ -91,8 +91,8 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
       .subscribe(res => {
         this._fuseProgressiveBarService.hide();
 
-        this.classC = res.data.setting.autoBlackListIpRanges.classC;
-        this.classD = res.data.setting.autoBlackListIpRanges.classD;
+        this.classC = res.data.setting.autoBlackListIpRanges.classC === false ? 1 : 2;
+        this.classD = res.data.setting.autoBlackListIpRanges.classD === false ? 1 : 2;
 
         this.isProcessing = false;
       },
@@ -108,6 +108,8 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
           }
           else this._dialogService._openErrorDialog(error.error);
 
+          this.classC = -1;
+          this.classD = -1;
         });
     this.subscriptions.push(sub);
   }
@@ -138,8 +140,8 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
 
   private generateAutoBlockingIPRangeParams(): any {
     const params = {
-      classC: this.classC,
-      classD: this.classD
+      classC: this.classC === 1 ? false : true,
+      classD: this.classD === 1 ? false : true
     }
 
     return params;

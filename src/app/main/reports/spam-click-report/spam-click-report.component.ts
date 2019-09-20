@@ -246,6 +246,12 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     this.subscriptions.push(sub);
   }
 
+  showReason(reason: any) {
+    if(reason)
+      console.log(reason.message);
+    else console.log('Unknown');
+  }
+
   changePage(event) {
     this.getAccountReport(this.selectedAccountId, event);
     this._router.navigate([], {

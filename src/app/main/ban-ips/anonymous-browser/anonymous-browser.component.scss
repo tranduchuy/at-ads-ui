@@ -43,6 +43,11 @@
   .container {
     .inner {
       padding: 15px;
+
+      .config-checking {
+        padding: 0;
+        text-align: center;
+      }
     }
   }
 

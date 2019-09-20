@@ -50,7 +50,22 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
         (error: HttpErrorResponse) => {
           this.websites = [];
           this._fuseProgressBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
+          
+          if (error.status === 404) {
+            const data = [];
+            data['select-campaign'] = { 
+              accountId: this.account.accountId,
+              adsId: this.account.adsId
+            };
+
+            this._dialogService._openInfoDialog(
+              'Tài khoản bạn chọn hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ',
+              '', '', 'select-campaign', data
+            );
+          }
+          else this._dialogService._openErrorDialog(error.error);
+
+          this.dialogRef.close();
         });
     this.subscriptions.push(sub);
   }

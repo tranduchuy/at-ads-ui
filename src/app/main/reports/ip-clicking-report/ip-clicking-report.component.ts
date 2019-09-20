@@ -63,6 +63,12 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
     this.subscriptions.push(sub);
   }
 
+  showReason(reason: any) {
+    if(reason)
+      console.log(reason.message);
+    else console.log('Unknown');
+  }
+
   getDailyClickingReport(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();

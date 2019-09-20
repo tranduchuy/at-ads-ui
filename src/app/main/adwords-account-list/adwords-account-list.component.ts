@@ -81,6 +81,8 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
                         this._sessionService.setAccountId('');
                         this._sessionService.setAdwordId('');
                       }
+
+                      this._fuseNavigationService.reloadNavigation();
                     }
                   );
                 this.subscriptions.push(getAccountDoneSub);

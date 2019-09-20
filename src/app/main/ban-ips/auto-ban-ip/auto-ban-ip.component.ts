@@ -17,7 +17,8 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
 
   isProcessing: boolean = true;
   selectedMaxClick: number;
-  selectedAutoRemove: boolean;
+  selectedMaxClickHours: number;
+  selectedAutoRemove: number;
   checked: boolean;
 
   itemsSource = {
@@ -47,14 +48,28 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
         value: 5
       },
     ],
+    maxClickHours: [
+      {
+        text: '6 giờ',
+        value: 6
+      },
+      {
+        text: '12 giờ',
+        value: 12
+      },
+      {
+        text: '24 giờ',
+        value: 24
+      },
+    ],
     autoRemove: [
       {
         text: 'Không xóa (được đề nghị)',
-        value: false
+        value: 1
       },
       {
         text: 'Cho phép xóa',
-        value: true
+        value: 2
       },
     ]
   };
@@ -108,9 +123,10 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
 
     const getSettingsSub = this._banIpsService.getBlockingIPSettings()
       .subscribe(res => {
-        this.selectedMaxClick = res.data.setting.autoBlockByMaxClick;
-        this.selectedAutoRemove = res.data.setting.autoRemoveBlocking;
         this.checked = res.data.setting.autoBlockWithAiAndBigData;
+        this.selectedMaxClick = res.data.setting.autoBlockByMaxClick;
+        this.selectedMaxClickHours = res.data.setting.countMaxClickInHours || 24;
+        this.selectedAutoRemove = res.data.setting.autoRemoveBlocking === false ? 1 : 2;
 
         this.isProcessing = false;
         this._fuseProgressiveBarService.hide();
@@ -127,6 +143,11 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
           }
           else this._dialogService._openErrorDialog(error.error);
 
+          //hide all options
+          this.checked = false;
+          this.selectedMaxClick = -2;
+          this.selectedMaxClickHours = -1;
+          this.selectedAutoRemove = -1;
         });
     this.subscriptions.push(getSettingsSub);
   }
@@ -167,8 +188,9 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
   private generateAutoBlockingIpParams(): any {
     const params = {
       maxClick: this.selectedMaxClick,
-      autoRemove: this.selectedAutoRemove,
-      autoBlockWithAiAndBigData: this.checked
+      autoRemove: this.selectedAutoRemove === 1 ? false : true,
+      autoBlockWithAiAndBigData: this.checked,
+      countMaxClickInHours: this.selectedMaxClickHours
     };
 
     return params;
