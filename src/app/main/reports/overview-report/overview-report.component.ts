@@ -189,6 +189,12 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     this.subscriptions.push(sub);
   }
 
+  showReason(reason: any) {
+    if(reason)
+      console.log(reason.message);
+    else console.log('Unknown');
+  }
+
   getPercentage(value: number, total: number): number {
     const res = value * 100 / total
     return Math.round(res * 100) / 100;

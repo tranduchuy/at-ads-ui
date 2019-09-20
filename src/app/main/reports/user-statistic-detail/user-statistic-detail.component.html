@@ -24,13 +24,6 @@
             [dataSource]="history | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }"
             class="mat-elevation-z8">
 
-            <ng-container matColumnDef="adwords">
-              <mat-header-cell *matHeaderCellDef></mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <span class="adwords-badge">GOOGLE ADS</span>
-              </mat-cell>
-            </ng-container>
-
             <ng-container matColumnDef="accessTime">
               <mat-header-cell *matHeaderCellDef>Truy cập</mat-header-cell>
               <mat-cell *matCellDef="let element">
