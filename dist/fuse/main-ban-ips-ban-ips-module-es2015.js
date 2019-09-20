@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"title1\">\r\n    CẤU HÌNH CHẶN TRÌNH DUYỆT ẨN DANH - TÀI KHOẢN <span class=\"account-id\">{{_sessionService.activeAdsAccountId}}</span>\r\n  </div>\r\n\r\n  <div class=\"inner\">\r\n    <p class=\"title2\">\r\n      Bằng việc cấu hình này, các quảng cáo sẽ <span style=\"color: red\">không hiển thị</span> trên các thiết bị sử dụng\r\n      <span style=\"color: #039be5\">trình duyệt ẩn danh</span>, giúp tiết kiệm chi phí với những người dùng muốn <span\r\n        style=\"color: red\">dấu thông tin</span> truy cập vào quảng cáo.\r\n    </p>\r\n\r\n    <div class=\"config-checking\">\r\n      <mat-checkbox [checked]=\"checked\" (change)=\"checkSetting($event)\" [disabled]=\"isProcessing\">\r\n        Chặn trình duyệt ẩn danh\r\n      </mat-checkbox>\r\n    </div>\r\n\r\n    <p class=\"button-area\">\r\n      <button mat-raised-button color=\"accent\" [disabled]=\"isProcessing\" (click)=\"setBlockingAnonymousBrowser()\">\r\n        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH\r\n      </button>\r\n    </p>\r\n  </div>\r\n\r\n</div>"
+module.exports = "<div class=\"container\">\r\n  <div class=\"title1\">\r\n    CẤU HÌNH CHẶN TRÌNH DUYỆT ẨN DANH - TÀI KHOẢN <span class=\"account-id\">{{_sessionService.activeAdsAccountId}}</span>\r\n  </div>\r\n\r\n  <div class=\"inner\">\r\n    <p class=\"title2\">\r\n      Bằng việc cấu hình này, các quảng cáo sẽ <span style=\"color: red\">không hiển thị</span> trên các thiết bị sử dụng\r\n      <span style=\"color: #039be5\">trình duyệt ẩn danh</span>, giúp tiết kiệm chi phí với những người dùng muốn <span\r\n        style=\"color: red\">dấu thông tin</span> truy cập vào quảng cáo.\r\n    </p>\r\n\r\n    <div class=\"config-checking\">\r\n      <mat-checkbox [checked]=\"checked\" (change)=\"checkSetting($event)\" [disabled]=\"isProcessing\">\r\n        <b>Chặn trình duyệt ẩn danh</b>\r\n      </mat-checkbox>\r\n    </div>\r\n\r\n    <p class=\"button-area\">\r\n      <button mat-raised-button color=\"accent\" [disabled]=\"isProcessing\" (click)=\"setBlockingAnonymousBrowser()\">\r\n        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH\r\n      </button>\r\n    </p>\r\n  </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"title1\">\r\n    C
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"title1\">\r\n    CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP - TÀI KHOẢN <span\r\n      class=\"account-id\">{{_sessionService.activeAdsAccountId || ''}}</span>\r\n  </div>\r\n\r\n  <div class=\"inner\">\r\n    <div class=\"title2\">\r\n      CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP\r\n    </div>\r\n\r\n    <p class=\"notification\">\r\n      Thông thường 1 người dùng chỉ click quảng cáo từ 1 đến 2 lần trước khi mua hàng. Chặn người dùng click quảng cáo\r\n      liên tục\r\n      giúp bạn tiết kiệm được chi phí lãng phí do những hành vi phá hoại gây ra\r\n    </p>\r\n\r\n    <div class=\"config-checking\">\r\n      <mat-checkbox [checked]=\"checked\" (change)=\"checkSetting($event)\" [disabled]=\"isProcessing\">\r\n        <b>\r\n          Tự động chặn những IP đang phá hoại sử dụng <span style=\"color: red\">AI</span> và <span style=\"color: red\">Big Data</span>.\r\n        </b>\r\n      </mat-checkbox>\r\n    </div>\r\n\r\n    <p>\r\n      <b>\r\n        Chặn sau khi 1 IP nhấn quảng cáo (<span style=\"color: red\">thường là 2 lần</span>)\r\n      </b>\r\n    </p>\r\n\r\n    <mat-form-field style=\"width: 100%\" appearance=\"outline\">\r\n      <mat-label>Chọn hình thức</mat-label>\r\n      <mat-select [(value)]=\"selectedMaxClick\" [disabled]=\"isProcessing\">\r\n        <mat-option *ngFor=\"let item of itemsSource.maxClick\" [value]=\"item.value\">{{item.text}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n\r\n    <p>\r\n      <b>\r\n        Xóa hết IP đã chặn khi qua ngày mới (<span style=\"color: red\">xóa vào lúc 0h-1h sáng</span>)\r\n      </b>\r\n    </p>\r\n\r\n    <mat-form-field style=\"width: 100%\" appearance=\"outline\">\r\n      <mat-label>Chọn hình thức</mat-label>\r\n      <mat-select [(value)]=\"selectedAutoRemove\" [disabled]=\"isProcessing\">\r\n        <mat-option *ngFor=\"let item of itemsSource.autoRemove\" [value]=\"item.value\">{{item.text}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n\r\n    <p class=\"text-center\">\r\n      <button mat-raised-button color=\"accent\" class=\"submit-button\" aria-label=\"Kết nối\" (click)=\"setAutoBlockingIP()\"\r\n        [disabled]=\"isProcessing\">\r\n        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH\r\n      </button>\r\n    </p>\r\n  </div>\r\n\r\n\r\n</div>"
+module.exports = "<div class=\"container\">\r\n  <div class=\"title1\">\r\n    CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP - TÀI KHOẢN <span\r\n      class=\"account-id\">{{_sessionService.activeAdsAccountId || ''}}</span>\r\n  </div>\r\n\r\n  <div class=\"inner\">\r\n    <div class=\"title2\">\r\n      CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP\r\n    </div>\r\n\r\n    <p class=\"notification\">\r\n      Thông thường 1 người dùng chỉ click quảng cáo từ 1 đến 2 lần trước khi mua hàng. Chặn người dùng click quảng cáo\r\n      liên tục\r\n      giúp bạn tiết kiệm được chi phí lãng phí do những hành vi phá hoại gây ra\r\n    </p>\r\n\r\n    <p class=\"config-checking\">\r\n      <mat-checkbox [checked]=\"checked\" (change)=\"checkSetting($event)\" [disabled]=\"isProcessing\">\r\n      </mat-checkbox>\r\n      <b>\r\n        Tự động chặn những IP đang phá hoại sử dụng <span style=\"color: red\">AI</span> và <span style=\"color: red\">Big\r\n          Data</span>.\r\n      </b>\r\n    </p>\r\n\r\n    <div fxLayout=\"row\" fxLayout.xs=\"column\" fxLayoutGap.xs=\"-20px\" fxLayoutGap=\"20px\" class=\"max-click\">\r\n      <div fxFlex=\"60\">\r\n        <p>\r\n          <b>\r\n            Chặn sau khi 1 IP nhấn quảng cáo (<span style=\"color: red\">thường là 2 lần</span>)\r\n          </b>\r\n        </p>\r\n\r\n        <mat-form-field style=\"width: 100%\" appearance=\"outline\">\r\n          <mat-label>Chọn số lần click</mat-label>\r\n          <mat-select [(value)]=\"selectedMaxClick\" [disabled]=\"isProcessing\">\r\n            <mat-option *ngFor=\"let item of itemsSource.maxClick\" [value]=\"item.value\">{{item.text}}</mat-option>\r\n          </mat-select>\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"40\">\r\n        <p>\r\n          <b>\r\n            Sau khoảng thời gian\r\n          </b>\r\n        </p>\r\n\r\n        <mat-form-field style=\"width: 100%\" appearance=\"outline\">\r\n          <mat-label>Chọn khoảng thời gian</mat-label>\r\n          <mat-select [(value)]=\"selectedMaxClickHours\" [disabled]=\"isProcessing\">\r\n            <mat-option *ngFor=\"let item of itemsSource.maxClickHours\" [value]=\"item.value\">{{item.text}}</mat-option>\r\n          </mat-select>\r\n        </mat-form-field>\r\n      </div>\r\n\r\n    </div>\r\n\r\n    <p>\r\n      <b>\r\n        Xóa hết IP đã chặn khi qua ngày mới (<span style=\"color: red\">xóa vào lúc 0h-1h sáng</span>)\r\n      </b>\r\n    </p>\r\n\r\n    <mat-form-field style=\"width: 100%\" appearance=\"outline\">\r\n      <mat-label>Chọn hình thức</mat-label>\r\n      <mat-select [(value)]=\"selectedAutoRemove\" [disabled]=\"isProcessing\">\r\n        <mat-option *ngFor=\"let item of itemsSource.autoRemove\" [value]=\"item.value\">{{item.text}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n\r\n    <p class=\"text-center\">\r\n      <button mat-raised-button color=\"accent\" class=\"submit-button\" aria-label=\"Kết nối\" (click)=\"setAutoBlockingIP()\"\r\n        [disabled]=\"isProcessing\">\r\n        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH\r\n      </button>\r\n    </p>\r\n  </div>\r\n\r\n\r\n</div>"
 
 /***/ }),
 
@@ -95,7 +95,7 @@ module.exports = "<div class=\"container\">\r\n\r\n  <div class=\"title1\">\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  width: 100%;\n}\n.container .title1 {\n  padding: 142px 30px 35px 30px;\n  background: url('dark-material-bg.jpg');\n  background-size: 100% 100%;\n  color: white;\n  font-size: 16px;\n  font-weight: bold;\n}\n.container .title1 .account-id {\n  color: yellow;\n}\n.container .inner {\n  padding: 15px 30px 15px 30px;\n}\n.container .inner .title2 {\n  padding-top: 15px;\n  padding-bottom: 15px;\n  text-align: justify;\n}\n.container .inner .config-checking {\n  font-size: 20px;\n  padding-left: 10%;\n}\n.container .inner .button-area {\n  text-align: center;\n  padding-top: 40px;\n}\n.container .inner .button-area button {\n  border-radius: 0;\n}\n@media screen and (max-width: 600px) {\n  .container .inner {\n    padding: 15px;\n  }\n\n  .button-area button {\n    font-size: 12px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFpbi9iYW4taXBzL2Fub255bW91cy1icm93c2VyL0M6XFxVc2Vyc1xcTWluaCBUdWVcXERlc2t0b3BcXGNsaWNrXFxmcm9udGVuZC9zcmNcXGFwcFxcbWFpblxcYmFuLWlwc1xcYW5vbnltb3VzLWJyb3dzZXJcXGFub255bW91cy1icm93c2VyLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9tYWluL2Jhbi1pcHMvYW5vbnltb3VzLWJyb3dzZXIvYW5vbnltb3VzLWJyb3dzZXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFBO0FDQ0Y7QURDRTtFQUNFLDZCQUFBO0VBQ0EsdUNBQUE7RUFDQSwwQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7QUNDSjtBRENJO0VBQ0UsYUFBQTtBQ0NOO0FER0U7RUFDRSw0QkFBQTtBQ0RKO0FERUk7RUFDRSxpQkFBQTtFQUNBLG9CQUFBO0VBRUEsbUJBQUE7QUNETjtBRElJO0VBQ0UsZUFBQTtFQUNBLGlCQUFBO0FDRk47QURLSTtFQUNFLGtCQUFBO0VBQ0EsaUJBQUE7QUNITjtBREtNO0VBQ0UsZ0JBQUE7QUNIUjtBRFNBO0VBRUk7SUFDRSxhQUFBO0VDUEo7O0VEWUU7SUFDRSxlQUFBO0VDVEo7QUFDRiIsImZpbGUiOiJzcmMvYXBwL21haW4vYmFuLWlwcy9hbm9ueW1vdXMtYnJvd3Nlci9hbm9ueW1vdXMtYnJvd3Nlci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG5cclxuICAudGl0bGUxIHtcclxuICAgIHBhZGRpbmc6IDE0MnB4IDMwcHggMzVweCAzMHB4O1xyXG4gICAgYmFja2dyb3VuZDogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL2ltYWdlcy9iYWNrZ3JvdW5kcy9kYXJrLW1hdGVyaWFsLWJnLmpwZ1wiKTtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogMTAwJSAxMDAlO1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcblxyXG4gICAgLmFjY291bnQtaWQge1xyXG4gICAgICBjb2xvcjogeWVsbG93O1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgLmlubmVyIHtcclxuICAgIHBhZGRpbmc6IDE1cHggMzBweCAxNXB4IDMwcHg7XHJcbiAgICAudGl0bGUyIHtcclxuICAgICAgcGFkZGluZy10b3A6IDE1cHg7XHJcbiAgICAgIHBhZGRpbmctYm90dG9tOiAxNXB4O1xyXG5cclxuICAgICAgdGV4dC1hbGlnbjoganVzdGlmeTtcclxuICAgIH1cclxuXHJcbiAgICAuY29uZmlnLWNoZWNraW5nIHtcclxuICAgICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgICBwYWRkaW5nLWxlZnQ6IDEwJTtcclxuICAgIH1cclxuXHJcbiAgICAuYnV0dG9uLWFyZWEge1xyXG4gICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICAgIHBhZGRpbmctdG9wOiA0MHB4O1xyXG5cclxuICAgICAgYnV0dG9uIHtcclxuICAgICAgICBib3JkZXItcmFkaXVzOiAwO1xyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxyXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xyXG4gIC5jb250YWluZXIge1xyXG4gICAgLmlubmVyIHtcclxuICAgICAgcGFkZGluZzogMTVweDtcclxuICAgIH1cclxuICB9XHJcblxyXG4gIC5idXR0b24tYXJlYSB7XHJcbiAgICBidXR0b24ge1xyXG4gICAgICBmb250LXNpemU6IDEycHg7XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcbiIsIi5jb250YWluZXIge1xuICB3aWR0aDogMTAwJTtcbn1cbi5jb250YWluZXIgLnRpdGxlMSB7XG4gIHBhZGRpbmc6IDE0MnB4IDMwcHggMzVweCAzMHB4O1xuICBiYWNrZ3JvdW5kOiB1cmwoXCIuLi8uLi8uLi8uLi9hc3NldHMvaW1hZ2VzL2JhY2tncm91bmRzL2RhcmstbWF0ZXJpYWwtYmcuanBnXCIpO1xuICBiYWNrZ3JvdW5kLXNpemU6IDEwMCUgMTAwJTtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXNpemU6IDE2cHg7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuLmNvbnRhaW5lciAudGl0bGUxIC5hY2NvdW50LWlkIHtcbiAgY29sb3I6IHllbGxvdztcbn1cbi5jb250YWluZXIgLmlubmVyIHtcbiAgcGFkZGluZzogMTVweCAzMHB4IDE1cHggMzBweDtcbn1cbi5jb250YWluZXIgLmlubmVyIC50aXRsZTIge1xuICBwYWRkaW5nLXRvcDogMTVweDtcbiAgcGFkZGluZy1ib3R0b206IDE1cHg7XG4gIHRleHQtYWxpZ246IGp1c3RpZnk7XG59XG4uY29udGFpbmVyIC5pbm5lciAuY29uZmlnLWNoZWNraW5nIHtcbiAgZm9udC1zaXplOiAyMHB4O1xuICBwYWRkaW5nLWxlZnQ6IDEwJTtcbn1cbi5jb250YWluZXIgLmlubmVyIC5idXR0b24tYXJlYSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZy10b3A6IDQwcHg7XG59XG4uY29udGFpbmVyIC5pbm5lciAuYnV0dG9uLWFyZWEgYnV0dG9uIHtcbiAgYm9yZGVyLXJhZGl1czogMDtcbn1cblxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgLmNvbnRhaW5lciAuaW5uZXIge1xuICAgIHBhZGRpbmc6IDE1cHg7XG4gIH1cblxuICAuYnV0dG9uLWFyZWEgYnV0dG9uIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gIH1cbn0iXX0= */"
+module.exports = ".container {\n  width: 100%;\n}\n.container .title1 {\n  padding: 142px 30px 35px 30px;\n  background: url('dark-material-bg.jpg');\n  background-size: 100% 100%;\n  color: white;\n  font-size: 16px;\n  font-weight: bold;\n}\n.container .title1 .account-id {\n  color: yellow;\n}\n.container .inner {\n  padding: 15px 30px 15px 30px;\n}\n.container .inner .title2 {\n  padding-top: 15px;\n  padding-bottom: 15px;\n  text-align: justify;\n}\n.container .inner .config-checking {\n  font-size: 20px;\n  padding-left: 10%;\n}\n.container .inner .button-area {\n  text-align: center;\n  padding-top: 40px;\n}\n.container .inner .button-area button {\n  border-radius: 0;\n}\n@media screen and (max-width: 600px) {\n  .container .inner {\n    padding: 15px;\n  }\n  .container .inner .config-checking {\n    padding: 0;\n    text-align: center;\n  }\n\n  .button-area button {\n    font-size: 12px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFpbi9iYW4taXBzL2Fub255bW91cy1icm93c2VyL0M6XFxVc2Vyc1xcTWluaCBUdWVcXERlc2t0b3BcXGNsaWNrXFxmcm9udGVuZC9zcmNcXGFwcFxcbWFpblxcYmFuLWlwc1xcYW5vbnltb3VzLWJyb3dzZXJcXGFub255bW91cy1icm93c2VyLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9tYWluL2Jhbi1pcHMvYW5vbnltb3VzLWJyb3dzZXIvYW5vbnltb3VzLWJyb3dzZXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFBO0FDQ0Y7QURDRTtFQUNFLDZCQUFBO0VBQ0EsdUNBQUE7RUFDQSwwQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7QUNDSjtBRENJO0VBQ0UsYUFBQTtBQ0NOO0FER0U7RUFDRSw0QkFBQTtBQ0RKO0FERUk7RUFDRSxpQkFBQTtFQUNBLG9CQUFBO0VBRUEsbUJBQUE7QUNETjtBRElJO0VBQ0UsZUFBQTtFQUNBLGlCQUFBO0FDRk47QURLSTtFQUNFLGtCQUFBO0VBQ0EsaUJBQUE7QUNITjtBREtNO0VBQ0UsZ0JBQUE7QUNIUjtBRFNBO0VBRUk7SUFDRSxhQUFBO0VDUEo7RURTSTtJQUNFLFVBQUE7SUFDQSxrQkFBQTtFQ1BOOztFRGFFO0lBQ0UsZUFBQTtFQ1ZKO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9tYWluL2Jhbi1pcHMvYW5vbnltb3VzLWJyb3dzZXIvYW5vbnltb3VzLWJyb3dzZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcclxuICB3aWR0aDogMTAwJTtcclxuXHJcbiAgLnRpdGxlMSB7XHJcbiAgICBwYWRkaW5nOiAxNDJweCAzMHB4IDM1cHggMzBweDtcclxuICAgIGJhY2tncm91bmQ6IHVybChcIi4uLy4uLy4uLy4uL2Fzc2V0cy9pbWFnZXMvYmFja2dyb3VuZHMvZGFyay1tYXRlcmlhbC1iZy5qcGdcIik7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IDEwMCUgMTAwJTtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG5cclxuICAgIC5hY2NvdW50LWlkIHtcclxuICAgICAgY29sb3I6IHllbGxvdztcclxuICAgIH1cclxuICB9XHJcblxyXG4gIC5pbm5lciB7XHJcbiAgICBwYWRkaW5nOiAxNXB4IDMwcHggMTVweCAzMHB4O1xyXG4gICAgLnRpdGxlMiB7XHJcbiAgICAgIHBhZGRpbmctdG9wOiAxNXB4O1xyXG4gICAgICBwYWRkaW5nLWJvdHRvbTogMTVweDtcclxuXHJcbiAgICAgIHRleHQtYWxpZ246IGp1c3RpZnk7XHJcbiAgICB9XHJcblxyXG4gICAgLmNvbmZpZy1jaGVja2luZyB7XHJcbiAgICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICAgICAgcGFkZGluZy1sZWZ0OiAxMCU7XHJcbiAgICB9XHJcblxyXG4gICAgLmJ1dHRvbi1hcmVhIHtcclxuICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgICBwYWRkaW5nLXRvcDogNDBweDtcclxuXHJcbiAgICAgIGJ1dHRvbiB7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogMDtcclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH1cclxufVxyXG5cclxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcclxuICAuY29udGFpbmVyIHtcclxuICAgIC5pbm5lciB7XHJcbiAgICAgIHBhZGRpbmc6IDE1cHg7XHJcblxyXG4gICAgICAuY29uZmlnLWNoZWNraW5nIHtcclxuICAgICAgICBwYWRkaW5nOiAwO1xyXG4gICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgLmJ1dHRvbi1hcmVhIHtcclxuICAgIGJ1dHRvbiB7XHJcbiAgICAgIGZvbnQtc2l6ZTogMTJweDtcclxuICAgIH1cclxuICB9XHJcbn1cclxuIiwiLmNvbnRhaW5lciB7XG4gIHdpZHRoOiAxMDAlO1xufVxuLmNvbnRhaW5lciAudGl0bGUxIHtcbiAgcGFkZGluZzogMTQycHggMzBweCAzNXB4IDMwcHg7XG4gIGJhY2tncm91bmQ6IHVybChcIi4uLy4uLy4uLy4uL2Fzc2V0cy9pbWFnZXMvYmFja2dyb3VuZHMvZGFyay1tYXRlcmlhbC1iZy5qcGdcIik7XG4gIGJhY2tncm91bmQtc2l6ZTogMTAwJSAxMDAlO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtc2l6ZTogMTZweDtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG4uY29udGFpbmVyIC50aXRsZTEgLmFjY291bnQtaWQge1xuICBjb2xvcjogeWVsbG93O1xufVxuLmNvbnRhaW5lciAuaW5uZXIge1xuICBwYWRkaW5nOiAxNXB4IDMwcHggMTVweCAzMHB4O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRpdGxlMiB7XG4gIHBhZGRpbmctdG9wOiAxNXB4O1xuICBwYWRkaW5nLWJvdHRvbTogMTVweDtcbiAgdGV4dC1hbGlnbjoganVzdGlmeTtcbn1cbi5jb250YWluZXIgLmlubmVyIC5jb25maWctY2hlY2tpbmcge1xuICBmb250LXNpemU6IDIwcHg7XG4gIHBhZGRpbmctbGVmdDogMTAlO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLmJ1dHRvbi1hcmVhIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBwYWRkaW5nLXRvcDogNDBweDtcbn1cbi5jb250YWluZXIgLmlubmVyIC5idXR0b24tYXJlYSBidXR0b24ge1xuICBib3JkZXItcmFkaXVzOiAwO1xufVxuXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAuY29udGFpbmVyIC5pbm5lciB7XG4gICAgcGFkZGluZzogMTVweDtcbiAgfVxuICAuY29udGFpbmVyIC5pbm5lciAuY29uZmlnLWNoZWNraW5nIHtcbiAgICBwYWRkaW5nOiAwO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgfVxuXG4gIC5idXR0b24tYXJlYSBidXR0b24ge1xuICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgfVxufSJdfQ== */"
 
 /***/ }),
 
@@ -222,7 +222,7 @@ AnonymousBrowserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  width: 100%;\n}\n.container .title1 {\n  padding: 142px 30px 35px 30px;\n  background: url('dark-material-bg.jpg');\n  background-size: 100% 100%;\n  color: white;\n  font-size: 16px;\n  font-weight: bold;\n}\n.container .title1 .account-id {\n  color: yellow;\n}\n.container .inner {\n  padding: 15px 30px 15px 30px;\n}\n.container .inner .title2 {\n  padding-top: 30px;\n  padding-bottom: 15px;\n  font-weight: bold;\n}\n.container .inner .title3 {\n  font-weight: bold;\n  font-size: 16px;\n}\n.container .inner .notification {\n  text-align: justify;\n}\n@media screen and (max-width: 600px) {\n  .container .inner {\n    padding: 15px;\n  }\n\n  .submit-button {\n    font-size: 12px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFpbi9iYW4taXBzL2F1dG8tYmFuLWlwL0M6XFxVc2Vyc1xcTWluaCBUdWVcXERlc2t0b3BcXGNsaWNrXFxmcm9udGVuZC9zcmNcXGFwcFxcbWFpblxcYmFuLWlwc1xcYXV0by1iYW4taXBcXGF1dG8tYmFuLWlwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9tYWluL2Jhbi1pcHMvYXV0by1iYW4taXAvYXV0by1iYW4taXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFBO0FDQ0Y7QURDRTtFQUNFLDZCQUFBO0VBQ0EsdUNBQUE7RUFDQSwwQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7QUNDSjtBRENJO0VBQ0UsYUFBQTtBQ0NOO0FER0U7RUFDRSw0QkFBQTtBQ0RKO0FER0k7RUFDRSxpQkFBQTtFQUNBLG9CQUFBO0VBRUEsaUJBQUE7QUNGTjtBREtJO0VBQ0UsaUJBQUE7RUFDQSxlQUFBO0FDSE47QURNSTtFQUNFLG1CQUFBO0FDSk47QURTQTtFQUVJO0lBQ0UsYUFBQTtFQ1BKOztFRFdBO0lBQ0UsZUFBQTtFQ1JGO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9tYWluL2Jhbi1pcHMvYXV0by1iYW4taXAvYXV0by1iYW4taXAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcclxuICB3aWR0aDogMTAwJTtcclxuXHJcbiAgLnRpdGxlMSB7XHJcbiAgICBwYWRkaW5nOiAxNDJweCAzMHB4IDM1cHggMzBweDtcclxuICAgIGJhY2tncm91bmQ6IHVybChcIi4uLy4uLy4uLy4uL2Fzc2V0cy9pbWFnZXMvYmFja2dyb3VuZHMvZGFyay1tYXRlcmlhbC1iZy5qcGdcIik7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IDEwMCUgMTAwJTtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG5cclxuICAgIC5hY2NvdW50LWlkIHtcclxuICAgICAgY29sb3I6IHllbGxvdztcclxuICAgIH1cclxuICB9XHJcblxyXG4gIC5pbm5lciB7XHJcbiAgICBwYWRkaW5nOiAxNXB4IDMwcHggMTVweCAzMHB4O1xyXG5cclxuICAgIC50aXRsZTIge1xyXG4gICAgICBwYWRkaW5nLXRvcDogMzBweDtcclxuICAgICAgcGFkZGluZy1ib3R0b206IDE1cHg7XHJcblxyXG4gICAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIH1cclxuXHJcbiAgICAudGl0bGUzIHtcclxuICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIH1cclxuXHJcbiAgICAubm90aWZpY2F0aW9uIHtcclxuICAgICAgdGV4dC1hbGlnbjoganVzdGlmeTtcclxuICAgIH1cclxuICB9XHJcbn1cclxuXHJcbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7XHJcbiAgLmNvbnRhaW5lciB7XHJcbiAgICAuaW5uZXIge1xyXG4gICAgICBwYWRkaW5nOiAxNXB4O1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgLnN1Ym1pdC1idXR0b24ge1xyXG4gICAgZm9udC1zaXplOiAxMnB4O1xyXG4gIH1cclxufVxyXG4iLCIuY29udGFpbmVyIHtcbiAgd2lkdGg6IDEwMCU7XG59XG4uY29udGFpbmVyIC50aXRsZTEge1xuICBwYWRkaW5nOiAxNDJweCAzMHB4IDM1cHggMzBweDtcbiAgYmFja2dyb3VuZDogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL2ltYWdlcy9iYWNrZ3JvdW5kcy9kYXJrLW1hdGVyaWFsLWJnLmpwZ1wiKTtcbiAgYmFja2dyb3VuZC1zaXplOiAxMDAlIDEwMCU7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC1zaXplOiAxNnB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cbi5jb250YWluZXIgLnRpdGxlMSAuYWNjb3VudC1pZCB7XG4gIGNvbG9yOiB5ZWxsb3c7XG59XG4uY29udGFpbmVyIC5pbm5lciB7XG4gIHBhZGRpbmc6IDE1cHggMzBweCAxNXB4IDMwcHg7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGl0bGUyIHtcbiAgcGFkZGluZy10b3A6IDMwcHg7XG4gIHBhZGRpbmctYm90dG9tOiAxNXB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cbi5jb250YWluZXIgLmlubmVyIC50aXRsZTMge1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgZm9udC1zaXplOiAxNnB4O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLm5vdGlmaWNhdGlvbiB7XG4gIHRleHQtYWxpZ246IGp1c3RpZnk7XG59XG5cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7XG4gIC5jb250YWluZXIgLmlubmVyIHtcbiAgICBwYWRkaW5nOiAxNXB4O1xuICB9XG5cbiAgLnN1Ym1pdC1idXR0b24ge1xuICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgfVxufSJdfQ== */"
+module.exports = ".container {\n  width: 100%;\n}\n.container .title1 {\n  padding: 142px 30px 35px 30px;\n  background: url('dark-material-bg.jpg');\n  background-size: 100% 100%;\n  color: white;\n  font-size: 16px;\n  font-weight: bold;\n}\n.container .title1 .account-id {\n  color: yellow;\n}\n.container .inner {\n  padding: 15px 30px 15px 30px;\n}\n.container .inner .title2 {\n  padding-top: 30px;\n  padding-bottom: 15px;\n  font-weight: bold;\n}\n.container .inner .title3 {\n  font-weight: bold;\n  font-size: 16px;\n}\n.container .inner .notification {\n  text-align: justify;\n}\n.container .inner .config-checking {\n  padding-top: 10px;\n}\n.container .inner .max-click {\n  width: 100%;\n}\n@media screen and (max-width: 600px) {\n  .container .inner {\n    padding: 15px;\n  }\n\n  .submit-button {\n    font-size: 12px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFpbi9iYW4taXBzL2F1dG8tYmFuLWlwL0M6XFxVc2Vyc1xcTWluaCBUdWVcXERlc2t0b3BcXGNsaWNrXFxmcm9udGVuZC9zcmNcXGFwcFxcbWFpblxcYmFuLWlwc1xcYXV0by1iYW4taXBcXGF1dG8tYmFuLWlwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9tYWluL2Jhbi1pcHMvYXV0by1iYW4taXAvYXV0by1iYW4taXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFBO0FDQ0Y7QURDRTtFQUNFLDZCQUFBO0VBQ0EsdUNBQUE7RUFDQSwwQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7QUNDSjtBRENJO0VBQ0UsYUFBQTtBQ0NOO0FER0U7RUFDRSw0QkFBQTtBQ0RKO0FER0k7RUFDRSxpQkFBQTtFQUNBLG9CQUFBO0VBRUEsaUJBQUE7QUNGTjtBREtJO0VBQ0UsaUJBQUE7RUFDQSxlQUFBO0FDSE47QURNSTtFQUNFLG1CQUFBO0FDSk47QURPSTtFQUNFLGlCQUFBO0FDTE47QURRSTtFQUNFLFdBQUE7QUNOTjtBRFdBO0VBRUk7SUFDRSxhQUFBO0VDVEo7O0VEYUE7SUFDRSxlQUFBO0VDVkY7QUFDRiIsImZpbGUiOiJzcmMvYXBwL21haW4vYmFuLWlwcy9hdXRvLWJhbi1pcC9hdXRvLWJhbi1pcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG5cclxuICAudGl0bGUxIHtcclxuICAgIHBhZGRpbmc6IDE0MnB4IDMwcHggMzVweCAzMHB4O1xyXG4gICAgYmFja2dyb3VuZDogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL2ltYWdlcy9iYWNrZ3JvdW5kcy9kYXJrLW1hdGVyaWFsLWJnLmpwZ1wiKTtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogMTAwJSAxMDAlO1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcblxyXG4gICAgLmFjY291bnQtaWQge1xyXG4gICAgICBjb2xvcjogeWVsbG93O1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgLmlubmVyIHtcclxuICAgIHBhZGRpbmc6IDE1cHggMzBweCAxNXB4IDMwcHg7XHJcblxyXG4gICAgLnRpdGxlMiB7XHJcbiAgICAgIHBhZGRpbmctdG9wOiAzMHB4O1xyXG4gICAgICBwYWRkaW5nLWJvdHRvbTogMTVweDtcclxuXHJcbiAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgfVxyXG5cclxuICAgIC50aXRsZTMge1xyXG4gICAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgfVxyXG5cclxuICAgIC5ub3RpZmljYXRpb24ge1xyXG4gICAgICB0ZXh0LWFsaWduOiBqdXN0aWZ5O1xyXG4gICAgfVxyXG5cclxuICAgIC5jb25maWctY2hlY2tpbmcge1xyXG4gICAgICBwYWRkaW5nLXRvcDogMTBweDtcclxuICAgIH1cclxuXHJcbiAgICAubWF4LWNsaWNrIHtcclxuICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxyXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xyXG4gIC5jb250YWluZXIge1xyXG4gICAgLmlubmVyIHtcclxuICAgICAgcGFkZGluZzogMTVweDtcclxuICAgIH1cclxuICB9XHJcblxyXG4gIC5zdWJtaXQtYnV0dG9uIHtcclxuICAgIGZvbnQtc2l6ZTogMTJweDtcclxuICB9XHJcbn1cclxuIiwiLmNvbnRhaW5lciB7XG4gIHdpZHRoOiAxMDAlO1xufVxuLmNvbnRhaW5lciAudGl0bGUxIHtcbiAgcGFkZGluZzogMTQycHggMzBweCAzNXB4IDMwcHg7XG4gIGJhY2tncm91bmQ6IHVybChcIi4uLy4uLy4uLy4uL2Fzc2V0cy9pbWFnZXMvYmFja2dyb3VuZHMvZGFyay1tYXRlcmlhbC1iZy5qcGdcIik7XG4gIGJhY2tncm91bmQtc2l6ZTogMTAwJSAxMDAlO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtc2l6ZTogMTZweDtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG4uY29udGFpbmVyIC50aXRsZTEgLmFjY291bnQtaWQge1xuICBjb2xvcjogeWVsbG93O1xufVxuLmNvbnRhaW5lciAuaW5uZXIge1xuICBwYWRkaW5nOiAxNXB4IDMwcHggMTVweCAzMHB4O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRpdGxlMiB7XG4gIHBhZGRpbmctdG9wOiAzMHB4O1xuICBwYWRkaW5nLWJvdHRvbTogMTVweDtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGl0bGUzIHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGZvbnQtc2l6ZTogMTZweDtcbn1cbi5jb250YWluZXIgLmlubmVyIC5ub3RpZmljYXRpb24ge1xuICB0ZXh0LWFsaWduOiBqdXN0aWZ5O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLmNvbmZpZy1jaGVja2luZyB7XG4gIHBhZGRpbmctdG9wOiAxMHB4O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLm1heC1jbGljayB7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAuY29udGFpbmVyIC5pbm5lciB7XG4gICAgcGFkZGluZzogMTVweDtcbiAgfVxuXG4gIC5zdWJtaXQtYnV0dG9uIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gIH1cbn0iXX0= */"
 
 /***/ }),
 
@@ -288,14 +288,28 @@ let AutoBanIPComponent = class AutoBanIPComponent extends app_shared_components_
                     value: 5
                 },
             ],
+            maxClickHours: [
+                {
+                    text: '6 giờ',
+                    value: 6
+                },
+                {
+                    text: '12 giờ',
+                    value: 12
+                },
+                {
+                    text: '24 giờ',
+                    value: 24
+                },
+            ],
             autoRemove: [
                 {
                     text: 'Không xóa (được đề nghị)',
-                    value: false
+                    value: 1
                 },
                 {
                     text: 'Cho phép xóa',
-                    value: true
+                    value: 2
                 },
             ]
         };
@@ -330,9 +344,10 @@ let AutoBanIPComponent = class AutoBanIPComponent extends app_shared_components_
         this._fuseProgressiveBarService.show();
         const getSettingsSub = this._banIpsService.getBlockingIPSettings()
             .subscribe(res => {
-            this.selectedMaxClick = res.data.setting.autoBlockByMaxClick;
-            this.selectedAutoRemove = res.data.setting.autoRemoveBlocking;
             this.checked = res.data.setting.autoBlockWithAiAndBigData;
+            this.selectedMaxClick = res.data.setting.autoBlockByMaxClick;
+            this.selectedMaxClickHours = res.data.setting.countMaxClickInHours || 24;
+            this.selectedAutoRemove = res.data.setting.autoRemoveBlocking === false ? 1 : 2;
             this.isProcessing = false;
             this._fuseProgressiveBarService.hide();
         }, (error) => {
@@ -342,6 +357,11 @@ let AutoBanIPComponent = class AutoBanIPComponent extends app_shared_components_
             }
             else
                 this._dialogService._openErrorDialog(error.error);
+            //hide all options
+            this.checked = false;
+            this.selectedMaxClick = -2;
+            this.selectedMaxClickHours = -1;
+            this.selectedAutoRemove = -1;
         });
         this.subscriptions.push(getSettingsSub);
     }
@@ -371,8 +391,9 @@ let AutoBanIPComponent = class AutoBanIPComponent extends app_shared_components_
     generateAutoBlockingIpParams() {
         const params = {
             maxClick: this.selectedMaxClick,
-            autoRemove: this.selectedAutoRemove,
-            autoBlockWithAiAndBigData: this.checked
+            autoRemove: this.selectedAutoRemove === 1 ? false : true,
+            autoBlockWithAiAndBigData: this.checked,
+            countMaxClickInHours: this.selectedMaxClickHours
         };
         return params;
     }
@@ -583,21 +604,21 @@ let AutoBlockingRangeIpsComponent = class AutoBlockingRangeIpsComponent extends 
             classC: [
                 {
                     text: 'Không kích hoạt (được đề nghị)',
-                    value: false
+                    value: 1
                 },
                 {
                     text: 'Kích hoạt',
-                    value: true
+                    value: 2
                 }
             ],
             classD: [
                 {
                     text: 'Không kích hoạt (được đề nghị)',
-                    value: false
+                    value: 1
                 },
                 {
                     text: 'Kích hoạt',
-                    value: true
+                    value: 2
                 }
             ]
         };
@@ -634,8 +655,8 @@ let AutoBlockingRangeIpsComponent = class AutoBlockingRangeIpsComponent extends 
         const sub = this._banIpsService.getBlockingIPSettings()
             .subscribe(res => {
             this._fuseProgressiveBarService.hide();
-            this.classC = res.data.setting.autoBlackListIpRanges.classC;
-            this.classD = res.data.setting.autoBlackListIpRanges.classD;
+            this.classC = res.data.setting.autoBlackListIpRanges.classC === false ? 1 : 2;
+            this.classD = res.data.setting.autoBlackListIpRanges.classD === false ? 1 : 2;
             this.isProcessing = false;
         }, (error) => {
             this._fuseProgressiveBarService.hide();
@@ -644,6 +665,8 @@ let AutoBlockingRangeIpsComponent = class AutoBlockingRangeIpsComponent extends 
             }
             else
                 this._dialogService._openErrorDialog(error.error);
+            this.classC = -1;
+            this.classD = -1;
         });
         this.subscriptions.push(sub);
     }
@@ -668,8 +691,8 @@ let AutoBlockingRangeIpsComponent = class AutoBlockingRangeIpsComponent extends 
     }
     generateAutoBlockingIPRangeParams() {
         const params = {
-            classC: this.classC,
-            classD: this.classD
+            classC: this.classC === 1 ? false : true,
+            classD: this.classD === 1 ? false : true
         };
         return params;
     }

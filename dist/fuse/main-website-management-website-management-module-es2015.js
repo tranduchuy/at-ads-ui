@@ -159,9 +159,18 @@ let WebsiteManagementComponent = class WebsiteManagementComponent extends _share
             this.isProcessing = false;
         }, (error) => {
             this._fuseProgressiveBarService.hide();
-            this._dialogService._openErrorDialog(error.error);
             this.websites = [];
             this.isProcessing = false;
+            if (error.status === 404) {
+                const data = [];
+                data['select-campaign'] = {
+                    accountId: this.selectedAccountId,
+                    adsId: this.selectedAdsId
+                };
+                this._dialogService._openInfoDialog('Tài khoản bạn chọn hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ', '', '', 'select-campaign', data);
+            }
+            else
+                this._dialogService._openErrorDialog(error.error);
         });
         this.subscriptions.push(sub);
     }

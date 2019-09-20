@@ -148,6 +148,7 @@ var AdwordsAccountListComponent = /** @class */ (function (_super) {
                             _this._sessionService.setAccountId('');
                             _this._sessionService.setAdwordId('');
                         }
+                        _this._fuseNavigationService.reloadNavigation();
                     });
                     _this.subscriptions.push(getAccountDoneSub);
                     setTimeout(function () {

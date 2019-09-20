@@ -141,6 +141,7 @@ let AdwordsAccountListComponent = class AdwordsAccountListComponent extends app_
                             this._sessionService.setAccountId('');
                             this._sessionService.setAdwordId('');
                         }
+                        this._fuseNavigationService.reloadNavigation();
                     });
                     this.subscriptions.push(getAccountDoneSub);
                     setTimeout(() => {

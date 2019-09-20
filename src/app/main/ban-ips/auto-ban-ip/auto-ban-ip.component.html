@@ -15,26 +15,47 @@
       giúp bạn tiết kiệm được chi phí lãng phí do những hành vi phá hoại gây ra
     </p>
 
-    <div class="config-checking">
+    <p class="config-checking">
       <mat-checkbox [checked]="checked" (change)="checkSetting($event)" [disabled]="isProcessing">
-        <b>
-          Tự động chặn những IP đang phá hoại sử dụng <span style="color: red">AI</span> và <span style="color: red">Big Data</span>.
-        </b>
       </mat-checkbox>
-    </div>
-
-    <p>
       <b>
-        Chặn sau khi 1 IP nhấn quảng cáo (<span style="color: red">thường là 2 lần</span>)
+        Tự động chặn những IP đang phá hoại sử dụng <span style="color: red">AI</span> và <span style="color: red">Big
+          Data</span>.
       </b>
     </p>
 
-    <mat-form-field style="width: 100%" appearance="outline">
-      <mat-label>Chọn hình thức</mat-label>
-      <mat-select [(value)]="selectedMaxClick" [disabled]="isProcessing">
-        <mat-option *ngFor="let item of itemsSource.maxClick" [value]="item.value">{{item.text}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="-20px" fxLayoutGap="20px" class="max-click">
+      <div fxFlex="60">
+        <p>
+          <b>
+            Chặn sau khi 1 IP nhấn quảng cáo (<span style="color: red">thường là 2 lần</span>)
+          </b>
+        </p>
+
+        <mat-form-field style="width: 100%" appearance="outline">
+          <mat-label>Chọn số lần click</mat-label>
+          <mat-select [(value)]="selectedMaxClick" [disabled]="isProcessing">
+            <mat-option *ngFor="let item of itemsSource.maxClick" [value]="item.value">{{item.text}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="40">
+        <p>
+          <b>
+            Sau khoảng thời gian
+          </b>
+        </p>
+
+        <mat-form-field style="width: 100%" appearance="outline">
+          <mat-label>Chọn khoảng thời gian</mat-label>
+          <mat-select [(value)]="selectedMaxClickHours" [disabled]="isProcessing">
+            <mat-option *ngFor="let item of itemsSource.maxClickHours" [value]="item.value">{{item.text}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
 
     <p>
       <b>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ErrorDialogComponent } from '../../dialog/error-dialog/error-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { SuccessDialogComponent } from '../../dialog/success-dialog/success-dialog.component';
 import { ISuccess } from '../../dialog/models/i-success';
 import { IError } from '../../dialog/models/i-error';
@@ -15,14 +15,21 @@ export class DialogService {
   constructor(private _matDialog: MatDialog) {
   }
 
-  public _openInfoDialog(message: string, linkName?: string, linkUrl?: string): void {
+  public _openInfoDialog(message: string, linkName?: string, linkUrl?: string, navigatedPage?: string, data?: any[]): void {
     const dialogRef = this._matDialog.open(InfoDialogComponent);
     dialogRef.componentInstance.confirmMessage = message;
 
     if (linkName !== undefined)
       dialogRef.componentInstance.linkName = linkName;
+
     if (linkUrl !== undefined)
       dialogRef.componentInstance.linkUrl = linkUrl;
+
+    if(navigatedPage !== undefined)
+      dialogRef.componentInstance.navigatedPage = navigatedPage;
+
+    if (data !== undefined)
+      dialogRef.componentInstance.data = data;
   }
 
   public _openSuccessDialog(res: ISuccess): void {

@@ -166,9 +166,18 @@ var WebsiteManagementComponent = /** @class */ (function (_super) {
             _this.isProcessing = false;
         }, function (error) {
             _this._fuseProgressiveBarService.hide();
-            _this._dialogService._openErrorDialog(error.error);
             _this.websites = [];
             _this.isProcessing = false;
+            if (error.status === 404) {
+                var data = [];
+                data['select-campaign'] = {
+                    accountId: _this.selectedAccountId,
+                    adsId: _this.selectedAdsId
+                };
+                _this._dialogService._openInfoDialog('Tài khoản bạn chọn hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ', '', '', 'select-campaign', data);
+            }
+            else
+                _this._dialogService._openErrorDialog(error.error);
         });
         this.subscriptions.push(sub);
     };
