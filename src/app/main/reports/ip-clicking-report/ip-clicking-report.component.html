@@ -45,7 +45,8 @@
               (mouseover)="showReason(element.info[0].reason || '')">
               <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
             </span>
-            <span *ngIf="element.info[0].isSpam === false" style="color: #44b543; font-weight: bold">
+            <span *ngIf="element.info[0].isSpam === false" style="color: #44b543; font-weight: bold"
+              (mouseover)="showReason(element.info[0].reason || '')">
               <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
             </span>
           </mat-cell>
