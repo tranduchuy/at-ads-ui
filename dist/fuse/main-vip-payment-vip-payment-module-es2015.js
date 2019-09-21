@@ -143,7 +143,7 @@ let VipPaymentComponent = class VipPaymentComponent extends app_shared_component
                 if (this.accounts.length > 0) {
                     for (const account of data)
                         this.websites[this.adsAccountIdPipe.transform(account.adsId)] = account.websites;
-                    if (this.websites.length > 0) {
+                    if (this.websites[this.selectedAccount].length > 0) {
                         this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
                         this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
                     }

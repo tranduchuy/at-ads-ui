@@ -151,7 +151,7 @@ var VipPaymentComponent = /** @class */ (function (_super) {
                         var account = data_1[_i];
                         _this.websites[_this.adsAccountIdPipe.transform(account.adsId)] = account.websites;
                     }
-                    if (_this.websites.length > 0) {
+                    if (_this.websites[_this.selectedAccount].length > 0) {
                         _this.selectedWebsite = _this.websites[_this.selectedAccount][0].domain;
                         _this.selectedWebsiteCode = _this.websites[_this.selectedAccount][0].code;
                     }
