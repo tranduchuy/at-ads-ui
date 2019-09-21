@@ -86,13 +86,13 @@ export class VipPaymentComponent extends PageBaseComponent implements OnInit {
               for (const account of data)
                 this.websites[this.adsAccountIdPipe.transform(account.adsId)] = account.websites;
 
+              this.selectedAccount = this.accounts[0].adsId;
+              this.selectedAccountId = this.accounts.find(item => item.adsId === this.selectedAccount).id;
+
               if (this.websites[this.selectedAccount].length > 0) {
                 this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
                 this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
               }
-
-              this.selectedAccount = this.accounts[0].adsId;
-              this.selectedAccountId = this.accounts.find(item => item.adsId === this.selectedAccount).id;
             }
 
             this._fuseProgressBarService.hide();
