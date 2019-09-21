@@ -143,10 +143,12 @@ let VipPaymentComponent = class VipPaymentComponent extends app_shared_component
                 if (this.accounts.length > 0) {
                     for (const account of data)
                         this.websites[this.adsAccountIdPipe.transform(account.adsId)] = account.websites;
+                    if (this.websites.length > 0) {
+                        this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
+                        this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
+                    }
                     this.selectedAccount = this.accounts[0].adsId;
                     this.selectedAccountId = this.accounts.find(item => item.adsId === this.selectedAccount).id;
-                    this.selectedWebsite = this.websites[this.selectedAccount][0].domain;
-                    this.selectedWebsiteCode = this.websites[this.selectedAccount][0].code;
                 }
                 this._fuseProgressBarService.hide();
                 this.isProcessing = false;

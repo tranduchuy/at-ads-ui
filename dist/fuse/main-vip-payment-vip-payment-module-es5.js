@@ -151,10 +151,12 @@ var VipPaymentComponent = /** @class */ (function (_super) {
                         var account = data_1[_i];
                         _this.websites[_this.adsAccountIdPipe.transform(account.adsId)] = account.websites;
                     }
+                    if (_this.websites.length > 0) {
+                        _this.selectedWebsite = _this.websites[_this.selectedAccount][0].domain;
+                        _this.selectedWebsiteCode = _this.websites[_this.selectedAccount][0].code;
+                    }
                     _this.selectedAccount = _this.accounts[0].adsId;
                     _this.selectedAccountId = _this.accounts.find(function (item) { return item.adsId === _this.selectedAccount; }).id;
-                    _this.selectedWebsite = _this.websites[_this.selectedAccount][0].domain;
-                    _this.selectedWebsiteCode = _this.websites[_this.selectedAccount][0].code;
                 }
                 _this._fuseProgressBarService.hide();
                 _this.isProcessing = false;
