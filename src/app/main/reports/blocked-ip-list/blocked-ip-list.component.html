@@ -8,7 +8,8 @@
       <!-- <mat-table
         [dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: currentPageNumber, totalItems: totalItems }"> -->
 
-      <mat-table [dataSource]="dataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }">
+      <mat-table
+        [dataSource]="dataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }">
 
         <!-- Position Column -->
         <ng-container matColumnDef="order">
@@ -20,9 +21,8 @@
         <ng-container matColumnDef="task">
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <button mat-icon-button color="accent" matTooltip="Nhấn để mở chặn"
-                    [disabled]="isProcessing" style="color: crimson"
-              (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
+            <button mat-icon-button color="accent" matTooltip="Nhấn để mở chặn" [disabled]="isProcessing"
+              style="color: crimson" (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
               <mat-icon>lock_open</mat-icon>
             </button>
           </mat-cell>
@@ -60,22 +60,16 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="blockingOver">
           <mat-header-cell *matHeaderCellDef> Khóa trên </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.numberOfCampaigns}} chiến dịch </mat-cell>
+          <mat-cell *matCellDef="let element"> <span
+              style="color: crimson; font-weight: bold; margin-right: 5px">{{element.numberOfCampaigns}}</span> chiến dịch </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="campaign">
           <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span *ngFor="let item of element.campaigns; let i = index">
-              <span *ngIf="item.campaignName && i < element.campaigns.length-1"
-                style="margin-right: 5px">{{item.campaignName}},</span>
-              <span *ngIf="!item.campaignName && i < element.campaigns.length-1"
-                style="margin-right: 5px">{{item.campaignId}},</span>
-              <span *ngIf="item.campaignName && i === element.campaigns.length-1"
-                style="margin-right: 5px">{{item.campaignName}}</span>
-              <span *ngIf="!item.campaignName && i === element.campaigns.length-1"
-                style="margin-right: 5px">{{item.campaignId}}</span>
+            <span *ngFor="let item of element.campaigns" class="campaign">
+              {{item.campaignName}}
             </span>
           </mat-cell>
         </ng-container>
