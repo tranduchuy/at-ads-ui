@@ -183,11 +183,11 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 if (res.data.isConnected) {
                     this.isAlertDisplayed = false;
                     this._router.navigateByUrl('/gan-tracking/chien-dich');
-                    this._dialogService._openSuccessDialog({ messages: ['Cập nhật quyền quản lý tài khoản thành công'] });
+                    this._dialogService._openSuccessDialog({ messages: ['Cập nhật quyền quản lý hệ thống tài khoản Google Ads thành công'] });
                 }
                 else {
                     this.isAlertDisplayed = true;
-                    this._dialogService._openInfoDialog('Tài khoản chưa được chấp nhận quyền quản lý hệ thống');
+                    this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
                 }
 
                 this._sessionService.setAcceptedAdsId();
