@@ -6,7 +6,8 @@
   <div class="inner">
     <div class="title2">
       <p>
-        Kết quả có được theo thống kê từ ngày <b>25/05/2019</b> đến ngày <b>08/06/2019</b>
+        Kết quả có được theo thống kê từ ngày <b>{{startDate | date: 'dd/MM/yyyy'}}</b> đến ngày
+        <b>{{endDate | date: 'dd/MM/yyyy'}}</b>
       </p>
       <p class="advise">
         <span class="success-badge">MẸO</span> Bạn có thể dừng quảng cáo trên các thiết bị mang lại hiệu quả quảng cáo
@@ -24,14 +25,19 @@
         <ng-container matColumnDef="device">
           <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span *ngIf="element.device === 'Điện thoại'">
-              <mat-icon color="accent">smartphone</mat-icon> {{element.device}}
+            <span *ngIf="element.device === 'Điện thoại'" fxLayout="row" fxLayoutAlign="center start"
+              fxLayoutGap="10px">
+              <mat-icon color="accent">smartphone</mat-icon>
+              <span class="device-name">{{element.device}}</span>
             </span>
-            <span *ngIf="element.device === 'Máy tính bảng'">
-              <mat-icon color="accent">tablet_mac</mat-icon> {{element.device}}
+            <span *ngIf="element.device === 'Máy tính bảng'" fxLayout="row" fxLayoutAlign="center start"
+              fxLayoutGap="10px">
+              <mat-icon color="accent">tablet_mac</mat-icon>
+              <span class="device-name">{{element.device}}</span>
             </span>
-            <span *ngIf="element.device === 'Máy tính'">
-              <mat-icon color="accent">laptop_chromebook</mat-icon> {{element.device}}
+            <span *ngIf="element.device === 'Máy tính'" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+              <mat-icon color="accent">laptop_chromebook</mat-icon>
+              <span class="device-name">{{element.device}}</span>
             </span>
           </mat-cell>
         </ng-container>

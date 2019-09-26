@@ -7,6 +7,7 @@ import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 export interface DeviceReport {
   device: string;
@@ -27,6 +28,8 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
   displayedColumns: string[] = ['device', 'cost', 'impressions', 'clicks', 'avgPosition', 'ctr', 'optimization'];
   deviceReports: DeviceReport[];
   isProcessing: boolean = true;
+  startDate = moment().subtract(1, 'months');
+  endDate = moment();
   deviceSettings: any = {
     mobile: false,
     tablet: false,
@@ -145,33 +148,6 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
     const sub = this._banIpsService.getDeviceReport()
       .subscribe(res => {
         this.deviceReports = res.data.reportDevice;
-
-        // this.deviceReports = [
-        //   {
-        //     device: 'Điện thoại',
-        //     cost: 123,
-        //     impressions: 123,
-        //     clicks: 123,
-        //     avgPosition: 123,
-        //     ctr: 123
-        //   },
-        //   {
-        //     device: 'Máy tính bảng',
-        //     cost: 123,
-        //     impressions: 123,
-        //     clicks: 123,
-        //     avgPosition: 123,
-        //     ctr: 123
-        //   },
-        //   {
-        //     device: 'Máy tính',
-        //     cost: 123,
-        //     impressions: 123,
-        //     clicks: 123,
-        //     avgPosition: 123,
-        //     ctr: 123
-        //   },
-        // ];
 
         this.getDeviceSettings();
 
