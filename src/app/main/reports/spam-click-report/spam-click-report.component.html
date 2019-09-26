@@ -24,11 +24,11 @@
 
     <div class="div-pie-chart">
       <p style="text-align: center">
-        Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold" [(ngModel)]="selectedDateRange"
+        Bạn có thể tiết kiệm trong <span style="color: crimson; font-weight: bold" [(ngModel)]="selectedDateRange"
           ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>
-        từ <span style="color:#039be5; font-weight: bold" [(ngModel)]="selectedDateRange"
+        từ <span style="font-weight: bold; color: #039be5" [(ngModel)]="selectedDateRange"
           ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
-        ngày <span style="color: #039be5; font-weight: bold" [(ngModel)]="selectedDateRange"
+        ngày <span style="font-weight: bold; color: #039be5" [(ngModel)]="selectedDateRange"
           ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
         hạn chế chiến dịch ảo
       </p>
