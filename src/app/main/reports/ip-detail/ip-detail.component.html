@@ -88,7 +88,7 @@
                 <a mat-button color="accent" *ngIf="element.uuid" class="uuid-detail-link"
                   matTooltip="Nhấn vào để xem chi tiết"
                   [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid]">
-                  <span>{{element.uuid}}</span>
+                  <span>*{{element.uuid.slice(-12)}}*</span>
                 </a>
                 <span style="color:silver; font-weight: bold" *ngIf="!element.uuid">Unknown</span>
               </mat-cell>

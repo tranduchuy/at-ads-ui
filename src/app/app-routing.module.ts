@@ -51,6 +51,11 @@ const appRoutes: Routes = [
     loadChildren: './main/reports/reports.module#ReportsModule'
   },
   {
+    path: 'yeu-cau-boi-hoan-phi',
+    canActivate: [MainGuardService],
+    loadChildren: './main/request-cash-back/request-cash-back.module#RequestCashBackModule'
+  },
+  {
     path: 'nang-cap-vip',
     canActivate: [MainGuardService],
     loadChildren: './main/vip-payment/vip-payment.module#VipPaymentModule'
