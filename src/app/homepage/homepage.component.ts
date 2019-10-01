@@ -179,7 +179,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         .subscribe(
           (val) => {
             //console.log(val['access_token'], val['refresh_token']);
-            this.submitGoogleLoginForm(val['access_token'], val['refresh_token']);
+            this.submitGoogleLoginForm(val['access_token'], val['refresh_token'] || null);
           },
           response => {
             console.error('POST call in error', response);
@@ -221,7 +221,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     });
   }
 
-  private submitGoogleLoginForm(accessToken: string, refreshToken: string): void {
+  private submitGoogleLoginForm(accessToken: string, refreshToken?: string): void {
     this._fuseSplashScreenService.show();
     const sub = this._authService.loginByGoogle({
       accessToken,
