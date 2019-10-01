@@ -213,7 +213,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
         client_id: environment.googleAuth2ClientID,
-        cookiepolicy: 'single_host_origin',
+        cookie_policy: 'single_host_origin',
         scope: 'profile email https://www.googleapis.com/auth/adwords'
       });
     });
