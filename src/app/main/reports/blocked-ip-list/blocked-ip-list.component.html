@@ -61,13 +61,29 @@
               style="color: crimson; font-weight: bold; margin-right: 5px">{{element.numberOfCampaigns}}</span> chiến dịch </mat-cell>
         </ng-container>
 
-        <!-- Symbol Column -->
+        <!-- Campaign Column -->
         <ng-container matColumnDef="campaign">
           <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span *ngFor="let item of element.campaigns" class="campaign">
               {{item.campaignName || item.campaignId}}
             </span>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Keyword Column -->
+        <ng-container matColumnDef="keyword">
+          <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>{{element.gclidInfo?.keyword}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Keyword match type Column-->
+        <ng-container matColumnDef="keywordMatchType">
+          <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>{{element.gclidInfo?.keywordMatchType}}</span>
           </mat-cell>
         </ng-container>
 

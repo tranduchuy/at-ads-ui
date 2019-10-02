@@ -223,10 +223,12 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   private submitGoogleLoginForm(accessToken: string, refreshToken?: string): void {
     this._fuseSplashScreenService.show();
-    const sub = this._authService.loginByGoogle({
-      accessToken,
-      refreshToken
-    }).subscribe((res: ILoginSuccess) => {
+    const params: any = {accessToken};
+    if (refreshToken) {
+      params.refreshToken = refreshToken;
+    }
+    const sub = this._authService.loginByGoogle(params)
+      .subscribe((res: ILoginSuccess) => {
       const token = res.data.meta.token;
       const user = res.data.user;
 

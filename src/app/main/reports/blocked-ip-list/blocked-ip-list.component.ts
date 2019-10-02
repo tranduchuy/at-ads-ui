@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class BlockedIpListComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'campaign'];
+  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'campaign', 'keyword', 'keywordMatchType'];
 
   dataSource = [];
 

@@ -146,6 +146,22 @@
             </mat-cell>
           </ng-container>
 
+          <!-- Keyword Column -->
+          <ng-container matColumnDef="keyword">
+            <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.gclidInfo?.keyword}}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Keyword Match Type Column -->
+          <ng-container matColumnDef="keywordMatchType">
+            <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.gclidInfo?.keywordMatchType}}
+            </mat-cell>
+          </ng-container>
+
           <mat-header-row *matHeaderRowDef="advertisementClickReportColumns; sticky: true"></mat-header-row>
           <mat-row *matRowDef="let row; columns: advertisementClickReportColumns;"></mat-row>
         </mat-table>
