@@ -193,9 +193,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   loginByGG(): void {
-    this.auth2.grantOfflineAccess({
-      prompt : 'select_account'
-    }).then(this.onSignIn.bind(this));
+    this.auth2.grantOfflineAccess({}).then(this.onSignIn.bind(this));
   }
 
   showImageDialog(imgSrc: string) {
