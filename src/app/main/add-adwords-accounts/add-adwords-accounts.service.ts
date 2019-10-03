@@ -40,11 +40,8 @@ export class AddAdwordsAccountsService {
     return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
 
-  public getAdsAccounts(params: IGetAdsAccountsParams): Observable<any> {
-    let url = API.AdwordsAccount.getAdsAccounts.replace('{accessToken}', params.accessToken);
-    url = url.replace('{refreshToken}', params.refreshToken);
-
-    return this._http.get(url);
+  public getAdsAccounts(): Observable<any> {
+    return this._http.get(API.AdwordsAccount.getAdsAccounts);
   }
 
 }

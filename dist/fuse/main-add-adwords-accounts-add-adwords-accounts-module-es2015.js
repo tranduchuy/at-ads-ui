@@ -157,11 +157,7 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
         });
     }
     showAccountListByEmail() {
-        const googleAccountToken = this._sessionService.getGoogleAccountToken();
-        if (!googleAccountToken.accessToken || !googleAccountToken.refreshToken)
-            this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
-        else
-            this.getAdsAccounts();
+        this.getAdsAccounts();
     }
     onSignIn(googleUser) {
         if (googleUser && googleUser['code']) {
@@ -193,8 +189,8 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
     getAdsAccounts() {
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
-        const googleAccountToken = this._sessionService.getGoogleAccountToken();
-        const sub = this._addAdwordsAccountsService.getAdsAccounts(googleAccountToken)
+        // const googleAccountToken = this._sessionService.getGoogleAccountToken();
+        const sub = this._addAdwordsAccountsService.getAdsAccounts()
             .subscribe(res => {
             this.adsAccounts = res.data.googleAds;
             this.adsAccounts = (this.adsAccounts || []).map(item => {
@@ -208,10 +204,12 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
             this.isAccountListShown = false;
             this.isProcessing = false;
             this._fuseProgressiveBarService.hide();
-            if (error.error.messages[0] === 'unauthorized_client')
+            if (error.error.messages[0] === 'unauthorized_client') {
                 this.loginByGG();
-            else
+            }
+            else {
                 this._dialogService._openErrorDialog(error.error, true);
+            }
         });
         this.subscriptions.push(sub);
     }
@@ -246,10 +244,19 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
             this.connectedAccountId = '';
             this.connectedAdsId = '';
             this._fuseProgressiveBarService.hide();
-            if (error.error.messages[0] === 'Không xác định được lỗi')
-                this._dialogService._openErrorDialog({ messages: ['Không thể gắn tracking vào tài khoản này!<br> Có thể bạn chưa kết nối Google Ads với Appnet Technology <br> hoặc tài khoản này đã tồn tại trong hệ thống.'] }, true);
-            else
+            if (error.error.messages[0] === 'Không xác định được lỗi') {
+                this._dialogService._openErrorDialog({
+                    messages: [
+                        `Không thể gắn tracking vào tài khoản này!<br> 
+Có thể bạn chưa kết nối Google Ads với Appnet Technology <br> 
+hoặc tài khoản này đã tồn tại trong hệ thống.
+                `
+                    ]
+                }, true);
+            }
+            else {
                 this._dialogService._openErrorDialog(error.error);
+            }
             this.isProcessing = false;
         });
         this.subscriptions.push(sub);
@@ -306,8 +313,9 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
             this._sessionService.setAccountId(this.connectedAccountId);
             this._sessionService.setAdwordId(this.connectedAdsId);
             this._fuseNavigationService.reloadNavigation();
-            if (this.isAccountListShown)
+            if (this.isAccountListShown) {
                 this.getAdsAccounts();
+            }
             this.isProcessing = false;
         }, (error) => {
             this.isConnected = false;
@@ -456,10 +464,8 @@ let AddAdwordsAccountsService = class AddAdwordsAccountsService {
     checkAccountAcceptance(params) {
         return this._http.post(_shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.checkAccountAcceptance, params);
     }
-    getAdsAccounts(params) {
-        let url = _shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.getAdsAccounts.replace('{accessToken}', params.accessToken);
-        url = url.replace('{refreshToken}', params.refreshToken);
-        return this._http.get(url);
+    getAdsAccounts() {
+        return this._http.get(_shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.getAdsAccounts);
     }
 };
 AddAdwordsAccountsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
