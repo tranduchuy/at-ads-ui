@@ -19,7 +19,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   pieChart: any = {};
   lineChart: any = {};
   clickTotal: number;
-  advertisementClickReportColumns = ['time', 'ip', 'click', 'status', 'location', 'isPrivateBrowsing'];
+  advertisementClickReportColumns = ['time', 'ip', 'click', 'status', 'location', 'isPrivateBrowsing', 'keyword', 'keywordMatchType'];
   advertisementClickReport = [];
   pageTotal: number;
   currentPageNumber: number;

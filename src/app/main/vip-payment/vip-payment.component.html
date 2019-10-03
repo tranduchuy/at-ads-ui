@@ -28,6 +28,8 @@
               </span>
             </mat-radio-button>
           </mat-radio-group>
+          <span style="color: gray" *ngIf="accounts.length === 0 && !isProcessing">Bạn chưa kết nối tài khoản nào. Vui lòng kết nối <a routerLink="/them-tai-khoan-moi"
+              style="text-decoration: underline !important">tại đây</a>!</span>
         </div>
 
         <div class="websites">
@@ -44,7 +46,8 @@
               <span *ngIf="website.isExpired === true" class="free-label" style="margin-left: 10px">FREE</span>
             </mat-radio-button>
           </mat-radio-group>
-          <span *ngIf="!selectedWebsite && !isProcessing" style="color: gray">Tài khoản này hiện chưa có website nào.
+          <span *ngIf="!selectedWebsite && !isProcessing && accounts.length > 0" style="color: gray">Tài khoản này hiện
+            chưa có website nào.
             Vui lòng thêm <a [routerLink]="['/quan-ly-website', selectedAccountId]"
               style="text-decoration: underline !important">tại
               đây</a>!</span>

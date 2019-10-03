@@ -26,10 +26,6 @@
               {{element._id}}
             </a>
 
-            <!-- <a style="font-weight: bold; padding-left: 0" mat-button color="accent">
-                  {{element._id}}
-                </a> -->
-
           </mat-cell>
         </ng-container>
 
@@ -45,7 +41,8 @@
               (mouseover)="showReason(element.info[0].reason || '')">
               <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
             </span>
-            <span *ngIf="element.info[0].isSpam === false" style="color: #44b543; font-weight: bold">
+            <span *ngIf="element.info[0].isSpam === false" style="color: #44b543; font-weight: bold"
+              (mouseover)="showReason(element.info[0].reason || '')">
               <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
             </span>
           </mat-cell>
@@ -72,7 +69,7 @@
               alt="" class="icon">
             <img *ngIf="element.info[0].os?.name === 'Linux'"
               src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
-            {{element.info[0].os?.name + ' ' + element.info[0].os?.version}}
+            {{(element.info[0].os?.name || 'Unknown') + ' ' + (element.info[0].os?.version || '')}}
           </mat-cell>
         </ng-container>
 
@@ -99,7 +96,7 @@
             <img *ngIf="element.info[0].browser?.name === 'Tor'"
               src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
               alt="" class="icon">
-            {{element.info[0].browser?.name + ' ' + element.info[0].browser?.version}}
+            {{(element.info[0].browser?.name || 'Unknown') + ' ' + (element.info[0].browser?.version || '')}}
           </mat-cell>
         </ng-container>
 
@@ -115,14 +112,8 @@
 
         <ng-container matColumnDef="network">
           <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].networkCompany?.name | uppercase}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].networkCompany?.name || 'Unknown'}} </mat-cell>
         </ng-container>
-
-        <!--<ng-container matColumnDef="keyword">-->
-        <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->
-        <!--<mat-cell *matCellDef="let element"> {{element.info[0].keyword || 'Unknown'}}-->
-        <!--</mat-cell>-->
-        <!--</ng-container>-->
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

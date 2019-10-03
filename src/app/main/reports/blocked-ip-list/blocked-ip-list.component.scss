@@ -59,7 +59,19 @@
 
         mat-header-cell:nth-child(7),
         mat-cell:nth-child(7) {
-          flex: 0 0 45%;
+          flex: 0 0 30%;
+        }
+
+        mat-cell:nth-child(7) {
+          display: table;
+          line-height: 30px;
+
+          .campaign {
+            background: whitesmoke;
+            padding: 3px;
+            margin-right: 5px;
+            transition: 0.2s;
+          }
         }
 
         mat-header-row,
@@ -69,15 +81,24 @@
         }
 
         mat-header-cell {
-          background: #039be5;
+          background: rgba(217, 83, 79, 1);
           color: white;
+        }
+
+        mat-cell {
+          padding-top: 5px;
+          padding-bottom: 5px;
         }
 
         mat-row {
           transition: 0.2s;
 
           &:hover {
-            background-color: rgba(3, 155, 229, 0.1);
+            background-color: rgba(217, 83, 79, 0.1);
+
+            .campaign {
+              background: rgba(217, 83, 79, 0.1);
+            }
           }
         }
       }

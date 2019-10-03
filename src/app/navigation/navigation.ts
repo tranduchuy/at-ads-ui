@@ -153,6 +153,22 @@ export const navigation: FuseNavigation[] = [
     ]
   },
   {
+    id: 'cash-back',
+    title: 'HƯỚNG DẪN HOÀN TIỀN',
+    translate: 'NAV.APPLICATIONS',
+    type: 'group',
+    children: [
+      {
+        id: 'request-cash-back',
+        title: 'Yêu Cầu Bồi Hoàn Phí',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'monetization_on',
+        url: '/yeu-cau-boi-hoan-phi',
+      },
+    ]
+  },
+  {
     id: 'support',
     title: 'NHÂN VIÊN HỖ TRỢ BẠN',
     translate: 'NAV.APPLICATIONS',

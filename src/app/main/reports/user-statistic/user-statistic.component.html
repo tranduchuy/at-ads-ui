@@ -28,7 +28,7 @@
             <a mat-button color="accent" *ngIf="element.uuid" class="uuid-detail-link"
               matTooltip="Nhấn vào để xem chi tiết"
               [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid]">
-              <span>{{element.uuid.slice(-12)}}</span>
+              <span>*{{element.uuid.slice(-12)}}*</span>
             </a>
             <span style="color:silver; font-weight: bold" *ngIf="!element.uuid">Unknown</span>
           </mat-cell>
@@ -99,15 +99,8 @@
 
         <ng-container matColumnDef="network">
           <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.networkCompany?.name}}</mat-cell>
+          <mat-cell *matCellDef="let element">{{element.networkCompany?.name || 'Unknown'}}</mat-cell>
         </ng-container>
-
-        <!-- <ng-container matColumnDef="keyword">
-          <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>
-          </mat-cell>
-        </ng-container> -->
 
         <ng-container matColumnDef="location">
           <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>

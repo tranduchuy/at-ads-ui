@@ -8,13 +8,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
 import { ActivatedRoute, Router } from '@angular/router';
 
-export interface BlockedIP {
-  _id: string;
-  campaignIds: string[];
-  numberOfCampaigns: number;
-  network: string;
-}
-
 @Component({
   selector: 'app-blocked-ip-list',
   templateUrl: './blocked-ip-list.component.html',
@@ -22,9 +15,9 @@ export interface BlockedIP {
 })
 export class BlockedIpListComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'campaign'];
+  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'campaign', 'keyword', 'keywordMatchType'];
 
-  dataSource: BlockedIP[] = [];
+  dataSource = [];
 
   currentPageNumber: number;
   pageTotal: number;

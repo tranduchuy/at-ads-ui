@@ -179,7 +179,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         .subscribe(
           (val) => {
             //console.log(val['access_token'], val['refresh_token']);
-            this.submitGoogleLoginForm(val['access_token'], val['refresh_token']);
+            this.submitGoogleLoginForm(val['access_token'], val['refresh_token'] || null);
           },
           response => {
             console.error('POST call in error', response);
@@ -193,7 +193,9 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   loginByGG(): void {
-    this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
+    this.auth2.grantOfflineAccess({
+      prompt : 'select_account'
+    }).then(this.onSignIn.bind(this));
   }
 
   showImageDialog(imgSrc: string) {
@@ -213,18 +215,20 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
         client_id: environment.googleAuth2ClientID,
-        cookiepolicy: 'single_host_origin',
+        cookie_policy: 'single_host_origin',
         scope: 'profile email https://www.googleapis.com/auth/adwords'
       });
     });
   }
 
-  private submitGoogleLoginForm(accessToken: string, refreshToken: string): void {
+  private submitGoogleLoginForm(accessToken: string, refreshToken?: string): void {
     this._fuseSplashScreenService.show();
-    const sub = this._authService.loginByGoogle({
-      accessToken,
-      refreshToken
-    }).subscribe((res: ILoginSuccess) => {
+    const params: any = {accessToken};
+    if (refreshToken) {
+      params.refreshToken = refreshToken;
+    }
+    const sub = this._authService.loginByGoogle(params)
+      .subscribe((res: ILoginSuccess) => {
       const token = res.data.meta.token;
       const user = res.data.user;
 
