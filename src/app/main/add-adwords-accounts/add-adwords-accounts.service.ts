@@ -40,8 +40,16 @@ export class AddAdwordsAccountsService {
     return this._http.post(API.AdwordsAccount.checkAccountAcceptance, params);
   }
 
-  public getAdsAccounts(): Observable<any> {
-    return this._http.get(API.AdwordsAccount.getAdsAccounts);
+  public getAccountsFromGoogleAds(): Observable<any> {
+    return this._http.get(API.AdwordsAccount.getAccountsFromGoogleAds);
+  }
+
+  public checkRefreshToken(): Observable<any> {
+    return this._http.get(API.AdwordsAccount.checkRefreshToken);
+  }
+
+  public updateAccessTokenRefreshToken(params: IGetAdsAccountsParams): Observable<any> {
+    return this._http.put(API.AdwordsAccount.updateAccessTokenRefreshToken, params);
   }
 
 }
