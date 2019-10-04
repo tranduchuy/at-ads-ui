@@ -129,7 +129,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     this.selectedAccount = event.value;
   }
 
-  checkRefreshToken() {
+  checkRefreshToken(): void {
     this.isProcessing = false;
     this._fuseProgressiveBarService.show();
 
@@ -148,7 +148,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     this.subscriptions.push(sub);
   }
 
-  updateAccessTokenRefreshToken() {
+  updateAccessTokenRefreshToken(): void {
     this.isProcessing = false;
     this._fuseProgressiveBarService.show();
 
@@ -160,6 +160,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
         this.getAccountsFromGoogleAds();
       },
         (error: HttpErrorResponse) => {
+          this._dialogService._openErrorDialog(error.error, true);
           this._fuseProgressiveBarService.hide();
           this.isAccountListShown = false;
           this.isProcessing = false;
