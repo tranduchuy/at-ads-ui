@@ -78,7 +78,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     //   this.isContactFooterDisplayed = false;
     // else this.isContactFooterDisplayed = true;
 
-    if(currentOffset > 470)
+    if (currentOffset > 470)
       this.isTopbarDisplayed = true && (window.innerWidth > 600);
     else this.isTopbarDisplayed = false;
 
@@ -178,7 +178,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         } as any)
         .subscribe(
           (val) => {
-            //console.log(val['access_token'], val['refresh_token']);
             this.submitGoogleLoginForm(val['access_token'], val['refresh_token'] || null);
           },
           response => {
@@ -194,7 +193,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   loginByGG(): void {
     this.auth2.grantOfflineAccess({
-      prompt : 'select_account'
+      prompt: 'select_account'
     }).then(this.onSignIn.bind(this));
   }
 
@@ -223,26 +222,26 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   private submitGoogleLoginForm(accessToken: string, refreshToken?: string): void {
     this._fuseSplashScreenService.show();
-    const params: any = {accessToken};
+    const params: any = { accessToken };
     if (refreshToken) {
       params.refreshToken = refreshToken;
     }
     const sub = this._authService.loginByGoogle(params)
       .subscribe((res: ILoginSuccess) => {
-      const token = res.data.meta.token;
-      const user = res.data.user;
+        const token = res.data.meta.token;
+        const user = res.data.user;
 
-      this._sessionService.set(token, user);
-      this._sessionService.setUser(user);
-      this._sessionService.setGoogleAccountToken(accessToken, refreshToken);
+        this._sessionService.set(token, user);
+        this._sessionService.setUser(user);
+        this._sessionService.setGoogleAccountToken(accessToken, refreshToken);
 
-      this._ngZone.run(() => this.checkAccountList());
-    },
-      (error: HttpErrorResponse) => {
-        this._fuseSplashScreenService.hide();
-        this._dialogService._openErrorDialog(error.error);
-      }
-    );
+        this._ngZone.run(() => this.checkAccountList());
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseSplashScreenService.hide();
+          this._dialogService._openErrorDialog(error.error);
+        }
+      );
     this.subscriptions.push(sub);
   }
 

@@ -45,10 +45,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     private _adwordsAccountsService: AdwordsAccountsService,
     private _sessionService: SessionService,
     private _router: Router,
-    private _fuseSlashScreenService: FuseSplashScreenService,
     private http: HttpClient,
-    private _ngZone: NgZone,
-    private _authService: AuthService,
   ) {
     super();
   }
@@ -78,7 +75,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
-          this.getAdsAccounts();
+          this.checkRefreshToken();
         }
       );
     this.subscriptions.push(sub);
@@ -95,7 +92,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   showAccountListByEmail(): void {
-    this.getAdsAccounts();
+    this.checkRefreshToken();
   }
 
   onSignIn(googleUser: any): void {
@@ -111,8 +108,9 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
         .subscribe(
           (val) => {
             this._sessionService.setGoogleAccountToken(val['access_token'], val['refresh_token']);
+            
             setTimeout(() => {
-              this.getAdsAccounts();
+              this.updateAccessTokenRefreshToken();
             }, 500);
           },
           response => {
@@ -122,7 +120,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
             console.log('The POST observable is now completed.');
           });
     } else {
-      this._dialogService._openErrorDialog({messages: ['Lấy thông tin tài khoản từ google không thành công']});
+      this._dialogService._openErrorDialog({ messages: ['Lấy thông tin tài khoản từ google không thành công'] });
     }
 
   }
@@ -131,25 +129,61 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     this.selectedAccount = event.value;
   }
 
-  getAdsAccounts(): void {
+  checkRefreshToken() {
+    this.isProcessing = false;
+    this._fuseProgressiveBarService.show();
+
+    const sub = this._addAdwordsAccountsService.checkRefreshToken()
+      .subscribe(res => {
+        this.isProcessing = false;
+        this._fuseProgressiveBarService.hide();
+        this.getAccountsFromGoogleAds();
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+          this.isAccountListShown = false;
+          this.loginByGG();
+        });
+    this.subscriptions.push(sub);
+  }
+
+  updateAccessTokenRefreshToken() {
+    this.isProcessing = false;
+    this._fuseProgressiveBarService.show();
+
+    const params = this._sessionService.getGoogleAccountToken();
+    const sub = this._addAdwordsAccountsService.updateAccessTokenRefreshToken(params)
+      .subscribe(res => {
+        this._fuseProgressiveBarService.hide();
+        this.isProcessing = false;
+        this.getAccountsFromGoogleAds();
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressiveBarService.hide();
+          this.isAccountListShown = false;
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
+  }
+
+  getAccountsFromGoogleAds(): void {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
 
-    // const googleAccountToken = this._sessionService.getGoogleAccountToken();
-
-    const sub = this._addAdwordsAccountsService.getAdsAccounts()
+    const sub = this._addAdwordsAccountsService.getAccountsFromGoogleAds()
       .subscribe(res => {
 
-          this.adsAccounts = res.data.googleAds;
-          this.adsAccounts = (this.adsAccounts || []).map(item => {
-            item.googleAdId = this._adsAccountIdPipe.transform(item.googleAdId);
-            return item;
-          });
+        this.adsAccounts = res.data.googleAds;
+        this.adsAccounts = (this.adsAccounts || []).map(item => {
+          item.googleAdId = this._adsAccountIdPipe.transform(item.googleAdId);
+          return item;
+        });
 
-          this._fuseProgressiveBarService.hide();
-          this.isAccountListShown = true;
-          this.isProcessing = false;
-        },
+        this._fuseProgressiveBarService.hide();
+        this.isAccountListShown = true;
+        this.isProcessing = false;
+      },
         (error: HttpErrorResponse) => {
           this.isAccountListShown = false;
           this.isProcessing = false;
@@ -165,7 +199,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   generateConnectAccountByEmailParam(): any {
-    return {adWordId: this.selectedAccount.replace(/[^a-zA-Z0-9 ]/g, '')};
+    return { adWordId: this.selectedAccount.replace(/[^a-zA-Z0-9 ]/g, '') };
   }
 
   connectAccountByEmail(): void {
@@ -198,7 +232,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this.isConnected = true;
 
           this.selectedAccount = '';
-          this.getAdsAccounts();
+          this.checkRefreshToken();
 
           this.isProcessing = false;
         },
@@ -240,16 +274,9 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
       .subscribe(
         res => {
           if (res.data.isConnected) {
-            this._dialogService._openSuccessDialog({messages: ['Kết nối tài khoản Google Ads thành công']});
+            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
 
             setTimeout(() => {
-
-              // this._sessionService.setActiveAccountId(this.connectedAccountId);
-              // this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
-              // this._sessionService.setAccountId(this.connectedAccountId);
-              // this._sessionService.setAdwordId(this.connectedAdsId);
-              // this._fuseNavigationService.reloadNavigation();
-
               this._fuseProgressiveBarService.hide();
               this._router.navigateByUrl('/gan-tracking/chien-dich');
             }, 2000);
@@ -257,7 +284,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
             this.isProcessing = false;
             this._fuseProgressiveBarService.hide();
             this._dialogService._openErrorDialog(
-              {messages: ['Hoàn tất kết nối tài khoản Google Ads thất bại.']},
+              { messages: ['Hoàn tất kết nối tài khoản Google Ads thất bại.'] },
               true
             );
           }
@@ -265,7 +292,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog({messages: ['Tài khoản Google Ads không tồn tại']});
+          this._dialogService._openErrorDialog({ messages: ['Tài khoản Google Ads không tồn tại'] });
           this.isProcessing = false;
         });
     this.subscriptions.push(sub);
@@ -300,7 +327,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
           this._fuseNavigationService.reloadNavigation();
 
           if (this.isAccountListShown) {
-            this.getAdsAccounts();
+            this.checkRefreshToken();
           }
 
           this.isProcessing = false;
@@ -330,7 +357,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
   }
 
   private generatePostObject(): any {
-    const params = {...this.form.value};
+    const params = { ...this.form.value };
 
     // required
     params.adWordId = params.adWordId.replace(/[^a-zA-Z0-9 ]/g, '');
