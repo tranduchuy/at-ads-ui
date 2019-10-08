@@ -269,14 +269,7 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
             _this._sessionService.setAccountId(_this.connectedAccountId);
             _this._sessionService.setAdwordId(_this.connectedAdsId);
             _this._fuseNavigationService.reloadNavigation();
-            if (res.data.isRefresh) {
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
-                return;
-            }
-            _this.isConnected = true;
-            _this.selectedAccount = '';
-            _this.checkRefreshToken();
-            _this.isProcessing = false;
+            _this._router.navigateByUrl('/gan-tracking/chien-dich');
         }, function (error) {
             _this.isConnected = false;
             _this.connectedAccountId = '';
