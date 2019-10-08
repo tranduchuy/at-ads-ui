@@ -86,10 +86,12 @@
           <ng-container matColumnDef="accepted">
             <mat-header-cell *matHeaderCellDef> Quyền quản lý </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <button mat-icon-button color="accent" matTooltip="Đã được chấp nhận" *ngIf="element.isConnected">
+              <button mat-icon-button color="accent" matTooltip="Đã được chấp nhận"
+                *ngIf="element.connectType !== 'GOOGLE_ADS_ID' || element.isConnected === true">
                 <mat-icon style="color: #4bb543">check_circle</mat-icon>
               </button>
-              <button mat-icon-button color="accent" matTooltip="Chưa được chấp nhận" *ngIf="!element.isConnected">
+              <button mat-icon-button color="accent" matTooltip="Chưa được chấp nhận"
+                *ngIf="element.connectType === 'GOOGLE_ADS_ID' && element.isConnected === false">
                 <mat-icon style="color: crimson">highlight_off</mat-icon>
               </button>
             </mat-cell>

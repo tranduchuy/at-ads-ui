@@ -224,18 +224,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this._sessionService.setAdwordId(this.connectedAdsId);
 
           this._fuseNavigationService.reloadNavigation();
-
-          if (res.data.isRefresh) {
-            this._router.navigateByUrl('/danh-sach-tai-khoan');
-            return;
-          }
-
-          this.isConnected = true;
-
-          this.selectedAccount = '';
-          this.checkRefreshToken();
-
-          this.isProcessing = false;
+          this._router.navigateByUrl('/gan-tracking/chien-dich');
         },
         (error: HttpErrorResponse) => {
 
