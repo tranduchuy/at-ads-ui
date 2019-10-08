@@ -209,7 +209,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
     const param = this.generateConnectAccountByEmailParam();
 
-    const sub = this._addAdwordsAccountsService.addAdwordsAccount(param)
+    const sub = this._addAdwordsAccountsService.addAdwordsAccountByEmail(param)
       .subscribe(
         (res) => {
           this._fuseProgressiveBarService.hide();

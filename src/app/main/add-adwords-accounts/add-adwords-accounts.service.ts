@@ -27,6 +27,10 @@ export class AddAdwordsAccountsService {
     return this._http.post(API.AdwordsAccount.addAccount, param);
   }
 
+  public addAdwordsAccountByEmail(param: IAddAccount): Observable<any> {
+    return this._http.post(API.AdwordsAccount.addAccountByEmail, param);
+  }
+
   public getAccounts(): Observable<any> {
     return this._http.get(API.AdwordsAccount.getAccounts);
   }
