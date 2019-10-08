@@ -245,7 +245,7 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
         const param = this.generateConnectAccountByEmailParam();
-        const sub = this._addAdwordsAccountsService.addAdwordsAccount(param)
+        const sub = this._addAdwordsAccountsService.addAdwordsAccountByEmail(param)
             .subscribe((res) => {
             this._fuseProgressiveBarService.hide();
             this._dialogService._openSuccessDialog(res);
@@ -470,6 +470,9 @@ let AddAdwordsAccountsService = class AddAdwordsAccountsService {
     }
     addAdwordsAccount(param) {
         return this._http.post(_shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.addAccount, param);
+    }
+    addAdwordsAccountByEmail(param) {
+        return this._http.post(_shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.addAccountByEmail, param);
     }
     getAccounts() {
         return this._http.get(_shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.getAccounts);

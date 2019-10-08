@@ -258,7 +258,7 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
         var param = this.generateConnectAccountByEmailParam();
-        var sub = this._addAdwordsAccountsService.addAdwordsAccount(param)
+        var sub = this._addAdwordsAccountsService.addAdwordsAccountByEmail(param)
             .subscribe(function (res) {
             _this._fuseProgressiveBarService.hide();
             _this._dialogService._openSuccessDialog(res);
@@ -486,6 +486,9 @@ var AddAdwordsAccountsService = /** @class */ (function () {
     }
     AddAdwordsAccountsService.prototype.addAdwordsAccount = function (param) {
         return this._http.post(_shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.addAccount, param);
+    };
+    AddAdwordsAccountsService.prototype.addAdwordsAccountByEmail = function (param) {
+        return this._http.post(_shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.addAccountByEmail, param);
     };
     AddAdwordsAccountsService.prototype.getAccounts = function () {
         return this._http.get(_shared_constants_api_constant__WEBPACK_IMPORTED_MODULE_2__["API"].AdwordsAccount.getAccounts);
