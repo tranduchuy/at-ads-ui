@@ -18,6 +18,7 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
+import { environment } from '../environments/environment';
 import { LoginModule } from './authentication/login/login.module';
 import { RegisterModule } from './authentication/register/register.module';
 import { ForgotPasswordModule } from './authentication/forgot-password/forgot-password.module';
@@ -39,17 +40,18 @@ import { CheckWebsiteTrackingDialogComponent } from './main/add-tracking-tags/ch
 import { MatTableModule } from '@angular/material';
 import { LogoutModule } from './authentication/logout/logout.module';
 import { HomepageModule } from './homepage/homepage.module';
-
-import * as firebase from 'firebase';
-import { FirebaseMessagingService } from './shared/services/firebase-service/firebase-messaging.service';
-import { firebaseConfig } from './shared/services/firebase-service/firebase-config';
 import { ImageDialogComponent } from './dialog/image-dialog/image-dialog.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = {
+  url: environment.hostApi + '/WEB_HOMEPAGE',
+  options: {}
+};
 
 export function init_app(appInitService: AppInitService): any {
   return () => {
     appInitService.initializeApp();
-    firebase.initializeApp(firebaseConfig);
-  }
+  };
 }
 
 @NgModule({
@@ -61,7 +63,7 @@ export function init_app(appInitService: AppInitService): any {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
+    SocketIoModule.forRoot(config),
     TranslateModule.forRoot(),
 
     // Material moment date module
@@ -117,7 +119,6 @@ export function init_app(appInitService: AppInitService): any {
     SessionService,
     ValidatorsService,
     AppInitService,
-    FirebaseMessagingService,
     { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true },
   ],
   bootstrap: [
