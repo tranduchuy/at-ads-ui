@@ -108,7 +108,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
         .subscribe(
           (val) => {
             this._sessionService.setGoogleAccountToken(val['access_token'], val['refresh_token']);
-            
+
             setTimeout(() => {
               this.updateAccessTokenRefreshToken();
             }, 500);
@@ -212,7 +212,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
       .subscribe(
         (res) => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openInfoDialog(res.messages[0]);
+          this._dialogService._openSuccessDialog(res);
 
           this.connectedAccountId = res.data.account._id;
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);

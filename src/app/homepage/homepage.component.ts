@@ -3,7 +3,7 @@ import { AfterViewInit, Component, NgZone, OnInit, HostListener } from '@angular
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
-import { FirebaseMessagingService } from 'app/shared/services/firebase-service/firebase-messaging.service';
+//import { FirebaseMessagingService } from 'app/shared/services/firebase-service/firebase-messaging.service';
 import { MatTableDataSource } from '@angular/material';
 import { FuseSplashScreenService } from '../../@fuse/services/splash-screen.service';
 import { environment } from '../../environments/environment';
@@ -37,7 +37,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private _sessionService: SessionService,
     private _dialogService: DialogService,
     private _ngZone: NgZone,
-    private _firebaseMessagingService: FirebaseMessagingService,
+    //private _firebaseMessagingService: FirebaseMessagingService,
     private http: HttpClient,
     private _authService: AuthService,
     private _router: Router,
@@ -104,28 +104,28 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
       this.isOnLogin = true;
     else this.isOnLogin = false;
 
-    this._firebaseMessagingService.getPermission();
+    //this._firebaseMessagingService.getPermission();
     this.get30FirstIPLogs();
   }
 
-  recieveMessage() {
-    const sub = this._firebaseMessagingService.getMessage()
-      .subscribe((payload: any) => {
-        if (Object.keys(payload).length > 0) {
+  // recieveMessage() {
+  //   const sub = this._firebaseMessagingService.getMessage()
+  //     .subscribe((payload: any) => {
+  //       if (Object.keys(payload).length > 0) {
 
-          let log = JSON.parse(payload.data.log);
+  //         let log = JSON.parse(payload.data.log);
 
-          this.logs.unshift(log);
+  //         this.logs.unshift(log);
 
-          if (this.logs.length > 30) {
-            this.logs.pop();
-          }
+  //         if (this.logs.length > 30) {
+  //           this.logs.pop();
+  //         }
 
-          this.dataSource = new MatTableDataSource<Element>(this.logs);
-        }
-      });
-    this.subscriptions.push(sub);
-  }
+  //         this.dataSource = new MatTableDataSource<Element>(this.logs);
+  //       }
+  //     });
+  //   this.subscriptions.push(sub);
+  // }
 
   get30FirstIPLogs() {
     this._fuseProgressBarService.show();
@@ -159,7 +159,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
         this.dataSource = new MatTableDataSource<Element>(this.logs);
 
-        this.recieveMessage();
+        //this.recieveMessage();
 
         this._fuseProgressBarService.hide();
       });
