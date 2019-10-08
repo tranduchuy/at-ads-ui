@@ -1,10 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, NgZone, OnInit, HostListener } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
-import { FirebaseMessagingService } from 'app/shared/services/firebase-service/firebase-messaging.service';
+// import { FirebaseMessagingService } from 'app/shared/services/firebase-service/firebase-messaging.service';
 import { MatTableDataSource } from '@angular/material';
+import { Socket } from 'ngx-socket-io';
 import { FuseSplashScreenService } from '../../@fuse/services/splash-screen.service';
 import { environment } from '../../environments/environment';
 import { ILoginSuccess } from '../authentication/login/models/i-login-success';
@@ -22,14 +23,14 @@ declare var gapi: any;
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit {
+export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location'];
   logs = [];
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);
   isOnLogin: boolean;
 
-  scrollPoint: number = 235;
+  scrollPoint = 235;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
@@ -37,7 +38,8 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private _sessionService: SessionService,
     private _dialogService: DialogService,
     private _ngZone: NgZone,
-    private _firebaseMessagingService: FirebaseMessagingService,
+    // private _firebaseMessagingService: FirebaseMessagingService,
+    private _socket: Socket,
     private http: HttpClient,
     private _authService: AuthService,
     private _router: Router,
@@ -66,9 +68,9 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     };
   }
 
-  lastOffset: number = 0;
+  lastOffset = 0;
   isContactFooterDisplayed: boolean = window.innerWidth > 600;
-  isTopbarDisplayed: boolean = false;
+  isTopbarDisplayed = false;
   isContactDisplayed: boolean = window.innerWidth <= 600;
 
   scroll = (event: any): void => {
@@ -78,14 +80,16 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     //   this.isContactFooterDisplayed = false;
     // else this.isContactFooterDisplayed = true;
 
-    if (currentOffset > 470)
-      this.isTopbarDisplayed = true && (window.innerWidth > 600);
-    else this.isTopbarDisplayed = false;
+    if (currentOffset > 470) {
+      this.isTopbarDisplayed = window.innerWidth > 600;
+    } else {
+      this.isTopbarDisplayed = false;
+    }
 
     this.lastOffset = currentOffset;
-  };
+  }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     window.removeEventListener('scroll', this.scroll, true);
   }
 
@@ -99,35 +103,35 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   ngOnInit(): void {
-
-    if (this._sessionService.user)
+    if (this._sessionService.user) {
       this.isOnLogin = true;
-    else this.isOnLogin = false;
+    } else {
+      this.isOnLogin = false;
+    }
 
-    this._firebaseMessagingService.getPermission();
+    // this._firebaseMessagingService.getPermission();
     this.get30FirstIPLogs();
   }
 
-  recieveMessage() {
-    const sub = this._firebaseMessagingService.getMessage()
-      .subscribe((payload: any) => {
-        if (Object.keys(payload).length > 0) {
-
-          let log = JSON.parse(payload.data.log);
-
+  receiveMessage(): void {
+    this._socket
+      .fromEvent('message')
+      .subscribe((value: any) => {
+        try {
+          const log = JSON.parse(value);
           this.logs.unshift(log);
-
           if (this.logs.length > 30) {
             this.logs.pop();
           }
 
           this.dataSource = new MatTableDataSource<Element>(this.logs);
+        } catch (e) {
+          console.error(e);
         }
       });
-    this.subscriptions.push(sub);
   }
 
-  get30FirstIPLogs() {
+  get30FirstIPLogs(): void {
     this._fuseProgressBarService.show();
     const sub = this._homepageService.get30FirstIPLogs()
       .subscribe(res => {
@@ -154,12 +158,12 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
               location: {
                 city: item.location !== undefined ? item.location.city : null
               },
-            }
-          })
+            };
+          });
 
         this.dataSource = new MatTableDataSource<Element>(this.logs);
 
-        this.recieveMessage();
+        this.receiveMessage();
 
         this._fuseProgressBarService.hide();
       });
@@ -197,14 +201,14 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     }).then(this.onSignIn.bind(this));
   }
 
-  showImageDialog(imgSrc: string) {
+  showImageDialog(imgSrc: string): void {
     this._dialogService._openImageDialog(imgSrc);
   }
 
-  checkLogin() {
-    if (this._sessionService.user)
+  checkLogin(): void {
+    if (this._sessionService.user) {
       this._router.navigateByUrl('/');
-    else {
+    } else {
       this.isOnLogin = false;
       this.loginByGG();
     }
