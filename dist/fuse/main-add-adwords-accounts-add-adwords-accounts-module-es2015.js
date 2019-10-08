@@ -248,7 +248,7 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
         const sub = this._addAdwordsAccountsService.addAdwordsAccount(param)
             .subscribe((res) => {
             this._fuseProgressiveBarService.hide();
-            this._dialogService._openInfoDialog(res.messages[0]);
+            this._dialogService._openSuccessDialog(res);
             this.connectedAccountId = res.data.account._id;
             this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
             this._sessionService.setActiveAccountId(this.connectedAccountId);

@@ -261,7 +261,7 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
         var sub = this._addAdwordsAccountsService.addAdwordsAccount(param)
             .subscribe(function (res) {
             _this._fuseProgressiveBarService.hide();
-            _this._dialogService._openInfoDialog(res.messages[0]);
+            _this._dialogService._openSuccessDialog(res);
             _this.connectedAccountId = res.data.account._id;
             _this.connectedAdsId = _this._adsAccountIdPipe.transform(res.data.account.adsId);
             _this._sessionService.setActiveAccountId(_this.connectedAccountId);
