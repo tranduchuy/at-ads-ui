@@ -1,19 +1,15 @@
 <div class="container">
 
   <div class="title1">
-    CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP - TÀI KHOẢN <span
+    CẤU HÌNH CHẶN THEO DANH SÁCH IP TÙY CHỈNH - TÀI KHOẢN <span
       class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
   <div class="inner">
-    <div class="title2">
-      TÍNH NĂNG CHẶN THEO DANH SÁCH IP TÙY CHỈNH
-    </div>
 
     <p class="notification">
-      Hệ thống kiểm tra IP máy tính của bạn và chặn quảng cáo <span style="color: red">không cho hiển thị</span> trên
-      máy
-      của bạn nữa. Sau khi thực hiện <span style="color: red">khoảng 60s</span> bạn sẽ không thấy quảng cáo hiển thị
+      Hệ thống sẽ thực hiện chặn một danh sách các IP theo yêu cầu của bạn và <span style="color: red">không cho hiển thị</span> quảng cáo
+      trên thiết bị đang sử dụng các IP này.
     </p>
 
     <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
@@ -46,7 +42,7 @@
             <br>IP4: 127.0.*.*
           </p> -->
           <span>
-            Hệ thống sẽ tự động chuyển đổi IP và chặn trong Google Ads, thời gian thực hiện từ 50-60s
+            Hệ thống sẽ tự động chuyển đổi IP và chặn trong Google Ads sau một khoảng thời gian.
           </span>
         </div>
       </div>

@@ -6,7 +6,8 @@
   </div>
 
   <div class="inner">
-    <p><span style="color: goldenrod; font-weight: bold">Nâng cấp VIP:</span> Vui lòng lựa thực hiện theo hướng dẫn bên
+    <p><span class="vip-title1">Nâng cấp VIP:</span> Vui lòng
+      lựa thực hiện theo hướng dẫn bên
       dưới.</p>
 
     <div class="choose-accounts-websites">
@@ -16,7 +17,10 @@
 
         <div class="accounts" fxFlex="50">
           <mat-radio-group aria-labelledby="accounts-label" class="example-radio-group" [(ngModel)]="selectedAccount">
-            <label id="accounts-label">Tài khoản Google Ads của bạn</label>
+            <label id="accounts-label">
+              <img src="../../../assets/icons/gg-ads.png" alt="" class="ggads-icon">
+              Tài khoản Google Ads của bạn
+            </label>
             <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account.adsId"
               (change)="onSelectAccount($event)">
               <span *ngIf="account.isFree == true">{{account.adsId}}</span>
@@ -28,13 +32,14 @@
               </span>
             </mat-radio-button>
           </mat-radio-group>
-          <span style="color: gray" *ngIf="accounts.length === 0 && !isProcessing">Bạn chưa kết nối tài khoản nào. Vui lòng kết nối <a routerLink="/them-tai-khoan-moi"
-              style="text-decoration: underline !important">tại đây</a>!</span>
+          <span style="color: gray" *ngIf="accounts.length === 0 && !isProcessing">Bạn chưa kết nối tài khoản nào. Vui
+            lòng kết nối <a routerLink="/them-tai-khoan-moi" style="text-decoration: underline !important">tại
+              đây</a>!</span>
         </div>
 
         <div class="websites">
           <mat-radio-group aria-labelledby="websites-label" class="example-radio-group" [(ngModel)]="selectedWebsite">
-            <label id="websites-label">Website của bạn</label>
+            <label id="websites-label">Website của tài khoản</label>
             <mat-radio-button class="example-radio-button"
               *ngFor="let website of websites[selectedAccount]; let i = index" [value]="website.domain"
               (change)="onSelectAccountWebsite(i)">
@@ -99,45 +104,47 @@
         Vui lòng chuyển khoản nâng cấp VIP theo số tiền và thông tin sau
       </p>
 
-      <mat-table [dataSource]="packages" class="mat-elevation-z8">
+      <div class="packages-table">
+        <mat-table [dataSource]="packages" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Gói </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <!-- <img src="../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
-            <span class="vip-label" style="margin-right: 10px">VIP</span>
-            <span style="color: #039be5; font-weight: bold">{{element.name}}</span>
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Gói </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <!-- <img src="../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
+              <span class="vip-label" style="margin-right: 10px">VIP</span>
+              <span style="color: #039be5; font-weight: bold">{{element.name}}</span>
+            </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="price">
-          <mat-header-cell *matHeaderCellDef> Số tiền </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            {{element.price}}
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Số tiền </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.price}}
+            </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="recommendance">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span *ngIf="element.recommendance" style="font-weight: bold">
-              <span *ngIf="element.recommendance === 'Khuyên dùng'" style="color: #44b543">
-                {{element.recommendance}} - {{element.discount}}
+          <ng-container matColumnDef="recommendance">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span *ngIf="element.recommendance" style="font-weight: bold">
+                <span *ngIf="element.recommendance === 'Khuyên dùng'" style="color: #44b543">
+                  {{element.recommendance}} - {{element.discount}}
+                </span>
+                <span *ngIf="element.recommendance === 'Yêu thích'" style="color: deeppink">
+                  {{element.recommendance}} - {{element.discount}}
+                </span>
+                <span *ngIf="element.recommendance === 'HOT'" style="color: crimson">
+                  <span class="packages-vip-label"
+                    style="background: crimson; color: white; font-weight: bold">{{element.recommendance}}</span>{{element.discount}}
+                </span>
               </span>
-              <span *ngIf="element.recommendance === 'Yêu thích'" style="color: deeppink">
-                {{element.recommendance}} - {{element.discount}}
-              </span>
-              <span *ngIf="element.recommendance === 'HOT'" style="color: crimson">
-                <span class="packages-vip-label"
-                  style="background: crimson; color: white; font-weight: bold">{{element.recommendance}}</span>{{element.discount}}
-              </span>
-            </span>
-          </mat-cell>
-        </ng-container>
+            </mat-cell>
+          </ng-container>
 
-        <mat-header-row *matHeaderRowDef="packagesCols; sticky: true"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: packagesCols;"></mat-row>
-      </mat-table>
+          <mat-header-row *matHeaderRowDef="packagesCols; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: packagesCols;"></mat-row>
+        </mat-table>
+      </div>
 
     </div>
 

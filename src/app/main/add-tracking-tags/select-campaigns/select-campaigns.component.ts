@@ -93,6 +93,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
           this._dialogService._openSuccessDialog(res);
           this._fuseProgressiveBarService.hide();
           this.isProcessing = false;
+
+          this._router.navigateByUrl(`/gan-tracking/website/${this._sessionService.activeAccountId}`);
         }, 0);
       },
         (error: HttpErrorResponse) => {

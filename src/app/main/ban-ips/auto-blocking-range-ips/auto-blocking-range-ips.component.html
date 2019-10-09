@@ -1,25 +1,22 @@
 <div class="container">
 
     <div class="title1">
-        CHẶN TỰ ĐỘNG THEO NHÓM IP - TÀI KHOẢN <span
+        CẤU HÌNH CHẶN TỰ ĐỘNG THEO NHÓM IP (NÂNG CAO) - TÀI KHOẢN <span
             class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
     </div>
 
     <div class="inner">
-        <div class="title2">
-            CHẶN TỰ ĐỘNG THEO NHÓM IP (<span style="color: #2d77f3">NÂNG CAO</span>)
-        </div>
 
         <p class="notification">
             Nhóm IP là danh sách các IP có tiền tố giống nhau. Ví dụ IP 127.0.0.1 và 127.0.0.2 sẽ thuộc nhóm IP
-            127.0.0.*
-            Bạn chỉ nên chọn chặn theo nhóm khi bị phá hoại với số lượng lớn, vì chặn theo nhóm có thể sẽ <span
-                style="color: red"> chặn nhầm khách hàng</span> của bạn.
+            127.0.0.<span style="color: red">*</span>
+            <br>Bạn chỉ nên chọn chặn theo nhóm IP khi bị phá hoại với quy mô lớn vì có thể sẽ
+            gây ra việc <span style="color: red"> chặn nhầm khách hàng</span> của bạn.
         </p>
 
         <p>
             <b>
-                Chọn nhóm IP 127.0.0.* (255 IP)
+                Chọn nhóm IP 127.0.0.<span style="color: red">*</span> (255 IP)
             </b>
         </p>
 
@@ -32,7 +29,7 @@
 
         <p>
             <b>
-                Chọn nhóm IP 127.0.*.* (65.026 IP)
+                Chọn nhóm IP 127.0.<span style="color: red">*</span>.<span style="color: red">*</span> (65.026 IP)
             </b>
         </p>
 
