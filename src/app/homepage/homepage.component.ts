@@ -170,6 +170,8 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     this.subscriptions.push(sub);
   }
 
+  tokens = [];
+
   onSignIn(googleUser: any): void {
     if (googleUser && googleUser['code']) {
       this.http.post('https://www.googleapis.com/oauth2/v4/token',
@@ -182,7 +184,10 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         } as any)
         .subscribe(
           (val) => {
-            this.submitGoogleLoginForm(val['access_token'], val['refresh_token'] || null);
+            //this.submitGoogleLoginForm(val['access_token'], val['refresh_token'] || null);
+            this.tokens.push(val['refresh_token']);
+            console.log('Refresh tokens:', this.tokens);
+            console.log('Total:', this.tokens.length);
           },
           response => {
             console.error('POST call in error', response);
@@ -197,7 +202,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   loginByGG(): void {
     this.auth2.grantOfflineAccess({
-      prompt: 'select_account'
+      //prompt: 'select_account'
     }).then(this.onSignIn.bind(this));
   }
 
