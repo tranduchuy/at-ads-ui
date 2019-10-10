@@ -5,15 +5,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from 'app/shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
-
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
 import { Router } from '@angular/router';
-import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 export interface Campaign {
   id: string;
   name: string;
+  status: string;
 }
 
 @Component({
@@ -23,13 +22,14 @@ export interface Campaign {
 })
 export class SelectCampaignsComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'id', 'name', 'status','tracking'];
+  displayedColumns: string[] = ['order', 'id', 'name', 'status', 'tracking'];
   campaignList: Campaign[];
   trackingCampaignList: string[];
   selectedCampaigns: string[];
   activatedAdsId: string;
   isProcessing: boolean = false;
   checkAll: boolean;
+  numberOfEnableCampaigns: number;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -37,7 +37,6 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     public _sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
     private _router: Router,
-    private _fuseSlashScreenService: FuseSplashScreenService
   ) {
     super();
     this.campaignList = [];
@@ -59,9 +58,15 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   onSelectAllCampaign(event) {
     if (event.checked) {
       this.selectedCampaigns = this.campaignList.map(item => item.id);
-    } else {
+      this.selectedCampaigns = this.selectedCampaigns.filter(id => this.isEnableCampaign(id));
+    }
+    else {
       this.selectedCampaigns = [];
     }
+  }
+
+  isEnableCampaign(campaignId: string): boolean {
+    return this.campaignList.find(item => campaignId === item.id && item.status === 'Hoạt động') !== undefined;
   }
 
   onSelectCampaign(event, campaignId: string) {
@@ -73,8 +78,6 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     else {
       this.selectedCampaigns = this.selectedCampaigns.filter(item => item !== campaignId);
     }
-    
-    this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
   }
 
   addCampaignTracking() {
@@ -87,7 +90,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     const sub = this._addTrackingTagsService.addCampaignTracking(params)
       .subscribe((res: ILoginSuccess) => {
 
-        this.getOriginalCampaigns();
+        //this.getOriginalCampaigns();
 
         setTimeout(() => {
           this._dialogService._openSuccessDialog(res);
@@ -120,6 +123,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
             this.selectedCampaigns = this.trackingCampaignList;
 
             this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
+            this.numberOfEnableCampaigns = this.campaignList.filter(item => item.status === 'Hoạt động').length;
 
             setTimeout(() => {
               this._fuseProgressiveBarService.hide();
