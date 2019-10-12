@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Subject, ReplaySubject } from 'rxjs';
+import { takeUntil, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
-import { navigation, NotConnectedAccountNavigation } from 'app/navigation/navigation';
+import { navigation } from 'app/navigation/navigation';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
@@ -16,6 +16,13 @@ import { ToolbarService } from './toolbar.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { FormControl } from '@angular/forms';
+import { MatSelect } from '@angular/material';
+
+interface GoogleAdsAccount {
+    name: string;
+    id: string;
+}
 
 @Component({
     selector: 'toolbar',
@@ -39,6 +46,32 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     userStatusOptions: any[];
     isProcessing: boolean = false;
     isAlertDisplayed: boolean = false;
+
+    adsAccounts: GoogleAdsAccount[] = [
+        {
+            name: '123-123-1234',
+            id: '1231231234'
+        },
+        {
+            name: '345-345-3345',
+            id: '3453453345'
+        },
+    ];
+
+    activeAdsId: string;
+
+    /** control for selected account */
+    public accountCtrl: FormControl = new FormControl();
+
+    /** control for the MatSelect filter keyword */
+    public accountFilterCtrl: FormControl = new FormControl();
+
+    /** list of accounts filterd by search keyword */
+    public filteredAccounts: ReplaySubject<GoogleAdsAccount[]> = new ReplaySubject<GoogleAdsAccount[]>(1);
+
+    @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+
+    private _onDestroy = new Subject<void>();
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -119,6 +152,19 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      * On init
      */
     ngOnInit(): void {
+        // set initial selection
+        this.accountCtrl.setValue(this.adsAccounts[0]);
+
+        // load the initial account list
+        this.filteredAccounts.next(this.adsAccounts.slice());
+
+        // listen for search field value changes
+        this.accountFilterCtrl.valueChanges
+            .pipe(takeUntil(this._onDestroy))
+            .subscribe(() => {
+                this.filterAccounts();
+            });
+
 
         // Subscribe to the config changes
         this._fuseConfigService.config
@@ -170,6 +216,45 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 this.isAlertDisplayed = !isAccepted;
             });
         this.subscriptions.push(getAccountAcceptanceSub);
+    }
+
+    ngAfterViewInit() {
+        this.setInitialValue();
+    }
+
+    selectAccount() {
+        console.log(this.accountCtrl.value);
+    }
+
+    private setInitialValue() {
+        this.filteredAccounts
+            .pipe(take(1), takeUntil(this._onDestroy))
+            .subscribe(() => {
+                // setting the compareWith property to a comparison function 
+                // triggers initializing the selection according to the initial value of 
+                // the form control (i.e. _initializeSelection())
+                // this needs to be done after the filteredBanks are loaded initially 
+                // and after the mat-option elements are available
+                this.singleSelect.compareWith = (a: GoogleAdsAccount, b: GoogleAdsAccount) => a.id === b.id;
+            });
+    }
+
+    private filterAccounts() {
+        if (!this.adsAccounts) {
+            return;
+        }
+        // get the search keyword
+        let search = this.accountFilterCtrl.value;
+        if (!search) {
+            this.filteredAccounts.next(this.adsAccounts.slice());
+            return;
+        } else {
+            search = search.toLowerCase();
+        }
+        // filter the banks
+        this.filteredAccounts.next(
+            this.adsAccounts.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
+        );
     }
 
     checkAccountAcceptance() {

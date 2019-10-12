@@ -145,13 +145,13 @@ export class SessionService {
     return this._accountId$.getValue();
   }
 
-  public setActiveGoogleAdsAccount(accountId: string, adWordId: string) {
+  public setActiveGoogleAdsAccount(accountId: string, adsId: string) {
     this.setActiveAccountId(accountId);
     this.setAccountId(accountId);
-    this.setActiveAdsAccountId(adWordId);
-    this.setAdwordId(adWordId);
+    this.setActiveAdsAccountId(adsId);
+    this.setAdwordId(adsId);
   }
-  public removeActiveGoogleAdsAccount() {
+  public unsetActiveGoogleAdsAccount() {
     this.setActiveAdsAccountId('');
     this.setAccountId('');
     this.setActiveAdsAccountId('');
