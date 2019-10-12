@@ -43,6 +43,12 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     '1 tuần': [moment().subtract(6, 'days'), moment()],
   }
 
+  itemsPerPageOptions = [
+    { text: '10', value: 10 },
+    { text: '20', value: 20 },
+    { text: '30', value: 30 }
+  ];
+
   selectedAdsId: string;
 
   adsAccountIdPipe = new AdsAccountIdPipe();
@@ -216,6 +222,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   ]
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
+    this.pageLimit = this.itemsPerPageOptions[0].value;
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
@@ -227,10 +235,10 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
           if (page) {
-            if(isNaN(Number(page)))
+            if (isNaN(Number(page)))
               return;
             this.currentPageNumber = Number(page);
-          }        
+          }
           else {
             this.currentPageNumber = 1;
             this._router.navigate([], {
@@ -247,7 +255,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   }
 
   showReason(reason: any) {
-    if(reason)
+    if (reason)
       console.log(reason.message);
     else console.log('Unknown');
   }
@@ -293,8 +301,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     return true;
   }
 
-  onApplyDateRange() {
-    this.getAccountStatisticReport(this._sessionService.activeAccountId);
+  changeItemsPerPageOption(e) {
     this.currentPageNumber = 1;
     this._router.navigate([], {
       queryParams: {
@@ -304,9 +311,19 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     this.getAccountReport(this._sessionService.activeAccountId, this.currentPageNumber);
   }
 
+  onApplyDateRange() {
+    this.currentPageNumber = 1;
+    this._router.navigate([], {
+      queryParams: {
+        page: this.currentPageNumber,
+      }
+    });
+    this.getAccountStatisticReport(this._sessionService.activeAccountId);
+    this.getAccountReport(this._sessionService.activeAccountId, this.currentPageNumber);
+  }
+
   getAccountReport(accountId: string, page?: number) {
     this._fuseProgressBarService.show();
-
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
 
@@ -332,8 +349,6 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   }
 
   getAccountStatisticReport(accountId: string) {
-    this._fuseProgressBarService.show();
-
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
 
@@ -481,10 +496,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
               }
             }
           }
-          this._fuseProgressBarService.hide();
         },
         (error: HttpErrorResponse) => {
-          this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
         });
     this.subscriptions.push(sub);

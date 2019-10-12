@@ -19,7 +19,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   pageTotal: number;
   currentPageNumber: number;
   totalItems: number;
-  pageLimit: number = 10;
+  pageLimit: number;
 
   TRAFFIC_SOURCE_TYPES: string[] = [
     'google/cpc',
@@ -65,13 +65,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   overviewTableCols: string[] = ['createdAt', 'ip', 'trafficSource', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'location'];
   overviewTable = [];
 
-  // single = [
-  //   {
-  //     "name": "Thiết bị",
-  //     "value": 100
-  //   },
-  // ]
-
   multi = [
     {
       "name": "Thiết bị",
@@ -93,6 +86,12 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   ];
 
   view: any[] = [325, 50];
+
+  itemsPerPageOptions = [
+    { text: '10', value: 10 },
+    { text: '20', value: 20 },
+    { text: '30', value: 30 }
+  ];
 
   // options
   showXAxis = false;
@@ -154,12 +153,11 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   ) {
     super();
-
-    // if(window.innerWidth > 600)
-    //   this.pieChart.legend = false;
   }
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
+    this.pageLimit = this.itemsPerPageOptions[0].value;
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
@@ -189,8 +187,18 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     this.subscriptions.push(sub);
   }
 
+  changeItemsPerPageOption(e) {
+    this.currentPageNumber = 1;
+    this._router.navigate([], {
+      queryParams: {
+        page: this.currentPageNumber,
+      }
+    });
+    this.getSessionReport(this.currentPageNumber);
+  }
+
   showReason(reason: any) {
-    if(reason)
+    if (reason)
       console.log(reason.message);
     else console.log('Unknown');
   }
@@ -231,8 +239,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   getStatisticTrafficSourceReport() {
     this.isProcessing = true;
-    this._fuseProgressBarService.show();
-
     const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
     const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
 
@@ -258,19 +264,17 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           const dataSource = data.map((item, index) => {
             const sessionCount = index < len - 1 ? item.sessionCount : (item.sessionCount + noIDSessionCountTotal)
             return {
-              name: this.TRAFFIC_SOURCE_TYPES[item._id - 1] + ` - Số phiên ${sessionCount}`,
+              name: (this.TRAFFIC_SOURCE_TYPES[item._id - 1] || 'Unknown') + ` - Số phiên ${sessionCount}`,
               value: this.getPercentage(sessionCount, sessionCountTotal)
             }
           });
 
           setTimeout(() => {
             this.pieChart.dataSource = dataSource;
-            this._fuseProgressBarService.hide();
             this.isProcessing = false;
           }, 0);
         },
         (error: HttpErrorResponse) => {
-          this._fuseProgressBarService.hide();
           this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
         });

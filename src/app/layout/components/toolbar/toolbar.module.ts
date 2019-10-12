@@ -9,6 +9,7 @@ import { FuseSearchBarModule, FuseShortcutsModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.component';
+import { MatSelectModule, MatFormFieldModule } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,8 @@ import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.componen
         MatIconModule,
         MatMenuModule,
         MatToolbarModule,
+        MatSelectModule,
+        MatFormFieldModule,
 
         FuseSharedModule,
         FuseSearchBarModule,

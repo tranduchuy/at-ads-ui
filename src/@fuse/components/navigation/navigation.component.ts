@@ -9,6 +9,7 @@ import { FuseSplashScreenService } from '../../services/splash-screen.service';
 
 import { AdsAccountIdPipe } from '../../../app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { accessSync } from 'fs';
+import { FuseProgressBarService } from '../progress-bar/progress-bar.service';
 
 @Component({
   selector: 'fuse-navigation',
@@ -63,7 +64,7 @@ export class FuseNavigationComponent implements OnInit {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseNavigationService: FuseNavigationService,
-    private _fuseSplashScreenService: FuseSplashScreenService,
+    private _fuseProgressBarService: FuseProgressBarService,
     private _adwordsAccountsService: AdwordsAccountsService,
     private _sessionService: SessionService,
   ) {
@@ -87,11 +88,13 @@ export class FuseNavigationComponent implements OnInit {
     this.loadNavigation();
   }
   loadNavigation(): void {
-    //this._fuseSplashScreenService.show();
+    this._fuseProgressBarService.show();
     this._adwordsAccountsService.getAdwordsAccount()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(
         (res) => {
+          this._fuseProgressBarService.hide();
+
           //let accounts = res.data.accounts.filter(item => item.isConnected === true);
           let accounts = res.data.accounts;
           let activeAdsAccountId = '';
@@ -206,10 +209,11 @@ export class FuseNavigationComponent implements OnInit {
             url: '/danh-sach-tai-khoan'
           },
 
-            this.loadRecentNavigation();
+          this.loadRecentNavigation();
           //this._fuseSplashScreenService.hide();
         },
         error => {
+          this._fuseProgressBarService.hide();
 
           //reset cookie
           this._sessionService.setActiveAdsAccountId('');

@@ -135,11 +135,6 @@
 
       <div class="overview-title1" fxLayout="row" fxLayout.xs="column">
         <p class="overview-title2" fxFlex="80">BÁO CÁO TỔNG THỂ TRUY CẬP</p>
-        <!-- <mat-form-field class="datePicker" fxFlex="20">
-          <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
-          <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
-            startKey="start" endKey="end" (datesUpdated)="onApplyDateRange($event)" ngDefaultControl />
-        </mat-form-field> -->
       </div>
 
       <div class="overview-table">
@@ -254,11 +249,6 @@
               {{element.networkCompany?.name || 'Unknown'}} </mat-cell>
           </ng-container>
 
-          <!--<ng-container matColumnDef="keyword">-->
-          <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->
-          <!--<mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>-->
-          <!--</ng-container>-->
-
           <ng-container matColumnDef="location">
             <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
@@ -273,12 +263,24 @@
       </div>
 
       <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
-        <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
-            ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
-          {{pageTotal}} trang</p>
-        <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+        <div fxFlex="60">
+          <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
+              ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
+            {{pageTotal}} trang</p>
+          <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+        </div>
+        <div fxFlex="10" class="item-per-page-options" *ngIf="pageTotal > 0">
+          <mat-form-field>
+            <mat-label>Số record mỗi trang</mat-label>
+            <mat-select [(value)]="pageLimit" (selectionChange)="changeItemsPerPageOption($event)">
+              <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option.value">
+                {{option.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
-          nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
+          nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0" fxFlex="30"></pagination-controls>
       </div>
 
     </div>

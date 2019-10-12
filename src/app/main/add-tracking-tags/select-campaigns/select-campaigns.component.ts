@@ -15,6 +15,11 @@ export interface Campaign {
   status: string;
 }
 
+export interface SentCampain {
+  campaignId: string;
+  campaignName: string;
+}
+
 @Component({
   selector: 'app-select-campaigns',
   templateUrl: './select-campaigns.component.html',
@@ -81,9 +86,18 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   }
 
   addCampaignTracking() {
+    let sentCampaigns: SentCampain[] = [];
+
+    for (const campagin of this.campaignList)
+      if (this.selectedCampaigns.indexOf(campagin.id) >= 0)
+        sentCampaigns.push({
+          campaignId: campagin.id,
+          campaignName: campagin.name || ''
+        });
+
     const params = {
-      campaignIds: this.selectedCampaigns
-    }
+      campaigns: sentCampaigns
+    };
 
     this._fuseProgressiveBarService.show();
     this.isProcessing = true;
