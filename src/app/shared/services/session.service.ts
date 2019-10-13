@@ -12,9 +12,18 @@ export class SessionService {
   private _user$ = new BehaviorSubject<any>({});
   private _accountAcceptance$ = new BehaviorSubject<boolean>(true);
   private _acceptedAdsId$ = new BehaviorSubject<string>('');
+  private _isNewAccountAdded$ = new BehaviorSubject<boolean>(false);
 
   constructor(private cookieService: CookieService) {
 
+  }
+
+  getIsNewAccountAdded(): Observable<boolean> {
+    return this._isNewAccountAdded$.asObservable();
+  }
+
+  notifyNewAccountWasAdded(): void {
+    this._isNewAccountAdded$.next(true);
   }
 
   getAcceptedAdsId(): Observable<string> {

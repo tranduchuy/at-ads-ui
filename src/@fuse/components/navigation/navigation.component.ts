@@ -87,162 +87,187 @@ export class FuseNavigationComponent implements OnInit {
   ngOnInit(): void {
     this.loadNavigation();
   }
+
   loadNavigation(): void {
-    this._fuseProgressBarService.show();
-    this._adwordsAccountsService.getAdwordsAccount()
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(
-        (res) => {
-          this._fuseProgressBarService.hide();
+    // this._fuseProgressBarService.show();
+    // this._adwordsAccountsService.getAdwordsAccount()
+    //   .pipe(takeUntil(this._unsubscribeAll))
+    //   .subscribe(
+    //     (res) => {
+    //       let accounts = res.data.accounts;
+    //       let activeAdsAccountId = '';
+    //       let activeAccountId = '';
+    //       let vipExpiration = '';
 
-          //let accounts = res.data.accounts.filter(item => item.isConnected === true);
-          let accounts = res.data.accounts;
-          let activeAdsAccountId = '';
-          let activeAccountId = '';
-          let vipExpiration = '';
+    //       for (const item of accounts)
+    //         this.isFreeAccounts[this.adsAccountIdPipe.transform(item.adsId)] = item.isFree;
 
-          for (const item of accounts)
-            this.isFreeAccounts[this.adsAccountIdPipe.transform(item.adsId)] = item.isFree;
+    //       if (this._sessionService.activeAccountId) {
+    //         activeAccountId = this._sessionService.activeAccountId;
+    //         activeAdsAccountId = this._sessionService.activeAdsAccountId;
+    //         this._sessionService.setAdwordId(activeAdsAccountId);
+    //         this._sessionService.setAccountId(activeAccountId);
 
-          if (this._sessionService.activeAccountId) {
-            activeAccountId = this._sessionService.activeAccountId;
-            activeAdsAccountId = this._sessionService.activeAdsAccountId;
-            this._sessionService.setAdwordId(activeAdsAccountId);
-            this._sessionService.setAccountId(activeAccountId);
+    //         if (this.isFreeAccounts[this._sessionService.activeAdsAccountId] === false) {
+    //           const expirations = accounts.find(
+    //             item => this.adsAccountIdPipe.transform(item.adsId) === this._sessionService.activeAdsAccountId)
+    //             .websites.map(item => item.expiredAt);
 
-            if (this.isFreeAccounts[this._sessionService.activeAdsAccountId] === false) {
-              const expirations = accounts.find(
-                item => this.adsAccountIdPipe.transform(item.adsId) === this._sessionService.activeAdsAccountId)
-                .websites.map(item => item.expiredAt);
+    //           if (expirations.length > 0)
+    //             vipExpiration = expirations[0];
+    //         }
 
-              if (expirations.length > 0)
-                vipExpiration = expirations[0];
-            }
+    //       }
 
-          }
+    //       if (accounts.length > 0) {
 
-          if (accounts.length > 0) {
+    //         if (!activeAccountId) {
+    //           this._sessionService.setActiveGoogleAdsAccount(
+    //             accounts[0].id,
+    //             this.adsAccountIdPipe.transform(accounts[0].adsId)
+    //           );
 
-            if (!activeAccountId) {
-              this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(accounts[0].adsId.toString()));
-              this._sessionService.setActiveAccountId(accounts[0].id.toString());
-              this._sessionService.setAdwordId(accounts[0].adsId.toString());
-              this._sessionService.setAccountId(accounts[0].id.toString());
+    //           activeAdsAccountId = this.adsAccountIdPipe.transform(accounts[0].adsId);
+    //           activeAccountId = accounts[0].id;
+    //         }
 
-              activeAdsAccountId = this.adsAccountIdPipe.transform(accounts[0].adsId.toString());
-              activeAccountId = accounts[0].id.toString();
-            }
+    //         if (this.isFreeAccounts[this._sessionService.activeAdsAccountId] === false) {
+    //           const expirations = accounts.find(
+    //             item => this.adsAccountIdPipe.transform(item.adsId) === this._sessionService.activeAdsAccountId)
+    //             .websites.map(item => item.expiredAt);
 
-            if (this.isFreeAccounts[this._sessionService.activeAdsAccountId] === false) {
-              const expirations = accounts.find(
-                item => this.adsAccountIdPipe.transform(item.adsId) === this._sessionService.activeAdsAccountId)
-                .websites.map(item => item.expiredAt);
+    //           if (expirations.length > 0)
+    //             vipExpiration = expirations[0];
+    //         }
 
-              if (expirations.length > 0)
-                vipExpiration = expirations[0];
-            }
+    //         accounts = accounts.filter(account => {
+    //           return this.adsAccountIdPipe.transform(account.adsId) !== activeAdsAccountId;
+    //         });
 
-            accounts = accounts.filter(account => {
-              return this.adsAccountIdPipe.transform(account.adsId) !== activeAdsAccountId;
-            });
+    //         accounts = accounts.map(account => {
+    //           return {
+    //             id: account.id,
+    //             title: this.adsAccountIdPipe.transform(account.adsId),
+    //             translate: 'NAV.SAMPLE.TITLE',
+    //             type: 'item',
+    //             icon: 'remove',
+    //             isAdsAccount: true
+    //           };
+    //         });
 
-            accounts = accounts.map(account => {
-              return {
-                id: account.id,
-                title: this.adsAccountIdPipe.transform(account.adsId),
-                translate: 'NAV.SAMPLE.TITLE',
-                type: 'item',
-                icon: 'remove',
-                isAdsAccount: true
-              };
-            });
+    //         this.accounts.children[0] = {
+    //           id: activeAdsAccountId,
+    //           title: activeAdsAccountId,
+    //           translate: 'NAV.APPLICATIONS',
+    //           icon: '../../../../../assets/icons/gg-ads.png',
+    //           type: 'collapsable',
+    //           children: [
+    //             {
+    //               id: 'add-accounts',
+    //               title: 'Thêm tài khoản mới',
+    //               translate: 'NAV.SAMPLE.TITLE',
+    //               type: 'item',
+    //               icon: 'library_add',
+    //               url: '/them-tai-khoan-moi'
+    //             },
+    //           ]
+    //         };
 
-            this.accounts.children[0] = {
-              id: activeAdsAccountId,
-              title: activeAdsAccountId,
-              translate: 'NAV.APPLICATIONS',
-              icon: '../../../../../assets/icons/gg-ads.png',
-              type: 'collapsable',
-              children: [
-                {
-                  id: 'add-accounts',
-                  title: 'Thêm tài khoản mới',
-                  translate: 'NAV.SAMPLE.TITLE',
-                  type: 'item',
-                  icon: 'library_add',
-                  url: '/them-tai-khoan-moi'
-                },
-              ]
-            };
+    //         if (this.isFreeAccounts[this.accounts.children[0].title] === false) {
+    //           this.accounts.children[0].icon = '../../../../../assets/icons/gg-ads-vip.png';
+    //         }
 
-            if (this.isFreeAccounts[this.accounts.children[0].title] === false) {
-              //this.accounts.children[0].icon = '../../../../../assets/icons/golden-shield.png';
-              this.accounts.children[0].icon = '../../../../../assets/icons/gg-ads-vip.png';
-            }
+    //         this.accounts.children[0].id = vipExpiration || 'not-vip';
+    //         this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
 
-            this.accounts.children[0].id = vipExpiration || 'not-vip';
-            this.accounts.children[0].children = accounts.concat(this.accounts.children[0].children);
+    //         this.accounts.children[2] = {
+    //           id: 'add-tracking-tags',
+    //           title: 'Gắn Tracking Chiến Dịch',
+    //           type: 'item',
+    //           icon: 'location_searching',
+    //           url: '/gan-tracking/chien-dich'
+    //         }
+    //       }
+    //       else {
+    //         this.accounts.children[0] = {
+    //           id: 'add-accounts',
+    //           title: 'Thêm tài khoản mới',
+    //           type: 'item',
+    //           icon: 'library_add',
+    //           url: '/them-tai-khoan-moi'
+    //         };
+    //       }
 
-            this.accounts.children[2] = {
-              id: 'add-tracking-tags',
-              title: 'Gắn Tracking Chiến Dịch',
-              type: 'item',
-              icon: 'location_searching',
-              url: '/gan-tracking/chien-dich'
-            }
-          }
-          else {
-            this.accounts.children[0] = {
-              id: 'add-accounts',
-              title: 'Thêm tài khoản mới',
-              type: 'item',
-              icon: 'library_add',
-              url: '/them-tai-khoan-moi'
-            };
-          }
+    //       this.accounts.children[1] = {
+    //         id: 'account-list',
+    //         title: 'Quản Lý Tài Khoản',
+    //         type: 'item',
+    //         icon: 'dashboard',
+    //         url: '/danh-sach-tai-khoan'
+    //       };
 
-          this.accounts.children[1] = {
-            id: 'account-list',
-            title: 'Quản Lý Tài Khoản',
-            type: 'item',
-            icon: 'dashboard',
-            url: '/danh-sach-tai-khoan'
-          },
+    //       this._fuseProgressBarService.hide();
+    //       this.loadRecentNavigation();
+    //     },
+    //     error => {
+    //       this._fuseProgressBarService.hide();
 
-          this.loadRecentNavigation();
-          //this._fuseSplashScreenService.hide();
-        },
-        error => {
-          this._fuseProgressBarService.hide();
+    //       //reset cookie
+    //       this._sessionService.unsetActiveGoogleAdsAccount();
 
-          //reset cookie
-          this._sessionService.setActiveAdsAccountId('');
-          this._sessionService.setActiveAccountId('');
+    //       //reset navbar displaying
+    //       this.accounts.children = [];
+    //       this.accounts.children[0] = {
+    //         id: 'add-accounts',
+    //         title: 'Thêm tài khoản mới',
+    //         type: 'item',
+    //         icon: 'library_add',
+    //         url: '/them-tai-khoan-moi'
+    //       };
+    //       this.accounts.children[1] = {
+    //         id: 'account-list',
+    //         title: 'Quản Lý Tài Khoản',
+    //         type: 'item',
+    //         icon: 'dashboard',
+    //         url: '/danh-sach-tai-khoan'
+    //       };
 
-          //emit changed value to all observer
-          this._sessionService.setAdwordId('');
-          this._sessionService.setAccountId('');
+    //       this.loadRecentNavigation();
+    //     });
 
-          //reset navbar displaying
-          this.accounts.children = [];
-          this.accounts.children[0] = {
-            id: 'add-accounts',
-            title: 'Thêm tài khoản mới',
-            type: 'item',
-            icon: 'library_add',
-            url: '/them-tai-khoan-moi'
-          };
-          this.accounts.children[1] = {
-            id: 'account-list',
-            title: 'Quản Lý Tài Khoản',
-            type: 'item',
-            icon: 'dashboard',
-            url: '/danh-sach-tai-khoan'
-          };
+    if (this._sessionService.activeAccountId && this._sessionService.activeAdsAccountId) {
+      this._sessionService.setActiveGoogleAdsAccount(
+        this._sessionService.activeAccountId,
+        this._sessionService.activeAdsAccountId
+      )
+    }
+    
+    this.accounts.children = [];
+    this.accounts.children[0] = {
+      id: 'add-accounts',
+      title: 'Thêm tài khoản mới',
+      type: 'item',
+      icon: 'library_add',
+      url: '/them-tai-khoan-moi'
+    };
+    this.accounts.children[1] = {
+      id: 'account-list',
+      title: 'Quản Lý Tài Khoản',
+      type: 'item',
+      icon: 'dashboard',
+      url: '/danh-sach-tai-khoan'
+    };
 
-          this.loadRecentNavigation();
-          //this._fuseSplashScreenService.hide();
-        });
+    if (this._sessionService.activeAccountId)
+      this.accounts.children[2] = {
+        id: 'add-tracking-tags',
+        title: 'Gắn Tracking Chiến Dịch',
+        type: 'item',
+        icon: 'location_searching',
+        url: '/gan-tracking/chien-dich'
+      }
+
+    this.loadRecentNavigation();
   }
 
   loadRecentNavigation(): void {

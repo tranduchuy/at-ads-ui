@@ -1,19 +1,17 @@
-import { Component, OnInit, NgZone, ViewChild, ElementRef, AfterViewInit, Renderer } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { Validators } from '@angular/forms';
-import { ILoginSuccess } from '../../authentication/login/models/i-login-success';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 import { DialogService } from '../../shared/services/dialog.service';
 import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 import { SessionService } from 'app/shared/services/session.service';
 import { Router } from '@angular/router';
-import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { environment } from 'environments/environment';
-import { AuthService } from 'app/shared/services/auth.service';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
+import { MatTableDataSource } from '@angular/material';
 
 declare var gapi: any;
 
@@ -37,6 +35,8 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   auth2: any;
 
+  dataSource = new MatTableDataSource(this.adsAccounts);
+
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
@@ -59,6 +59,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     setTimeout(() => {
       this.googleInit();
     }, 500);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   loginByGG(): void {
@@ -181,6 +185,8 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           return item;
         });
 
+        this.dataSource = new MatTableDataSource(this.adsAccounts);
+
         this._fuseProgressiveBarService.hide();
         this.isAccountListShown = true;
         this.isProcessing = false;
@@ -200,7 +206,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   generateConnectAccountByEmailParam(): any {
-    return { adWordId: this.selectedAccount.replace(/[^a-zA-Z0-9 ]/g, '') };
+    return { adWordId: this.selectedAccount.replace(/\D/g, '') };
   }
 
   connectAccountByEmail(): void {
@@ -213,15 +219,13 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
       .subscribe(
         (res) => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openSuccessDialog(res);
+          this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
 
           this.connectedAccountId = res.data.account._id;
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
-          this._sessionService.setActiveAccountId(this.connectedAccountId);
-          this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
-          this._sessionService.setAccountId(this.connectedAccountId);
-          this._sessionService.setAdwordId(this.connectedAdsId);
+          this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
+          this._sessionService.notifyNewAccountWasAdded();
 
           this._fuseNavigationService.reloadNavigation();
           this._router.navigateByUrl('/gan-tracking/chien-dich');
@@ -293,31 +297,34 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
     this._fuseProgressiveBarService.show();
 
     const params = this.generatePostObject();
-
     const sub = this._addAdwordsAccountsService.addAdwordsAccount(params)
       .subscribe(
         (res) => {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openInfoDialog(res.messages[0]);
 
-          if (res.data.isRefresh) {
+          this.connectedAccountId = res.data.account._id;
+          this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
+
+          if (res.data.isRefresh === true) {
+            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
+            this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
+            this._sessionService.notifyNewAccountWasAdded();
             this._fuseNavigationService.reloadNavigation();
             this._router.navigateByUrl('/danh-sach-tai-khoan');
             return;
           }
+          else {
+            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công! Vui lòng thực hiện theo các bước tiếp theo để hoàn tất kết nối.'] });
+          }
 
           this.isConnected = true;
-          this.connectedAccountId = res.data.account._id;
-          this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
+          this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
+          this._sessionService.notifyNewAccountWasAdded();
 
-          this._sessionService.setActiveAccountId(this.connectedAccountId);
-          this._sessionService.setActiveAdsAccountId(this.connectedAdsId);
-          this._sessionService.setAccountId(this.connectedAccountId);
-          this._sessionService.setAdwordId(this.connectedAdsId);
           this._fuseNavigationService.reloadNavigation();
 
-          if (this.isAccountListShown) {
-            this.checkRefreshToken();
+          if (this.isAccountListShown === true) {
+            this.isAccountListShown = false;
           }
 
           this.isProcessing = false;
@@ -350,7 +357,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
     const params = { ...this.form.value };
 
     // required
-    params.adWordId = params.adWordId.replace(/[^a-zA-Z0-9 ]/g, '');
+    params.adWordId = params.adWordId.replace(/\D/g, '');
 
     return params;
   }

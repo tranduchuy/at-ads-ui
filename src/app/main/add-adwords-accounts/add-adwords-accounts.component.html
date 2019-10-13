@@ -59,9 +59,14 @@
         VUI LÒNG LỰA CHỌN TÀI KHOẢN GOOGLE ADS CỦA BẠN
       </div>
 
+      <mat-form-field>
+        <mat-icon matPrefix style="font-size: 20px; color: rgba(0,0,0,0.6);">search</mat-icon>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiếm">
+      </mat-form-field>
+
       <div class="ads-account-list-wrapper">
 
-        <mat-table [dataSource]="adsAccounts" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
           <ng-container matColumnDef="order">
             <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
@@ -131,8 +136,9 @@
         <img src="../../../assets/images/connect-ads-account-step3.PNG" class="instruction-step3">
       </p>
       <p class="text-center" style="padding-top: 20px">
-        <button mat-raised-button [disabled]="isProcessing" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI" [disabled]="isProcessing"
-          (click)="completeAccountConnection()" style="border-radius: 0; background-color: #44b543; color: white">
+        <button mat-raised-button [disabled]="isProcessing" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI"
+          [disabled]="isProcessing" (click)="completeAccountConnection()"
+          style="border-radius: 0; background-color: #44b543; color: white">
           <mat-icon matSuffix class="done_outline" style="font-size: 20px">check</mat-icon>
           TÔI ĐÃ HOÀN TẤT KẾT NỐI
         </button>

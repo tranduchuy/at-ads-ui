@@ -8,6 +8,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
 import { Router } from '@angular/router';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { MatTableDataSource, MatTable } from '@angular/material';
 
 export interface Campaign {
   id: string;
@@ -36,6 +37,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   checkAll: boolean;
   numberOfEnableCampaigns: number;
 
+  dataSource = new MatTableDataSource(this.campaignList);
+
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     private _dialogService: DialogService,
@@ -58,6 +61,10 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   onSelectAllCampaign(event) {
@@ -138,6 +145,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
             this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
             this.numberOfEnableCampaigns = this.campaignList.filter(item => item.status === 'Hoạt động').length;
+
+            this.dataSource = new MatTableDataSource(this.campaignList);
 
             setTimeout(() => {
               this._fuseProgressiveBarService.hide();

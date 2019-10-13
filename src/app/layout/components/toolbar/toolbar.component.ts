@@ -15,13 +15,18 @@ import { DialogService } from 'app/shared/services/dialog.service';
 import { ToolbarService } from './toolbar.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { FormControl } from '@angular/forms';
 import { MatSelect } from '@angular/material';
+import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
+import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
 interface GoogleAdsAccount {
     name: string;
-    id: string;
+    accountId: string;
+    adsId: string;
+    isFree: boolean;
+    expriredAt?: Date;
 }
 
 @Component({
@@ -47,18 +52,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     isProcessing: boolean = false;
     isAlertDisplayed: boolean = false;
 
-    adsAccounts: GoogleAdsAccount[] = [
-        {
-            name: '123-123-1234',
-            id: '1231231234'
-        },
-        {
-            name: '345-345-3345',
-            id: '3453453345'
-        },
-    ];
-
-    activeAdsId: string;
+    adsAccounts: GoogleAdsAccount[] = [];
 
     /** control for selected account */
     public accountCtrl: FormControl = new FormControl();
@@ -92,7 +86,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         private _dialogService: DialogService,
         private _toolbarService: ToolbarService,
         private _fuseProgressiveBarService: FuseProgressBarService,
-        private _fuseSplashScreenService: FuseSplashScreenService
+        private _adwordsAccountService: AdwordsAccountsService,
+        private _fuseNavigationService: FuseNavigationService
     ) {
         super();
 
@@ -153,18 +148,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      */
     ngOnInit(): void {
         // set initial selection
-        this.accountCtrl.setValue(this.adsAccounts[0]);
+        this.getAdsAccounts();
 
-        // load the initial account list
-        this.filteredAccounts.next(this.adsAccounts.slice());
-
-        // listen for search field value changes
-        this.accountFilterCtrl.valueChanges
-            .pipe(takeUntil(this._onDestroy))
-            .subscribe(() => {
-                this.filterAccounts();
+        const isNewAccountAddedSub = this._sessionService.getIsNewAccountAdded()
+            .subscribe((isAdded: boolean) => {
+                if (isAdded === true)
+                    this.getAdsAccounts();
             });
-
+        this.subscriptions.push(isNewAccountAddedSub);
 
         // Subscribe to the config changes
         this._fuseConfigService.config
@@ -195,6 +186,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             .subscribe((adsId: string) => {
                 if (adsId) {
                     this.isProcessing = true;
+                    this.accountCtrl.setValue(this.adsAccounts.find(account => account.name === adsId));
+
                     const checkAccountSub = this._toolbarService.checkAccountAcceptance()
                         .subscribe(res => {
                             this.isAlertDisplayed = !res.data.isConnected;
@@ -222,8 +215,74 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         this.setInitialValue();
     }
 
+    _adsAccountPipe: AdsAccountIdPipe = new AdsAccountIdPipe();
+
     selectAccount() {
-        console.log(this.accountCtrl.value);
+        this._sessionService.setActiveGoogleAdsAccount(
+            this.accountCtrl.value.accountId,
+            this.accountCtrl.value.name
+        );
+        this._fuseNavigationService.reloadNavigation();
+    }
+
+    getAdsAccounts() {
+        this._fuseProgressiveBarService.show();
+        this.isProcessing = true;
+
+        const sub = this._adwordsAccountService.getAdwordsAccount()
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe(res => {
+                this.adsAccounts = (res.data.accounts || [])
+                    .map((account: any) => {
+                        return {
+                            name: this._adsAccountPipe.transform(account.adsId),
+                            accountId: account.id,
+                            adsId: account.adsId,
+                            isFree: account.isFree,
+                            expiredAt: account.websites.length > 0 ? account.websites[0].expiredAt : new Date()
+                        }
+                    });
+
+                if (this.adsAccounts.length === 0) {
+                    this._sessionService.unsetActiveGoogleAdsAccount();
+                    this._fuseNavigationService.reloadNavigation();
+                    return;
+                }
+
+                else if (!this._sessionService.activeAccountId || !this._sessionService.activeAdsAccountId) {
+                    this.accountCtrl.setValue(this.adsAccounts[0]);
+                    this._sessionService.setActiveGoogleAdsAccount(
+                        this.accountCtrl.value.accountId,
+                        this.accountCtrl.value.name
+                    );
+                }
+                else {
+                    this.accountCtrl.setValue(this.adsAccounts
+                        .find(account => account.name === this._sessionService.activeAdsAccountId));
+                }
+
+                // load the initial account list
+                this.filteredAccounts.next(this.adsAccounts.slice());
+
+                // listen for search field value changes
+                this.accountFilterCtrl.valueChanges
+                    .pipe(takeUntil(this._onDestroy))
+                    .subscribe(() => {
+                        this.filterAccounts();
+                    });
+
+                this._fuseNavigationService.reloadNavigation();
+
+                this._fuseProgressiveBarService.hide();
+                this.isProcessing = false;
+            },
+                (error: HttpErrorResponse) => {
+                    this.adsAccounts = [];
+                    this._sessionService.unsetActiveGoogleAdsAccount();
+                    this._fuseProgressiveBarService.hide();
+                    this.isProcessing = false;
+                });
+        this.subscriptions.push(sub);
     }
 
     private setInitialValue() {
@@ -233,9 +292,9 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 // setting the compareWith property to a comparison function 
                 // triggers initializing the selection according to the initial value of 
                 // the form control (i.e. _initializeSelection())
-                // this needs to be done after the filteredBanks are loaded initially 
+                // this needs to be done after the filteredAccounts are loaded initially 
                 // and after the mat-option elements are available
-                this.singleSelect.compareWith = (a: GoogleAdsAccount, b: GoogleAdsAccount) => a.id === b.id;
+                // this.singleSelect.compareWith = (a: GoogleAdsAccount, b: GoogleAdsAccount) => a.id === b.id;
             });
     }
 
@@ -251,9 +310,9 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         } else {
             search = search.toLowerCase();
         }
-        // filter the banks
+        // filter the accounts
         this.filteredAccounts.next(
-            this.adsAccounts.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
+            this.adsAccounts.filter(account => account.name.toLowerCase().indexOf(search) > -1)
         );
     }
 
