@@ -51212,7 +51212,7 @@ module.exports = "<div class=\"container\">\n\n  <div class=\"title1\"></div>\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"main-title\">\n    <div class=\"main-title-text\">\n      BÁO CÁO CLICK QUẢNG CÁO - TÀI KHOẢN <span style=\"color: yellow\">{{selectedAdsId}}</span>\n      <!-- TỪ <span style=\"color:skyblue\" [(ngModel)]=\"selectedDateRange\"\n        ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span>\n      ĐẾN <span style=\"color:skyblue\" [(ngModel)]=\"selectedDateRange\"\n        ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> -->\n    </div>\n\n    <mat-form-field class=\"datePicker\">\n      <mat-label style=\"color: white\">Khoảng thời gian thống kê</mat-label>\n      <input type=\"text\" ngxDaterangepickerMd matInput readonly [locale]=\"locale\" [(ngModel)]=\"selectedDateRange\"\n        startKey=\"start\" endKey=\"end\" [material]=\"true\" [ranges]=\"ranges\" (datesUpdated)=\"onSelectDateRange($event)\"\n        (change)=\"onApplyDateRange()\" ngDefaultControl />\n    </mat-form-field>\n\n    <div class=\"clear\"></div>\n\n  </div>\n\n  <div class=\"section\">\n\n    <div class=\"div-pie-chart\">\n      <p style=\"text-align: center\">\n        Bạn có thể tiết kiệm trong <span style=\"color: crimson; font-weight: bold\" [(ngModel)]=\"selectedDateRange\"\n          ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>\n        từ <span style=\"font-weight: bold; color: #039be5\" [(ngModel)]=\"selectedDateRange\"\n          ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến\n        ngày <span style=\"font-weight: bold; color: #039be5\" [(ngModel)]=\"selectedDateRange\"\n          ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc\n        hạn chế chiến dịch ảo\n      </p>\n      <div class=\"h-400 pie-chart\">\n\n        <ngx-charts-pie-chart *fuseIfOnDom [scheme]=\"pieChart.scheme\" [results]=\"pieChart.dataSource\"\n          [explodeSlices]=\"pieChart.explodeSlices\" [labels]=\"pieChart.labels\" [trimLabels]=\"pieChart.trimLabels\"\n          [doughnut]=\"pieChart.doughnut\" [gradient]=\"pieChart.gradient\" (select)=\"pieChart.onSelect($event)\"\n          [labelFormatting]=\"pieChart.setLabelFormatting\">\n\n          <ng-template #tooltipTemplate let-model=\"model\">\n            <p style=\"color: #fff\">\n              {{model.value}}%\n            </p>\n          </ng-template>\n\n        </ngx-charts-pie-chart>\n\n        <div style=\"text-align: center\" class=\"click-total\">\n          <span class=\"click-number\">{{clickTotal}}</span>\n          <br><span style=\"color: gray\">click</span>\n        </div>\n\n      </div>\n\n    </div>\n  </div>\n\n  <div class=\"section div-line-chart\">\n    <div class=\"title1\">\n      <span>BÁO CÁO TỔNG THỂ THEO NGÀY</span>\n      <!--<button mat-raised-button color=\"accent\" style=\"border-radius: 15px\">Xem Đầy Đủ</button>-->\n    </div>\n\n    <div class=\"position-relative h-368 pb-16\">\n      <canvas baseChart [datasets]=\"lineChart.datasets.report\" [labels]=\"lineChart.labels\" [colors]=\"lineChart.colors\"\n        [options]=\"lineChart.options\" [chartType]=\"lineChart.chartType\">\n      </canvas>\n    </div>\n\n  </div>\n\n  <div class=\"section tables\">\n\n    <div class=\"left\">\n      <div class=\"title1\">\n        BÁO CÁO IP CLICK QUẢNG CÁO\n      </div>\n\n      <div class=\"left-table\">\n        <mat-table\n          [dataSource]=\"advertisementClickReport | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }\"\n          class=\"mat-elevation-z8\">\n          <ng-container matColumnDef=\"time\">\n            <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>\n          </ng-container>\n\n          <ng-container matColumnDef=\"ip\">\n            <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n\n              <a matTooltip=\"Nhấn vào để xem chi tiết\" [routerLink]=\"['/bao-cao/chi-tiet-ip', element.ip]\"\n                class=\"ip-detail-link\" mat-button color=\"accent\">\n                <mat-icon *ngIf=\"element.isSpam === true\" style=\"color: red\" class=\"ip-symbol\">not_interested\n                </mat-icon>\n                <mat-icon *ngIf=\"element.isSpam === false\" style=\"color:silver\" class=\"ip-symbol\">\n                  not_interested\n                </mat-icon>\n                {{element.ip}}\n              </a>\n\n            </mat-cell>\n          </ng-container>\n\n          <ng-container matColumnDef=\"click\">\n            <mat-header-cell style=\"justify-content: center\" *matHeaderCellDef> Số click </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\" style=\"justify-content: center\">\n              {{element.click}}\n            </mat-cell>\n          </ng-container>\n\n          <ng-container matColumnDef=\"status\">\n            <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n              <span *ngIf=\"element.isSpam === true\" style=\"color: crimson; font-weight: bold\"\n                (mouseover)=\"showReason(element.reason || '')\">\n                <mat-icon style=\"font-size: 18px\">not_interested</mat-icon> Đã chặn\n              </span>\n              <span *ngIf=\"element.isSpam === false\" style=\"color: #44b543; font-weight: bold\"\n                (mouseover)=\"showReason(element.reason || '')\">\n                <mat-icon style=\"font-size: 18px\">check_circle</mat-icon> Hợp lệ\n              </span>\n            </mat-cell>\n          </ng-container>\n\n          <!--<ng-container matColumnDef=\"keyword\">-->\n          <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->\n          <!--<mat-cell *matCellDef=\"let element\"> {{element.keyword}} </mat-cell>-->\n          <!--</ng-container>-->\n\n          <ng-container matColumnDef=\"location\">\n            <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\"> {{element.location?.city || 'Unknown'}}\n            </mat-cell>\n          </ng-container>\n\n          <ng-container matColumnDef=\"isPrivateBrowsing\">\n            <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n              <span *ngIf=\"element.isPrivateBrowsing === true\" style=\"color: orange; font-weight: bold\">\n                <mat-icon style=\"font-size: 18px\">report_problem</mat-icon>Có\n              </span>\n              <span *ngIf=\"element.isPrivateBrowsing === false\" style=\"color:silver\">Không</span>\n            </mat-cell>\n          </ng-container>\n\n          <!-- Keyword Column -->\n          <ng-container matColumnDef=\"keyword\">\n            <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n              {{element.gclidInfo?.keyword}}\n            </mat-cell>\n          </ng-container>\n\n          <!-- Keyword Match Type Column -->\n          <ng-container matColumnDef=\"keywordMatchType\">\n            <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n              {{element.gclidInfo?.keywordMatchType}}\n            </mat-cell>\n          </ng-container>\n\n          <mat-header-row *matHeaderRowDef=\"advertisementClickReportColumns; sticky: true\"></mat-header-row>\n          <mat-row *matRowDef=\"let row; columns: advertisementClickReportColumns;\"></mat-row>\n        </mat-table>\n      </div>\n\n      <!-- <button mat-raised-button color=\"accent\" class=\"table-button\" style=\"background-color:#4bb453\">BÁO CÁO TOÀN BỘ\n        IP</button> -->\n\n      <div class=\"pagination-buttons\" fxLayout=\"row\" fxLayout.xs=\"column\" *ngIf=\"pageTotal !== 1\">\n        <div fxFlex=\"60\">\n          <p *ngIf=\"pageTotal > 0\">Trang <span [(ngModel)]=\"currentPageNumber\"\n              ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng\n            {{pageTotal}} trang</p>\n          <p *ngIf=\"pageTotal === 0\">Chưa có ghi nhận nào.</p>\n        </div>\n        <div fxFlex=\"10\" class=\"item-per-page-options\" *ngIf=\"pageTotal > 0\">\n          <mat-form-field>\n            <mat-label>Số record mỗi trang</mat-label>\n            <mat-select [(value)]=\"pageLimit\" (selectionChange)=\"changeItemsPerPageOption($event)\">\n              <mat-option *ngFor=\"let option of itemsPerPageOptions\" [value]=\"option.value\">\n                {{option.text}}\n              </mat-option>\n            </mat-select>\n          </mat-form-field>\n        </div>\n        <pagination-controls (pageChange)=\"changePage($event); currentPageNumber = $event\" previousLabel=\"Trước\"\n          nextLabel=\"Sau\" fxFlex fxLayoutAlign=\"end start\" *ngIf=\"pageTotal > 0\" fxFlex=\"30\"></pagination-controls>\n      </div>\n\n    </div>\n\n  </div>\n\n</div>"
+module.exports = "<div class=\"container\">\n\n  <div class=\"main-title\">\n    <div class=\"main-title-text\">\n      BÁO CÁO CLICK QUẢNG CÁO - TÀI KHOẢN <span style=\"color: yellow\">{{selectedAdsId}}</span>\n      <!-- TỪ <span style=\"color:skyblue\" [(ngModel)]=\"selectedDateRange\"\n        ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span>\n      ĐẾN <span style=\"color:skyblue\" [(ngModel)]=\"selectedDateRange\"\n        ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> -->\n    </div>\n\n    <mat-form-field class=\"datePicker\">\n      <mat-label style=\"color: white\">Khoảng thời gian thống kê</mat-label>\n      <input type=\"text\" ngxDaterangepickerMd matInput readonly [locale]=\"locale\" [(ngModel)]=\"selectedDateRange\"\n        startKey=\"start\" endKey=\"end\" [material]=\"true\" [ranges]=\"ranges\" (datesUpdated)=\"onSelectDateRange($event)\"\n        (change)=\"onApplyDateRange()\" ngDefaultControl />\n    </mat-form-field>\n\n    <div class=\"clear\"></div>\n\n  </div>\n\n  <div class=\"section\">\n\n    <div class=\"div-pie-chart\">\n      <p style=\"text-align: center\">\n        Bạn có thể tiết kiệm trong <span style=\"color: crimson; font-weight: bold\" [(ngModel)]=\"selectedDateRange\"\n          ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>\n        từ <span style=\"font-weight: bold; color: #039be5\" [(ngModel)]=\"selectedDateRange\"\n          ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến\n        ngày <span style=\"font-weight: bold; color: #039be5\" [(ngModel)]=\"selectedDateRange\"\n          ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc\n        hạn chế chiến dịch ảo\n      </p>\n      <div class=\"h-400 pie-chart\">\n\n        <ngx-charts-pie-chart *fuseIfOnDom [scheme]=\"pieChart.scheme\" [results]=\"pieChart.dataSource\"\n          [explodeSlices]=\"pieChart.explodeSlices\" [labels]=\"pieChart.labels\" [trimLabels]=\"pieChart.trimLabels\"\n          [doughnut]=\"pieChart.doughnut\" [gradient]=\"pieChart.gradient\" (select)=\"pieChart.onSelect($event)\"\n          [labelFormatting]=\"pieChart.setLabelFormatting\">\n\n          <ng-template #tooltipTemplate let-model=\"model\">\n            <p style=\"color: #fff\">\n              {{model.value}}%\n            </p>\n          </ng-template>\n\n        </ngx-charts-pie-chart>\n\n        <div style=\"text-align: center\" class=\"click-total\">\n          <span class=\"click-number\">{{abbreviateNumber(clickTotal)}}</span>\n          <br><span style=\"color: gray\">click</span>\n        </div>\n\n      </div>\n\n    </div>\n  </div>\n\n  <div class=\"section div-line-chart\">\n    <div class=\"title1\">\n      <span>BÁO CÁO TỔNG THỂ THEO NGÀY</span>\n      <!--<button mat-raised-button color=\"accent\" style=\"border-radius: 15px\">Xem Đầy Đủ</button>-->\n    </div>\n\n    <div class=\"position-relative h-368 pb-16\">\n      <canvas baseChart [datasets]=\"lineChart.datasets.report\" [labels]=\"lineChart.labels\" [colors]=\"lineChart.colors\"\n        [options]=\"lineChart.options\" [chartType]=\"lineChart.chartType\">\n      </canvas>\n    </div>\n\n  </div>\n\n  <div class=\"section tables\">\n\n    <div class=\"left\">\n      <div class=\"title1\">\n        BÁO CÁO IP CLICK QUẢNG CÁO\n      </div>\n\n      <div class=\"left-table\">\n        <mat-table\n          [dataSource]=\"advertisementClickReport | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }\"\n          class=\"mat-elevation-z8\">\n          <ng-container matColumnDef=\"time\">\n            <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>\n          </ng-container>\n\n          <ng-container matColumnDef=\"ip\">\n            <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n\n              <a matTooltip=\"Nhấn vào để xem chi tiết\" [routerLink]=\"['/bao-cao/chi-tiet-ip', element.ip]\"\n                class=\"ip-detail-link\" mat-button color=\"accent\">\n                <mat-icon *ngIf=\"element.isSpam === true\" style=\"color: red\" class=\"ip-symbol\">not_interested\n                </mat-icon>\n                <mat-icon *ngIf=\"element.isSpam === false\" style=\"color:silver\" class=\"ip-symbol\">\n                  not_interested\n                </mat-icon>\n                {{element.ip}}\n              </a>\n\n            </mat-cell>\n          </ng-container>\n\n          <ng-container matColumnDef=\"click\">\n            <mat-header-cell style=\"justify-content: center\" *matHeaderCellDef> Số click </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\" style=\"justify-content: center\">\n              {{element.click}}\n            </mat-cell>\n          </ng-container>\n\n          <ng-container matColumnDef=\"status\">\n            <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n              <span *ngIf=\"element.isSpam === true\" style=\"color: crimson; font-weight: bold\"\n                (mouseover)=\"showReason(element.reason || '')\">\n                <mat-icon style=\"font-size: 18px\">not_interested</mat-icon> Đã chặn\n              </span>\n              <span *ngIf=\"element.isSpam === false\" style=\"color: #44b543; font-weight: bold\"\n                (mouseover)=\"showReason(element.reason || '')\">\n                <mat-icon style=\"font-size: 18px\">check_circle</mat-icon> Hợp lệ\n              </span>\n            </mat-cell>\n          </ng-container>\n\n          <!--<ng-container matColumnDef=\"keyword\">-->\n          <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->\n          <!--<mat-cell *matCellDef=\"let element\"> {{element.keyword}} </mat-cell>-->\n          <!--</ng-container>-->\n\n          <ng-container matColumnDef=\"location\">\n            <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\"> {{element.location?.city || 'Unknown'}}\n            </mat-cell>\n          </ng-container>\n\n          <ng-container matColumnDef=\"isPrivateBrowsing\">\n            <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n              <span *ngIf=\"element.isPrivateBrowsing === true\" style=\"color: orange; font-weight: bold\">\n                <mat-icon style=\"font-size: 18px\">report_problem</mat-icon>Có\n              </span>\n              <span *ngIf=\"element.isPrivateBrowsing === false\" style=\"color:silver\">Không</span>\n            </mat-cell>\n          </ng-container>\n\n          <!-- Keyword Column -->\n          <ng-container matColumnDef=\"keyword\">\n            <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n              {{element.gclidInfo?.keyword}}\n            </mat-cell>\n          </ng-container>\n\n          <!-- Keyword Match Type Column -->\n          <ng-container matColumnDef=\"keywordMatchType\">\n            <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>\n            <mat-cell *matCellDef=\"let element\">\n              {{element.gclidInfo?.keywordMatchType}}\n            </mat-cell>\n          </ng-container>\n\n          <mat-header-row *matHeaderRowDef=\"advertisementClickReportColumns; sticky: true\"></mat-header-row>\n          <mat-row *matRowDef=\"let row; columns: advertisementClickReportColumns;\"></mat-row>\n        </mat-table>\n      </div>\n\n      <!-- <button mat-raised-button color=\"accent\" class=\"table-button\" style=\"background-color:#4bb453\">BÁO CÁO TOÀN BỘ\n        IP</button> -->\n\n      <div class=\"pagination-buttons\" fxLayout=\"row\" fxLayout.xs=\"column\" *ngIf=\"pageTotal !== 1\">\n        <div fxFlex=\"60\">\n          <p *ngIf=\"pageTotal > 0\">Trang <span [(ngModel)]=\"currentPageNumber\"\n              ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng\n            {{pageTotal}} trang</p>\n          <p *ngIf=\"pageTotal === 0\">Chưa có ghi nhận nào.</p>\n        </div>\n        <div fxFlex=\"10\" class=\"item-per-page-options\" *ngIf=\"pageTotal > 0\">\n          <mat-form-field>\n            <mat-label>Số record mỗi trang</mat-label>\n            <mat-select [(value)]=\"pageLimit\" (selectionChange)=\"changeItemsPerPageOption($event)\">\n              <mat-option *ngFor=\"let option of itemsPerPageOptions\" [value]=\"option.value\">\n                {{option.text}}\n              </mat-option>\n            </mat-select>\n          </mat-form-field>\n        </div>\n        <pagination-controls (pageChange)=\"changePage($event); currentPageNumber = $event\" previousLabel=\"Trước\"\n          nextLabel=\"Sau\" fxFlex fxLayoutAlign=\"end start\" *ngIf=\"pageTotal > 0\" fxFlex=\"30\"></pagination-controls>\n      </div>\n\n    </div>\n\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -51923,6 +51923,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _report_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../report.service */ "./src/app/main/reports/report.service.ts");
 /* harmony import */ var app_shared_services_session_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! app/shared/services/session.service */ "./src/app/shared/services/session.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _shared_constants_generals__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../shared/constants/generals */ "./src/app/shared/constants/generals.ts");
+
 
 
 
@@ -52003,11 +52005,7 @@ var OverviewReportComponent = /** @class */ (function (_super) {
             },
         ];
         _this.view = [325, 50];
-        _this.itemsPerPageOptions = [
-            { text: '10', value: 10 },
-            { text: '20', value: 20 },
-            { text: '30', value: 30 }
-        ];
+        _this.itemsPerPageOptions = _shared_constants_generals__WEBPACK_IMPORTED_MODULE_9__["Generals"].Pagination.itemsPerPageOptions;
         // options
         _this.showXAxis = false;
         _this.showYAxis = false;
@@ -52625,6 +52623,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var app_shared_services_dialog_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! app/shared/services/dialog.service */ "./src/app/shared/services/dialog.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var app_shared_pipes_ads_account_id_ads_account_id_pipe__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! app/shared/pipes/ads-account-id/ads-account-id.pipe */ "./src/app/shared/pipes/ads-account-id/ads-account-id.pipe.ts");
+/* harmony import */ var app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! app/shared/constants/generals */ "./src/app/shared/constants/generals.ts");
+
 
 
 
@@ -52665,11 +52665,7 @@ var SpamClickReportComponent = /** @class */ (function (_super) {
             'Hôm qua': [moment__WEBPACK_IMPORTED_MODULE_2__().subtract(1, 'days'), moment__WEBPACK_IMPORTED_MODULE_2__().subtract(1, 'days')],
             '1 tuần': [moment__WEBPACK_IMPORTED_MODULE_2__().subtract(6, 'days'), moment__WEBPACK_IMPORTED_MODULE_2__()],
         };
-        _this.itemsPerPageOptions = [
-            { text: '10', value: 10 },
-            { text: '20', value: 20 },
-            { text: '30', value: 30 }
-        ];
+        _this.itemsPerPageOptions = app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_10__["Generals"].Pagination.itemsPerPageOptions;
         _this.adsAccountIdPipe = new app_shared_pipes_ads_account_id_ads_account_id_pipe__WEBPACK_IMPORTED_MODULE_9__["AdsAccountIdPipe"]();
         _this.rightTableColumns = ['order', 'time', 'phone', 'network'];
         _this.rightTable = [
@@ -52824,6 +52820,19 @@ var SpamClickReportComponent = /** @class */ (function (_super) {
         };
         return _this;
     }
+    SpamClickReportComponent.prototype.abbreviateNumber = function (number) {
+        var SI_POSTFIXES = ["", "k", "M", "B", "T", "P", "E"];
+        var tier = Math.log10(Math.abs(number)) / 3 | 0;
+        if (tier == 0)
+            return number;
+        var postfix = SI_POSTFIXES[tier];
+        var scale = Math.pow(10, tier * 3);
+        var scaled = number / scale;
+        var formatted = scaled.toFixed(1) + '';
+        if (/\.0$/.test(formatted))
+            formatted = formatted.substr(0, formatted.length - 2);
+        return formatted + postfix;
+    };
     ;
     SpamClickReportComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -52954,11 +52963,11 @@ var SpamClickReportComponent = /** @class */ (function (_super) {
                 },
                 dataSource: [
                     {
-                        name: 'Click thật: ' + res.data.pieChart.realClick,
+                        name: 'Click thật: ' + _this.abbreviateNumber(res.data.pieChart.realClick),
                         value: Math.round(realClickPercentage * 100) / 100
                     },
                     {
-                        name: 'Click ảo: ' + res.data.pieChart.spamClick,
+                        name: 'Click ảo: ' + _this.abbreviateNumber(res.data.pieChart.spamClick),
                         value: Math.round(spamClickPercentage * 100) / 100
                     },
                 ],
@@ -53587,6 +53596,46 @@ function getVietnamesePaginatorIntl() {
     paginatorIntl.getRangeLabel = vietnameseRangeLabel;
     return paginatorIntl;
 }
+
+
+/***/ }),
+
+/***/ "./src/app/shared/constants/generals.ts":
+/*!**********************************************!*\
+  !*** ./src/app/shared/constants/generals.ts ***!
+  \**********************************************/
+/*! exports provided: Generals */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Generals", function() { return Generals; });
+var Generals;
+(function (Generals) {
+    var Pagination;
+    (function (Pagination) {
+        Pagination.itemsPerPageOptions = [
+            {
+                text: '10',
+                value: 10
+            },
+            {
+                text: '30',
+                value: 30
+            },
+            {
+                text: '50',
+                value: 50
+            },
+            {
+                text: '100',
+                value: 100
+            }
+        ];
+    })(Pagination = Generals.Pagination || (Generals.Pagination = {}));
+    ;
+})(Generals || (Generals = {}));
+;
 
 
 /***/ })

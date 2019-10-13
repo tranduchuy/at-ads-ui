@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
+import { Generals } from 'app/shared/constants/generals';
 
 @Component({
   selector: 'app-spam-click-report',
@@ -43,15 +44,29 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     '1 tuần': [moment().subtract(6, 'days'), moment()],
   }
 
-  itemsPerPageOptions = [
-    { text: '10', value: 10 },
-    { text: '20', value: 20 },
-    { text: '30', value: 30 }
-  ];
+  itemsPerPageOptions = Generals.Pagination.itemsPerPageOptions;
 
   selectedAdsId: string;
 
   adsAccountIdPipe = new AdsAccountIdPipe();
+
+  abbreviateNumber(number: number): string | number {
+    const SI_POSTFIXES: string[] = ["", "k", "M", "B", "T", "P", "E"];
+    const tier = Math.log10(Math.abs(number)) / 3 | 0;
+
+    if (tier == 0)
+      return number;
+
+    const postfix = SI_POSTFIXES[tier];
+    const scale = Math.pow(10, tier * 3);
+    const scaled = number / scale;
+    let formatted = scaled.toFixed(1) + '';
+
+    if (/\.0$/.test(formatted))
+      formatted = formatted.substr(0, formatted.length - 2);
+
+    return formatted + postfix;
+  }
 
   constructor(
     public _sessionService: SessionService,
@@ -371,11 +386,11 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             },
             dataSource: [
               {
-                name: 'Click thật: ' + res.data.pieChart.realClick,
+                name: 'Click thật: ' + this.abbreviateNumber(res.data.pieChart.realClick),
                 value: Math.round(realClickPercentage * 100) / 100
               },
               {
-                name: 'Click ảo: ' + res.data.pieChart.spamClick,
+                name: 'Click ảo: ' + this.abbreviateNumber(res.data.pieChart.spamClick),
                 value: Math.round(spamClickPercentage * 100) / 100
               },
             ],

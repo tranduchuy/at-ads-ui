@@ -7,6 +7,7 @@ import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SessionService } from 'app/shared/services/session.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Generals } from '../../../shared/constants/generals';
 
 @Component({
   selector: 'app-overview-report',
@@ -87,11 +88,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   view: any[] = [325, 50];
 
-  itemsPerPageOptions = [
-    { text: '10', value: 10 },
-    { text: '20', value: 20 },
-    { text: '30', value: 30 }
-  ];
+  itemsPerPageOptions = Generals.Pagination.itemsPerPageOptions;
 
   // options
   showXAxis = false;
