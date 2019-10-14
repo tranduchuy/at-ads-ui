@@ -18,6 +18,25 @@
 
         <div class="px-8 px-md-16">
             <!-- <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts> -->
+            <mat-form-field *ngIf="_sessionService.activeAdsAccountId" appearance="none">
+                <img src="../../../../assets/icons/gg-ads.png" alt="googleAdsIcon" class="ggAds-icon">
+                <mat-label style="color: lightgreen">Tài khoản Google Ads</mat-label>
+                <mat-select [formControl]="accountCtrl" placeholder="Tài khoản Google Ads" #singleSelect
+                    (selectionChange)="selectAccount()">
+                    <mat-option>
+                        <ngx-mat-select-search [formControl]="accountFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
+                            [noEntriesFoundLabel]="'Không tìm thấy tài khoản nào'"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let account of filteredAccounts | async" [value]="account">
+                        {{account.name}}
+                    </mat-option>
+                </mat-select>
+                <span class="free-label" *ngIf="accountCtrl.value?.isFree === true">FREE</span>
+                <span *ngIf="accountCtrl.value?.isFree === false">
+                    <span class="vip-label">VIP</span>
+                    <span class="vip-expiration">{{accountCtrl.value?.expiredAt | date: 'dd/MM/yyyy'}}</span>
+                </span>
+            </mat-form-field>
         </div>
 
     </div>

@@ -4,8 +4,13 @@ import { API } from '../../shared/constants/api.constant';
 import { HttpClient } from '@angular/common/http';
 import { SessionService } from '../../shared/services/session.service';
 
+interface Campagin {
+  campaignId: string;
+  campaignName: string;
+}
+
 export interface IAddCampaignTrackingParams {
-  campaignIds: string[];
+  campaigns: Campagin[]
 }
 
 export interface ICheckAccountAcceptance {

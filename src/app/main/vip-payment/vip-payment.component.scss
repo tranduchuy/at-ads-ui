@@ -36,6 +36,18 @@
     margin: 5px;
   }
 
+  .ggads-icon {
+    width: 20px;
+    margin-right: 3px;
+  }
+
+  .vip-title1 {
+    color: goldenrod;
+    font-weight: bold;
+    text-shadow: 0.5px 1px 1.5px gray;
+    margin-right: 3px;
+  }
+
   .vip-logo {
     height: 30px;
     width: 30px;
@@ -195,19 +207,37 @@
         box-shadow: 1px 1px 2px silver;
       }
 
-      mat-table {
-        box-shadow: 1px 1px 4px silver;
+      .packages-table {
+        overflow: auto;
+        mat-table {
+          box-shadow: 1px 1px 4px silver;
 
-        mat-header-cell {
-          background: #039be5;
-          color: white;
-        }
+          mat-header-cell {
+            background: #039be5;
+            color: white;
+          }
 
-        mat-row {
-          transition: 0.2s;
+          mat-row {
+            transition: 0.2s;
 
-          &:hover {
-            background: rgba(3, 155, 229, 0.1);
+            &:hover {
+              background: rgba(3, 155, 229, 0.1);
+            }
+          }
+
+          mat-header-cell:nth-child(1),
+          mat-cell:nth-child(1) {
+            flex: 0 0 25%;
+          }
+          mat-header-cell:nth-child(2),
+          mat-cell:nth-child(2) {
+            flex: 0 0 20%;
+          }
+
+          mat-header-row,
+          mat-row {
+            min-width: 700px;
+            width: 100%;
           }
         }
       }
@@ -262,4 +292,7 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 600px) {
 }

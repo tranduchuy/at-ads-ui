@@ -97,6 +97,12 @@
     .pagination-buttons {
       padding: 10px;
       color: gray;
+
+      .item-per-page-options {
+        mat-form-field {
+          width: 100%;
+        }
+      }
     }
 
     .pie-chart-report-title {
@@ -247,6 +253,12 @@
 
       .div-pie-chart {
         padding: 5px;
+      }
+
+      .pagination-buttons {
+        .item-per-page-options {
+          width: 50%;
+        }
       }
     }
 

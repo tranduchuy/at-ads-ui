@@ -186,6 +186,12 @@
       .pagination-buttons {
         padding: 10px;
         color: gray;
+
+        .item-per-page-options {
+          mat-form-field {
+            width: 100%;
+          }
+        }
       }
 
       .overview-table {
@@ -275,11 +281,17 @@
     }
     .inner {
       .highline2 {
-        padding-bottom: 65%;
+        padding-bottom: 70%;
         .hl2-title1 {
           .datePicker {
             margin-top: 25px;
           }
+        }
+      }
+
+      .pagination-buttons {
+        .item-per-page-options {
+          width: 50%;
         }
       }
     }

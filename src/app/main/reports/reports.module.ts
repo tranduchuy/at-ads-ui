@@ -23,7 +23,7 @@ import { SpamClickReportComponent } from './spam-click-report/spam-click-report.
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { ChartsModule } from 'ng2-charts';
-import { MatRadioModule, MatDatepickerModule, MatPaginatorModule, MatPaginatorIntl, MatDividerModule, MatTabsModule, MatTreeModule, MatProgressBarModule, MatMenuModule, MatExpansionModule } from '@angular/material';
+import { MatRadioModule, MatDatepickerModule, MatPaginatorModule, MatPaginatorIntl, MatDividerModule, MatTabsModule, MatTreeModule, MatProgressBarModule, MatMenuModule, MatExpansionModule, MatSelectModule } from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
 import { IpDetailComponent } from './ip-detail/ip-detail.component';
 import { BlockedIpListComponent } from './blocked-ip-list/blocked-ip-list.component';
@@ -58,6 +58,7 @@ import { OverviewReportComponent } from './overview-report/overview-report.compo
     MatProgressBarModule,
     MatMenuModule,
     MatExpansionModule,
+    MatSelectModule,
 
     CheckboxGroupModule,
     ReactiveFormsModule,

@@ -191,7 +191,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
             console.log('The POST observable is now completed.');
           });
     } else {
-      this._dialogService._openErrorDialog({ messages: ['Lấy thông tin tài khoản từ google ko thành công'] });
+      this._dialogService._openErrorDialog({ messages: ['Lấy thông tin tài khoản từ Google không thành công'] });
     }
   }
 

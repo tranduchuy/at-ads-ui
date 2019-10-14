@@ -12,9 +12,18 @@ export class SessionService {
   private _user$ = new BehaviorSubject<any>({});
   private _accountAcceptance$ = new BehaviorSubject<boolean>(true);
   private _acceptedAdsId$ = new BehaviorSubject<string>('');
+  private _isNewAccountAdded$ = new BehaviorSubject<boolean>(false);
 
   constructor(private cookieService: CookieService) {
 
+  }
+
+  getIsNewAccountAdded(): Observable<boolean> {
+    return this._isNewAccountAdded$.asObservable();
+  }
+
+  notifyNewAccountWasAdded(): void {
+    this._isNewAccountAdded$.next(true);
   }
 
   getAcceptedAdsId(): Observable<string> {
@@ -143,5 +152,18 @@ export class SessionService {
 
   public getValueOfAccountId(): string {
     return this._accountId$.getValue();
+  }
+
+  public setActiveGoogleAdsAccount(accountId: string, adsId: string) {
+    this.setActiveAccountId(accountId);
+    this.setAccountId(accountId);
+    this.setActiveAdsAccountId(adsId);
+    this.setAdwordId(adsId);
+  }
+  public unsetActiveGoogleAdsAccount() {
+    this.setActiveAdsAccountId('');
+    this.setAccountId('');
+    this.setActiveAdsAccountId('');
+    this.setAdwordId('');
   }
 }

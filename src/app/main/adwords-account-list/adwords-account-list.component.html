@@ -24,7 +24,7 @@
           </ng-container>
 
           <ng-container matColumnDef="date">
-            <mat-header-cell *matHeaderCellDef> Ngày </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Ngày kết nối </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
           </ng-container>
 
@@ -98,7 +98,7 @@
           </ng-container>
 
           <ng-container matColumnDef="website">
-            <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Website của tài khoản </mat-header-cell>
             <mat-cell *matCellDef="let element" fxLayout="column" fxLayoutAlign="start">
               <ul class="website-list" *ngIf="element.websites.length > 0">
                 <li *ngFor="let website of element.websites, let i = index" fxLayout="row"
