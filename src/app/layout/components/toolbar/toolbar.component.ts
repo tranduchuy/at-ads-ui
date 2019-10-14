@@ -81,7 +81,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
-        private _sessionService: SessionService,
+        public _sessionService: SessionService,
         private _router: Router,
         private _dialogService: DialogService,
         private _toolbarService: ToolbarService,
