@@ -245,7 +245,7 @@ export class FuseNavigationComponent implements OnInit {
     this.accounts.children = [];
     this.accounts.children[0] = {
       id: 'add-accounts',
-      title: 'Thêm tài khoản mới',
+      title: 'Thêm Tài Khoản Mới',
       type: 'item',
       icon: 'library_add',
       url: '/them-tai-khoan-moi'

@@ -1,0 +1,15 @@
+<div class="campaign-dialog">
+  <h1 matDialogTitle>Chiến dịch đã chặn</h1>
+  <!-- <div style="text-align: center; margin-bottom: 15px">
+      <mat-icon class="s-60" style="color: #039be5">info</mat-icon>
+    </div> -->
+  <div mat-dialog-content style="text-align: justify">
+    <span *ngFor="let item of campaigns" class="campaign">
+      {{item.campaignName || item.campaignId}}
+    </span>
+  </div>
+  <div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">
+    <button mat-raised-button color="basic" (click)="dialogRef.close(true)">Đóng
+    </button>
+  </div>
+</div>
