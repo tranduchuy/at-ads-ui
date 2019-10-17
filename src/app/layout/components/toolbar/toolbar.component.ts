@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { Subject, ReplaySubject } from 'rxjs';
+import { Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
@@ -37,6 +37,7 @@ interface GoogleAdsAccount {
 })
 
 export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDestroy {
+    adminIsStandingForUser = false;
     user = {
         avatar: '',
         name: '',
@@ -165,19 +166,33 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, { id: this._translateService.currentLang });
 
-        if (this._sessionService.user) {
-            this._sessionService.setUser(JSON.parse(this._sessionService.user));
-        }
+        // if (this._sessionService.user) {
+        //     this._sessionService.setUser(JSON.parse(this._sessionService.user));
+        // }
 
-        const sub = this._sessionService.getUser()
-            .subscribe((user: any) => {
-                if (user) {
-                    this.user.name = user.name;
-                    this.user.avatar = user.avatar;
-                    this.user.email = user.email;
-                }
-            });
+        const sub = combineLatest([
+            this._sessionService.getUser(),
+            this._sessionService.getStandByUser$()
+        ]).subscribe((values: any[]) => {
+            console.log('ahihi', values);
+            const user = values[0];
+            if (user) {
+                this.user.name = user.name;
+                this.user.avatar = user.avatar;
+                this.user.email = user.email;
+                this.adminIsStandingForUser = false;
+            }
+
+            if (values[1]) {
+                this.adminIsStandingForUser = true;
+                this.user.name = values[1].name;
+                this.user.avatar = values[1].avatar || '';
+                this.user.email = values[1].email;
+            }
+        });
+
         this.subscriptions.push(sub);
+
 
         const getAdsIdSub = this._sessionService.getAdwordId()
             .subscribe((adsId: string) => {

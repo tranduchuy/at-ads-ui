@@ -6,7 +6,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class SessionService {
-
+  private _standByUser = new BehaviorSubject<any>(null);
   private _adsId$ = new BehaviorSubject<string>('');
   private _accountId$ = new BehaviorSubject<string>('');
   private _user$ = new BehaviorSubject<any>({});
@@ -68,9 +68,11 @@ export class SessionService {
     const today = new Date();
     today.setHours(today.getHours() + 8);
     this.cookieService.putObject(CookieNames.user, user, { expires: today });
+    this._user$.next(user);
 
     if (standByUser) {
       this.cookieService.putObject(CookieNames.standBy, standByUser, { expires: today });
+      this._standByUser.next(standByUser);
     }
   }
 
@@ -140,6 +142,10 @@ export class SessionService {
 
   public getUser(): Observable<any> {
     return this._user$.asObservable();
+  }
+
+  public getStandByUser$(): Observable<any> {
+    return this._standByUser.asObservable();
   }
 
   public setAdwordId(value: string): void {
