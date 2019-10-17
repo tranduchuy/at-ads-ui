@@ -28,11 +28,18 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+
+    let standForUser = null;
+    try {
+      standForUser = JSON.parse(this._sessionService.user);
+    } catch (e) {}
+
     if (this._isUrlApi(request.url)) {
       // modify request
       request = request.clone({
         setHeaders: {
-          accessToken: this._sessionService.token || ''
+          accessToken: this._sessionService.token || '',
+          standfor: standForUser ? standForUser._id : ''
         }
       });
 
@@ -47,6 +54,7 @@ export class TokenInterceptor implements HttpInterceptor {
             }
           },
           error => {
+            console.log(error);
             // http response status code
             if (error.status === HttpCode.UNAUTHORIZED) {
               this._sessionService.remove();

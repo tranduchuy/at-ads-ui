@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
-import { Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { SessionService } from 'app/shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { ProfileService } from '../profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
 @Component({
   selector: 'app-update-user-info',
@@ -13,10 +12,8 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
   styleUrls: ['./update-user-info.component.scss']
 })
 export class UpdateUserInfoComponent extends EditableFormBaseComponent implements OnInit {
-
-  isProcessing: boolean = false;
+  isProcessing = false;
   userInfo: any;
-
   email: string;
 
   constructor(
@@ -32,7 +29,7 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
     this.userInfo = JSON.parse(this._sessionService.user);
   }
 
-  submitForm() {
+  submitForm(): void {
     this.onSubmit();
   }
 
@@ -87,21 +84,21 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
   private generatePostObject(): any {
     const params = { ...this.form.value };
 
-    if (params.phone === undefined || !params.phone)
-      params.phone = "";
-
+    if (params.phone === undefined || !params.phone) {
+      params.phone = '';
+    }
     this.email = params.email;
-
     delete params.email;
-
-    for (const key in params)
-      if (!params[key])
+    for (const key in params) {
+      if (params.hasOwnProperty(key) && !params[key]) {
         delete params[key];
+      }
+    }
 
     return params;
   }
 
-  onPressPhoneNumber(keyCode: number) {
-    return (keyCode >= 48 && keyCode <= 57);
+  onPressPhoneNumber(keyCode: number): boolean {
+    return keyCode >= 48 && keyCode <= 57;
   }
 }

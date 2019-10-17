@@ -49,8 +49,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     navigation: any;
     selectedLanguage: any;
     userStatusOptions: any[];
-    isProcessing: boolean = false;
-    isAlertDisplayed: boolean = false;
+    isProcessing = false;
+    isAlertDisplayed = false;
 
     adsAccounts: GoogleAdsAccount[] = [];
 
@@ -70,13 +70,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     // Private
     private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {FuseConfigService} _fuseConfigService
-     * @param {FuseSidebarService} _fuseSidebarService
-     * @param {TranslateService} _translateService
-     */
+    _adsAccountPipe: AdsAccountIdPipe = new AdsAccountIdPipe();
+
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
@@ -152,8 +147,9 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
         const isNewAccountAddedSub = this._sessionService.getIsNewAccountAdded()
             .subscribe((isAdded: boolean) => {
-                if (isAdded === true)
+                if (isAdded === true) {
                     this.getAdsAccounts();
+                }
             });
         this.subscriptions.push(isNewAccountAddedSub);
 
@@ -169,8 +165,9 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, { id: this._translateService.currentLang });
 
-        if (this._sessionService.user)
+        if (this._sessionService.user) {
             this._sessionService.setUser(JSON.parse(this._sessionService.user));
+        }
 
         const sub = this._sessionService.getUser()
             .subscribe((user: any) => {
@@ -194,13 +191,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                             this.isProcessing = false;
                         },
                             (error: HttpErrorResponse) => {
-                                //this._dialogService._openErrorDialog(error.error);
+                                // this._dialogService._openErrorDialog(error.error);
                                 this.isAlertDisplayed = false;
                                 this.isProcessing = false;
                             });
                     this.subscriptions.push(checkAccountSub);
+                } else {
+                    this.isAlertDisplayed = false;
                 }
-                else this.isAlertDisplayed = false;
             });
         this.subscriptions.push(getAdsIdSub);
 
@@ -211,13 +209,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         this.subscriptions.push(getAccountAcceptanceSub);
     }
 
-    ngAfterViewInit() {
-        this.setInitialValue();
-    }
-
-    _adsAccountPipe: AdsAccountIdPipe = new AdsAccountIdPipe();
-
-    selectAccount() {
+    selectAccount(): void {
         this._sessionService.setActiveGoogleAdsAccount(
             this.accountCtrl.value.accountId,
             this.accountCtrl.value.name
@@ -225,7 +217,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         this._fuseNavigationService.reloadNavigation();
     }
 
-    getAdsAccounts() {
+    getAdsAccounts(): void {
         this._fuseProgressiveBarService.show();
         this.isProcessing = true;
 
@@ -240,7 +232,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                             adsId: account.adsId,
                             isFree: account.isFree,
                             expiredAt: account.websites.length > 0 ? account.websites[0].expiredAt : new Date()
-                        }
+                        };
                     });
 
                 if (this.adsAccounts.length === 0) {
@@ -285,7 +277,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         this.subscriptions.push(sub);
     }
 
-    private setInitialValue() {
+    private setInitialValue(): void {
         this.filteredAccounts
             .pipe(take(1), takeUntil(this._onDestroy))
             .subscribe(() => {
@@ -298,7 +290,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             });
     }
 
-    private filterAccounts() {
+    private filterAccounts(): void {
         if (!this.adsAccounts) {
             return;
         }
@@ -316,7 +308,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         );
     }
 
-    checkAccountAcceptance() {
+    checkAccountAcceptance(): void {
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
 
@@ -340,7 +332,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             },
                 (error: HttpErrorResponse) => {
                     this._fuseProgressiveBarService.hide();
-                    //this._dialogService._openErrorDialog(error.error);
+                    // this._dialogService._openErrorDialog(error.error);
                     this.isAlertDisplayed = false;
                     this.isProcessing = false;
                 });
