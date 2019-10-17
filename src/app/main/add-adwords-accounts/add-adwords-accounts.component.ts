@@ -61,7 +61,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     }, 500);
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { AuthService } from '../../shared/services/auth.service';
@@ -20,13 +19,6 @@ import { IForgotPasswordSuccess } from './models/i-forgot-password-success';
 export class ForgotPasswordComponent extends PageBaseComponent implements OnInit
 {
     forgotPasswordForm: FormGroup;
-
-    /**
-     * Constructor
-     *
-     * @param {FuseConfigService} _fuseConfigService
-     * @param {FormBuilder} _formBuilder
-     */
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,

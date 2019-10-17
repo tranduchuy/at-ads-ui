@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, NgZone, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
@@ -29,8 +29,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);
   isOnLogin: boolean;
-
-  scrollPoint = 235;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
@@ -103,11 +101,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   ngOnInit(): void {
-    if (this._sessionService.user) {
-      this.isOnLogin = true;
-    } else {
-      this.isOnLogin = false;
-    }
+    this.isOnLogin = !!this._sessionService.user;
 
     // this._firebaseMessagingService.getPermission();
     this.get30FirstIPLogs();

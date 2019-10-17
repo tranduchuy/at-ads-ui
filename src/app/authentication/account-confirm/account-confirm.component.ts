@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,15 +17,8 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
   animations: fuseAnimations
 })
 export class AccountConfirmComponent extends PageBaseComponent implements OnInit {
-
   email: string;
   token: string;
-
-  /**
-   * Constructor
-   *
-   * @param {FuseConfigService} _fuseConfigService
-   */
   constructor(
     private _fuseConfigService: FuseConfigService,
     private _activatedRoute: ActivatedRoute,
@@ -56,7 +48,7 @@ export class AccountConfirmComponent extends PageBaseComponent implements OnInit
     };
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const sub = this._activatedRoute.params
       .subscribe((param: any) => {
         this.token = param.token;
@@ -65,11 +57,11 @@ export class AccountConfirmComponent extends PageBaseComponent implements OnInit
         } else {
           this.activateAccount();
         }
-      })
+      });
     this.subscriptions.push(sub);
   }
 
-  activateAccount() {
+  activateAccount(): void {
     this._fuseSplashScreenService.show();
     const sub = this._authService.confirmEmail({ token: this.token })
       .subscribe((res: ILoginSuccess) => {
