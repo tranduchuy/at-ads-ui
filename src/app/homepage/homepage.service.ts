@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { API } from '../shared/constants/api.constant';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

@@ -155,10 +155,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   navigateToSpamClickReport(accountId: string, adsId: string) {
-    this._sessionService.setActiveAccountId(accountId);
-    this._sessionService.setActiveAdsAccountId(this.adsAccountIdPipe.transform(adsId));
-    this._sessionService.setAccountId(accountId);
-    this._sessionService.setAdwordId(this.adsAccountIdPipe.transform(adsId));
+    this._sessionService.setActiveGoogleAdsAccount(accountId, this.adsAccountIdPipe.transform(adsId));
     this._fuseNavigationService.reloadNavigation();
     this._router.navigateByUrl('/bao-cao/click-ao');
   }

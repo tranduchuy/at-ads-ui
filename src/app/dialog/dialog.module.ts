@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
+import { CampaignDialogComponent } from './campaign-dialog/campaign-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ImageDialogComponent } from './image-dialog/image-dialog.component';
     ErrorDialogComponent,
     SuccessDialogComponent,
     ConfirmDialogComponent,
-    ImageDialogComponent
+    ImageDialogComponent,
+    CampaignDialogComponent
   ],
   providers: [],
   imports: [
@@ -33,11 +35,16 @@ import { ImageDialogComponent } from './image-dialog/image-dialog.component';
     ErrorDialogComponent,
     SuccessDialogComponent,
     ConfirmDialogComponent,
+    ImageDialogComponent,
+    CampaignDialogComponent,
   ],
   exports: [
     InfoDialogComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    ConfirmDialogComponent,
+    ImageDialogComponent,
+    CampaignDialogComponent
   ]
 })
 export class DialogModule {

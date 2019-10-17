@@ -6,7 +6,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class SessionService {
-
+  private _standByUser = new BehaviorSubject<any>(null);
   private _adsId$ = new BehaviorSubject<string>('');
   private _accountId$ = new BehaviorSubject<string>('');
   private _user$ = new BehaviorSubject<any>({});
@@ -64,10 +64,16 @@ export class SessionService {
     };
   }
 
-  setLoggedInUser(user): void {
+  setLoggedInUser(user, standByUser): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
     this.cookieService.putObject(CookieNames.user, user, { expires: today });
+    this._user$.next(user);
+
+    if (standByUser) {
+      this.cookieService.putObject(CookieNames.standBy, standByUser, { expires: today });
+      this._standByUser.next(standByUser);
+    }
   }
 
   setActiveAccountId(accountId): void {
@@ -118,6 +124,10 @@ export class SessionService {
     return this.cookieService.get(CookieNames.token);
   }
 
+  get standByUser(): any {
+    return this.cookieService.get(CookieNames.standBy);
+  }
+
   public getValueOfAdwordId(): string {
     return this._adsId$.getValue();
   }
@@ -134,15 +144,19 @@ export class SessionService {
     return this._user$.asObservable();
   }
 
-  public setAdwordId(value: string) {
+  public getStandByUser$(): Observable<any> {
+    return this._standByUser.asObservable();
+  }
+
+  public setAdwordId(value: string): void {
     this._adsId$.next(value);
   }
 
-  public setAccountId(value: string) {
+  public setAccountId(value: string): void {
     this._accountId$.next(value);
   }
 
-  public setUser(user: any) {
+  public setUser(user: any): void {
     this._user$.next(user);
   }
 
@@ -154,13 +168,13 @@ export class SessionService {
     return this._accountId$.getValue();
   }
 
-  public setActiveGoogleAdsAccount(accountId: string, adsId: string) {
+  public setActiveGoogleAdsAccount(accountId: string, adsId: string): void {
     this.setActiveAccountId(accountId);
     this.setAccountId(accountId);
     this.setActiveAdsAccountId(adsId);
     this.setAdwordId(adsId);
   }
-  public unsetActiveGoogleAdsAccount() {
+  public unsetActiveGoogleAdsAccount(): void {
     this.setActiveAdsAccountId('');
     this.setAccountId('');
     this.setActiveAdsAccountId('');

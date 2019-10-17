@@ -6,7 +6,7 @@
   </div>
 
   <div class="inner">
-    <p><span class="vip-title1">Nâng cấp VIP:</span> Vui lòng
+    <p>Để nâng cấp VIP cho tài khoản Google Ads của bạn, vui lòng
       lựa thực hiện theo hướng dẫn bên
       dưới.</p>
 
@@ -22,7 +22,7 @@
               Tài khoản Google Ads của bạn
             </label>
             <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account.adsId"
-              (change)="onSelectAccount($event)">
+              (change)="onSelectAccount($event)" fxLayout="row">
               <span *ngIf="account.isFree == true">{{account.adsId}}</span>
               <span *ngIf="account.isFree == false" class="vip-account">
                 <span class="vip-account">{{account.adsId}}</span>
@@ -42,7 +42,7 @@
             <label id="websites-label">Website của tài khoản</label>
             <mat-radio-button class="example-radio-button"
               *ngFor="let website of websites[selectedAccount]; let i = index" [value]="website.domain"
-              (change)="onSelectAccountWebsite(i)">
+              (change)="onSelectAccountWebsite(i)" fxLayout="row">
               <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
               <span *ngIf="website.isExpired === false">
                 <span class="vip-label" style="margin-left: 10px">VIP</span>

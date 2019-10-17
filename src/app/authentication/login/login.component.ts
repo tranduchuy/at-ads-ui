@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
-
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
@@ -11,7 +10,7 @@ import { Router } from '@angular/router';
 import { PageBaseComponent } from '../../shared/components/base/page-base.component';
 import { SessionService } from '../../shared/services/session.service';
 import { ILoginSuccess } from './models/i-login-success';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { ValidatorsService } from 'app/shared/services/validator.service';

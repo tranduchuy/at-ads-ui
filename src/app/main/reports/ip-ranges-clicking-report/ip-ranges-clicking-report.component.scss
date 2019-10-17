@@ -2,7 +2,7 @@
   width: 100%;
 
   .title1 {
-    padding: 125px 30px 27px 30px;
+    padding: 77px 30px 17px 30px;
     background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
     background-size: 100% 100%;
     color: white;
@@ -67,6 +67,11 @@
         flex: 0 0 18%;
       }
 
+      mat-header-cell:nth-child(2),
+      mat-cell:nth-child(2) {
+        flex: 0 0 12%;
+      }
+
       mat-header-cell:nth-child(3),
       mat-cell:nth-child(3) {
         flex: 0 0 10%;
@@ -108,7 +113,6 @@
 
 @media screen and (max-width: 600px) {
   .container {
-
     pagination-controls {
       display: flex !important;
       justify-content: center !important;

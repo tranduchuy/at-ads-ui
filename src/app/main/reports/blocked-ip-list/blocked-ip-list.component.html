@@ -56,19 +56,13 @@
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="blockingOver">
-          <mat-header-cell *matHeaderCellDef> Khóa trên </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <span
-              style="color: crimson; font-weight: bold; margin-right: 5px">{{element.numberOfCampaigns}}</span> chiến dịch </mat-cell>
-        </ng-container>
-
-        <!-- Campaign Column -->
-        <ng-container matColumnDef="campaign">
-          <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Đã chặn trên </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span *ngFor="let item of element.campaigns" class="campaign">
-              {{item.campaignName || item.campaignId}}
-            </span>
-          </mat-cell>
+            <span style="color: crimson; font-weight: bold; margin-right: 5px">{{element.numberOfCampaigns}}</span>
+            chiến
+            dịch
+            <button mat-stroked-button style="margin-left: 10px" (click)="showCampaignListDialog(element.campaigns)">Xem
+              tất cả</button></mat-cell>
         </ng-container>
 
         <!-- Keyword Column -->

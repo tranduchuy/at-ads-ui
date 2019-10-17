@@ -2,7 +2,7 @@
   width: 100%;
 
   .title1 {
-    padding: 142px 30px 53px 30px;
+    padding: 92px 30px 43px 30px;
     background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
     background-size: 100% 100%;
     color: white;
@@ -57,26 +57,14 @@
           justify-content: center;
         }
 
-        mat-header-cell:nth-child(7),
-        mat-cell:nth-child(7) {
-          flex: 0 0 30%;
-        }
-
-        mat-cell:nth-child(7) {
-          display: table;
-          line-height: 30px;
-
-          .campaign {
-            background: whitesmoke;
-            padding: 3px;
-            margin-right: 5px;
-            transition: 0.2s;
-          }
+        mat-header-cell:nth-child(6),
+        mat-cell:nth-child(6) {
+          flex: 0 0 20%;
         }
 
         mat-header-row,
         mat-row {
-          min-width: 1000px;
+          min-width: 1100px;
           width: 100%;
         }
 
