@@ -37,7 +37,6 @@ import { CheckWebsiteTrackingDialogComponent } from './main/add-tracking-tags/ch
 import { MatTableModule } from '@angular/material';
 import { LogoutModule } from './authentication/logout/logout.module';
 import { HomepageModule } from './homepage/homepage.module';
-import { ImageDialogComponent } from './dialog/image-dialog/image-dialog.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 const config: SocketIoConfig = {
@@ -103,7 +102,6 @@ export function init_app(appInitService: AppInitService): any {
   ],
   entryComponents: [
     CheckWebsiteTrackingDialogComponent,
-    ImageDialogComponent
   ],
   providers: [
     {

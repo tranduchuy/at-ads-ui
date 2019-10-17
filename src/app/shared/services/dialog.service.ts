@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from 'app/dialog/confirm-dialog/confirm-dialog
 import { Observable } from 'rxjs';
 import { InfoDialogComponent } from 'app/dialog/info-dialog/info-dialog.component';
 import { ImageDialogComponent } from 'app/dialog/image-dialog/image-dialog.component';
+import { CampaignDialogComponent } from 'app/dialog/campaign-dialog/campaign-dialog.component';
 
 @Injectable()
 export class DialogService {
@@ -25,7 +26,7 @@ export class DialogService {
     if (linkUrl !== undefined)
       dialogRef.componentInstance.linkUrl = linkUrl;
 
-    if(navigatedPage !== undefined)
+    if (navigatedPage !== undefined)
       dialogRef.componentInstance.navigatedPage = navigatedPage;
 
     if (data !== undefined)
@@ -35,6 +36,14 @@ export class DialogService {
   public _openSuccessDialog(res: ISuccess): void {
     const dialogRef = this._matDialog.open(SuccessDialogComponent);
     dialogRef.componentInstance.messages = res.messages;
+  }
+
+  public _openCampaignDialog(campaigns: any) {
+    const dialogRef = this._matDialog.open(CampaignDialogComponent, {
+      width: '65%',
+      panelClass: 'campaign-dialog'
+    });
+    dialogRef.componentInstance.campaigns = campaigns;
   }
 
   public _openErrorDialog(error: IError, contact?: boolean): void {
@@ -54,10 +63,6 @@ export class DialogService {
   public _openImageDialog(imgSrc: string): Observable<boolean> {
     const dialogRef = this._matDialog.open(ImageDialogComponent, {
       autoFocus: false,
-      // maxWidth: '100vw',
-      // maxHeight: '100vh',
-      // height: '100%',
-      // width: '100%',
       panelClass: 'image-dialog'
     });
 

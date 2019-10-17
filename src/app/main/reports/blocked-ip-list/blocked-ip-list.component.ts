@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class BlockedIpListComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'campaign', 'keyword', 'keywordMatchType'];
+  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'keyword', 'keywordMatchType'];
 
   dataSource = [];
 
@@ -64,12 +64,19 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
     this.subscriptions.push(sub);
   }
 
+  showCampaignListDialog(campaigns: any) {
+    this._dialogService._openCampaignDialog(campaigns);
+  }
+
   getBlockedIPsListReport(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
 
     const sub = this._reportService.getBlockedIPsListReport({ page, limit: this.pageLimit })
       .subscribe(res => {
+
+        // const data = { "_id": "27.78.214.152", "campaigns": [{ "campaignId": "954282145", "campaignName": "1. Bảo hành tivi" }, { "campaignId": "933358694", "campaignName": "1. Tivi - chung - không xác định" }, { "campaignId": "763908172", "campaignName": "1. Tivi - loại" }, { "campaignId": "764202431", "campaignName": "1. Tivi - thương hiệu" }, { "campaignId": "764224443", "campaignName": "1.Tivi - chung" }, { "campaignId": "954320764", "campaignName": "2. Bảo hành tủ lạnh" }, { "campaignId": "764596510", "campaignName": "2. Tủ lạnh - Chung" }, { "campaignId": "933808708", "campaignName": "2. Tủ lạnh - Chung - không xác định" }, { "campaignId": "764944701", "campaignName": "2. Tủ lạnh - Thương Hiệu" }, { "campaignId": "764988188", "campaignName": "2.Tủ lạnh - quận" }, { "campaignId": "956091823", "campaignName": "3. Bảo hành máy giặt" }, { "campaignId": "957120444", "campaignName": "3. Máy giặt - chung - không xác định" }, { "campaignId": "766431547", "campaignName": "3. Máy giặt - thương hiệu" }, { "campaignId": "767004414", "campaignName": "3.Máy giặt - chung" }, { "campaignId": "767020272", "campaignName": "3.Máy giặt - Quận" }, { "campaignId": "2008215084", "campaignName": "5. Tủ lạnh - Thương Hiệu #2" }, { "campaignId": "1152293962", "campaignName": "8. Máy Lạnh - Chung - không xác định" }, { "campaignId": "765839244", "campaignName": "8. Máy lạnh - Thương hiệu" }, { "campaignId": "1726042940", "campaignName": "Bao hành - Top" }, { "campaignId": "767008514", "campaignName": "Lò vi sóng - chung" }, { "campaignId": "766682305", "campaignName": "Lò vi sóng - Quận" }, { "campaignId": "766652857", "campaignName": "Lò vi sóng - Thương hiệu" }, { "campaignId": "765894921", "campaignName": "Máy Lạnh - Quận" }, { "campaignId": "1729464644", "campaignName": "Search. Dynamic.All" }, { "campaignId": "780442513", "campaignName": "Search.Bảo Hành - Thương hiệu" }, { "campaignId": "1726030931", "campaignName": "Search.Bảo Hành - Thương hiệu chay Top" }, { "campaignId": "764777026", "campaignName": "Search.Máy Lạnh - Chung" }], "numberOfCampaigns": 27, "network": null, "isPrivateBrowsing": false, "gclid": "EAIaIQobChMImqWSpNj55AIVzw0rCh0z5AzwEAAYASAAEgIRHvD_BwE", "gclidInfo": { "_id": "5d93a23c698ac43420c6534d", "keywordMatchType": "Không xác định", "device": "Điện thoại", "clickType": "Headline", "keywordId": "19959388920", "keyword": "", "adGroupId": "64817373101", "adGroupName": "All Website", "campaignId": "1729464644", "campaignName": "Search. Dynamic.All", "gclId": "EAIaIQobChMImqWSpNj55AIVzw0rCh0z5AzwEAAYASAAEgIRHvD_BwE", "lopRegionCriteriaId": "9040373", "lopMostSpecificTargetId": "1028581", "lopCityCriteriaId": "1028581", "lopCountryCriteriaId": "2704", "dateOfTakingReport": "2019-10-01T00:00:00.000Z", "__v": 0, "createdAt": "2019-10-01T19:00:13.076Z", "updatedAt": "2019-10-01T19:00:13.076Z" } };
+        // this.dataSource.push(data);
 
         this.dataSource = res.data.ips;
 

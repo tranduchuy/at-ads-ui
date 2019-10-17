@@ -9,7 +9,7 @@
     background-size: 100% 100%;
     color: white;
     font-size: 16px;
-    padding: 127px 30px 10px 30px;
+    padding: 79px 30px 0px 30px;
     font-weight: bold;
 
     .main-title-text {
@@ -31,7 +31,7 @@
   .section {
     box-shadow: 1px 1px 4px silver;
     border-radius: 0;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     background-color: white;
 
     .datePicker {
@@ -176,7 +176,7 @@
 
       mat-row,
       mat-header-row {
-        min-width: 1000px;
+        min-width: 1100px;
         width: 100%;
       }
 
