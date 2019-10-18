@@ -98,7 +98,7 @@ export function init_app(appInitService: AppInitService): any {
 
     // Cookie
 
-    CookieModule.forRoot(),
+    CookieModule.forRoot({domain: ''}),
   ],
   entryComponents: [
     CheckWebsiteTrackingDialogComponent,

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
+import { environment } from '../../../environments/environment';
 
 import CookieNames from '../constants/cookies';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -46,15 +47,15 @@ export class SessionService {
     const today = new Date();
     today.setHours(today.getHours() + 8);
 
-    this.cookieService.put(CookieNames.token, token, { expires: today });
-    this.cookieService.putObject(CookieNames.user, user, { expires: today });
+    this.cookieService.put(CookieNames.token, token, {expires: today, domain: environment.cookieDomain});
+    this.cookieService.putObject(CookieNames.user, user, {expires: today, domain: environment.cookieDomain});
   }
 
   setGoogleAccountToken(accessToken: string, refreshToken: string): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.put(CookieNames.accessToken, accessToken, { expires: today });
-    this.cookieService.put(CookieNames.refreshToken, refreshToken, { expires: today });
+    this.cookieService.put(CookieNames.accessToken, accessToken, {expires: today, domain: environment.cookieDomain});
+    this.cookieService.put(CookieNames.refreshToken, refreshToken, {expires: today, domain: environment.cookieDomain});
   }
 
   getGoogleAccountToken(): any {
@@ -67,11 +68,14 @@ export class SessionService {
   setLoggedInUser(user, standByUser): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.putObject(CookieNames.user, user, { expires: today });
+    this.cookieService.putObject(CookieNames.user, user, {expires: today, domain: environment.cookieDomain});
     this._user$.next(user);
 
     if (standByUser) {
-      this.cookieService.putObject(CookieNames.standBy, standByUser, { expires: today });
+      this.cookieService.putObject(CookieNames.standBy, standByUser, {
+        expires: today,
+        domain: environment.cookieDomain
+      });
       this._standByUser.next(standByUser);
     }
   }
@@ -79,13 +83,13 @@ export class SessionService {
   setActiveAccountId(accountId): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.put(CookieNames.activeAccountId, accountId, { expires: today });
+    this.cookieService.put(CookieNames.activeAccountId, accountId, {expires: today, domain: environment.cookieDomain});
   }
 
   setActiveAdsAccountId(accountId): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.put(CookieNames.activeAdsAccountId, accountId, { expires: today });
+    this.cookieService.put(CookieNames.activeAdsAccountId, accountId, {expires: today, domain: environment.cookieDomain});
   }
 
   remove(): void {
@@ -106,12 +110,13 @@ export class SessionService {
     newUser.phone = phone;
     newUser.usePassword = usePassword;
 
-    this.cookieService.put(CookieNames.user, JSON.stringify(newUser), { expires: today });
+    this.cookieService.put(CookieNames.user, JSON.stringify(newUser), {expires: today, domain: environment.cookieDomain});
   }
 
   get user(): any {
     return this.cookieService.get(CookieNames.user);
   }
+
   get activeAccountId(): any {
     return this.cookieService.get(CookieNames.activeAccountId);
   }
@@ -174,6 +179,7 @@ export class SessionService {
     this.setActiveAdsAccountId(adsId);
     this.setAdwordId(adsId);
   }
+
   public unsetActiveGoogleAdsAccount(): void {
     this.setActiveAdsAccountId('');
     this.setAccountId('');
