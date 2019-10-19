@@ -93,12 +93,13 @@ export class SessionService {
   }
 
   remove(): void {
-    this.cookieService.remove(CookieNames.token);
-    this.cookieService.remove(CookieNames.user);
-    this.cookieService.remove(CookieNames.activeAccountId);
-    this.cookieService.remove(CookieNames.activeAdsAccountId);
-    this.cookieService.remove(CookieNames.accessToken);
-    this.cookieService.remove(CookieNames.refreshToken);
+    this.cookieService.remove(CookieNames.token, {domain: environment.cookieDomain});
+    this.cookieService.remove(CookieNames.standBy, {domain: environment.cookieDomain});
+    this.cookieService.remove(CookieNames.user, {domain: environment.cookieDomain});
+    this.cookieService.remove(CookieNames.activeAccountId, {domain: environment.cookieDomain});
+    this.cookieService.remove(CookieNames.activeAdsAccountId, {domain: environment.cookieDomain});
+    this.cookieService.remove(CookieNames.accessToken, {domain: environment.cookieDomain});
+    this.cookieService.remove(CookieNames.refreshToken, {domain: environment.cookieDomain});
   }
 
   setUserProfile(name: string, phone: string, usePassword: boolean): any {
