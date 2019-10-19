@@ -39,7 +39,7 @@ export class TokenInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           accessToken: this._sessionService.token || '',
-          standfor: standForUser ? standForUser._id : ''
+          standfor: this._sessionService.standByUser && standForUser ? standForUser._id : ''
         }
       });
 
