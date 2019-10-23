@@ -8,7 +8,8 @@ export const environment = {
   hostApi: 'http://localhost:3000',
   googleAuth2ClientID: '246364548184-qi67l6sl8p9rlv8e8ev1p6329caf8gfr.apps.googleusercontent.com',
   hostTracking: 'http://159.65.11.195:3001/static/tracking.js',
-  oauth2RedirectUri: 'http://localhost:4200'
+  oauth2RedirectUri: 'http://localhost:4200',
+  cookieDomain: 'localhost'
 };
 
 /*

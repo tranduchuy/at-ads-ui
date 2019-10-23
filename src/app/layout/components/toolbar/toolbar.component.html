@@ -43,34 +43,58 @@
 
     <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
-        <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
-            <div fxLayout="row" fxLayoutAlign="center center">
-                <img class="avatar mr-0 mr-sm-16"
-                    [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
-                <span class="username mr-12" fxHide fxShow.gt-sm>{{ user.name || '' }}</span>
-                <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
-            </div>
-        </button>
-
-        <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
-
-            <a routerLink="/nang-cap-vip" mat-menu-item style="color: #44b543; font-weight: bold">
-                <!-- <img src="../../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
-                <mat-icon style="color: #44b433">arrow_upward</mat-icon>
-                <span>Nâng cấp <span class="vip-label" style="margin-left: 5px">VIP</span></span>
-            </a>
-
-            <a routerLink="/nguoi-dung/thong-tin-ca-nhan" mat-menu-item>
-                <mat-icon>account_circle</mat-icon>
-                <span>Thông tin cá nhân</span>
-            </a>
-
-            <button mat-menu-item class="" (click)="logout()">
-                <mat-icon>exit_to_app</mat-icon>
-                <span>Đăng xuất</span>
+        <div *ngIf="adminIsStandingForUser === true">
+            <button mat-button
+                    [matMenuTriggerFor]="userMenu"
+                    class="user-button btn-standby">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar mr-0 mr-sm-16"
+                         [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                    <span class="username mr-12" fxHide fxShow.gt-sm>
+                        <strong>{{ user.name || '' }}</strong> <small style="margin-left: 5px;">đang thay quyền</small>
+                    </span>
+                    <!--<mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>-->
+                </div>
             </button>
 
-        </mat-menu>
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item class="" (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Đăng xuất</span>
+                </button>
+            </mat-menu>
+        </div>
+
+        <div *ngIf="adminIsStandingForUser === false">
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar mr-0 mr-sm-16"
+                         [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                    <span class="username mr-12" fxHide fxShow.gt-sm>{{ user.name || '' }}</span>
+                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+
+                <a routerLink="/nang-cap-vip" mat-menu-item style="color: #44b543; font-weight: bold">
+                    <!-- <img src="../../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
+                    <mat-icon style="color: #44b433">arrow_upward</mat-icon>
+                    <span>Nâng cấp <span class="vip-label" style="margin-left: 5px">VIP</span></span>
+                </a>
+
+                <a routerLink="/nguoi-dung/thong-tin-ca-nhan" mat-menu-item>
+                    <mat-icon>account_circle</mat-icon>
+                    <span>Thông tin cá nhân</span>
+                </a>
+
+                <button mat-menu-item class="" (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Đăng xuất</span>
+                </button>
+
+            </mat-menu>
+        </div>
 
         <!-- <div class="toolbar-separator"></div>
 

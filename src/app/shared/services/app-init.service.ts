@@ -30,7 +30,8 @@ export class AppInitService {
     this._authService.getLoggedInInfo()
       .subscribe((res: ISuccess) => {
           const user = res.data.user;
-          this._sessionService.setLoggedInUser(user);
+          const standBy = res.data.standBy || null; // admin info
+          this._sessionService.setLoggedInUser(user, standBy);
         },
         (error: HttpErrorResponse) => {
           this._sessionService.remove();
