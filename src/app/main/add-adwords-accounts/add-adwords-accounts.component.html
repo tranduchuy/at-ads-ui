@@ -56,7 +56,8 @@
     <div class="ads-account-list" *ngIf="isAccountListShown">
 
       <div class="ads-account-list-title">
-        VUI LÒNG LỰA CHỌN TÀI KHOẢN GOOGLE ADS CỦA BẠN
+        <img src="../../../assets/icons/gg-ads.png" alt="" style="width: 20px; height: 20px"> VUI LÒNG LỰA CHỌN TÀI KHOẢN
+        GOOGLE ADS CỦA BẠN
       </div>
 
       <mat-form-field>
@@ -76,7 +77,7 @@
           </ng-container>
 
           <ng-container matColumnDef="adsId">
-            <mat-header-cell *matHeaderCellDef> Google Ads ID </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Google Ads ID </mat-header-cell>
             <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
               {{element.googleAdId}}
             </mat-cell>

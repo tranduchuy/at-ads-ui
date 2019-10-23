@@ -1,273 +1,225 @@
 @import "src/@fuse/scss/fuse";
 
 toolbar {
- // position: absolute;
- // display: flex;
- // flex: 0 0 auto;
- // z-index: 4;
- //justify-content: flex-end;
+  // position: absolute;
+  // display: flex;
+  // flex: 0 0 auto;
+  // z-index: 4;
+  //justify-content: flex-end;
 
- background: #1e2129;
- color: white;
- width: 100%;
- //filter: drop-shadow(0px 1px 2px black);
-
- &.below {
-  z-index: 2;
- }
-
- .mat-toolbar {
-  position: fixed;
-  background: inherit !important;
-  color: inherit !important;
-  padding-top: 30px;
-  z-index: 100;
-  box-shadow: 0 1px 2px black !important;
- }
-
- .bottom-distance {
-  margin-bottom: 50px;
- }
-
- .free-title {
-  font-weight: bolder;
- }
-
- .free-label {
-  background: #44b543;
+  background: #1e2129;
   color: white;
-  padding: 4px 4px 1.5px 4px;
-  font-size: 12px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bold;
-  margin-left: 10px;
-  text-shadow: none;
-  filter: drop-shadow(0px 1px 1px black);
-  border-radius: 2px;
- }
+  width: 100%;
+  //filter: drop-shadow(0px 1px 2px black);
 
- .vip-title {
-  color: yellow;
-  font-weight: bolder;
- }
+  &.below {
+    z-index: 2;
+  }
 
- .vip-expiration {
-  font-size: 12px;
-  text-align: center;
-  background: rgba(255, 165, 0, 0.2);
-  color: yellow;
-  font-weight: bold;
-  padding: 2px;
- }
+  .mat-toolbar {
+    position: fixed;
+    background: inherit !important;
+    color: inherit !important;
+    padding-top: 30px;
+    z-index: 100;
+    box-shadow: 0 1px 2px black !important;
+  }
 
- .vip-label {
-  background: radial-gradient(
+  .bottom-distance {
+    margin-bottom: 50px;
+  }
+
+  .alert {
+    background: darkred;
+    color: white;
+    width: 100%;
+
+    font-size: 14px;
+    padding: 10px;
+    padding-left: 30px;
+    cursor: pointer;
+
+    position: absolute;
+    white-space: initial !important;
+    top: 100%;
+
+    line-height: 2rem;
+
+    //-webkit-animation: alert 0.4s linear;
+  }
+
+  // mat-form-field span.mat-form-field-label-wrapper label {
+  //   color: silver !important;
+  // }
+
+  mat-form-field {
+    padding-top: 10px;
+    padding-left: 10px;
+    height: 55px;
+
+    .free-label {
+      background: #44b243;
+      color: white;
+      padding: 4px 4px 1.5px 4px;
+      font-size: 11px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: bold;
+      margin-left: 10px;
+      text-shadow: none;
+      filter: drop-shadow(0px 1px 1px black);
+      border-radius: 2px;
+    }
+
+    .vip-expiration {
+      font-size: 12px;
+      text-align: center;
+      background: rgba(255, 165, 0, 0.2);
+      color: yellow;
+      font-weight: bold;
+      padding: 2px;
+    }
+
+    .vip-label {
+      background: radial-gradient(
           ellipse farthest-corner at right bottom,
           #fedb37 0%,
           #fdb931 8%,
           #9f7928 30%,
           #8a6e2f 40%,
           transparent 80%
-  ),
-  radial-gradient(
+        ),
+        radial-gradient(
           ellipse farthest-corner at left top,
           #ffffff 0%,
           #ffffac 8%,
           #d1b464 25%,
           #5d4a1f 62.5%,
           #5d4a1f 100%
-  );
-  color: lightyellow;
-  padding: 2.5px 4.5px 1.5px 4.5px;
-  font-size: 12px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bold;
-  margin-left: 5px;
-  margin-right: 5px;
-  text-shadow: none;
-  filter: drop-shadow(0px 1px 1px black);
-  border-radius: 2px;
- }
+        );
+      color: lightyellow;
+      padding: 2.5px 4.5px 1.5px 4.5px;
+      font-size: 12px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: bold;
+      margin-left: 5px;
+      margin-right: 5px;
+      text-shadow: none;
+      filter: drop-shadow(0px 1px 1px black);
+      border-radius: 2px;
+    }
 
- .alert {
-  background: darkred;
-  color: white;
-  width: 100%;
-
-  font-size: 14px;
-  padding: 10px;
-  padding-left: 30px;
-  cursor: pointer;
-
-  position: absolute;
-  white-space: initial !important;
-  top: 100%;
-
-  line-height: 2rem;
-
-  //-webkit-animation: alert 0.4s linear;
- }
-
- // mat-form-field span.mat-form-field-label-wrapper label {
- //   color: silver !important;
- // }
-
- mat-form-field {
-  padding-top: 30px;
-  padding-left: 10px;
-
-  .ggAds-icon {
-   width: 18px;
-   margin-right: 10px;
+    .ggAds-icon {
+      max-width: 18px;
+      margin-right: 10px;
+    }
   }
- }
 
- @keyframes alert {
-  from {
-   margin-top: -100px;
+  @keyframes alert {
+    from {
+      margin-top: -100px;
+    }
+    to {
+      margin-top: 0;
+    }
   }
-  to {
-   margin-top: 0;
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    .logo-icon {
+      width: 38px;
+    }
   }
- }
 
- .logo {
-  display: flex;
-  align-items: center;
+  .user-button,
+  fuse-search-bar,
+  .language-button,
+  .chat-panel-toggle-button,
+  .quick-panel-toggle-button {
+    min-width: 64px;
+    height: 64px;
+    position: fixed;
+    right: 0;
+    top: 0;
 
-  .logo-icon {
-   width: 38px;
+    @include media-breakpoint("xs") {
+      height: 56px;
+    }
   }
- }
 
- .user-button,
- fuse-search-bar,
- .language-button,
- .chat-panel-toggle-button,
- .quick-panel-toggle-button {
-  min-width: 64px;
-  height: 64px;
-  position: fixed;
-  right: 0;
-  top: 0;
-
-  @include media-breakpoint("xs") {
-   height: 56px;
+  .navbar-toggle-button {
+    min-width: 56px;
+    height: 56px;
   }
- }
 
- .navbar-toggle-button {
-  min-width: 56px;
-  height: 56px;
- }
+  .toolbar-separator {
+    height: 64px;
+    width: 1px;
 
- .toolbar-separator {
-  height: 64px;
-  width: 1px;
-
-  @include media-breakpoint("xs") {
-   height: 56px;
+    @include media-breakpoint("xs") {
+      height: 56px;
+    }
   }
- }
-}
-
-.submit-button {
- height: 40px;
- border-radius: 0px;
 }
 
 a {
- text-decoration: none !important;
-}
-
-.vip-logo {
- height: 26px;
- width: 26px;
- margin: 10px 15px 0 0;
- filter: drop-shadow(0px 1px 1px black);
-}
-
-.vip-label {
- background: radial-gradient(
-         ellipse farthest-corner at right bottom,
-         #fedb37 0%,
-         #fdb931 8%,
-         #9f7928 30%,
-         #8a6e2f 40%,
-         transparent 80%
- ),
- radial-gradient(
-         ellipse farthest-corner at left top,
-         #ffffff 0%,
-         #ffffac 8%,
-         #d1b464 25%,
-         #5d4a1f 62.5%,
-         #5d4a1f 100%
- );
- color: lightyellow;
- padding: 1.5px 4.5px 1.5px 4.5px;
- font-size: 12px;
- font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
- font-weight: bold;
- text-shadow: none;
- filter: drop-shadow(0px 1px 1px black);
- border-radius: 2px;
+  text-decoration: none !important;
 }
 
 @media screen and (max-width: 600px) {
- toolbar {
-  .alert {
-   padding: 5px;
-   text-align: center;
-  }
+  toolbar {
+    .alert {
+      padding: 5px;
+      text-align: center;
+    }
 
-  mat-form-field {
-   padding-left: 0;
-  }
+    mat-form-field {
+      padding-left: 0;
+    }
 
-  .mat-select-value-text {
-   font-size: 13px;
+    .mat-select-value-text {
+      font-size: 13px;
+    }
   }
- }
 }
-
 
 $btn_standby: #760200;
 .btn-standby {
- -webkit-animation-name: animation;
- -webkit-animation-duration: 2s;
- -webkit-animation-timing-function: ease-in-out;
- -webkit-animation-iteration-count: infinite;
- -webkit-animation-play-state: running;
+  -webkit-animation-name: animation;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-play-state: running;
 
- animation-name: animation;
- animation-duration: 2s;
- animation-timing-function: ease-in-out;
- animation-iteration-count: infinite;
- animation-play-state: running;
- background-color: $btn_standby;
+  animation-name: animation;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  background-color: $btn_standby;
 }
 
 @-webkit-keyframes animation {
- 0% {
-  background-color: $btn_standby;
- }
- 50.0% {
-  background-color: lighten($btn_standby, 15);
- }
- 100.0% {
-  background-color: $btn_standby;
- }
+  0% {
+    background-color: $btn_standby;
+  }
+  50.0% {
+    background-color: lighten($btn_standby, 15);
+  }
+  100.0% {
+    background-color: $btn_standby;
+  }
 }
 
 @keyframes animation {
- 0% {
-  background-color: $btn_standby;
- }
- 50.0% {
-  background-color: lighten($btn_standby, 15);
- }
- 100.0% {
-  background-color: $btn_standby;
- }
+  0% {
+    background-color: $btn_standby;
+  }
+  50.0% {
+    background-color: lighten($btn_standby, 15);
+  }
+  100.0% {
+    background-color: $btn_standby;
+  }
 }
