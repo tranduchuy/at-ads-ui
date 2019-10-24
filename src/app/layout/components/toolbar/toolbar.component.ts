@@ -52,6 +52,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     userStatusOptions: any[];
     isProcessing = false;
     isAlertDisplayed = false;
+    isAccountSelectionDisplayed = false;
+    accountConnectTypes = [];
 
     adsAccounts: GoogleAdsAccount[] = [];
 
@@ -143,17 +145,6 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      * On init
      */
     ngOnInit(): void {
-        // set initial selection
-        this.getAdsAccounts();
-
-        const isNewAccountAddedSub = this._sessionService.getIsNewAccountAdded()
-            .subscribe((isAdded: boolean) => {
-                if (isAdded === true) {
-                    this.getAdsAccounts();
-                }
-            });
-        this.subscriptions.push(isNewAccountAddedSub);
-
         // Subscribe to the config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
@@ -174,7 +165,6 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             this._sessionService.getUser(),
             this._sessionService.getStandByUser$()
         ]).subscribe((values: any[]) => {
-            console.log('ahihi', values);
             const user = values[0];
             if (user) {
                 this.user.name = user.name;
@@ -190,38 +180,49 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 this.user.email = values[1].email;
             }
         });
-
         this.subscriptions.push(sub);
 
+        // set initial selection
+        this.getAdsAccounts();
+
+        const isNewAccountAddedSub = this._sessionService.getIsNewAccountAdded()
+            .subscribe((isAdded: boolean) => {
+                if (isAdded === true) {
+                    this.getAdsAccounts();
+                }
+            });
+        this.subscriptions.push(isNewAccountAddedSub);
 
         const getAdsIdSub = this._sessionService.getAdwordId()
             .subscribe((adsId: string) => {
                 if (adsId) {
-                    this.isProcessing = true;
                     this.accountCtrl.setValue(this.adsAccounts.find(account => account.name === adsId));
 
-                    const checkAccountSub = this._toolbarService.checkAccountAcceptance()
-                        .subscribe(res => {
-                            this.isAlertDisplayed = !res.data.isConnected;
-                            this.isProcessing = false;
-                        },
-                            (error: HttpErrorResponse) => {
-                                // this._dialogService._openErrorDialog(error.error);
-                                this.isAlertDisplayed = false;
-                                this.isProcessing = false;
-                            });
-                    this.subscriptions.push(checkAccountSub);
-                } else {
+                    if (this.accountConnectTypes[adsId] === 'GOOGLE_ADS_ID')
+                        this.checkAccountAcceptance();
+                }
+                else {
                     this.isAlertDisplayed = false;
                 }
             });
         this.subscriptions.push(getAdsIdSub);
+    }
 
-        const getAccountAcceptanceSub = this._sessionService.getAccountAcceptance()
-            .subscribe((isAccepted: boolean) => {
-                this.isAlertDisplayed = !isAccepted;
-            });
-        this.subscriptions.push(getAccountAcceptanceSub);
+    checkAccountAcceptance() {
+        this.isProcessing = true;
+        this._fuseProgressiveBarService.show();
+        const checkAccountSub = this._toolbarService.checkAccountAcceptance()
+            .subscribe(res => {
+                this.isAlertDisplayed = !res.data.isConnected;
+                this.isProcessing = false;
+                this._fuseProgressiveBarService.hide();
+            },
+                (error: HttpErrorResponse) => {
+                    this.isAlertDisplayed = false;
+                    this.isProcessing = false;
+                    this._fuseProgressiveBarService.hide();
+                });
+        this.subscriptions.push(checkAccountSub);
     }
 
     selectAccount(): void {
@@ -241,6 +242,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             .subscribe(res => {
                 this.adsAccounts = (res.data.accounts || [])
                     .map((account: any) => {
+                        this.accountConnectTypes[this._adsAccountPipe.transform(account.adsId)] = account.connectType;
                         return {
                             name: this._adsAccountPipe.transform(account.adsId),
                             accountId: account.id,
@@ -278,9 +280,12 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                         this.filterAccounts();
                     });
 
-                this._fuseNavigationService.reloadNavigation();
+                if (this.accountConnectTypes[this._sessionService.activeAdsAccountId] === 'GOOGLE_ADS_ID')
+                    this.checkAccountAcceptance();
 
+                this._fuseNavigationService.reloadNavigation();
                 this._fuseProgressiveBarService.hide();
+                this.isAccountSelectionDisplayed = true;
                 this.isProcessing = false;
             },
                 (error: HttpErrorResponse) => {
@@ -323,7 +328,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         );
     }
 
-    checkAccountAcceptance(): void {
+    updateAccountAcceptance(): void {
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
 

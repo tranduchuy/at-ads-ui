@@ -23,7 +23,7 @@
       box-shadow: 0 2px 8px black;
 
       .banner {
-        background: rgba(0, 0, 0, 0.55);
+        background: rgba(0, 0, 0, 0.6);
         color: white;
         padding: 90px 30px 70px 30px;
         position: relative;
@@ -31,11 +31,15 @@
 
         .app-title {
           font-size: 35px !important;
-          text-shadow: 1px 2px 2px black;
+          filter: drop-shadow(0px 1px 2px black);
           font-weight: bolder;
-          color: skyblue;
-          font-family: "Segoe UI";
+          font-family: "Poppins", sans-serif;
           -webkit-animation: titleAppearance 0.8s linear;
+
+          background-color: #7fcec5;
+          background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         @keyframes titleAppearance {
@@ -174,7 +178,10 @@
           background: rgba(3, 155, 229, 0.1);
 
           mat-header-row {
-            background: rgba(3, 155, 229, 0.3);
+            background: rgba(12, 20, 33, 1);
+            background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+            background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+            background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
           }
 
           mat-header-cell {
@@ -248,7 +255,10 @@
           padding-bottom: 30px;
 
           .step {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(12, 20, 33, 1);
+            background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+            background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+            background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
             text-shadow: 1px 1px 4px black;
             color: white;
             border-radius: 5px;
@@ -360,7 +370,7 @@
 
       p {
         font-size: 14px;
-        color: silver;
+        color: #eee;
       }
 
       img {
@@ -386,7 +396,11 @@
         padding: 60px 30px 100px 30px;
         color: white;
         //background: rgba(125, 125, 125, 0.2);
-        background: rgba(3, 155, 229, 0.2);
+        //background: rgba(3, 155, 229, 0.2);
+        background: url("../../assets/images/backgrounds/QL5I0O.jpg");
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        background-position: center center;
         text-shadow: 1px 1px 4px black;
 
         .main-benefit {
@@ -402,7 +416,7 @@
             width: 150px;
             height: 150px;
             transition: 0.2s;
-            filter: drop-shadow(0px 1px 5px black);
+            filter: drop-shadow(0px 1px 2px black);
 
             &:hover {
               transform: scale(1.05, 1.05);
@@ -489,8 +503,12 @@
     .topbar {
       //background: #1E2129;
       //background: rgba(3, 155, 229, 0.4);
-      background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
-      background-size: 100% 100%;
+      // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
+      // background-size: 100% 100%;
+      background: rgba(12, 20, 33, 1);
+      background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+      background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+      background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
       filter: drop-shadow(0px 1px 4px black);
       color: #eee;
       text-shadow: 1px 1px 4px black;
