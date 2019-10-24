@@ -18,7 +18,7 @@
 
         <div class="px-8 px-md-16">
             <!-- <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts> -->
-            <mat-form-field *ngIf="_sessionService.activeAdsAccountId" appearance="none">
+            <mat-form-field *ngIf="_sessionService.activeAdsAccountId && isAccountSelectionDisplayed === true" appearance="none">
                 <img src="../../../../assets/icons/gg-ads.png" alt="googleAdsIcon" class="ggAds-icon">
                 <mat-label style="color: lightgreen">Tài khoản Google Ads</mat-label>
                 <mat-select [formControl]="accountCtrl" placeholder="Tài khoản Google Ads" #singleSelect
@@ -138,7 +138,7 @@
 
     <div class="alert" *ngIf="isAlertDisplayed">
         Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống! Vui lòng chấp nhận và <span
-            style="color: skyblue; text-decoration: underline" (click)="checkAccountAcceptance()">nhấn vào đây</span> để
+            style="color: skyblue; text-decoration: underline" (click)="updateAccountAcceptance()">nhấn vào đây</span> để
         cập
         nhật.
     </div>
