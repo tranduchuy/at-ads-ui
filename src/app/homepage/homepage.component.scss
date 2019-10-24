@@ -399,8 +399,6 @@
         //background: rgba(3, 155, 229, 0.2);
         background: url("../../assets/images/backgrounds/QL5I0O.jpg");
         background-size: 100% 100%;
-        background-attachment: fixed;
-        background-position: center center;
         text-shadow: 1px 1px 4px black;
 
         .main-benefit {
@@ -473,7 +471,10 @@
     background-color: rgba(0, 0, 0, 0.3);
     //filter: drop-shadow(0px 1px 4px black);
     .footer-contact {
-      background: rgba(38, 61, 67, 0.4);
+      background: rgba(12, 20, 33, 1);
+      background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+      background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+      background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
       color: white;
       padding: 15px;
       text-align: center;
@@ -482,10 +483,13 @@
   }
 
   .contact {
-    background: #002c45;
+    background: rgba(12, 20, 33, 1);
+    background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
     // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
     // background-size: 100% 100%;
-    filter: drop-shadow(0px 1px 4px black);
+    filter: drop-shadow(0px 1px 2px black);
     color: silver;
     font-weight: bold;
     position: fixed;
@@ -528,9 +532,19 @@
         filter: drop-shadow(0px 1px 2px black);
       }
 
+      .topbar-google-button {
+        transition: 0.2s;
+        &:hover {
+          transform: scale(1.05, 1.05);
+        }
+      }
+
       .topbar-access-system-button {
         background: #44b543;
         color: white;
+        &:hover {
+          transform: scale(1.05, 1.05);
+        }
       }
     }
   }
@@ -608,6 +622,13 @@
 
           .login-with-google {
             padding-top: 10px;
+
+            .gg-icon {
+              height: 18px;
+              width: 18px;
+              margin-top: -5px;
+              margin-right: 2px;
+            }
 
             .access-system-button {
               font-size: 11px;
