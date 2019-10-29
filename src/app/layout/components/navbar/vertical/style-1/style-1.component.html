@@ -33,15 +33,15 @@
             <img class="avatar"
                 [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
         </div>
-        <div class="user-type" *ngIf="user.email" fxLayout="row" fxLayoutAlign="center center">
+        <div class="user-licence" *ngIf="user.email" fxLayout="row" fxLayoutAlign="center center">
             <span [class.free-label]="user.licence.type === 'FREE'" [class.vip-label]="user.licence.type === 'VIP1'"
                 [class.custom-label]="user.licence.type === 'CUSTOM'" fxLayout="row">
-                <span [class.custom-title]="user.licence.type === 'CUSTOM'">
-                    <img src="../../../../../../assets/icons/gold-wings.png" alt="" class="custom-symbol"
-                        *ngIf="user.licence.type === 'CUSTOM'">{{user.licence.name}}</span>
+                <span *ngIf="user.licence.type === 'VIP1'">{{user.licence.name | uppercase}}</span>
+                <span *ngIf="user.licence.type !== 'VIP1'"
+                    [class.custom-title]="user.licence.type === 'CUSTOM'">{{user.licence.name}}</span>
             </span>
-            <span [class.vip-expiration]="user.licence.type === 'VIP1'"
-                [class.custom-expiration]="user.licence.type === 'CUSTOM'" *ngIf="user.licence.type !== 'FREE'"
+            <span class="licence-expiration"
+                *ngIf="user.licence.type !== 'FREE' && user.licence.expiredAt"
                 matTooltip="Hạn dùng đến hết ngày {{user.licence.expiredAt | date: 'dd/MM/yyyy'}}">{{user.licence.expiredAt | date: 'dd/MM/yyyy'}}</span>
         </div>
     </div>

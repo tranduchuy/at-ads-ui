@@ -97,19 +97,12 @@ navbar {
     width: 100%;
     height: 100%;
 
-    .user-type {
+    .user-licence {
       position: absolute;
       top: 0;
       right: 0;
-      .vip-expiration {
-        font-size: 12px;
-        text-align: center;
-        background-color: #63d471;
-        background-image: linear-gradient(315deg, #63d471 0%, #233329 74%);
-        font-weight: bold;
-        padding: 4px;
-      }
-      .custom-expiration {
+      filter: drop-shadow(0px 1px 1px black);
+      .licence-expiration {
         font-size: 12px;
         text-align: center;
         background-color: #63d471;
@@ -135,8 +128,8 @@ navbar {
             #5d4a1f 100%
           );
         color: lightyellow;
-        padding: 4px 6px 4px 6px;
-        font-size: 13px;
+        padding: 3px 5px 3px 5px;
+        font-size: 12px;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
         text-shadow: none;
@@ -147,36 +140,24 @@ navbar {
         background-color: #63d471;
         background-image: linear-gradient(315deg, #63d471 0%, #233329 74%);
         color: white;
-        padding: 4px 10px 4px 10px;
-        font-size: 13px;
+        padding: 3.5px 10px 3.5px 10px;
+        font-size: 12px;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
         margin-left: 10px;
-        // filter: drop-shadow(0px 1px 1px black);
-        // border-radius: 2px;
         height: 100%;
       }
       .custom-label {
-        background-color: #7fcec5;
-        background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+        background-color: #e0455f;
+        background-image: linear-gradient(147deg, #e0455f 0%, #44000b 74%);
         padding: 4px;
         font-weight: bold;
         text-shadow: none;
         filter: drop-shadow(0px 1px 1px black);
         border-radius: 2px;
-      }
-      .custom-title {
         color: gold;
-        text-shadow: 0.5px 0.5px black;
-        font-family: "Playfair Display", serif;
-        font-size: 14px;
-      }
-      .custom-symbol {
-        height: 12px;
-        width: 24px;
-        margin-right: 2px;
-        margin-top: 3px;
-        filter: drop-shadow(0px 0.5px 0.5px black);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 12px;
       }
     }
 
@@ -190,6 +171,8 @@ navbar {
       max-height: 64px;
       height: 64px;
       padding: 12px 12px 12px 20px;
+      background-color: #000000 !important;
+      background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
 
       @include media-breakpoint("xs") {
         min-height: 56px;
@@ -246,7 +229,7 @@ navbar {
         max-height: 136px;
         padding: 40px 0 64px 0;
 
-        background: url("../../../../../../assets/images/backgrounds/dark-material-bg.jpg");
+        background: url("../../../../../../assets/images/backgrounds/Abstract-Blue-Futuristic-Wallpaper.jpg");
         background-size: 100% 100%;
 
         .avatar-container {
@@ -256,6 +239,7 @@ navbar {
           padding: 8px;
           transform: translateX(-50%);
           left: 50%;
+          background: rgba(0, 0, 0, 0.8) !important;
 
           .avatar {
             width: 72px;
@@ -268,6 +252,8 @@ navbar {
       .navbar-content {
         flex: 1 1 auto;
         padding-top: 32px;
+        background-color: #000000 !important;
+        background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
       }
     }
   }

@@ -138,7 +138,7 @@ export class NavbarVerticalStyle1Component extends PageBaseComponent implements 
           // };
           // user.licence = {
           //   type: 'VIP1',
-          //   name: 'VIP1',
+          //   name: 'Vip1',
           //   expiredAt: new Date()
           // };
           // user.licence = {
@@ -164,7 +164,7 @@ export class NavbarVerticalStyle1Component extends PageBaseComponent implements 
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
-
+  
   /**
    * Toggle sidebar opened status
    */
