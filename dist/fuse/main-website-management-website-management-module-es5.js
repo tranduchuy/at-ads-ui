@@ -238,6 +238,7 @@ var WebsiteManagementComponent = /** @class */ (function (_super) {
         var sub = this._websiteManagementService.addWebsite(params)
             .subscribe(function (res) {
             _this.getWebsites();
+            _this._sessionService.notifyListAccountsChanged();
             setTimeout(function () {
                 _this._fuseProgressiveBarService.hide();
                 _this._dialogService._openSuccessDialog(res);

@@ -228,6 +228,7 @@ let WebsiteManagementComponent = class WebsiteManagementComponent extends _share
         const sub = this._websiteManagementService.addWebsite(params)
             .subscribe((res) => {
             this.getWebsites();
+            this._sessionService.notifyListAccountsChanged();
             setTimeout(() => {
                 this._fuseProgressiveBarService.hide();
                 this._dialogService._openSuccessDialog(res);

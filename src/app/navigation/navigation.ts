@@ -222,14 +222,14 @@ export const navigation: FuseNavigation[] = [
         icon: 'history',
         url: '/nguoi-dung/lich-su-thao-tac',
       },
-      {
-        id: 'user_logout',
-        title: 'Đăng xuất',
-        translate: 'NAV.SAMPLE.TITLE',
-        type: 'item',
-        icon: 'power_settings_new',
-        url: '/auth/logout',
-      },
+      // {
+      //   id: 'user_logout',
+      //   title: 'Đăng xuất',
+      //   translate: 'NAV.SAMPLE.TITLE',
+      //   type: 'item',
+      //   icon: 'power_settings_new',
+      //   url: '/auth/logout',
+      // },
     ]
   },
 ];

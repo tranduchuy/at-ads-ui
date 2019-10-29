@@ -121,12 +121,8 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
     }
     ngOnInit() {
         this.initForm();
+        this.googleInit();
         this.checkAccountList();
-    }
-    ngAfterViewInit() {
-        setTimeout(() => {
-            this.googleInit();
-        }, 500);
     }
     applyFilter(filterValue) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -259,8 +255,7 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
             this.connectedAccountId = res.data.account._id;
             this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
             this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-            this._sessionService.notifyNewAccountWasAdded();
-            this._fuseNavigationService.reloadNavigation();
+            this._sessionService.notifyListAccountsChanged();
             this._router.navigateByUrl('/gan-tracking/chien-dich');
         }, (error) => {
             this.isConnected = false;
@@ -288,7 +283,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
         const sub = this._addAdwordsAccountsService.checkAccountAcceptance({
-            adWordId: this.connectedAdsId.replace(/\D+/g, '')
+            adWordId: this.connectedAdsId.replace(/\D/g, '')
         })
             .subscribe(res => {
             if (res.data.isConnected) {
@@ -322,7 +317,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
             if (res.data.isRefresh === true) {
                 this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
                 this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-                this._sessionService.notifyNewAccountWasAdded();
+                this._sessionService.notifyListAccountsChanged();
                 this._fuseNavigationService.reloadNavigation();
                 this._router.navigateByUrl('/danh-sach-tai-khoan');
                 return;
@@ -332,8 +327,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
             }
             this.isConnected = true;
             this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-            this._sessionService.notifyNewAccountWasAdded();
-            this._fuseNavigationService.reloadNavigation();
+            this._sessionService.notifyListAccountsChanged();
             if (this.isAccountListShown === true) {
                 this.isAccountListShown = false;
             }

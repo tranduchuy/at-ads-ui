@@ -19,11 +19,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 export class NavbarVerticalStyle1Component extends PageBaseComponent implements OnInit, OnDestroy {
   fuseConfig: any;
   navigation: any;
-  user = {
-    avatar: '',
-    name: '',
-    email: ''
-  };
+  user: any = {};
 
   // Private
   private _fusePerfectScrollbar: FusePerfectScrollbarDirective;
@@ -135,6 +131,22 @@ export class NavbarVerticalStyle1Component extends PageBaseComponent implements 
           this.user.name = user.name;
           this.user.avatar = user.avatar;
           this.user.email = user.email;
+          // user.licence = {
+          //   type: 'CUSTOM',
+          //   name: 'Đối tác',
+          //   expiredAt: new Date()
+          // };
+          // user.licence = {
+          //   type: 'VIP1',
+          //   name: 'VIP1',
+          //   expiredAt: new Date()
+          // };
+          // user.licence = {
+          //   type: 'FREE',
+          //   name: 'Miễn phí',
+          //   expiredAt: new Date()
+          // };
+          this.user.licence = user.licence;
         }
       });
     this.subscriptions.push(sub);

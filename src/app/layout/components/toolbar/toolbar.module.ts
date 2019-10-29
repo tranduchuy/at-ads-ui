@@ -9,7 +9,7 @@ import { FuseSearchBarModule, FuseShortcutsModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.component';
-import { MatSelectModule, MatFormFieldModule } from '@angular/material';
+import { MatSelectModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
@@ -24,6 +24,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
         MatToolbarModule,
         MatSelectModule,
         MatFormFieldModule,
+        MatInputModule,
 
         FuseSharedModule,
         FuseSearchBarModule,

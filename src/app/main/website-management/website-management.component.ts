@@ -9,7 +9,7 @@ import { ValidatorsService } from 'app/shared/services/validator.service';
 import { Validators } from '@angular/forms';
 import { WebsiteManagementService } from './website-management.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface Website {
   domain: string;
@@ -133,7 +133,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
           if (error.status === 404) {
             const data = [];
-            data['select-campaign'] = { 
+            data['select-campaign'] = {
               accountId: this.selectedAccountId,
               adsId: this.selectedAdsId
             };
@@ -219,6 +219,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
         (res: ILoginSuccess) => {
 
           this.getWebsites();
+          this._sessionService.notifyListAccountsChanged();
 
           setTimeout(() => {
             this._fuseProgressiveBarService.hide();

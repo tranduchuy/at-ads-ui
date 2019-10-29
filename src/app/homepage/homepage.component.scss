@@ -320,6 +320,7 @@
     .feature-container {
       background: url("../../assets/images/backgrounds/dell-background.jpg");
       background-size: 100% 100%;
+      background-attachment: fixed;
 
       .feature {
         background: rgba(0, 0, 0, 0.6);
@@ -410,6 +411,7 @@
         //background: rgba(3, 155, 229, 0.2);
         background: url("../../assets/images/backgrounds/QL5I0O.jpg");
         background-size: 100% 100%;
+        background-attachment: fixed;
         text-shadow: 1px 1px 4px black;
 
         .main-benefit {
@@ -594,11 +596,11 @@
 
     .topbar-container {
       .topbar {
-        padding-top: 20px;
+        padding: 5px;
 
         .topbar-logo {
-          height: 36px;
-          width: 36px;
+          height: 45px;
+          width: 45px;
         }
       }
     }
@@ -618,7 +620,7 @@
           padding-top: 100px;
 
           .app-title {
-            font-size: 20px !important;
+            font-size: 22px !important;
           }
 
           .logo {
@@ -689,6 +691,7 @@
       .feature-container {
         background: url("../../assets/images/backgrounds/20597.jpg");
         background-size: 100% 100%;
+        background-attachment: fixed;
 
         .feature {
           padding: 10px;

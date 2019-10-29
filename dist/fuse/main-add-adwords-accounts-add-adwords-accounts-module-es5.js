@@ -126,13 +126,8 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
     }
     AddAdwordsAccountsComponent.prototype.ngOnInit = function () {
         this.initForm();
+        this.googleInit();
         this.checkAccountList();
-    };
-    AddAdwordsAccountsComponent.prototype.ngAfterViewInit = function () {
-        var _this = this;
-        setTimeout(function () {
-            _this.googleInit();
-        }, 500);
     };
     AddAdwordsAccountsComponent.prototype.applyFilter = function (filterValue) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -272,8 +267,7 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
             _this.connectedAccountId = res.data.account._id;
             _this.connectedAdsId = _this._adsAccountIdPipe.transform(res.data.account.adsId);
             _this._sessionService.setActiveGoogleAdsAccount(_this.connectedAccountId, _this.connectedAdsId);
-            _this._sessionService.notifyNewAccountWasAdded();
-            _this._fuseNavigationService.reloadNavigation();
+            _this._sessionService.notifyListAccountsChanged();
             _this._router.navigateByUrl('/gan-tracking/chien-dich');
         }, function (error) {
             _this.isConnected = false;
@@ -299,7 +293,7 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
         var sub = this._addAdwordsAccountsService.checkAccountAcceptance({
-            adWordId: this.connectedAdsId.replace(/\D+/g, '')
+            adWordId: this.connectedAdsId.replace(/\D/g, '')
         })
             .subscribe(function (res) {
             if (res.data.isConnected) {
@@ -334,7 +328,7 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
             if (res.data.isRefresh === true) {
                 _this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
                 _this._sessionService.setActiveGoogleAdsAccount(_this.connectedAccountId, _this.connectedAdsId);
-                _this._sessionService.notifyNewAccountWasAdded();
+                _this._sessionService.notifyListAccountsChanged();
                 _this._fuseNavigationService.reloadNavigation();
                 _this._router.navigateByUrl('/danh-sach-tai-khoan');
                 return;
@@ -344,8 +338,7 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
             }
             _this.isConnected = true;
             _this._sessionService.setActiveGoogleAdsAccount(_this.connectedAccountId, _this.connectedAdsId);
-            _this._sessionService.notifyNewAccountWasAdded();
-            _this._fuseNavigationService.reloadNavigation();
+            _this._sessionService.notifyListAccountsChanged();
             if (_this.isAccountListShown === true) {
                 _this.isAccountListShown = false;
             }

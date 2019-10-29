@@ -7,6 +7,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { NavbarVerticalStyle1Component } from 'app/layout/components/navbar/vertical/style-1/style-1.component';
 import { RouterModule } from '@angular/router';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { RouterModule } from '@angular/router';
         MatButtonModule,
         MatIconModule,
         RouterModule,
+        MatTooltipModule,
 
         FuseSharedModule,
         FuseNavigationModule

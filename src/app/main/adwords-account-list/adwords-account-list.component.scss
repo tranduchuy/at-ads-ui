@@ -10,8 +10,18 @@
     font-weight: bold;
   }
 
+  .title2 {
+    padding: 90px 20px 24px 25px;
+    background: url("../../../assets/images/backgrounds/dark-material-bg.jpg");
+    background-size: 100% 100%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
   .inner {
-    .add-account-button {
+    mat-icon {
+      font-size: 20px;
     }
 
     .website-list {
@@ -19,7 +29,7 @@
       max-height: 250px;
       overflow: auto;
       border-left: 0.5px solid #d2d2d2;
-      border-radius: 5px;
+      border-radius: 3px;
       box-shadow: 1px 1px 4px silver;
       padding: 10px;
     }
@@ -94,7 +104,7 @@
       width: 100%;
 
       mat-icon {
-        font-size: 22px;
+        font-size: 20px;
       }
     }
 
@@ -147,13 +157,13 @@
 
       mat-header-cell:nth-child(3),
       mat-cell:nth-child(3) {
-        flex: 0 0 31%;
+        flex: 0 0 22%;
       }
 
       mat-header-cell:nth-child(4),
       mat-cell:nth-child(4) {
         justify-content: center;
-        flex: 0 0 10%;
+        flex: 0 0 14%;
       }
 
       mat-cell:nth-child(5) {
@@ -226,8 +236,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .title1 {
-    text-align: center;
+  .title1, .title2 {
     font-size: 14px !important;
   }
 }
