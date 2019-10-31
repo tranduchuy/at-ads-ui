@@ -28,15 +28,16 @@
               <mat-header-cell *matHeaderCellDef>Truy cập</mat-header-cell>
               <mat-cell *matCellDef="let element">
 
-                <mat-icon *ngIf="element.type === 2" style="color: #44b543" class="user-action-icon" matTooltip="Xem trang">
+                <mat-icon *ngIf="element.type === 2" style="color: #44b543" class="user-action-icon"
+                  matTooltip="Xem trang">
                   remove_red_eye</mat-icon>
 
-                <mat-icon *ngIf="element.isSpam === true && element.type === 1"
-                  style="color: crimson" class="user-action-icon" matTooltip="Đã chặn và không bị tính tiền">verified_user
+                <mat-icon *ngIf="element.isSpam === true && element.type === 1" style="color: crimson"
+                  class="user-action-icon" matTooltip="Đã chặn và không bị tính tiền">verified_user
                 </mat-icon>
 
-                <mat-icon *ngIf="element.isSpam === false && element.type === 1" style="color: gold" class="user-action-icon"
-                  matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
+                <mat-icon *ngIf="element.isSpam === false && element.type === 1" style="color: gold"
+                  class="user-action-icon" matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
 
                 {{(element.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}
               </mat-cell>
@@ -45,7 +46,8 @@
             <ng-container matColumnDef="ip">
               <mat-header-cell *matHeaderCellDef>IP</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <a [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]" mat-button color="accent" class="ip-detail-link" matTooltip="Nhấn vào để xem chi tiết">
+                <a [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]" mat-button color="accent" class="ip-detail-link"
+                  matTooltip="Nhấn vào để xem chi tiết">
                   {{element.ip}}
                 </a>
               </mat-cell>
@@ -191,3 +193,4 @@
       </div>
     </div>
   </div>
+</div>

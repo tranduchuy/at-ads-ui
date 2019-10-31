@@ -38,6 +38,7 @@ import { MatTableModule } from '@angular/material';
 import { LogoutModule } from './authentication/logout/logout.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { UpgradeLicenceComponent } from './main/upgrade-licence/upgrade-licence.component';
 
 const config: SocketIoConfig = {
   url: environment.hostApi + '/WEB_HOMEPAGE',

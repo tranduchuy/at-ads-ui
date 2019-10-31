@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { InfoDialogComponent } from 'app/dialog/info-dialog/info-dialog.component';
 import { ImageDialogComponent } from 'app/dialog/image-dialog/image-dialog.component';
 import { CampaignDialogComponent } from 'app/dialog/campaign-dialog/campaign-dialog.component';
+import { UpgradeLicenceDialogComponent } from 'app/dialog/upgrade-licence-dialog/upgrade-licence-dialog.component';
 
 @Injectable()
 export class DialogService {
@@ -36,6 +37,16 @@ export class DialogService {
   public _openSuccessDialog(res: ISuccess): void {
     const dialogRef = this._matDialog.open(SuccessDialogComponent);
     dialogRef.componentInstance.messages = res.messages;
+  }
+
+  public _openUpgradeLicenceDialog(licenceType: string, licenceName: string): void {
+    const dialogRef = this._matDialog.open(UpgradeLicenceDialogComponent, {
+      panelClass: 'upgrade-dialog',
+      autoFocus: false,
+      minHeight: '38vh'
+    });
+    dialogRef.componentInstance.licenceType = licenceType;
+    dialogRef.componentInstance.licenceName = licenceName;
   }
 
   public _openCampaignDialog(campaigns: any) {

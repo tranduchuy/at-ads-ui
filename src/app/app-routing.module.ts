@@ -59,7 +59,7 @@ const appRoutes: Routes = [
   {
     path: 'nang-cap-vip',
     canActivate: [MainGuardService],
-    loadChildren: './main/vip-payment/vip-payment.module#VipPaymentModule'
+    loadChildren: './main/upgrade-licence/upgrade-licence.module#UpgradeLicenceModule'
   },
   {
     path: '**',

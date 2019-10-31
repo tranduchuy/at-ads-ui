@@ -99,7 +99,7 @@ export class FuseNavigationComponent implements OnInit {
   getUser() {
     const sub = this._sessionService.getUser()
       .subscribe(user => {
-        if (user) {
+        if (user && user.licence) {
           const userLicenceType = user.licence.type;
 
           if (userLicenceType !== 'FREE' && userLicenceType !== 'VIP1') {

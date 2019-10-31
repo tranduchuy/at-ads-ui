@@ -199,8 +199,8 @@ export const navigation: FuseNavigation[] = [
     type: 'group',
     children: [
       {
-        id: 'vip_payment',
-        title: 'Nâng cấp VIP',
+        id: 'upgrade_licence',
+        title: 'Nâng cấp tài khoản',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'arrow_upward',

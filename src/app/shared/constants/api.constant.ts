@@ -16,6 +16,7 @@ export namespace API {
     export const confirmEmail = environment.hostApi + '/api/users/confirm';
     export const updateProfile = environment.hostApi + '/api/users/';
     export const getActionHistory = environment.hostApi + '/api/users/actions-history?page={page}&limit={limit}';
+    export const sendUpgradeLicenceRequest = environment.hostApi + '/api/users/order';
   }
   export namespace AdwordsAccount {
     export const getAccounts = environment.hostApi + '/api/account-adwords';

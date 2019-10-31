@@ -1,0 +1,21 @@
+<div class="upgrade-dialog">
+  <h1 matDialogTitle>NÂNG CẤP TÀI KHOẢN {{licenceName | uppercase}}</h1>
+  <!-- <div style="text-align: center; margin-bottom: 15px">
+        <mat-icon class="s-60" style="color: #039be5">info</mat-icon>
+      </div> -->
+  <div mat-dialog-content style="text-align: justify">
+    <label id="expirations-label">
+      Vui lòng lựa chọn các gói sau đây:
+    </label>
+    <mat-radio-group aria-labelledby="expirations-label" class="example-radio-group" [(ngModel)]="selectedExpiration">
+      <mat-radio-button class="example-radio-button" *ngFor="let option of expirations" [value]="option.value"
+        (change)="onSelectExpiration($event)" fxLayout="row" style="margin-top: 5px">
+        {{option.text}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">
+    <button mat-raised-button color="basic" (click)="sendRequest()" [disabled]="isProcessing">Gửi yêu cầu
+    </button>
+  </div>
+</div>
