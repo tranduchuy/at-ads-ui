@@ -66,26 +66,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   overviewTableCols: string[] = ['createdAt', 'ip', 'trafficSource', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'location'];
   overviewTable = [];
 
-  multi = [
-    {
-      "name": "Thiết bị",
-      "series": [
-        {
-          "name": "Máy tính",
-          "value": 57
-        },
-        {
-          "name": "Di động",
-          "value": 22
-        },
-        {
-          "name": "Máy tính bảng",
-          "value": 11
-        }
-      ]
-    },
-  ];
-
   view: any[] = [325, 50];
 
   itemsPerPageOptions = Generals.Pagination.itemsPerPageOptions;
@@ -116,28 +96,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
         //'#6FAAB0','#C4C24A','#8BC652', '#E94649','#F6B53F','#FB954F','#005277','#039be5','#9370DB', '#33495D', '#FF6384'
       ]
     },
-    dataSource: [
-      {
-        name: 'google/cpc',
-        value: 82,
-      },
-      {
-        name: 'google/organic',
-        value: 12
-      },
-      {
-        name: 'facebook.com',
-        value: 2
-      },
-      {
-        name: '[direct]/[none]',
-        value: 2
-      },
-      {
-        name: 'coccoc.com',
-        value: 1
-      }
-    ],
+    dataSource: [],
   };
 
   constructor(

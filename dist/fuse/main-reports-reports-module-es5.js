@@ -51990,25 +51990,6 @@ var OverviewReportComponent = /** @class */ (function (_super) {
         ];
         _this.overviewTableCols = ['createdAt', 'ip', 'trafficSource', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'location'];
         _this.overviewTable = [];
-        _this.multi = [
-            {
-                "name": "Thiết bị",
-                "series": [
-                    {
-                        "name": "Máy tính",
-                        "value": 57
-                    },
-                    {
-                        "name": "Di động",
-                        "value": 22
-                    },
-                    {
-                        "name": "Máy tính bảng",
-                        "value": 11
-                    }
-                ]
-            },
-        ];
         _this.view = [325, 50];
         _this.itemsPerPageOptions = _shared_constants_generals__WEBPACK_IMPORTED_MODULE_9__["Generals"].Pagination.itemsPerPageOptions;
         // options
@@ -52034,28 +52015,7 @@ var OverviewReportComponent = /** @class */ (function (_super) {
                     '#87CEEB', '#f44336', '#039be5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
                 ]
             },
-            dataSource: [
-                {
-                    name: 'google/cpc',
-                    value: 82,
-                },
-                {
-                    name: 'google/organic',
-                    value: 12
-                },
-                {
-                    name: 'facebook.com',
-                    value: 2
-                },
-                {
-                    name: '[direct]/[none]',
-                    value: 2
-                },
-                {
-                    name: 'coccoc.com',
-                    value: 1
-                }
-            ],
+            dataSource: [],
         };
         return _this;
     }

@@ -11,17 +11,17 @@
     <ul style="list-style: none">
       <li>
         <mat-icon class="list-check">check_circle</mat-icon> Theo dõi khách đang truy cập website thông qua <span
-          style="color: red; font-weight: bold">Khách Đang Truy Cập</span>
+          style="color: red; font-weight: bold">khách đang truy cập</span>.
       </li>
       <li>
         <mat-icon class="list-check">check_circle</mat-icon> Tích hợp tất cả các công cụ thu thập thông tin khách hàng,
         giúp bạn
-        có nhiều thông tin khách hàng hơn
+        có nhiều thông tin khách hàng hơn.
       </li>
       <li>
-        <mat-icon class="list-check">check_circle</mat-icon> Đồng bộ thông tin khách hàng vào tập khách hàng "<span
-          style="color: red; font-weight: bold">THEO DÕI</span>", dễ dàng triển khai
-        quảng cáo "<span style="color: red; font-weight: bold">BÁM ĐUÔI</span>"
+        <mat-icon class="list-check">check_circle</mat-icon> Đồng bộ thông tin khách hàng vào tập khách hàng <span
+          style="color: red; font-weight: bold">theo dõi</span>, dễ dàng triển khai
+        quảng cáo <span style="color: red; font-weight: bold">bám đuôi</span>.
       </li>
     </ul>
 
@@ -29,25 +29,32 @@
 
     <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
 
-      <p><strong>Tài Khoản Google Ads Đang Quảng Cáo Cho Website Này</strong></p>
+      <p *ngIf="user.licence.type === 'CUSTOM'"><strong>Tài Khoản Google Ads đang quảng cáo cho website này</strong></p>
       <app-select-text (valueChanged)="onSelectAdsId($event)" [itemsSource]="accountItemsSource" [displayPath]="'text'"
         [valuePath]="'value'" [title]="'Chọn tài khoản Google Ads'" [formControlName]="'adsId'"
-        [isDisabled]="isProcessing"></app-select-text>
+        [isDisabled]="isProcessing" *ngIf="user.licence.type === 'CUSTOM'"></app-select-text>
 
-      <p>
-        <strong>Vui lòng nhập tên miền website của bạn vào ô bên dưới</strong>
-      </p>
-      <div fxLayout="row" fxLayout.xs="column">
-        <app-input-text [formControlName]="'domain'" [errors]="getMessageErrors('domain')"
-          [title]="'Nhập tên miền của bạn'"></app-input-text>
-        <button type="submit" mat-raised-button color="accent" class="add-website-button" [disabled]="isProcessing">
-          THÊM WEBSITE
-        </button>
+      <div *ngIf="isAddingWebsiteAllowed === true">
+        <p>
+          <strong>Vui lòng nhập tên miền website của bạn vào ô bên dưới</strong>
+        </p>
+        <div fxLayout="row" fxLayout.xs="column">
+          <app-input-text [formControlName]="'domain'" [errors]="getMessageErrors('domain')"
+            [title]="'Nhập tên miền của bạn'" [isDisabled]="isProcessing === true">
+          </app-input-text>
+          <button type="submit" mat-raised-button color="accent" class="add-website-button"
+            [disabled]="isProcessing === true">
+            THÊM WEBSITE
+          </button>
+        </div>
+        <br><span><b><span style="color: red">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
+            style="color: #039be5">http://</span> hoặc <span style="color: #039be5">https://</span></span>
       </div>
+      <p *ngIf="isAddingWebsiteAllowed === false" class="limit-website-notification">
+        <span style="color: red">*</span><b>Chú ý:</b> Số lượng website của tài khoản Google Ads này đã đạt tối đa. Vui
+        lòng nâng cấp thêm <a routerLink="/nang-cap-vip">tại đây</a>
+      </p>
     </form>
-
-    <br><span><b><span style="color: red">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
-        style="color: #039be5">http://</span> hoặc <span style="color: #039be5">https://</span></span>
 
     <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
 
@@ -87,7 +94,8 @@
               [routerLink]="['/gan-tracking/website', selectedAccountId]">
               <mat-icon style="font-size: 20px">close</mat-icon> Chưa có
             </a>
-            <button (click)="openRemoveWebsiteConfirmDialog(element.code)" class="delete-button" mat-icon-button color="accent" matTooltip="Xóa website" [disabled]="isProcessing">
+            <button (click)="openRemoveWebsiteConfirmDialog(element.code)" class="delete-button" mat-icon-button
+              color="accent" matTooltip="Xóa website" [disabled]="isProcessing">
               <mat-icon style="color: silver; margin-top: -5px">delete</mat-icon>
             </button>
           </mat-cell>

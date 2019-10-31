@@ -4,7 +4,7 @@
         <a routerLink="/gioi-thieu">
             <img class="logo-icon" src="assets/images/app-logo.png">
         </a>
-        <span class="logo-text secondary-text">Công cụ chống click tặc 2019</span>
+        <span class="logo-text secondary-text">CÔNG CỤ CHỐNG CLICK TẶC</span>
     </div>
 
     <div class="buttons">
@@ -36,11 +36,9 @@
         <div class="user-licence" *ngIf="user.email" fxLayout="row" fxLayoutAlign="center center">
             <span [class.free-label]="user.licence.type === 'FREE'" [class.vip-label]="user.licence.type === 'VIP1'"
                 [class.custom-label]="user.licence.type === 'CUSTOM'" fxLayout="row">
-                <span *ngIf="user.licence.type === 'VIP1'">{{user.licence.name | uppercase}}</span>
-                <span *ngIf="user.licence.type !== 'VIP1'"
-                    [class.custom-title]="user.licence.type === 'CUSTOM'">{{user.licence.name}}</span>
+                {{user.licence.name}}
             </span>
-            <span class="licence-expiration"
+            <span [class.vip-expiration]="user.licence.type === 'VIP1'" [class.custom-expiration]="user.licence.type === 'CUSTOM'"
                 *ngIf="user.licence.type !== 'FREE' && user.licence.expiredAt"
                 matTooltip="Hạn dùng đến hết ngày {{user.licence.expiredAt | date: 'dd/MM/yyyy'}}">{{user.licence.expiredAt | date: 'dd/MM/yyyy'}}</span>
         </div>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { Subject, ReplaySubject, combineLatest } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, ReplaySubject, combineLatest, pipe } from 'rxjs';
+import { takeUntil, distinctUntilChanged, first, takeLast, take, distinct, single, last } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -174,6 +174,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
         // set initial selection
         this.getAdsAccounts();
+        // this.getAdsId();
 
         const onListAccountsChangedSub = this._sessionService.onListAccountsChanged()
             .subscribe(wasChanged => {
@@ -186,14 +187,17 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 }
             });
         this.subscriptions.push(onListAccountsChangedSub);
+    }
 
+    getAdsId() {
         const getAdsIdSub = this._sessionService.getAdwordId()
             .subscribe((adsId: string) => {
                 if (adsId) {
                     this.accountCtrl.setValue(this.adsAccounts.find(account => account.name === adsId));
 
-                    if (this.accountConnectTypes[adsId] === 'GOOGLE_ADS_ID')
+                    if (this.accountConnectTypes[adsId] === 'GOOGLE_ADS_ID') {
                         this.checkAccountAcceptance();
+                    }
                 }
                 else {
                     this.isAlertDisplayed = false;
@@ -245,7 +249,6 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             this.accountCtrl.value.accountId,
             this.accountCtrl.value.name
         );
-        this._fuseNavigationService.reloadNavigation();
     }
 
     getAdsAccounts(action?: any): void {
@@ -253,7 +256,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         this.isProcessing = true;
 
         const sub = this._adwordsAccountService.getAdwordsAccount()
-            .pipe(takeUntil(this._unsubscribeAll))
+            .pipe()
             .subscribe(res => {
                 this.adsAccounts = (res.data.accounts || [])
                     .map((account: any) => {
@@ -267,7 +270,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                             isConnected: account.isConnected,
                             createdAt: account.createdAt,
                             connectType: account.connectType,
-                            websites: account.websites
+                            websites: account.websites,
+                            limitWebsite: account.limitWebsite
                         };
                     });
 
@@ -279,29 +283,15 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     this._sessionService.unsetActiveGoogleAdsAccount();
                     this._sessionService.completeCheckingIfUserHasAccount(false);
                     this._fuseNavigationService.reloadNavigation();
+                    return;
                 }
-                else if (!this._sessionService.activeAccountId || !this._sessionService.activeAdsAccountId) {
+                else {
                     this.accountCtrl.setValue(this.adsAccounts[0]);
                     this._sessionService.setActiveGoogleAdsAccount(
                         this.accountCtrl.value.accountId,
                         this.accountCtrl.value.name
                     );
                 }
-                else {
-                    const adsAccount = this.adsAccounts.find(account => account.name === this._sessionService.activeAdsAccountId);
-                    if (!adsAccount) {
-                        this.accountCtrl.setValue(this.adsAccounts[0]);
-                        this._sessionService.setActiveGoogleAdsAccount(
-                            this.accountCtrl.value.accountId,
-                            this.accountCtrl.value.name
-                        );
-                    }
-                    else {
-                        this.accountCtrl.setValue(adsAccount);
-                    }
-                }
-
-                // this.onRemovingAccount();
 
                 this._sessionService.completeCheckingIfUserHasAccount(true);
 

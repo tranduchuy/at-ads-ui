@@ -19,7 +19,7 @@ export class ToolbarService {
   ) { }
 
   checkAccountAcceptance(): Observable<any> {
-    const adWordId = this._sessionService.getValueOfAdwordId().replace(/[^a-zA-Z0-9 ]/g, '');
+    const adWordId = this._sessionService.getValueOfAdwordId().replace(/\D/g, '');
     return this._http.post(API.AdwordsAccount.checkAccountAcceptance, { adWordId });
   }
 }

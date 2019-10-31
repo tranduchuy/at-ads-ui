@@ -72,46 +72,8 @@ export class FuseNavigationComponent implements OnInit {
   }
 
   loadNavigation(): void {
-    if (this._sessionService.activeAccountId && this._sessionService.activeAdsAccountId) {
-      this._sessionService.setActiveGoogleAdsAccount(
-        this._sessionService.activeAccountId,
-        this._sessionService.activeAdsAccountId
-      )
-    }
-
     this.accounts.children = [];
-
-    if (this._sessionService.user) {
-      const userLicenceType = JSON.parse(this._sessionService.user).licence.type;
-
-      if (userLicenceType !== 'FREE' && userLicenceType !== 'VIP1') {
-        this.accounts.children.push({
-          id: 'add-accounts',
-          title: 'Thêm Tài Khoản Mới',
-          type: 'item',
-          icon: 'library_add',
-          url: '/them-tai-khoan-moi'
-        });
-      }
-      else {
-        const sub = this._sessionService.checkIfUserHasAccount()
-          .subscribe((userHasAccount: boolean) => {
-            if (userHasAccount) {
-              this.accounts.children.shift();
-            }
-            else {
-              this.accounts.children.unshift({
-                id: 'add-accounts',
-                title: 'Thêm Tài Khoản Mới',
-                type: 'item',
-                icon: 'library_add',
-                url: '/them-tai-khoan-moi'
-              });
-            }
-          });
-        sub.unsubscribe();
-      }
-    }
+    this.getUser();
 
     this.accounts.children.push({
       id: 'account-list',
@@ -132,6 +94,48 @@ export class FuseNavigationComponent implements OnInit {
     }
 
     this.loadRecentNavigation();
+  }
+
+  getUser() {
+    const sub = this._sessionService.getUser()
+      .subscribe(user => {
+        if (user) {
+          const userLicenceType = user.licence.type;
+
+          if (userLicenceType !== 'FREE' && userLicenceType !== 'VIP1') {
+            this.accounts.children.push({
+              id: 'add-accounts',
+              title: 'Thêm Tài Khoản Mới',
+              type: 'item',
+              icon: 'library_add',
+              url: '/them-tai-khoan-moi'
+            });
+          }
+          else {
+            this.checkIfUserHasAccount();
+          }
+        }
+      });
+    sub.unsubscribe();
+  }
+
+  checkIfUserHasAccount() {
+    const sub = this._sessionService.checkIfUserHasAccount()
+      .subscribe((userHasAccount: boolean) => {
+        if (userHasAccount) {
+          this.accounts.children.shift();
+        }
+        else {
+          this.accounts.children.unshift({
+            id: 'add-accounts',
+            title: 'Thêm Tài Khoản Mới',
+            type: 'item',
+            icon: 'library_add',
+            url: '/them-tai-khoan-moi'
+          });
+        }
+      });
+    sub.unsubscribe();
   }
 
   loadRecentNavigation(): void {

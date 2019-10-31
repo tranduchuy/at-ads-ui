@@ -194,7 +194,7 @@ export const navigation: FuseNavigation[] = [
   },
   {
     id: 'user_info',
-    title: 'THÔNG TIN KHÁCH HÀNG',
+    title: 'THÔNG TIN NGƯỜI DÙNG',
     translate: 'NAV.APPLICATIONS',
     type: 'group',
     children: [

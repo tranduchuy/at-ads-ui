@@ -28,7 +28,6 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   user: any;
   isTitle1Displayed: boolean = false;
   isTitle2Displayed: boolean = false;
-  userHasAccount: boolean = false;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -43,8 +42,19 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.accounts);
-    this.user = JSON.parse(this._sessionService.user);
-    this.getAccounts();
+    this.getUser();
+  }
+
+  getUser() {
+    const sub = this._sessionService.getUser()
+      .subscribe(user => {
+        if (user) {
+          this.user = JSON.parse(this._sessionService.user);
+          this._sessionService.notifyListAccountsChanged();
+          this.getAccounts();
+        }
+      });
+    this.subscriptions.push(sub);
   }
 
   setTitleDisplaying() {

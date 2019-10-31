@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center" *ngIf="isTitle1Displayed === true">
+  <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center" *ngIf="isTitle1Displayed === true" fxLayoutGap="15px">
     <span fxFlex="75">QUẢN LÝ TÀI KHOẢN GOOGLE ADS & WEBSITE</span>
-    <a [routerLink]="'/them-tai-khoan-moi'" mat-button class="add-account-button">
+    <a [routerLink]="'/them-tai-khoan-moi'" mat-raised-button color="warn" class="add-account-button">
       <mat-icon>library_add</mat-icon> Thêm tài khoản mới
     </a>
   </div>
@@ -135,15 +135,15 @@
                 </li>
               </ul>
               <button (click)="navigateToWebsiteManagement(element.accountId, element.campaignNumber)" mat-button
-                class="add-domain-button" [disabled]="isProcessing" color="accent" *ngIf="element.websites.length < 2">
+                class="add-domain-button" [disabled]="isProcessing" color="accent" *ngIf="element.websites.length < element.limitWebsite">
                 <mat-icon>add_circle_outline</mat-icon> Thêm Website
               </button>
-              <span *ngIf="element.websites.length >= 2">
+              <span *ngIf="element.websites.length >= element.limitWebsite">
                 <button mat-button class="add-domain-button" color="accent" disabled>
                   <mat-icon>add_circle_outline</mat-icon> Thêm Website
                 </button>
                 <span class="caution"><span style="color: red">*</span><b>Chú ý:</b> Số lượng website của tài khoản này
-                  đã đạt tối đa.</span>
+                  đã đạt tối đa. Vui lòng nâng cấp thêm <a routerLink="/nang-cap-vip">tại đây</a></span>
               </span>
             </mat-cell>
           </ng-container>

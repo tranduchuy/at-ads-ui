@@ -29,7 +29,7 @@ export class AddAwordsAccountsGuardService implements CanActivate {
         map((userHasAccount: boolean) => {
           if (userHasAccount) {
             this._dialogService._openInfoDialog(
-              'Số lần kết nối tài khoản Google Ads của bạn đã đạt tối đa. Vui lòng nâng cấp thêm',
+              'Số  lượng tài khoản Google Ads được phép kết nối đã hết. Vui lòng nâng cấp thêm',
               'tại đây',
               '/nang-cap-vip'
               );
