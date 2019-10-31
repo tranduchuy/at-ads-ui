@@ -7,8 +7,7 @@
     </p>
   </div>
 
-  <div class="package-wrapper" fxLayout="row" fxLayoutAlign="center">
-
+  <div class="package-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
     <div class="package">
       <span class="label-base free-label">CƠ BẢN</span>
       <p class="package-price">
@@ -18,7 +17,6 @@
         <mat-divider></mat-divider>
       </div>
       <div class="package-benefit">
-        <div class="benefit-title">Quyền lợi</div>
         <ul>
           <li>
             <mat-icon>check</mat-icon>
@@ -52,7 +50,6 @@
         <mat-divider></mat-divider>
       </div>
       <div class="package-benefit">
-        <div class="benefit-title">Quyền lợi</div>
         <ul>
           <li>
             <mat-icon>check</mat-icon>
@@ -89,7 +86,7 @@
         </ul>
       </div>
       <div class="register-package-button" (click)="openUpgradeLicenceDialog('VIP1', 'Tối ưu')">
-        <button mat-raised-button>Đăng ký ngay</button>
+        <button mat-raised-button color="accent">Đăng ký ngay</button>
       </div>
     </div>
     <div class="package">
@@ -101,7 +98,6 @@
         <mat-divider></mat-divider>
       </div>
       <div class="package-benefit">
-        <div class="benefit-title">Quyền lợi</div>
         <ul>
           <li>
             <mat-icon>check</mat-icon>
@@ -142,7 +138,26 @@
         </ul>
       </div>
     </div>
-
   </div>
+
+  <div class="casher">
+    <p class="casher-title">Thông tin tài khoản nhận tiền</p>
+    <mat-divider></mat-divider>
+    <ul>
+      <li>
+        <b>Ngân hàng:</b> Vietcombank
+      </li>
+      <li>
+        <b>Chủ tài khoản:</b> Nguyen Binh Long
+      </li>
+      <li>
+        <b>Số tài khoản:</b> 0331000419983
+      </li>
+      <li>
+        <b>Chi nhánh:</b> VCB Chi nhánh Bến Thành Tp.HCM
+      </li>
+    </ul>
+  </div>
+
 
 </div>

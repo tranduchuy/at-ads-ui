@@ -43,7 +43,7 @@ export class DialogService {
     const dialogRef = this._matDialog.open(UpgradeLicenceDialogComponent, {
       panelClass: 'upgrade-dialog',
       autoFocus: false,
-      minHeight: '38vh'
+      minHeight: '42vh',
     });
     dialogRef.componentInstance.licenceType = licenceType;
     dialogRef.componentInstance.licenceName = licenceName;

@@ -71,6 +71,11 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
     // console.log(event);
   }
 
+  divideThousand(x: number) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+
   sendRequest() {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
@@ -80,7 +85,13 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
     }).subscribe((res: any) => {
       this._openSuccessDialog({
         messages: [`
-          Gửi yêu cầu thành công! Vui lòng chuyển khoản số tiền ${res.data.price} VNĐ theo nội dung như sau ${res.data.code}
+          <center>
+          <h2>Gửi yêu cầu thành công</h2>
+          Vui lòng chuyển khoản số tiền <b>${this.divideThousand(res.data.price)}</b> VNĐ
+          <br>theo nội dung như sau <b>${res.data.code}</b>
+          vào tài khoản người nhận bên dưới. 
+          <br>Xin chân thành cảm ơn Bạn!
+          </center>
       `]
       });
       this._fuseProgressBarService.hide();
