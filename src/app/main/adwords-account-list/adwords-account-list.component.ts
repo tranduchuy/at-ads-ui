@@ -131,11 +131,16 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     const sub = this._adwordsAccountListService.removeWebsite(websiteId)
       .subscribe(
         (res: ILoginSuccess) => {
-          this._sessionService.notifyListAccountsChanged({
-            name: 'remove',
-            message: res.messages[0]
-          });
-          this.isProcessing = false;
+          // this._sessionService.notifyListAccountsChanged({
+          //   name: 'remove',
+          //   message: res.messages[0]
+          // });
+          this._sessionService.notifyListAccountsChanged();
+
+          setTimeout(() => {
+            this._dialogService._openSuccessDialog(res);
+            this.isProcessing = false;
+          }, 1500);
         },
         (error: HttpErrorResponse) => {
           if (error.error.messages) {

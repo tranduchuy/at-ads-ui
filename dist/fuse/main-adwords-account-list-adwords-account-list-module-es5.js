@@ -200,11 +200,15 @@ var AdwordsAccountListComponent = /** @class */ (function (_super) {
         this._fuseProgressiveBarService.show();
         var sub = this._adwordsAccountListService.removeWebsite(websiteId)
             .subscribe(function (res) {
-            _this._sessionService.notifyListAccountsChanged({
-                name: 'remove',
-                message: res.messages[0]
-            });
-            _this.isProcessing = false;
+            // this._sessionService.notifyListAccountsChanged({
+            //   name: 'remove',
+            //   message: res.messages[0]
+            // });
+            _this._sessionService.notifyListAccountsChanged();
+            setTimeout(function () {
+                _this._dialogService._openSuccessDialog(res);
+                _this.isProcessing = false;
+            }, 1500);
         }, function (error) {
             if (error.error.messages) {
                 _this._dialogService._openErrorDialog(error.error);

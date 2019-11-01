@@ -189,11 +189,15 @@ let AdwordsAccountListComponent = class AdwordsAccountListComponent extends app_
         this._fuseProgressiveBarService.show();
         const sub = this._adwordsAccountListService.removeWebsite(websiteId)
             .subscribe((res) => {
-            this._sessionService.notifyListAccountsChanged({
-                name: 'remove',
-                message: res.messages[0]
-            });
-            this.isProcessing = false;
+            // this._sessionService.notifyListAccountsChanged({
+            //   name: 'remove',
+            //   message: res.messages[0]
+            // });
+            this._sessionService.notifyListAccountsChanged();
+            setTimeout(() => {
+                this._dialogService._openSuccessDialog(res);
+                this.isProcessing = false;
+            }, 1500);
         }, (error) => {
             if (error.error.messages) {
                 this._dialogService._openErrorDialog(error.error);
