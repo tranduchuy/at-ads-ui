@@ -32,11 +32,15 @@ import {getVietnamesePaginatorIntl} from './vietnamese-paginator-intl';
 import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-report.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-ranges-clicking-report.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { UuidHistoryComponent } from './uuid-history/uuid-history.component';
 import { UserStatisticDetailComponent } from './user-statistic-detail/user-statistic-detail.component';
 import { OverviewReportComponent } from './overview-report/overview-report.component';
+
 
 @NgModule({
   declarations: [SpamClickReportComponent, IpDetailComponent, BlockedIpListComponent, IpClickingReportComponent, IpRangesClickingReportComponent, UserStatisticComponent, UuidHistoryComponent, UserStatisticDetailComponent, OverviewReportComponent],
@@ -71,6 +75,7 @@ import { OverviewReportComponent } from './overview-report/overview-report.compo
     ChartsModule,
     NgxDaterangepickerMd,
     NgxPaginationModule,
+    NgxMatSelectSearchModule,
 
     FuseSharedModule,
 

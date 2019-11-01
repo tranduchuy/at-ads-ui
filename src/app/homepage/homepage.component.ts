@@ -246,6 +246,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   checkAccountList(): any {
+    this._sessionService.completeCheckingIfUserHasAccount(true);
     const sub = this._sessionService.checkIfUserHasAccount()
       .subscribe((userHasAccount: boolean) => {
         if (userHasAccount) {

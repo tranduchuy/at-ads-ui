@@ -2,7 +2,7 @@
   width: 100%;
 
   .title1 {
-    padding: 35px 30px 28px 30px;
+    padding: 35px 30px 22px 30px;
     background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
     background-size: 100% 100%;
     color: white;
@@ -32,10 +32,23 @@
         font-size: 16px;
         font-weight: bold;
 
+        .website-selection {
+          margin-top: 15px;
+
+          ::ng-deep .mat-select {
+            .mat-select-value {
+              color: white !important;
+            }
+            .mat-select-arrow {
+              color: white !important;
+            }
+          }
+        }
+
         .datePicker {
           color: #039be5;
           width: 250px;
-          margin-top: 10px;
+          margin-top: 15px;
 
           input {
             color: white;
@@ -288,8 +301,11 @@
         padding-bottom: 70%;
         .hl2-title1 {
           padding-top: 30px;
-          .datePicker {
+          .website-selection {
             margin-top: 25px;
+          }
+          .datePicker {
+            margin-top: 0;
           }
         }
       }

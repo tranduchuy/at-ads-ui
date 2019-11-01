@@ -73,6 +73,7 @@ export interface IGetIPClickDetails {
 export interface IGetStatisticTrafficSourceParams {
   from: string;
   to: string;
+  website?: string;
 }
 
 export interface IGetSessionReportParams {
@@ -80,6 +81,7 @@ export interface IGetSessionReportParams {
   to: string;
   page?: number;
   limit?: number;
+  website?: string;
 }
 
 @Injectable({
@@ -107,9 +109,9 @@ export class ReportService {
     url = url.replace('{from}', params.from);
     url = url.replace('{to}', params.to);
 
-    if (params.page !== undefined)
+    if (params.page)
       url += `&page=${params.page}`;
-    if (params.limit !== undefined)
+    if (params.limit)
       url += `&limit=${params.limit}`;
 
     return this._http.get(url);
@@ -121,9 +123,9 @@ export class ReportService {
     url = url.replace('{from}', params.startDate);
     url = url.replace('{to}', params.endDate);
 
-    if (params.page !== undefined)
+    if (params.page)
       url += `&page=${params.page}`;
-    if (params.limit !== undefined)
+    if (params.limit)
       url += `&limit=${params.limit}`;
 
     return this._http.get(url);
@@ -158,9 +160,9 @@ export class ReportService {
     const activeAccountId = this._sessionService.getValueOfAccountId();
     let url = API.Report.getBlockedIPsListReport.replace('{account_id}', activeAccountId);
 
-    if (params.page !== undefined)
+    if (params.page)
       url += `?page=${params.page}`;
-    if (params.limit !== undefined)
+    if (params.limit)
       url += `&limit=${params.limit}`;
 
     return this._http.get(url);
@@ -185,9 +187,9 @@ export class ReportService {
     let url = API.Report.getIPHistory.replace('{account_id}', activeAccountId);
     url = url.replace('{ip}', params.ip);
 
-    if (params.page !== undefined)
+    if (params.page)
       url += `&page=${params.page}`;
-    if (params.limit !== undefined)
+    if (params.limit)
       url += `&limit=${params.limit}`;
 
     return this._http.get(url);
@@ -200,9 +202,9 @@ export class ReportService {
     url = url.replace('{from}', params.startDate);
     url = url.replace('{to}', params.endDate);
 
-    if (params.page !== undefined)
+    if (params.page)
       url += `&page=${params.page}`;
-    if (params.limit !== undefined)
+    if (params.limit)
       url += `&limit=${params.limit}`;
 
     return this._http.get(url);
@@ -213,9 +215,9 @@ export class ReportService {
     let url = API.Report.getIPClicksList.replace('{account_id}', activeAccountId);
     url = url.replace('{ip}', params.ip);
 
-    if (params.page !== undefined)
+    if (params.page)
       url += `?page=${params.page}`;
-    if (params.limit !== undefined)
+    if (params.limit)
       url += `&limit=${params.limit}`;
 
     return this._http.get(url);
@@ -240,6 +242,10 @@ export class ReportService {
     url = url.replace('{from}', params.from);
     url = url.replace('{to}', params.to);
 
+    if (params.website) {
+      url += `&website=${params.website}`;
+    }
+
     return this._http.get(url);
   }
 
@@ -249,10 +255,13 @@ export class ReportService {
     url = url.replace('{from}', params.from);
     url = url.replace('{to}', params.to);
 
-    if (params.page !== undefined)
+    if (params.page)
       url += `&page=${params.page}`;
-    if (params.limit !== undefined)
+    if (params.limit)
       url += `&limit=${params.limit}`;
+    if (params.website) {
+      url += `&website=${params.website}`;
+    }
 
     return this._http.get(url);
   }

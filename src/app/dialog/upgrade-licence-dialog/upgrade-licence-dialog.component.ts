@@ -63,7 +63,9 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
   }
 
   _openSuccessDialog(res: ISuccess): void {
-    const dialogRef = this._matDialog.open(SuccessDialogComponent);
+    const dialogRef = this._matDialog.open(SuccessDialogComponent, {
+      panelClass: 'success-dialog'
+    });
     dialogRef.componentInstance.messages = res.messages;
   }
 
@@ -85,14 +87,16 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
     }).subscribe((res: any) => {
       this._openSuccessDialog({
         messages: [`
-          <center>
-          <h2>Gửi yêu cầu thành công</h2>
-          Vui lòng chuyển khoản số tiền <b>${this.divideThousand(res.data.price)}</b> VNĐ
-          <br>theo nội dung như sau <b>${res.data.code}</b>
-          vào tài khoản người nhận bên dưới. 
-          <br>Xin chân thành cảm ơn Bạn!
-          </center>
-      `]
+          <center><h2>Gửi yêu cầu thành công</h2>
+          Vui lòng chuyển khoản số tiền <h3 style="display: inline !important"><b>${this.divideThousand(res.data.price)} VNĐ</b></h3>
+          với nội dung như sau: <h3><b>#${res.data.code}</b></h3></center>
+          <br><b>Thông tin tài khoản ngân hàng</b>
+          <br><b>Ngân hàng:</b> Vietcombank
+          <br><b>Chủ tài khoản:</b> Nguyen Binh Long
+          <br><b>Số tài khoản:</b> 0331000419983
+          <br><b>Chi nhánh:</b> VCB Chi nhánh Bến Thành Tp.HCM</b>.
+          <br><br><center>Xin chân thành cảm ơn!</center>
+        `]
       });
       this._fuseProgressBarService.hide();
       this.isProcessing = false;
