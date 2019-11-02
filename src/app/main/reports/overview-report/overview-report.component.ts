@@ -190,7 +190,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
             .subscribe(() => {
               this.filterWebsites();
             });
-          
+
           // set default option is the first item of list websites
           this.websiteCtrl.setValue(this.websites[0]);
 
@@ -199,6 +199,11 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
         else {
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
+          this._dialogService._openInfoDialog(
+            'Tài khoản chưa có website nào. Vui lòng thêm',
+            'tại đây',
+            `/quan-ly-website/${this._sessionService.activeAccountId}`
+          )
         }
       });
     this.subscriptions.push(sub);

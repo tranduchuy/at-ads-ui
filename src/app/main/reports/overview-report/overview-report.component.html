@@ -98,7 +98,7 @@
 
         <mat-form-field fxFlex="20" class="website-selection">
           <mat-label style="color: white" *ngIf="websites.length === 0 && isProcessing == false">
-            Tài khoản chưa có website nào.
+            Tài khoản chưa có website.
           </mat-label>
           <mat-label style="color: white" *ngIf="websites.length > 0 && isProcessing == false">Thống kê theo</mat-label>
           <mat-select [formControl]="websiteCtrl" placeholder="Website của tài khoản" #singleSelect
