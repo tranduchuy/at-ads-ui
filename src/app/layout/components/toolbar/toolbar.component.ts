@@ -133,6 +133,10 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      * On init
      */
     ngOnInit(): void {
+        const loggedInUser = this._sessionService.user;
+        if(!loggedInUser)
+            return;
+
         // Subscribe to the config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))

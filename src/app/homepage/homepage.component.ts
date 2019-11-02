@@ -16,6 +16,7 @@ import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-b
 import { HomepageService } from './homepage.service';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 declare var gapi: any;
 
@@ -248,6 +249,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   checkAccountList(): any {
     this._sessionService.completeCheckingIfUserHasAccount(true);
     const sub = this._sessionService.checkIfUserHasAccount()
+      .pipe(distinctUntilChanged())
       .subscribe((userHasAccount: boolean) => {
         if (userHasAccount) {
           this._fuseSplashScreenService.hide();

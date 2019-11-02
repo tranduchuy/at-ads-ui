@@ -11,6 +11,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import * as _ from 'lodash';
 import { MatTableDataSource, MatTab } from '@angular/material';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-adwords-account-list',
@@ -60,6 +61,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   setTitleDisplaying() {
     const userLicenceType = this.user.licence.type;
     const sub = this._sessionService.checkIfUserHasAccount()
+      .pipe(distinctUntilChanged())
       .subscribe((userHasAccount: boolean) => {
         if (userHasAccount) {
           if (userLicenceType !== 'CUSTOM') {

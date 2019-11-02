@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { merge, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
 
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { AdwordsAccountsService } from '../../../app/shared/services/ads-accounts/adwords-accounts.service';
@@ -121,6 +121,7 @@ export class FuseNavigationComponent implements OnInit {
 
   checkIfUserHasAccount() {
     const sub = this._sessionService.checkIfUserHasAccount()
+      .pipe(distinctUntilChanged())
       .subscribe((userHasAccount: boolean) => {
         if (userHasAccount) {
           this.accounts.children.shift();
