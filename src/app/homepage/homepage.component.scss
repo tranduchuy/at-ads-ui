@@ -231,9 +231,14 @@
             flex: 0 0 17%;
           }
 
+          mat-header-cell:nth-child(2),
+          mat-cell:nth-child(2) {
+            color: skyblue;
+          }
+
           mat-header-row,
           mat-row {
-            min-width: 1300px;
+            min-width: 850px;
             width: 100%;
           }
         }
@@ -241,7 +246,7 @@
     }
 
     .instruction-container {
-      background: rgba(3, 155, 229, 0.3);
+      background: rgba(3, 155, 229, 0.2);
       .instruction {
         padding: 30px;
         background: rgba(0, 0, 0, 0.5);
