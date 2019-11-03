@@ -34,6 +34,7 @@
 
         .website-selection {
           margin-top: 15px;
+          width: 250px;
 
           ::ng-deep .mat-select {
             .mat-select-value {
@@ -302,7 +303,7 @@
         .hl2-title1 {
           padding-top: 30px;
           .website-selection {
-            margin-top: 25px;
+            margin-top: 0;
           }
           .datePicker {
             margin-top: 0;

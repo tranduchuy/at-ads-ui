@@ -135,16 +135,21 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
     AddAdwordsAccountsComponent.prototype.loginByGG = function () {
         this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
     };
+    AddAdwordsAccountsComponent.prototype.hasValue = function (value) {
+        return value !== null && value !== undefined;
+    };
     AddAdwordsAccountsComponent.prototype.checkAccountList = function () {
         var _this = this;
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
-        var sub = this._adwordsAccountsService.getAdwordsAccount()
-            .subscribe(function (res) {
-            _this._fuseProgressiveBarService.hide();
-            _this.isProcessing = false;
-        }, function (error) {
-            _this.checkRefreshToken();
+        var sub = this._sessionService.getListAccounts()
+            .subscribe(function (listAccounts) {
+            if (listAccounts) {
+                if (listAccounts.length === 0)
+                    _this.checkRefreshToken();
+                else
+                    _this.isProcessing = false;
+            }
         });
         this.subscriptions.push(sub);
     };

@@ -134,7 +134,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
      */
     ngOnInit(): void {
         const loggedInUser = this._sessionService.user;
-        if(!loggedInUser)
+        if (!loggedInUser)
             return;
 
         // Subscribe to the config changes
@@ -289,15 +289,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     this._fuseNavigationService.reloadNavigation();
                     return;
                 }
-                else {
-                    this.accountCtrl.setValue(this.adsAccounts[0]);
-                    this._sessionService.setActiveGoogleAdsAccount(
-                        this.accountCtrl.value.accountId,
-                        this.accountCtrl.value.name
-                    );
-                }
 
                 this._sessionService.completeCheckingIfUserHasAccount(true);
+
+                this.accountCtrl.setValue(this.adsAccounts[0]);
+                this._sessionService.setActiveGoogleAdsAccount(
+                    this.accountCtrl.value.accountId,
+                    this.accountCtrl.value.name
+                );
 
                 // load the initial account list
                 this.filteredAccounts.next(this.adsAccounts.slice());

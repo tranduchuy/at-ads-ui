@@ -111,6 +111,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   };
 
   websites: SelectedWebsite[] = [];
+  hasWebsite: boolean;
 
   /** control for selected website */
   public websiteCtrl: FormControl = new FormControl();
@@ -139,7 +140,16 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   }
 
   ngOnInit() {
-    this.prepareGettingReport();
+    this.pageLimit = this.itemsPerPageOptions[0].value;
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
+          this.getWebsites(accountId);
+        }
+      });
+    this.subscriptions.push(sub);
   }
 
   getReport() {
@@ -176,6 +186,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
         });
 
         if (this.websites.length > 0) {
+          this.hasWebsite = true;
           this.websites.unshift({
             id: 'VIEW_ALL',
             name: 'Tất cả website'
@@ -197,6 +208,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this.getReport();
         }
         else {
+          this.hasWebsite = false;
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
           this._dialogService._openInfoDialog(
@@ -204,34 +216,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
             'tại đây',
             `/quan-ly-website/${this._sessionService.activeAccountId}`
           )
-        }
-      });
-    this.subscriptions.push(sub);
-  }
-
-  getAccountWebsites() {
-    const activeAccountId = this._sessionService.activeAccountId;
-    if (activeAccountId) {
-      this.getWebsites(activeAccountId);
-    }
-    else {
-      this._fuseProgressBarService.hide();
-      this.isProcessing = false;
-    }
-  }
-
-  prepareGettingReport() {
-    this.pageLimit = this.itemsPerPageOptions[0].value;
-    this.isProcessing = true;
-    this._fuseProgressBarService.show();
-    this.getAccountId();
-  }
-
-  getAccountId() {
-    const sub = this._sessionService.getAccountId()
-      .subscribe((accountId: string) => {
-        if (accountId) {
-          this.getAccountWebsites();
         }
       });
     this.subscriptions.push(sub);

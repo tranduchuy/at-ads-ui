@@ -130,15 +130,20 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
     loginByGG() {
         this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
     }
+    hasValue(value) {
+        return value !== null && value !== undefined;
+    }
     checkAccountList() {
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
-        const sub = this._adwordsAccountsService.getAdwordsAccount()
-            .subscribe(res => {
-            this._fuseProgressiveBarService.hide();
-            this.isProcessing = false;
-        }, (error) => {
-            this.checkRefreshToken();
+        const sub = this._sessionService.getListAccounts()
+            .subscribe(listAccounts => {
+            if (listAccounts) {
+                if (listAccounts.length === 0)
+                    this.checkRefreshToken();
+                else
+                    this.isProcessing = false;
+            }
         });
         this.subscriptions.push(sub);
     }
