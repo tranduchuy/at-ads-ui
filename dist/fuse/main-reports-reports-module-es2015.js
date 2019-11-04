@@ -51450,9 +51450,10 @@ let OverviewReportComponent = class OverviewReportComponent extends app_shared_c
                 this.getReport();
             }
             else {
-                this.hasWebsite = false;
                 this.pieChart.dataSource = [];
                 this.overviewTable = [];
+                this.hasWebsite = false;
+                this.pageTotal = 0;
                 this._fuseProgressBarService.hide();
                 this.isProcessing = false;
                 this._dialogService._openInfoDialog('Tài khoản chưa có website nào. Vui lòng thêm', 'tại đây', `/quan-ly-website/${this._sessionService.activeAccountId}`);

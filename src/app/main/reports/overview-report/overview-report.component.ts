@@ -208,9 +208,10 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this.getReport();
         }
         else {
-          this.hasWebsite = false;
           this.pieChart.dataSource = [];
           this.overviewTable = [];
+          this.hasWebsite = false;
+          this.pageTotal = 0;
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
           this._dialogService._openInfoDialog(

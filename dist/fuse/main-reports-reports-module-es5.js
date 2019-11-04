@@ -52103,9 +52103,10 @@ var OverviewReportComponent = /** @class */ (function (_super) {
                 _this.getReport();
             }
             else {
-                _this.hasWebsite = false;
                 _this.pieChart.dataSource = [];
                 _this.overviewTable = [];
+                _this.hasWebsite = false;
+                _this.pageTotal = 0;
                 _this._fuseProgressBarService.hide();
                 _this.isProcessing = false;
                 _this._dialogService._openInfoDialog('Tài khoản chưa có website nào. Vui lòng thêm', 'tại đây', "/quan-ly-website/" + _this._sessionService.activeAccountId);
