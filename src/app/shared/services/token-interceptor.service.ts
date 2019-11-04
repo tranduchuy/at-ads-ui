@@ -54,7 +54,6 @@ export class TokenInterceptor implements HttpInterceptor {
             }
           },
           error => {
-            console.log(error);
             // http response status code
             if (error.status === HttpCode.UNAUTHORIZED) {
               this._sessionService.remove();

@@ -15,6 +15,8 @@ import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 declare var gapi: any;
 
@@ -44,6 +46,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private _fuseProgressBarService: FuseProgressBarService,
     private _homepageService: HomepageService,
     private _adwordsAccountsService: AdwordsAccountsService,
+    private _fuseNavigationService: FuseNavigationService
   ) {
 
     super();
@@ -67,9 +70,10 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   lastOffset = 0;
-  isContactFooterDisplayed: boolean = window.innerWidth > 600;
+  isContactFooterDisplayed: boolean = true;
   isTopbarDisplayed = false;
-  isContactDisplayed: boolean = window.innerWidth <= 600;
+  isTopbarTitleDisplayed = false;
+  isContactDisplayed: boolean = false;
 
   scroll = (event: any): void => {
     const currentOffset = event.srcElement.scrollTop;
@@ -79,7 +83,8 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     // else this.isContactFooterDisplayed = true;
 
     if (currentOffset > 470) {
-      this.isTopbarDisplayed = window.innerWidth > 600;
+      this.isTopbarDisplayed = true;
+      this.isTopbarTitleDisplayed = window.innerWidth > 600;
     } else {
       this.isTopbarDisplayed = false;
     }
@@ -92,18 +97,16 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   ngAfterViewInit(): void {
-
     window.addEventListener('scroll', this.scroll, true);
-
-    setTimeout(() => {
-      this.googleInit();
-    }, 500);
   }
 
   ngOnInit(): void {
     this.isOnLogin = !!this._sessionService.user;
 
     // this._firebaseMessagingService.getPermission();
+    setTimeout(() => {
+      this.googleInit();
+    }, 200);
     this.get30FirstIPLogs();
   }
 
@@ -244,18 +247,18 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   checkAccountList(): any {
-    const sub = this._adwordsAccountsService.getAdwordsAccount()
-      .subscribe(
-        res => {
+    this._sessionService.completeCheckingIfUserHasAccount(true);
+    const sub = this._sessionService.checkIfUserHasAccount()
+      .pipe(distinctUntilChanged())
+      .subscribe((userHasAccount: boolean) => {
+        if (userHasAccount) {
           this._fuseSplashScreenService.hide();
           return this._router.navigateByUrl('/danh-sach-tai-khoan');
-        },
-        (error: HttpErrorResponse) => {
+        } else {
           this._fuseSplashScreenService.hide();
           return this._router.navigateByUrl('/them-tai-khoan-moi');
         }
-      );
+      });
     this.subscriptions.push(sub);
   }
-
 }

@@ -20,9 +20,10 @@
             <!-- <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts> -->
             <mat-form-field *ngIf="_sessionService.activeAdsAccountId && isAccountSelectionDisplayed === true" appearance="none">
                 <img src="../../../../assets/icons/gg-ads.png" alt="googleAdsIcon" class="ggAds-icon">
-                <mat-label style="color: lightgreen">Tài khoản Google Ads</mat-label>
+                <mat-label style="color: lightgreen">Đang kết nối tài khoản</mat-label>
+                <input matInput [value]="adsAccounts[0].name" readonly *ngIf="user.licence.type !== 'CUSTOM'">
                 <mat-select [formControl]="accountCtrl" placeholder="Tài khoản Google Ads" #singleSelect
-                    (selectionChange)="selectAccount()">
+                    (selectionChange)="selectAccount()" *ngIf="user.licence.type === 'CUSTOM'">
                     <mat-option>
                         <ngx-mat-select-search [formControl]="accountFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
                             [noEntriesFoundLabel]="'Không tìm thấy tài khoản nào'"></ngx-mat-select-search>
@@ -31,11 +32,11 @@
                         {{account.name}}
                     </mat-option>
                 </mat-select>
-                <span class="free-label" *ngIf="accountCtrl.value?.isFree === true">FREE</span>
+                <!-- <span class="free-label" *ngIf="accountCtrl.value?.isFree === true">FREE</span>
                 <span *ngIf="accountCtrl.value?.isFree === false">
                     <span class="vip-label">VIP</span>
                     <span class="vip-expiration">{{accountCtrl.value?.expiredAt | date: 'dd/MM/yyyy'}}</span>
-                </span>
+                </span> -->
             </mat-form-field>
         </div>
 
@@ -80,7 +81,7 @@
                 <a routerLink="/nang-cap-vip" mat-menu-item style="color: #44b543; font-weight: bold">
                     <!-- <img src="../../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
                     <mat-icon style="color: #44b433">arrow_upward</mat-icon>
-                    <span>Nâng cấp <span class="vip-label" style="margin-left: 5px">VIP</span></span>
+                    <span>Nâng cấp tài khoản</span>
                 </a>
 
                 <a routerLink="/nguoi-dung/thong-tin-ca-nhan" mat-menu-item>

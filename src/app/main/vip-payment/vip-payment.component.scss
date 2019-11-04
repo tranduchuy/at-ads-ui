@@ -186,7 +186,12 @@
     }
 
     .instruction {
-      padding-top: 60px;
+      padding-top: 40px;
+
+      .instruction-title {
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.8);
+      }
     }
 
     .packages {
@@ -247,8 +252,8 @@
       padding-top: 40px;
 
       .casher-title {
-        font-weight: bold;
-        font-size: 16px;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.8);
       }
 
       ul {

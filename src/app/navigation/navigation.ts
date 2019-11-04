@@ -194,13 +194,13 @@ export const navigation: FuseNavigation[] = [
   },
   {
     id: 'user_info',
-    title: 'THÔNG TIN KHÁCH HÀNG',
+    title: 'THÔNG TIN NGƯỜI DÙNG',
     translate: 'NAV.APPLICATIONS',
     type: 'group',
     children: [
       {
-        id: 'vip_payment',
-        title: 'Nâng cấp VIP',
+        id: 'upgrade_licence',
+        title: 'Nâng cấp tài khoản',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'arrow_upward',
@@ -222,14 +222,14 @@ export const navigation: FuseNavigation[] = [
         icon: 'history',
         url: '/nguoi-dung/lich-su-thao-tac',
       },
-      {
-        id: 'user_logout',
-        title: 'Đăng xuất',
-        translate: 'NAV.SAMPLE.TITLE',
-        type: 'item',
-        icon: 'power_settings_new',
-        url: '/auth/logout',
-      },
+      // {
+      //   id: 'user_logout',
+      //   title: 'Đăng xuất',
+      //   translate: 'NAV.SAMPLE.TITLE',
+      //   type: 'item',
+      //   icon: 'power_settings_new',
+      //   url: '/auth/logout',
+      // },
     ]
   },
 ];

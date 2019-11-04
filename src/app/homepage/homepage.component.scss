@@ -17,7 +17,7 @@
 
     .banner-container {
       background-image: url("../../assets/images/backgrounds/shutterstock_503902966-Converted-01x1200.jpg");
-      //background-attachment: fixed;
+      background-attachment: fixed;
       background-position: center center;
       background-size: 100% 100%;
       box-shadow: 0 2px 8px black;
@@ -25,12 +25,12 @@
       .banner {
         background: rgba(0, 0, 0, 0.6);
         color: white;
-        padding: 90px 30px 70px 30px;
+        padding: 110px 30px 70px 30px;
         position: relative;
         z-index: 100;
 
         .app-title {
-          font-size: 35px !important;
+          font-size: 40px !important;
           filter: drop-shadow(0px 1px 2px black);
           font-weight: bolder;
           font-family: "Poppins", sans-serif;
@@ -97,8 +97,11 @@
           text-align: center;
           padding: 20px;
 
-          img {
-            width: 24px;
+          .gg-icon {
+            height: 18px;
+            width: 18px;
+            margin-top: -5px;
+            margin-right: 2px;
           }
 
           .login-google-button {
@@ -200,9 +203,17 @@
             //   background-color: whitesmoke;
             // }
 
+            &:nth-child(odd) {
+              background: rgba(3, 155, 229, 0.2);
+            }
+
             &:hover {
               //background-color: rgba(3, 155, 229, 0.1);
-              background: rgba(3, 155, 229, 0.18);
+              font-weight: bolder;
+
+              mat-cell {
+                color: orange !important;
+              }
             }
           }
 
@@ -220,9 +231,14 @@
             flex: 0 0 17%;
           }
 
+          mat-header-cell:nth-child(2),
+          mat-cell:nth-child(2) {
+            color: skyblue;
+          }
+
           mat-header-row,
           mat-row {
-            min-width: 1300px;
+            min-width: 850px;
             width: 100%;
           }
         }
@@ -230,10 +246,10 @@
     }
 
     .instruction-container {
+      background: rgba(3, 155, 229, 0.2);
       .instruction {
         padding: 30px;
-        background: rgba(3, 155, 229, 0.2);
-        //background: rgba(125, 125, 125, 0.2);
+        background: rgba(0, 0, 0, 0.5);
 
         .steps-main-title {
           font-size: 25px;
@@ -241,6 +257,7 @@
           text-align: center;
           color: white;
           text-shadow: 1px 1px 4px black;
+          padding-bottom: 10px;
         }
 
         .demo-video {
@@ -286,6 +303,8 @@
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
+                pointer-events: none;
+                filter: drop-shadow(1px 1px 2px black);
               }
             }
 
@@ -309,6 +328,7 @@
     .feature-container {
       background: url("../../assets/images/backgrounds/dell-background.jpg");
       background-size: 100% 100%;
+      background-attachment: fixed;
 
       .feature {
         background: rgba(0, 0, 0, 0.6);
@@ -370,7 +390,7 @@
 
       p {
         font-size: 14px;
-        color: #eee;
+        color: silver;
       }
 
       img {
@@ -397,10 +417,10 @@
         color: white;
         //background: rgba(125, 125, 125, 0.2);
         //background: rgba(3, 155, 229, 0.2);
-        background: url("../../assets/images/backgrounds/QL5I0O.jpg");
+        //background: url("../../assets/images/backgrounds/QL5I0O.jpg");
+        background: url("../../assets/images/backgrounds/loading-bg1.jpg");
         background-size: 100% 100%;
         background-attachment: fixed;
-        background-position: center center;
         text-shadow: 1px 1px 4px black;
 
         .main-benefit {
@@ -430,7 +450,11 @@
     padding: 60px;
     padding-bottom: 40px;
     padding-top: 100px;
-    background: rgba(0, 0, 0, 0.6);
+    //background: rgba(0, 0, 0, 0.6);
+    background: rgba(12, 20, 33, 1);
+    background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
     color: silver;
     text-align: justify;
 
@@ -470,10 +494,13 @@
   }
 
   .footer-contact-container {
-    background-color: rgba(0, 0, 0, 0.3);
+    //background-color: rgba(0, 0, 0, 0.3);
     //filter: drop-shadow(0px 1px 4px black);
     .footer-contact {
-      background: rgba(38, 61, 67, 0.4);
+      background: rgba(12, 20, 33, 1);
+      background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+      background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+      background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
       color: white;
       padding: 15px;
       text-align: center;
@@ -482,10 +509,13 @@
   }
 
   .contact {
-    background: #002c45;
+    background: rgba(12, 20, 33, 1);
+    background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
     // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
     // background-size: 100% 100%;
-    filter: drop-shadow(0px 1px 4px black);
+    filter: drop-shadow(0px 1px 2px black);
     color: silver;
     font-weight: bold;
     position: fixed;
@@ -528,9 +558,19 @@
         filter: drop-shadow(0px 1px 2px black);
       }
 
+      .topbar-google-button {
+        transition: 0.2s;
+        &:hover {
+          transform: scale(1.05, 1.05);
+        }
+      }
+
       .topbar-access-system-button {
         background: #44b543;
         color: white;
+        &:hover {
+          transform: scale(1.05, 1.05);
+        }
       }
     }
   }
@@ -569,11 +609,15 @@
 
     .topbar-container {
       .topbar {
-        padding-top: 20px;
+        padding: 5px;
 
         .topbar-logo {
-          height: 36px;
-          width: 36px;
+          height: 45px;
+          width: 45px;
+        }
+
+        .topbar-access-system-button {
+          font-size: 12.5px;
         }
       }
     }
@@ -593,7 +637,7 @@
           padding-top: 100px;
 
           .app-title {
-            font-size: 20px !important;
+            font-size: 22px !important;
           }
 
           .logo {
@@ -608,6 +652,13 @@
 
           .login-with-google {
             padding-top: 10px;
+
+            .gg-icon {
+              height: 18px;
+              width: 18px;
+              margin-top: -5px;
+              margin-right: 2px;
+            }
 
             .access-system-button {
               font-size: 11px;
@@ -657,6 +708,7 @@
       .feature-container {
         background: url("../../assets/images/backgrounds/20597.jpg");
         background-size: 100% 100%;
+        background-attachment: fixed;
 
         .feature {
           padding: 10px;

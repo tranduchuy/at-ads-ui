@@ -15,7 +15,7 @@ export class WebsiteManagementService {
 
   constructor(private _http: HttpClient) { }
 
-  getAccounts(): Observable<any> {
+  getAdwordsAccounts(): Observable<any> {
     return this._http.get(API.AdwordsAccount.getAccounts);
   }
 

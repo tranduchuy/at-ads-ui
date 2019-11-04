@@ -23,18 +23,19 @@
             </label>
             <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account.adsId"
               (change)="onSelectAccount($event)" fxLayout="row">
-              <span *ngIf="account.isFree == true">{{account.adsId}}</span>
+              {{account.adsId}}
+              <!-- <span *ngIf="account.isFree == true">{{account.adsId}}</span>
               <span *ngIf="account.isFree == false" class="vip-account">
                 <span class="vip-account">{{account.adsId}}</span>
                 <span class="vip-label" style="margin-left: 10px">VIP</span>
                 <span class="vip-expiration"
                   *ngIf="selectedAccount && websites[account.adsId].length > 0">({{websites[account.adsId][0].expiredAt | date: 'dd/MM/yyyy'}})</span>
-              </span>
+              </span> -->
             </mat-radio-button>
           </mat-radio-group>
           <span style="color: gray" *ngIf="accounts.length === 0 && !isProcessing">Bạn chưa kết nối tài khoản nào. Vui
             lòng kết nối <a routerLink="/them-tai-khoan-moi" style="text-decoration: underline !important">tại
-              đây</a>!</span>
+              đây</a></span>
         </div>
 
         <div class="websites">
@@ -44,18 +45,18 @@
               *ngFor="let website of websites[selectedAccount]; let i = index" [value]="website.domain"
               (change)="onSelectAccountWebsite(i)" fxLayout="row">
               <a href="{{website.domain}}" target="_blank">{{website.domain}}</a>
-              <span *ngIf="website.isExpired === false">
+              <!-- <span *ngIf="website.isExpired === false">
                 <span class="vip-label" style="margin-left: 10px">VIP</span>
                 <span class="vip-expiration">({{website.expiredAt | date: 'dd/MM/yyyy'}})</span>
               </span>
-              <span *ngIf="website.isExpired === true" class="free-label" style="margin-left: 10px">FREE</span>
+              <span *ngIf="website.isExpired === true" class="free-label" style="margin-left: 10px">FREE</span> -->
             </mat-radio-button>
           </mat-radio-group>
           <span *ngIf="!selectedWebsite && !isProcessing && accounts.length > 0" style="color: gray">Tài khoản này hiện
             chưa có website nào.
             Vui lòng thêm <a [routerLink]="['/quan-ly-website', selectedAccountId]"
               style="text-decoration: underline !important">tại
-              đây</a>!</span>
+              đây</a></span>
         </div>
 
       </div>
@@ -87,11 +88,11 @@
     </div>
 
     <div class="instruction">
-      <p style="font-size: 16px; font-weight: bold">Hướng dẫn</p>
+      <p class="instruction-title">Hướng dẫn thanh toán</p>
       <mat-divider></mat-divider>
       <br>
       <mat-icon style="font-size: 20px; margin-top: 5px">keyboard_arrow_right</mat-icon>
-      <span style="color: red; font-weight: bold">"Chuyển khoản"</span> theo nội dung bên trên. Hệ
+      <span style="color: red; font-weight: bold">Chuyển khoản</span> theo nội dung bên trên. Hệ
       thống sẽ tự động kiểm tra và nâng cấp VIP cho bạn.
       <br>
       <mat-icon style="font-size: 20px; margin-top: 5px">keyboard_arrow_right</mat-icon> Nếu gói VIP đang còn thời hạn,
@@ -101,7 +102,7 @@
 
     <div class="packages">
       <p class="packages-title">
-        Vui lòng chuyển khoản nâng cấp VIP theo số tiền và thông tin sau
+        Vui lòng chuyển khoản số tiền theo các <span style="color: #039be5">Gói VIP</span> sau đây:
       </p>
 
       <div class="packages-table">

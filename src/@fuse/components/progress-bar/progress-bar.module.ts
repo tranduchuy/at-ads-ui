@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { FuseProgressBarComponent } from './progress-bar.component';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { FuseProgressBarComponent } from './progress-bar.component';
 
         MatButtonModule,
         MatIconModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatProgressSpinnerModule
     ],
     exports     : [
         FuseProgressBarComponent

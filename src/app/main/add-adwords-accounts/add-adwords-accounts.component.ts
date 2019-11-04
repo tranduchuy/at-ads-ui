@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { Validators } from '@angular/forms';
@@ -20,7 +20,7 @@ declare var gapi: any;
   templateUrl: './add-adwords-accounts.component.html',
   styleUrls: ['./add-adwords-accounts.component.scss']
 })
-export class AddAdwordsAccountsComponent extends EditableFormBaseComponent implements OnInit, AfterViewInit {
+export class AddAdwordsAccountsComponent extends EditableFormBaseComponent implements OnInit {
   form;
   isConnected = false;
   connectedAccountId: string;
@@ -52,13 +52,8 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
   ngOnInit(): void {
     this.initForm();
+    this.googleInit();
     this.checkAccountList();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.googleInit();
-    }, 500);
   }
 
   applyFilter(filterValue: string): void {
@@ -69,19 +64,24 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     this.auth2.grantOfflineAccess().then(this.onSignIn.bind(this));
   }
 
+  hasValue(value: any) {
+    return value !== null && value !== undefined;
+  }
+
   checkAccountList(): any {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
-    const sub = this._adwordsAccountsService.getAdwordsAccount()
-      .subscribe(
-        res => {
-          this._fuseProgressiveBarService.hide();
-          this.isProcessing = false;
-        },
-        (error: HttpErrorResponse) => {
-          this.checkRefreshToken();
+    const sub = this._sessionService.getListAccounts()
+      .subscribe(listAccounts => {
+        if (listAccounts) {
+          if (listAccounts.length === 0)
+            this.checkRefreshToken();
+          else {
+            this._fuseProgressiveBarService.hide();
+            this.isProcessing = false;
+          }
         }
-      );
+      });
     this.subscriptions.push(sub);
   }
 
@@ -225,9 +225,8 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
           this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-          this._sessionService.notifyNewAccountWasAdded();
+          this._sessionService.notifyListAccountsChanged();
 
-          this._fuseNavigationService.reloadNavigation();
           this._router.navigateByUrl('/gan-tracking/chien-dich');
         },
         (error: HttpErrorResponse) => {
@@ -263,7 +262,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
     this._fuseProgressiveBarService.show();
 
     const sub = this._addAdwordsAccountsService.checkAccountAcceptance({
-      adWordId: this.connectedAdsId.replace(/\D+/g, '')
+      adWordId: this.connectedAdsId.replace(/\D/g, '')
     })
       .subscribe(
         res => {
@@ -308,7 +307,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
           if (res.data.isRefresh === true) {
             this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
             this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-            this._sessionService.notifyNewAccountWasAdded();
+            this._sessionService.notifyListAccountsChanged();
             this._fuseNavigationService.reloadNavigation();
             this._router.navigateByUrl('/danh-sach-tai-khoan');
             return;
@@ -319,9 +318,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
 
           this.isConnected = true;
           this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-          this._sessionService.notifyNewAccountWasAdded();
-
-          this._fuseNavigationService.reloadNavigation();
+          this._sessionService.notifyListAccountsChanged();
 
           if (this.isAccountListShown === true) {
             this.isAccountListShown = false;

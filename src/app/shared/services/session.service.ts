@@ -13,19 +13,59 @@ export class SessionService {
   private _user$ = new BehaviorSubject<any>({});
   private _accountAcceptance$ = new BehaviorSubject<boolean>(true);
   private _acceptedAdsId$ = new BehaviorSubject<string>('');
-  private _isNewAccountAdded$ = new BehaviorSubject<boolean>(false);
+  private _isListAccountChanged$ = new BehaviorSubject<boolean | any>(false);
+  private _doesUserHaveAccount$ = new BehaviorSubject<boolean>(true);
+  private _listAccounts$ = new BehaviorSubject<any>(false);
+  private _removedAccountId$ = new BehaviorSubject<string>('');
 
   constructor(private cookieService: CookieService) {
 
   }
 
-  getIsNewAccountAdded(): Observable<boolean> {
-    return this._isNewAccountAdded$.asObservable();
+  onRemovingAccount(): Observable<string> {
+    return this._removedAccountId$.asObservable();
   }
 
-  notifyNewAccountWasAdded(): void {
-    this._isNewAccountAdded$.next(true);
+  completeRemovingAccount(accountId: string) {
+    this._removedAccountId$.next(accountId);
   }
+
+  getListAccounts(): Observable<any> {
+    return this._listAccounts$.asObservable();
+  }
+
+  setListAccounts(listAccounts: any) {
+    this._listAccounts$.next(listAccounts);
+  }
+
+  getValueOfListAccounts(): any {
+    return this._listAccounts$.getValue();
+  }
+
+  getValueOfCheckingIfUserHasAccount(): boolean {
+    return this._doesUserHaveAccount$.getValue();
+  }
+
+  checkIfUserHasAccount(): Observable<boolean> {
+    return this._doesUserHaveAccount$.asObservable();
+  }
+
+  completeCheckingIfUserHasAccount(userHasAccount: boolean) {
+    return this._doesUserHaveAccount$.next(userHasAccount);
+  }
+
+  onListAccountsChanged(): Observable<boolean | any> {
+    return this._isListAccountChanged$.asObservable();
+  }
+
+  notifyListAccountsChanged(action?: any): void {
+    if (action) {
+      this._isListAccountChanged$.next(action);
+    }
+    else this._isListAccountChanged$.next(true);
+  }
+
+
 
   getAcceptedAdsId(): Observable<string> {
     return this._acceptedAdsId$.asObservable();
@@ -47,15 +87,15 @@ export class SessionService {
     const today = new Date();
     today.setHours(today.getHours() + 8);
 
-    this.cookieService.put(CookieNames.token, token, {expires: today, domain: environment.cookieDomain});
-    this.cookieService.putObject(CookieNames.user, user, {expires: today, domain: environment.cookieDomain});
+    this.cookieService.put(CookieNames.token, token, { expires: today, domain: environment.cookieDomain });
+    this.cookieService.putObject(CookieNames.user, user, { expires: today, domain: environment.cookieDomain });
   }
 
   setGoogleAccountToken(accessToken: string, refreshToken: string): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.put(CookieNames.accessToken, accessToken, {expires: today, domain: environment.cookieDomain});
-    this.cookieService.put(CookieNames.refreshToken, refreshToken, {expires: today, domain: environment.cookieDomain});
+    this.cookieService.put(CookieNames.accessToken, accessToken, { expires: today, domain: environment.cookieDomain });
+    this.cookieService.put(CookieNames.refreshToken, refreshToken, { expires: today, domain: environment.cookieDomain });
   }
 
   getGoogleAccountToken(): any {
@@ -68,7 +108,7 @@ export class SessionService {
   setLoggedInUser(user, standByUser): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.putObject(CookieNames.user, user, {expires: today, domain: environment.cookieDomain});
+    this.cookieService.putObject(CookieNames.user, user, { expires: today, domain: environment.cookieDomain });
     this._user$.next(user);
 
     if (standByUser) {
@@ -80,26 +120,26 @@ export class SessionService {
     }
   }
 
-  setActiveAccountId(accountId): void {
+  setActiveAccountId(accountId: string): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.put(CookieNames.activeAccountId, accountId, {expires: today, domain: environment.cookieDomain});
+    this.cookieService.put(CookieNames.activeAccountId, accountId, { expires: today, domain: environment.cookieDomain });
   }
 
-  setActiveAdsAccountId(accountId): void {
+  setActiveAdsAccountId(adsId: string): void {
     const today = new Date();
     today.setHours(today.getHours() + 8);
-    this.cookieService.put(CookieNames.activeAdsAccountId, accountId, {expires: today, domain: environment.cookieDomain});
+    this.cookieService.put(CookieNames.activeAdsAccountId, adsId, { expires: today, domain: environment.cookieDomain });
   }
 
   remove(): void {
-    this.cookieService.remove(CookieNames.token, {domain: environment.cookieDomain});
-    this.cookieService.remove(CookieNames.standBy, {domain: environment.cookieDomain});
-    this.cookieService.remove(CookieNames.user, {domain: environment.cookieDomain});
-    this.cookieService.remove(CookieNames.activeAccountId, {domain: environment.cookieDomain});
-    this.cookieService.remove(CookieNames.activeAdsAccountId, {domain: environment.cookieDomain});
-    this.cookieService.remove(CookieNames.accessToken, {domain: environment.cookieDomain});
-    this.cookieService.remove(CookieNames.refreshToken, {domain: environment.cookieDomain});
+    this.cookieService.remove(CookieNames.token, { domain: environment.cookieDomain });
+    this.cookieService.remove(CookieNames.standBy, { domain: environment.cookieDomain });
+    this.cookieService.remove(CookieNames.user, { domain: environment.cookieDomain });
+    this.cookieService.remove(CookieNames.activeAccountId, { domain: environment.cookieDomain });
+    this.cookieService.remove(CookieNames.activeAdsAccountId, { domain: environment.cookieDomain });
+    this.cookieService.remove(CookieNames.accessToken, { domain: environment.cookieDomain });
+    this.cookieService.remove(CookieNames.refreshToken, { domain: environment.cookieDomain });
   }
 
   setUserProfile(name: string, phone: string, usePassword: boolean): any {
@@ -111,7 +151,7 @@ export class SessionService {
     newUser.phone = phone;
     newUser.usePassword = usePassword;
 
-    this.cookieService.put(CookieNames.user, JSON.stringify(newUser), {expires: today, domain: environment.cookieDomain});
+    this.cookieService.put(CookieNames.user, JSON.stringify(newUser), { expires: today, domain: environment.cookieDomain });
   }
 
   get user(): any {
@@ -176,15 +216,15 @@ export class SessionService {
 
   public setActiveGoogleAdsAccount(accountId: string, adsId: string): void {
     this.setActiveAccountId(accountId);
-    this.setAccountId(accountId);
     this.setActiveAdsAccountId(adsId);
+    this.setAccountId(accountId);
     this.setAdwordId(adsId);
   }
 
   public unsetActiveGoogleAdsAccount(): void {
+    this.setActiveAccountId('');
     this.setActiveAdsAccountId('');
     this.setAccountId('');
-    this.setActiveAdsAccountId('');
     this.setAdwordId('');
   }
 }

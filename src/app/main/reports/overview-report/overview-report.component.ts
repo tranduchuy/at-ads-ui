@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
@@ -8,6 +8,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SessionService } from 'app/shared/services/session.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Generals } from '../../../shared/constants/generals';
+import { ReplaySubject, Subject } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { MatSelect } from '@angular/material';
+import { takeUntil } from 'rxjs/operators';
+import * as _ from 'lodash';
+import { WebsiteManagementService } from 'app/main/website-management/website-management.service';
+
+interface SelectedWebsite {
+  id: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-overview-report',
@@ -66,26 +77,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   overviewTableCols: string[] = ['createdAt', 'ip', 'trafficSource', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'location'];
   overviewTable = [];
 
-  multi = [
-    {
-      "name": "Thiết bị",
-      "series": [
-        {
-          "name": "Máy tính",
-          "value": 57
-        },
-        {
-          "name": "Di động",
-          "value": 22
-        },
-        {
-          "name": "Máy tính bảng",
-          "value": 11
-        }
-      ]
-    },
-  ];
-
   view: any[] = [325, 50];
 
   itemsPerPageOptions = Generals.Pagination.itemsPerPageOptions;
@@ -116,29 +107,24 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
         //'#6FAAB0','#C4C24A','#8BC652', '#E94649','#F6B53F','#FB954F','#005277','#039be5','#9370DB', '#33495D', '#FF6384'
       ]
     },
-    dataSource: [
-      {
-        name: 'google/cpc',
-        value: 82,
-      },
-      {
-        name: 'google/organic',
-        value: 12
-      },
-      {
-        name: 'facebook.com',
-        value: 2
-      },
-      {
-        name: '[direct]/[none]',
-        value: 2
-      },
-      {
-        name: 'coccoc.com',
-        value: 1
-      }
-    ],
+    dataSource: [],
   };
+
+  websites: SelectedWebsite[] = [];
+  hasWebsite: boolean;
+
+  /** control for selected website */
+  public websiteCtrl: FormControl = new FormControl();
+
+  /** control for the MatSelect filter keyword */
+  public websiteFilterCtrl: FormControl = new FormControl();
+
+  /** list of websites filterd by search keyword */
+  public filteredWebsites: ReplaySubject<any[]> = new ReplaySubject<SelectedWebsite[]>(1);
+
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+
+  private _onDestroy = new Subject<void>();
 
   constructor(
     private _dialogService: DialogService,
@@ -146,42 +132,121 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     private _reportService: ReportService,
     public _sessionService: SessionService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _websiteManagementService: WebsiteManagementService
 
   ) {
     super();
   }
 
   ngOnInit() {
-    this._fuseProgressBarService.show();
     this.pageLimit = this.itemsPerPageOptions[0].value;
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          this.getStatisticTrafficSourceReport();
-
-          this.pageTotal = 0;
-
-          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-
-          if (page) {
-            if (isNaN(Number(page)))
-              return;
-            this.currentPageNumber = Number(page);
-          }
-          else {
-            this.currentPageNumber = 1;
-            this._router.navigate([], {
-              queryParams: {
-                page: this.currentPageNumber,
-              }
-            });
-          }
-
-          this.getSessionReport(this.currentPageNumber);
+          this.getWebsites(accountId);
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  getReport() {
+    this._fuseProgressBarService.show();
+    this.pageTotal = 0;
+    const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+    if (page) {
+      if (isNaN(Number(page)))
+        return;
+      this.currentPageNumber = Number(page);
+    }
+    else {
+      this.currentPageNumber = 1;
+      this._router.navigate([], {
+        queryParams: {
+          page: this.currentPageNumber,
+        }
+      });
+    }
+
+    this.getStatisticTrafficSourceReport();
+    this.getSessionReport(this.currentPageNumber);
+  }
+
+  getWebsites(accountId: string) {
+    const sub = this._websiteManagementService.getWebsites(accountId)
+      .subscribe(res => {
+        this.websites = (res.data.website || []).map(website => {
+          return {
+            id: website._id,
+            name: website.domain
+          } as SelectedWebsite
+        });
+
+        if (this.websites.length > 0) {
+          this.hasWebsite = true;
+          this.websites.unshift({
+            id: 'VIEW_ALL',
+            name: 'Tất cả website'
+          } as SelectedWebsite);
+
+          // load the initial account list
+          this.filteredWebsites.next(this.websites.slice());
+
+          // listen for search field value changes
+          this.websiteFilterCtrl.valueChanges
+            .pipe(takeUntil(this._onDestroy))
+            .subscribe(() => {
+              this.filterWebsites();
+            });
+
+          // set default option is the first item of list websites
+          this.websiteCtrl.setValue(this.websites[0]);
+
+          this.getReport();
+        }
+        else {
+          this.pieChart.dataSource = [];
+          this.overviewTable = [];
+          this.hasWebsite = false;
+          this.pageTotal = 0;
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
+          this._dialogService._openInfoDialog(
+            'Tài khoản chưa có website nào. Vui lòng thêm',
+            'tại đây',
+            `/quan-ly-website/${this._sessionService.activeAccountId}`
+          )
+        }
+      });
+    this.subscriptions.push(sub);
+  }
+
+  selectWebsite(): void {
+    const selectedId = this.websiteCtrl.value.id;
+    const selectedIndex = _.findIndex(this.websites, website => website.id === selectedId);
+    this.websiteCtrl.setValue(this.websites[selectedIndex]);
+    this.getReport();
+  }
+
+  private filterWebsites(): void {
+    if (!this.websites) {
+      return;
+    }
+    // get the search keyword
+    let search = this.websiteFilterCtrl.value;
+    if (!search) {
+      this.filteredWebsites.next(this.websites.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the websites
+    this.filteredWebsites.next(
+      this.websites.filter(website => website.name.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   changeItemsPerPageOption(e) {
@@ -201,48 +266,69 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   }
 
   getPercentage(value: number, total: number): number {
-    const res = value * 100 / total
+    const res = value * 100 / total;
     return Math.round(res * 100) / 100;
+  }
+
+  generateSessionReportParams(page: number) {
+    const params = {
+      from: new Date(this.selectedDateRange.start).getTime().toString(),
+      to: new Date(this.selectedDateRange.end).getTime().toString(),
+      website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null,
+      page,
+      limit: this.pageLimit
+    }
+
+    if (!params.website)
+      delete params.website;
+
+    return params;
   }
 
   getSessionReport(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-
-    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
-    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
-
-    const sub = this._reportService.getSessionReport({ from: start, to: end, page, limit: this.pageLimit })
+    const params = this.generateSessionReportParams(page);
+    const sub = this._reportService.getSessionReport(params)
       .subscribe(
         res => {
           this.overviewTable = res.data.trafficSourceData;
+          this.totalItems = res.data.totalItems;
+          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
-          setTimeout(() => {
-            this.totalItems = res.data.totalItems;
-            this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
-            this._fuseProgressBarService.hide();
-            this.isProcessing = false;
-          }, 0);
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
+          this.pageTotal = 0;
+          this.overviewTable = [];
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
-          this.pageTotal = 0;
         }
       );
     this.subscriptions.push(sub);
   }
 
+  generateStatisticTrafficSourceReportParams() {
+    const params = {
+      from: new Date(this.selectedDateRange.start).getTime().toString(),
+      to: new Date(this.selectedDateRange.end).getTime().toString(),
+      website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null
+    }
+
+    if (!params.website)
+      delete params.website;
+
+    return params;
+  }
+
   getStatisticTrafficSourceReport() {
     this.isProcessing = true;
-    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
-    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
-
-    const sub = this._reportService.getStatisticTrafficSourceReport({ from: start, to: end })
+    const params = this.generateStatisticTrafficSourceReportParams();
+    const sub = this._reportService.getStatisticTrafficSourceReport(params)
       .subscribe(
         res => {
-
           let data = JSON.parse(JSON.stringify(res.data.TrafficSourceData));
 
           let sessionCountTotal = 0;
@@ -266,13 +352,14 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
             }
           });
 
-          setTimeout(() => {
-            this.pieChart.dataSource = dataSource;
-            this.isProcessing = false;
-          }, 0);
+          this.pieChart.dataSource = dataSource;
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
+          this.pieChart.dataSource = [];
           this.isProcessing = false;
+          this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
         });
     this.subscriptions.push(sub);

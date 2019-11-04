@@ -7,7 +7,8 @@ toolbar {
   // z-index: 4;
   //justify-content: flex-end;
 
-  background: #1e2129;
+  background-color: #000000 !important;
+  background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
   color: white;
   width: 100%;
   //filter: drop-shadow(0px 1px 2px black);
@@ -52,15 +53,18 @@ toolbar {
   //   color: silver !important;
   // }
 
-  mat-form-field {
-    padding-top: 10px;
-    padding-left: 10px;
-    height: 55px;
+  .mat-form-field-wrapper {
+    position: absolute;
+    z-index: 1000;
+    top: -28px;
+    left: 10px;
+  }
 
+  mat-form-field {
     .free-label {
       background: #44b243;
       color: white;
-      padding: 4px 4px 1.5px 4px;
+      padding: 3.5px 4px 1.5px 4px;
       font-size: 11px;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       font-weight: bold;
@@ -68,6 +72,7 @@ toolbar {
       text-shadow: none;
       filter: drop-shadow(0px 1px 1px black);
       border-radius: 2px;
+      height: 100%;
     }
 
     .vip-expiration {
@@ -109,8 +114,9 @@ toolbar {
     }
 
     .ggAds-icon {
-      max-width: 18px;
+      width: 18px;
       margin-right: 10px;
+      height: 100%;
     }
   }
 
@@ -174,12 +180,12 @@ a {
       text-align: center;
     }
 
-    mat-form-field {
-      padding-left: 0;
-    }
-
     .mat-select-value-text {
       font-size: 13px;
+    }
+
+    .mat-form-field-wrapper {
+      left: 0;
     }
   }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainGuardService } from './shared/services/guard/main-guard.service';
 import { AccountAcceptanceGuardService } from './shared/services/guard/account-acceptance-guard.service';
 import { environment } from 'environments/environment';
+import { AddAwordsAccountsGuardService } from './shared/services/guard/add-awords-accounts-guard.service';
 
 const appRoutes: Routes = [
   {
@@ -13,11 +14,11 @@ const appRoutes: Routes = [
   {
     path: '',
     canActivate: [MainGuardService],
-    loadChildren: './main/add-adwords-accounts/add-adwords-accounts.module#AddAdwordsAccountsModule'
+    loadChildren: './main/adwords-account-list/adwords-account-list.module#AdwordsAccountListModule'
   },
   {
     path: 'them-tai-khoan-moi',
-    canActivate: [MainGuardService],
+    canActivate: [MainGuardService, AddAwordsAccountsGuardService],
     loadChildren: './main/add-adwords-accounts/add-adwords-accounts.module#AddAdwordsAccountsModule'
   },
   {
@@ -58,7 +59,7 @@ const appRoutes: Routes = [
   {
     path: 'nang-cap-vip',
     canActivate: [MainGuardService],
-    loadChildren: './main/vip-payment/vip-payment.module#VipPaymentModule'
+    loadChildren: './main/upgrade-licence/upgrade-licence.module#UpgradeLicenceModule'
   },
   {
     path: '**',

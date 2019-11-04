@@ -6,11 +6,10 @@
 
    <div class="topbar-container" *ngIf="isTopbarDisplayed">
       <div class="topbar">
-         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayout.xs="column"
-            fxLayoutGap="10px" fxLayoutGap.xs="30px">
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxFlex>
+         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="10px">
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
                <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
-               <span class="topbar-title" fxFlex>CÔNG CỤ CHỐNG CLICK TẶC 2019</span>
+               <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed">CÔNG CỤ CHỐNG CLICK TẶC 2019</span>
             </div>
             <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
                class="topbar-google-button" fxFlex="nogrow">
@@ -19,7 +18,7 @@
                Google
             </button>
             <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()" *ngIf="isOnLogin"
-               fxFlex="nogrow" fxFlex.xs="column">
+               fxFlex="nogrow">
                TRUY CẬP HỆ THỐNG CHỐNG CLICK TẶC<mat-icon style="font-size: 20px">navigate_next</mat-icon>
             </button>
          </div>
@@ -31,7 +30,7 @@
       <div class="banner-container">
          <div class="banner">
 
-            <div class="title1 app-title">
+            <div class="title1 app-title box--gradient silver">
                CÔNG CỤ CHỐNG CLICK TẶC 2019
             </div>
 
@@ -65,8 +64,7 @@
             <div class="login-with-google">
                <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
                   class="login-google-button">
-                  <img src="../../assets/icons/google-icon.png"
-                     style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
+                  <img src="../../assets/icons/google-icon.png" class="gg-icon" alt=""> Đăng nhập bằng
                   Google
                </button>
                <button mat-raised-button class="access-system-button" (click)="checkLogin()" *ngIf="isOnLogin">
@@ -100,7 +98,7 @@
                <ng-container matColumnDef="ip">
                   <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <span style="font-weight: bold; color: lightblue">{{element.ip}}</span>
+                     <span>{{element.ip}}</span>
                   </mat-cell>
                </ng-container>
 
@@ -224,12 +222,12 @@
                </button>
             </div> -->
 
-            <div class="step-wrapper" fxLayout="row" fxLayoutGap="15px" fxLayout.xs="column">
+            <div class="step-wrapper" fxLayout="row" fxLayoutGap="15px" fxLayout.sm="column" fxLayout.xs="column">
 
                <div class="step step1" fxFlex="33.33">
                   <div class="step-image">
-                     <img src="../../assets/images/step1.PNG" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step1.PNG')">
+                     <img src="../../assets/images/step1.png" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step1.png')">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 1: Liên kết Google Ads</span>
@@ -242,8 +240,8 @@
 
                <div class="step step2" fxFlex="33.33">
                   <div class="step-image">
-                     <img src="../../assets/images/step2.PNG" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step2.PNG')">
+                     <img src="../../assets/images/step2.png" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step2.png')">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
@@ -256,8 +254,8 @@
 
                <div class="step step3" fxFlex="33.33">
                   <div class="step-image">
-                     <img src="../../assets/images/step3.PNG" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step3.PNG')">
+                     <img src="../../assets/images/step3.png" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step3.png')">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 3: Chặn click ảo</span>
@@ -582,7 +580,8 @@
 
    <div class="footer-contact-container" *ngIf="isContactFooterDisplayed">
       <div class="footer-contact">
-         Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
+         Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp. <br>
+         Bản quyền &copy; 2019 thuộc Appnet Technology
       </div>
    </div>
 

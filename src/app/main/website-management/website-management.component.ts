@@ -9,7 +9,7 @@ import { ValidatorsService } from 'app/shared/services/validator.service';
 import { Validators } from '@angular/forms';
 import { WebsiteManagementService } from './website-management.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface Website {
   domain: string;
@@ -19,7 +19,7 @@ export interface Website {
 }
 
 export interface Account {
-  id: string;
+  accountId: string;
   adsId: string;
   createdAt: Date;
   numberOfWebsites: number;
@@ -45,7 +45,10 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
   selectedAdsId: string;
   selectedAccountId: string;
-  isProcessing: boolean = false;
+  isProcessing: boolean;
+  isAddingWebsiteAllowed: boolean;
+  limitWebsite: number;
+  user: any;
 
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
@@ -66,10 +69,11 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   ngOnInit() {
+    this.initForm();
+    this.user = JSON.parse(this._sessionService.user);
+
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
-    this.initForm();
-
     const sub = this._activatedRoute.params.subscribe(
       (params: any) => {
 
@@ -82,22 +86,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
         }
         else {
           this.selectedAccountId = params.accountId;
-
-          const detailSub = this._websiteManagementService.getAdwordsAccountDetail(this.selectedAccountId)
-            .subscribe(
-              res => {
-                this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsAccount.adsId);
-
-                setTimeout(() => {
-                  this.getAccounts();
-                  this._fuseProgressiveBarService.hide();
-                  this.isProcessing = false;
-                }, 0);
-              },
-              (error: HttpErrorResponse) => {
-                this._router.navigateByUrl('/danh-sach-tai-khoan');
-              });
-          this.subscriptions.push(detailSub);
+          this.getAdwordsAccountDetail();
         }
 
       });
@@ -115,6 +104,22 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     this.onSubmit();
   }
 
+  getAdwordsAccountDetail() {
+    const detailSub = this._websiteManagementService.getAdwordsAccountDetail(this.selectedAccountId)
+      .subscribe(
+        res => {
+          this.selectedAdsId = this.adsAccountIdPipe.transform(res.data.adsAccount.adsId);
+          this.limitWebsite = res.data.adsAccount.setting.limitWebsite;
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+          this.getAccounts();
+        },
+        (error: HttpErrorResponse) => {
+          this._router.navigateByUrl('/danh-sach-tai-khoan');
+        });
+    this.subscriptions.push(detailSub);
+  }
+
   getWebsites() {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
@@ -123,6 +128,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
       .subscribe(
         res => {
           this.websites = res.data.websites;
+          this.isAddingWebsiteAllowed = (this.websites || []).length < this.limitWebsite;
           this._fuseProgressiveBarService.hide();
           this.isProcessing = false;
         },
@@ -133,7 +139,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
 
           if (error.status === 404) {
             const data = [];
-            data['select-campaign'] = { 
+            data['select-campaign'] = {
               accountId: this.selectedAccountId,
               adsId: this.selectedAdsId
             };
@@ -152,48 +158,36 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
 
-    const sub = this._websiteManagementService.getAccounts()
+    const sub = this._sessionService.getListAccounts()
       .subscribe(
-        res => {
-          this.accounts = res.data.accounts;
+        listAccounts => {
+          if (listAccounts) {
+            this.accounts = listAccounts;
 
-          if (this.accounts.length > 0) {
+            if (this.accounts.length > 0) {
+              
+              for (const item of this.accounts) {
+                if (this.adsAccountIdPipe.transform(item.adsId) !== this.selectedAdsId) {
+                  this.accountItemsSource.push({
+                    text: this.adsAccountIdPipe.transform(item.adsId),
+                    value: item.accountId
+                  });
+                }
+                else {
+                  this.accountItemsSource.unshift({
+                    text: this.selectedAdsId,
+                    value: item.accountId
+                  });
+                  this.selectedAccountId = item.accountId;
+                  this.getWebsites();
+                }
 
-            for (const item of this.accounts) {
-
-              if (this.adsAccountIdPipe.transform(item.adsId) !== this.selectedAdsId) {
-                this.accountItemsSource.push({
-                  text: this.adsAccountIdPipe.transform(item.adsId),
-                  value: item.id
-                });
+                if (this.accountItemsSource.length === 1) {
+                  this.form.controls['adsId'].setValue(this.accountItemsSource[0]);
+                }
               }
-              else {
-                this.accountItemsSource.unshift({
-                  text: this.selectedAdsId,
-                  value: item.id
-                });
-                this.selectedAccountId = item.id;
-                this.getWebsites();
-              }
-
-              if (this.accountItemsSource.length === 1) {
-                this.form.controls['adsId'].setValue(this.accountItemsSource[0]);
-              }
-
             }
-
           }
-          else {
-            this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
-            this._router.navigateByUrl('/them-tai-khoan-moi');
-          }
-
-          this.isProcessing = false;
-        },
-        (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
-          this.isProcessing = false;
         });
     this.subscriptions.push(sub);
   }
@@ -217,14 +211,10 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     const sub = this._websiteManagementService.addWebsite(params)
       .subscribe(
         (res: ILoginSuccess) => {
-
           this.getWebsites();
-
-          setTimeout(() => {
-            this._fuseProgressiveBarService.hide();
-            this._dialogService._openSuccessDialog(res);
-            this.isProcessing = false;
-          }, 0);
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openSuccessDialog(res);
+          this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);
@@ -246,14 +236,9 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
             const sub = this._websiteManagementService.removeWebsite(websiteId)
               .subscribe(
                 (res: ILoginSuccess) => {
-
                   this.getWebsites();
-
-                  setTimeout(() => {
-                    this._fuseProgressiveBarService.hide();
-                    this._dialogService._openSuccessDialog(res);
-                    this.isProcessing = false;
-                  }, 0);
+                  this._fuseProgressiveBarService.hide();
+                  this._dialogService._openSuccessDialog(res);
                 },
                 (error: HttpErrorResponse) => {
                   if (error.error.messages) {

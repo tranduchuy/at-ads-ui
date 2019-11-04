@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FlexAlignDirective, FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatDialogModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatIconModule, MatRadioModule, MatFormFieldModule } from '@angular/material';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
@@ -10,6 +10,9 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { CampaignDialogComponent } from './campaign-dialog/campaign-dialog.component';
+import { UpgradeLicenceDialogComponent } from './upgrade-licence-dialog/upgrade-licence-dialog.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FuseSharedModule } from '@fuse/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import { CampaignDialogComponent } from './campaign-dialog/campaign-dialog.compo
     SuccessDialogComponent,
     ConfirmDialogComponent,
     ImageDialogComponent,
-    CampaignDialogComponent
+    CampaignDialogComponent,
+    UpgradeLicenceDialogComponent
   ],
   providers: [],
   imports: [
@@ -29,6 +33,15 @@ import { CampaignDialogComponent } from './campaign-dialog/campaign-dialog.compo
     RouterModule,
     BrowserModule,
     CommonModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    FuseSharedModule,
   ],
   entryComponents: [
     InfoDialogComponent,
@@ -37,6 +50,7 @@ import { CampaignDialogComponent } from './campaign-dialog/campaign-dialog.compo
     ConfirmDialogComponent,
     ImageDialogComponent,
     CampaignDialogComponent,
+    UpgradeLicenceDialogComponent
   ],
   exports: [
     InfoDialogComponent,
@@ -44,7 +58,8 @@ import { CampaignDialogComponent } from './campaign-dialog/campaign-dialog.compo
     SuccessDialogComponent,
     ConfirmDialogComponent,
     ImageDialogComponent,
-    CampaignDialogComponent
+    CampaignDialogComponent,
+    UpgradeLicenceDialogComponent,
   ]
 })
 export class DialogModule {
