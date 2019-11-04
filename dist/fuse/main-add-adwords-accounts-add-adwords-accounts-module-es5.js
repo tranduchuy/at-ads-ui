@@ -147,8 +147,10 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
             if (listAccounts) {
                 if (listAccounts.length === 0)
                     _this.checkRefreshToken();
-                else
+                else {
+                    _this._fuseProgressiveBarService.hide();
                     _this.isProcessing = false;
+                }
             }
         });
         this.subscriptions.push(sub);

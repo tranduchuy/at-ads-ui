@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EditableFormBaseComponent } from '../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { Validators } from '@angular/forms';
@@ -12,7 +12,6 @@ import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id
 import { environment } from 'environments/environment';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
 import { MatTableDataSource } from '@angular/material';
-import { distinctUntilChanged, last, takeLast, takeUntil, take, skip, withLatestFrom, distinct, first } from 'rxjs/operators';
 
 declare var gapi: any;
 
@@ -74,10 +73,13 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     this._fuseProgressiveBarService.show();
     const sub = this._sessionService.getListAccounts()
       .subscribe(listAccounts => {
-        if(listAccounts) {
-          if(listAccounts.length === 0)
+        if (listAccounts) {
+          if (listAccounts.length === 0)
             this.checkRefreshToken();
-          else this.isProcessing = false;
+          else {
+            this._fuseProgressiveBarService.hide();
+            this.isProcessing = false;
+          }
         }
       });
     this.subscriptions.push(sub);

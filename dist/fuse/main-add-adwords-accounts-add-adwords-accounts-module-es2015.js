@@ -141,8 +141,10 @@ let AddAdwordsAccountsComponent = class AddAdwordsAccountsComponent extends _sha
             if (listAccounts) {
                 if (listAccounts.length === 0)
                     this.checkRefreshToken();
-                else
+                else {
+                    this._fuseProgressiveBarService.hide();
                     this.isProcessing = false;
+                }
             }
         });
         this.subscriptions.push(sub);

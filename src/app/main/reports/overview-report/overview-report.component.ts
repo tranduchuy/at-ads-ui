@@ -209,6 +209,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
         }
         else {
           this.hasWebsite = false;
+          this.pieChart.dataSource = [];
+          this.overviewTable = [];
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
           this._dialogService._openInfoDialog(
@@ -298,6 +300,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
         },
         (error: HttpErrorResponse) => {
           this.pageTotal = 0;
+          this.overviewTable = [];
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
@@ -353,6 +356,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
+          this.pieChart.dataSource = [];
           this.isProcessing = false;
           this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
