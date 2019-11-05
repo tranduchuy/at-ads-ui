@@ -14,6 +14,7 @@ import { FuseNavHorizontalItemComponent } from './horizontal/item/item.component
 import { FuseNavHorizontalCollapsableComponent } from './horizontal/collapsable/collapsable.component';
 
 import { AdsAccountIdModule } from '../../../app/shared/pipes/ads-account-id/ads-account-id.module';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { AdsAccountIdModule } from '../../../app/shared/pipes/ads-account-id/ads
 
         MatIconModule,
         MatRippleModule,
+        MatTooltipModule,
 
         TranslateModule.forChild(),
 

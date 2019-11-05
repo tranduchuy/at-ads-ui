@@ -12,6 +12,7 @@ import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id
 import { environment } from 'environments/environment';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
 import { MatTableDataSource } from '@angular/material';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 declare var gapi: any;
 
@@ -32,6 +33,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   adsAccounts = [];
   adsAccountColumns: string[] = ['order', 'adsId', 'name', 'selection'];
   selectedAccount = '';
+  disableAllControls: boolean;
 
   auth2: any;
 
@@ -71,12 +73,18 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   checkAccountList(): any {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
+    const user = this._sessionService.user;
     const sub = this._sessionService.getListAccounts()
       .subscribe(listAccounts => {
         if (listAccounts) {
-          if (listAccounts.length === 0)
-            this.checkRefreshToken();
+          if (listAccounts.length === 0) {
+            this.showAccountListByEmail();
+            this.disableAllControls = false;
+          }
           else {
+            if (user.type !== 'VIP1')
+              this.disableAllControls = true;
+
             this._fuseProgressiveBarService.hide();
             this.isProcessing = false;
           }
@@ -226,6 +234,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
 
           this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
           this._sessionService.notifyListAccountsChanged();
+          this._fuseNavigationService.reloadNavigation();
 
           this._router.navigateByUrl('/gan-tracking/chien-dich');
         },
@@ -316,15 +325,15 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
             this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công! Vui lòng thực hiện theo các bước tiếp theo để hoàn tất kết nối.'] });
           }
 
-          this.isConnected = true;
-          this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-          this._sessionService.notifyListAccountsChanged();
-
           if (this.isAccountListShown === true) {
             this.isAccountListShown = false;
           }
 
           this.isProcessing = false;
+          this.isConnected = true;
+          this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
+          this._sessionService.notifyListAccountsChanged();
+          this._fuseNavigationService.reloadNavigation();
         },
         (error: HttpErrorResponse) => {
 

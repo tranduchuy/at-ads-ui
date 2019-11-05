@@ -95,6 +95,15 @@
       }
     }
 
+    .limit-account-notify {
+      text-align: center;
+      width: 100%;
+      background: #eee;
+      padding: 30px;
+      margin-top: 40px;
+      border-left: 4px solid #ff0037;
+    }
+
     .ads-account-list {
       padding-top: 20px;
 
@@ -111,6 +120,7 @@
       }
 
       .ads-account-list-title {
+        color: rgba(0, 0, 0, 0.8);
         font-weight: bold;
         font-size: 16px;
         padding-top: 10px;

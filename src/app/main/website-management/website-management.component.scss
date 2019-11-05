@@ -37,13 +37,15 @@
     .limit-website-notification {
       width: 100%;
       padding: 20px;
-      border-left: 5px solid orangered;
-      box-shadow: 1px 1px 4px silver;
+      border-left: 5px solid #ff0037;
+      background: #eee;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
 
     .table-wrapper {
       background-color: white;
-      box-shadow: 2px 2px 5px silver;
+      box-shadow: 1px 1px 4px silver;
       max-height: 500px;
       margin-top: 10px;
       overflow: auto;

@@ -73,8 +73,15 @@ export class FuseNavigationComponent implements OnInit {
 
   loadNavigation(): void {
     this.accounts.children = [];
-    this.getUser();
+    //this.getUser();
 
+    this.accounts.children.push({
+      id: 'add-accounts',
+      title: 'Thêm Tài Khoản Mới',
+      type: 'item',
+      icon: 'library_add',
+      url: '/them-tai-khoan-moi'
+    });
     this.accounts.children.push({
       id: 'account-list',
       title: 'Quản Lý Tài Khoản',

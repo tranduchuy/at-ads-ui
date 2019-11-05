@@ -236,29 +236,16 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         this._sessionService.setUser(user);
         this._sessionService.setGoogleAccountToken(accessToken, refreshToken);
 
-        this._ngZone.run(() => this.checkAccountList());
+        this._ngZone.run(() => {
+          this._fuseSplashScreenService.hide();
+          this._router.navigateByUrl('/them-tai-khoan-moi');
+        });
       },
         (error: HttpErrorResponse) => {
           this._fuseSplashScreenService.hide();
           this._dialogService._openErrorDialog(error.error);
         }
       );
-    this.subscriptions.push(sub);
-  }
-
-  checkAccountList(): any {
-    this._sessionService.completeCheckingIfUserHasAccount(true);
-    const sub = this._sessionService.checkIfUserHasAccount()
-      .pipe(distinctUntilChanged())
-      .subscribe((userHasAccount: boolean) => {
-        if (userHasAccount) {
-          this._fuseSplashScreenService.hide();
-          return this._router.navigateByUrl('/danh-sach-tai-khoan');
-        } else {
-          this._fuseSplashScreenService.hide();
-          return this._router.navigateByUrl('/them-tai-khoan-moi');
-        }
-      });
     this.subscriptions.push(sub);
   }
 }

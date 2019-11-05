@@ -25,7 +25,7 @@
       </li>
     </ul>
 
-    <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 30px">
+
 
     <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
 
@@ -35,6 +35,7 @@
         [isDisabled]="isProcessing" *ngIf="user.licence.type === 'CUSTOM'"></app-select-text>
 
       <div *ngIf="isAddingWebsiteAllowed === true">
+        <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 30px">
         <p>
           <strong>Vui lòng nhập tên miền website của bạn vào ô bên dưới</strong>
         </p>
@@ -49,14 +50,13 @@
         </div>
         <br><span><b><span style="color: red">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
             style="color: #039be5">http://</span> hoặc <span style="color: #039be5">https://</span></span>
+        <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
       </div>
       <p *ngIf="isAddingWebsiteAllowed === false" class="limit-website-notification">
-        <b>Chú ý:</b> Số lượng website của tài khoản Google Ads này đã đạt tối đa. Vui
+        Số lượng website của tài khoản Google Ads này đã đạt tối đa. Vui
         lòng nâng cấp thêm <a routerLink="/nang-cap-vip">tại đây</a>
       </p>
     </form>
-
-    <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center">
       <p><strong>CÁC WEBSITE TRONG TÀI KHOẢN <span [(ngModel)]="selectedAdsId" ngDefaultControl

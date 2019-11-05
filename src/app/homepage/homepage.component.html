@@ -9,7 +9,9 @@
          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="10px">
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
                <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
-               <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed">CÔNG CỤ CHỐNG CLICK TẶC 2019</span>
+               <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed">
+                  Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads
+               </span>
             </div>
             <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
                class="topbar-google-button" fxFlex="nogrow">
@@ -30,8 +32,10 @@
       <div class="banner-container">
          <div class="banner">
 
-            <div class="title1 app-title box--gradient silver">
-               CÔNG CỤ CHỐNG CLICK TẶC 2019
+            <div class="title1 app-title">
+               <span class="shiny">
+                  <span class="inner-shiny">Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads</span>
+               </span>
             </div>
 
             <div class="logo">
@@ -580,8 +584,9 @@
 
    <div class="footer-contact-container" *ngIf="isContactFooterDisplayed">
       <div class="footer-contact">
-         Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp. <br>
-         Bản quyền &copy; 2019 thuộc Appnet Technology
+         Vui lòng liên hệ <a href="tel:0937573139" style="color: orange">SĐT, Zalo,
+            Viber 093.757.3139</a> khi bạn cần trợ giúp. <br>
+         Bản quyền &copy; 2019 thuộc <span style="color: skyblue">Appnet Technology</span>
       </div>
    </div>
 

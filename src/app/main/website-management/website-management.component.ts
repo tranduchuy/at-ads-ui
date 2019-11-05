@@ -165,7 +165,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
             this.accounts = listAccounts;
 
             if (this.accounts.length > 0) {
-              
+
               for (const item of this.accounts) {
                 if (this.adsAccountIdPipe.transform(item.adsId) !== this.selectedAdsId) {
                   this.accountItemsSource.push({
@@ -212,9 +212,11 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
       .subscribe(
         (res: ILoginSuccess) => {
           this.getWebsites();
-          this._fuseProgressiveBarService.hide();
-          this._dialogService._openSuccessDialog(res);
-          this.isProcessing = false;
+          setTimeout(() => {
+            this._fuseProgressiveBarService.hide();
+            this._dialogService._openSuccessDialog(res);
+            this.isProcessing = false;
+          }, 2000);
         },
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);
@@ -232,25 +234,29 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
           if (isAccepted) {
             this.isProcessing = true;
             this._fuseProgressiveBarService.show();
-
-            const sub = this._websiteManagementService.removeWebsite(websiteId)
-              .subscribe(
-                (res: ILoginSuccess) => {
-                  this.getWebsites();
-                  this._fuseProgressiveBarService.hide();
-                  this._dialogService._openSuccessDialog(res);
-                },
-                (error: HttpErrorResponse) => {
-                  if (error.error.messages) {
-                    this._dialogService._openErrorDialog(error.error);
-                  }
-                  this._fuseProgressiveBarService.hide();
-                  this.isProcessing = false;
-                });
-            this.subscriptions.push(sub);
+            this.removeWebsite(websiteId);
           }
         });
     this.subscriptions.push(confirmDialogSub);
+  }
+
+  removeWebsite(websiteId: string) {
+    const sub = this._websiteManagementService.removeWebsite(websiteId)
+      .subscribe(
+        (res: ILoginSuccess) => {
+          this.getWebsites();
+          setTimeout(() => {
+            this._dialogService._openSuccessDialog(res);
+          }, 2000);
+        },
+        (error: HttpErrorResponse) => {
+          if (error.error.messages) {
+            this._dialogService._openErrorDialog(error.error);
+          }
+          this._fuseProgressiveBarService.hide();
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
   }
 
   onSelectAdsId(event) {
