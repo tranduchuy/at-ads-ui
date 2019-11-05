@@ -32,7 +32,7 @@ export class AddAwordsAccountsGuardService implements CanActivate {
               'Số  lượng tài khoản Google Ads được phép kết nối đã hết. Vui lòng nâng cấp thêm',
               'tại đây',
               '/nang-cap-vip'
-              );
+            );
             this._router.navigateByUrl('/danh-sach-tai-khoan');
             return false;
           }

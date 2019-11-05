@@ -17,6 +17,13 @@
     flex-wrap: wrap;
     text-align: justify;
     line-height: 20px;
+
+    .highline {
+      font-weight: bold;
+      color: orange;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
   }
 
   &.above {

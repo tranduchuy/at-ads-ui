@@ -11,15 +11,16 @@
           trình kết nối</p>
         <div class="loginWithGoogle">
 
-          <button mat-raised-button (click)="showAccountListByEmail()" [disabled]="isProcessing"
+          <button mat-raised-button (click)="showAccountListByEmail()" [disabled]="isProcessing || disableAllControls"
             *ngIf="!isAccountListShown" class="connect-by-email-button">
             <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt=""
               style="margin-right: 8px">Kết nối nhanh
             bằng
             Gmail</button>
 
-          <button mat-raised-button (click)="isAccountListShown = false; selectedAccount = ''" [disabled]="isProcessing"
-            *ngIf="isAccountListShown" class="disconnect-by-email-button">
+          <button mat-raised-button (click)="isAccountListShown = false; selectedAccount = ''"
+            [disabled]="isProcessing || disableAllControls" *ngIf="isAccountListShown"
+            class="disconnect-by-email-button">
             <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt="">Hủy kết nối nhanh
             bằng Gmail</button>
 
@@ -40,10 +41,11 @@
           <div fxLayout="row">
             <app-input-text [formControlName]="'adWordId'" [title]="'Google Ads ID'"
               [placeholder]="'Ví dụ: 5456445193 hoặc 545-644-5193'" [pristine]="true"
-              [errors]="getMessageErrors('adWordId')" (keypress)="onPressId($event.keyCode)">
+              [errors]="getMessageErrors('adWordId')" (keypress)="onPressId($event.keyCode)"
+              [isDisabled]="isProcessing || disableAllControls">
             </app-input-text>
             <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
-              (click)="onClickBtnSubmit()" [disabled]="isProcessing">
+              (click)="onClickBtnSubmit()" [disabled]="isProcessing || disableAllControls">
               <mat-icon matSuffix class="add_box" style="font-size: 20px">wifi</mat-icon>
               Kết nối
             </button>
@@ -53,10 +55,18 @@
       </div>
     </div>
 
+    <div class="limit-account-notify" *ngIf="disableAllControls">
+      <div class="limit-account-notify-content">
+        Số lần kết nối tài khoản Google Ads của bạn đã hết. Vui lòng nâng cấp thêm <a routerLink="/nang-cap-vip">tại
+          đây</a>
+      </div>
+    </div>
+
     <div class="ads-account-list" *ngIf="isAccountListShown">
 
       <div class="ads-account-list-title">
-        <img src="../../../assets/icons/gg-ads.png" alt="" style="width: 20px; height: 20px"> VUI LÒNG LỰA CHỌN TÀI KHOẢN
+        <img src="../../../assets/icons/gg-ads.png" alt="" style="width: 20px; height: 20px"> VUI LÒNG LỰA CHỌN TÀI
+        KHOẢN
         GOOGLE ADS CỦA BẠN
       </div>
 

@@ -18,7 +18,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'them-tai-khoan-moi',
-    canActivate: [MainGuardService, AddAwordsAccountsGuardService],
+    canActivate: [MainGuardService],
     loadChildren: './main/add-adwords-accounts/add-adwords-accounts.module#AddAdwordsAccountsModule'
   },
   {

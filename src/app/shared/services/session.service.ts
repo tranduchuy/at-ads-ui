@@ -14,7 +14,7 @@ export class SessionService {
   private _accountAcceptance$ = new BehaviorSubject<boolean>(true);
   private _acceptedAdsId$ = new BehaviorSubject<string>('');
   private _isListAccountChanged$ = new BehaviorSubject<boolean | any>(false);
-  private _doesUserHaveAccount$ = new BehaviorSubject<boolean>(true);
+  private _doesUserHaveAccount$ = new BehaviorSubject<boolean>(false);
   private _listAccounts$ = new BehaviorSubject<any>(false);
   private _removedAccountId$ = new BehaviorSubject<string>('');
 

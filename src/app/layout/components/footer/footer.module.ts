@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { FooterComponent } from 'app/layout/components/footer/footer.component';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { FooterComponent } from 'app/layout/components/footer/footer.component';
         MatButtonModule,
         MatIconModule,
         MatToolbarModule,
+        MatTooltipModule,
 
         FuseSharedModule
     ],

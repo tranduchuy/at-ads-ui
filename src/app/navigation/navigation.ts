@@ -175,19 +175,19 @@ export const navigation: FuseNavigation[] = [
     type: 'group',
     children: [
       {
-        id: 'supporter',
-        title: 'Sơn Hà',
+        id: 'supporter_name',
+        title: 'Mr. Long',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'contact_support',
+        icon: 'headset_mic',
         function: () => { }
       },
       {
-        id: 'supporter_email',
-        title: 'ha@appnet.edu.vn',
+        id: 'supporter_contact',
+        title: '093.757.3139',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'email',
+        icon: 'phone',
         function: () => { }
       },
     ]

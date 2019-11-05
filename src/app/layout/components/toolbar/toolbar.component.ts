@@ -176,21 +176,24 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         });
         this.subscriptions.push(sub);
 
-        // set initial selection
         this.getAdsAccounts();
-        // this.getAdsId();
+        this.listenOnListAccountsChanged();
+    }
 
-        const onListAccountsChangedSub = this._sessionService.onListAccountsChanged()
+    listenOnListAccountsChanged() {
+        const sub = this._sessionService.onListAccountsChanged()
             .subscribe(wasChanged => {
                 if (wasChanged) {
                     if (typeof wasChanged === 'object') {
                         const action: any = wasChanged;
                         this.getAdsAccounts(action);
                     }
-                    else this.getAdsAccounts();
+                    else {
+                        this.getAdsAccounts();
+                    }
                 }
             });
-        this.subscriptions.push(onListAccountsChangedSub);
+        this.subscriptions.push(sub);
     }
 
     getAdsId() {
@@ -438,7 +441,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     if (isAccepted) {
                         this._sessionService.remove();
                         this._sessionService.completeCheckingIfUserHasAccount(true);
-                        this._sessionService.setListAccounts([]);
+                        this._sessionService.setListAccounts(false);
                         this._router.navigate(['/gioi-thieu']);
                     }
                 }
