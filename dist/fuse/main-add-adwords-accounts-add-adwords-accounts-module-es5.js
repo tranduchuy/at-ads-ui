@@ -142,7 +142,6 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
         var _this = this;
         this.isProcessing = true;
         this._fuseProgressiveBarService.show();
-        var user = this._sessionService.user;
         var sub = this._sessionService.getListAccounts()
             .subscribe(function (listAccounts) {
             if (listAccounts) {
@@ -151,8 +150,11 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
                     _this.disableAllControls = false;
                 }
                 else {
-                    if (user.type !== 'VIP1')
+                    var user = JSON.parse(_this._sessionService.user);
+                    if (user.licence.type !== 'CUSTOM')
                         _this.disableAllControls = true;
+                    else
+                        _this.disableAllControls = false;
                     _this._fuseProgressiveBarService.hide();
                     _this.isProcessing = false;
                 }

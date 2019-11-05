@@ -73,7 +73,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   checkAccountList(): any {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
-    const user = this._sessionService.user;
     const sub = this._sessionService.getListAccounts()
       .subscribe(listAccounts => {
         if (listAccounts) {
@@ -82,8 +81,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
             this.disableAllControls = false;
           }
           else {
-            if (user.type !== 'VIP1')
+            const user = JSON.parse(this._sessionService.user);
+            if (user.licence.type !== 'CUSTOM')
               this.disableAllControls = true;
+            else this.disableAllControls = false;
 
             this._fuseProgressiveBarService.hide();
             this.isProcessing = false;
