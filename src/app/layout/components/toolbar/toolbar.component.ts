@@ -295,7 +295,13 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
                 this._sessionService.completeCheckingIfUserHasAccount(true);
 
-                this.accountCtrl.setValue(this.adsAccounts[0]);
+                let activeIndex = 0;
+
+                if (this._sessionService.activeAccountId && this._sessionService.activeAdsAccountId) {
+                    activeIndex = _.findIndex(this.adsAccounts, account => account.accountId === this._sessionService.activeAccountId);
+                }
+
+                this.accountCtrl.setValue(this.adsAccounts[activeIndex]);
                 this._sessionService.setActiveGoogleAdsAccount(
                     this.accountCtrl.value.accountId,
                     this.accountCtrl.value.name
