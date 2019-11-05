@@ -73,7 +73,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   checkAccountList(): any {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
-    const user = this._sessionService.user;
     const sub = this._sessionService.getListAccounts()
       .subscribe(listAccounts => {
         if (listAccounts) {
@@ -82,8 +81,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
             this.disableAllControls = false;
           }
           else {
-            if (user.type !== 'VIP1')
+            const user = JSON.parse(this._sessionService.user);
+            if (user.licence.type !== 'CUSTOM')
               this.disableAllControls = true;
+            else this.disableAllControls = false;
 
             this._fuseProgressiveBarService.hide();
             this.isProcessing = false;
@@ -226,17 +227,19 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     const sub = this._addAdwordsAccountsService.addAdwordsAccountByEmail(param)
       .subscribe(
         (res) => {
-          this._fuseProgressiveBarService.hide();
-          this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
-
           this.connectedAccountId = res.data.account._id;
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
           this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
           this._sessionService.notifyListAccountsChanged();
-          this._fuseNavigationService.reloadNavigation();
 
-          this._router.navigateByUrl('/gan-tracking/chien-dich');
+          setTimeout(() => {
+            this._fuseNavigationService.reloadNavigation();
+            this._fuseProgressiveBarService.hide();
+            this.isProcessing = false;
+            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
+            this._router.navigateByUrl('/gan-tracking/chien-dich');
+          }, 2000);
         },
         (error: HttpErrorResponse) => {
 
@@ -272,31 +275,27 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
 
     const sub = this._addAdwordsAccountsService.checkAccountAcceptance({
       adWordId: this.connectedAdsId.replace(/\D/g, '')
-    })
-      .subscribe(
-        res => {
-          if (res.data.isConnected) {
-            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
-
-            setTimeout(() => {
-              this._fuseProgressiveBarService.hide();
-              this._router.navigateByUrl('/gan-tracking/chien-dich');
-            }, 2000);
-          } else {
-            this.isProcessing = false;
-            this._fuseProgressiveBarService.hide();
-            this._dialogService._openErrorDialog(
-              { messages: ['Hoàn tất kết nối tài khoản Google Ads thất bại.'] },
-              true
-            );
-          }
-
-        },
-        (error: HttpErrorResponse) => {
+    }).subscribe(
+      res => {
+        if (res.data.isConnected) {
           this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog({ messages: ['Tài khoản Google Ads không tồn tại'] });
+          this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
+          this._router.navigateByUrl('/gan-tracking/chien-dich');
+        }
+        else {
           this.isProcessing = false;
-        });
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(
+            { messages: ['Hoàn tất kết nối tài khoản Google Ads thất bại.'] },
+            true
+          );
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this._fuseProgressiveBarService.hide();
+        this._dialogService._openErrorDialog({ messages: ['Tài khoản Google Ads không tồn tại'] });
+        this.isProcessing = false;
+      });
     this.subscriptions.push(sub);
   }
 
@@ -308,39 +307,34 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
     const sub = this._addAdwordsAccountsService.addAdwordsAccount(params)
       .subscribe(
         (res) => {
-          this._fuseProgressiveBarService.hide();
-
           this.connectedAccountId = res.data.account._id;
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
-          if (res.data.isRefresh === true) {
-            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
-            this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-            this._sessionService.notifyListAccountsChanged();
-            this._fuseNavigationService.reloadNavigation();
-            this._router.navigateByUrl('/danh-sach-tai-khoan');
-            return;
-          }
-          else {
-            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công! Vui lòng thực hiện theo các bước tiếp theo để hoàn tất kết nối.'] });
-          }
-
-          if (this.isAccountListShown === true) {
-            this.isAccountListShown = false;
-          }
-
-          this.isProcessing = false;
-          this.isConnected = true;
           this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
           this._sessionService.notifyListAccountsChanged();
-          this._fuseNavigationService.reloadNavigation();
+
+          if (res.data.isRefresh === true) {
+            setTimeout(() => {
+              this._fuseNavigationService.reloadNavigation();
+              this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
+              this._router.navigateByUrl('/danh-sach-tai-khoan');
+            }, 2000);
+
+            return;
+          }
+
+          setTimeout(() => {
+            this._fuseNavigationService.reloadNavigation();
+            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công! Vui lòng thực hiện theo các bước tiếp theo để hoàn tất kết nối.'] });
+            this.isAccountListShown = false;
+            this.isConnected = true;
+            this.isProcessing = false;
+          }, 2000);
         },
         (error: HttpErrorResponse) => {
-
           this.isConnected = false;
           this.connectedAccountId = '';
           this.connectedAdsId = '';
-
           this._fuseProgressiveBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
