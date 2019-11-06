@@ -85,18 +85,18 @@
         <ng-container matColumnDef="tracking">
           <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <button *ngIf="element.isTracking === true" mat-stroked-button color="accent">
-              <mat-icon style="font-size: 20px">check</mat-icon> Hoàn
+            <button *ngIf="element.isTracking === true" mat-stroked-button color="accent" class="tracking-status">
+              <mat-icon>check</mat-icon> Hoàn
               thành
             </button>
-            <a *ngIf="element.isTracking === false" mat-stroked-button matTooltip="Nhấn để tiến hành gắn tracking"
-              style="color: crimson; border: 0; padding-left: 0"
+            <button *ngIf="element.isTracking === false" mat-stroked-button matTooltip="Nhấn để tiến hành gắn tracking"
+              style="color: crimson" class="tracking-status"
               [routerLink]="['/gan-tracking/website', selectedAccountId]">
-              <mat-icon style="font-size: 20px">close</mat-icon> Chưa có
-            </a>
+              <mat-icon>close</mat-icon> Chưa có
+            </button>
             <button (click)="openRemoveWebsiteConfirmDialog(element.code)" class="delete-button" mat-icon-button
               color="accent" matTooltip="Xóa website" [disabled]="isProcessing">
-              <mat-icon style="color: silver; margin-top: -5px">delete</mat-icon>
+              <mat-icon style="color: silver">delete</mat-icon>
             </button>
           </mat-cell>
         </ng-container>

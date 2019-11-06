@@ -54,6 +54,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
   }
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { SessionService } from 'app/shared/services/session.service';
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
@@ -17,11 +17,12 @@ export interface AdwordsAccount {
   templateUrl: './check-website-tracking-dialog.component.html',
   styleUrls: ['./check-website-tracking-dialog.component.scss']
 })
-export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent implements OnInit {
+export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['order', 'website', 'tracking'];
   websites: any = [];
   account: AdwordsAccount;
+  isProcessing: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<CheckWebsiteTrackingDialogComponent>,
@@ -34,26 +35,30 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
   }
 
   ngOnInit() {
-    this.getWebsiteTrackingInfo();
+
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.getWebsiteTrackingInfo();
+    }, 0);
   }
 
   getWebsiteTrackingInfo() {
-    setTimeout(() => {
-      this._fuseProgressBarService.show();
-    }, 0);
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
     const sub = this._addTrackingTagsService.getWebsiteTrackingInfo(this.account.accountId)
       .subscribe(res => {
         this.websites = res.data.websites;
-
+        this.isProcessing = false;
         this._fuseProgressBarService.hide();
       },
         (error: HttpErrorResponse) => {
           this.websites = [];
-          this._fuseProgressBarService.hide();
-          
+
           if (error.status === 404) {
             const data = [];
-            data['select-campaign'] = { 
+            data['select-campaign'] = {
               accountId: this.account.accountId,
               adsId: this.account.adsId
             };
@@ -65,8 +70,16 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
           }
           else this._dialogService._openErrorDialog(error.error);
 
+          this._fuseProgressBarService.hide();
+          this.isProcessing = false;
           this.dialogRef.close();
         });
     this.subscriptions.push(sub);
+  }
+
+  closeDialog() {
+    this.isProcessing = false;
+    this._fuseProgressBarService.hide();
+    this.dialogRef.close(true);
   }
 }

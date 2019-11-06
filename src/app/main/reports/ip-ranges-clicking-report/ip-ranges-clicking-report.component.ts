@@ -53,6 +53,7 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
   }
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {

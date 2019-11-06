@@ -24,219 +24,216 @@
 
   .main-inner {
     .inner {
-      padding: 30px;
-      padding-top: 80px;
+      padding: 50px 30px 30px 30px;
       margin-top: -18px;
-    }
 
-    .left {
-      padding: 40px;
-      padding-top: 10px;
-      padding-bottom: 15px;
-      text-align: center;
-
-      .ip-main-info {
-        width: 100%;
-
-        .avatar {
-          height: 110px;
-          width: 110px;
-          display: table;
-          margin: 0 auto;
-          margin-bottom: 15px;
-        }
-      }
-    }
-
-    .right {
-      width: 100%;
-
-      mat-tree {
-        box-shadow: 1px 1px 4px silver;
-        padding-top: 20px;
-      }
-
-      .example-tree-invisible {
-        display: none !important;
-      }
-
-      .example-tree ul,
-      .example-tree li {
-        list-style-type: none;
-        width: 100%;
-      }
-
-      .ip-click-detail {
-        width: 100%;
-      }
-
-      .div-uuid {
-        margin: 10px;
-        border: 0.5px solid #d2d2d2;
-        padding: 15px;
-        border-radius: 5px;
-        width: 100%;
-
-        li {
-          width: 100%;
-          padding-bottom: 10px;
-        }
-      }
-
-      mat-table {
-        box-shadow: none;
-
-        mat-row {
-          transition: 0.2s;
-        }
-        mat-row:hover {
-          background-color: rgba(3, 155, 229, 0.1);
-        }
-
-        mat-header-cell {
-          background: #039be5;
-          color: white;
-        }
-
-        mat-row,
-        mat-header-row {
-          min-width: 1000px;
-          width: 100%;
-        }
-      }
-
-      .adwords-badge {
-        border: 1px solid #4bb543;
-        border-radius: 5px;
-        padding: 5px;
-      }
-    }
-
-    .ip-click-history {
-      width: 100%;
-      overflow: auto;
-      box-shadow: 1px 1px 4px silver;
-
-      mat-table {
-        box-shadow: none;
-
-        .uuid-detail-link {
-          padding-left: 0;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-          font-weight: bold;
-          font-size: 12px;
-
-          &:hover {
-            background: rgba(3, 155, 229, 0.1);
-          }
-        }
-
-        .user-action-icon {
-          margin-right: 10px;
-          font-size: 20px;
-          margin-top: 5px;
-        }
-
-        mat-row {
-          transition: 0.2s;
-
-          &:hover {
-            font-weight: bolder;
-          }
-        }
-
-        mat-cell {
-          font-size: 12px;
-        }
-
-        mat-header-cell {
-          background: #039be5;
-          color: white;
-        }
-
-        mat-header-cell:nth-child(4),
-        mat-cell:nth-child(4) {
-          flex: 0 0 5%;
-        }
-
-        mat-header-cell:nth-child(5),
-        mat-cell:nth-child(5) {
-          a {
-            width: 150px;
-            display: block;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-          }
-        }
-
-        mat-header-cell:nth-child(6),
-        mat-cell:nth-child(6),
-        mat-header-cell:nth-child(7),
-        mat-cell:nth-child(7) {
-          flex: 0 0 13%;
-        }
-
-        mat-header-cell:nth-child(1),
-        mat-cell:nth-child(1) {
-          flex: 0 0 12%;
-        }
-
-        mat-row,
-        mat-header-row {
-          min-width: 1400px;
-          width: 100%;
-        }
-      }
-    }
-
-    .icon,
-    .os-icon {
-      height: 20px;
-      width: 20px;
-      //margin-top: -2px;
-      margin-right: 5px;
-      //margin-left: 18px;
-    }
-
-    .os-icon {
-      margin-left: 3px;
-    }
-
-    .user-image {
-      height: 30px;
-      width: 30px;
-      margin-right: 10px;
-      border-radius: 50%;
-    }
-
-    .pagination-buttons {
-      width: 100%;
-      color: gray;
-    }
-
-    .bottom {
-      padding: 30px;
-      padding-left: 40px;
-      padding-right: 0;
-
-      .last-history-icon {
+      .left {
+        padding: 40px;
+        padding-top: 10px;
+        padding-bottom: 15px;
         text-align: center;
 
-        mat-icon {
-          font-size: 30px;
+        .ip-main-info {
+          width: 100%;
+
+          .avatar {
+            height: 110px;
+            width: 110px;
+            display: table;
+            margin: 0 auto;
+            margin-bottom: 15px;
+          }
         }
       }
 
-      .back-button {
-        padding-left: 5px;
-        a {
-          padding-left: 0;
-          mat-icon {
+      .right {
+        width: 100%;
+
+        mat-tree {
+          box-shadow: 1px 1px 4px silver;
+          padding-top: 20px;
+        }
+
+        .example-tree-invisible {
+          display: none !important;
+        }
+
+        .example-tree ul,
+        .example-tree li {
+          list-style-type: none;
+          width: 100%;
+        }
+
+        .ip-click-detail {
+          width: 100%;
+        }
+
+        .div-uuid {
+          margin: 10px;
+          border: 0.5px solid #d2d2d2;
+          padding: 15px;
+          border-radius: 5px;
+          width: 100%;
+
+          li {
+            width: 100%;
+            padding-bottom: 10px;
+          }
+        }
+
+        mat-table {
+          box-shadow: none;
+
+          mat-row {
+            transition: 0.2s;
+          }
+          mat-row:hover {
+            background-color: rgba(3, 155, 229, 0.1);
+          }
+
+          mat-header-cell {
+            background: #039be5;
+            color: white;
+          }
+
+          mat-row,
+          mat-header-row {
+            min-width: 1000px;
+            width: 100%;
+          }
+        }
+
+        .adwords-badge {
+          border: 1px solid #4bb543;
+          border-radius: 5px;
+          padding: 5px;
+        }
+      }
+
+      .ip-click-history {
+        overflow: auto;
+        box-shadow: 1px 1px 4px silver;
+
+        mat-table {
+          box-shadow: none;
+
+          .uuid-detail-link {
+            padding-left: 0;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: bold;
+            font-size: 12px;
+
+            &:hover {
+              background: rgba(3, 155, 229, 0.1);
+            }
+          }
+
+          .user-action-icon {
+            margin-right: 10px;
             font-size: 20px;
-            margin-right: 7px;
+            margin-top: 5px;
+          }
+
+          mat-row {
+            transition: 0.2s;
+
+            &:hover {
+              font-weight: bolder;
+            }
+          }
+
+          mat-cell {
+            font-size: 12px;
+          }
+
+          mat-header-cell {
+            background: #039be5;
+            color: white;
+          }
+
+          mat-header-cell:nth-child(4),
+          mat-cell:nth-child(4) {
+            flex: 0 0 5%;
+          }
+
+          mat-header-cell:nth-child(5),
+          mat-cell:nth-child(5) {
+            a {
+              width: 150px;
+              display: block;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+            }
+          }
+
+          mat-header-cell:nth-child(6),
+          mat-cell:nth-child(6),
+          mat-header-cell:nth-child(7),
+          mat-cell:nth-child(7) {
+            flex: 0 0 13%;
+          }
+
+          mat-header-cell:nth-child(1),
+          mat-cell:nth-child(1) {
+            flex: 0 0 12%;
+          }
+
+          mat-row,
+          mat-header-row {
+            min-width: 1400px;
+            width: 100%;
+          }
+        }
+      }
+
+      .icon,
+      .os-icon {
+        height: 20px;
+        width: 20px;
+        //margin-top: -2px;
+        margin-right: 5px;
+        //margin-left: 18px;
+      }
+
+      .os-icon {
+        margin-left: 3px;
+      }
+
+      .user-image {
+        height: 30px;
+        width: 30px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+
+      .pagination-buttons {
+        width: 100%;
+        color: gray;
+      }
+
+      .bottom {
+        margin-top: 15px;
+        padding: 15px;
+  
+        .last-history-icon {
+          text-align: center;
+  
+          mat-icon {
+            font-size: 30px;
+          }
+        }
+
+        .back-button {
+          padding-left: 5px;
+          a {
+            padding-left: 0;
+            mat-icon {
+              font-size: 20px;
+              margin-right: 7px;
+            }
           }
         }
       }
@@ -254,18 +251,9 @@
       .inner {
         padding-left: 15px;
         padding-right: 15px;
-      }
 
-      .left {
-        padding: 0;
-
-        .ip-main-info {
-          width: 95vw;
-        }
-
-        .bottom {
-          padding: 0;
-          padding-top: 20px;
+        .ip-click-history {
+          overflow: auto;
         }
       }
     }

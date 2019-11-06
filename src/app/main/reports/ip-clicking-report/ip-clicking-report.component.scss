@@ -48,6 +48,7 @@
           font-weight: bold;
           padding-left: 2px;
           transition: 0.2s;
+          font-size: 12px;
 
           &:hover {
             background: rgba(3, 155, 229, 0.1);
@@ -80,7 +81,7 @@
 
         mat-header-row,
         mat-row {
-          min-width: 1250px;
+          min-width: 1000px;
           width: 100%;
         }
 
@@ -91,6 +92,10 @@
         mat-header-cell {
           background: #039be5;
           color: white;
+        }
+
+        mat-cell {
+          font-size: 12px;
         }
 
         mat-row:hover {
