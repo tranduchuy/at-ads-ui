@@ -67,6 +67,7 @@
         "prismjs": "1.16.0",
         "rxjs": "6.5.2",
         "typescript-dotnet-commonjs": "^4.11.2",
+        "url-parse": "^1.4.7",
         "web-animations-js": "github:angular/web-animations-js#release_pr208",
         "zone.js": "0.9.1"
     },

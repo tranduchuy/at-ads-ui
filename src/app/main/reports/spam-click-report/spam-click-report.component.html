@@ -91,7 +91,7 @@
             <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
             <mat-cell *matCellDef="let element">
 
-              <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]"
+              <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]"
                 class="ip-detail-link" mat-button color="accent">
                 <mat-icon *ngIf="element.isSpam === true" style="color: red" class="ip-symbol">not_interested
                 </mat-icon>

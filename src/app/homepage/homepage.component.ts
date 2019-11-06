@@ -45,8 +45,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private _router: Router,
     private _fuseProgressBarService: FuseProgressBarService,
     private _homepageService: HomepageService,
-    private _adwordsAccountsService: AdwordsAccountsService,
-    private _fuseNavigationService: FuseNavigationService
   ) {
 
     super();

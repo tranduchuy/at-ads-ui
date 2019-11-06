@@ -39,6 +39,7 @@ import { LogoutModule } from './authentication/logout/logout.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { UpgradeLicenceComponent } from './main/upgrade-licence/upgrade-licence.component';
+import { PreviousRouteService } from './shared/services/previous-route.service';
 
 const config: SocketIoConfig = {
   url: environment.hostApi + '/WEB_HOMEPAGE',
@@ -113,6 +114,7 @@ export function init_app(appInitService: AppInitService): any {
     AuthService,
     DialogService,
     SessionService,
+    PreviousRouteService,
     ValidatorsService,
     AppInitService,
     { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true },

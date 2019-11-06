@@ -48,7 +48,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
     private _reportService: ReportService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    public router: Router,
   ) {
     super();
   }
@@ -69,7 +69,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
           }        
           else {
             this.currentPageNumber = 1;
-            this._router.navigate([], {
+            this.router.navigate([], {
               queryParams: {
                 page: this.currentPageNumber,
               }
@@ -114,7 +114,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
 
   changePage(event) {
     this.getStatisticUserReport(this.selectedAccountId, event);
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: event,
       }
@@ -123,7 +123,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
 
   onApplyDateRange() {
     this.currentPageNumber = 1;
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: this.currentPageNumber,
       }

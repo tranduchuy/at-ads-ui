@@ -21,7 +21,7 @@
           <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
           <mat-cell *matCellDef="let element">
 
-            <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id]"
+            <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id, router.url]"
               class="ip-detail-link" mat-button color="accent">
               {{element._id}}
             </a>

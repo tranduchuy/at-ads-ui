@@ -74,7 +74,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     private _reportService: ReportService,
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    public router: Router
   ) {
 
     super();
@@ -256,7 +256,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           }
           else {
             this.currentPageNumber = 1;
-            this._router.navigate([], {
+            this.router.navigate([], {
               queryParams: {
                 page: this.currentPageNumber,
               }
@@ -277,7 +277,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
   changePage(event) {
     this.getAccountReport(this.selectedAccountId, event);
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: event,
       }
@@ -318,7 +318,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
   changeItemsPerPageOption(e) {
     this.currentPageNumber = 1;
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: this.currentPageNumber,
       }
@@ -328,7 +328,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
   onApplyDateRange() {
     this.currentPageNumber = 1;
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: this.currentPageNumber,
       }

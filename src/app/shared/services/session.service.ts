@@ -18,7 +18,9 @@ export class SessionService {
   private _listAccounts$ = new BehaviorSubject<any>(false);
   private _removedAccountId$ = new BehaviorSubject<string>('');
 
-  constructor(private cookieService: CookieService) {
+  constructor(
+    private cookieService: CookieService
+  ) {
 
   }
 

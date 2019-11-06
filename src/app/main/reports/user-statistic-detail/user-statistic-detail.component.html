@@ -26,7 +26,7 @@
 
             <ng-container matColumnDef="accessTime">
               <mat-header-cell *matHeaderCellDef>Truy cập</mat-header-cell>
-              <mat-cell *matCellDef="let element">
+              <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1" [class.ads-click-ip]="element.isSpam === false && element.type === 1" [class.visitor-ip]="element.type === 2">
 
                 <mat-icon *ngIf="element.type === 2" style="color: #44b543" class="user-action-icon"
                   matTooltip="Xem trang">
@@ -45,9 +45,9 @@
 
             <ng-container matColumnDef="ip">
               <mat-header-cell *matHeaderCellDef>IP</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <a [routerLink]="['/bao-cao/chi-tiet-ip', element.ip]" mat-button color="accent" class="ip-detail-link"
-                  matTooltip="Nhấn vào để xem chi tiết">
+              <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1" [class.ads-click-ip]="element.isSpam === false && element.type === 1" [class.visitor-ip]="element.type === 2">
+                <a [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]" mat-button
+                  color="accent" class="ip-detail-link" matTooltip="Nhấn vào để xem chi tiết">
                   {{element.ip}}
                 </a>
               </mat-cell>
@@ -55,7 +55,7 @@
 
             <ng-container matColumnDef="action">
               <mat-header-cell *matHeaderCellDef>Hành động</mat-header-cell>
-              <mat-cell *matCellDef="let element">
+              <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1" [class.ads-click-ip]="element.isSpam === false && element.type === 1" [class.visitor-ip]="element.type === 2">
                 <span *ngIf="element.type === 1">Click quảng cáo</span>
                 <span *ngIf="element.type === 2">Xem trang</span>
               </mat-cell>
@@ -63,14 +63,16 @@
 
             <ng-container matColumnDef="website">
               <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <a href="{{element.href}}" target="_blank">{{element.pathname}}</a>
+              <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1" [class.ads-click-ip]="element.isSpam === false && element.type === 1" [class.visitor-ip]="element.type === 2">
+                <a href="{{element.href}}" target="_blank">
+                  {{element.pathname}}
+                </a>
               </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="os">
               <mat-header-cell *matHeaderCellDef>Hệ điều hành</mat-header-cell>
-              <mat-cell *matCellDef="let element">
+              <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1" [class.ads-click-ip]="element.isSpam === false && element.type === 1" [class.visitor-ip]="element.type === 2">
                 <img *ngIf="element.os?.name === 'Windows'"
                   src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
                 <img *ngIf="element.os?.name === 'iOS'"
@@ -89,7 +91,7 @@
 
             <ng-container matColumnDef="browser">
               <mat-header-cell *matHeaderCellDef>Trình duyệt</mat-header-cell>
-              <mat-cell *matCellDef="let element">
+              <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1" [class.ads-click-ip]="element.isSpam === false && element.type === 1" [class.visitor-ip]="element.type === 2">
                 <img *ngIf="element.browser?.name === 'Firefox'"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png"
                   alt="" class="icon">
@@ -117,7 +119,7 @@
 
             <ng-container matColumnDef="isPrivateBrowsing">
               <mat-header-cell *matHeaderCellDef>Ẩn danh</mat-header-cell>
-              <mat-cell *matCellDef="let element">
+              <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1" [class.ads-click-ip]="element.isSpam === false && element.type === 1" [class.visitor-ip]="element.type === 2">
                 <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
                   <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
                 </span>
@@ -132,7 +134,8 @@
 
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef>Tại (địa điểm)</mat-header-cell>
-              <mat-cell *matCellDef="let element">{{element.location?.city || 'Unknown'}}
+              <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1" [class.ads-click-ip]="element.isSpam === false && element.type === 1" [class.visitor-ip]="element.type === 2">
+                {{element.location?.city || 'Unknown'}}
               </mat-cell>
             </ng-container>
 
@@ -143,7 +146,7 @@
       </div>
 
       <div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.xs="0" *ngIf="pageTotal !== 1">
-        <div fxFlex="20" fxFlex.xs="0"></div>
+        <div fxFlex="17.5" fxFlex.xs="0"></div>
         <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
           <div fxFlex="70" fxFlex.xs="100">
             <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
@@ -189,6 +192,12 @@
               {{lastHistory.device?.vendor || 'Unknown'}}
             </div>
           </div>
+        </div>
+        <div class="back-button" fxLayout="row" fxLayoutGap="12px">
+          <a (click)="backToMainReport()" fxLayout="row" mat-button color="accent">
+            <mat-icon color="accent">arrow_back</mat-icon>
+            <span>Trở về trước</span>
+          </a>
         </div>
       </div>
     </div>
