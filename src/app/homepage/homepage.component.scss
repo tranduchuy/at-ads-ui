@@ -510,7 +510,7 @@
       background-attachment: fixed;
 
       .feature {
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.5);
         padding: 70px 90px 70px 90px;
         color: white;
 
@@ -561,7 +561,7 @@
       padding-bottom: 15px;
       transition: 0.2s;
       text-align: justify;
-      height: 100px;
+      min-height: 100px;
 
       mat-icon {
         color: skyblue;
