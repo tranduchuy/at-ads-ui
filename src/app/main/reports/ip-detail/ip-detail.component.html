@@ -156,9 +156,9 @@
       </div>
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" *ngIf="pageTotal !== 1">
-        <div fxFlex="29"></div>
+        <div fxFlex="18.5" fxFlex.xs="0"></div>
         <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
-          <div fxFlex="61">
+          <div fxFlex="70" fxFlex.xs="100">
             <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
                 ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
               {{pageTotal}} trang</p>
