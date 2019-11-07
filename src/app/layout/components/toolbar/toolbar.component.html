@@ -18,7 +18,8 @@
 
         <div class="px-8 px-md-16">
             <!-- <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts> -->
-            <mat-form-field *ngIf="_sessionService.activeAdsAccountId && isAccountSelectionDisplayed === true" appearance="none">
+            <mat-form-field *ngIf="_sessionService.activeAdsAccountId && isAccountSelectionDisplayed === true"
+                appearance="none">
                 <img src="../../../../assets/icons/gg-ads.png" alt="googleAdsIcon" class="ggAds-icon">
                 <mat-label style="color: lightgreen">Đang kết nối tài khoản</mat-label>
                 <input matInput [value]="adsAccounts[0].name" readonly *ngIf="user.licence.type !== 'CUSTOM'">
@@ -45,12 +46,10 @@
     <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
         <div *ngIf="adminIsStandingForUser === true">
-            <button mat-button
-                    [matMenuTriggerFor]="userMenu"
-                    class="user-button btn-standby">
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button btn-standby">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar mr-0 mr-sm-16"
-                         [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                        [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
                     <span class="username mr-12" fxHide fxShow.gt-sm>
                         <strong>{{ user.name || '' }}</strong> <small style="margin-left: 5px;">đang thay quyền</small>
                     </span>
@@ -70,7 +69,7 @@
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar mr-0 mr-sm-16"
-                         [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                        [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{ user.name || '' }}</span>
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
@@ -96,6 +95,13 @@
 
             </mat-menu>
         </div>
+
+        <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
+
+        <button mat-icon-button fxHide.gt-md class="chat-panel-toggle-button" (click)="toggleSidebarOpen('chatPanel')"
+            aria-label="Toggle chat panel">
+            <mat-icon class="secondary-text">chat</mat-icon>
+        </button>
 
         <!-- <div class="toolbar-separator"></div>
 
@@ -139,7 +145,8 @@
 
     <div class="alert" *ngIf="isAlertDisplayed">
         Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống! Vui lòng chấp nhận và <span
-            style="color: skyblue; text-decoration: underline" (click)="updateAccountAcceptance()">nhấn vào đây</span> để
+            style="color: skyblue; text-decoration: underline" (click)="updateAccountAcceptance()">nhấn vào đây</span>
+        để
         cập
         nhật.
     </div>
