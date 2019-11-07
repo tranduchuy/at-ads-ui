@@ -5,7 +5,7 @@
       <div class="title ml-16" fxLayout="row" fxLayoutAlign="start center"
            (click)="unfoldSidebarTemporarily()">
           <mat-icon class="s-32 fuse-white-fg">chat</mat-icon>
-          <h3 class="ml-12">Team Chat</h3>
+          <h3 class="ml-12">Chat với hỗ trợ viên</h3>
       </div>
 
   </ng-container>
@@ -88,7 +88,8 @@
               </div>
 
               <div class="no-messages secondary-text">
-                  Start a conversation by typing your message below.
+                  <!-- Start a conversation by typing your message below. -->
+                  Bắt đầu cuộc trò chuyện bằng cách nhập tin nhắn của bạn dưới đây.
               </div>
 
           </ng-container>
@@ -102,7 +103,8 @@
                   </div>
 
                   <div class="no-contact secondary-text">
-                      Select a contact to start a conversation.
+                      <!-- Select a contact to start a conversation. -->
+                      Vui lòng chọn một hỗ trợ viên để bắt đầu cuộc trò chuyện.
                   </div>
 
               </div>
@@ -120,7 +122,7 @@
                 fxFlex fxLayout="row" fxLayoutAlign="start center">
 
               <mat-form-field class="message-text" fxFlex floatLabel="never" appearance="standard">
-                  <textarea matInput #replyInput ngModel name="message" placeholder="Type your message"
+                  <textarea matInput #replyInput ngModel name="message" placeholder="Nhập tin nhắn của bạn"
                             [rows]="1" [matTextareaAutosize]="true"></textarea>
               </mat-form-field>
 
