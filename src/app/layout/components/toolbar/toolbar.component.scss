@@ -154,6 +154,24 @@ toolbar {
     }
   }
 
+  .user-button {
+    right: 80px;
+    @include media-breakpoint("xs") {
+      right: 60px;
+    }
+  }
+
+  .chat-panel-toggle-button {
+    @include media-breakpoint("xs") {
+      mat-icon {
+        color: white !important;
+      }
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+  }
+
   .navbar-toggle-button {
     min-width: 56px;
     height: 56px;
