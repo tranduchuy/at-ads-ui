@@ -4,6 +4,10 @@
     max-width: 120px;
     padding-left: 0;
     padding-right: 10px;
+    font-size: 12px;
+    mat-icon {
+      font-size: 20px;
+    }
   }
 
   .table-wrapper {
@@ -27,13 +31,25 @@
       mat-header-row,
       mat-row {
         transition: 0.2s;
-        min-width: 600px;
+        min-width: 400px;
         width: 100%;
       }
 
       mat-header-cell {
         background: #039be5;
         color: white;
+      }
+
+      mat-cell {
+        font-size: 12px;
+
+        mat-icon {
+          font-size: 20px;
+        }
+
+        button {
+          font-size: 12px;
+        }
       }
 
       mat-row:hover {

@@ -25,7 +25,7 @@ import { OverviewReportComponent } from './overview-report/overview-report.compo
         component: SpamClickReportComponent
       },
       {
-        path: 'chi-tiet-ip/:ip',
+        path: 'chi-tiet-ip/:ip/:mainReportUrl',
         pathMatch: 'full',
         component: IpDetailComponent
       },
@@ -50,7 +50,7 @@ import { OverviewReportComponent } from './overview-report/overview-report.compo
         component: UserStatisticComponent
       },
       {
-        path: 'chi-tiet-thong-ke-nguoi-dung/:uuid',
+        path: 'chi-tiet-thong-ke-nguoi-dung/:uuid/:mainReportUrl',
         pathMatch: 'full',
         component: UserStatisticDetailComponent
       },

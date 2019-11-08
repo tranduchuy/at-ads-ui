@@ -22,7 +22,7 @@
 
     <form class="form">
 
-      <mat-form-field *ngIf="campaignList.length > 0 && !isProcessing">
+      <mat-form-field *ngIf="hasCampaign === true">
         <mat-icon matPrefix style="font-size: 20px; color: rgba(0,0,0,0.6);">search</mat-icon>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiếm">
       </mat-form-field>
@@ -86,7 +86,7 @@
         </button>
       </p>
 
-      <p class="notification" *ngIf="campaignList.length === 0 && !isProcessing">
+      <p class="notification" *ngIf="hasCampaign === false">
         Chúng tôi không tìm thấy chiến dịch nào trên tài khoản Google Ads này. Vui lòng <a (click)="getOriginalCampaigns()"
           class="link-button">thử lại</a> hoặc <a class="link-button" (click)="showSupportInfoDialog()">liên
           hệ</a> với hỗ trợ viên để được giúp đỡ.

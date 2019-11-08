@@ -10,16 +10,16 @@ fuse-sidebar {
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    width: 250px;
-    min-width: 250px;
-    max-width: 250px;
+    width: 235px;
+    min-width: 235px;
+    max-width: 235px;
     z-index: 1000;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
 
     @include media-breakpoint('xs') {
         min-width: 0 !important;
-        max-width: 80vw !important;
-        width: 80vw !important;
+        max-width: 65vw !important;
+        width: 65vw !important;
     }
 
     &.left-positioned {

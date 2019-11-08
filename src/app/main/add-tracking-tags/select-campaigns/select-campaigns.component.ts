@@ -35,6 +35,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   activatedAdsId: string;
   isProcessing: boolean = false;
   checkAll: boolean;
+  hasCampaign: boolean;
   numberOfEnableCampaigns: number;
 
   dataSource = new MatTableDataSource(this.campaignList);
@@ -53,6 +54,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   }
 
   ngOnInit() {
+    this._fuseProgressiveBarService.show();
     const sub = this._sessionService.getAccountId()
       .pipe(distinctUntilChanged())
       .subscribe((accountId: string) => {
@@ -137,39 +139,18 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
       .subscribe(res => {
         this.campaignList = res.data.campaignList;
 
-        const sub1 = this._addTrackingTagsService.getTrackingCampaigns()
-          .subscribe(res => {
+        if (this.campaignList.length > 0)
+          this.hasCampaign = true;
+        else this.hasCampaign = false;
 
-            this.trackingCampaignList = res.data.campaignIds;
-            this.selectedCampaigns = this.trackingCampaignList;
-
-            this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
-            this.numberOfEnableCampaigns = this.campaignList.filter(item => item.status === 'Hoạt động').length;
-
-            this.dataSource = new MatTableDataSource(this.campaignList);
-
-            setTimeout(() => {
-              this._fuseProgressiveBarService.hide();
-              this.isProcessing = false;
-            }, 0);
-          },
-            (error: HttpErrorResponse) => {
-
-              this.trackingCampaignList = [];
-
-              this._fuseProgressiveBarService.hide();
-              this._dialogService._openErrorDialog(error.error);
-              this.isProcessing = false;
-            });
-        this.subscriptions.push(sub1);
+        this.getTrackingCampaigns();
       },
         (error: HttpErrorResponse) => {
 
           if (error.error.messages) {
-
             this.campaignList = [];
             this.trackingCampaignList = [];
-
+            this.hasCampaign = false;
             this._dialogService._openErrorDialog(error.error);
             this.isProcessing = false;
           }
@@ -179,7 +160,34 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
     this.subscriptions.push(sub);
   }
 
+  getTrackingCampaigns() {
+    const sub = this._addTrackingTagsService.getTrackingCampaigns()
+      .subscribe(res => {
+        this.trackingCampaignList = res.data.campaignIds;
+        this.selectedCampaigns = this.trackingCampaignList;
+
+        this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
+        this.numberOfEnableCampaigns = this.campaignList.filter(item => item.status === 'Hoạt động').length;
+
+        this.dataSource = new MatTableDataSource(this.campaignList);
+
+        this._fuseProgressiveBarService.hide();
+        this.isProcessing = false;
+      },
+        (error: HttpErrorResponse) => {
+          this.trackingCampaignList = [];
+          this._fuseProgressiveBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.isProcessing = false;
+        });
+    this.subscriptions.push(sub);
+  }
+
   showSupportInfoDialog() {
-    this._dialogService._openInfoDialog('Vui lòng liên hệ email ha@appnet.edu.vn để được hỗ trợ thêm.');
+    this._dialogService._openInfoDialog(`
+    Vui lòng liên hệ
+    SĐT, Zalo, Viber 093.757.3139
+    để được hỗ trợ thêm.
+    `);
   }
 }

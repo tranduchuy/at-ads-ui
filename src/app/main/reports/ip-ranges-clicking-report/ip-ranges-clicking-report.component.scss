@@ -57,7 +57,7 @@
 
       mat-header-row,
       mat-row {
-        min-width: 1000px;
+        min-width: 800px;
         width: 100%;
         transition: 0.2s;
       }
@@ -101,6 +101,10 @@
 
       mat-row:hover {
         background-color: rgba(3, 155, 229, 0.1);
+      }
+
+      mat-cell {
+        font-size: 12px;
       }
 
       ul {

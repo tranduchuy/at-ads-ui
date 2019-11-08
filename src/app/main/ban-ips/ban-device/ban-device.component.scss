@@ -87,8 +87,12 @@
 
       mat-row,
       mat-header-row {
-        min-width: 1000px;
+        min-width: 800px;
         width: 100%;
+      }
+
+      mat-cell {
+        font-size: 12px;
       }
 
       mat-header-cell {

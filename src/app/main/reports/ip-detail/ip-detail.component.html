@@ -7,47 +7,12 @@
   <div class="main-inner">
     <div class="inner">
 
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center start">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
 
-        <div class="left" fxFlex="29" fxFlex.xs="100">
+        <div class="left" fxFlex="20">
           <div class="ip-main-info" fxLayout="column" fxLayoutAlign="center center">
             <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
             <p style="color: #039be5; font-weight: bold">IP: {{ip}}</p>
-          </div>
-
-          <div class="bottom" fxLayout="column" fxLayoutGap="17px" fxLayoutAlign="center start">
-            <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
-              <div class="last-history-icon">
-                <mat-icon color="accent">calendar_today</mat-icon>
-              </div>
-              <div class="title" style="text-align: left">
-                Ngày ghi nhận cuối
-                <div style="color: gray" *ngIf="lastClickHistory">
-                  {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>
-              </div>
-            </div>
-            <div class="access-location" fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="center center">
-              <div class="last-history-icon">
-                <mat-icon color="accent">location_on</mat-icon>
-              </div>
-              <div class="title" style="text-align: left">
-                Vị trí truy cập
-                <div style="color: gray" *ngIf="lastClickHistory">
-                  {{lastClickHistory.location?.city || 'Unknown'}}
-                </div>
-              </div>
-            </div>
-            <div class="last-access-device" fxLayout="row" fxLayoutGap="12px">
-              <div class="last-history-icon">
-                <mat-icon color="accent">speaker_phone</mat-icon>
-              </div>
-              <div class="title" style="text-align: left">
-                Thiết bị truy cập cuối
-                <div style="color: gray" *ngIf="lastClickHistory">
-                  {{lastClickHistory.device?.vendor || 'Unknown'}}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -58,16 +23,18 @@
 
             <ng-container matColumnDef="type">
               <mat-header-cell *matHeaderCellDef>Click Ads/Xem trang</mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
-                <mat-icon *ngIf="element.type === 2" style="color: #44b543" class="user-action-icon" matTooltip="Xem trang">
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
+                <mat-icon *ngIf="element.type === 2" style="color: #44b543" class="user-action-icon"
+                  matTooltip="Xem trang">
                   remove_red_eye</mat-icon>
 
-                <mat-icon *ngIf="element.isSpam === true && element.type === 1"
-                  style="color: crimson" class="user-action-icon" matTooltip="Đã chặn và không bị tính tiền">verified_user
+                <mat-icon *ngIf="element.isSpam === true && element.type === 1" style="color: crimson"
+                  class="user-action-icon" matTooltip="Đã chặn và không bị tính tiền">verified_user
                 </mat-icon>
 
-                <mat-icon *ngIf="element.isSpam === false && element.type === 1" style="color: gold" class="user-action-icon"
-                  matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
+                <mat-icon *ngIf="element.isSpam === false && element.type === 1" style="color: gold"
+                  class="user-action-icon" matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
                 <p *ngIf="element.type === 1">Click Quảng cáo</p>
                 <p *ngIf="element.type === 2">Xem trang</p>
               </mat-cell>
@@ -75,19 +42,21 @@
 
             <ng-container matColumnDef="createdAt">
               <mat-header-cell *matHeaderCellDef>Thời gian</mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
                 {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}}
               </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="uuid">
               <mat-header-cell *matHeaderCellDef>Người dùng (uid)</mat-header-cell>
-              <mat-cell *matCellDef="let element; let i = index" [class.type1]="element.type === 1"
-                [class.type2]="element.type === 2">
+              <mat-cell *matCellDef="let element; let i = index"
+                [class.type1]="element.isSpam === false && element.type === 1" [class.type2]="element.type === 2"
+                [class.type3]="element.isSpam === true && element.type === 1">
                 <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" class="user-image">
                 <a mat-button color="accent" *ngIf="element.uuid" class="uuid-detail-link"
                   matTooltip="Nhấn vào để xem chi tiết"
-                  [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid]">
+                  [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid, router.url]">
                   <span>*{{element.uuid.slice(-12)}}*</span>
                 </a>
                 <span style="color:silver; font-weight: bold" *ngIf="!element.uuid">Unknown</span>
@@ -96,7 +65,8 @@
 
             <ng-container matColumnDef="isPrivateBrowsing">
               <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
                 <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
                   <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
                 </span>
@@ -106,14 +76,17 @@
 
             <ng-container matColumnDef="href">
               <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
-                <a href="{{element.href}}">{{element.pathname}}</a>
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
+                <a
+                  href="{{element.href}}">{{element.pathname}}{{element.pathname}}{{element.pathname}}{{element.pathname}}</a>
               </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="os">
               <mat-header-cell *matHeaderCellDef>Hệ điều hành</mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
                 <img *ngIf="element.os?.name === 'Windows'"
                   src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
                 <img *ngIf="element.os?.name === 'iOS'"
@@ -132,7 +105,8 @@
 
             <ng-container matColumnDef="browser">
               <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
                 <img *ngIf="element.browser?.name === 'Firefox'"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png"
                   alt="" class="icon">
@@ -160,13 +134,15 @@
 
             <ng-container matColumnDef="networkCompany">
               <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
                 {{element.networkCompany?.name || 'Unknown'}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-              <mat-cell *matCellDef="let element" [class.type1]="element.type === 1" [class.type2]="element.type === 2">
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
                 {{element.location?.city || 'Unknown'}}
               </mat-cell>
             </ng-container>
@@ -180,9 +156,9 @@
       </div>
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" *ngIf="pageTotal !== 1">
-        <div fxFlex="29"></div>
+        <div fxFlex="18.5" fxFlex.xs="0"></div>
         <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
-          <div fxFlex="61">
+          <div fxFlex="70" fxFlex.xs="100">
             <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
                 ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
               {{pageTotal}} trang</p>
@@ -193,7 +169,46 @@
         </div>
       </div>
 
-
+      <div class="bottom" fxLayout="column" fxLayoutGap="17px" fxLayoutAlign="center start">
+        <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
+          <div class="last-history-icon">
+            <mat-icon color="accent">calendar_today</mat-icon>
+          </div>
+          <div class="title" style="text-align: left">
+            Ngày ghi nhận cuối
+            <div style="color: gray" *ngIf="lastClickHistory">
+              {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>
+          </div>
+        </div>
+        <div class="access-location" fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="center center">
+          <div class="last-history-icon">
+            <mat-icon color="accent">location_on</mat-icon>
+          </div>
+          <div class="title" style="text-align: left">
+            Vị trí truy cập
+            <div style="color: gray" *ngIf="lastClickHistory">
+              {{lastClickHistory.location?.city || 'Unknown'}}
+            </div>
+          </div>
+        </div>
+        <div class="last-access-device" fxLayout="row" fxLayoutGap="12px">
+          <div class="last-history-icon">
+            <mat-icon color="accent">speaker_phone</mat-icon>
+          </div>
+          <div class="title" style="text-align: left">
+            Thiết bị truy cập cuối
+            <div style="color: gray" *ngIf="lastClickHistory">
+              {{lastClickHistory.device?.vendor || 'Unknown'}}
+            </div>
+          </div>
+        </div>
+        <div class="back-button" fxLayout="row" fxLayoutGap="12px">
+          <a (click)="backToMainReport()" fxLayout="row" mat-button color="accent">
+            <mat-icon color="accent">arrow_back</mat-icon>
+            <span>Trở về trước</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

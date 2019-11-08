@@ -6,6 +6,7 @@ import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PreviousRouteService } from 'app/shared/services/previous-route.service';
 
 @Component({
   selector: 'app-ip-clicking-report',
@@ -24,7 +25,7 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
     private _reportService: ReportService,
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    public router: Router,
   ) {
     super();
   }
@@ -36,6 +37,7 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
   pageLimit: number = 10;
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
@@ -44,13 +46,13 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
           const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
           if (page) {
-            if(isNaN(Number(page)))
+            if (isNaN(Number(page)))
               return;
             this.currentPageNumber = Number(page);
-          }        
+          }
           else {
             this.currentPageNumber = 1;
-            this._router.navigate([], {
+            this.router.navigate([], {
               queryParams: {
                 page: this.currentPageNumber,
               }
@@ -63,8 +65,12 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
     this.subscriptions.push(sub);
   }
 
+  getCurrentRoute() {
+    return `/bao-cao/ip-dang-click?page=${this.currentPageNumber}`;
+  }
+
   showReason(reason: any) {
-    if(reason)
+    if (reason)
       console.log(reason.message);
     else console.log('Unknown');
   }
@@ -96,7 +102,7 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
 
   changePage(event) {
     this.getDailyClickingReport(event);
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: event,
       }

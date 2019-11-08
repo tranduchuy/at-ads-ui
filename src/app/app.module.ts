@@ -39,6 +39,9 @@ import { LogoutModule } from './authentication/logout/logout.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { UpgradeLicenceComponent } from './main/upgrade-licence/upgrade-licence.component';
+import { PreviousRouteService } from './shared/services/previous-route.service';
+import { FakeDbService } from './fake-db/fake-db.service';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 const config: SocketIoConfig = {
   url: environment.hostApi + '/WEB_HOMEPAGE',
@@ -62,6 +65,12 @@ export function init_app(appInitService: AppInitService): any {
     HttpClientModule,
     SocketIoModule.forRoot(config),
     TranslateModule.forRoot(),
+
+    TranslateModule.forRoot(),
+    InMemoryWebApiModule.forRoot(FakeDbService, {
+      delay: 0,
+      passThruUnknownUrl: true
+    }),
 
     // Material moment date module
     MatMomentDateModule,
@@ -99,7 +108,7 @@ export function init_app(appInitService: AppInitService): any {
 
     // Cookie
 
-    CookieModule.forRoot({domain: ''}),
+    CookieModule.forRoot({ domain: '' }),
   ],
   entryComponents: [
     CheckWebsiteTrackingDialogComponent,
@@ -113,6 +122,7 @@ export function init_app(appInitService: AppInitService): any {
     AuthService,
     DialogService,
     SessionService,
+    PreviousRouteService,
     ValidatorsService,
     AppInitService,
     { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true },

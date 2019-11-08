@@ -91,9 +91,30 @@
         }
       }
 
+      mat-cell {
+        font-size: 12px;
+
+        mat-icon {
+          font-size: 20px
+        }
+
+        .tracking-status {
+          font-size: 12px;
+          border: 0;
+          padding-left: 0;
+          max-width: 100px;
+        }
+      }
+
       mat-header-cell {
         background: #039be5;
         color: white;
+      }
+
+      mat-header-row,
+      mat-row {
+        min-width: 650px;
+        width: 100%;
       }
     }
 

@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import * as moment from 'moment'
+import * as Url from 'url-parse';
 
 interface Node {
   name: string[];
@@ -37,6 +37,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   totalItems: number;
   pageTotal: number;
   pageLimit: number = 10;
+  mainReportUrl: any;
   collapsedNodes: string[] = [];
 
   clicksDataSource = [];
@@ -53,30 +54,43 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     private _reportService: ReportService,
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    public router: Router,
   ) {
     super();
   }
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
     const sub = this._activatedRoute.params
       .subscribe((params: any) => {
-
-        if (params.ip) {
+        if (params) {
+          this.mainReportUrl = new Url(params.mainReportUrl);
+          this.mainReportUrl.page = this.mainReportUrl.query.split('=')[1];
           this.ip = params.ip;
-          const getAccountIdSub = this._sessionService.getAccountId()
-            .subscribe(
-              (accoundId: string) => {
-                if (accoundId) {
-                  this.checkAccountAcceptance();
-                }
-              }
-            );
-          this.subscriptions.push(getAccountIdSub);
+          this.getAccountId();
         }
-
       });
     this.subscriptions.push(sub);
+  }
+
+  backToMainReport() {
+    this.router.navigate([this.mainReportUrl.pathname], {
+      queryParams: {
+        page: this.mainReportUrl.page,
+      }
+    });
+  }
+
+  getAccountId() {
+    const getAccountIdSub = this._sessionService.getAccountId()
+      .subscribe(
+        (accoundId: string) => {
+          if (accoundId) {
+            this.checkAccountAcceptance();
+          }
+        }
+      );
+    this.subscriptions.push(getAccountIdSub);
   }
 
   getIPClicksList(page: number) {
@@ -124,7 +138,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
         }
         else {
           this.currentPageNumber = 1;
-          this._router.navigate([], {
+          this.router.navigate([], {
             queryParams: {
               page: this.currentPageNumber,
             }
@@ -167,7 +181,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
 
   changePage(event) {
     this.getIPClicksList(event);
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: event,
       }

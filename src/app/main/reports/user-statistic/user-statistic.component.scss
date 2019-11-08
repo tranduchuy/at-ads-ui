@@ -73,6 +73,7 @@
           overflow: hidden;
           white-space: nowrap;
           font-weight: bold;
+          font-size: 12px;
 
           &:hover {
             background: rgba(3, 155, 229, 0.1);
@@ -121,6 +122,10 @@
 
         mat-row:hover {
           background-color: rgba(3, 155, 229, 0.1);
+        }
+
+        mat-cell {
+          font-size: 12px;
         }
 
         ul {

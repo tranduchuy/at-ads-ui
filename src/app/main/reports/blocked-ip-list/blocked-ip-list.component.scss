@@ -38,10 +38,16 @@
           font-weight: bold;
           padding-left: 2px;
           transition: 0.2s;
+          font-size: 12px;
 
           &:hover {
             background: rgba(3, 155, 229, 0.1);
           }
+        }
+
+        .view-campaign-button {
+          margin-left: 10px;
+          font-size: 12px;
         }
 
         mat-header-cell:nth-child(1),
@@ -64,7 +70,7 @@
 
         mat-header-row,
         mat-row {
-          min-width: 1100px;
+          min-width: 900px;
           width: 100%;
         }
 
@@ -76,6 +82,7 @@
         mat-cell {
           padding-top: 5px;
           padding-bottom: 5px;
+          font-size: 12px;
         }
 
         mat-row {
@@ -95,6 +102,4 @@
 }
 
 @media screen and (max-width: 600px) {
-  .container {
-  }
 }

@@ -199,11 +199,17 @@
       box-shadow: 0 2px 8px black;
 
       .banner {
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.65);
         color: white;
         padding: 130px 30px 70px 30px;
         position: relative;
         z-index: 100;
+
+        .decoration {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
 
         .app-title {
           filter: drop-shadow(0px 1px 2px black);
@@ -561,10 +567,11 @@
       padding-bottom: 15px;
       transition: 0.2s;
       text-align: justify;
-      height: 100px;
+      min-height: 100px;
 
       mat-icon {
         color: skyblue;
+        margin-top: -5px;
       }
 
       p {
@@ -828,6 +835,10 @@
           padding-bottom: 50px;
           padding-top: 100px;
 
+          .decoration {
+            width: 60vw;
+          }
+
           .app-title {
             font-size: 22px !important;
           }
@@ -902,7 +913,7 @@
       }
 
       .feature-container {
-        background-size: cover;
+        background: url("../../assets/images/backgrounds/maxresdefault.jpg");
 
         .feature {
           padding: 10px;

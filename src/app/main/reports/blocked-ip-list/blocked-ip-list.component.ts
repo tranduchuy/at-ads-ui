@@ -31,12 +31,13 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
     private _dialogService: DialogService,
     private _reportService: ReportService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    public router: Router
   ) {
     super();
   }
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
@@ -51,7 +52,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
           }
           else {
             this.currentPageNumber = 1;
-            this._router.navigate([], {
+            this.router.navigate([], {
               queryParams: {
                 page: this.currentPageNumber,
               }
@@ -143,7 +144,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
 
   changePage(event) {
     this.getBlockedIPsListReport(event);
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: event,
       }

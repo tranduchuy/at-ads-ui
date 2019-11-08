@@ -7,6 +7,8 @@ import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import * as moment from 'moment';
+import * as Url from 'url-parse';
+import { PreviousRouteService } from 'app/shared/services/previous-route.service';
 
 @Component({
   selector: 'app-user-statistic-detail',
@@ -29,6 +31,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   totalItems: number;
   pageTotal: number;
   pageLimit: number;
+  mainReportUrl: any;
 
   selectedDateRange: any = {
     start: moment().subtract(6, 'days'),
@@ -52,33 +55,44 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     private _reportService: ReportService,
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
-    
+    public router: Router,
   ) {
     super();
   }
 
   ngOnInit() {
+    this._fuseProgressBarService.show();
     const sub = this._activatedRoute.params
       .subscribe((params: any) => {
-
-        if (params.uuid) {
+        if (params) {
           this.uuid = params.uuid;
           this.shortUuid = '*' + params.uuid.slice(-12) + '*';
-          
-          const getAccountIdSub = this._sessionService.getAccountId()
-            .subscribe(
-              (accoundId: string) => {
-                if (accoundId) {
-                 this.checkAccountAcceptance();
-                }
-              }
-            );
-          this.subscriptions.push(getAccountIdSub);
+          this.mainReportUrl = new Url(params.mainReportUrl);
+          this.mainReportUrl.page = this.mainReportUrl.query.split('=')[1];
+          this.getAccountId();
         }
-
       });
     this.subscriptions.push(sub);
+  }
+
+  getAccountId() {
+    const getAccountIdSub = this._sessionService.getAccountId()
+      .subscribe(
+        (accoundId: string) => {
+          if (accoundId) {
+            this.checkAccountAcceptance();
+          }
+        }
+      );
+    this.subscriptions.push(getAccountIdSub);
+  }
+
+  backToMainReport() {
+    this.router.navigate(['/bao-cao/thong-ke-nguoi-dung'], {
+      queryParams: {
+        page: this.mainReportUrl.page,
+      }
+    });
   }
 
   checkAccountAcceptance() {
@@ -99,14 +113,14 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
         }
         else {
           this.currentPageNumber = 1;
-          this._router.navigate([], {
+          this.router.navigate([], {
             queryParams: {
               page: this.currentPageNumber,
             }
           });
         }
 
-        this.getUserStatisticDetail(this.uuid,this.currentPageNumber,this.pageLimit);
+        this.getUserStatisticDetail(this.uuid, this.currentPageNumber, this.pageLimit);
       });
     this.subscriptions.push(sub);
   }
@@ -149,7 +163,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   }
 
   changePage(event) {
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: event,
       }
@@ -167,7 +181,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
 
   onApplyDateRange() {
     this.currentPageNumber = 1;
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: this.currentPageNumber,
       }

@@ -132,7 +132,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     private _reportService: ReportService,
     public _sessionService: SessionService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router,
+    public router: Router,
     private _websiteManagementService: WebsiteManagementService
 
   ) {
@@ -164,7 +164,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     }
     else {
       this.currentPageNumber = 1;
-      this._router.navigate([], {
+      this.router.navigate([], {
         queryParams: {
           page: this.currentPageNumber,
         }
@@ -251,7 +251,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   changeItemsPerPageOption(e) {
     this.currentPageNumber = 1;
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: this.currentPageNumber,
       }
@@ -375,7 +375,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   onApplyDateRange() {
     this.currentPageNumber = 1;
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: this.currentPageNumber,
       }
@@ -386,7 +386,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   changePage(event) {
     this.getSessionReport(event);
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         page: event,
       }
