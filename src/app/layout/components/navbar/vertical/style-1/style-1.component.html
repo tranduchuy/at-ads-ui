@@ -33,14 +33,14 @@
             <img class="avatar"
                 [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
         </div>
-        <div class="user-licence" *ngIf="user.email" fxLayout="row" fxLayoutAlign="center center">
+        <div class="user-licence" *ngIf="user.email && user.licence" fxLayout="row" fxLayoutAlign="center center">
             <span [class.free-label]="user.licence.type === 'FREE'" [class.vip-label]="user.licence.type === 'VIP1'"
                 [class.custom-label]="user.licence.type === 'CUSTOM'" fxLayout="row">
-                {{user.licence.name}}
+                {{user.licence?.name}}
             </span>
             <span [class.vip-expiration]="user.licence.type === 'VIP1'" [class.custom-expiration]="user.licence.type === 'CUSTOM'"
                 *ngIf="user.licence.type !== 'FREE' && user.licence.expiredAt"
-                matTooltip="Hạn dùng đến hết ngày {{user.licence.expiredAt | date: 'dd/MM/yyyy'}}">{{user.licence.expiredAt | date: 'dd/MM/yyyy'}}</span>
+                matTooltip="Hạn dùng đến hết ngày {{user.licence.expiredAt | date: 'dd/MM/yyyy'}}">{{user.licence?.expiredAt | date: 'dd/MM/yyyy'}}</span>
         </div>
     </div>
 
