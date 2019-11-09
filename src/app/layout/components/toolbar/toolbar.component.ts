@@ -157,6 +157,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             this._sessionService.getUser(),
             this._sessionService.getStandByUser$()
         ]).subscribe((values: any[]) => {
+            console.log('=======', values);
             const user = values[0];
             if (user) {
                 this.user.name = user.name;
