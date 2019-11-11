@@ -202,9 +202,13 @@ export class ChatPanelComponent extends PageBaseComponent implements OnInit, Aft
      * @returns {boolean}
      */
     shouldShowContactAvatar(message, i): boolean {
+        // return (
+        //     message.who === this.selectedContact.id &&
+        //     ((this.chat.dialog[i + 1] && this.chat.dialog[i + 1].who !== this.selectedContact.id) || !this.chat.dialog[i + 1])
+        // );
         return (
-            message.who === this.selectedContact.id &&
-            ((this.chat.dialog[i + 1] && this.chat.dialog[i + 1].who !== this.selectedContact.id) || !this.chat.dialog[i + 1])
+            message.who === this.loggedInUser._id &&
+            ((this.chat.dialog[i + 1] && this.chat.dialog[i + 1].who !== this.loggedInUser._id) || !this.chat.dialog[i + 1])
         );
     }
 
