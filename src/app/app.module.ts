@@ -1,4 +1,4 @@
-import { Injector, NgModule } from '@angular/core';
+import { Injector, NgModule, Injectable } from '@angular/core';
 import { APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -38,10 +38,10 @@ import { MatTableModule } from '@angular/material';
 import { LogoutModule } from './authentication/logout/logout.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { UpgradeLicenceComponent } from './main/upgrade-licence/upgrade-licence.component';
 import { PreviousRouteService } from './shared/services/previous-route.service';
 import { FakeDbService } from './fake-db/fake-db.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ChatService } from './shared/services/chat.service';
 
 const config: SocketIoConfig = {
   url: environment.hostApi + '/WEB_HOMEPAGE',
@@ -126,6 +126,8 @@ export function init_app(appInitService: AppInitService): any {
     ValidatorsService,
     AppInitService,
     { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true },
+
+    ChatService
   ],
   bootstrap: [
     AppComponent
