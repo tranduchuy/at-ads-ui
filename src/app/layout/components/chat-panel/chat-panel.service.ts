@@ -63,7 +63,7 @@ export class ChatPanelService {
                             id: "1725a680b3249760ea21de52",
                             dialog: [
                                 {
-                                    message: "Chào Bạn! Mình là Long. Mình sẽ hỗ trợ Bạn giải đáp mọi thắc mắc khi sử dụng công cụ. Chúc Bạn sử dụng Công cụ Chống Click Ảo 2019 vui vẻ và đạt được hiệu quả cao.",
+                                    message: "Chào Bạn! Mình là Long. Mình sẽ hỗ trợ Bạn giải đáp mọi thắc mắc khi sử dụng công cụ. Chúc Bạn sử dụng Công cụ Chặn Click Ảo 2019 vui vẻ và đạt được hiệu quả cao.",
                                     time: new Date().toISOString(),
                                     who: "5725a680b3249760ea21de52",
                                 }
