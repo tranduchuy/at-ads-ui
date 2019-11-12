@@ -30,6 +30,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 
 export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDestroy {
     adminIsStandingForUser = false;
+    standBy: any = {};
     user: any = {};
     horizontalNavbar: boolean;
     rightNavbar: boolean;
@@ -157,6 +158,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             this._sessionService.getUser(),
             this._sessionService.getStandByUser$()
         ]).subscribe((values: any[]) => {
+            console.log('=======', values);
             const user = values[0];
             if (user) {
                 this.user.name = user.name;
@@ -168,10 +170,9 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
             if (values[1]) {
                 this.adminIsStandingForUser = true;
-                this.user.name = values[1].name;
-                this.user.avatar = values[1].avatar || '';
-                this.user.email = values[1].email;
-                this.user.licence = values[1].licence;
+                this.standBy.name = values[1].name;
+                this.standBy.avatar = values[1].avatar || '';
+                this.standBy.email = values[1].email;
             }
         });
         this.subscriptions.push(sub);
@@ -328,21 +329,21 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     }
                 }
             },
-                (error: HttpErrorResponse) => {
-                    this._fuseProgressiveBarService.hide();
-                    this.adsAccounts = [];
-                    this._sessionService.setListAccounts(this.adsAccounts);
-                    this._sessionService.completeCheckingIfUserHasAccount(false);
-                    this._sessionService.unsetActiveGoogleAdsAccount();
-                    this._fuseNavigationService.reloadNavigation();
-                    this.isProcessing = false;
-                    if (action) {
-                        const { name, message } = action;
-                        if (name === 'remove') {
-                            this._dialogService._openSuccessDialog({ messages: [message] });
-                        }
+            (error: HttpErrorResponse) => {
+                this._fuseProgressiveBarService.hide();
+                this.adsAccounts = [];
+                this._sessionService.setListAccounts(this.adsAccounts);
+                this._sessionService.completeCheckingIfUserHasAccount(false);
+                this._sessionService.unsetActiveGoogleAdsAccount();
+                this._fuseNavigationService.reloadNavigation();
+                this.isProcessing = false;
+                if (action) {
+                    const { name, message } = action;
+                    if (name === 'remove') {
+                        this._dialogService._openSuccessDialog({ messages: [message] });
                     }
-                });
+                }
+            });
         this.subscriptions.push(sub);
     }
 

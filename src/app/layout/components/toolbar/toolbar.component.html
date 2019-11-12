@@ -22,6 +22,8 @@
                 appearance="none">
                 <img src="../../../../assets/icons/gg-ads.png" alt="googleAdsIcon" class="ggAds-icon">
                 <mat-label style="color: lightgreen">Đang kết nối tài khoản</mat-label>
+                
+
                 <input matInput [value]="adsAccounts[0].name" readonly *ngIf="user.licence.type !== 'CUSTOM'">
                 <mat-select [formControl]="accountCtrl" placeholder="Tài khoản Google Ads" #singleSelect
                     (selectionChange)="selectAccount()" *ngIf="user.licence.type === 'CUSTOM'">
@@ -33,6 +35,7 @@
                         {{account.name}}
                     </mat-option>
                 </mat-select>
+                
                 <!-- <span class="free-label" *ngIf="accountCtrl.value?.isFree === true">FREE</span>
                 <span *ngIf="accountCtrl.value?.isFree === false">
                     <span class="vip-label">VIP</span>
@@ -49,9 +52,9 @@
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button btn-standby">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar mr-0 mr-sm-16"
-                        [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                        [src]="standBy.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
                     <span class="username mr-12" fxHide fxShow.gt-sm>
-                        <strong>{{ user.name || '' }}</strong> <small style="margin-left: 5px;">đang thay quyền</small>
+                        <strong>{{ standBy.name || '' }}</strong> <small style="margin-left: 5px;">đang thay quyền</small>
                     </span>
                     <!--<mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>-->
                 </div>
