@@ -66,9 +66,10 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   lastOffset = 0;
   isContactFooterDisplayed: boolean = true;
-  isTopbarDisplayed = false;
-  isTopbarTitleDisplayed = false;
+  isTopbarDisplayed: boolean = true;
+  isTopbarTitleDisplayed: boolean = true;
   isContactDisplayed: boolean = false;
+  isLoginButtonDisplayed: boolean = false;
 
   scroll = (event: any): void => {
     const currentOffset = event.srcElement.scrollTop;
@@ -77,11 +78,19 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     //   this.isContactFooterDisplayed = false;
     // else this.isContactFooterDisplayed = true;
 
-    if (currentOffset > 470) {
-      this.isTopbarDisplayed = true;
-      this.isTopbarTitleDisplayed = window.innerWidth > 600;
+    // if (currentOffset > 470) {
+    //   this.isTopbarDisplayed = true;
+    //   this.isTopbarTitleDisplayed = window.innerWidth > 600;
+    // } else {
+    //   this.isTopbarDisplayed = false;
+    // }
+
+    if(currentOffset > 440) {
+      this.isLoginButtonDisplayed = true;
+      this.isTopbarTitleDisplayed = window.innerWidth > 600 ? true : false;
     } else {
-      this.isTopbarDisplayed = false;
+      this.isLoginButtonDisplayed = false;
+      this.isTopbarTitleDisplayed = true;
     }
 
     this.lastOffset = currentOffset;
