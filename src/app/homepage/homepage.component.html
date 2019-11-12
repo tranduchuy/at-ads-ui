@@ -5,21 +5,21 @@
    </div>
 
    <div class="topbar-container" *ngIf="isTopbarDisplayed">
-      <div class="topbar">
+      <div class="topbar" [class.topbar2]="isLoginButtonDisplayed">
          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="10px">
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
                <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
                <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed">
-                  Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads
+                  CHẶN CLICK ẢO 2019
                </span>
             </div>
-            <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
+            <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin && isLoginButtonDisplayed"
                class="topbar-google-button" fxFlex="nogrow">
                <img src="../../assets/icons/google-icon.png"
                   style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
                Google
             </button>
-            <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()" *ngIf="isOnLogin"
+            <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()" *ngIf="isOnLogin && isLoginButtonDisplayed"
                fxFlex="nogrow">
                TRUY CẬP HỆ THỐNG CHỐNG CLICK ẢO<mat-icon style="font-size: 20px">navigate_next</mat-icon>
             </button>
