@@ -154,21 +154,40 @@ toolbar {
     }
   }
 
-  .user-button {
-    right: 80px;
-    @include media-breakpoint("xs") {
-      right: 60px;
-    }
-  }
-
   .chat-panel-toggle-button {
-    @include media-breakpoint("xs") {
-      mat-icon {
-        color: white !important;
-      }
-      top: 0;
-      right: 0;
-      border-radius: 0;
+    mat-icon {
+      color: white !important;
+      font-size: 30px;
+      margin-left: -5px;
+    }
+
+    //background: rgba(0, 0, 0, 0.3) !important;
+    right: 0;
+    top: 90vh;
+    border-radius: 50%;
+    padding: 0;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
+
+    transition: 0.2s;
+    &:hover {
+      transform: scale(1.05,1.05);
+    }
+
+    .supporter-avatar{
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;  
+    }
+
+    .say-hi {
+      position: relative;
+      z-index: 200;
+      font-size: 11px !important; 
+      background: crimson;
+      padding: 2.8px 4px 2.8px 4px;
+      border-radius: 50%;
+      top: -20px;
+      right: 15px;
     }
   }
 

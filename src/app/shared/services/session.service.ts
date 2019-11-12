@@ -17,11 +17,20 @@ export class SessionService {
   private _doesUserHaveAccount$ = new BehaviorSubject<boolean>(false);
   private _listAccounts$ = new BehaviorSubject<any>(false);
   private _removedAccountId$ = new BehaviorSubject<string>('');
+  private _isChatPanelShow$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private cookieService: CookieService
   ) {
 
+  }
+
+  onShowingChatPanel(): Observable<boolean> {
+    return this._isChatPanelShow$.asObservable();
+  }
+
+  showChatPanel() {
+    return this._isChatPanelShow$.next(true);
   }
 
   onRemovingAccount(): Observable<string> {

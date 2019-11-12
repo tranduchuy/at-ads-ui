@@ -11,6 +11,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.component';
 import { MatSelectModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { TooltipModule } from '@swimlane/ngx-charts';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,
+        TooltipModule,
 
         FuseSharedModule,
         FuseSearchBarModule,

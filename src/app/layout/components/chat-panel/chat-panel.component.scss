@@ -55,6 +55,7 @@ chat-panel {
     max-width: 72px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    display: none;
 
     // Perfect scrollbar
     .ps__rail-y {
@@ -187,6 +188,10 @@ chat-panel {
           padding: 12px;
           max-width: 100%;
 
+          font-size: 13px !important;
+          color: rgba(0, 0, 0, 0.9) !important;
+          background: #eee !important;
+
           .message {
             white-space: pre-wrap;
             line-height: 1.2;
@@ -246,6 +251,10 @@ chat-panel {
 
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
+
+            font-size: 13px !important;
+            color: white !important;
+            background: #3c4052 !important;
 
             .time {
               justify-content: flex-end;
@@ -374,6 +383,9 @@ fuse-sidebar {
     width: 360px;
     min-width: 360px;
     max-width: 360px;
+
+    height: 60vh !important;
+    top: 40vh;
 
     @include media-breakpoint("xs") {
       min-width: 0 !important;

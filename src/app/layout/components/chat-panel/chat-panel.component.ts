@@ -78,13 +78,13 @@ export class ChatPanelComponent extends PageBaseComponent implements OnInit, Aft
             //this.contacts = this._chatPanelService.contacts;
             this.contacts = [
                 {
-                    'id': '5725a680b3249760ea21de52_Long',
+                    'id': '5725a680b3249760ea21de52',
                     'name': 'Mr. Long (Hỗ trợ viên)',
                     'avatar': 'assets/images/avatars/Long.jpeg',
                     'status': 'online',
                     'mood': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
                 },
-            ]
+            ];
             this.user = this._chatPanelService.user;
         });
 
@@ -96,6 +96,17 @@ export class ChatPanelComponent extends PageBaseComponent implements OnInit, Aft
             });
 
         this.getLoggedInUser();
+        this.onShowingChatPanel();
+    }
+
+    onShowingChatPanel() {
+        const sub = this._sessionService.onShowingChatPanel()
+            .subscribe((isShown: boolean) => {
+                if (isShown) {
+                    this.toggleChat(this.contacts[0]);
+                }
+            });
+        this.subscriptions.push(sub);
     }
 
     getLoggedInUser() {
@@ -184,6 +195,19 @@ export class ChatPanelComponent extends PageBaseComponent implements OnInit, Aft
      * Unfold the sidebar temporarily
      */
     unfoldSidebarTemporarily(): void {
+        // Set the selected contact
+        this.selectedContact = this.contacts[0];
+
+        // Load the chat
+        this._chatPanelService.getChat(this.contacts[0].id).then((chat) => {
+
+            // Set the chat
+            this.chat = chat;
+
+            // Prepare the chat for the replies
+            this._prepareChatForReplies();
+        });
+        
         this._fuseSidebarService.getSidebar('chatPanel').unfoldTemporarily();
     }
 

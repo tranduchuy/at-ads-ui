@@ -158,7 +158,6 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             this._sessionService.getUser(),
             this._sessionService.getStandByUser$()
         ]).subscribe((values: any[]) => {
-            console.log('=======', values);
             const user = values[0];
             if (user) {
                 this.user.name = user.name;
@@ -212,6 +211,11 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 }
             });
         this.subscriptions.push(getAdsIdSub);
+    }
+
+    showChatPanel() {
+        this._sessionService.showChatPanel();
+        this.toggleSidebarOpen('chatPanel');
     }
 
     onRemovingAccount() {
@@ -329,21 +333,21 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     }
                 }
             },
-            (error: HttpErrorResponse) => {
-                this._fuseProgressiveBarService.hide();
-                this.adsAccounts = [];
-                this._sessionService.setListAccounts(this.adsAccounts);
-                this._sessionService.completeCheckingIfUserHasAccount(false);
-                this._sessionService.unsetActiveGoogleAdsAccount();
-                this._fuseNavigationService.reloadNavigation();
-                this.isProcessing = false;
-                if (action) {
-                    const { name, message } = action;
-                    if (name === 'remove') {
-                        this._dialogService._openSuccessDialog({ messages: [message] });
+                (error: HttpErrorResponse) => {
+                    this._fuseProgressiveBarService.hide();
+                    this.adsAccounts = [];
+                    this._sessionService.setListAccounts(this.adsAccounts);
+                    this._sessionService.completeCheckingIfUserHasAccount(false);
+                    this._sessionService.unsetActiveGoogleAdsAccount();
+                    this._fuseNavigationService.reloadNavigation();
+                    this.isProcessing = false;
+                    if (action) {
+                        const { name, message } = action;
+                        if (name === 'remove') {
+                            this._dialogService._openSuccessDialog({ messages: [message] });
+                        }
                     }
-                }
-            });
+                });
         this.subscriptions.push(sub);
     }
 

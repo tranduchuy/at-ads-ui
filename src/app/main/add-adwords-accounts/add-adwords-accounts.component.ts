@@ -53,6 +53,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   ngOnInit(): void {
+    this._fuseProgressiveBarService.show();
     this.initForm();
     this.googleInit();
     this.checkAccountList();

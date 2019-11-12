@@ -26,6 +26,7 @@
       .advise {
         font-size: 12px;
         color: gray;
+        line-height: 2rem;
       }
     }
 
@@ -104,7 +105,7 @@
     .empty-report-notification {
       background-color: #eee;
       padding: 20px;
-      border-left: 4px solid darkorange;
+      border-left: 5px solid darkorange;
     }
   }
 }
