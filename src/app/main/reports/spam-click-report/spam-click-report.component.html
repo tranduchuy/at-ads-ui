@@ -47,7 +47,7 @@
 
         </ngx-charts-pie-chart>
 
-        <div style="text-align: center" class="click-total">
+        <div style="text-align: center" class="click-total" *ngIf="clickTotal">
           <span class="click-number">{{abbreviateNumber(clickTotal)}}</span>
           <br><span style="color: gray">click</span>
         </div>

@@ -1,10 +1,12 @@
 .homepage {
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
+
   background: url("../../assets/images/backgrounds/Abstract-Blue-Futuristic-Wallpaper.jpg");
   background-size: 100% 100%;
-  background-attachment: fixed;
   background-position: center center;
+
+  background-attachment: fixed;
 
   .main-content {
     button {
@@ -196,7 +198,6 @@
       background-attachment: fixed;
       background-position: center center;
       background-size: 100% 100%;
-      box-shadow: 0 2px 8px black;
 
       .banner {
         background: rgba(0, 0, 0, 0.65);
@@ -416,7 +417,6 @@
             flex: 0 0 17%;
           }
 
-          mat-header-cell:nth-child(2),
           mat-cell:nth-child(2) {
             color: skyblue;
           }
@@ -828,12 +828,12 @@
       }
 
       .shiny2 {
-        font-size: 16px !important;
+        font-size: 18px !important;
       }
 
       .banner-container {
         .banner {
-          padding-bottom: 50px;
+          padding-bottom: 30px;
           padding-top: 100px;
 
           .decoration {
@@ -953,13 +953,13 @@
           }
 
           .benefit-title {
-            font-size: 16px !important;
+            font-size: 18px !important;
           }
 
           .benefit-symbol {
             img {
-              width: 70px;
-              height: 70px;
+              width: 80px;
+              height: 80px;
             }
           }
         }

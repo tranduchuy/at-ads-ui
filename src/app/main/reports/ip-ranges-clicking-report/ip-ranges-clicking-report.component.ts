@@ -62,10 +62,10 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
           const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
           if (page) {
-            if(isNaN(Number(page)))
+            if (isNaN(Number(page)))
               return;
             this.currentPageNumber = Number(page);
-          }        
+          }
           else {
             this.currentPageNumber = 1;
             this._router.navigate([], {
@@ -81,15 +81,22 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
     this.subscriptions.push(sub);
   }
 
-  getClassDClickingReport(page: number) {
+  generateClassDClickingReportParams(page: number) {
+    const params = {
+      from: new Date(this.selectedDateRange.start).getTime().toString(),
+      to: new Date(this.selectedDateRange.end).getTime().toString(),
+      page,
+      limit: this.pageLimit
+    };
 
+    return params;
+  }
+
+  getClassDClickingReport(page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-
-    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
-    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
-
-    const sub = this._reportService.getClassDClickingReport({ from: start, to: end, page, limit: this.pageLimit })
+    const params = this.generateClassDClickingReportParams(page);
+    const sub = this._reportService.getClassDClickingReport(params)
       .subscribe(res => {
 
         this.dataSource = res.data.rangeIps;
