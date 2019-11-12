@@ -337,12 +337,20 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     this.getAccountReport(this._sessionService.activeAccountId, this.currentPageNumber);
   }
 
-  getAccountReport(accountId: string, page?: number) {
-    this._fuseProgressBarService.show();
-    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
-    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
+  generateAccountReportParams(page: number) {
+    const params = {
+      from: new Date(this.selectedDateRange.start).getTime().toString(),
+      to: new Date(this.selectedDateRange.end).getTime().toString(),
+      page,
+      limit: this.pageLimit
+    }
 
-    const sub = this._reportService.getAccountReport({ from: start, to: end, page, limit: this.pageLimit }, accountId)
+    return params;
+  }
+
+  getAccountReport(accountId: string, page?: number) {
+    const params = this.generateAccountReportParams(page);
+    const sub = this._reportService.getAccountReport(params, accountId)
       .subscribe(
         res => {
           this.advertisementClickReport = res.data.logs;
@@ -363,11 +371,20 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     this.subscriptions.push(sub);
   }
 
-  getAccountStatisticReport(accountId: string) {
-    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
-    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
+  generateAccountStatisticReportParams() {
+    const params = {
+      from: new Date(this.selectedDateRange.start).getTime().toString(),
+      to: new Date(this.selectedDateRange.end).getTime().toString()
+    };
 
-    const sub = this._reportService.getAccountStatisticReport({ from: start, to: end }, accountId)
+    return params;
+  }
+
+  getAccountStatisticReport(accountId: string) {
+    this._fuseProgressBarService.show();
+    const params = this.generateAccountStatisticReportParams();
+
+    const sub = this._reportService.getAccountStatisticReport(params, accountId)
       .subscribe(
         res => {
           this.clickTotal = res.data.pieChart.realClick + res.data.pieChart.spamClick;
@@ -395,7 +412,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
               },
             ],
             onSelect: (ev) => {
-              console.log(ev);
+              //console.log(ev);
             },
             // setLabelFormatting(name): any {
             //   return `${name}`;

@@ -1,7 +1,12 @@
 <div class="container">
 
-  <div class="title1">
-    LỊCH SỬ IP CLICK QUẢNG CÁO - TÀI KHOẢN <span style="color:yellow">{{_sessionService.activeAdsAccountId}}</span>
+  <div class="title1" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" fxLayoutGap.xs="-10px">
+    <button mat-icon-button (click)="backToMainReport()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>
+      LỊCH SỬ IP CLICK QUẢNG CÁO - TÀI KHOẢN <span style="color:yellow">{{_sessionService.activeAdsAccountId}}</span>
+    </span>
   </div>
 
   <div class="main-inner">
@@ -9,10 +14,47 @@
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
 
-        <div class="left" fxFlex="20">
-          <div class="ip-main-info" fxLayout="column" fxLayoutAlign="center center">
-            <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
-            <p style="color: #039be5; font-weight: bold">IP: {{ip}}</p>
+        <div fxLayout="column" fxFlex="20">
+          <div class="left">
+            <div class="ip-main-info" fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png" alt="" class="avatar">
+              <p style="color: #039be5; font-weight: bold">IP: {{ip}}</p>
+            </div>
+          </div>
+
+          <div class="bottom" fxLayout="column" fxLayoutGap="17px" fxLayoutAlign="center start">
+            <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
+              <div class="last-history-icon">
+                <mat-icon color="accent">calendar_today</mat-icon>
+              </div>
+              <div class="title" style="text-align: left">
+                Ngày ghi nhận cuối
+                <div style="color: gray" *ngIf="lastClickHistory">
+                  {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>
+              </div>
+            </div>
+            <div class="access-location" fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="center center">
+              <div class="last-history-icon">
+                <mat-icon color="accent">location_on</mat-icon>
+              </div>
+              <div class="title" style="text-align: left">
+                Vị trí truy cập
+                <div style="color: gray" *ngIf="lastClickHistory">
+                  {{lastClickHistory.location?.city || 'Unknown'}}
+                </div>
+              </div>
+            </div>
+            <div class="last-access-device" fxLayout="row" fxLayoutGap="12px">
+              <div class="last-history-icon">
+                <mat-icon color="accent">speaker_phone</mat-icon>
+              </div>
+              <div class="title" style="text-align: left">
+                Thiết bị truy cập cuối
+                <div style="color: gray" *ngIf="lastClickHistory">
+                  {{lastClickHistory.device?.vendor || 'Unknown'}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -169,7 +211,7 @@
         </div>
       </div>
 
-      <div class="bottom" fxLayout="column" fxLayoutGap="17px" fxLayoutAlign="center start">
+      <!-- <div class="bottom" fxLayout="column" fxLayoutGap="17px" fxLayoutAlign="center start">
         <div class="last-access-notification" fxLayout="row" fxLayoutGap="12px">
           <div class="last-history-icon">
             <mat-icon color="accent">calendar_today</mat-icon>
@@ -202,13 +244,7 @@
             </div>
           </div>
         </div>
-        <div class="back-button" fxLayout="row" fxLayoutGap="12px">
-          <a (click)="backToMainReport()" fxLayout="row" mat-button color="accent">
-            <mat-icon color="accent">arrow_back</mat-icon>
-            <span>Trở về trước</span>
-          </a>
-        </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
