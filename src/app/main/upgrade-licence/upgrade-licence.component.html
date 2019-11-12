@@ -87,7 +87,7 @@
           </li>
         </ul>
       </div>
-      <div class="register-package-button" (click)="openUpgradeLicenceDialog('VIP1', 'Tối ưu')">
+      <div class="register-package-button" (click)="openUpgradeLicenceDialog('VIP1', 'Tối ưu')" [class.no-display]="isRegisterButtonNotDisplayed">
         <button mat-raised-button color="accent">Đăng ký ngay</button>
       </div>
     </div>
