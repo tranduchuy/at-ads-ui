@@ -223,7 +223,7 @@
           filter: drop-shadow(0px 1px 2px black);
           font-weight: bolder;
           font-family: "Poppins", sans-serif;
-          -webkit-animation: titleAppearance 2s linear;
+          -webkit-animation: titleAppearance 1s ease-out;
 
           background-color: #772f1a;
           background-image: linear-gradient(315deg, #772f1a 0%, #f2a65a 74%);
@@ -235,9 +235,11 @@
         @keyframes titleAppearance {
           from {
             opacity: 0;
+            transform: translateX(-800px);
           }
           to {
             opacity: 1;
+            transform: translateX(0);
           }
         }
 
@@ -281,7 +283,18 @@
           text-align: center;
           text-shadow: 1px 1px 4px black;
           font-size: 16px;
-          -webkit-animation: titleAppearance 2s linear;
+          -webkit-animation: title2Appearance 1s ease-out;
+        }
+
+        @keyframes title2Appearance {
+          from {
+            opacity: 0;
+            transform: translateX(800px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
         }
 
         .login-with-google {
@@ -296,20 +309,28 @@
           }
 
           .login-google-button {
+          }
+
+          .access-system-button {
+            background: #44b543;
+            color: white;
+          }
+
+          button {
             transition: 0.2s;
+            -webkit-animation: buttonAppearance 1.2s ease-in;
 
             &:hover {
               transform: scale(1.05, 1.05);
             }
           }
 
-          .access-system-button {
-            background: #44b543;
-            color: white;
-            transition: 0.2s;
-
-            &:hover {
-              transform: scale(1.05, 1.05);
+          @keyframes buttonAppearance {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
             }
           }
         }
@@ -842,7 +863,7 @@
 
     .main-content {
       .shiny {
-        font-size: 22px !important;
+        font-size: 20px !important;
       }
 
       .shiny2 {
@@ -858,8 +879,8 @@
           padding-left: 30px;
           padding-right: 30px;
 
-          padding-top: 150px;
-          height: 55vh;
+          padding-top: 130px;
+          height: 60vh;
 
           .decoration {
             width: 60vw;
