@@ -64,10 +64,10 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
           const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
           if (page) {
-            if(isNaN(Number(page)))
+            if (isNaN(Number(page)))
               return;
             this.currentPageNumber = Number(page);
-          }        
+          }
           else {
             this.currentPageNumber = 1;
             this.router.navigate([], {
@@ -83,15 +83,22 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
     this.subscriptions.push(sub);
   }
 
-  getStatisticUserReport(accountId: string, page?: number) {
+  generateStatisticUserReportParams(page: number) {
+    const params = {
+      startDate: new Date(this.selectedDateRange.start).getTime().toString(),
+      endDate: new Date(this.selectedDateRange.end).getTime().toString(),
+      page,
+      limit: this.pageLimit
+    };
 
+    return params;
+  }
+
+  getStatisticUserReport(accountId: string, page?: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-
-    const start = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
-    const end = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
-
-    const sub = this._reportService.getStatisticUserReport({ startDate: start, endDate: end, page, limit: this.pageLimit }, accountId)
+    const params = this.generateStatisticUserReportParams(page);
+    const sub = this._reportService.getStatisticUserReport(params, accountId)
       .subscribe(res => {
 
         this.dataSource = res.data.users;

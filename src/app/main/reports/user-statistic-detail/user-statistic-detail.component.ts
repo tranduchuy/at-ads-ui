@@ -120,19 +120,28 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
           });
         }
 
-        this.getUserStatisticDetail(this.uuid, this.currentPageNumber, this.pageLimit);
+        this.getUserStatisticDetail(this.uuid, this.currentPageNumber);
       });
     this.subscriptions.push(sub);
   }
 
-  getUserStatisticDetail(id: string, page: number, limit: number) {
+  generateUserStatisticDetailParams(uuid: string, page: number) {
+    const params = {
+      id: uuid,
+      startDate: new Date(this.selectedDateRange.start).getTime().toString(),
+      endDate: new Date(this.selectedDateRange.end).getTime().toString(),
+      page,
+      limit: this.pageLimit
+    };
+
+    return params;
+  }
+
+  getUserStatisticDetail(id: string, page: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-
-    const startDate = moment(this.selectedDateRange.start).format('DD-MM-YYYY');
-    const endDate = moment(this.selectedDateRange.end).format('DD-MM-YYYY');
-
-    const sub = this._reportService.getUserStatisticDetail({ id, startDate, endDate, page, limit })
+    const params = this.generateUserStatisticDetailParams(id, page);
+    const sub = this._reportService.getUserStatisticDetail(params)
       .subscribe(
         res => {
 
@@ -157,6 +166,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
 
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
+          this._dialogService._openErrorDialog(error.error);
         }
       );
     this.subscriptions.push(sub);
@@ -168,7 +178,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
         page: event,
       }
     });
-    this.getUserStatisticDetail(this.uuid, event, this.pageLimit);
+    this.getUserStatisticDetail(this.uuid, event);
   }
 
   onSelectDateRange(event) {
@@ -186,7 +196,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
         page: this.currentPageNumber,
       }
     });
-    this.getUserStatisticDetail(this.uuid, this.currentPageNumber, this.pageLimit);
+    this.getUserStatisticDetail(this.uuid, this.currentPageNumber);
   }
 }
 
