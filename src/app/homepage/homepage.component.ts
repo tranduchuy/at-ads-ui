@@ -14,9 +14,7 @@ import { DialogService } from '../shared/services/dialog.service';
 import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
-import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
-import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
-import { distinctUntilChanged } from 'rxjs/operators';
+import * as moment from 'moment';
 
 declare var gapi: any;
 

@@ -28,21 +28,21 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   selectedAccountId: string;
   pageLimit: number = 20;
 
-  selectedDateRange: any = {
-    start: moment().subtract(6, 'days'),
-    end: moment()
-  }
   locale: any = {
     format: 'DD/MM/YYYY',
     separator: ' Đến ',
     applyLabel: 'Áp dụng',
     cancelLabel: 'Đóng',
   };
+  selectedDateRange: any = {
+    start: moment().subtract(6, 'days').startOf('day'),
+    end: moment().endOf('day')
+  };
   ranges: any = {
-    'Hôm nay': [moment(), moment()],
-    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    '1 tuần': [moment().subtract(6, 'days'), moment()],
-  }
+    'Hôm nay': [moment().startOf('day'), moment().endOf('day')],
+    'Hôm qua': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+    '1 tuần': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
+  };
 
   itemsPerPageOptions = Generals.Pagination.itemsPerPageOptions;
 
@@ -337,44 +337,11 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     this.getAccountReport(this._sessionService.activeAccountId, this.currentPageNumber);
   }
 
-  generateAccountReportParams(page: number) {
-    const params = {
-      from: new Date(this.selectedDateRange.start).getTime().toString(),
-      to: new Date(this.selectedDateRange.end).getTime().toString(),
-      page,
-      limit: this.pageLimit
-    }
-
-    return params;
-  }
-
-  getAccountReport(accountId: string, page?: number) {
-    const params = this.generateAccountReportParams(page);
-    const sub = this._reportService.getAccountReport(params, accountId)
-      .subscribe(
-        res => {
-          this.advertisementClickReport = res.data.logs;
-
-          this.totalItems = res.data.totalItems;
-          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
-
-          this._fuseProgressBarService.hide();
-        },
-        (error: HttpErrorResponse) => {
-          this._fuseProgressBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
-          this.advertisementClickReport = [];
-          this.totalItems = 0;
-          this.pageTotal = 0;
-        }
-      );
-    this.subscriptions.push(sub);
-  }
-
   generateAccountStatisticReportParams() {
     const params = {
       from: new Date(this.selectedDateRange.start).getTime().toString(),
-      to: new Date(this.selectedDateRange.end).getTime().toString()
+      to: new Date(this.selectedDateRange.end).getTime().toString(),
+      timeZone: moment().format('Z')
     };
 
     return params;
@@ -383,7 +350,6 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   getAccountStatisticReport(accountId: string) {
     this._fuseProgressBarService.show();
     const params = this.generateAccountStatisticReportParams();
-
     const sub = this._reportService.getAccountStatisticReport(params, accountId)
       .subscribe(
         res => {
@@ -532,6 +498,40 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);
         });
+    this.subscriptions.push(sub);
+  }
+
+  generateAccountReportParams(page: number) {
+    const params = {
+      from: new Date(this.selectedDateRange.start).getTime().toString(),
+      to: new Date(this.selectedDateRange.end).getTime().toString(),
+      page,
+      limit: this.pageLimit
+    }
+
+    return params;
+  }
+
+  getAccountReport(accountId: string, page?: number) {
+    const params = this.generateAccountReportParams(page);
+    const sub = this._reportService.getAccountReport(params, accountId)
+      .subscribe(
+        res => {
+          this.advertisementClickReport = res.data.logs;
+
+          this.totalItems = res.data.totalItems;
+          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
+
+          this._fuseProgressBarService.hide();
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this.advertisementClickReport = [];
+          this.totalItems = 0;
+          this.pageTotal = 0;
+        }
+      );
     this.subscriptions.push(sub);
   }
 }
