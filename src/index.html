@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en">
-    
+
 <head>
 
     <title>Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads</title>
     <base href="/">
 
     <meta charset="utf-8">
-    <meta name="description" content="Công cụ Chặn Click Ảo 2019 hoàn toàn mới, hỗ trợ nhiều tính năng ưu việt: chặn theo IP, chặn theo tỉnh thành, chặn theo thời gian, chặn theo thiết bị">
+    <meta name="description"
+        content="Công cụ Chặn Click Ảo 2019 hoàn toàn mới, hỗ trợ nhiều tính năng ưu việt: chặn theo IP, chặn theo tỉnh thành, chặn theo thời gian, chặn theo thiết bị">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="cH7BEetJ-VLZAhKAv24IAb6U6Ud7eIJpb_RZFOaPmOI" />
 
@@ -32,6 +33,19 @@
             z-index: 99999;
             pointer-events: none;
         }
+
+        #fuse-splash-screen2 {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 100000;
+            pointer-events: none;
+        }
+
 
         #fuse-splash-screen .center {
             display: block;
@@ -205,28 +219,30 @@
     <!-- FUSE Splash Screen -->
     <fuse-splash-screen id="fuse-splash-screen">
 
-        <div class="center">
+        <div id="fuse-splash-screen2">
+            <div class="center">
 
-            <div class="logo">
-                <img width="140" src="assets/images/app-logo.png">
-            </div>
+                <div class="logo">
+                    <img width="140" src="assets/images/app-logo.png">
+                </div>
 
-            <!-- Material Design Spinner -->
-            <div class="spinner-wrapper">
-                <div class="spinner">
-                    <div class="inner">
-                        <div class="gap"></div>
-                        <div class="left">
-                            <div class="half-circle"></div>
-                        </div>
-                        <div class="right">
-                            <div class="half-circle"></div>
+                <!-- Material Design Spinner -->
+                <div class="spinner-wrapper">
+                    <div class="spinner">
+                        <div class="inner">
+                            <div class="gap"></div>
+                            <div class="left">
+                                <div class="half-circle"></div>
+                            </div>
+                            <div class="right">
+                                <div class="half-circle"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- / Material Design Spinner -->
+                <!-- / Material Design Spinner -->
 
+            </div>
         </div>
 
     </fuse-splash-screen>

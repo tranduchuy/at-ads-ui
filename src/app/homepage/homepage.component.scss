@@ -2,7 +2,7 @@
   font-size: 14px;
   width: 100%;
 
-  background: url("../../assets/images/backgrounds/Abstract-Blue-Futuristic-Wallpaper.jpg");
+  background: url("../../assets/images/backgrounds/loading-bg1.jpg");
   background-size: 100% 100%;
   background-position: center center;
 
@@ -23,7 +23,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       font-size: 30px !important;
       font-weight: 900;
       position: relative;
@@ -96,8 +96,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 30px !important;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 26px !important;
       font-weight: 900;
       position: relative;
       text-transform: uppercase;
@@ -200,7 +200,7 @@
       background-size: 100% 100%;
 
       .banner {
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.7);
         color: white;
         height: 100vh;
         position: relative;
@@ -215,21 +215,21 @@
           position: absolute;
           top: 0;
           right: 0;
-          opacity: 0.7;
-          display: none;
+          opacity: 0.4;
         }
 
         .app-title {
+          margin-top: -100px;
           filter: drop-shadow(0px 1px 2px black);
           font-weight: bolder;
           font-family: "Poppins", sans-serif;
-          -webkit-animation: titleAppearance 1s ease-out;
 
-          background-color: #772f1a;
-          background-image: linear-gradient(315deg, #772f1a 0%, #f2a65a 74%);
+          background: rgba(255, 255, 255, 0.1);
+          padding: 20px 0 20px 0;
 
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          .insider {
+            -webkit-animation: titleAppearance 1s ease-in;
+          }
         }
 
         @keyframes titleAppearance {
@@ -283,7 +283,7 @@
           text-align: center;
           text-shadow: 1px 1px 4px black;
           font-size: 16px;
-          -webkit-animation: title2Appearance 1s ease-out;
+          -webkit-animation: title2Appearance 1s ease-in;
         }
 
         @keyframes title2Appearance {
@@ -299,7 +299,7 @@
 
         .login-with-google {
           text-align: center;
-          padding: 20px;
+          padding-top: 20px;
 
           .gg-icon {
             height: 18px;
@@ -324,21 +324,21 @@
               transform: scale(1.05, 1.05);
             }
           }
-
-          @keyframes buttonAppearance {
-            from {
-              opacity: 0;
-            }
-            to {
-              opacity: 1;
-            }
-          }
         }
       }
     }
 
+    @keyframes buttonAppearance {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
     .table {
-      padding: 30px;
+      padding: 150px;
       padding-top: 50px;
       padding-bottom: 50px;
       background: rgba(0, 0, 0, 0.5);
@@ -352,7 +352,11 @@
 
       .table-wrapper {
         overflow: auto;
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.8));
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+        background: rgba(12, 20, 33, 1);
+        background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+        background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+        background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
 
         .network-logo,
         .mobifone,
@@ -391,14 +395,11 @@
         mat-table {
           margin: 0 auto;
           display: table;
-          width: 92%;
+          width: 100%;
           background: rgba(3, 155, 229, 0.1);
 
           mat-header-row {
-            background: rgba(12, 20, 33, 1);
-            background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-            background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-            background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+            background: rgba(0, 0, 0, 0.3);
           }
 
           mat-header-cell {
@@ -418,7 +419,7 @@
             // }
 
             &:nth-child(odd) {
-              background: rgba(3, 155, 229, 0.2);
+              background: rgba(0, 0, 0, 0.05);
             }
 
             &:hover {
@@ -459,19 +460,17 @@
     }
 
     .instruction-container {
-      background: rgba(3, 155, 229, 0.2);
       .instruction {
-        padding: 30px 90px 30px 90px;
+        padding: 30px 150px 30px 150px;
         background: rgba(0, 0, 0, 0.5);
 
         .steps-main-title {
-          font-size: 25px;
+          font-size: 22px;
           width: 100%;
           text-align: center;
           color: #eee;
-          font-weight: bold;
           text-shadow: 1px 1px 4px black;
-          padding-bottom: 10px;
+          padding-bottom: 15px;
         }
 
         .demo-video {
@@ -527,7 +526,7 @@
               text-align: justify;
 
               .step-name {
-                font-size: 20px;
+                font-size: 18px;
               }
             }
           }
@@ -546,7 +545,7 @@
 
       .feature {
         background: rgba(0, 0, 0, 0.6);
-        padding: 70px 90px 70px 90px;
+        padding: 70px 150px 70px 150px;
         color: white;
 
         .overview {
@@ -555,11 +554,11 @@
           text-shadow: 1px 1px 4px black;
 
           .overview-title {
-            font-size: 25px;
+            font-size: 22px;
 
             img {
-              width: 52px;
-              height: 48px;
+              width: 48px;
+              height: 44px;
               margin-right: 5px;
               margin-top: -20px;
               filter: drop-shadow(0px 1px 4px gold);
@@ -630,14 +629,11 @@
     .benefit-container {
       // background: url("../../assets/images/backgrounds/45760598514_3da4c18fa7_b.jpg");
       // background-size: 100% 100%;
-      background: url("../../assets/images/backgrounds/loading-bg1.jpg");
-      background-size: 100% 100%;
-      background-attachment: fixed;
 
       .benefit {
         background: rgba(0, 0, 0, 0.2);
         text-align: center;
-        padding: 90px;
+        padding: 90px 150px 90px 150px;
         color: white;
         //background: rgba(125, 125, 125, 0.2);
         //background: rgba(3, 155, 229, 0.2);
@@ -671,7 +667,7 @@
     }
   }
   .footer {
-    padding: 100px 90px 40px 90px;
+    padding: 100px 150px 40px 150px;
     //background: rgba(0, 0, 0, 0.6);
     background: rgba(12, 20, 33, 1);
     background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
@@ -772,7 +768,7 @@
       // background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
       // background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
 
-      background: rgba(255, 255, 255, 0.1);
+      //background: #20222a;
 
       filter: drop-shadow(0px 1px 4px black);
       text-shadow: 1px 1px 4px black;
@@ -782,8 +778,8 @@
       width: 100%;
       top: 0;
       padding: 15px;
-      padding-left: 85px;
-      padding-right: 88px;
+      padding-left: 145px;
+      padding-right: 148px;
 
       .topbar-logo {
         height: 32px;
@@ -793,10 +789,12 @@
       }
 
       .topbar-title {
-        color: #eee;
+        color: #c5e5ed;
+        font-weight: bolder;
       }
 
       .topbar-google-button {
+        -webkit-animation: buttonAppearance 0.5s ease-in;
         transition: 0.2s;
         &:hover {
           transform: scale(1.05, 1.05);
@@ -804,6 +802,7 @@
       }
 
       .topbar-access-system-button {
+        -webkit-animation: buttonAppearance 0.5s ease-in;
         background: #44b543;
         color: white;
         &:hover {
@@ -886,6 +885,7 @@
           .decoration {
             width: 60vw;
             //display: initial;
+            display: none;
           }
 
           .app-title {

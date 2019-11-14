@@ -75,10 +75,10 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     gradient: false,
     scheme: {
       domain: [
-        //'#87CEEB', '#f44336', '#039be5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
+        '#87CEEB', '#f44336', '#039be5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
         //'#6FAAB0','#C4C24A','#8BC652', '#E94649','#F6B53F','#FB954F','#005277','#039be5','#9370DB', '#33495D', '#FF6384'
         //'rgba(51, 169, 234)','rgba(51, 169, 234, 1)','rgba(51, 169, 234, 0.9)','rgba(51, 169, 234, 0.8)','rgba(51, 169, 234, 0.7)','rgba(51, 169, 234, 0.6)','rgba(51, 169, 234, 0.5)','rgba(51, 169, 234, 0.4)','rgba(51, 169, 234, 0.3)','rgba(51, 169, 234, 0.1)','rgba(51, 169, 234, 0)'
-        'hsl(200, 100%, 12%)','hsl(200, 100%, 18%)','hsl(200, 100%, 25%)','hsl(200, 100%, 35%)','hsl(200, 100%, 45%)','hsl(200, 100%, 55%)','hsl(200, 100%, 65%)','hsl(200, 100%, 75%)','hsl(200, 100%, 85%)','hsl(200, 100%, 95%)','hsl(200, 100%, 100%)'
+        //'hsl(200, 100%, 12%)','hsl(200, 100%, 18%)','hsl(200, 100%, 25%)','hsl(200, 100%, 35%)','hsl(200, 100%, 45%)','hsl(200, 100%, 55%)','hsl(200, 100%, 65%)','hsl(200, 100%, 75%)','hsl(200, 100%, 85%)','hsl(200, 100%, 95%)','hsl(200, 100%, 100%)'
       ]
     },
     dataSource: [],
@@ -305,17 +305,17 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     const sub = this._reportService.getStatisticTrafficSourceReport(params)
       .subscribe(
         res => {
-          let data = JSON.parse(JSON.stringify(res.data.TrafficSourceData));
+          //let data = JSON.parse(JSON.stringify(res.data.TrafficSourceData));
 
-          // let data = [
-          //   { _id: 10, sessionCount: 174 },
-          //   { _id: 1, sessionCount: 96 },
-          //   { _id: 11, sessionCount: 53 },
-          //   { _id: 2, sessionCount: 34 },
-          //   { _id: 3, sessionCount: 12 },
-          //   { _id: 9, sessionCount: 2 },
-          //   { _id: 5, sessionCount: 1 },
-          // ]
+          let data = [
+            { _id: 10, sessionCount: 174 },
+            { _id: 1, sessionCount: 96 },
+            { _id: 11, sessionCount: 53 },
+            { _id: 2, sessionCount: 34 },
+            { _id: 3, sessionCount: 12 },
+            { _id: 9, sessionCount: 2 },
+            { _id: 5, sessionCount: 1 },
+          ]
 
           let sessionCountTotal = 0;
           data.forEach(element => {
