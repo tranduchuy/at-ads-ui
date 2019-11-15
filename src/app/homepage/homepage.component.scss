@@ -194,7 +194,7 @@
     }
 
     .banner-container {
-      background-image: url("../../assets/images/backgrounds/cybersecurity-lock.jpg");
+      background-image: url("../../assets/images/backgrounds/ai-machine-learning.png");
       background-attachment: fixed;
       background-position: left center;
       background-size: 100% 100%;
@@ -215,7 +215,8 @@
           position: absolute;
           top: 0;
           right: 0;
-          opacity: 0.5;
+          opacity: 0.6;
+          display: none;
         }
 
         .app-title {
@@ -243,27 +244,16 @@
         }
 
         .logo {
-          width: 180px;
-          margin: 52px auto;
-          -webkit-animation: logoScale 0.4s linear;
-          transition: 0.2s;
-          display: none;
-
-          &:hover {
-            transform: scale(1.05, 1.05);
-          }
-
-          @keyframes logoScale {
-            from {
-              -webkit-transform: scale(0, 0);
-            }
-            to {
-              -webkit-transform: scale(1, 1);
-            }
-          }
-
+          width: 140px;
+          margin: 25px auto;
+          //display: none;
           img {
-            filter: drop-shadow(0px 1px 5px black);
+            filter: drop-shadow(1px 4px 4px black);
+            transition: 0.2s;
+
+            &:hover {
+              transform: scale(1.05, 1.05);
+            }
           }
         }
 
@@ -340,7 +330,7 @@
       padding: 150px;
       padding-top: 50px;
       padding-bottom: 50px;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.4);
 
       .table-title {
         padding: 20px;
@@ -396,6 +386,11 @@
           display: table;
           width: 100%;
           background: rgba(3, 155, 229, 0.1);
+
+          img,
+          mat-icon {
+            filter: drop-shadow(0.2px 1px 1px black);
+          }
 
           mat-header-row {
             background: rgba(0, 0, 0, 0.3);
@@ -461,7 +456,7 @@
     .instruction-container {
       .instruction {
         padding: 30px 150px 30px 150px;
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.4);
 
         .steps-main-title {
           font-size: 22px;
@@ -603,6 +598,7 @@
       mat-icon {
         color: skyblue;
         margin-top: -5px;
+        filter: drop-shadow(1px 2px 2px black) !important;
       }
 
       p {
@@ -614,6 +610,7 @@
         height: 55px;
         max-width: 170px;
         margin-left: 5px;
+        filter: drop-shadow(1px 2px 2px black) !important;
       }
     }
 
@@ -630,7 +627,7 @@
       // background-size: 100% 100%;
 
       .benefit {
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.4);
         text-align: center;
         padding: 90px 150px 90px 150px;
         color: white;
@@ -881,8 +878,8 @@
           padding-left: 30px;
           padding-right: 30px;
 
-          padding-top: 100px;
-          height: 65vh;
+          padding-top: 50px;
+          height: 75vh;
 
           .decoration {
             width: 60vw;
@@ -895,7 +892,7 @@
           }
 
           .logo {
-            width: 140px;
+            width: 120px;
             margin: 32px auto;
             margin-bottom: 16px;
           }
