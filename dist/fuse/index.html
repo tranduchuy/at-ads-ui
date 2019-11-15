@@ -46,7 +46,6 @@
             pointer-events: none;
         }
 
-
         #fuse-splash-screen .center {
             display: block;
             width: 100%;
@@ -59,6 +58,18 @@
             width: 140px;
             margin: 0 auto;
             filter: drop-shadow(1px 2px 2px black);
+        }
+
+        #fuse-splash-screen .logo img  {
+            /* -webkit-animation: scale 0.4s infinite */
+        }
+
+        @keyframes scale {
+            from {
+                transform: scale(1,1)
+            } to {
+                transform: scale(1.05, 1.05)
+            }
         }
 
         #fuse-splash-screen .logo img {
