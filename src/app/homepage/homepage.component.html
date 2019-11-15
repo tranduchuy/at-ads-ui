@@ -129,7 +129,8 @@
                         src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Ubuntu'"
                         src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
-                     <span *ngIf="element.os?.name">{{element.os?.name + ' ' + element.os?.version}}</span>
+                     <span
+                        *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
                      <mat-icon *ngIf="!element.os?.name" style="color: silver; margin-right: 5px">help_outline
                      </mat-icon>
@@ -169,7 +170,7 @@
                         alt="" class="icon">
                      <mat-icon *ngIf="!element.browser?.name" style="color: silver; margin-right: 5px">help_outline
                      </mat-icon>
-                     <span>{{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}</span>
+                     <span>{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
 
                   </mat-cell>
                </ng-container>
