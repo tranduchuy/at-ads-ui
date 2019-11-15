@@ -195,6 +195,10 @@
                         *ngIf="element.network?.name === 'VNPT'" alt="">
                      <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
                         *ngIf="element.network?.name === 'FPT'" alt="">
+
+                     <mat-icon *ngIf="!element.network?.name" style="color: silver; margin-right: 5px">help_outline
+                     </mat-icon>
+                     <span *ngIf="!element.network?.name">Unknown</span>
                   </mat-cell>
                </ng-container>
 

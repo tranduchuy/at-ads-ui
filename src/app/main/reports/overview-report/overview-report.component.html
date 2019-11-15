@@ -122,185 +122,188 @@
         </mat-form-field>
       </div>
 
-      <div class="hl2-title2">
-        Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>
-        từ <span style="color:#039be5; font-weight: bold" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
-        ngày <span style="color: #039be5; font-weight: bold" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
-        hạn chế chiến dịch ảo
-      </div>
+      <div class="overview-chart">
+        <div class="hl2-title2">
+          Bạn có thể tiết kiệm trong <span style="color: red; font-weight: bold" [(ngModel)]="selectedDateRange"
+            ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>
+          từ <span style="color:#039be5; font-weight: bold" [(ngModel)]="selectedDateRange"
+            ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
+          ngày <span style="color: #039be5; font-weight: bold" [(ngModel)]="selectedDateRange"
+            ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
+          hạn chế chiến dịch ảo
+        </div>
 
-      <div class="h-400 hl2-pie-chart">
+        <div class="h-400 hl2-pie-chart">
 
-        <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
-          [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
-          [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" [labelFormatting]="pieChart.setLabelFormatting"
-          [legend]="pieChart.legend" [legendTitle]="''">
+          <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
+            [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
+            [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient"
+            [labelFormatting]="pieChart.setLabelFormatting" [legend]="pieChart.legend" [legendTitle]="''">
 
-          <ng-template #tooltipTemplate let-model="model">
-            <p style="color: #fff; text-align: left">
-              {{model.name}} <b>({{model.value}}%)</b>
-            </p>
-          </ng-template>
+            <ng-template #tooltipTemplate let-model="model">
+              <p style="color: #fff; text-align: left">
+                {{model.name}} <b>({{model.value}}%)</b>
+              </p>
+            </ng-template>
 
-        </ngx-charts-pie-chart>
+          </ngx-charts-pie-chart>
 
+        </div>
       </div>
 
     </div>
 
     <div class="overview">
-
-      <div class="overview-title1" fxLayout="row" fxLayout.xs="column">
-        <p class="overview-title2" fxFlex="80">BÁO CÁO TỔNG THỂ TRUY CẬP</p>
-      </div>
-
-      <div class="overview-table">
-
-        <mat-table
-          [dataSource]="overviewTable | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }"
-          class="mat-elevation-z8">
-
-          <ng-container matColumnDef="createdAt">
-            <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="ip">
-            <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]"
-                class="ip-detail-link" mat-button color="accent">
-                <mat-icon *ngIf="element.isSpam === true" style="color: red" class="ip-symbol">not_interested
-                </mat-icon>
-                <mat-icon *ngIf="element.isSpam === false" style="color:silver" class="ip-symbol">
-                  not_interested
-                </mat-icon>
-                {{element.ip}}
-              </a>
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="trafficSource">
-            <mat-header-cell *matHeaderCellDef> Nguồn/Phương tiện </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{TRAFFIC_SOURCE_TYPES[element.trafficSource - 1]}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="session">
-            <mat-header-cell *matHeaderCellDef> Số phiên </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.count || 0}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold"
-                (mouseover)="showReason(element.reason || '')">
-                <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
-              </span>
-              <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold"
-                (mouseover)="showReason(element.reason || '')">
-                <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
-              </span>
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="os">
-            <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <img *ngIf="element.os?.name === 'Windows'"
-                src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
-              <img *ngIf="element.os?.name === 'iOS'"
-                src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
-                alt="" class="icon">
-              <img *ngIf="element.os?.name === 'Android'" src="https://image.flaticon.com/icons/png/512/226/226770.png"
-                alt="" class="icon">
-              <img *ngIf="element.os?.name === 'Mac OS'"
-                src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
-                alt="" class="icon">
-              <img *ngIf="element.os?.name === 'Linux'"
-                src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
-              {{(element.os?.name || 'Unknown') + ' ' + (element.os?.version || '')}}
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="browser">
-            <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <img *ngIf="element.browser?.name === 'Firefox'"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png"
-                alt="" class="icon">
-              <img *ngIf="element.browser?.name === 'Chrome'"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png"
-                alt="" class="icon">
-              <img *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png"
-                alt="" class="icon">
-              <img *ngIf="element.browser?.name === 'IE'"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png"
-                alt="" class="icon">
-              <img *ngIf="element.browser?.name === 'Cốc Cốc'"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png"
-                alt="" class="icon">
-              <img *ngIf="element.browser?.name === 'Opera'"
-                src="https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png" alt="" class="icon">
-              <img *ngIf="element.browser?.name === 'Tor'"
-                src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
-                alt="" class="icon">
-              {{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="isPrivateBrowsing">
-            <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
-                <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
-              </span>
-              <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="networkCompany">
-            <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              {{element.networkCompany?.name || 'Unknown'}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="location">
-            <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
-            </mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="overviewTableCols; sticky: true"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: overviewTableCols;"></mat-row>
-
-        </mat-table>
-
-      </div>
-
-      <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
-        <div fxFlex="60">
-          <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
-              ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
-            {{pageTotal}} trang</p>
-          <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+      <div class="overview-main">
+        <div class="overview-title1" fxLayout="row" fxLayout.xs="column">
+          <p class="overview-title2" fxFlex="80">BÁO CÁO TỔNG THỂ TRUY CẬP</p>
         </div>
-        <div fxFlex="10" class="item-per-page-options" *ngIf="pageTotal > 0">
-          <mat-form-field>
-            <mat-label>Số record mỗi trang</mat-label>
-            <mat-select [(value)]="pageLimit" (selectionChange)="changeItemsPerPageOption($event)">
-              <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option.value">
-                {{option.text}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div class="overview-table">
+
+          <mat-table
+            [dataSource]="overviewTable | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }"
+            class="mat-elevation-z8">
+
+            <ng-container matColumnDef="createdAt">
+              <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ip">
+              <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]"
+                  class="ip-detail-link" mat-button color="accent">
+                  <mat-icon *ngIf="element.isSpam === true" style="color: red" class="ip-symbol">not_interested
+                  </mat-icon>
+                  <mat-icon *ngIf="element.isSpam === false" style="color:silver" class="ip-symbol">
+                    not_interested
+                  </mat-icon>
+                  {{element.ip}}
+                </a>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="trafficSource">
+              <mat-header-cell *matHeaderCellDef> Nguồn/Phương tiện </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{TRAFFIC_SOURCE_TYPES[element.trafficSource - 1]}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="session">
+              <mat-header-cell *matHeaderCellDef> Số phiên </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.count || 0}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef> Nhận diện </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold"
+                  (mouseover)="showReason(element.reason || '')">
+                  <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
+                </span>
+                <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold"
+                  (mouseover)="showReason(element.reason || '')">
+                  <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="os">
+              <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <img *ngIf="element.os?.name === 'Windows'"
+                  src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
+                <img *ngIf="element.os?.name === 'iOS'"
+                  src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
+                  alt="" class="icon">
+                <img *ngIf="element.os?.name === 'Android'"
+                  src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
+                <img *ngIf="element.os?.name === 'Mac OS'"
+                  src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
+                  alt="" class="icon">
+                <img *ngIf="element.os?.name === 'Linux'"
+                  src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
+                {{(element.os?.name || 'Unknown') + ' ' + (element.os?.version || '')}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="browser">
+              <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <img *ngIf="element.browser?.name === 'Firefox'"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png"
+                  alt="" class="icon">
+                <img *ngIf="element.browser?.name === 'Chrome'"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png"
+                  alt="" class="icon">
+                <img *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png"
+                  alt="" class="icon">
+                <img *ngIf="element.browser?.name === 'IE'"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png"
+                  alt="" class="icon">
+                <img *ngIf="element.browser?.name === 'Cốc Cốc'"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png"
+                  alt="" class="icon">
+                <img *ngIf="element.browser?.name === 'Opera'"
+                  src="https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png" alt=""
+                  class="icon">
+                <img *ngIf="element.browser?.name === 'Tor'"
+                  src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
+                  alt="" class="icon">
+                {{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="isPrivateBrowsing">
+              <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
+                  <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+                </span>
+                <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="networkCompany">
+              <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{element.networkCompany?.name || 'Unknown'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="location">
+              <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="overviewTableCols; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: overviewTableCols;"></mat-row>
+
+          </mat-table>
+
         </div>
-        <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
-          nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0" fxFlex="30"></pagination-controls>
+
+        <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
+          <div fxFlex="60">
+            <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
+                ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
+              {{pageTotal}} trang</p>
+            <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+          </div>
+          <div fxFlex="10" class="item-per-page-options" *ngIf="pageTotal > 0">
+            <mat-form-field>
+              <mat-label>Số record mỗi trang</mat-label>
+              <mat-select [(value)]="pageLimit" (selectionChange)="changeItemsPerPageOption($event)">
+                <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option.value">
+                  {{option.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
+            nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0" fxFlex="30"></pagination-controls>
+        </div>
       </div>
 
     </div>
