@@ -841,7 +841,10 @@
   .homepage {
     font-size: 14px;
 
-    background: url("../../assets/images/backgrounds/QL5I0O.jpg");
+    background: rgba(12, 20, 33, 1);
+    background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
 
     .topbar-container {
       .topbar {
