@@ -779,6 +779,9 @@
       padding: 15px;
       padding-left: 145px;
       padding-right: 148px;
+      border: 0 !important;
+      outline: 0 !important;
+      box-sizing: 0 !important;
 
       .topbar-logo {
         height: 32px;
@@ -838,10 +841,10 @@
   .homepage {
     font-size: 14px;
 
-    // background: url("../../assets/images/backgrounds/QL5I0O.jpg");
-    // background-size: 100% 100%;
-    // background-attachment: fixed;
-    // background-position: center center;
+    background: rgba(12, 20, 33, 1);
+    background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
 
     .topbar-container {
       .topbar {
@@ -993,6 +996,10 @@
       }
 
       .benefit-container {
+        background: url("../../assets/images/backgrounds/loading-bg1.jpg");
+        background-size: 100% 100%;
+        background-position: center center;
+        background-attachment: fixed;
         .benefit {
           padding: 60px 30px 60px 30px;
           .main-benefit {
