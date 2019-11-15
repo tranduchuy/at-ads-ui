@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 export interface IAccountStatisticReportParams {
   from: string;
   to: string;
+  timeZone: string;
 }
 
 export interface IAccountReportParams {
@@ -99,6 +100,7 @@ export class ReportService {
     let url = API.Report.getAccountStatisticReport.replace('{account_id}', accountId);
     url = url.replace('{from}', params.from);
     url = url.replace('{to}', params.to);
+    url = url.replace('{timeZone}', params.timeZone);
 
     return this._http.get(url);
   }

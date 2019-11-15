@@ -299,6 +299,9 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
                 if (this._sessionService.activeAccountId && this._sessionService.activeAdsAccountId) {
                     activeIndex = _.findIndex(this.adsAccounts, account => account.accountId === this._sessionService.activeAccountId);
+
+                    if (activeIndex < 0)
+                        activeIndex = 0;
                 }
 
                 this.accountCtrl.setValue(this.adsAccounts[activeIndex]);
@@ -328,21 +331,21 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     }
                 }
             },
-            (error: HttpErrorResponse) => {
-                this._fuseProgressiveBarService.hide();
-                this.adsAccounts = [];
-                this._sessionService.setListAccounts(this.adsAccounts);
-                this._sessionService.completeCheckingIfUserHasAccount(false);
-                this._sessionService.unsetActiveGoogleAdsAccount();
-                this._fuseNavigationService.reloadNavigation();
-                this.isProcessing = false;
-                if (action) {
-                    const { name, message } = action;
-                    if (name === 'remove') {
-                        this._dialogService._openSuccessDialog({ messages: [message] });
+                (error: HttpErrorResponse) => {
+                    this._fuseProgressiveBarService.hide();
+                    this.adsAccounts = [];
+                    this._sessionService.setListAccounts(this.adsAccounts);
+                    this._sessionService.completeCheckingIfUserHasAccount(false);
+                    this._sessionService.unsetActiveGoogleAdsAccount();
+                    this._fuseNavigationService.reloadNavigation();
+                    this.isProcessing = false;
+                    if (action) {
+                        const { name, message } = action;
+                        if (name === 'remove') {
+                            this._dialogService._openSuccessDialog({ messages: [message] });
+                        }
                     }
-                }
-            });
+                });
         this.subscriptions.push(sub);
     }
 

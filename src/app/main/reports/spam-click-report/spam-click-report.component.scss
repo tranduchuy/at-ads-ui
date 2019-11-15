@@ -29,8 +29,9 @@
   }
 
   .section {
+    margin: 20px;
     box-shadow: 1px 1px 4px silver;
-    border-radius: 0;
+    border-radius: 4px;
     padding-bottom: 10px;
     background-color: white;
 
@@ -79,11 +80,12 @@
 
     .title1 {
       padding: 30px;
-      background-color: #000000 !important;
-      background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-      color: white;
+      // background-color: #000000 !important;
+      // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+      // color: white;
       font-size: 16px;
-      font-weight: bold;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      //font-weight: bold;
 
       .datePicker {
         color: #039be5;
@@ -107,11 +109,6 @@
 
     .pie-chart-report-title {
       padding-bottom: 0;
-    }
-
-    .title2 {
-      float: left;
-      padding-top: 15px;
     }
 
     .div-pie-chart {
@@ -148,10 +145,14 @@
   .left {
     margin: 0;
     border-radius: 0;
+    padding: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .tables {
-    padding: 0;
+    padding-top: 0;
+    padding-bottom: 10px;
 
     mat-table {
       box-shadow: none;
@@ -163,7 +164,7 @@
         font-size: 12px;
 
         &:hover {
-          background: rgba(3, 155, 229, 0.1);
+          background: rgba(3, 155, 229, 0.05);
         }
       }
 
@@ -171,7 +172,7 @@
         transition: 0.2s;
 
         &:hover {
-          background-color: rgba(3, 155, 229, 0.1);
+          background-color: rgba(3, 155, 229, 0.05);
         }
       }
 
@@ -199,6 +200,7 @@
       mat-header-cell {
         background-color: #039be5;
         color: white;
+        // background: rgba(3, 155, 229, 0.1);
       }
 
       mat-cell {
@@ -246,7 +248,14 @@
     }
 
     .section {
-      padding: 0;
+      margin: 10px;
+      padding: 5px;
+
+      .title1 {
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+      }
 
       .click-number {
         font-size: 14px;
@@ -264,9 +273,9 @@
       }
     }
 
-    .div-line-chart {
-      padding: 0;
-      margin-top: -30px;
+    .left {
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
     :host ::ng-deep .pie-chart {

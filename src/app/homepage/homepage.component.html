@@ -19,8 +19,8 @@
                   style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
                Google
             </button>
-            <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()" *ngIf="isOnLogin && isLoginButtonDisplayed"
-               fxFlex="nogrow">
+            <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()"
+               *ngIf="isOnLogin && isLoginButtonDisplayed" fxFlex="nogrow">
                TRUY CẬP HỆ THỐNG CHẶN CLICK ẢO<mat-icon style="font-size: 20px">navigate_next</mat-icon>
             </button>
          </div>
@@ -37,9 +37,11 @@
             <img src="../../assets/images/backgrounds/abc.png" class="decoration" alt="">
 
             <div class="title1 app-title">
-               <span class="shiny">
-                  <span class="inner-shiny">Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads</span>
-               </span>
+               <div class="insider">
+                  <span class="shiny">
+                     <span class="inner-shiny">Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads</span>
+                  </span>
+               </div>
             </div>
 
             <div class="logo">
@@ -127,7 +129,8 @@
                         src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Ubuntu'"
                         src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
-                     <span *ngIf="element.os?.name">{{element.os?.name + ' ' + element.os?.version}}</span>
+                     <span
+                        *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
                      <mat-icon *ngIf="!element.os?.name" style="color: silver; margin-right: 5px">help_outline
                      </mat-icon>
@@ -167,7 +170,7 @@
                         alt="" class="icon">
                      <mat-icon *ngIf="!element.browser?.name" style="color: silver; margin-right: 5px">help_outline
                      </mat-icon>
-                     <span>{{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}</span>
+                     <span>{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
 
                   </mat-cell>
                </ng-container>
@@ -193,6 +196,10 @@
                         *ngIf="element.network?.name === 'VNPT'" alt="">
                      <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
                         *ngIf="element.network?.name === 'FPT'" alt="">
+
+                     <mat-icon *ngIf="!element.network?.name" style="color: silver; margin-right: 5px">help_outline
+                     </mat-icon>
+                     <span *ngIf="!element.network?.name">Unknown</span>
                   </mat-cell>
                </ng-container>
 

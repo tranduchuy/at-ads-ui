@@ -17,21 +17,21 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
 
   displayedColumns: string[] = ['time', 'ip', 'clicks', 'location', 'network'];
 
-  selectedDateRange: any = {
-    start: moment().subtract(6, 'days'),
-    end: moment()
-  }
   locale: any = {
     format: 'DD/MM/YYYY',
     separator: ' Đến ',
     applyLabel: 'Áp dụng',
     cancelLabel: 'Đóng',
   };
+  selectedDateRange: any = {
+    start: moment().subtract(6, 'days').startOf('day'),
+    end: moment().endOf('day')
+  };
   ranges: any = {
-    'Hôm nay': [moment(), moment()],
-    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    '1 tuần': [moment().subtract(6, 'days'), moment()],
-  }
+    'Hôm nay': [moment().startOf('day'), moment().endOf('day')],
+    'Hôm qua': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+    '1 tuần': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
+  };
 
   dataSource = [];
 
