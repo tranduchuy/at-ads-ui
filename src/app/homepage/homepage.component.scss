@@ -779,6 +779,9 @@
       padding: 15px;
       padding-left: 145px;
       padding-right: 148px;
+      border: 0 !important;
+      outline: 0 !important;
+      box-sizing: 0 !important;
 
       .topbar-logo {
         height: 32px;
@@ -840,6 +843,9 @@
 
     background-color: #0d0a0b;
     background-image: linear-gradient(315deg, #0d0a0b 0%, #009fc2 74%);
+    background-size: 100% 100%;
+    background-position: center center;
+    background-attachment: fixed;
 
     .topbar-container {
       .topbar {
