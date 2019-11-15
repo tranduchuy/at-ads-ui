@@ -129,8 +129,7 @@
                         src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
                      <img *ngIf="element.os?.name === 'Ubuntu'"
                         src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
-                     <span
-                        *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
+                     <span *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
                      <mat-icon *ngIf="!element.os?.name" style="color: silver; margin-right: 5px">help_outline
                      </mat-icon>
@@ -168,9 +167,12 @@
                      <img *ngIf="element.browser?.name === 'Tor'"
                         src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
                         alt="" class="icon">
+                     <span
+                        *ngIf="element.browser?.name">{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
+                        
                      <mat-icon *ngIf="!element.browser?.name" style="color: silver; margin-right: 5px">help_outline
                      </mat-icon>
-                     <span>{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
+                     <span *ngIf="!element.browser?.name">Unknown</span>
 
                   </mat-cell>
                </ng-container>
