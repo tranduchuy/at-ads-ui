@@ -148,6 +148,11 @@
 
           </ngx-charts-pie-chart>
 
+          <div style="text-align: center" class="session-total" *ngIf="sessionTotal">
+            <span class="click-number">{{abbreviateNumber(sessionTotal)}}</span>
+            <br><span style="color: gray">phiên</span>
+          </div>
+
         </div>
       </div>
 
