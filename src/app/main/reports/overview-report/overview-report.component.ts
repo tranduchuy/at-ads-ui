@@ -77,7 +77,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     scheme: {
       domain: [
         //'#87CEEB', '#f44336', '#039be5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
-        '#6FAAB0','#C4C24A','#8BC652', '#E94649','#F6B53F','#FB954F','#005277','#039be5','#9370DB', '#33495D', '#FF6384'
+        '#6FAAB0', '#C4C24A', '#8BC652', '#E94649', '#F6B53F', '#FB954F', '#005277', '#039be5', '#9370DB', '#33495D', '#FF6384'
         //'hsl(200, 100%, 12%)','hsl(200, 100%, 20%)','hsl(200, 100%, 28%)','hsl(200, 100%, 38%)','hsl(200, 100%, 48%)','hsl(200, 100%, 58%)','hsl(200, 100%, 68%)','hsl(200, 100%, 78%)','hsl(200, 100%, 85%)','hsl(200, 100%, 95%)','hsl(200, 100%, 100%)'
       ]
     },
@@ -241,11 +241,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     else console.log('Unknown');
   }
 
-  getPercentage(value: number, total: number): number {
-    const res = value * 100 / total;
-    return Math.round(res * 100) / 100;
-  }
-
   generateSessionReportParams(page: number) {
     const params = {
       from: new Date(this.selectedDateRange.start).getTime().toString(),
@@ -355,8 +350,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
             return {
               name: (this.TRAFFIC_SOURCE_TYPES[item._id - 1] || 'Unknown')
                 + ': ' + this.abbreviateNumber(sessionCount) + ' phiên'
-                + ` (${Math.round(sessionCount * 100 / this.sessionTotal)}%)`,
-              value: this.getPercentage(sessionCount, sessionCountTotal)
+                + ` (${_.round(sessionCount * 100 / this.sessionTotal, 2) || 0}%)`,
+              value: _.round(sessionCount * 100 / this.sessionTotal, 2) || 0
             }
           });
 

@@ -9,6 +9,7 @@ import { DialogService } from 'app/shared/services/dialog.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { Generals } from 'app/shared/constants/generals';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-spam-click-report',
@@ -79,13 +80,13 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     datasets: {
       report: [
         {
-          label: 'Hợp lệ',
+          label: 'Click thật',
           data: [],
           fill: 'start'
 
         },
         {
-          label: 'Không hợp lệ',
+          label: 'Click ảo',
           data: [],
           fill: 'start'
         }
@@ -95,8 +96,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     colors: [
       {
         borderColor: '#35afea',
-        backgroundColor: 'rgba(3, 155, 229, 0.1)',
-        //backgroundColor: 'rgba(0,0,0,0)',
+        //backgroundColor: 'rgba(3, 155, 229, 0.1)',
+        backgroundColor: 'rgba(0,0,0,0)',
         pointBackgroundColor: 'white',
         pointHoverBackgroundColor: '#35afea',
         pointBorderColor: '#35afea',
@@ -104,8 +105,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
       },
       {
         borderColor: '#f44336',
-        backgroundColor: 'rgba(255, 0, 55, 0.1)',
-        //backgroundColor: 'rgba(0,0,0,0)',
+        //backgroundColor: 'rgba(255, 0, 55, 0.1)',
+        backgroundColor: 'rgba(0,0,0,0)',
         pointBackgroundColor: 'white',
         pointHoverBackgroundColor: '#f44336',
         pointBorderColor: '#f44336',
@@ -138,7 +139,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           hoverBorderWstatusth: 2
         },
         line: {
-          tension: 0.3
+          tension: 0
         }
       },
       scales: {
@@ -368,11 +369,11 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
           const realClickDetail: any = {
             name: 'Click thật: ' + this.abbreviateNumber(res.data.pieChart.realClick),
-            value: Math.round(res.data.pieChart.realClick * 100 / this.clickTotal)
+            value: _.round(res.data.pieChart.realClick * 100 / this.clickTotal, 2) || 0
           };
           const spamClickDetail: any = {
             name: 'Click ảo: ' + this.abbreviateNumber(res.data.pieChart.spamClick),
-            value: Math.round(100 - realClickDetail.value)
+            value: _.round(res.data.pieChart.spamClick * 100 / this.clickTotal, 2) || 0
           };
 
           this.pieChart = {
