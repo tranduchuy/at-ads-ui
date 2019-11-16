@@ -355,7 +355,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
             return {
               name: (this.TRAFFIC_SOURCE_TYPES[item._id - 1] || 'Unknown')
                 + ': ' + this.abbreviateNumber(sessionCount) + ' phiên'
-                + ` (${Math.ceil(sessionCount * 100 / this.sessionTotal)}%)`,
+                + ` (${Math.round(sessionCount * 100 / this.sessionTotal)}%)`,
               value: this.getPercentage(sessionCount, sessionCountTotal)
             }
           });
