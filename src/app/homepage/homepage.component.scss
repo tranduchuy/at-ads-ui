@@ -343,10 +343,7 @@
       .table-wrapper {
         overflow: auto;
         filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
-        background: rgba(12, 20, 33, 1);
-        background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-        background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-        background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+        background: #002d41;
 
         .network-logo,
         .mobifone,
@@ -419,7 +416,6 @@
 
             &:hover {
               //background-color: rgba(3, 155, 229, 0.1);
-              font-weight: bolder;
 
               mat-cell {
                 color: orange !important;
@@ -613,14 +609,11 @@
         margin-left: 5px;
         filter: drop-shadow(1px 2px 2px black) !important;
       }
-    }
 
-    .feature-item:hover {
-      // transform: scale(1.02, 1.02);
-      // p {
-      //   color: white;
-      // }
-      color: orange;
+      .feature-name {
+        font-weight: bold;
+        color: #c5e5ed;
+      }
     }
 
     .benefit-container {

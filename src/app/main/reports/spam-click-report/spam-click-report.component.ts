@@ -16,9 +16,6 @@ import { Generals } from 'app/shared/constants/generals';
   styleUrls: ['./spam-click-report.component.scss'],
 })
 export class SpamClickReportComponent extends PageBaseComponent implements OnInit {
-
-  pieChart: any = {};
-  lineChart: any = {};
   clickTotal: number;
   advertisementClickReportColumns = ['time', 'ip', 'click', 'status', 'location', 'isPrivateBrowsing', 'keyword', 'keywordMatchType'];
   advertisementClickReport = [];
@@ -50,6 +47,120 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
   adsAccountIdPipe = new AdsAccountIdPipe();
 
+  pieChart: any = {
+    legend: false,
+    explodeSlices: false,
+    labels: true,
+    doughnut: true,
+    gradient: false,
+    scheme: {
+      domain: ['#039be5', '#ff0037']
+    },
+    dataSource: [
+      {
+        name: '',
+        value: 0
+      },
+      {
+        name: '',
+        value: 0
+      },
+    ],
+    onSelect: (ev) => {
+      //console.log(ev);
+    },
+    // setLabelFormatting(name): any {
+    //   return `${name}`;
+    // }
+  };
+
+  lineChart: any = {
+    chartType: 'line',
+    datasets: {
+      report: [
+        {
+          label: 'Hợp lệ',
+          data: [],
+          fill: 'start'
+
+        },
+        {
+          label: 'Không hợp lệ',
+          data: [],
+          fill: 'start'
+        }
+      ],
+    },
+    labels: [],
+    colors: [
+      {
+        borderColor: '#35afea',
+        backgroundColor: 'rgba(3, 155, 229, 0.1)',
+        //backgroundColor: 'rgba(0,0,0,0)',
+        pointBackgroundColor: 'white',
+        pointHoverBackgroundColor: '#35afea',
+        pointBorderColor: '#35afea',
+        pointHoverBorderColor: '#35afea'
+      },
+      {
+        borderColor: '#f44336',
+        backgroundColor: 'rgba(255, 0, 55, 0.1)',
+        //backgroundColor: 'rgba(0,0,0,0)',
+        pointBackgroundColor: 'white',
+        pointHoverBackgroundColor: '#f44336',
+        pointBorderColor: '#f44336',
+        pointHoverBorderColor: '#f44336'
+      }
+    ],
+    options: {
+      spanGaps: false,
+      legend: {
+        display: true
+      },
+      maintainAspectRatio: false,
+      tooltips: {
+        position: 'nearest',
+        mode: 'index',
+        intersect: false
+      },
+      layout: {
+        padding: {
+          left: 24,
+          right: 32,
+          top: 20
+        }
+      },
+      elements: {
+        point: {
+          radius: 4,
+          borderWstatusth: 2,
+          hoverRadius: 4,
+          hoverBorderWstatusth: 2
+        },
+        line: {
+          tension: 0.3
+        }
+      },
+      scales: {
+        xAxes: [{}],
+        yAxes: [
+          {
+            status: 'y-axis-0',
+            position: 'left',
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      plugins: {
+        filler: {
+          propagate: false
+        }
+      }
+    }
+  }
+
   abbreviateNumber(number: number): string | number {
     const SI_POSTFIXES: string[] = ["", "k", "M", "B", "T", "P", "E"];
     const tier = Math.log10(Math.abs(number)) / 3 | 0;
@@ -76,115 +187,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     private _activatedRoute: ActivatedRoute,
     public router: Router
   ) {
-
     super();
-
-    this.pieChart = {
-      legend: false,
-      explodeSlices: false,
-      labels: true,
-      doughnut: true,
-      gradient: false,
-      scheme: {
-        domain: ['#039be5', '#f44336']
-      },
-      dataSource: [
-        {
-          name: '',
-          value: 0
-        },
-        {
-          name: '',
-          value: 0
-        },
-      ],
-    };
-
-    this.lineChart = {
-      chartType: 'line',
-      datasets: {
-        report: [
-          {
-            label: '',
-            data: [],
-            fill: 'start'
-
-          },
-          {
-            label: '',
-            data: [],
-            fill: 'start'
-          }
-        ],
-      },
-      labels: [],
-      colors: [
-        {
-          borderColor: '#35afea',
-          backgroundColor: 'rgba(0,0,0,0)',
-          pointBackgroundColor: 'white',
-          pointHoverBackgroundColor: '#35afea',
-          pointBorderColor: '#35afea',
-          pointHoverBorderColor: '#35afea'
-        },
-        {
-          borderColor: '#f44336',
-          backgroundColor: 'rgba(0,0,0,0)',
-          pointBackgroundColor: 'white',
-          pointHoverBackgroundColor: '#f44336',
-          pointBorderColor: '#f44336',
-          pointHoverBorderColor: '#f44336'
-        }
-      ],
-      options: {
-        spanGaps: false,
-        legend: {
-          display: true
-        },
-        maintainAspectRatio: false,
-        tooltips: {
-          position: 'nearest',
-          mode: 'index',
-          intersect: false
-        },
-        layout: {
-          padding: {
-            left: 24,
-            right: 32,
-            top: 20
-          }
-        },
-        elements: {
-          point: {
-            radius: 4,
-            borderWstatusth: 2,
-            hoverRadius: 4,
-            hoverBorderWstatusth: 2
-          },
-          line: {
-            tension: 0
-          }
-        },
-        scales: {
-          xAxes: [{}],
-          yAxes: [
-            {
-              status: 'y-axis-0',
-              position: 'left',
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        },
-        plugins: {
-          filler: {
-            propagate: false
-          }
-        }
-      }
-    }
-
   };
 
   rightTableColumns = ['order', 'time', 'phone', 'network'];
@@ -267,6 +270,14 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         }
       });
     this.subscriptions.push(sub);
+
+    if (window.innerWidth < 600) {
+      this.lineChart.options.layout = {
+        left: 10,
+        right: 10,
+        top: 0
+      };
+    }
   }
 
   showReason(reason: any) {
@@ -299,11 +310,11 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     let lastDate = moment(this.selectedDateRange.end).startOf('day');
 
     while (currDate.add(1, 'days').diff(lastDate) < 0) {
-      dates.push(moment(currDate.clone().toDate()).format('DD-MM'));
+      dates.push(moment(currDate.clone().toDate()).format('DD-MM-YYYY'));
     }
 
-    dates.unshift(moment(this.selectedDateRange.start).format('DD-MM'));
-    dates.push(moment(this.selectedDateRange.end).format('DD-MM'));
+    dates.unshift(moment(this.selectedDateRange.start).format('DD-MM-YYYY'));
+    dates.push(moment(this.selectedDateRange.end).format('DD-MM-YYYY'));
 
     return dates;
   }
@@ -355,27 +366,26 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         res => {
           this.clickTotal = res.data.pieChart.realClick + res.data.pieChart.spamClick;
 
-          const realClickPercentage = res.data.pieChart.realClick * 100 / this.clickTotal;
-          const spamClickPercentage = 100 - realClickPercentage;
+          const realClickDetail: any = {
+            name: 'Click thật: ' + this.abbreviateNumber(res.data.pieChart.realClick),
+            value: Math.round(res.data.pieChart.realClick * 100 / this.clickTotal)
+          };
+          const spamClickDetail: any = {
+            name: 'Click ảo: ' + this.abbreviateNumber(res.data.pieChart.spamClick),
+            value: Math.round(100 - realClickDetail.value)
+          };
 
           this.pieChart = {
             legend: false,
             explodeSlices: false,
             labels: true,
             doughnut: true,
-            gradient: false,
+            gradient: true,
             scheme: {
-              domain: ['#039be5', '#f44336']
+              domain: ['#039be5', '#ff0037']
             },
             dataSource: [
-              {
-                name: 'Click thật: ' + this.abbreviateNumber(res.data.pieChart.realClick),
-                value: Math.round(realClickPercentage * 100) / 100
-              },
-              {
-                name: 'Click ảo: ' + this.abbreviateNumber(res.data.pieChart.spamClick),
-                value: Math.round(spamClickPercentage * 100) / 100
-              },
+              realClickDetail, spamClickDetail
             ],
             onSelect: (ev) => {
               //console.log(ev);
@@ -388,7 +398,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           let lineChartData = [];
 
           for (const item of res.data.lineChart)
-            lineChartData[moment(item._id, 'DD-MM-YYYY').format('DD-MM')] = {
+            lineChartData[item._id] = {
               realClick: item.realClick,
               spamClick: item.spamClick
             };
@@ -398,102 +408,19 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           const spamClickDataSets = [];
 
           lineChartLabels.forEach((item, index) => {
-
             if (lineChartData[item] !== undefined) {
-              realClickDataSets[index] = lineChartData[item].realClick;
-              spamClickDataSets[index] = lineChartData[item].spamClick;
+              realClickDataSets[index] = this.abbreviateNumber(lineChartData[item].realClick);
+              spamClickDataSets[index] = this.abbreviateNumber(lineChartData[item].spamClick);
             }
             else {
               realClickDataSets[index] = 0;
               spamClickDataSets[index] = 0;
             }
-
           });
 
-          this.lineChart = {
-            chartType: 'line',
-            datasets: {
-              report: [
-                {
-                  label: 'Hợp lệ',
-                  data: realClickDataSets,
-                  fill: 'start'
-
-                },
-                {
-                  label: 'Không hợp lệ',
-                  data: spamClickDataSets,
-                  fill: 'start'
-                }
-              ],
-            },
-            labels: lineChartLabels,
-            colors: [
-              {
-                borderColor: '#35afea',
-                backgroundColor: 'rgba(0,0,0,0)',
-                pointBackgroundColor: 'white',
-                pointHoverBackgroundColor: '#35afea',
-                pointBorderColor: '#35afea',
-                pointHoverBorderColor: '#35afea'
-              },
-              {
-                borderColor: '#f44336',
-                backgroundColor: 'rgba(0,0,0,0)',
-                pointBackgroundColor: 'white',
-                pointHoverBackgroundColor: '#f44336',
-                pointBorderColor: '#f44336',
-                pointHoverBorderColor: '#f44336'
-              }
-            ],
-            options: {
-              spanGaps: false,
-              legend: {
-                display: true
-              },
-              maintainAspectRatio: false,
-              tooltips: {
-                position: 'nearest',
-                mode: 'index',
-                intersect: false
-              },
-              layout: {
-                padding: {
-                  left: 24,
-                  right: 32,
-                  top: 20
-                }
-              },
-              elements: {
-                point: {
-                  radius: 4,
-                  borderWstatusth: 2,
-                  hoverRadius: 4,
-                  hoverBorderWstatusth: 2
-                },
-                line: {
-                  tension: 0
-                }
-              },
-              scales: {
-                xAxes: [{}],
-                yAxes: [
-                  {
-                    status: 'y-axis-0',
-                    position: 'left',
-                    ticks: {
-                      beginAtZero: true
-                    }
-                  }
-                ]
-              },
-              plugins: {
-                filler: {
-                  propagate: false
-                }
-              }
-            }
-          }
+          this.lineChart.labels = lineChartLabels;
+          this.lineChart.datasets.report[0].data = realClickDataSets;
+          this.lineChart.datasets.report[1].data = spamClickDataSets;
         },
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);

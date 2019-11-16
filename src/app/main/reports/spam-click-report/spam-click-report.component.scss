@@ -164,7 +164,7 @@
         font-size: 12px;
 
         &:hover {
-          background: rgba(3, 155, 229, 0.05);
+          background: rgba(3, 155, 229, 0.1);
         }
       }
 
@@ -172,7 +172,7 @@
         transition: 0.2s;
 
         &:hover {
-          background-color: rgba(3, 155, 229, 0.05);
+          background-color: rgba(3, 155, 229, 0.1);
         }
       }
 
@@ -225,7 +225,7 @@
 
   :host ::ng-deep .pie-chart {
     margin-top: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 
     .pie-label {
       font-size: 20px !important;
@@ -235,6 +235,16 @@
 
 @media screen and (max-width: 600px) {
   .container {
+
+    :host ::ng-deep .pie-chart {
+      margin-top: 0;
+      margin-bottom: -9vh;
+  
+      .pie-label {
+        font-size: 16px !important;
+      }
+    }
+
     .main-title {
       .main-title-text {
         padding-bottom: 10px;
@@ -255,6 +265,10 @@
         padding-left: 0;
         padding-right: 0;
         text-align: center;
+      }
+
+      .click-total {
+        font-size: 12px;
       }
 
       .click-number {
