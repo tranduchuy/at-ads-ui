@@ -52897,7 +52897,7 @@ var OverviewReportComponent = /** @class */ (function (_super) {
                 return {
                     name: (_this.TRAFFIC_SOURCE_TYPES[item._id - 1] || 'Unknown')
                         + ': ' + _this.abbreviateNumber(sessionCount) + ' phiên'
-                        + (" (" + Math.ceil(sessionCount * 100 / _this.sessionTotal) + "%)"),
+                        + (" (" + Math.round(sessionCount * 100 / _this.sessionTotal) + "%)"),
                     value: _this.getPercentage(sessionCount, sessionCountTotal)
                 };
             });

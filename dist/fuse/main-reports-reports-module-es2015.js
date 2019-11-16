@@ -52241,7 +52241,7 @@ let OverviewReportComponent = class OverviewReportComponent extends app_shared_c
                 return {
                     name: (this.TRAFFIC_SOURCE_TYPES[item._id - 1] || 'Unknown')
                         + ': ' + this.abbreviateNumber(sessionCount) + ' phiên'
-                        + ` (${Math.ceil(sessionCount * 100 / this.sessionTotal)}%)`,
+                        + ` (${Math.round(sessionCount * 100 / this.sessionTotal)}%)`,
                     value: this.getPercentage(sessionCount, sessionCountTotal)
                 };
             });
