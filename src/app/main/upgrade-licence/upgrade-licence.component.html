@@ -1,12 +1,14 @@
 <div class="container">
 
   <div class="main-title" fxLayout="column" fxLayoutAlign="center center">
-    <span class="shiny">
-      <span class="inner-shiny">Nâng cấp tài khoản</span>
-    </span>
-    <p class="notice">
-      Hãy nâng cấp tài khoản của bạn để trải nghiệm những tính năng tuyệt vời nhất!
-    </p>
+    <div class="main-title-inner">
+      <span class="shiny">
+        <span class="inner-shiny">Nâng cấp tài khoản</span>
+      </span>
+      <p class="notice">
+        Hãy nâng cấp tài khoản của bạn để trải nghiệm những tính năng tuyệt vời nhất!
+      </p>
+    </div>
   </div>
 
   <div class="package-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
@@ -87,7 +89,8 @@
           </li>
         </ul>
       </div>
-      <div class="register-package-button" (click)="openUpgradeLicenceDialog('VIP1', 'Tối ưu')" [class.no-display]="isRegisterButtonNotDisplayed">
+      <div class="register-package-button" (click)="openUpgradeLicenceDialog('VIP1', 'Tối ưu')"
+        [class.no-display]="isRegisterButtonNotDisplayed">
         <button mat-raised-button color="accent">Đăng ký ngay</button>
       </div>
     </div>

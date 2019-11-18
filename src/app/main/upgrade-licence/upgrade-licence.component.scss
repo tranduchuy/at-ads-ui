@@ -6,33 +6,42 @@
   }
 
   .main-title {
-    padding: 140px 20px 250px 20px;
-    background-color: #000000;
-    background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
-    background-attachment: fixed;
-    text-align: center;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
+    filter: drop-shadow(0px 1px 2px black) !important;
 
-    .notice {
-      font-size: 14px;
-      font-weight: normal;
-      font-style: italic;
+    background: url("../../../assets/images/backgrounds/ai-machine-learning.png");
+    background-size: 100% 100%;
+    background-position: center center;
+    background-attachment: fixed;
+
+    .main-title-inner {
+      padding: 140px 20px 250px 20px;
+      text-align: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.6);
+      width: 100%;
+
+      .notice {
+        font-size: 14px;
+        font-weight: normal;
+        font-style: italic;
+      }
     }
   }
 
   .shiny {
-    color: #f5c21b;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f5c21b), to(#d17000));
+    color: lime;
+    background: -webkit-gradient(linear, left top, left bottom, from(lime), to(green));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 30px !important;
     font-weight: 900;
     position: relative;
     text-transform: uppercase;
+    filter: drop-shadow(0px 1px 2px black);
   }
 
   .shiny::before {
