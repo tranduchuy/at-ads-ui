@@ -71,12 +71,15 @@
 
         .session-total {
           position: relative;
-          left: 41.5%;
+          left: 41.2%;
           top: -110px;
           width: 50px;
-          height: 50px;
-          -webkit-transform: translate(-41.5%, -110px);
-          transform: translate(-41.5%, -110px);
+          -webkit-transform: translate(-41.2%, -110px);
+          transform: translate(-41.2%, -110px);
+
+          .session-number {
+            font-size: 20px;
+          }
         }
       }
     }
@@ -355,8 +358,8 @@
           height: 750px;
 
           .session-total {
-            left: 50%;
-            top: -73.5%;
+            -webkit-transform: translate(20%, -350px);
+            transform: translate(20%, -350px);
           }
         }
       }
