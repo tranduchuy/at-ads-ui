@@ -254,7 +254,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     selectAccount(): void {
         this._sessionService.setActiveGoogleAdsAccount(
             this.accountCtrl.value.accountId,
-            this.accountCtrl.value.name
+            this._adsAccountPipe.transform(this.accountCtrl.value.adsId)
         );
     }
 
@@ -278,7 +278,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                             createdAt: account.createdAt,
                             connectType: account.connectType,
                             websites: account.websites,
-                            limitWebsite: account.limitWebsite
+                            limitWebsite: account.limitWebsite,
                         };
                     });
 
@@ -307,7 +307,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 this.accountCtrl.setValue(this.adsAccounts[activeIndex]);
                 this._sessionService.setActiveGoogleAdsAccount(
                     this.accountCtrl.value.accountId,
-                    this.accountCtrl.value.name
+                    this._adsAccountPipe.transform(this.accountCtrl.value.adsId)
                 );
 
                 // load the initial account list

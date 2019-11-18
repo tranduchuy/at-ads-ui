@@ -38,7 +38,6 @@ import { MatTableModule } from '@angular/material';
 import { LogoutModule } from './authentication/logout/logout.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { UpgradeLicenceComponent } from './main/upgrade-licence/upgrade-licence.component';
 import { PreviousRouteService } from './shared/services/previous-route.service';
 import { FakeDbService } from './fake-db/fake-db.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';

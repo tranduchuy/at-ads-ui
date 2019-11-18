@@ -142,14 +142,14 @@
 
             <ng-template #tooltipTemplate let-model="model">
               <p style="color: #fff; text-align: left">
-                {{model.name}} <b>({{model.value}}%)</b>
+                {{model.name}}
               </p>
             </ng-template>
 
           </ngx-charts-pie-chart>
 
           <div style="text-align: center" class="session-total" *ngIf="sessionTotal">
-            <span class="click-number">{{abbreviateNumber(sessionTotal)}}</span>
+            <span class="session-number">{{abbreviateNumber(sessionTotal)}}</span>
             <br><span style="color: gray">phiên</span>
           </div>
 
