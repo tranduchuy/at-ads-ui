@@ -43,29 +43,30 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
         if (accountId) {
           this.pageTotal = 0;
 
-          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-
-          if (page) {
-            if (isNaN(Number(page))) {
-              this.currentPageNumber = 1;
-              this.router.navigate([], {
-                queryParams: {
-                  page: this.currentPageNumber,
-                }
-              });
-            }
-            else {
-              this.currentPageNumber = Number(page);
-            }
+          const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+          if (selectedActiveAccount) {
+            this.currentPageNumber = 1;
           }
           else {
-            this.currentPageNumber = 1;
-            this.router.navigate([], {
-              queryParams: {
-                page: this.currentPageNumber,
+            const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+            if (page) {
+              if (isNaN(Number(page))) {
+                this.currentPageNumber = 1;
               }
-            });
+              else {
+                this.currentPageNumber = Number(page);
+              }
+            }
+            else {
+              this.currentPageNumber = 1;
+            }
           }
+          this.router.navigate([], {
+            queryParams: {
+              page: this.currentPageNumber,
+            }
+          });
 
           this.getDailyClickingReport(this.currentPageNumber);
         }

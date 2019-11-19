@@ -255,6 +255,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
           if (selectedActiveAccount) {
             this.currentPageNumber = 1;
+            this.pageLimit = this.itemsPerPageOptions[0].value;
           }
           else {
             const page = this._activatedRoute.snapshot.queryParamMap.get('page');
@@ -271,12 +272,12 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
               this.currentPageNumber = 1;
             }
           }
-
           this.router.navigate([], {
             queryParams: {
               page: this.currentPageNumber,
             }
           });
+          
           this.getAccountReport(accountId, this.currentPageNumber);
         }
       });

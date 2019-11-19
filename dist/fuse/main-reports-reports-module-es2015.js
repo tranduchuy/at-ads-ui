@@ -50684,7 +50684,7 @@ module.exports = "<div class=\"container\">\n\n  <div class=\"title1\">\n    THE
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"title1\" fxLayout=\"row\" fxLayoutAlign=\"start center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"-10px\">\n    <button mat-icon-button (click)=\"backToMainReport()\">\n      <mat-icon>arrow_back</mat-icon>\n    </button>\n    <span>\n      LỊCH SỬ IP CLICK QUẢNG CÁO - TÀI KHOẢN <span style=\"color:yellow\">{{_sessionService.activeAdsAccountId}}</span>\n    </span>\n  </div>\n\n  <div class=\"main-inner\">\n    <div class=\"inner\">\n\n      <div fxLayout=\"row\" fxLayout.xs=\"column\" fxLayoutGap=\"15px\">\n\n        <div fxLayout=\"column\" fxFlex=\"20\">\n          <div class=\"left\">\n            <div class=\"ip-main-info\" fxLayout=\"column\" fxLayoutAlign=\"center center\">\n              <img src=\"https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png\" alt=\"\" class=\"avatar\">\n              <p style=\"color: #039be5; font-weight: bold\">IP: {{ip}}</p>\n            </div>\n          </div>\n\n          <div class=\"bottom\" fxLayout=\"column\" fxLayoutGap=\"17px\" fxLayoutAlign=\"center start\">\n            <div class=\"last-access-notification\" fxLayout=\"row\" fxLayoutGap=\"12px\">\n              <div class=\"last-history-icon\">\n                <mat-icon color=\"accent\">calendar_today</mat-icon>\n              </div>\n              <div class=\"title\" style=\"text-align: left\">\n                Ngày ghi nhận cuối\n                <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n                  {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>\n              </div>\n            </div>\n            <div class=\"access-location\" fxLayout=\"row\" fxLayoutGap=\"12px\" fxLayoutAlign=\"center center\">\n              <div class=\"last-history-icon\">\n                <mat-icon color=\"accent\">location_on</mat-icon>\n              </div>\n              <div class=\"title\" style=\"text-align: left\">\n                Vị trí truy cập\n                <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n                  {{lastClickHistory.location?.city || 'Unknown'}}\n                </div>\n              </div>\n            </div>\n            <div class=\"last-access-device\" fxLayout=\"row\" fxLayoutGap=\"12px\">\n              <div class=\"last-history-icon\">\n                <mat-icon color=\"accent\">speaker_phone</mat-icon>\n              </div>\n              <div class=\"title\" style=\"text-align: left\">\n                Thiết bị truy cập cuối\n                <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n                  {{lastClickHistory.device?.vendor || 'Unknown'}}\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"mat-elevation-z8 ip-click-history\">\n\n          <mat-table\n            [dataSource]=\"clicksDataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }\">\n\n            <ng-container matColumnDef=\"type\">\n              <mat-header-cell *matHeaderCellDef>Click Ads/Xem trang</mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <mat-icon *ngIf=\"element.type === 2\" style=\"color: #44b543\" class=\"user-action-icon\"\n                  matTooltip=\"Xem trang\">\n                  remove_red_eye</mat-icon>\n\n                <mat-icon *ngIf=\"element.isSpam === true && element.type === 1\" style=\"color: crimson\"\n                  class=\"user-action-icon\" matTooltip=\"Đã chặn và không bị tính tiền\">verified_user\n                </mat-icon>\n\n                <mat-icon *ngIf=\"element.isSpam === false && element.type === 1\" style=\"color: gold\"\n                  class=\"user-action-icon\" matTooltip=\"Click chuột quảng cáo bị tính tiền\">monetization_on</mat-icon>\n                <p *ngIf=\"element.type === 1\">Click Quảng cáo</p>\n                <p *ngIf=\"element.type === 2\">Xem trang</p>\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"createdAt\">\n              <mat-header-cell *matHeaderCellDef>Thời gian</mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}}\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"uuid\">\n              <mat-header-cell *matHeaderCellDef>Người dùng (uid)</mat-header-cell>\n              <mat-cell *matCellDef=\"let element; let i = index\"\n                [class.type1]=\"element.isSpam === false && element.type === 1\" [class.type2]=\"element.type === 2\"\n                [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <img [src]=\"'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'\" class=\"user-image\">\n                <a mat-button color=\"accent\" *ngIf=\"element.uuid\" class=\"uuid-detail-link\"\n                  matTooltip=\"Nhấn vào để xem chi tiết\"\n                  [routerLink]=\"['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid, router.url]\">\n                  <span>*{{element.uuid.slice(-12)}}*</span>\n                </a>\n                <span style=\"color:silver; font-weight: bold\" *ngIf=\"!element.uuid\">Unknown</span>\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"isPrivateBrowsing\">\n              <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <span *ngIf=\"element.isPrivateBrowsing === true\" style=\"color: orange; font-weight: bold\">\n                  <mat-icon style=\"font-size: 18px\">report_problem</mat-icon>Có\n                </span>\n                <span *ngIf=\"element.isPrivateBrowsing === false\" style=\"color:silver\">Không</span>\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"href\">\n              <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <a\n                  href=\"{{element.href}}\">{{element.pathname}}{{element.pathname}}{{element.pathname}}{{element.pathname}}</a>\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"os\">\n              <mat-header-cell *matHeaderCellDef>Hệ điều hành</mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <img *ngIf=\"element.os?.name === 'Windows'\"\n                  src=\"https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png\" alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.os?.name === 'iOS'\"\n                  src=\"https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.os?.name === 'Android'\"\n                  src=\"https://image.flaticon.com/icons/png/512/226/226770.png\" alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.os?.name === 'Mac OS'\"\n                  src=\"https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.os?.name === 'Linux'\"\n                  src=\"https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png\" alt=\"\" class=\"icon\">\n                {{(element.os?.name || 'Unknown') + ' ' + (element.os?.version || '')}}\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"browser\">\n              <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <img *ngIf=\"element.browser?.name === 'Firefox'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Chrome'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'IE'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Cốc Cốc'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Opera'\"\n                  src=\"https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png\" alt=\"\"\n                  class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Tor'\"\n                  src=\"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png\"\n                  alt=\"\" class=\"icon\">\n                {{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"networkCompany\">\n              <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                {{element.networkCompany?.name || 'Unknown'}} </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"location\">\n              <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                {{element.location?.city || 'Unknown'}}\n              </mat-cell>\n            </ng-container>\n\n            <mat-header-row *matHeaderRowDef=\"clicksDataSourceCols; sticky: true\"></mat-header-row>\n            <mat-row *matRowDef=\"let row; columns: clicksDataSourceCols;\"></mat-row>\n          </mat-table>\n\n        </div>\n\n      </div>\n\n      <div fxLayout=\"row\" fxLayout.xs=\"column\" fxLayoutGap=\"15px\" *ngIf=\"pageTotal !== 1\">\n        <div fxFlex=\"18.5\" fxFlex.xs=\"0\"></div>\n        <div class=\"pagination-buttons\" fxLayout=\"row\" fxLayout.xs=\"column\">\n          <div fxFlex=\"70\" fxFlex.xs=\"100\">\n            <p *ngIf=\"pageTotal > 0\">Trang <span [(ngModel)]=\"currentPageNumber\"\n                ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng\n              {{pageTotal}} trang</p>\n            <!-- <p *ngIf=\"pageTotal === 0\">Chưa có ghi nhận nào.</p> -->\n          </div>\n          <pagination-controls (pageChange)=\"changePage($event); currentPageNumber = $event\" previousLabel=\"Trước\"\n            nextLabel=\"Sau\" fxFlex fxLayoutAlign=\"end start\" *ngIf=\"pageTotal > 0\"></pagination-controls>\n        </div>\n      </div>\n\n      <!-- <div class=\"bottom\" fxLayout=\"column\" fxLayoutGap=\"17px\" fxLayoutAlign=\"center start\">\n        <div class=\"last-access-notification\" fxLayout=\"row\" fxLayoutGap=\"12px\">\n          <div class=\"last-history-icon\">\n            <mat-icon color=\"accent\">calendar_today</mat-icon>\n          </div>\n          <div class=\"title\" style=\"text-align: left\">\n            Ngày ghi nhận cuối\n            <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n              {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>\n          </div>\n        </div>\n        <div class=\"access-location\" fxLayout=\"row\" fxLayoutGap=\"12px\" fxLayoutAlign=\"center center\">\n          <div class=\"last-history-icon\">\n            <mat-icon color=\"accent\">location_on</mat-icon>\n          </div>\n          <div class=\"title\" style=\"text-align: left\">\n            Vị trí truy cập\n            <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n              {{lastClickHistory.location?.city || 'Unknown'}}\n            </div>\n          </div>\n        </div>\n        <div class=\"last-access-device\" fxLayout=\"row\" fxLayoutGap=\"12px\">\n          <div class=\"last-history-icon\">\n            <mat-icon color=\"accent\">speaker_phone</mat-icon>\n          </div>\n          <div class=\"title\" style=\"text-align: left\">\n            Thiết bị truy cập cuối\n            <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n              {{lastClickHistory.device?.vendor || 'Unknown'}}\n            </div>\n          </div>\n        </div>\n      </div> -->\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n\n  <div class=\"title1\" fxLayout=\"row\" fxLayoutAlign=\"start center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"-10px\">\n    <button mat-icon-button (click)=\"backToMainReport()\">\n      <mat-icon>arrow_back</mat-icon>\n    </button>\n    <span>\n      LỊCH SỬ IP CLICK QUẢNG CÁO - TÀI KHOẢN <span style=\"color:yellow\">{{_sessionService.activeAdsAccountId}}</span>\n    </span>\n  </div>\n\n  <div class=\"main-inner\">\n    <div class=\"inner\">\n\n      <div fxLayout=\"row\" fxLayout.xs=\"column\" fxLayoutGap=\"15px\">\n\n        <div fxLayout=\"column\" fxFlex=\"20\">\n          <div class=\"left\">\n            <div class=\"ip-main-info\" fxLayout=\"column\" fxLayoutAlign=\"center center\">\n              <img src=\"https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png\" alt=\"\" class=\"avatar\">\n              <p style=\"color: #039be5; font-weight: bold\">IP: {{ip}}</p>\n            </div>\n          </div>\n\n          <div class=\"bottom\" fxLayout=\"column\" fxLayoutGap=\"17px\" fxLayoutAlign=\"center start\">\n            <div class=\"last-access-notification\" fxLayout=\"row\" fxLayoutGap=\"12px\">\n              <div class=\"last-history-icon\">\n                <mat-icon color=\"accent\">calendar_today</mat-icon>\n              </div>\n              <div class=\"title\" style=\"text-align: left\">\n                Ngày ghi nhận cuối\n                <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n                  {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>\n              </div>\n            </div>\n            <div class=\"access-location\" fxLayout=\"row\" fxLayoutGap=\"12px\" fxLayoutAlign=\"center center\">\n              <div class=\"last-history-icon\">\n                <mat-icon color=\"accent\">location_on</mat-icon>\n              </div>\n              <div class=\"title\" style=\"text-align: left\">\n                Vị trí truy cập\n                <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n                  {{lastClickHistory.location?.city || 'Unknown'}}\n                </div>\n              </div>\n            </div>\n            <div class=\"last-access-device\" fxLayout=\"row\" fxLayoutGap=\"12px\">\n              <div class=\"last-history-icon\">\n                <mat-icon color=\"accent\">speaker_phone</mat-icon>\n              </div>\n              <div class=\"title\" style=\"text-align: left\">\n                Thiết bị truy cập cuối\n                <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n                  {{lastClickHistory.device?.vendor || 'Unknown'}}\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"mat-elevation-z8 ip-click-history\">\n\n          <mat-table\n            [dataSource]=\"clicksDataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }\">\n\n            <ng-container matColumnDef=\"type\">\n              <mat-header-cell *matHeaderCellDef>Click Ads/Xem trang</mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <mat-icon *ngIf=\"element.type === 2\" style=\"color: #44b543\" class=\"user-action-icon\"\n                  matTooltip=\"Xem trang\">\n                  remove_red_eye</mat-icon>\n\n                <mat-icon *ngIf=\"element.isSpam === true && element.type === 1\" style=\"color: crimson\"\n                  class=\"user-action-icon\" matTooltip=\"Đã chặn và không bị tính tiền\">verified_user\n                </mat-icon>\n\n                <mat-icon *ngIf=\"element.isSpam === false && element.type === 1\" style=\"color: gold\"\n                  class=\"user-action-icon\" matTooltip=\"Click chuột quảng cáo bị tính tiền\">monetization_on</mat-icon>\n                <p *ngIf=\"element.type === 1\">Click Quảng cáo</p>\n                <p *ngIf=\"element.type === 2\">Xem trang</p>\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"createdAt\">\n              <mat-header-cell *matHeaderCellDef>Thời gian</mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}}\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"uuid\">\n              <mat-header-cell *matHeaderCellDef>Người dùng (uid)</mat-header-cell>\n              <mat-cell *matCellDef=\"let element; let i = index\"\n                [class.type1]=\"element.isSpam === false && element.type === 1\" [class.type2]=\"element.type === 2\"\n                [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <img [src]=\"'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'\" class=\"user-image\">\n                <a mat-button color=\"accent\" *ngIf=\"element.uuid\" class=\"uuid-detail-link\"\n                  matTooltip=\"Nhấn vào để xem chi tiết\"\n                  [routerLink]=\"['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid, router.url]\">\n                  <span>*{{element.uuid.slice(-12)}}*</span>\n                </a>\n                <span style=\"color:silver; font-weight: bold\" *ngIf=\"!element.uuid\">Unknown</span>\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"isPrivateBrowsing\">\n              <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <span *ngIf=\"element.isPrivateBrowsing === true\" style=\"color: orange; font-weight: bold\">\n                  <mat-icon style=\"font-size: 18px\">report_problem</mat-icon>Có\n                </span>\n                <span *ngIf=\"element.isPrivateBrowsing === false\" style=\"color:silver\">Không</span>\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"href\">\n              <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <a\n                  href=\"{{element.href}}\">{{element.pathname}}{{element.pathname}}{{element.pathname}}{{element.pathname}}</a>\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"os\">\n              <mat-header-cell *matHeaderCellDef>Hệ điều hành</mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <img *ngIf=\"element.os?.name === 'Windows'\"\n                  src=\"https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png\" alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.os?.name === 'iOS'\"\n                  src=\"https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.os?.name === 'Android'\"\n                  src=\"https://image.flaticon.com/icons/png/512/226/226770.png\" alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.os?.name === 'Mac OS'\"\n                  src=\"https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.os?.name === 'Linux'\"\n                  src=\"https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png\" alt=\"\" class=\"icon\">\n                {{(element.os?.name || 'Unknown') + ' ' + (element.os?.version || '')}}\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"browser\">\n              <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                <img *ngIf=\"element.browser?.name === 'Firefox'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Chrome'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'IE'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Cốc Cốc'\"\n                  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png\"\n                  alt=\"\" class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Opera'\"\n                  src=\"https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png\" alt=\"\"\n                  class=\"icon\">\n                <img *ngIf=\"element.browser?.name === 'Tor'\"\n                  src=\"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png\"\n                  alt=\"\" class=\"icon\">\n                {{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}\n              </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"networkCompany\">\n              <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                {{element.networkCompany?.name || 'Unknown'}} </mat-cell>\n            </ng-container>\n\n            <ng-container matColumnDef=\"location\">\n              <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>\n              <mat-cell *matCellDef=\"let element\" [class.type1]=\"element.isSpam === false && element.type === 1\"\n                [class.type2]=\"element.type === 2\" [class.type3]=\"element.isSpam === true && element.type === 1\">\n                {{element.location?.city || 'Unknown'}}\n              </mat-cell>\n            </ng-container>\n\n            <mat-header-row *matHeaderRowDef=\"clicksDataSourceCols; sticky: true\"></mat-header-row>\n            <mat-row *matRowDef=\"let row; columns: clicksDataSourceCols;\"></mat-row>\n          </mat-table>\n\n        </div>\n\n      </div>\n\n      <div fxLayout=\"row\" fxLayout.xs=\"column\" fxLayoutGap=\"15px\" *ngIf=\"pageTotal !== 1\">\n        <div fxFlex=\"19\" fxFlex.xs=\"0\"></div>\n        <div class=\"pagination-buttons\" fxLayout=\"row\" fxLayout.xs=\"column\">\n          <div fxFlex=\"70\" fxFlex.xs=\"100\">\n            <p *ngIf=\"pageTotal > 0\">Trang <span [(ngModel)]=\"currentPageNumber\"\n                ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng\n              {{pageTotal}} trang</p>\n            <!-- <p *ngIf=\"pageTotal === 0\">Chưa có ghi nhận nào.</p> -->\n          </div>\n          <pagination-controls (pageChange)=\"changePage($event); currentPageNumber = $event\" previousLabel=\"Trước\"\n            nextLabel=\"Sau\" fxFlex fxLayoutAlign=\"end start\" *ngIf=\"pageTotal > 0\"></pagination-controls>\n        </div>\n      </div>\n\n      <!-- <div class=\"bottom\" fxLayout=\"column\" fxLayoutGap=\"17px\" fxLayoutAlign=\"center start\">\n        <div class=\"last-access-notification\" fxLayout=\"row\" fxLayoutGap=\"12px\">\n          <div class=\"last-history-icon\">\n            <mat-icon color=\"accent\">calendar_today</mat-icon>\n          </div>\n          <div class=\"title\" style=\"text-align: left\">\n            Ngày ghi nhận cuối\n            <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n              {{(lastClickHistory.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}</div>\n          </div>\n        </div>\n        <div class=\"access-location\" fxLayout=\"row\" fxLayoutGap=\"12px\" fxLayoutAlign=\"center center\">\n          <div class=\"last-history-icon\">\n            <mat-icon color=\"accent\">location_on</mat-icon>\n          </div>\n          <div class=\"title\" style=\"text-align: left\">\n            Vị trí truy cập\n            <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n              {{lastClickHistory.location?.city || 'Unknown'}}\n            </div>\n          </div>\n        </div>\n        <div class=\"last-access-device\" fxLayout=\"row\" fxLayoutGap=\"12px\">\n          <div class=\"last-history-icon\">\n            <mat-icon color=\"accent\">speaker_phone</mat-icon>\n          </div>\n          <div class=\"title\" style=\"text-align: left\">\n            Thiết bị truy cập cuối\n            <div style=\"color: gray\" *ngIf=\"lastClickHistory\">\n              {{lastClickHistory.device?.vendor || 'Unknown'}}\n            </div>\n          </div>\n        </div>\n      </div> -->\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -51323,28 +51323,29 @@ let BlockedIpListComponent = class BlockedIpListComponent extends app_shared_com
             .subscribe((accountId) => {
             if (accountId) {
                 this.pageTotal = 0;
-                const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-                if (page) {
-                    if (isNaN(Number(page))) {
-                        this.currentPageNumber = 1;
-                        this.router.navigate([], {
-                            queryParams: {
-                                page: this.currentPageNumber,
-                            }
-                        });
-                    }
-                    else {
-                        this.currentPageNumber = Number(page);
-                    }
+                const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+                if (selectedActiveAccount) {
+                    this.currentPageNumber = 1;
                 }
                 else {
-                    this.currentPageNumber = 1;
-                    this.router.navigate([], {
-                        queryParams: {
-                            page: this.currentPageNumber,
+                    const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+                    if (page) {
+                        if (isNaN(Number(page))) {
+                            this.currentPageNumber = 1;
                         }
-                    });
+                        else {
+                            this.currentPageNumber = Number(page);
+                        }
+                    }
+                    else {
+                        this.currentPageNumber = 1;
+                    }
                 }
+                this.router.navigate([], {
+                    queryParams: {
+                        page: this.currentPageNumber,
+                    }
+                });
                 this.getBlockedIPsListReport(this.currentPageNumber);
             }
         });
@@ -51443,7 +51444,7 @@ BlockedIpListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  width: 100%;\n}\n.container .title1 {\n  padding: 94px 30px 44px 30px;\n  background-color: #000000 !important;\n  background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;\n  color: white;\n  font-size: 16px;\n  font-weight: bold;\n}\n.container .inner .icon {\n  height: 22px;\n  width: 22px;\n  margin-right: 5px;\n}\n.container .inner .pagination-buttons {\n  display: table;\n  margin: 0 auto;\n  padding-left: 10px;\n  padding-bottom: 30px;\n  color: gray;\n}\n.container .inner mat-divider {\n  margin: 50px 25px 0 25px;\n}\n.container .inner .footer {\n  text-align: center;\n  padding: 30px;\n  padding-top: 10px;\n}\n.container .inner .table-wrapper {\n  height: auto;\n  background-color: white;\n  border-bottom: 0.5px solid #eee;\n  margin-top: -18px;\n  overflow: auto;\n  overflow-y: hidden;\n}\n.container .inner .table-wrapper mat-table {\n  box-shadow: none;\n}\n.container .inner .table-wrapper mat-table .ip-detail-link {\n  font-weight: bold;\n  padding-left: 2px;\n  transition: 0.2s;\n  font-size: 12px;\n}\n.container .inner .table-wrapper mat-table .ip-detail-link:hover {\n  background: rgba(3, 155, 229, 0.1);\n}\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(1),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(1) {\n  flex: 0 0 15%;\n}\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(3),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(3) {\n  justify-content: center;\n}\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(5),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(5),\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(6),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(6),\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(7),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(7) {\n  flex: 0 0 11%;\n}\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(8),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(8) {\n  justify-content: center;\n}\n.container .inner .table-wrapper mat-table mat-header-row,\n.container .inner .table-wrapper mat-table mat-row {\n  min-width: 1000px;\n  width: 100%;\n}\n.container .inner .table-wrapper mat-table mat-row {\n  transition: 0.2s;\n}\n.container .inner .table-wrapper mat-table mat-header-cell {\n  background: #039be5;\n  color: white;\n}\n.container .inner .table-wrapper mat-table mat-cell {\n  font-size: 12px;\n}\n.container .inner .table-wrapper mat-table mat-row:hover {\n  background-color: rgba(3, 155, 229, 0.1);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3ZpZXR0cmFuL0Rlc2t0b3AvY2xpY2svZnJvbnRlbmQvc3JjL2FwcC9tYWluL3JlcG9ydHMvaXAtY2xpY2tpbmctcmVwb3J0L2lwLWNsaWNraW5nLXJlcG9ydC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvbWFpbi9yZXBvcnRzL2lwLWNsaWNraW5nLXJlcG9ydC9pcC1jbGlja2luZy1yZXBvcnQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFBO0FDQ0Y7QURDRTtFQUNFLDRCQUFBO0VBRUEsb0NBQUE7RUFDQSw2RUFBQTtFQUNBLFlBQUE7RUFFQSxlQUFBO0VBQ0EsaUJBQUE7QUNESjtBREtJO0VBQ0UsWUFBQTtFQUNBLFdBQUE7RUFDQSxpQkFBQTtBQ0hOO0FETUk7RUFDRSxjQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0Esb0JBQUE7RUFDQSxXQUFBO0FDSk47QURPSTtFQUNFLHdCQUFBO0FDTE47QURRSTtFQUNFLGtCQUFBO0VBQ0EsYUFBQTtFQUNBLGlCQUFBO0FDTk47QURTSTtFQUNFLFlBQUE7RUFDQSx1QkFBQTtFQUNBLCtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7QUNQTjtBRFNNO0VBQ0UsZ0JBQUE7QUNQUjtBRFNRO0VBQ0UsaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0VBQ0EsZUFBQTtBQ1BWO0FEU1U7RUFDRSxrQ0FBQTtBQ1BaO0FEV1E7O0VBRUUsYUFBQTtBQ1RWO0FEWVE7O0VBRUUsdUJBQUE7QUNWVjtBRGFROzs7Ozs7RUFNRSxhQUFBO0FDWFY7QURjUTs7RUFFRSx1QkFBQTtBQ1pWO0FEZVE7O0VBRUUsaUJBQUE7RUFDQSxXQUFBO0FDYlY7QURnQlE7RUFDRSxnQkFBQTtBQ2RWO0FEaUJRO0VBQ0UsbUJBQUE7RUFDQSxZQUFBO0FDZlY7QURrQlE7RUFDRSxlQUFBO0FDaEJWO0FEbUJRO0VBQ0Usd0NBQUE7QUNqQlYiLCJmaWxlIjoic3JjL2FwcC9tYWluL3JlcG9ydHMvaXAtY2xpY2tpbmctcmVwb3J0L2lwLWNsaWNraW5nLXJlcG9ydC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xuICB3aWR0aDogMTAwJTtcblxuICAudGl0bGUxIHtcbiAgICBwYWRkaW5nOiA5NHB4IDMwcHggNDRweCAzMHB4O1xuXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMCAhaW1wb3J0YW50O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCgxNDdkZWcsICMwMDAwMDAgMCUsICMyYzNlNTAgNzQlKSAhaW1wb3J0YW50O1xuICAgIGNvbG9yOiB3aGl0ZTtcblxuICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgfVxuXG4gIC5pbm5lciB7XG4gICAgLmljb24ge1xuICAgICAgaGVpZ2h0OiAyMnB4O1xuICAgICAgd2lkdGg6IDIycHg7XG4gICAgICBtYXJnaW4tcmlnaHQ6IDVweDtcbiAgICB9XG5cbiAgICAucGFnaW5hdGlvbi1idXR0b25zIHtcbiAgICAgIGRpc3BsYXk6IHRhYmxlO1xuICAgICAgbWFyZ2luOiAwIGF1dG87XG4gICAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gICAgICBwYWRkaW5nLWJvdHRvbTogMzBweDtcbiAgICAgIGNvbG9yOiBncmF5O1xuICAgIH1cblxuICAgIG1hdC1kaXZpZGVyIHtcbiAgICAgIG1hcmdpbjogNTBweCAyNXB4IDAgMjVweDtcbiAgICB9XG5cbiAgICAuZm9vdGVyIHtcbiAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgIHBhZGRpbmc6IDMwcHg7XG4gICAgICBwYWRkaW5nLXRvcDogMTBweDtcbiAgICB9XG5cbiAgICAudGFibGUtd3JhcHBlciB7XG4gICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICAgIGJvcmRlci1ib3R0b206IDAuNXB4IHNvbGlkICNlZWU7XG4gICAgICBtYXJnaW4tdG9wOiAtMThweDtcbiAgICAgIG92ZXJmbG93OiBhdXRvO1xuICAgICAgb3ZlcmZsb3cteTogaGlkZGVuO1xuXG4gICAgICBtYXQtdGFibGUge1xuICAgICAgICBib3gtc2hhZG93OiBub25lO1xuXG4gICAgICAgIC5pcC1kZXRhaWwtbGluayB7XG4gICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgICAgcGFkZGluZy1sZWZ0OiAycHg7XG4gICAgICAgICAgdHJhbnNpdGlvbjogMC4ycztcbiAgICAgICAgICBmb250LXNpemU6IDEycHg7XG5cbiAgICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICAgIGJhY2tncm91bmQ6IHJnYmEoMywgMTU1LCAyMjksIDAuMSk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG5cbiAgICAgICAgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCgxKSxcbiAgICAgICAgbWF0LWNlbGw6bnRoLWNoaWxkKDEpIHtcbiAgICAgICAgICBmbGV4OiAwIDAgMTUlO1xuICAgICAgICB9XG5cbiAgICAgICAgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCgzKSxcbiAgICAgICAgbWF0LWNlbGw6bnRoLWNoaWxkKDMpIHtcbiAgICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgfVxuXG4gICAgICAgIG1hdC1oZWFkZXItY2VsbDpudGgtY2hpbGQoNSksXG4gICAgICAgIG1hdC1jZWxsOm50aC1jaGlsZCg1KSxcbiAgICAgICAgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCg2KSxcbiAgICAgICAgbWF0LWNlbGw6bnRoLWNoaWxkKDYpLFxuICAgICAgICBtYXQtaGVhZGVyLWNlbGw6bnRoLWNoaWxkKDcpLFxuICAgICAgICBtYXQtY2VsbDpudGgtY2hpbGQoNykge1xuICAgICAgICAgIGZsZXg6IDAgMCAxMSU7XG4gICAgICAgIH1cblxuICAgICAgICBtYXQtaGVhZGVyLWNlbGw6bnRoLWNoaWxkKDgpLFxuICAgICAgICBtYXQtY2VsbDpudGgtY2hpbGQoOCkge1xuICAgICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB9XG5cbiAgICAgICAgbWF0LWhlYWRlci1yb3csXG4gICAgICAgIG1hdC1yb3cge1xuICAgICAgICAgIG1pbi13aWR0aDogMTAwMHB4O1xuICAgICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICB9XG5cbiAgICAgICAgbWF0LXJvdyB7XG4gICAgICAgICAgdHJhbnNpdGlvbjogMC4ycztcbiAgICAgICAgfVxuXG4gICAgICAgIG1hdC1oZWFkZXItY2VsbCB7XG4gICAgICAgICAgYmFja2dyb3VuZDogIzAzOWJlNTtcbiAgICAgICAgICBjb2xvcjogd2hpdGU7XG4gICAgICAgIH1cblxuICAgICAgICBtYXQtY2VsbCB7XG4gICAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgICB9XG5cbiAgICAgICAgbWF0LXJvdzpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgzLCAxNTUsIDIyOSwgMC4xKTtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xufVxuIiwiLmNvbnRhaW5lciB7XG4gIHdpZHRoOiAxMDAlO1xufVxuLmNvbnRhaW5lciAudGl0bGUxIHtcbiAgcGFkZGluZzogOTRweCAzMHB4IDQ0cHggMzBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMCAhaW1wb3J0YW50O1xuICBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQoMTQ3ZGVnLCAjMDAwMDAwIDAlLCAjMmMzZTUwIDc0JSkgIWltcG9ydGFudDtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXNpemU6IDE2cHg7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLmljb24ge1xuICBoZWlnaHQ6IDIycHg7XG4gIHdpZHRoOiAyMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDVweDtcbn1cbi5jb250YWluZXIgLmlubmVyIC5wYWdpbmF0aW9uLWJ1dHRvbnMge1xuICBkaXNwbGF5OiB0YWJsZTtcbiAgbWFyZ2luOiAwIGF1dG87XG4gIHBhZGRpbmctbGVmdDogMTBweDtcbiAgcGFkZGluZy1ib3R0b206IDMwcHg7XG4gIGNvbG9yOiBncmF5O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgbWF0LWRpdmlkZXIge1xuICBtYXJnaW46IDUwcHggMjVweCAwIDI1cHg7XG59XG4uY29udGFpbmVyIC5pbm5lciAuZm9vdGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBwYWRkaW5nOiAzMHB4O1xuICBwYWRkaW5nLXRvcDogMTBweDtcbn1cbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIHtcbiAgaGVpZ2h0OiBhdXRvO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgYm9yZGVyLWJvdHRvbTogMC41cHggc29saWQgI2VlZTtcbiAgbWFyZ2luLXRvcDogLTE4cHg7XG4gIG92ZXJmbG93OiBhdXRvO1xuICBvdmVyZmxvdy15OiBoaWRkZW47XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUge1xuICBib3gtc2hhZG93OiBub25lO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIC5pcC1kZXRhaWwtbGluayB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBwYWRkaW5nLWxlZnQ6IDJweDtcbiAgdHJhbnNpdGlvbjogMC4ycztcbiAgZm9udC1zaXplOiAxMnB4O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIC5pcC1kZXRhaWwtbGluazpob3ZlciB7XG4gIGJhY2tncm91bmQ6IHJnYmEoMywgMTU1LCAyMjksIDAuMSk7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCgxKSxcbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSBtYXQtY2VsbDpudGgtY2hpbGQoMSkge1xuICBmbGV4OiAwIDAgMTUlO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1oZWFkZXItY2VsbDpudGgtY2hpbGQoMyksXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWNlbGw6bnRoLWNoaWxkKDMpIHtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCg1KSxcbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSBtYXQtY2VsbDpudGgtY2hpbGQoNSksXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCg2KSxcbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSBtYXQtY2VsbDpudGgtY2hpbGQoNiksXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCg3KSxcbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSBtYXQtY2VsbDpudGgtY2hpbGQoNykge1xuICBmbGV4OiAwIDAgMTElO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1oZWFkZXItY2VsbDpudGgtY2hpbGQoOCksXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWNlbGw6bnRoLWNoaWxkKDgpIHtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWhlYWRlci1yb3csXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LXJvdyB7XG4gIG1pbi13aWR0aDogMTAwMHB4O1xuICB3aWR0aDogMTAwJTtcbn1cbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSBtYXQtcm93IHtcbiAgdHJhbnNpdGlvbjogMC4ycztcbn1cbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSBtYXQtaGVhZGVyLWNlbGwge1xuICBiYWNrZ3JvdW5kOiAjMDM5YmU1O1xuICBjb2xvcjogd2hpdGU7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWNlbGwge1xuICBmb250LXNpemU6IDEycHg7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LXJvdzpob3ZlciB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMywgMTU1LCAyMjksIDAuMSk7XG59Il19 */"
+module.exports = ".container {\n  width: 100%;\n}\n.container .title1 {\n  padding: 94px 30px 44px 30px;\n  background-color: #000000 !important;\n  background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;\n  color: white;\n  font-size: 16px;\n  font-weight: bold;\n}\n.container .inner .icon {\n  height: 22px;\n  width: 22px;\n  margin-right: 5px;\n}\n.container .inner .pagination-buttons {\n  display: table;\n  margin: 0 auto;\n  padding-left: 10px;\n  padding-bottom: 30px;\n  color: gray;\n}\n.container .inner .footer {\n  text-align: center;\n  padding: 30px;\n  padding-top: 10px;\n}\n.container .inner .table-wrapper {\n  height: auto;\n  background-color: white;\n  border-bottom: 0.5px solid #eee;\n  margin-top: -18px;\n  overflow: auto;\n  overflow-y: hidden;\n}\n.container .inner .table-wrapper mat-table {\n  box-shadow: none;\n}\n.container .inner .table-wrapper mat-table .ip-detail-link {\n  font-weight: bold;\n  padding-left: 2px;\n  transition: 0.2s;\n  font-size: 12px;\n}\n.container .inner .table-wrapper mat-table .ip-detail-link:hover {\n  background: rgba(3, 155, 229, 0.1);\n}\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(1),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(1) {\n  flex: 0 0 15%;\n}\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(3),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(3) {\n  justify-content: center;\n}\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(5),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(5),\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(6),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(6),\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(7),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(7) {\n  flex: 0 0 11%;\n}\n.container .inner .table-wrapper mat-table mat-header-cell:nth-child(8),\n.container .inner .table-wrapper mat-table mat-cell:nth-child(8) {\n  justify-content: center;\n}\n.container .inner .table-wrapper mat-table mat-header-row,\n.container .inner .table-wrapper mat-table mat-row {\n  min-width: 1000px;\n  width: 100%;\n}\n.container .inner .table-wrapper mat-table mat-row {\n  transition: 0.2s;\n}\n.container .inner .table-wrapper mat-table mat-header-cell {\n  background: #039be5;\n  color: white;\n}\n.container .inner .table-wrapper mat-table mat-cell {\n  font-size: 12px;\n}\n.container .inner .table-wrapper mat-table mat-row:hover {\n  background-color: rgba(3, 155, 229, 0.1);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3ZpZXR0cmFuL0Rlc2t0b3AvY2xpY2svZnJvbnRlbmQvc3JjL2FwcC9tYWluL3JlcG9ydHMvaXAtY2xpY2tpbmctcmVwb3J0L2lwLWNsaWNraW5nLXJlcG9ydC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvbWFpbi9yZXBvcnRzL2lwLWNsaWNraW5nLXJlcG9ydC9pcC1jbGlja2luZy1yZXBvcnQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFBO0FDQ0Y7QURDRTtFQUNFLDRCQUFBO0VBRUEsb0NBQUE7RUFDQSw2RUFBQTtFQUNBLFlBQUE7RUFFQSxlQUFBO0VBQ0EsaUJBQUE7QUNESjtBREtJO0VBQ0UsWUFBQTtFQUNBLFdBQUE7RUFDQSxpQkFBQTtBQ0hOO0FETUk7RUFDRSxjQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0Esb0JBQUE7RUFDQSxXQUFBO0FDSk47QURPSTtFQUNFLGtCQUFBO0VBQ0EsYUFBQTtFQUNBLGlCQUFBO0FDTE47QURRSTtFQUNFLFlBQUE7RUFDQSx1QkFBQTtFQUNBLCtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7QUNOTjtBRFFNO0VBQ0UsZ0JBQUE7QUNOUjtBRFFRO0VBQ0UsaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0VBQ0EsZUFBQTtBQ05WO0FEUVU7RUFDRSxrQ0FBQTtBQ05aO0FEVVE7O0VBRUUsYUFBQTtBQ1JWO0FEV1E7O0VBRUUsdUJBQUE7QUNUVjtBRFlROzs7Ozs7RUFNRSxhQUFBO0FDVlY7QURhUTs7RUFFRSx1QkFBQTtBQ1hWO0FEY1E7O0VBRUUsaUJBQUE7RUFDQSxXQUFBO0FDWlY7QURlUTtFQUNFLGdCQUFBO0FDYlY7QURnQlE7RUFDRSxtQkFBQTtFQUNBLFlBQUE7QUNkVjtBRGlCUTtFQUNFLGVBQUE7QUNmVjtBRGtCUTtFQUNFLHdDQUFBO0FDaEJWIiwiZmlsZSI6InNyYy9hcHAvbWFpbi9yZXBvcnRzL2lwLWNsaWNraW5nLXJlcG9ydC9pcC1jbGlja2luZy1yZXBvcnQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcbiAgd2lkdGg6IDEwMCU7XG5cbiAgLnRpdGxlMSB7XG4gICAgcGFkZGluZzogOTRweCAzMHB4IDQ0cHggMzBweDtcblxuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDAwMDAgIWltcG9ydGFudDtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQoMTQ3ZGVnLCAjMDAwMDAwIDAlLCAjMmMzZTUwIDc0JSkgIWltcG9ydGFudDtcbiAgICBjb2xvcjogd2hpdGU7XG5cbiAgICBmb250LXNpemU6IDE2cHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIH1cblxuICAuaW5uZXIge1xuICAgIC5pY29uIHtcbiAgICAgIGhlaWdodDogMjJweDtcbiAgICAgIHdpZHRoOiAyMnB4O1xuICAgICAgbWFyZ2luLXJpZ2h0OiA1cHg7XG4gICAgfVxuXG4gICAgLnBhZ2luYXRpb24tYnV0dG9ucyB7XG4gICAgICBkaXNwbGF5OiB0YWJsZTtcbiAgICAgIG1hcmdpbjogMCBhdXRvO1xuICAgICAgcGFkZGluZy1sZWZ0OiAxMHB4O1xuICAgICAgcGFkZGluZy1ib3R0b206IDMwcHg7XG4gICAgICBjb2xvcjogZ3JheTtcbiAgICB9XG5cbiAgICAuZm9vdGVyIHtcbiAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgIHBhZGRpbmc6IDMwcHg7XG4gICAgICBwYWRkaW5nLXRvcDogMTBweDtcbiAgICB9XG5cbiAgICAudGFibGUtd3JhcHBlciB7XG4gICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICAgIGJvcmRlci1ib3R0b206IDAuNXB4IHNvbGlkICNlZWU7XG4gICAgICBtYXJnaW4tdG9wOiAtMThweDtcbiAgICAgIG92ZXJmbG93OiBhdXRvO1xuICAgICAgb3ZlcmZsb3cteTogaGlkZGVuO1xuXG4gICAgICBtYXQtdGFibGUge1xuICAgICAgICBib3gtc2hhZG93OiBub25lO1xuXG4gICAgICAgIC5pcC1kZXRhaWwtbGluayB7XG4gICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgICAgcGFkZGluZy1sZWZ0OiAycHg7XG4gICAgICAgICAgdHJhbnNpdGlvbjogMC4ycztcbiAgICAgICAgICBmb250LXNpemU6IDEycHg7XG5cbiAgICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICAgIGJhY2tncm91bmQ6IHJnYmEoMywgMTU1LCAyMjksIDAuMSk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG5cbiAgICAgICAgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCgxKSxcbiAgICAgICAgbWF0LWNlbGw6bnRoLWNoaWxkKDEpIHtcbiAgICAgICAgICBmbGV4OiAwIDAgMTUlO1xuICAgICAgICB9XG5cbiAgICAgICAgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCgzKSxcbiAgICAgICAgbWF0LWNlbGw6bnRoLWNoaWxkKDMpIHtcbiAgICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgfVxuXG4gICAgICAgIG1hdC1oZWFkZXItY2VsbDpudGgtY2hpbGQoNSksXG4gICAgICAgIG1hdC1jZWxsOm50aC1jaGlsZCg1KSxcbiAgICAgICAgbWF0LWhlYWRlci1jZWxsOm50aC1jaGlsZCg2KSxcbiAgICAgICAgbWF0LWNlbGw6bnRoLWNoaWxkKDYpLFxuICAgICAgICBtYXQtaGVhZGVyLWNlbGw6bnRoLWNoaWxkKDcpLFxuICAgICAgICBtYXQtY2VsbDpudGgtY2hpbGQoNykge1xuICAgICAgICAgIGZsZXg6IDAgMCAxMSU7XG4gICAgICAgIH1cblxuICAgICAgICBtYXQtaGVhZGVyLWNlbGw6bnRoLWNoaWxkKDgpLFxuICAgICAgICBtYXQtY2VsbDpudGgtY2hpbGQoOCkge1xuICAgICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB9XG5cbiAgICAgICAgbWF0LWhlYWRlci1yb3csXG4gICAgICAgIG1hdC1yb3cge1xuICAgICAgICAgIG1pbi13aWR0aDogMTAwMHB4O1xuICAgICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICB9XG5cbiAgICAgICAgbWF0LXJvdyB7XG4gICAgICAgICAgdHJhbnNpdGlvbjogMC4ycztcbiAgICAgICAgfVxuXG4gICAgICAgIG1hdC1oZWFkZXItY2VsbCB7XG4gICAgICAgICAgYmFja2dyb3VuZDogIzAzOWJlNTtcbiAgICAgICAgICBjb2xvcjogd2hpdGU7XG4gICAgICAgIH1cblxuICAgICAgICBtYXQtY2VsbCB7XG4gICAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgICB9XG5cbiAgICAgICAgbWF0LXJvdzpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgzLCAxNTUsIDIyOSwgMC4xKTtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xufVxuIiwiLmNvbnRhaW5lciB7XG4gIHdpZHRoOiAxMDAlO1xufVxuLmNvbnRhaW5lciAudGl0bGUxIHtcbiAgcGFkZGluZzogOTRweCAzMHB4IDQ0cHggMzBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMCAhaW1wb3J0YW50O1xuICBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQoMTQ3ZGVnLCAjMDAwMDAwIDAlLCAjMmMzZTUwIDc0JSkgIWltcG9ydGFudDtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXNpemU6IDE2cHg7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLmljb24ge1xuICBoZWlnaHQ6IDIycHg7XG4gIHdpZHRoOiAyMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDVweDtcbn1cbi5jb250YWluZXIgLmlubmVyIC5wYWdpbmF0aW9uLWJ1dHRvbnMge1xuICBkaXNwbGF5OiB0YWJsZTtcbiAgbWFyZ2luOiAwIGF1dG87XG4gIHBhZGRpbmctbGVmdDogMTBweDtcbiAgcGFkZGluZy1ib3R0b206IDMwcHg7XG4gIGNvbG9yOiBncmF5O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLmZvb3RlciB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZzogMzBweDtcbiAgcGFkZGluZy10b3A6IDEwcHg7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciB7XG4gIGhlaWdodDogYXV0bztcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIGJvcmRlci1ib3R0b206IDAuNXB4IHNvbGlkICNlZWU7XG4gIG1hcmdpbi10b3A6IC0xOHB4O1xuICBvdmVyZmxvdzogYXV0bztcbiAgb3ZlcmZsb3cteTogaGlkZGVuO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIHtcbiAgYm94LXNoYWRvdzogbm9uZTtcbn1cbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSAuaXAtZGV0YWlsLWxpbmsge1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgcGFkZGluZy1sZWZ0OiAycHg7XG4gIHRyYW5zaXRpb246IDAuMnM7XG4gIGZvbnQtc2l6ZTogMTJweDtcbn1cbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSAuaXAtZGV0YWlsLWxpbms6aG92ZXIge1xuICBiYWNrZ3JvdW5kOiByZ2JhKDMsIDE1NSwgMjI5LCAwLjEpO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1oZWFkZXItY2VsbDpudGgtY2hpbGQoMSksXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWNlbGw6bnRoLWNoaWxkKDEpIHtcbiAgZmxleDogMCAwIDE1JTtcbn1cbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSBtYXQtaGVhZGVyLWNlbGw6bnRoLWNoaWxkKDMpLFxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1jZWxsOm50aC1jaGlsZCgzKSB7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1oZWFkZXItY2VsbDpudGgtY2hpbGQoNSksXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWNlbGw6bnRoLWNoaWxkKDUpLFxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1oZWFkZXItY2VsbDpudGgtY2hpbGQoNiksXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWNlbGw6bnRoLWNoaWxkKDYpLFxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1oZWFkZXItY2VsbDpudGgtY2hpbGQoNyksXG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWNlbGw6bnRoLWNoaWxkKDcpIHtcbiAgZmxleDogMCAwIDExJTtcbn1cbi5jb250YWluZXIgLmlubmVyIC50YWJsZS13cmFwcGVyIG1hdC10YWJsZSBtYXQtaGVhZGVyLWNlbGw6bnRoLWNoaWxkKDgpLFxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1jZWxsOm50aC1jaGlsZCg4KSB7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1oZWFkZXItcm93LFxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1yb3cge1xuICBtaW4td2lkdGg6IDEwMDBweDtcbiAgd2lkdGg6IDEwMCU7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LXJvdyB7XG4gIHRyYW5zaXRpb246IDAuMnM7XG59XG4uY29udGFpbmVyIC5pbm5lciAudGFibGUtd3JhcHBlciBtYXQtdGFibGUgbWF0LWhlYWRlci1jZWxsIHtcbiAgYmFja2dyb3VuZDogIzAzOWJlNTtcbiAgY29sb3I6IHdoaXRlO1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1jZWxsIHtcbiAgZm9udC1zaXplOiAxMnB4O1xufVxuLmNvbnRhaW5lciAuaW5uZXIgLnRhYmxlLXdyYXBwZXIgbWF0LXRhYmxlIG1hdC1yb3c6aG92ZXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDMsIDE1NSwgMjI5LCAwLjEpO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -51493,28 +51494,29 @@ let IpClickingReportComponent = class IpClickingReportComponent extends app_shar
             .subscribe((accountId) => {
             if (accountId) {
                 this.pageTotal = 0;
-                const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-                if (page) {
-                    if (isNaN(Number(page))) {
-                        this.currentPageNumber = 1;
-                        this.router.navigate([], {
-                            queryParams: {
-                                page: this.currentPageNumber,
-                            }
-                        });
-                    }
-                    else {
-                        this.currentPageNumber = Number(page);
-                    }
+                const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+                if (selectedActiveAccount) {
+                    this.currentPageNumber = 1;
                 }
                 else {
-                    this.currentPageNumber = 1;
-                    this.router.navigate([], {
-                        queryParams: {
-                            page: this.currentPageNumber,
+                    const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+                    if (page) {
+                        if (isNaN(Number(page))) {
+                            this.currentPageNumber = 1;
                         }
-                    });
+                        else {
+                            this.currentPageNumber = Number(page);
+                        }
+                    }
+                    else {
+                        this.currentPageNumber = 1;
+                    }
                 }
+                this.router.navigate([], {
+                    queryParams: {
+                        page: this.currentPageNumber,
+                    }
+                });
                 this.getDailyClickingReport(this.currentPageNumber);
             }
         });
@@ -51700,28 +51702,29 @@ let IpDetailComponent = class IpDetailComponent extends app_shared_components_ba
                 this.pageLimit = 20;
             else
                 this.pageLimit = 10;
-            const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-            if (page) {
-                if (isNaN(Number(page))) {
-                    this.currentPageNumber = 1;
-                    this.router.navigate([], {
-                        queryParams: {
-                            page: this.currentPageNumber,
-                        }
-                    });
-                }
-                else {
-                    this.currentPageNumber = Number(page);
-                }
+            const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+            if (selectedActiveAccount) {
+                this.currentPageNumber = 1;
             }
             else {
-                this.currentPageNumber = 1;
-                this.router.navigate([], {
-                    queryParams: {
-                        page: this.currentPageNumber,
+                const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+                if (page) {
+                    if (isNaN(Number(page))) {
+                        this.currentPageNumber = 1;
                     }
-                });
+                    else {
+                        this.currentPageNumber = Number(page);
+                    }
+                }
+                else {
+                    this.currentPageNumber = 1;
+                }
             }
+            this.router.navigate([], {
+                queryParams: {
+                    page: this.currentPageNumber,
+                }
+            });
             this.getIPClicksList(this.currentPageNumber);
         });
         this.subscriptions.push(sub);
@@ -51850,28 +51853,29 @@ let IpRangesClickingReportComponent = class IpRangesClickingReportComponent exte
             .subscribe((accountId) => {
             if (accountId) {
                 this.pageTotal = 0;
-                const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-                if (page) {
-                    if (isNaN(Number(page))) {
-                        this.currentPageNumber = 1;
-                        this._router.navigate([], {
-                            queryParams: {
-                                page: this.currentPageNumber,
-                            }
-                        });
-                    }
-                    else {
-                        this.currentPageNumber = Number(page);
-                    }
+                const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+                if (selectedActiveAccount) {
+                    this.currentPageNumber = 1;
                 }
                 else {
-                    this.currentPageNumber = 1;
-                    this._router.navigate([], {
-                        queryParams: {
-                            page: this.currentPageNumber,
+                    const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+                    if (page) {
+                        if (isNaN(Number(page))) {
+                            this.currentPageNumber = 1;
                         }
-                    });
+                        else {
+                            this.currentPageNumber = Number(page);
+                        }
+                    }
+                    else {
+                        this.currentPageNumber = 1;
+                    }
                 }
+                this._router.navigate([], {
+                    queryParams: {
+                        page: this.currentPageNumber,
+                    }
+                });
                 this.getClassDClickingReport(this.currentPageNumber);
             }
         });
@@ -52089,28 +52093,30 @@ let OverviewReportComponent = class OverviewReportComponent extends app_shared_c
     getReport() {
         this._fuseProgressBarService.show();
         this.pageTotal = 0;
-        const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-        if (page) {
-            if (isNaN(Number(page))) {
-                this.currentPageNumber = 1;
-                this.router.navigate([], {
-                    queryParams: {
-                        page: this.currentPageNumber,
-                    }
-                });
-            }
-            else {
-                this.currentPageNumber = Number(page);
-            }
+        const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+        if (selectedActiveAccount) {
+            this.currentPageNumber = 1;
+            this.pageLimit = this.itemsPerPageOptions[0].value;
         }
         else {
-            this.currentPageNumber = 1;
-            this.router.navigate([], {
-                queryParams: {
-                    page: this.currentPageNumber,
+            const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+            if (page) {
+                if (isNaN(Number(page))) {
+                    this.currentPageNumber = 1;
                 }
-            });
+                else {
+                    this.currentPageNumber = Number(page);
+                }
+            }
+            else {
+                this.currentPageNumber = 1;
+            }
         }
+        this.router.navigate([], {
+            queryParams: {
+                page: this.currentPageNumber,
+            }
+        });
         this.getStatisticTrafficSourceReport();
         this.getSessionReport(this.currentPageNumber);
     }
@@ -52991,6 +52997,7 @@ let SpamClickReportComponent = class SpamClickReportComponent extends app_shared
                 const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
                 if (selectedActiveAccount) {
                     this.currentPageNumber = 1;
+                    this.pageLimit = this.itemsPerPageOptions[0].value;
                 }
                 else {
                     const page = this._activatedRoute.snapshot.queryParamMap.get('page');
@@ -53305,28 +53312,29 @@ let UserStatisticDetailComponent = class UserStatisticDetailComponent extends ap
                 this.pageLimit = 20;
             else
                 this.pageLimit = 10;
-            const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-            if (page) {
-                if (isNaN(Number(page))) {
-                    this.currentPageNumber = 1;
-                    this.router.navigate([], {
-                        queryParams: {
-                            page: this.currentPageNumber,
-                        }
-                    });
-                }
-                else {
-                    this.currentPageNumber = Number(page);
-                }
+            const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+            if (selectedActiveAccount) {
+                this.currentPageNumber = 1;
             }
             else {
-                this.currentPageNumber = 1;
-                this.router.navigate([], {
-                    queryParams: {
-                        page: this.currentPageNumber,
+                const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+                if (page) {
+                    if (isNaN(Number(page))) {
+                        this.currentPageNumber = 1;
                     }
-                });
+                    else {
+                        this.currentPageNumber = Number(page);
+                    }
+                }
+                else {
+                    this.currentPageNumber = 1;
+                }
             }
+            this.router.navigate([], {
+                queryParams: {
+                    page: this.currentPageNumber,
+                }
+            });
             this.getUserStatisticDetail(this.uuid, this.currentPageNumber);
         });
         this.subscriptions.push(sub);
@@ -53487,28 +53495,29 @@ let UserStatisticComponent = class UserStatisticComponent extends app_shared_com
             if (accountId) {
                 this.pageTotal = 0;
                 this.selectedAccountId = accountId;
-                const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-                if (page) {
-                    if (isNaN(Number(page))) {
-                        this.currentPageNumber = 1;
-                        this.router.navigate([], {
-                            queryParams: {
-                                page: this.currentPageNumber,
-                            }
-                        });
-                    }
-                    else {
-                        this.currentPageNumber = Number(page);
-                    }
+                const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+                if (selectedActiveAccount) {
+                    this.currentPageNumber = 1;
                 }
                 else {
-                    this.currentPageNumber = 1;
-                    this.router.navigate([], {
-                        queryParams: {
-                            page: this.currentPageNumber,
+                    const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+                    if (page) {
+                        if (isNaN(Number(page))) {
+                            this.currentPageNumber = 1;
                         }
-                    });
+                        else {
+                            this.currentPageNumber = Number(page);
+                        }
+                    }
+                    else {
+                        this.currentPageNumber = 1;
+                    }
                 }
+                this.router.navigate([], {
+                    queryParams: {
+                        page: this.currentPageNumber,
+                    }
+                });
                 this.getStatisticUserReport(accountId, this.currentPageNumber);
             }
         });
