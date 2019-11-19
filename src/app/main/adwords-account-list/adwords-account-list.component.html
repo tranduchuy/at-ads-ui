@@ -41,13 +41,13 @@
                     <span class="ads-account-name">{{element.adsName}}</span>
                   </span>
                 </p>
-                <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="65">
+                <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="75">
                   <span class="ads-account" matTooltip="Tài khoản chưa có website nào.">
                     <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
                     <span class="ads-account-name">{{element.adsName}}</span>
                   </span>
                 </p>
-                <p style="color: silver" *ngIf="!element.isConnected" fxFlex="65">
+                <p style="color: silver" *ngIf="!element.isConnected" fxFlex="75">
                   <span class="ads-account" matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
                     <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
                     <span class="ads-account-name">{{element.adsName}}</span>
