@@ -13,6 +13,18 @@ toolbar {
   width: 100%;
   //filter: drop-shadow(0px 1px 2px black);
 
+  .mat-select-value-text {
+    max-width: 350px;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @include media-breakpoint("xs") {
+      max-width: 190px;
+    }
+  }
+
   &.below {
     z-index: 2;
   }
