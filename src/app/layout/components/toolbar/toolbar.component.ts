@@ -256,6 +256,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             this.accountCtrl.value.accountId,
             this._adsAccountPipe.transform(this.accountCtrl.value.adsId)
         );
+        this._sessionService.emitSelectedActiveAccount(this.accountCtrl.value.accountId);
     }
 
     getAdsAccounts(action?: any): void {

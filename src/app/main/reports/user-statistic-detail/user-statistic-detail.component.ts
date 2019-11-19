@@ -107,9 +107,17 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
         const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
         if (page) {
-          if (isNaN(Number(page)))
-            return;
-          this.currentPageNumber = Number(page);
+          if (isNaN(Number(page))) {
+            this.currentPageNumber = 1;
+            this.router.navigate([], {
+              queryParams: {
+                page: this.currentPageNumber,
+              }
+            });
+          }
+          else {
+            this.currentPageNumber = Number(page);
+          }
         }
         else {
           this.currentPageNumber = 1;

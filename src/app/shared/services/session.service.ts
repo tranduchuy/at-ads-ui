@@ -17,11 +17,24 @@ export class SessionService {
   private _doesUserHaveAccount$ = new BehaviorSubject<boolean>(false);
   private _listAccounts$ = new BehaviorSubject<any>(false);
   private _removedAccountId$ = new BehaviorSubject<string>('');
+  private _activeAccountChanged$ = new BehaviorSubject<string>('');
 
   constructor(
     private cookieService: CookieService
   ) {
 
+  }
+
+  onSelectingActiveAccount(): Observable<string> {
+    return this._activeAccountChanged$.asObservable();
+  }
+
+  emitSelectedActiveAccount(accountId: string) {
+    this._activeAccountChanged$.next(accountId);
+  }
+
+  getValueOfSelectedActiveAccount(): string {
+    return this._activeAccountChanged$.getValue();
   }
 
   onRemovingAccount(): Observable<string> {
@@ -228,5 +241,6 @@ export class SessionService {
     this.setActiveAdsAccountId('');
     this.setAccountId('');
     this.setAdwordId('');
+    this.emitSelectedActiveAccount('');
   }
 }

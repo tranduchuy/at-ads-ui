@@ -73,7 +73,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     explodeSlices: false,
     labels: true,
     doughnut: true,
-    gradient: true,
+    gradient: false,
     scheme: {
       domain: [
         //'#87CEEB', '#f44336', '#039be5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
@@ -134,9 +134,17 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
     if (page) {
-      if (isNaN(Number(page)))
-        return;
-      this.currentPageNumber = Number(page);
+      if (isNaN(Number(page))) {
+        this.currentPageNumber = 1;
+        this.router.navigate([], {
+          queryParams: {
+            page: this.currentPageNumber,
+          }
+        });
+      }
+      else {
+        this.currentPageNumber = Number(page);
+      }
     }
     else {
       this.currentPageNumber = 1;

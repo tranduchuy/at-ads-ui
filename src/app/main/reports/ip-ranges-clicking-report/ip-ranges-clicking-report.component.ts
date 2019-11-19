@@ -62,9 +62,17 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
           const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
           if (page) {
-            if (isNaN(Number(page)))
-              return;
-            this.currentPageNumber = Number(page);
+            if (isNaN(Number(page))) {
+              this.currentPageNumber = 1;
+              this._router.navigate([], {
+                queryParams: {
+                  page: this.currentPageNumber,
+                }
+              });
+            }
+            else {
+              this.currentPageNumber = Number(page);
+            }
           }
           else {
             this.currentPageNumber = 1;
