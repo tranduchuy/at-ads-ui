@@ -65,7 +65,8 @@
     <div class="ads-account-list" *ngIf="isAccountListShown">
 
       <div class="ads-account-list-title">
-        <img src="../../../assets/icons/gg-ads.png" alt="" style="width: 20px; height: 20px; margin-right: 5px"> VUI LÒNG LỰA CHỌN TÀI
+        <img src="../../../assets/icons/gg-ads.png" alt="" style="width: 20px; height: 20px; margin-right: 5px"> VUI
+        LÒNG LỰA CHỌN TÀI
         KHOẢN
         GOOGLE ADS CỦA BẠN
       </div>
@@ -104,11 +105,11 @@
             <mat-header-cell *matHeaderCellDef> Chọn tại đây </mat-header-cell>
             <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
 
-              <mat-radio-button value="{{element.googleAdId}}" *ngIf="!element.availableToConnect"
+              <mat-radio-button value="{element.googleAdId, adsName: element.name}" *ngIf="!element.availableToConnect"
                 matTooltip="{{element.reason}}" disabled></mat-radio-button>
 
-              <mat-radio-button value="{{element.googleAdId}}" *ngIf="element.availableToConnect"
-                (change)="selectAccount($event)"></mat-radio-button>
+              <mat-radio-button [value]="{googleAdId: element.googleAdId, adsName: element.name}"
+                *ngIf="element.availableToConnect" (change)="selectAccount($event)"></mat-radio-button>
 
             </mat-cell>
           </ng-container>
