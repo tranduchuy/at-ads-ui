@@ -40,7 +40,7 @@
       padding: 15px;
       background-color: white;
 
-      box-shadow: 1px 1px 4px silver;
+      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     }
 
     .list-ip {
@@ -90,7 +90,7 @@
 
     .table-wrapper {
       max-height: 500px;
-      box-shadow: 1px 1px 4px silver;
+      border: 0.5px solid #eee;
       background-color: white;
       overflow: auto;
 
@@ -171,7 +171,7 @@
       background-color: crimson;
       color: white;
       padding: 4px;
-      box-shadow: 1px 1px 4px silver;
+      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       font-size: 12px;
       font-weight: bold;
     }

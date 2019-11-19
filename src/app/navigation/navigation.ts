@@ -32,7 +32,7 @@ export const navigation: FuseNavigation[] = [
     children: [
       {
         id: 'spam-click-report',
-        title: 'Xem Báo Cáo Click Ảo',
+        title: 'Báo Cáo Click Ảo',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'data_usage',
@@ -70,14 +70,6 @@ export const navigation: FuseNavigation[] = [
         icon: 'people',
         url: '/bao-cao/thong-ke-nguoi-dung'
       },
-      // {
-      //   id: 'uuid-history',
-      //   title: 'UUID History',
-      //   translate: 'NAV.SAMPLE.TITLE',
-      //   type: 'item',
-      //   icon: 'devices',
-      //   url: '/bao-cao/uuid-history'
-      // },
     ]
   },
   {

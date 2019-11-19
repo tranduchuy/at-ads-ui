@@ -13,7 +13,7 @@
   .table-wrapper {
     max-height: 350px;
     overflow: auto;
-    box-shadow: 1px 1px 4px silver;
+    border: 0.5px solid #eee;
 
     mat-table {
       box-shadow: none;

@@ -34,7 +34,7 @@
       margin-top: 25px;
       padding: 15px;
 
-      box-shadow: 1px 1px 5px silver;
+      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       background-color: white;
     }
 
@@ -59,7 +59,7 @@
 
       text-align: justify;
 
-      box-shadow: 2px 2px 5px silver;
+      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 
       button {
         border-radius: 0;

@@ -26,10 +26,11 @@
     .table-wrapper {
       margin-top: -17px;
       background-color: white;
-      box-shadow: 1px 1px 4px silver;
+      border-bottom: 0.5px solid #eee;
       height: auto;
       overflow: auto;
       overflow-y: hidden;
+      box-shadow: none !important;
 
       mat-table {
         box-shadow: none;

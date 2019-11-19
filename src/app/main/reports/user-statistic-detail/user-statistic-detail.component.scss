@@ -46,7 +46,7 @@
   
       .right {
         background-color: white;
-        box-shadow: 1px 1px 4px silver;
+        border: 0.5px solid #eee;
   
         .user-action-icon {
           margin-right: 10px;
@@ -59,7 +59,7 @@
         }
 
         .visitor-ip {
-          background: rgba(0, 128, 0, 0.1);
+          //background: rgba(0, 128, 0, 0.1);
         }
 
         .ads-click-ip {

@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import * as _ from 'lodash';
-import { MatTableDataSource, MatTab } from '@angular/material';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-adwords-account-list',
