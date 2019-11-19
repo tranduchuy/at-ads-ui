@@ -44,7 +44,7 @@
 
     .table-wrapper {
       margin-top: 10px;
-      box-shadow: 1px 1px 4px silver;
+      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       overflow: auto;
 
       mat-table {

@@ -36,7 +36,7 @@
     .table-wrapper {
       height: auto;
       background-color: white;
-      box-shadow: 1px 1px 4px silver;
+      border-bottom: 0.5px solid #eee;
       margin-top: -18px;
       overflow: auto;
       overflow-y: hidden;
@@ -107,4 +107,13 @@
 }
 
 @media screen and (max-width: 600px) {
+  .container {
+    .inner {
+      .footer {
+        mat-divider {
+          margin-top: 30px;
+        }
+      }
+    }
+  }
 }

@@ -66,7 +66,7 @@
       .overview-chart {
         margin: 20px;
         background: white;
-        box-shadow: 1px 1px 4px silver;
+        box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
         border-radius: 4px;
 
         .session-total {
@@ -140,7 +140,7 @@
         }
 
         .right-table {
-          box-shadow: 1px 1px 4px silver;
+          box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
           margin-top: 12px;
           overflow: auto;
 
@@ -198,7 +198,7 @@
 
     .overview {
       margin: 20px;
-      box-shadow: 1px 1px 4px silver;
+      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       border-radius: 4px;
       .overview-main {
         padding: 30px;
@@ -211,7 +211,6 @@
           padding: 20px 0 15px 0;
           background: white;
           font-size: 16px;
-          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
           .datePicker {
             color: #039be5;
@@ -240,7 +239,7 @@
         }
 
         .overview-table {
-          box-shadow: 1px 1px 4px silver;
+          border: 0.5px solid #eee;
           overflow: auto;
           max-width: none;
           -webkit-overflow-scrolling: touch !important;
@@ -345,7 +344,7 @@
             margin-top: 10px;
           }
           .datePicker {
-            margin-top: 0;
+            margin-top: -5px;
           }
         }
 
@@ -358,8 +357,9 @@
           height: 750px;
 
           .session-total {
-            -webkit-transform: translate(20%, -350px);
-            transform: translate(20%, -350px);
+            -webkit-transform: translate(25%, 107vh);
+            transform: translate(25%, 107vh);
+            position: absolute;
           }
         }
       }

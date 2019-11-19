@@ -131,7 +131,7 @@
         max-height: 300px;
         overflow: auto;
         background-color: white;
-        box-shadow: 1px 1px 4px silver;
+        box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 
         mat-table {
           box-shadow: none;
@@ -210,11 +210,13 @@
     .instruction-step3 {
       height: 50%;
       width: 50%;
+      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     }
 
     .instruction-step {
       font-size: 16px;
       padding-top: 20px;
+      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     }
   }
 }

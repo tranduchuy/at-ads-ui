@@ -15,7 +15,7 @@
   }
 
   .type2 {
-    background: rgba(0, 128, 0, 0.1);
+    //background: rgba(0, 128, 0, 0.1);
   }
 
   .type3 {
@@ -50,7 +50,7 @@
         width: 100%;
 
         mat-tree {
-          box-shadow: 1px 1px 4px silver;
+          box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
           padding-top: 20px;
         }
 
@@ -112,8 +112,9 @@
 
       .ip-click-history {
         overflow: auto;
-        box-shadow: 1px 1px 4px silver;
+        border: 0.5px solid #eee;
         max-height: 450px;
+        box-shadow: none !important;
 
         mat-table {
           box-shadow: none;

@@ -92,7 +92,6 @@ export class NavbarVerticalStyle1Component extends PageBaseComponent implements 
    * On init
    */
   ngOnInit(): void {
-
     this._router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),

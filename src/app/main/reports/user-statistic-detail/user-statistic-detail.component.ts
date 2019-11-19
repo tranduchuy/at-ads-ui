@@ -104,21 +104,30 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
           this.pageLimit = 20;
         else this.pageLimit = 10;
 
-        const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-
-        if (page) {
-          if (isNaN(Number(page)))
-            return;
-          this.currentPageNumber = Number(page);
+        const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+        if (selectedActiveAccount) {
+          this.currentPageNumber = 1;
         }
         else {
-          this.currentPageNumber = 1;
-          this.router.navigate([], {
-            queryParams: {
-              page: this.currentPageNumber,
+          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+          if (page) {
+            if (isNaN(Number(page))) {
+              this.currentPageNumber = 1;
             }
-          });
+            else {
+              this.currentPageNumber = Number(page);
+            }
+          }
+          else {
+            this.currentPageNumber = 1;
+          }
         }
+        this.router.navigate([], {
+          queryParams: {
+            page: this.currentPageNumber,
+          }
+        });
 
         this.getUserStatisticDetail(this.uuid, this.currentPageNumber);
       });

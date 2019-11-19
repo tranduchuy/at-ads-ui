@@ -243,7 +243,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   ngOnInit() {
     this._fuseProgressBarService.show();
     this.pageLimit = this.itemsPerPageOptions[0].value;
-    const sub = this._sessionService.getAccountId()
+
+    const getAccountId = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
           this.pageTotal = 0;
@@ -251,26 +252,36 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           this.setSelectedAdsId(accountId);
           this.getAccountStatisticReport(accountId);
 
-          const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-
-          if (page) {
-            if (isNaN(Number(page)))
-              return;
-            this.currentPageNumber = Number(page);
+          const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+          if (selectedActiveAccount) {
+            this.currentPageNumber = 1;
+            this.pageLimit = this.itemsPerPageOptions[0].value;
           }
           else {
-            this.currentPageNumber = 1;
-            this.router.navigate([], {
-              queryParams: {
-                page: this.currentPageNumber,
-              }
-            });
-          }
+            const page = this._activatedRoute.snapshot.queryParamMap.get('page');
 
+            if (page) {
+              if (isNaN(Number(page))) {
+                this.currentPageNumber = 1;
+              }
+              else {
+                this.currentPageNumber = Number(page);
+              }
+            }
+            else {
+              this.currentPageNumber = 1;
+            }
+          }
+          this.router.navigate([], {
+            queryParams: {
+              page: this.currentPageNumber,
+            }
+          });
+          
           this.getAccountReport(accountId, this.currentPageNumber);
         }
       });
-    this.subscriptions.push(sub);
+    this.subscriptions.push(getAccountId);
 
     if (window.innerWidth < 600) {
       this.lineChart.options.layout = {
@@ -381,7 +392,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             explodeSlices: false,
             labels: true,
             doughnut: true,
-            gradient: true,
+            gradient: false,
             scheme: {
               domain: ['#039be5', '#ff0037']
             },

@@ -58,7 +58,7 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
       .open(
         CheckWebsiteTrackingDialogComponent,
         {
-          autoFocus: false,
+          autoFocus: true,
           maxWidth: '100vw !important'
         },
       );

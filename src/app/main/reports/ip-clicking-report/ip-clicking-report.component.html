@@ -135,15 +135,12 @@
 
     <div class="footer">
       <p>
-        Để thực hiện giới hạn 1 IP click quảng cáo nhiều lần hay gọi là click ảo, Bạn có thể hạn chế bằng <span
-          style="color: red; font-weight: bold">Tính Năng Hạn Chế Click Ảo</span>
+        Để theo dõi hành vi click quảng cáo của một IP, Bạn có thể tiến hành gắn mã tracking cho các website của tài khoản Google Ads <a
+        [routerLink]="['/gan-tracking/website', _sessionService.activeAccountId]">tại đây</a>
       </p>
       <div class="button-area" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center center">
-        <!-- <button mat-raised-button color="accent" style="border-radius: 0">
-              <mat-icon>verified_user</mat-icon> HẠN CHẾ IP CLICK NHIỀU
-            </button> -->
         <a [routerLink]="'/bao-cao/click-ao'" mat-raised-button color="warn">
-          <mat-icon>data_usage</mat-icon> XEM BÁO CÁO THEO NGÀY
+          <mat-icon>data_usage</mat-icon> XEM BÁO CÁO CLICK ẢO
         </a>
       </div>
     </div>

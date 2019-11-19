@@ -16,7 +16,7 @@
           <ng-container matColumnDef="task">
             <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <button mat-icon-button color="accent" matTooltip="Cập nhật dữ liệu"
+              <button mat-icon-button color="accent" matTooltip="Cập nhật tài khoản"
                 (click)="checkAccountAcceptance(element.adsId, element.isConnected, element.connectType)"
                 [disabled]="isProcessing">
                 <mat-icon>sync</mat-icon>
@@ -31,44 +31,29 @@
 
           <ng-container matColumnDef="adwords">
             <mat-header-cell *matHeaderCellDef>
-              <img src="../../../assets/icons/gg-ads.png" alt="" style="height: 18px; width: 18px; margin-right: 5px">
-              Google Ads ID </mat-header-cell>
+              <img src="../../../assets/icons/gg-ads.png" alt="" class="ggAds-icon">
+              Tài khoản</mat-header-cell>
             <mat-cell *matCellDef="let element">
               <div fxLayout="row">
-                <p style="color: #4bb543" *ngIf="element.isConnected && element.websites.length > 0" fxFlex="65">
-
-                  <span class="ads-account"
-                    matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">{{element.adsId | adsAccountId}}</span>
-
-                  <!-- <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
-                    style="padding-left:0">
-                    FREE - Nâng cấp VIP
-                  </a> -->
-
+                <p style="color: #4bb543" *ngIf="element.isConnected && element.websites.length > 0" fxFlex="75">
+                  <span class="ads-account" matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">
+                    <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
+                    <span class="ads-account-name">{{element.adsName}}</span>
+                  </span>
                 </p>
-                <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="65">
-
-                  <span class="ads-account"
-                    matTooltip="Tài khoản chưa có website nào.">{{element.adsId | adsAccountId}}</span>
-
-                  <!-- <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
-                    style="padding-left:0">
-                    FREE - Nâng cấp VIP
-                  </a> -->
-
+                <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="75">
+                  <span class="ads-account" matTooltip="Tài khoản chưa có website nào.">
+                    <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
+                    <span class="ads-account-name">{{element.adsName}}</span>
+                  </span>
                 </p>
-                <p style="color: silver" *ngIf="!element.isConnected" fxFlex="65">
-
-                  <span class="ads-account"
-                    matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">{{element.adsId | adsAccountId}}</span>
-
-                  <!-- <a *ngIf="element.isFree === true" class="free-label" routerLink="/nang-cap-vip" matTooltip=""
-                    style="padding-left:0">
-                    FREE - Nâng cấp VIP
-                  </a> -->
-
+                <p style="color: silver" *ngIf="!element.isConnected" fxFlex="75">
+                  <span class="ads-account" matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
+                    <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
+                    <span class="ads-account-name">{{element.adsName}}</span>
+                  </span>
                 </p>
-                <div fxLayout="row" fxFlex="35" fxLayoutAlign="center center">
+                <div fxLayout="row" fxFlex="25" fxLayoutAlign="center center">
                   <button mat-icon-button color="accent" matTooltip="Xem báo cáo click ảo"
                     (click)="navigateToSpamClickReport(element.accountId, element.adsId)">
                     <mat-icon>data_usage</mat-icon>
@@ -77,7 +62,7 @@
                     matTooltip="Gắn mã tracking cho các website" class="tracking-button">
                     <mat-icon>code</mat-icon>
                   </a>
-                  <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản Google Ads"
+                  <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản"
                     (click)="openRemoveAccountConfirmDialog(element.accountId)" [disabled]="isProcessing">
                     <mat-icon style="color: silver">close</mat-icon>
                   </button>
@@ -106,21 +91,10 @@
               <ul class="website-list" *ngIf="element.websites.length > 0">
                 <li *ngFor="let website of element.websites, let i = index" fxLayout="row"
                   fxLayoutAlign="center center">
-                  <div style="padding-left: 5px" fxFlex="55">
+                  <div style="padding-left: 5px" fxFlex="90">
                     <span>{{i+1}}</span>.
                     <a href="{{website.domain}}" target="_blank">
                       {{website.domain}}</a>
-                  </div>
-                  <div fxFlex="35">
-                    <!-- <a *ngIf="website.isExpired === true" class="free-label" routerLink="/nang-cap-vip" matTooltip="">
-                      FREE - Nâng cấp VIP
-                    </a> -->
-                    <!-- <div *ngIf="website.isExpired === false">
-                      <a routerLink="/nang-cap-vip">
-                        <span class="vip-label" matTooltip="Nhấn để gia hạn thêm VIP">VIP</span>
-                      </a>
-                      <span class="vip-expiration">({{(website.expiredAt | date: 'dd/MM/yyyy') || 'Unknown'}})</span>
-                    </div> -->
                   </div>
                   <div fxFlex="10">
                     <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
@@ -131,7 +105,8 @@
                 </li>
               </ul>
               <button (click)="navigateToWebsiteManagement(element.accountId, element.campaignNumber)" mat-button
-                class="add-domain-button" [disabled]="isProcessing" color="accent" *ngIf="element.websites.length < element.limitWebsite">
+                class="add-domain-button" [disabled]="isProcessing" color="accent"
+                *ngIf="element.websites.length < element.limitWebsite">
                 <mat-icon>add_circle_outline</mat-icon> Thêm Website
               </button>
               <span *ngIf="element.websites.length >= element.limitWebsite">

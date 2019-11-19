@@ -416,7 +416,7 @@ export class FusePerfectScrollbarDirective implements OnInit, AfterViewInit, OnD
      */
     scrollToTop(offset?: number, speed?: number): void
     {
-        this.animateScrolling('scrollTop', (offset || 0), speed);
+        //this.animateScrolling('scrollTop', (offset || 0), speed);
     }
 
     /**

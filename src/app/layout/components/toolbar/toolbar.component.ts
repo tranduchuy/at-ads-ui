@@ -256,6 +256,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             this.accountCtrl.value.accountId,
             this._adsAccountPipe.transform(this.accountCtrl.value.adsId)
         );
+        this._sessionService.emitSelectedActiveAccount(this.accountCtrl.value.accountId);
     }
 
     getAdsAccounts(action?: any): void {
@@ -269,16 +270,18 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     .map((account: any) => {
                         this.accountConnectTypes[this._adsAccountPipe.transform(account.adsId)] = account.connectType;
                         return {
-                            name: this._adsAccountPipe.transform(account.adsId),
+                            name: this._adsAccountPipe.transform(account.adsId)
+                                + (account.adsName ? ` (${account.adsName})` : ''),
                             accountId: account.id,
                             adsId: account.adsId,
+                            adsName: account.adsName || '',
                             isFree: account.isFree,
                             expiredAt: account.websites.length > 0 ? account.websites[0].expiredAt : new Date(),
                             isConnected: account.isConnected,
                             createdAt: account.createdAt,
                             connectType: account.connectType,
                             websites: account.websites,
-                            limitWebsite: account.limitWebsite,
+                            limitWebsite: account.limitWebsite
                         };
                     });
 

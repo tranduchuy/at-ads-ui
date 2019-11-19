@@ -10,9 +10,7 @@ import { SessionService } from 'app/shared/services/session.service';
 import { Router } from '@angular/router';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { environment } from 'environments/environment';
-import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
 import { MatTableDataSource } from '@angular/material';
-import { distinctUntilChanged } from 'rxjs/operators';
 
 declare var gapi: any;
 
@@ -29,10 +27,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   _adsAccountIdPipe = new AdsAccountIdPipe();
   isProcessing = false;
 
-  isAccountListShown = false;
+  isAccountListShown: boolean;
   adsAccounts = [];
   adsAccountColumns: string[] = ['order', 'adsId', 'name', 'selection'];
-  selectedAccount = '';
+  selectedAccount: any;
   disableAllControls: boolean;
 
   auth2: any;
@@ -44,7 +42,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     public _dialogService: DialogService,
     private _fuseNavigationService: FuseNavigationService,
     private _addAdwordsAccountsService: AddAdwordsAccountsService,
-    private _adwordsAccountsService: AdwordsAccountsService,
     private _sessionService: SessionService,
     private _router: Router,
     private http: HttpClient,
@@ -215,7 +212,10 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   generateConnectAccountByEmailParam(): any {
-    return { adWordId: this.selectedAccount.replace(/\D/g, '') };
+    return { 
+      adWordId: this.selectedAccount.googleAdId.replace(/\D/g, ''),
+      adsName: this.selectedAccount.adsName || ''
+    };
   }
 
   connectAccountByEmail(): void {

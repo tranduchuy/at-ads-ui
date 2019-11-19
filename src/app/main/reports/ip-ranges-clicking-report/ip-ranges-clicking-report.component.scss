@@ -47,12 +47,13 @@
 
     .table-wrapper {
       margin-top: -18px;
-      box-shadow: 1px 1px 4px silver;
+      border-bottom: 0.5px solid #eee;
       overflow: auto;
       overflow-y: hidden;
+      box-shadow: none !important;
 
       mat-table {
-        box-shadow: none;
+        box-shadow: none !important;
       }
 
       mat-header-row,

@@ -45,10 +45,11 @@
 
     .table-wrapper {
       background-color: white;
-      box-shadow: 1px 1px 4px silver;
+      border: 0.5px solid #eee;
       max-height: 500px;
       margin-top: 10px;
       overflow: auto;
+      box-shadow: none !important;
 
       mat-table {
         box-shadow: none;
