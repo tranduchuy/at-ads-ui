@@ -344,7 +344,7 @@
             margin-top: 10px;
           }
           .datePicker {
-            margin-top: 0;
+            margin-top: -5px;
           }
         }
 
@@ -357,8 +357,8 @@
           height: 750px;
 
           .session-total {
-            -webkit-transform: translate(20%, 98vh);
-            transform: translate(20%, 98vh);
+            -webkit-transform: translate(25%, 105vh);
+            transform: translate(25%, 105vh);
             position: absolute;
           }
         }
