@@ -131,7 +131,7 @@
                         src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
                      <span *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
-                     <mat-icon *ngIf="!element.os?.name" style="color: silver; margin-right: 5px">help_outline
+                     <mat-icon *ngIf="!element.os?.name" class="unknown-icon">help_outline
                      </mat-icon>
                      <span *ngIf="!element.os?.name">Unknown</span>
                   </mat-cell>
@@ -170,7 +170,7 @@
                      <span
                         *ngIf="element.browser?.name">{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
 
-                     <mat-icon *ngIf="!element.browser?.name" style="color: silver; margin-right: 5px">help_outline
+                     <mat-icon *ngIf="!element.browser?.name" class="unknown-icon">help_outline
                      </mat-icon>
                      <span *ngIf="!element.browser?.name">Unknown</span>
 
@@ -199,7 +199,7 @@
                      <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
                         *ngIf="element.network?.name === 'FPT'" alt="">
 
-                     <mat-icon *ngIf="!element.network?.name" style="color: silver; margin-right: 5px">help_outline
+                     <mat-icon *ngIf="!element.network?.name" class="unknown-icon">help_outline
                      </mat-icon>
                      <span *ngIf="!element.network?.name">Unknown</span>
                   </mat-cell>
@@ -213,8 +213,7 @@
                         *ngIf="element.location?.city">
                      <span *ngIf="element.location?.city">{{element.location?.city}}</span>
 
-                     <mat-icon *ngIf="!element.location?.city"
-                        style="font-size: 20px; color: silver; margin-right: 2px">help_outline
+                     <mat-icon *ngIf="!element.location?.city" class="unknown-icon unknown-icon-city">help_outline
                      </mat-icon>
                      <span *ngIf="!element.location?.city">Unknown</span>
                   </mat-cell>
