@@ -131,7 +131,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   getReport() {
     this._fuseProgressBarService.show();
     this.pageTotal = 0;
-    
+
     const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
     if (selectedActiveAccount) {
       this.currentPageNumber = 1;
@@ -253,12 +253,24 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   }
 
   generateSessionReportParams(page: number) {
+    const timezone = new Date().getTimezoneOffset();
+    const hours = -(parseInt((timezone / 60).toString()));
+    const minutes = -(timezone % 60);
+
+    let startDate = moment(this.selectedDateRange.start).startOf('day');
+    if (hours >= 0) {
+      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    }
+    else {
+      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    }
+
     const params = {
-      from: new Date(this.selectedDateRange.start).getTime().toString(),
-      to: new Date(this.selectedDateRange.end).getTime().toString(),
-      website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null,
+      from: startDate.valueOf().toString(),
+      to: moment(this.selectedDateRange.end).valueOf().toString(),
       page,
-      limit: this.pageLimit
+      limit: this.pageLimit,
+      website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null
     }
 
     if (!params.website)
@@ -293,9 +305,21 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   }
 
   generateStatisticTrafficSourceReportParams() {
+    const timezone = new Date().getTimezoneOffset();
+    const hours = -(parseInt((timezone / 60).toString()));
+    const minutes = -(timezone % 60);
+
+    let startDate = moment(this.selectedDateRange.start).startOf('day');
+    if (hours >= 0) {
+      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    }
+    else {
+      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    }
+
     const params = {
-      from: new Date(this.selectedDateRange.start).getTime().toString(),
-      to: new Date(this.selectedDateRange.end).getTime().toString(),
+      from: startDate.valueOf().toString(),
+      to: moment(this.selectedDateRange.end).valueOf().toString(),
       website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null
     }
 

@@ -33,12 +33,24 @@
 
     .website-list {
       width: 100%;
-      max-height: 100px;
+      max-height: 250px;
       overflow: auto;
       border-radius: 5px;
-      padding: 10px;
       margin: 5px;
-      border: 1.2px solid #eee;
+      border: 1px solid #eee;
+      padding: 0;
+
+      li {
+        border-bottom: 0.5px solid #eee;
+
+        &:nth-last-child(1) {
+          border-bottom: 0;
+        }
+
+        a {
+          padding-left: 10px
+        }
+      }
     }
 
     .add-domain-button {
@@ -47,9 +59,12 @@
       padding-left: 0;
       width: 100%;
       margin-left: 5px;
+      font-size: 12px;
 
       mat-icon {
-        font-size: 18px;
+        font-size: 14px;
+        margin-top: 8px;
+        margin-right: -5px;
       }
     }
 
