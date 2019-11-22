@@ -91,8 +91,7 @@
               <ul class="website-list" *ngIf="element.websites.length > 0">
                 <li *ngFor="let website of element.websites, let i = index" fxLayout="row"
                   fxLayoutAlign="center center">
-                  <div style="padding-left: 5px" fxFlex="90">
-                    <span>{{i+1}}</span>.
+                  <div fxFlex="90">
                     <a href="{{website.domain}}" target="_blank">
                       {{website.domain}}</a>
                   </div>
@@ -107,11 +106,11 @@
               <button (click)="navigateToWebsiteManagement(element.accountId, element.campaignNumber)" mat-button
                 class="add-domain-button" [disabled]="isProcessing" color="accent"
                 *ngIf="element.websites.length < element.limitWebsite">
-                <mat-icon>add_circle_outline</mat-icon> Thêm Website
+                <mat-icon>add</mat-icon>Thêm website
               </button>
               <span *ngIf="element.websites.length >= element.limitWebsite">
                 <button mat-button class="add-domain-button" color="accent" disabled>
-                  <mat-icon>add_circle_outline</mat-icon> Thêm Website
+                  <mat-icon>add</mat-icon>Thêm website
                 </button>
                 <span class="caution"><span style="color: red">*</span><b>Chú ý:</b> Số lượng website của tài khoản này
                   đã đạt tối đa. Vui lòng nâng cấp thêm <a routerLink="/nang-cap-vip">tại đây</a></span>

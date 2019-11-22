@@ -93,12 +93,24 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
   }
 
   generateStatisticUserReportParams(page: number) {
+    const timezone = new Date().getTimezoneOffset();
+    const hours = -(parseInt((timezone / 60).toString()));
+    const minutes = -(timezone % 60);
+
+    let startDate = moment(this.selectedDateRange.start).startOf('day');
+    if (hours >= 0) {
+      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    }
+    else {
+      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    }
+
     const params = {
-      startDate: new Date(this.selectedDateRange.start).getTime().toString(),
-      endDate: new Date(this.selectedDateRange.end).getTime().toString(),
+      startDate: startDate.valueOf().toString(),
+      endDate: moment(this.selectedDateRange.end).valueOf().toString(),
       page,
       limit: this.pageLimit
-    };
+    }
 
     return params;
   }

@@ -91,12 +91,24 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
   }
 
   generateClassDClickingReportParams(page: number) {
+    const timezone = new Date().getTimezoneOffset();
+    const hours = -(parseInt((timezone / 60).toString()));
+    const minutes = -(timezone % 60);
+
+    let startDate = moment(this.selectedDateRange.start).startOf('day');
+    if (hours >= 0) {
+      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    }
+    else {
+      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    }
+
     const params = {
-      from: new Date(this.selectedDateRange.start).getTime().toString(),
-      to: new Date(this.selectedDateRange.end).getTime().toString(),
+      from: startDate.valueOf().toString(),
+      to: moment(this.selectedDateRange.end).valueOf().toString(),
       page,
       limit: this.pageLimit
-    };
+    }
 
     return params;
   }
