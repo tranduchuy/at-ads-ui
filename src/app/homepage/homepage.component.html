@@ -169,7 +169,7 @@
                         alt="" class="icon">
                      <span
                         *ngIf="element.browser?.name">{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
-                        
+
                      <mat-icon *ngIf="!element.browser?.name" style="color: silver; margin-right: 5px">help_outline
                      </mat-icon>
                      <span *ngIf="!element.browser?.name">Unknown</span>
@@ -313,7 +313,7 @@
                <div class="feature-left" fxLayout="column" fxLayoutGap="10px">
                   <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
                      <div class="icon">
-                        <mat-icon color="accent" class="s-60">verified_user</mat-icon>
+                        <mat-icon color="accent">verified_user</mat-icon>
                      </div>
                      <div class="feature-description">
                         <span class="feature-name">Chặn theo IP</span>
@@ -325,7 +325,7 @@
                   </div>
                   <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
                      <div class="icon">
-                        <!-- <mat-icon color="accent" class="s-60">public</mat-icon> -->
+                        <!-- <mat-icon color="accent" >public</mat-icon> -->
                         <img src="../../assets/icons/incognito.png" alt="">
                      </div>
                      <div class="feature-description">
@@ -339,7 +339,7 @@
                   </div>
                   <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
                      <div class="icon">
-                        <mat-icon color="accent" class="s-60">wifi</mat-icon>
+                        <mat-icon color="accent">wifi</mat-icon>
                      </div>
                      <div class="feature-description">
                         <span class="feature-name">Chặn theo 3G & 4G</span>
@@ -351,7 +351,7 @@
                   </div>
                   <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
                      <div class="icon">
-                        <mat-icon color="accent" class="s-60">timeline</mat-icon>
+                        <mat-icon color="accent">timeline</mat-icon>
                      </div>
                      <div class="feature-description">
                         <span class="feature-name">Chặn theo Big Data</span>
@@ -368,7 +368,7 @@
             <div class="feature-right" fxLayout="column" fxLayoutGap="10px">
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60">phonelink</mat-icon>
+                     <mat-icon color="accent">phonelink</mat-icon>
                   </div>
                   <div class="feature-description">
                      <span class="feature-name">Chặn theo thiết bị</span>
@@ -381,7 +381,7 @@
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60">apps</mat-icon>
+                     <mat-icon color="accent">apps</mat-icon>
                   </div>
                   <div class="feature-description">
                      <span class="feature-name">Chặn theo mạng lưới</span>
@@ -395,7 +395,7 @@
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60">location_on</mat-icon>
+                     <mat-icon color="accent">location_on</mat-icon>
                   </div>
                   <div class="feature-description">
                      <span class="feature-name">Tỉnh-Thành quảng cáo</span>
@@ -408,7 +408,7 @@
                </div>
                <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
                   <div class="icon">
-                     <mat-icon color="accent" class="s-60">view_list</mat-icon>
+                     <mat-icon color="accent">view_list</mat-icon>
                   </div>
                   <div class="feature-description">
                      <span class="feature-name">Blacklist / Whitelist</span>
@@ -433,7 +433,7 @@
             </div>
 
             <p class="secondary-benefit-title">
-               Lợi ích thấy ngay khi đăng ký và sử dụng công cụ Chặn Click Ảo
+               Lợi ích thấy ngay khi đăng ký và sử dụng Công cụ Chặn Click Ảo
             </p>
 
             <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="60px">
@@ -442,7 +442,7 @@
                      <img src="../../assets/images/save-money.svg" alt="">
                   </div>
                   <div class="benefit-description">
-                     <p>TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
+                     <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
                      </p>
                      Giảm thiểu đến 50% chi phí quảng cáo <span style="color: orange">lãng phí vô ích</span> do đối thủ
                      phá
@@ -455,7 +455,8 @@
                      <img src="../../assets/images/timer.svg" alt="">
                   </div>
                   <div class="benefit-description">
-                     <p>GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward</mat-icon>
+                     <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward
+                        </mat-icon>
                      </p>
                      Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn 24h/ngày và 7
                      ngày/tuần.
@@ -466,7 +467,8 @@
                      <img src="../../assets/images/customer.png" alt="">
                   </div>
                   <div class="benefit-description">
-                     <p>TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward</mat-icon>
+                     <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward
+                        </mat-icon>
                      </p>
                      Giảm các chi phí <span style="color:orange">lãng phí</span> do click ảo, bạn sẽ có thêm chi phí
                      quảng
@@ -486,7 +488,7 @@
          <div class="footer-title1">FAQ</div>
          <mat-divider class="footer-divider"></mat-divider>
          <div class="footer-col1-info">
-            <span style="color: white; font-weight: bold">
+            <span class="question-title">
                Mỗi đóng góp ý kiến của bạn là động lực giúp chúng tôi tồn tại và phát triển
             </span>
             <br><br>
@@ -506,7 +508,7 @@
          <div class="footer-col footer-col2-1" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: white; font-weight: bold">
+               <span class="question-title">
                   Chặn click ảo là gì?
                </span>
                <p>
@@ -519,7 +521,7 @@
          <div class="footer-col footer-col2-2" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: white; font-weight: bold">
+               <span class="question-title">
                   Thật sự giảm được 50% chi phí?
                </span>
                <p>
@@ -533,7 +535,7 @@
          <div class="footer-col footer-col2-3" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: white; font-weight: bold">
+               <span class="question-title">
                   Thời gian dùng thử bao lâu?
                </span>
                <p>
@@ -552,7 +554,7 @@
          <div class="footer-col footer-col3-1" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: white; font-weight: bold">
+               <span class="question-title">
                   Chi phí là bao nhiêu?
                </span>
                <p>
@@ -565,7 +567,7 @@
          <div class="footer-col footer-col3-2" fxLayout="row">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: white; font-weight: bold">
+               <span class="question-title">
                   Bảo mật tài khoản Google Ads?
                </span>
                <p>
@@ -582,7 +584,7 @@
          <div class="footer-col footer-col3-3">
             <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
             <div>
-               <span style="color: white; font-weight: bold">
+               <span class="question-title">
                   Tôi phải làm gì khi cần trợ giúp thêm?
                </span>
                <p>

@@ -23,7 +23,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
-      font-size: 30px !important;
+      font-size: 26px !important;
       font-weight: 900;
       position: relative;
       text-transform: uppercase;
@@ -90,12 +90,12 @@
     }
 
     .shiny2 {
-      color: #f5c21b;
-      background: -webkit-gradient(linear, left top, left bottom, from(#f5c21b), to(#d17000));
+      color: lime;
+      background: -webkit-gradient(linear, left top, left bottom, from(lime), to(darkgreen));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
-      font-size: 26px !important;
+      font-size: 24px !important;
       font-weight: 900;
       position: relative;
       text-transform: uppercase;
@@ -200,7 +200,7 @@
       .banner {
         background: rgba(0, 0, 0, 0.65);
         color: white;
-        height: 85vh;
+        height: 88vh;
         position: relative;
         z-index: 100;
 
@@ -218,7 +218,6 @@
         }
 
         .app-title {
-          margin-top: 50px;
           filter: drop-shadow(0px 1px 2px black);
           font-weight: bolder;
           font-family: "Poppins", sans-serif;
@@ -327,7 +326,7 @@
     }
 
     .table {
-      padding: 150px;
+      padding: 180px;
       padding-top: 50px;
       padding-bottom: 50px;
       background: rgba(0, 0, 0, 0.4);
@@ -336,7 +335,7 @@
         padding: 20px;
         text-align: center;
         background-color: whitesmoke;
-        box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+        box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       }
 
       .table-wrapper {
@@ -347,12 +346,12 @@
         .network-logo,
         .mobifone,
         .fpt {
-          height: 20px;
-          width: 80px;
+          height: 16px;
+          width: 74px;
         }
 
         .vietnamobile {
-          height: 25px;
+          height: 21px;
         }
 
         .vnpt {
@@ -363,13 +362,13 @@
         }
 
         .fpt {
-          height: 30px;
+          height: 26px;
         }
 
         .icon {
-          height: 22px;
-          width: 22px;
-          margin-right: 5px;
+          height: 18px;
+          width: 18px;
+          margin-right: 10px;
         }
 
         .location-icon {
@@ -393,12 +392,9 @@
             background: rgba(0, 0, 0, 0.3);
           }
 
-          mat-header-cell {
+          mat-header-cell, mat-cell {
             color: white;
-          }
-
-          mat-cell {
-            color: white;
+            font-size: 12px !important;
           }
 
           mat-row {
@@ -438,6 +434,7 @@
 
           mat-cell:nth-child(2) {
             color: skyblue;
+            font-weight: bold;
           }
 
           mat-header-row,
@@ -451,7 +448,7 @@
 
     .instruction-container {
       .instruction {
-        padding: 30px 150px 30px 150px;
+        padding: 30px 180px 30px 180px;
         background: rgba(0, 0, 0, 0.4);
 
         .steps-main-title {
@@ -507,16 +504,17 @@
                 height: 100%;
                 cursor: pointer;
                 pointer-events: none;
-                filter: drop-shadow(1px 1px 2px black);
+                filter: drop-shadow(1px 1px 1px black);
               }
             }
 
             .step-description {
               padding-top: 25px;
               text-align: justify;
+              font-size: 12px;
 
               .step-name {
-                font-size: 18px;
+                font-size: 16px;
               }
             }
           }
@@ -535,7 +533,7 @@
 
       .feature {
         background: rgba(0, 0, 0, 0.6);
-        padding: 70px 150px 70px 150px;
+        padding: 70px 180px 70px 180px;
         color: white;
 
         .overview {
@@ -544,7 +542,7 @@
           text-shadow: 1px 1px 4px black;
 
           .overview-title {
-            font-size: 22px;
+            font-size: 20px;
 
             img {
               width: 48px;
@@ -557,7 +555,7 @@
 
           .overview-info {
             padding-top: 20px;
-            line-height: 40px;
+            line-height: 30px;
             text-align: justify;
           }
 
@@ -591,22 +589,21 @@
       text-align: justify;
       min-height: 100px;
 
-      mat-icon {
+      mat-icon, img {
+        font-size: 45px;
+        min-width: 45px;
         color: skyblue;
-        margin-top: -5px;
-        filter: drop-shadow(1px 2px 2px black) !important;
-      }
-
-      p {
-        font-size: 13px;
-        color: #eee;
+        margin-left: 5px;
+        filter: drop-shadow(1px 1px 1px black) !important;
       }
 
       img {
-        height: 55px;
-        max-width: 170px;
-        margin-left: 5px;
-        filter: drop-shadow(1px 2px 2px black) !important;
+        height: 45px;
+      }
+
+      p {
+        font-size: 12px;
+        color: #eee;
       }
 
       .feature-name {
@@ -622,7 +619,7 @@
       .benefit {
         background: rgba(0, 0, 0, 0.4);
         text-align: center;
-        padding: 90px 150px 90px 150px;
+        padding: 90px 180px 90px 180px;
         color: white;
         //background: rgba(125, 125, 125, 0.2);
         //background: rgba(3, 155, 229, 0.2);
@@ -642,8 +639,8 @@
 
         .benefit-symbol {
           img {
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             transition: 0.2s;
             filter: drop-shadow(0px 1px 2px black);
 
@@ -652,11 +649,19 @@
             }
           }
         }
+
+        .benefit-description {
+          font-size: 12px;
+
+          .benefit-description-title {
+            font-size: 14px;
+          }
+        }
       }
     }
   }
   .footer {
-    padding: 100px 150px 40px 150px;
+    padding: 100px 180px 30px 180px;
     //background: rgba(0, 0, 0, 0.6);
     background: rgba(12, 20, 33, 1);
     background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
@@ -664,9 +669,15 @@
     background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
     color: silver;
     text-align: justify;
+    font-size: 12px;
+
+    .question-title {
+      color: white;
+      font-weight: bold;
+    }
 
     .footer-title1 {
-      font-size: 35px;
+      font-size: 30px;
       font-family: "Courier New";
     }
 
@@ -712,6 +723,7 @@
       padding: 15px;
       text-align: center;
       font-weight: bold;
+      font-size: 12px;
     }
   }
 
@@ -767,8 +779,8 @@
       width: 100%;
       top: 0;
       padding: 15px;
-      padding-left: 145px;
-      padding-right: 148px;
+      padding-left: 175px;
+      padding-right: 178px;
       border: 0 !important;
       outline: 0 !important;
       box-sizing: 0 !important;
@@ -871,8 +883,8 @@
           padding-left: 30px;
           padding-right: 30px;
 
-          padding-top: 50px;
-          height: 83vh;
+          padding-top: 30px;
+          height: 82vh;
 
           .decoration {
             width: 60vw;
@@ -941,12 +953,6 @@
 
           .step-wrapper {
             .step {
-              padding-bottom: 0;
-              .step-description {
-                .step-name {
-                  font-size: 18px;
-                }
-              }
               .step-image {
                 height: 50%;
               }
@@ -967,8 +973,6 @@
             padding: 0;
 
             .overview-title {
-              font-size: 20px;
-
               img {
                 margin-right: 5px;
                 margin-top: -20px;
@@ -984,6 +988,19 @@
               padding-bottom: 20px;
             }
           }
+        }
+      }
+
+      .feature-item {
+        padding-bottom: 5px;
+
+        mat-icon, img {
+          font-size: 40px;
+          min-width: 40px;
+        }
+
+        img {
+          height: 40px;
         }
       }
 
@@ -1015,6 +1032,7 @@
     .footer {
       padding: 20px;
       padding-top: 40px;
+      padding-bottom: 0;
 
       .view-more-button {
         padding-bottom: 20px;
