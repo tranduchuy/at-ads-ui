@@ -5,10 +5,8 @@ import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { AdwordsAccountsService } from '../../../app/shared/services/ads-accounts/adwords-accounts.service';
 import { SessionService } from '../../../app/shared/services/session.service';
-import { FuseSplashScreenService } from '../../services/splash-screen.service';
 
 import { AdsAccountIdPipe } from '../../../app/shared/pipes/ads-account-id/ads-account-id.pipe';
-import { accessSync } from 'fs';
 import { FuseProgressBarService } from '../progress-bar/progress-bar.service';
 
 @Component({
