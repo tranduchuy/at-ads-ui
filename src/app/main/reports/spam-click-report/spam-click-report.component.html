@@ -171,22 +171,23 @@
         IP</button> -->
 
       <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
-        <div fxFlex="60">
+        <!-- old: fxFlex="60" -->
+        <div fxFlex="70">
           <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
               ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
             {{pageTotal}} trang</p>
           <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
         </div>
-        <div fxFlex="10" class="item-per-page-options" *ngIf="pageTotal > 0">
+        <!-- <div fxFlex="10" class="item-per-page-options" *ngIf="pageTotal > 0">
           <mat-form-field>
-            <mat-label>Số record mỗi trang</mat-label>
+            <mat-label>Mỗi trang</mat-label>
             <mat-select [(value)]="pageLimit" (selectionChange)="changeItemsPerPageOption($event)">
               <mat-option *ngFor="let option of itemsPerPageOptions" [value]="option.value">
                 {{option.text}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
+        </div> -->
         <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
           nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0" fxFlex="30"></pagination-controls>
       </div>

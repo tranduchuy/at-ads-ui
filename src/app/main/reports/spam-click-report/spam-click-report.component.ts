@@ -238,7 +238,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
       phone: '0908xxx191',
       network: 'VNPT'
     },
-  ]
+  ];
 
   ngOnInit() {
     this._fuseProgressBarService.show();

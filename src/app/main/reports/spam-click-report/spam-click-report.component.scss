@@ -152,7 +152,7 @@
 
   .tables {
     padding-top: 0;
-    padding-bottom: 10px;
+    min-height: 500px;
 
     mat-table {
       box-shadow: none;

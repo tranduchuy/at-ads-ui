@@ -243,8 +243,7 @@
         .overview-table {
           border: 0.5px solid #eee;
           overflow: auto;
-          max-width: none;
-          -webkit-overflow-scrolling: touch !important;
+          min-height: 500px;
 
           mat-table {
             box-shadow: none;
