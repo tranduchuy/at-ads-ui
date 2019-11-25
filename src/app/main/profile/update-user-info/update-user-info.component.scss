@@ -1,12 +1,16 @@
 .container {
-  background-color: #537895;
-  background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+  // background-color: #537895;
+  // background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+  background: url("../../../../assets/images/backgrounds/md2.jpeg");
+  background-position: center center;
+  background-size: 100% 100%;
   background-attachment: fixed;
 
   width: 100%;
 
   .inner {
     padding: 100px 30px 30px 30px;
+    backdrop-filter: blur(3px);
 
     .form {
       width: 70%;
@@ -22,7 +26,9 @@
         margin: 0 auto;
         font-size: 16px;
         width: 70%;
-        font-size: 22px;
+        font-size: 16px;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.7);
         padding-bottom: 30px;
       }
 

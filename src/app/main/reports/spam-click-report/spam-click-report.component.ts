@@ -390,13 +390,16 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         res => {
           this.clickTotal = res.data.pieChart.realClick + res.data.pieChart.spamClick;
 
+          const realClickPercentage = _.round(res.data.pieChart.realClick * 100 / this.clickTotal, 2) || 0;
           const realClickDetail: any = {
             name: 'Click thật: ' + this.abbreviateNumber(res.data.pieChart.realClick),
-            value: _.round(res.data.pieChart.realClick * 100 / this.clickTotal, 2) || 0
+            value: realClickPercentage
           };
+
+          const spamClickPercentage = _.round(res.data.pieChart.spamClick * 100 / this.clickTotal, 2) || 0;
           const spamClickDetail: any = {
             name: 'Click ảo: ' + this.abbreviateNumber(res.data.pieChart.spamClick),
-            value: _.round(res.data.pieChart.spamClick * 100 / this.clickTotal, 2) || 0
+            value: spamClickPercentage
           };
 
           this.pieChart = {

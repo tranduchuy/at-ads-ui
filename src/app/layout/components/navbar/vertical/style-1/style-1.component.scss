@@ -106,10 +106,11 @@ navbar {
       .custom-expiration {
         font-size: 12px;
         text-align: center;
-        background-color: #d2a813;
-        background-image: linear-gradient(315deg, #d2a813 0%, #000000 74%);
+        // background-color: #d2a813;
+        // background-image: linear-gradient(315deg, #d2a813 0%, #000000 74%);
         font-weight: bold;
         padding: 4px;
+        background: rgba(255,255,255,0.2);
       }
       .vip-label {
         background: radial-gradient(
@@ -231,7 +232,7 @@ navbar {
         max-height: 136px;
         padding: 40px 0 64px 0;
 
-        background: url("../../../../../../assets/images/backgrounds/NervousSmallAustralianfreshwatercrocodile-size_restricted.gif");
+        background: url("../../../../../../assets/images/backgrounds/md1.jpeg");
         background-size: 100% 100%;
 
         .avatar-container {

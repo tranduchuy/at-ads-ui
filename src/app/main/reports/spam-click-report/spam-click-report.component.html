@@ -41,7 +41,7 @@
 
           <ng-template #tooltipTemplate let-model="model">
             <p style="color: #fff">
-              {{model.value}}%
+              {{model.name.split(':')[0] + ' (' + model.value + '%)'}}
             </p>
           </ng-template>
 

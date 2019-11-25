@@ -19,28 +19,29 @@
       color: white;
       font-size: 24px;
       font-weight: bold;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(7, 87, 115, 0.5);
       width: 100%;
 
       .notice {
         font-size: 14px;
         font-weight: normal;
         font-style: italic;
+        filter: drop-shadow(0 1px 1px black);
       }
     }
   }
 
   .shiny {
-    color: lime;
-    background: -webkit-gradient(linear, left top, left bottom, from(lime), to(darkgreen));
+    color: lightgreen;
+    background: -webkit-gradient(linear, left top, left bottom, from(lightgreen), to(#d17000));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
-    font-size: 30px !important;
+    font-size: 26px !important;
     font-weight: 900;
     position: relative;
     text-transform: uppercase;
-    filter: drop-shadow(0px 1px 2px black);
+    filter: drop-shadow(1px 3px 3px black);
   }
 
   .shiny::before {
