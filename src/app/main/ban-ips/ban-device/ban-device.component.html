@@ -1,13 +1,14 @@
 <div class="container">
   <div class="title1">
-    CẤU HÌNH CHẶN THEO THIẾT BỊ - TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId}}</span>
+    CẤU HÌNH CHẶN THEO THIẾT BỊ - TÀI KHOẢN <span class="account-id">{{sessionService.activeAdsAccountId}}</span>
   </div>
 
   <div class="inner">
     <div class="title2">
       <p>
-        Kết quả có được theo thống kê từ ngày <b>{{startDate | date: 'dd/MM/yyyy'}}</b> đến ngày
-        <b>{{endDate | date: 'dd/MM/yyyy'}}</b>
+        Kết quả có được theo thống kê từ ngày <span
+          style="color: #0093e5; font-weight: bold">{{startDate | date: 'dd/MM/yyyy'}}</span> đến ngày
+        <span style="color: #0093e5; font-weight: bold">{{endDate | date: 'dd/MM/yyyy'}}</span>
       </p>
       <p class="advise">
         <span class="success-badge">MẸO</span> Bạn có thể dừng quảng cáo trên các thiết bị mang lại hiệu quả quảng cáo

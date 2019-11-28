@@ -14,6 +14,7 @@ import { MatSelect } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { WebsiteManagementService } from 'app/main/website-management/website-management.service';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 interface SelectedWebsite {
   id: string;
@@ -76,8 +77,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     gradient: false,
     scheme: {
       domain: [
-        //'#87CEEB', '#f44336', '#039be5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
-        '#6FAAB0', '#C4C24A', '#8BC652', '#E94649', '#F6B53F', '#FB954F', '#005277', '#039be5', '#9370DB', '#33495D', '#FF6384'
+        //'#87CEEB', '#f44336', '#0093e5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
+        '#6FAAB0', '#C4C24A', '#8BC652', '#E94649', '#F6B53F', '#FB954F', '#005277', '#0093e5', '#9370DB', '#33495D', '#FF6384'
         //'hsl(200, 100%, 12%)','hsl(200, 100%, 20%)','hsl(200, 100%, 28%)','hsl(200, 100%, 38%)','hsl(200, 100%, 48%)','hsl(200, 100%, 58%)','hsl(200, 100%, 68%)','hsl(200, 100%, 78%)','hsl(200, 100%, 85%)','hsl(200, 100%, 95%)','hsl(200, 100%, 100%)'
       ]
     },
@@ -104,10 +105,11 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     private _dialogService: DialogService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _reportService: ReportService,
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _activatedRoute: ActivatedRoute,
     public router: Router,
-    private _websiteManagementService: WebsiteManagementService
+    private _websiteManagementService: WebsiteManagementService,
+    private _fuseSplashScreenService: FuseSplashScreenService
 
   ) {
     super();
@@ -117,7 +119,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     this.pageLimit = this.itemsPerPageOptions[0].value;
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-    const sub = this._sessionService.getAccountId()
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
           this.getWebsites(accountId);
@@ -132,7 +134,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     this._fuseProgressBarService.show();
     this.pageTotal = 0;
 
-    const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+    const selectedActiveAccount = this.sessionService.getValueOfSelectedActiveAccount();
     if (selectedActiveAccount) {
       this.currentPageNumber = 1;
       this.pageLimit = this.itemsPerPageOptions[0].value;
@@ -204,7 +206,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this._dialogService._openInfoDialog(
             'Tài khoản chưa có website nào. Vui lòng thêm',
             'tại đây',
-            `/quan-ly-website/${this._sessionService.activeAccountId}`
+            `/quan-ly-website/${this.sessionService.activeAccountId}`
           )
         }
       });
@@ -291,12 +293,14 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
           this.pageTotal = 0;
           this.overviewTable = [];
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
         }

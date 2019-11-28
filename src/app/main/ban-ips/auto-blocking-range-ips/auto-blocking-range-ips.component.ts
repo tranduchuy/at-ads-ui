@@ -7,6 +7,7 @@ import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-auto-blocking-range-ips',
@@ -20,10 +21,11 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
   classD: number;
 
   constructor(private _banIpsService: BanIpsService,
-    public _sessionService: SessionService,
-    private _fuseProgressiveBarService: FuseProgressBarService,
+    public sessionService: SessionService,
+    private _fuseProgresBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _router: Router
+    private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
@@ -52,52 +54,54 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
   };
 
   ngOnInit(): void {
-    this._fuseProgressiveBarService.show();
-    const sub = this._sessionService.getAccountId()
+    this.isProcessing = true;
+    this._fuseProgresBarService.show();
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
-            .subscribe(
-              (res) => {
-
-                if (res.data.adsAccount.isConnected) {
-                  this._fuseProgressiveBarService.hide();
-                  this.getAutoBLockingIPRangeSetting();
-                }
-                else {
-                  this._fuseProgressiveBarService.hide();
-                  this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-                  this._router.navigateByUrl('/danh-sach-tai-khoan');
-                }
-
-              },
-              (error: HttpErrorResponse) => {
-                this._fuseProgressiveBarService.hide();
-                this._dialogService._openErrorDialog(error.error);
-                this._router.navigateByUrl('/danh-sach-tai-khoan');
-              }
-            );
-          this.subscriptions.push(accountDetailSub);
+          this.getAccountDetail(accountId);
         }
       });
     this.subscriptions.push(sub);
   }
 
-  getAutoBLockingIPRangeSetting() {
-    this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
+  getAccountDetail(accountId: string) {
+    const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+      .subscribe(
+        (res) => {
+          if (res.data.adsAccount.isConnected) {
+            this.getAutoBLockingIPRangeSetting();
+          }
+          else {
+            this._fuseProgresBarService.hide();
+            this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgresBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this._router.navigateByUrl('/danh-sach-tai-khoan');
+        }
+      );
+    this.subscriptions.push(accountDetailSub);
+  }
 
+  getAutoBLockingIPRangeSetting() {
+    this._fuseProgresBarService.show();
+    this.isProcessing = true;
     const sub = this._banIpsService.getBlockingIPSettings()
       .subscribe(res => {
-        this._fuseProgressiveBarService.hide();
+        this._fuseProgresBarService.hide();
 
         this.classC = res.data.setting.autoBlackListIpRanges.classC === false ? 1 : 2;
         this.classD = res.data.setting.autoBlackListIpRanges.classD === false ? 1 : 2;
 
         this.isProcessing = false;
+        this._fuseSplashScreenService.hide();
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
 
           if (error.status === 404) {
             this._dialogService._openInfoDialog(
@@ -110,6 +114,7 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
 
           this.classC = -1;
           this.classD = -1;
+          this._fuseSplashScreenService.hide();
         });
     this.subscriptions.push(sub);
   }
@@ -117,7 +122,7 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
   setAutoBlockingIPRange() {
     this.isProcessing = true;
     const params = this.generateAutoBlockingIPRangeParams();
-    this._fuseProgressiveBarService.show();
+    this._fuseProgresBarService.show();
 
     const sub = this._banIpsService.autoBlockingRangeIP(params)
       .subscribe((res: ILoginSuccess) => {
@@ -125,13 +130,13 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
         this.getAutoBLockingIPRangeSetting();
 
         setTimeout(() => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
           this._dialogService._openSuccessDialog(res);
           this.isProcessing = false;
         }, 0);
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
         });

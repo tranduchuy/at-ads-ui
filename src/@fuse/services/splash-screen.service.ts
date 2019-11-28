@@ -93,7 +93,7 @@ export class FuseSplashScreenService
         this.player =
             this._animationBuilder
                 .build([
-                    style({opacity: '1'}),
+                    style({opacity: '0'}),
                     animate('400ms ease', style({
                         opacity: '0',
                         zIndex : '-10'

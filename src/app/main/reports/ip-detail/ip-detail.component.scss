@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  padding-bottom: 50px;
 
   .title1 {
     padding: 83px 30px 18px 30px;
@@ -92,7 +93,7 @@
           }
 
           mat-header-cell {
-            background: #039be5;
+            background: #0093e5;
             color: white;
           }
 
@@ -151,8 +152,9 @@
           }
 
           mat-header-cell {
-            background: #039be5;
+            background: #0093e5;
             color: white;
+            font-weight: bold;
           }
 
           mat-header-cell:nth-child(4),

@@ -49,7 +49,7 @@
     }
 
     .step {
-      color: #039be5;
+      color: #0093e5;
     }
     .box {
       padding: 30px;
@@ -101,7 +101,7 @@
       background: #eee;
       padding: 30px;
       margin-top: 40px;
-      border-left: 4px solid #ff0037;
+      border-left: 4px solid darkorange;
     }
 
     .ads-account-list {
@@ -145,7 +145,7 @@
           }
 
           mat-cell {
-            color: #039be5;
+            color: #0093e5;
           }
 
           .disabled-cell {
@@ -164,8 +164,9 @@
           }
 
           mat-header-cell {
-            background: #039be5;
+            background: #0093e5;
             color: white;
+            font-weight: bold;
           }
         }
       }

@@ -24,7 +24,7 @@
     }
 
     .link-button {
-      color: #039be5;
+      color: #0093e5;
       cursor: pointer;
       text-decoration: underline !important;
     }
@@ -93,8 +93,9 @@
       }
 
       mat-header-cell {
-        background: #039be5;
+        background: #0093e5;
         color: white;
+        font-weight: bold;
       }
 
       mat-cell {
@@ -116,7 +117,7 @@
     }
 
     .enable-status {
-      color: #039be5;
+      color: #0093e5;
     }
 
     .disabled-status {

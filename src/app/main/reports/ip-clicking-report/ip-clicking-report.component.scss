@@ -23,8 +23,11 @@
       display: table;
       margin: 0 auto;
       padding-left: 10px;
-      padding-bottom: 30px;
       color: gray;
+    }
+
+    mat-divider {
+      margin-top: 30px;
     }
 
     .footer {
@@ -90,8 +93,9 @@
         }
 
         mat-header-cell {
-          background: #039be5;
+          background: #0093e5;
           color: white;
+          font-weight: bold;
         }
 
         mat-cell {

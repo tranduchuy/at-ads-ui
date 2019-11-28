@@ -7,6 +7,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-ip-ranges-clicking-report',
@@ -42,24 +43,25 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
   pageLimit: number = 20;
 
   constructor(
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _dialogService: DialogService,
     private _reportService: ReportService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
 
   ngOnInit() {
     this._fuseProgressBarService.show();
-    const sub = this._sessionService.getAccountId()
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
           this.pageTotal = 0;
 
-          const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+          const selectedActiveAccount = this.sessionService.getValueOfSelectedActiveAccount();
           if (selectedActiveAccount) {
             this.currentPageNumber = 1;
           }
@@ -126,11 +128,13 @@ export class IpRangesClickingReportComponent extends PageBaseComponent implement
           this.pageTotal = Math.ceil(res.data.totalItems / this.pageLimit);
           this.totalItems = res.data.totalItems;
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
         }, 0);
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.dataSource = [];
           this.pageTotal = 0;

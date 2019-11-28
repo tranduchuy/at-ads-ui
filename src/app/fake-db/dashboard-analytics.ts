@@ -491,7 +491,7 @@ export class AnalyticsDashboardDb
                     'elementType': 'all',
                     'stylers'    : [
                         {
-                            'color': '#039be5'
+                            'color': '#0093e5'
                         },
                         {
                             'visibility': 'on'

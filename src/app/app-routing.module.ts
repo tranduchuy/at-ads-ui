@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainGuardService } from './shared/services/guard/main-guard.service';
 import { AccountAcceptanceGuardService } from './shared/services/guard/account-acceptance-guard.service';
 import { environment } from 'environments/environment';
-import { AddAwordsAccountsGuardService } from './shared/services/guard/add-awords-accounts-guard.service';
+import { CheckRefreshTokenGuardService } from './shared/services/guard/check-refresh-token-guard.service';
 
 const appRoutes: Routes = [
   {
     path: 'chan-ip',
-    canActivate: [MainGuardService, AccountAcceptanceGuardService],
+    canActivate: [MainGuardService, AccountAcceptanceGuardService, CheckRefreshTokenGuardService],
     loadChildren: './main/ban-ips/ban-ips.module#BanIPsModule'
   },
   {
@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'gan-tracking',
-    canActivate: [MainGuardService, AccountAcceptanceGuardService],
+    canActivate: [MainGuardService, AccountAcceptanceGuardService, CheckRefreshTokenGuardService],
     loadChildren: './main/add-tracking-tags/add-tracking-tags.module#AddTrackingTagsModule'
   },
   {
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'bao-cao',
-    canActivate: [MainGuardService, AccountAcceptanceGuardService],
+    canActivate: [MainGuardService, AccountAcceptanceGuardService, CheckRefreshTokenGuardService],
     loadChildren: './main/reports/reports.module#ReportsModule'
   },
   {

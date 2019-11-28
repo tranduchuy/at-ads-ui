@@ -9,6 +9,7 @@ import { DialogService } from 'app/shared/services/dialog.service';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import * as Url from 'url-parse';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 interface Node {
   name: string[];
@@ -50,11 +51,12 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
 
   constructor(
     private _fuseProgressBarService: FuseProgressBarService,
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _reportService: ReportService,
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
     public router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
@@ -82,7 +84,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   }
 
   getAccountId() {
-    const getAccountIdSub = this._sessionService.getAccountId()
+    const getAccountIdSub = this.sessionService.getAccountId()
       .subscribe(
         (accoundId: string) => {
           if (accoundId) {
@@ -106,6 +108,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
@@ -114,6 +117,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
           this.totalItems = 0;
           this.pageTotal = 0;
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
         });
@@ -121,7 +125,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   }
 
   checkAccountAcceptance() {
-    const sub = this._sessionService.getAccountAcceptance()
+    const sub = this.sessionService.getAccountAcceptance()
       .subscribe((isAccepted: boolean) => {
         this.pageTotal = 0;
 
@@ -129,7 +133,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
           this.pageLimit = 20;
         else this.pageLimit = 10;
 
-        const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+        const selectedActiveAccount = this.sessionService.getValueOfSelectedActiveAccount();
         if (selectedActiveAccount) {
           this.currentPageNumber = 1;
         }

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   hmr: false,
-  hostApi: 'http://localhost:4500',
+  hostApi: 'http://localhost:4202',
   googleAuth2ClientID: '246364548184-qi67l6sl8p9rlv8e8ev1p6329caf8gfr.apps.googleusercontent.com',
   hostTracking: 'http://159.65.11.195:3001/static/tracking.js',
   oauth2RedirectUri: 'http://localhost:4200',

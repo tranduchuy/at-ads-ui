@@ -1,13 +1,13 @@
 <div class="container">
   <div class="title1">
-    CẤU HÌNH CHẶN TRÌNH DUYỆT ẨN DANH - TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId}}</span>
+    CẤU HÌNH CHẶN TRÌNH DUYỆT ẨN DANH - TÀI KHOẢN <span class="account-id">{{sessionService.activeAdsAccountId}}</span>
   </div>
 
   <div class="inner">
     <p class="title2">
-      Bằng việc cấu hình này, các quảng cáo sẽ <span style="color: red">không hiển thị</span> trên các thiết bị sử dụng
-      <span style="color: #039be5">trình duyệt ẩn danh</span>, giúp tiết kiệm chi phí với những người dùng muốn <span
-        style="color: red">ẩn thông tin</span> khi truy cập vào quảng cáo.
+      Bằng việc cấu hình này, các quảng cáo sẽ <span style="color: crimson; font-weight: bold">không hiển thị</span> trên các thiết bị sử dụng
+      <span style="color: #0093e5; font-weight: bold">trình duyệt ẩn danh</span>, giúp tiết kiệm chi phí với những người dùng muốn <span
+        style="color: crimson; font-weight: bold">ẩn thông tin</span> khi truy cập vào quảng cáo.
     </p>
 
     <div class="config-checking">
@@ -18,7 +18,7 @@
 
     <p class="button-area">
       <button mat-raised-button color="accent" [disabled]="isProcessing" (click)="setBlockingAnonymousBrowser()">
-        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+        <mat-icon style="font-size: 20px">check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
       </button>
     </p>
   </div>

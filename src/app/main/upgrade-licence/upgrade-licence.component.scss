@@ -6,11 +6,10 @@
   }
 
   .main-title {
-    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 
-    background: url("../../../assets/images/backgrounds/ai-machine-learning.png");
-    background-size: 100% 100%;
-    background-position: center center;
+    background-color: #ffffb5;
+    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
     background-attachment: fixed;
 
     .main-title-inner {
@@ -19,7 +18,7 @@
       color: white;
       font-size: 24px;
       font-weight: bold;
-      background: rgba(7, 87, 115, 0.5);
+      background: rgba(0, 0, 0, 0.5);
       width: 100%;
 
       .notice {
@@ -41,7 +40,7 @@
     font-weight: 900;
     position: relative;
     text-transform: uppercase;
-    filter: drop-shadow(1px 3px 3px black);
+    filter: drop-shadow(0.5px 1px 1px black);
   }
 
   .shiny::before {
@@ -141,7 +140,7 @@
 
     .package {
       background: white;
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       padding-bottom: 20px;
       width: 21vw;
       margin: 35px;

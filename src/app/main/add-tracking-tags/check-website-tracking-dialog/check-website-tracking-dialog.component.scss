@@ -6,7 +6,7 @@
     padding-right: 10px;
     font-size: 12px;
     mat-icon {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 
@@ -36,8 +36,9 @@
       }
 
       mat-header-cell {
-        background: #039be5;
+        background: #0093e5;
         color: white;
+        font-weight: bold;
       }
 
       mat-cell {

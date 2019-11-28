@@ -30,7 +30,7 @@
 
   .section {
     margin: 20px;
-    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     border-radius: 4px;
     padding-bottom: 10px;
     background-color: white;
@@ -88,7 +88,7 @@
       color: rgba(0, 0, 0, 0.7);
 
       .datePicker {
-        color: #039be5;
+        color: #0093e5;
 
         input {
           color: white;
@@ -152,7 +152,8 @@
 
   .tables {
     padding-top: 0;
-    min-height: 500px;
+    background: white;
+    height: 95vh;
 
     mat-table {
       box-shadow: none;
@@ -198,9 +199,9 @@
       }
 
       mat-header-cell {
-        background-color: #039be5;
+        background-color: #0093e5;
         color: white;
-        // background: rgba(3, 155, 229, 0.1);
+        font-weight: bold;
       }
 
       mat-cell {
@@ -211,7 +212,6 @@
 
   .left-table,
   .right-table {
-    background-color: white;
     overflow: auto;
     border: 0.5px solid #eee;
   }
@@ -235,11 +235,10 @@
 
 @media screen and (max-width: 600px) {
   .container {
-
     :host ::ng-deep .pie-chart {
       margin-top: 0;
       margin-bottom: -9vh;
-  
+
       .pie-label {
         font-size: 16px !important;
       }
@@ -290,6 +289,10 @@
     .left {
       padding-left: 10px;
       padding-right: 10px;
+    }
+
+    .tables {
+      height: 123vh;
     }
 
     :host ::ng-deep .pie-chart {

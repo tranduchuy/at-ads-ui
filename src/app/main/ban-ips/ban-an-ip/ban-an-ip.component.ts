@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-
 import { EditableFormBaseComponent } from '../../../shared/components/base/editable-form-base.component';
-
 import { BanIpsService } from '../ban-ips.service';
-import { DialogService } from 'app/shared/services/dialog.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
@@ -19,80 +16,86 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 })
 export class BanAnIPComponent extends EditableFormBaseComponent implements OnInit {
 
-  blockedIPs: string[];
+  blockedIPs: string[] = [];
   hasBlockedIP: boolean;
-  isProcessing: boolean = true;
+  isProcessing: boolean;
 
   constructor(
     private _banIpsService: BanIpsService,
-    public _sessionService: SessionService,
-    private _fuseProgressiveBarService: FuseProgressBarService,
-    public _dialogService: DialogService,
+    public sessionService: SessionService,
+    private _fuseProgresBarService: FuseProgressBarService,
     private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
-    this.blockedIPs = [];
   }
 
   ngOnInit(): void {
-    this._fuseProgressiveBarService.show();
-    this.hasBlockedIP = false;
+    this.isProcessing = true;
+    this._fuseProgresBarService.show();
     this.initForm();
-
-    const sub = this._sessionService.getAccountId()
+    const sub = this.sessionService.getAccountId()
       .subscribe(
         (accountId: string) => {
-
           if (accountId) {
-            const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
-              .subscribe(
-                (res) => {
-
-                  if (res.data.adsAccount.isConnected) {
-                    const blockedIPsSub = this._banIpsService.getBlockedSampleIP()
-                      .subscribe(res => {
-                        this.blockedIPs = res.data.ips;
-
-                        if (this.blockedIPs.length > 0)
-                          this.hasBlockedIP = true;
-                        else this.hasBlockedIP = false;
-
-                        this._fuseProgressiveBarService.hide();
-                        this.isProcessing = false;
-                      },
-                        (error: HttpErrorResponse) => {
-                          this._fuseProgressiveBarService.hide();
-
-                          if (error.status === 404) {
-                            this._dialogService._openInfoDialog(
-                              'Tài khoản hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ',
-                              'tại đây',
-                              '/gan-tracking/chien-dich'
-                            );
-                          }
-                          else this._dialogService._openErrorDialog(error.error);
-
-                          this.hasBlockedIP = false;
-                        });
-                    this.subscriptions.push(blockedIPsSub);
-                  }
-                  else {
-                    this._fuseProgressiveBarService.hide();
-                    this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-                    this._router.navigateByUrl('/danh-sach-tai-khoan');
-                  }
-
-                },
-                (error: HttpErrorResponse) => {
-                  this._fuseProgressiveBarService.hide();
-                  this._dialogService._openErrorDialog(error.error);
-                  this._router.navigateByUrl('/danh-sach-tai-khoan');
-                });
-            this.subscriptions.push(accountDetailSub);
+            this.getAccountDetail(accountId);
           }
-
         });
     this.subscriptions.push(sub);
+  }
+
+  getAccountDetail(accountId: string) {
+    const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+      .subscribe(
+        (res) => {
+          if (res.data.adsAccount.isConnected) {
+            this.getBlockedSampleIP();
+          }
+          else {
+            this._fuseProgresBarService.hide();
+            this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+          }
+
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgresBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this._router.navigateByUrl('/danh-sach-tai-khoan');
+        });
+    this.subscriptions.push(accountDetailSub);
+  }
+
+  getBlockedSampleIP() {
+    const blockedIPsSub = this._banIpsService.getBlockedSampleIP()
+      .subscribe(res => {
+        this.blockedIPs = res.data.ips;
+
+        if (this.blockedIPs.length > 0)
+          this.hasBlockedIP = true;
+        else this.hasBlockedIP = false;
+
+        this._fuseProgresBarService.hide();
+        this.isProcessing = false;
+        this._fuseSplashScreenService.hide();
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgresBarService.hide();
+
+          if (error.status === 404) {
+            this._dialogService._openInfoDialog(
+              'Tài khoản hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ',
+              'tại đây',
+              '/gan-tracking/chien-dich'
+            );
+          }
+          else this._dialogService._openErrorDialog(error.error);
+
+          this.hasBlockedIP = false;
+          this.isProcessing = false;
+          this._fuseSplashScreenService.hide();
+        });
+    this.subscriptions.push(blockedIPsSub);
   }
 
   onSubmitForm(): void {
@@ -115,13 +118,12 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
 
   post(): void {
     const params = this.generateBlockSapmleIPParams();
-    this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
+    this._fuseProgresBarService.show();
 
     const sub = this._banIpsService.blockSampleIP(params)
       .subscribe(
         (res: ILoginSuccess) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
           this.blockedIPs[0] = params.ip;
           this.hasBlockedIP = true;
 
@@ -131,12 +133,11 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
           }, 0);
         },
         (error: HttpErrorResponse) => {
-
           if (error.error.messages) {
             this._dialogService._openErrorDialog(error.error);
           }
 
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
           this.isProcessing = false;
         }
       );
@@ -158,23 +159,22 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
           if (result) {
             const params = this.generateUnblockeSampleIPParmas();
             this.isProcessing = true;
-            this._fuseProgressiveBarService.show();
+            this._fuseProgresBarService.show();
             const sub = this._banIpsService.unblockSampleIP(params)
               .subscribe((res: ILoginSuccess) => {
-                this._fuseProgressiveBarService.hide();
+                this._fuseProgresBarService.hide();
                 this.blockedIPs = [];
                 this.hasBlockedIP = false;
                 this._dialogService._openSuccessDialog(res);
                 this.isProcessing = false;
               },
                 (error: HttpErrorResponse) => {
-                  this._fuseProgressiveBarService.hide();
+                  this._fuseProgresBarService.hide();
                   this._dialogService._openErrorDialog(error.error);
                   this.isProcessing = false;
                 })
             this.subscriptions.push(sub);
           }
-
         })
   }
 }

@@ -1,14 +1,14 @@
 <div class="container">
 
   <div class="title1">
-    CẤU HÌNH WHITELIST IP - TÀI KHOẢN <span class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
+    CẤU HÌNH WHITELIST IP - TÀI KHOẢN <span class="account-id">{{sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
   <div class="inner">
 
     <p class="notification">
       Hệ thống sẽ ghi nhận một danh sách các IP mà bạn không cho phép chặn. Thiết bị đang sử dụng các IP này sẽ được hệ
-      thống nhận diện là <span style="color: green; font-weight: bold">an toàn và không bị chặn</span>.
+      thống nhận diện là <span style="color: #0093e5; font-weight: bold">an toàn và không bị chặn</span>.
     </p>
 
     <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
@@ -22,7 +22,7 @@
 
         </div>
         <div class="input-example" fxFlex="auto">
-          <p class="title3">Hướng Dẫn Không Cho Phép Chặn IP Tùy Chỉnh</p>
+          <p class="title3">HƯỚNG DẪN KHÔNG CHO PHÉP CHẶN IP TÙY CHỈNH</p>
           <p>
             Bạn có thể nhập <b>từng IP riêng lẻ</b>, vui lòng điền mỗi IP 1 dòng
           </p>
@@ -46,7 +46,7 @@
 
       <div class="button-area">
         <button type="submit" mat-raised-button color="accent" [disabled]="isProcessing">
-          <mat-icon>sync</mat-icon> CẬP NHẬT WHITELIST
+          <mat-icon style="font-size: 20px; margin-top: 5px">sync</mat-icon> CẬP NHẬT WHITELIST
         </button>
       </div>
     </form>

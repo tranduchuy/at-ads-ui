@@ -8,6 +8,7 @@ import { SessionService } from '../../../shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 export interface DeviceReport {
   device: string;
@@ -26,7 +27,7 @@ export interface DeviceReport {
 export class BanDeviceComponent extends PageBaseComponent implements OnInit {
 
   displayedColumns: string[] = ['device', 'cost', 'impressions', 'clicks', 'avgPosition', 'ctr', 'optimization'];
-  deviceReports: DeviceReport[];
+  deviceReports: DeviceReport[] = [];
   isProcessing: boolean = true;
   startDate = moment().subtract(1, 'months');
   endDate = moment();
@@ -71,94 +72,89 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
 
   constructor(
     private _banIpsService: BanIpsService,
-    private _fuseProgressiveBarService: FuseProgressBarService,
-    public _sessionService: SessionService,
-    public _dialogService: DialogService,
-    private _router: Router
+    private _fuseProgressBarService: FuseProgressBarService,
+    public sessionService: SessionService,
+    public dialogService: DialogService,
+    private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
-    this.deviceReports = [];
   }
 
   ngOnInit(): void {
-    const sub = this._sessionService.getAccountId()
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
-            .subscribe(
-              (res) => {
-
-                if (res.data.adsAccount.isConnected) {
-                  this._fuseProgressiveBarService.hide();
-                  this.getDeviceReport();
-                }
-                else {
-                  this._fuseProgressiveBarService.hide();
-                  this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-                  this._router.navigateByUrl('/danh-sach-tai-khoan');
-                }
-
-              },
-              (error: HttpErrorResponse) => {
-                this._fuseProgressiveBarService.hide();
-                this._dialogService._openErrorDialog(error.error);
-                this._router.navigateByUrl('/danh-sach-tai-khoan');
-              }
-            );
-          this.subscriptions.push(accountDetailSub);
+          this.getAccountDetail(accountId);
         }
       });
-
     this.subscriptions.push(sub);
   }
 
-  getDeviceSettings() {
-    this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
+  getAccountDetail(accountId: string) {
+    const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+      .subscribe(
+        (res) => {
+          if (res.data.adsAccount.isConnected) {
+            this.getDeviceReport();
+          }
+          else {
+            this._fuseSplashScreenService.hide();
+            this._fuseProgressBarService.hide();
+            this.dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseSplashScreenService.hide();
+          this._fuseProgressBarService.hide();
+          this.dialogService._openErrorDialog(error.error);
+          this._router.navigateByUrl('/danh-sach-tai-khoan');
+        }
+      );
+    this.subscriptions.push(accountDetailSub);
+  }
 
+  getDeviceSettings() {
+    this._fuseProgressBarService.show();
+    this.isProcessing = true;
     const sub = this._banIpsService.getBlockingIPSettings()
       .subscribe(res => {
-
         this.deviceSettings = res.data.setting.devices;
-
-        setTimeout(() => {
-          this._fuseProgressiveBarService.hide();
-          this.isProcessing = false;
-        }, 0);
+        this._fuseProgressBarService.hide();
+        this._fuseSplashScreenService.hide();
+        this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
+          this.isProcessing = false;
 
           if (error.status === 404) {
-            this._dialogService._openInfoDialog(
+            this.dialogService._openInfoDialog(
               'Tài khoản hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ',
               'tại đây',
               '/gan-tracking/chien-dich'
             );
           }
-          else this._dialogService._openErrorDialog(error.error);
+          else this.dialogService._openErrorDialog(error.error);
 
         });
     this.subscriptions.push(sub);
   }
 
   getDeviceReport() {
-    this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
     const sub = this._banIpsService.getDeviceReport()
       .subscribe(res => {
         this.deviceReports = res.data.reportDevice;
-
         this.getDeviceSettings();
-
-        setTimeout(() => {
-          this._fuseProgressiveBarService.hide();
-          this.isProcessing = false;
-        }, 0);
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
+          this._fuseSplashScreenService.hide();
+          this._fuseProgressBarService.hide();
+          this.dialogService._openErrorDialog(error.error);
           this.deviceReports = [];
           this.isProcessing = false;
         }
@@ -168,7 +164,7 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
 
   setDeviceCampaignRunning(event, deviceId: number) {
     this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
+    this._fuseProgressBarService.show();
 
     const sub = this._banIpsService.setDeviceCampaignRunning({ device: deviceId, isEnabled: event.value })
       .subscribe((res: ILoginSuccess) => {
@@ -176,14 +172,14 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
         this.getDeviceSettings();
 
         setTimeout(() => {
-          this._fuseProgressiveBarService.hide();
-          this._dialogService._openSuccessDialog(res);
+          this._fuseProgressBarService.hide();
+          this.dialogService._openSuccessDialog(res);
           this.isProcessing = false;
         }, 0);
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
+          this._fuseProgressBarService.hide();
+          this.dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
         }
       );
