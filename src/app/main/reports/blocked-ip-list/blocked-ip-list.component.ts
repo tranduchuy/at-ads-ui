@@ -7,6 +7,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { HttpErrorResponse } from '@angular/common/http';
 import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-blocked-ip-list',
@@ -26,24 +27,25 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
   pageLimit: number = 10;
 
   constructor(
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _dialogService: DialogService,
     private _reportService: ReportService,
     private _activatedRoute: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
 
   ngOnInit() {
     this._fuseProgressBarService.show();
-    const sub = this._sessionService.getAccountId()
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
           this.pageTotal = 0;
 
-          const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+          const selectedActiveAccount = this.sessionService.getValueOfSelectedActiveAccount();
           if (selectedActiveAccount) {
             this.currentPageNumber = 1;
           }
@@ -95,6 +97,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
 
         setTimeout(() => {
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
         }, 500);
       },
@@ -103,6 +106,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
           this.pageTotal = 0;
           this.totalItems = 0;
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
         });

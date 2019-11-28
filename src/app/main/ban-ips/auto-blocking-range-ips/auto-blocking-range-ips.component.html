@@ -2,21 +2,21 @@
 
     <div class="title1">
         CẤU HÌNH CHẶN TỰ ĐỘNG THEO NHÓM IP (NÂNG CAO) - TÀI KHOẢN <span
-            class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
+            class="account-id">{{sessionService.activeAdsAccountId || ''}}</span>
     </div>
 
     <div class="inner">
 
         <p class="notification">
             Nhóm IP là danh sách các IP có tiền tố giống nhau. Ví dụ IP 127.0.0.1 và 127.0.0.2 sẽ thuộc nhóm IP
-            127.0.0.<span style="color: red">*</span>
+            127.0.0.<span style="color: crimson">*</span>
             <br>Bạn chỉ nên chọn chặn theo nhóm IP khi bị phá hoại với quy mô lớn vì có thể sẽ
-            gây ra việc <span style="color: red"> chặn nhầm khách hàng</span> của bạn.
+            gây ra việc <span style="color: crimson; font-weight: bold"> chặn nhầm khách hàng</span> của bạn.
         </p>
 
         <p>
             <b>
-                Chọn nhóm IP 127.0.0.<span style="color: red">*</span> (255 IP)
+                Chọn nhóm IP 127.0.0.<span style="color: crimson">*</span> (255 IP)
             </b>
         </p>
 
@@ -29,7 +29,7 @@
 
         <p>
             <b>
-                Chọn nhóm IP 127.0.<span style="color: red">*</span>.<span style="color: red">*</span> (65.026 IP)
+                Chọn nhóm IP 127.0.<span style="color: crimson">*</span>.<span style="color: crimson">*</span> (65.026 IP)
             </b>
         </p>
 
@@ -43,7 +43,7 @@
         <p class="text-center">
             <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
                 (click)="setAutoBlockingIPRange()" [disabled]="isProcessing">
-                <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+                <mat-icon style="font-size: 20px">check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
             </button>
         </p>
     </div>

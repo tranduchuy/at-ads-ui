@@ -2,13 +2,13 @@
 
   <div class="title1">
     CẤU HÌNH THỬ CHẶN 1 IP - TÀI KHOẢN <span
-      class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
+      class="account-id">{{sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
   <div class="inner">
 
     <p class="notification">
-      Hệ thống sẽ thực hiện chặn IP theo yêu cầu của bạn và <span style="color: red">không cho hiển thị</span> quảng cáo trên thiết bị đang sử dụng IP này.
+      Hệ thống sẽ thực hiện chặn IP theo yêu cầu của bạn và <span style="color: crimson; font-weight: bold">không cho hiển thị</span> quảng cáo trên thiết bị đang sử dụng IP này.
     </p>
 
     <form class="ban-ip-form" [formGroup]="form" (ngSubmit)="onSubmitForm()">
@@ -19,7 +19,7 @@
 
       <div class="button-area">
         <button type="submit" mat-raised-button color="warn" [disabled]="isProcessing">
-          <mat-icon>block</mat-icon> THỬ CHẶN IP CỦA BẠN
+          <mat-icon style="font-size: 20px; margin-top: 5px">block</mat-icon> THỬ CHẶN IP CỦA BẠN
         </button>
       </div>
     </form>
@@ -47,7 +47,7 @@
       <div>
         <button mat-raised-button style="background-color: #4bb353; color: white" (click)="unblockSampleIP()"
           class="unblock-ip-button" [disabled]="isProcessing">
-          <mat-icon>lock_open</mat-icon>
+          <mat-icon style="font-size: 20px">lock_open</mat-icon>
           MỞ CHẶN IP CỦA BẠN
         </button>
       </div>

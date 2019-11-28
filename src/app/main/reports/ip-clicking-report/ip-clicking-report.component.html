@@ -2,7 +2,7 @@
 
   <div class="title1">
     THEO DÕI KHÁCH ĐANG CLICK QUẢNG CÁO - TÀI KHOẢN <span
-      style="color: yellow">{{_sessionService.activeAdsAccountId}}</span>
+      style="color: yellow">{{sessionService.activeAdsAccountId}}</span>
   </div>
 
   <div class="inner">
@@ -136,7 +136,7 @@
     <div class="footer">
       <p>
         Để theo dõi hành vi click quảng cáo của một IP, Bạn có thể tiến hành gắn mã tracking cho các website của tài khoản Google Ads <a
-        [routerLink]="['/gan-tracking/website', _sessionService.activeAccountId]">tại đây</a>
+        [routerLink]="['/gan-tracking/website', sessionService.activeAccountId]">tại đây</a>
       </p>
       <div class="button-area" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center center">
         <a [routerLink]="'/bao-cao/click-ao'" mat-raised-button color="warn">

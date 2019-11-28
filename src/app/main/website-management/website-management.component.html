@@ -10,24 +10,24 @@
     </p>
     <ul style="list-style: none">
       <li>
-        <mat-icon class="list-check">check_circle</mat-icon> Theo dõi khách đang truy cập website thông qua <span
-          style="color: red; font-weight: bold">khách đang truy cập</span>.
+        <mat-icon class="list-check">check</mat-icon> Theo dõi khách đang truy cập website thông qua <span
+          style="color: crimson; font-weight: bold">khách đang truy cập</span>.
       </li>
       <li>
-        <mat-icon class="list-check">check_circle</mat-icon> Tích hợp tất cả các công cụ thu thập thông tin khách hàng,
+        <mat-icon class="list-check">check</mat-icon> Tích hợp tất cả các công cụ thu thập thông tin khách hàng,
         giúp bạn
         có nhiều thông tin khách hàng hơn.
       </li>
       <li>
-        <mat-icon class="list-check">check_circle</mat-icon> Đồng bộ thông tin khách hàng vào tập khách hàng <span
-          style="color: red; font-weight: bold">theo dõi</span>, dễ dàng triển khai
-        quảng cáo <span style="color: red; font-weight: bold">bám đuôi</span>.
+        <mat-icon class="list-check">check</mat-icon> Đồng bộ thông tin khách hàng vào tập khách hàng <span
+          style="color: crimson; font-weight: bold">theo dõi</span>, dễ dàng triển khai
+        quảng cáo <span style="color: crimson; font-weight: bold">bám đuôi</span>.
       </li>
     </ul>
 
 
 
-    <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+    <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="main-form">
 
       <p *ngIf="user.licence.type === 'CUSTOM'"><strong>Tài Khoản Google Ads đang quảng cáo cho website này</strong></p>
       <app-select-text (valueChanged)="onSelectAdsId($event)" [itemsSource]="accountItemsSource" [displayPath]="'text'"
@@ -35,7 +35,6 @@
         [isDisabled]="isProcessing" *ngIf="user.licence.type === 'CUSTOM'"></app-select-text>
 
       <div *ngIf="isAddingWebsiteAllowed === true">
-        <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 30px">
         <p>
           <strong>Vui lòng nhập tên miền website của bạn vào ô bên dưới</strong>
         </p>
@@ -45,12 +44,12 @@
           </app-input-text>
           <button type="submit" mat-raised-button color="accent" class="add-website-button"
             [disabled]="isProcessing === true">
-            THÊM WEBSITE
+            <mat-icon style="font-size: 20px">add</mat-icon> THÊM WEBSITE
           </button>
         </div>
-        <br><span><b><span style="color: red">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
-            style="color: #039be5">http://</span> hoặc <span style="color: #039be5">https://</span></span>
-        <hr style="border: 0.5px solid #DCDCDC; margin-top: 30px; margin-bottom: 20px">
+        <br><span><b><span style="color: crimson">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
+            style="color: #0093e5; font-weight: bold">http://</span> hoặc <span
+            style="color: #0093e5; font-weight: bold">https://</span></span>
       </div>
       <p *ngIf="isAddingWebsiteAllowed === false" class="limit-website-notification">
         Số lượng website của tài khoản Google Ads này đã đạt tối đa. Vui
@@ -58,9 +57,11 @@
       </p>
     </form>
 
+    <hr style="border: 0.5px solid #DCDCDC; margin-bottom: 20px">
+
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center">
       <p><strong>CÁC WEBSITE TRONG TÀI KHOẢN <span [(ngModel)]="selectedAdsId" ngDefaultControl
-            style="color: #039be5">{{selectedAdsId}}</span></strong></p>
+            style="color: #0093e5">{{selectedAdsId}}</span></strong></p>
       <button mat-button class="update-website-list-button" color="accent" (click)="getWebsites()"
         [disabled]="isProcessing">
         <mat-icon style="font-size: 18px">sync</mat-icon>Cập nhật

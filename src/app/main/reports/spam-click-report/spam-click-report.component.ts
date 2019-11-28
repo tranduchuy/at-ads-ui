@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { Generals } from 'app/shared/constants/generals';
 import * as _ from 'lodash';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-spam-click-report',
@@ -55,7 +56,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     doughnut: true,
     gradient: false,
     scheme: {
-      domain: ['#039be5', '#ff0037']
+      domain: ['#0093e5', '#ff0037']
     },
     dataSource: [
       {
@@ -181,12 +182,13 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   }
 
   constructor(
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _reportService: ReportService,
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   };
@@ -244,7 +246,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     this._fuseProgressBarService.show();
     this.pageLimit = this.itemsPerPageOptions[0].value;
 
-    const getAccountId = this._sessionService.getAccountId()
+    const getAccountId = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
           this.pageTotal = 0;
@@ -252,7 +254,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           this.setSelectedAdsId(accountId);
           this.getAccountStatisticReport(accountId);
 
-          const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+          const selectedActiveAccount = this.sessionService.getValueOfSelectedActiveAccount();
           if (selectedActiveAccount) {
             this.currentPageNumber = 1;
             this.pageLimit = this.itemsPerPageOptions[0].value;
@@ -346,7 +348,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         page: this.currentPageNumber,
       }
     });
-    this.getAccountReport(this._sessionService.activeAccountId, this.currentPageNumber);
+    this.getAccountReport(this.sessionService.activeAccountId, this.currentPageNumber);
   }
 
   onApplyDateRange() {
@@ -356,8 +358,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         page: this.currentPageNumber,
       }
     });
-    this.getAccountStatisticReport(this._sessionService.activeAccountId);
-    this.getAccountReport(this._sessionService.activeAccountId, this.currentPageNumber);
+    this.getAccountStatisticReport(this.sessionService.activeAccountId);
+    this.getAccountReport(this.sessionService.activeAccountId, this.currentPageNumber);
   }
 
   generateAccountStatisticReportParams() {
@@ -409,7 +411,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             doughnut: true,
             gradient: false,
             scheme: {
-              domain: ['#039be5', '#ff0037']
+              domain: ['#0093e5', '#ff0037']
             },
             dataSource: [
               realClickDetail, spamClickDetail
@@ -490,9 +492,11 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide()
           this._dialogService._openErrorDialog(error.error);
           this.advertisementClickReport = [];
           this.totalItems = 0;

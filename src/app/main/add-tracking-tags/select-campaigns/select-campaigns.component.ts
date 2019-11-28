@@ -8,7 +8,8 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
 import { Router } from '@angular/router';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { MatTableDataSource, MatTable } from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 export interface Campaign {
   id: string;
@@ -29,9 +30,9 @@ export interface SentCampain {
 export class SelectCampaignsComponent extends PageBaseComponent implements OnInit {
 
   displayedColumns: string[] = ['order', 'id', 'name', 'status', 'tracking'];
-  campaignList: Campaign[];
-  trackingCampaignList: string[];
-  selectedCampaigns: string[];
+  campaignList: Campaign[] = [];
+  trackingCampaignList: string[] = [];
+  selectedCampaigns: string[] = [];
   activatedAdsId: string;
   isProcessing: boolean = false;
   checkAll: boolean;
@@ -41,21 +42,19 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   dataSource = new MatTableDataSource(this.campaignList);
 
   constructor(
-    private _fuseProgressiveBarService: FuseProgressBarService,
+    private _fuseProgressBarService: FuseProgressBarService,
     private _dialogService: DialogService,
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _addTrackingTagsService: AddTrackingTagsService,
     private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
-    this.campaignList = [];
-    this.selectedCampaigns = [];
-    this.trackingCampaignList = [];
   }
 
   ngOnInit() {
-    this._fuseProgressiveBarService.show();
-    const sub = this._sessionService.getAccountId()
+    this._fuseProgressBarService.show();
+    const sub = this.sessionService.getAccountId()
       .pipe(distinctUntilChanged())
       .subscribe((accountId: string) => {
         if (accountId) {
@@ -108,7 +107,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
       campaigns: sentCampaigns
     };
 
-    this._fuseProgressiveBarService.show();
+    this._fuseProgressBarService.show();
     this.isProcessing = true;
     const sub = this._addTrackingTagsService.addCampaignTracking(params)
       .subscribe((res: ILoginSuccess) => {
@@ -117,14 +116,15 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
         setTimeout(() => {
           this._dialogService._openSuccessDialog(res);
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
 
-          this._router.navigateByUrl(`/gan-tracking/website/${this._sessionService.activeAccountId}`);
+          this._router.navigateByUrl(`/gan-tracking/website/${this.sessionService.activeAccountId}`);
         }, 0);
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
         });
@@ -133,7 +133,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
   getOriginalCampaigns() {
     this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
+    this._fuseProgressBarService.show();
 
     const sub = this._addTrackingTagsService.getOriginalCampaigns()
       .subscribe(res => {
@@ -154,7 +154,8 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
             this._dialogService._openErrorDialog(error.error);
             this.isProcessing = false;
           }
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
         }
       );
     this.subscriptions.push(sub);
@@ -171,14 +172,16 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
         this.dataSource = new MatTableDataSource(this.campaignList);
 
-        this._fuseProgressiveBarService.hide();
+        this._fuseProgressBarService.hide();
         this.isProcessing = false;
+        this._fuseSplashScreenService.hide();
       },
         (error: HttpErrorResponse) => {
           this.trackingCampaignList = [];
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
+          this._fuseSplashScreenService.hide();
         });
     this.subscriptions.push(sub);
   }

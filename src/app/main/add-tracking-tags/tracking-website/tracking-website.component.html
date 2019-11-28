@@ -6,14 +6,14 @@
 
   <div class="inner">
     <p class="info">
-      <b>Tại sao cần gắn mã:</b> Hệ thống đưa vào mã tracking để phát hiện số điện thoại truy cập vào website của bạn.
+      <span class="bold-text">Tại sao cần gắn mã:</span> Hệ thống đưa vào mã tracking để phát hiện số điện thoại truy cập vào website của bạn.
       Bạn
       có thể bỏ mã vào bất cứ vị trí nào trong website. Tuy nhiên tốt nhất hãy bỏ mã vào trong
       <span class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span>
     </p>
 
     <div style="padding-top: 10px">
-      <span class="step"><b>Bước 1:</b> Copy mã tracking</span>
+      <span class="step"><span class="bold-text">Bước 1:</span> Copy mã tracking</span>
       <div fxLayout="row" style="padding-top: 10px">
         <input class="key" type="text" #inputKey
           value='&lt;script type="text/javascript" src="{{hostTracking}}?key={{key}}"&gt;&lt;/script&gt;' readonly>
@@ -22,13 +22,13 @@
         </button>
       </div>
       <p style="padding-top: 10px; line-height: 30px">
-        <span class="step"><b>Bước 2:</b> Mở các website của bạn và gắn mã vào trong thẻ
+        <span class="step"><span class="bold-text">Bước 2:</span> Mở các website của bạn và gắn mã vào trong thẻ
           <span class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span></span>
       </p>
       <div style="padding-top: 10px">
-        <span class="step"><b>Bước 3:</b> Kiểm tra mã</span>
+        <span class="step"><span class="bold-text">Bước 3:</span> Kiểm tra mã</span>
         <p>
-          <button mat-raised-button color="accent" style="border-radius: 0" (click)="checkWebsiteTracking()">
+          <button mat-raised-button color="accent" (click)="checkWebsiteTracking()">
             BẤM ĐỂ KIỂM TRA MÃ
           </button>
         </p>

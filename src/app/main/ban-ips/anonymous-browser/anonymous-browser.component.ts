@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-anonymous-browser',
@@ -19,61 +20,67 @@ export class AnonymousBrowserComponent extends PageBaseComponent implements OnIn
   checked: boolean;
 
   constructor(
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _banIpsService: BanIpsService,
-    private _fuseProgressiveBarService: FuseProgressBarService,
+    private _fuseProgresBarService: FuseProgressBarService,
     private _dialogService: DialogService,
-    private _router: Router
+    private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
 
   ngOnInit() {
-
-    const sub = this._sessionService.getAccountId()
+    this.isProcessing = true;
+    this._fuseProgresBarService.show();
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
-            .subscribe(
-              (res) => {
-
-                if (res.data.adsAccount.isConnected) {
-                  this._fuseProgressiveBarService.hide();
-                  this.getBlockingAnonymousBrowserSetting();
-                }
-                else {
-                  this._fuseProgressiveBarService.hide();
-                  this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-                  this._router.navigateByUrl('/danh-sach-tai-khoan');
-                }
-
-              },
-              (error: HttpErrorResponse) => {
-                this._fuseProgressiveBarService.hide();
-                this._dialogService._openErrorDialog(error.error);
-                this._router.navigateByUrl('/danh-sach-tai-khoan');
-              }
-            );
-          this.subscriptions.push(accountDetailSub);
+          this.getAccountDetail(accountId);
         }
       });
     this.subscriptions.push(sub);
 
   }
 
+  getAccountDetail(accountId: string) {
+    const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+      .subscribe(
+        (res) => {
+
+          if (res.data.adsAccount.isConnected) {
+            this._fuseProgresBarService.hide();
+            this.getBlockingAnonymousBrowserSetting();
+          }
+          else {
+            this._fuseProgresBarService.hide();
+            this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+          }
+
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgresBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this._router.navigateByUrl('/danh-sach-tai-khoan');
+        }
+      );
+    this.subscriptions.push(accountDetailSub);
+  }
+
   getBlockingAnonymousBrowserSetting() {
     this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
-
+    this._fuseProgresBarService.show();
     const sub = this._banIpsService.getBlockingIPSettings()
       .subscribe(res => {
-        this._fuseProgressiveBarService.hide();
+        this._fuseProgresBarService.hide();
+        this._fuseSplashScreenService.hide();
         this.checked = res.data.setting.blockByPrivateBrowser;
-
         this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
+          this._fuseSplashScreenService.hide();
 
           if (error.status === 404) {
             this._dialogService._openInfoDialog(
@@ -94,7 +101,7 @@ export class AnonymousBrowserComponent extends PageBaseComponent implements OnIn
 
   setBlockingAnonymousBrowser() {
     this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
+    this._fuseProgresBarService.show();
 
     const sub = this._banIpsService.setBlockingAnonymousBrowser({ blockByPrivate: this.checked })
       .subscribe(
@@ -102,12 +109,12 @@ export class AnonymousBrowserComponent extends PageBaseComponent implements OnIn
 
           this.getBlockingAnonymousBrowserSetting();
 
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
           this._dialogService._openSuccessDialog(res);
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
         }

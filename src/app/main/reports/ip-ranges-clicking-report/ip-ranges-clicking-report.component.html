@@ -2,7 +2,7 @@
 
   <div class="title1" fxLayout="row" fxLayout.xs="column">
     <p class="title2" fxFlex="80">BÁO CÁO NHÓM IP ĐANG CLICK QUẢNG CÁO - TÀI KHOẢN <span
-        style="color:yellow">{{_sessionService.activeAdsAccountId}}</span></p>
+        style="color:yellow">{{sessionService.activeAdsAccountId}}</span></p>
     <mat-form-field class="datePicker" fxFlex="20">
       <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
       <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
@@ -24,7 +24,7 @@
         <ng-container matColumnDef="ip">
           <mat-header-cell *matHeaderCellDef> Nhóm IP </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span style="color: #039be5; font-weight: bold">{{element._id}}</span>
+            <span style="color: #0093e5; font-weight: bold">{{element._id}}</span>
           </mat-cell>
         </ng-container>
 

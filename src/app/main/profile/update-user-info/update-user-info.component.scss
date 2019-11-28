@@ -1,81 +1,83 @@
 .container {
   // background-color: #537895;
   // background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
-  background: url("../../../../assets/images/backgrounds/md2.jpeg");
-  background-position: center center;
-  background-size: 100% 100%;
+  background-color: #ffffb5;
+  background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
   background-attachment: fixed;
 
   width: 100%;
 
-  .inner {
-    padding: 100px 30px 30px 30px;
-    backdrop-filter: blur(3px);
+  .inner-container {
+    background: rgba(0, 0, 0, 0.5);
+    .inner {
+      padding: 100px 30px 30px 30px;
+      backdrop-filter: blur(3px);
 
-    .form {
-      width: 70%;
-      display: table;
-      margin: 0 auto;
-      filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.6));
-      background-color: whitesmoke;
-      padding: 40px 50px 20px 50px;
-
-      .title1 {
-        background-color: whitesmoke;
+      .form {
+        width: 70%;
         display: table;
         margin: 0 auto;
-        font-size: 16px;
-        width: 70%;
-        font-size: 16px;
-        font-weight: bold;
-        color: rgba(0, 0, 0, 0.7);
-        padding-bottom: 30px;
-      }
+        filter: drop-shadow(1px 1px 2px gray);
+        background-color: whitesmoke;
+        padding: 40px 50px 20px 50px;
 
-      .user-info {
-        padding: 20px;
-        padding-top: 10px;
-        border-radius: 5px;
-        border: 1px solid #d2d2d2;
-        box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
-        background-color: white;
+        .title1 {
+          background-color: whitesmoke;
+          display: table;
+          margin: 0 auto;
+          font-size: 18px;
+          width: 70%;
+          font-size: 16px;
+          font-weight: bold;
+          color: rgba(0, 0, 0, 0.7);
+          padding-bottom: 30px;
+        }
 
-        .avatar {
-          text-align: center;
-          width: 100%;
+        .user-info {
+          padding: 20px;
+          padding-top: 10px;
+          border-radius: 5px;
+          border: 1px solid #d2d2d2;
+          box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+          background-color: white;
 
-          img {
-            border-radius: 50%;
-            height: 122px;
-            width: 122px;
-            display: table;
-            margin: 0 auto;
+          .avatar {
+            text-align: center;
+            width: 100%;
+
+            img {
+              border-radius: 50%;
+              height: 122px;
+              width: 122px;
+              display: table;
+              margin: 0 auto;
+            }
           }
         }
-      }
 
-      .title2 {
-        padding-bottom: 10px;
-        color: gray;
-      }
+        .title2 {
+          padding-bottom: 10px;
+          color: gray;
+        }
 
-      mat-divider {
-        margin-bottom: 30px;
-      }
+        mat-divider {
+          margin-bottom: 30px;
+        }
 
-      .change-password {
-        padding: 20px;
-        border: 1px solid #d2d2d2;
-        background: white;
-        border-radius: 5px;
-        box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
-        margin-top: 20px;
-      }
+        .change-password {
+          padding: 20px;
+          border: 1px solid #d2d2d2;
+          background: white;
+          border-radius: 5px;
+          box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+          margin-top: 20px;
+        }
 
-      .submit-button {
-        margin-top: 20px;
-        background-color: #44b453;
-        color: white;
+        .submit-button {
+          margin-top: 20px;
+          background-color: #44b453;
+          color: white;
+        }
       }
     }
   }
@@ -83,23 +85,25 @@
 
 @media screen and (max-width: 600px) {
   .container {
-    .inner {
-      padding: 15px;
-      padding-top: 80px;
+    .inner-container {
+      .inner {
+        padding: 15px;
+        padding-top: 80px;
 
-      .form {
-        width: 100%;
-        padding: 10px;
-        padding-top: 20px;
+        .form {
+          width: 100%;
+          padding: 10px;
+          padding-top: 20px;
 
-        .title1 {
-          padding-bottom: 20px;
-          font-size: 18px;
-        }
+          .title1 {
+            padding-bottom: 20px;
+            font-size: 18px;
+          }
 
-        .user-info {
-          .info {
-            padding-top: 110px;
+          .user-info {
+            .info {
+              padding-top: 110px;
+            }
           }
         }
       }

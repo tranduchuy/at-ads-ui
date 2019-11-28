@@ -8,6 +8,7 @@ import { BanIpsService } from '../ban-ips.service';
 import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-whitelist-ip',
@@ -20,43 +21,49 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
   whiteList = [];
 
   constructor(
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _banIpsService: BanIpsService,
-    private _router: Router
+    private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
 
   ngOnInit() {
+    this.isProcessing = true;
     this._fuseProgressBarService.show();
     this.initForm();
-    const sub = this._sessionService.getAccountId()
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
-            .subscribe(
-              (res) => {
-                this._fuseProgressBarService.hide();
-
-                if (res.data.adsAccount.isConnected)
-                  this.getWhitelistIPs();
-                else {
-                  this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-                  this._router.navigateByUrl('/danh-sach-tai-khoan');
-                }
-
-              },
-              (error: HttpErrorResponse) => {
-                this._fuseProgressBarService.hide();
-                this._dialogService._openErrorDialog(error.error);
-                this._router.navigateByUrl('/danh-sach-tai-khoan');
-              }
-            );
-          this.subscriptions.push(accountDetailSub);
+          this.getAccountDetail(accountId);
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  getAccountDetail(accountId: string) {
+    const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+      .subscribe(
+        (res) => {
+          this._fuseProgressBarService.hide();
+
+          if (res.data.adsAccount.isConnected)
+            this.getWhitelistIPs();
+          else {
+            this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+          }
+
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this._router.navigateByUrl('/danh-sach-tai-khoan');
+        }
+      );
+    this.subscriptions.push(accountDetailSub);
   }
 
   getWhitelistIPs() {
@@ -66,6 +73,7 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
     const sub = this._banIpsService.getBlockingIPSettings()
       .subscribe(res => {
         this._fuseProgressBarService.hide();
+        this._fuseSplashScreenService.hide();
 
         this.whiteList = Array.from(new Set(res.data.setting.customWhiteList));
 
@@ -77,6 +85,7 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
 
           if (error.status === 404) {
             this._dialogService._openInfoDialog(

@@ -132,7 +132,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
     } else {
       this._dialogService._openErrorDialog({ messages: ['Lấy thông tin tài khoản từ google không thành công'] });
     }
-
   }
 
   selectAccount(event): void {

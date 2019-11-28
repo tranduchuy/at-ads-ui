@@ -9,6 +9,7 @@ import { DialogService } from 'app/shared/services/dialog.service';
 import * as moment from 'moment';
 import * as Url from 'url-parse';
 import { PreviousRouteService } from 'app/shared/services/previous-route.service';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-user-statistic-detail',
@@ -51,11 +52,12 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
 
   constructor(
     private _fuseProgressBarService: FuseProgressBarService,
-    public _sessionService: SessionService,
+    public sessionService: SessionService,
     private _reportService: ReportService,
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
     public router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
@@ -76,7 +78,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   }
 
   getAccountId() {
-    const getAccountIdSub = this._sessionService.getAccountId()
+    const getAccountIdSub = this.sessionService.getAccountId()
       .subscribe(
         (accoundId: string) => {
           if (accoundId) {
@@ -96,7 +98,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   }
 
   checkAccountAcceptance() {
-    const sub = this._sessionService.getAccountAcceptance()
+    const sub = this.sessionService.getAccountAcceptance()
       .subscribe((isAccepted: boolean) => {
         this.pageTotal = 0;
 
@@ -104,7 +106,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
           this.pageLimit = 20;
         else this.pageLimit = 10;
 
-        const selectedActiveAccount = this._sessionService.getValueOfSelectedActiveAccount();
+        const selectedActiveAccount = this.sessionService.getValueOfSelectedActiveAccount();
         if (selectedActiveAccount) {
           this.currentPageNumber = 1;
         }
@@ -177,6 +179,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
           this.lastHistory = res.data.last;
 
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
@@ -186,6 +189,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
           this.totalItems = 0;
 
           this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
         }

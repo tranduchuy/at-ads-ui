@@ -2,13 +2,13 @@
 
   <div class="title1">
     CẤU HÌNH CHẶN THEO DANH SÁCH IP TÙY CHỈNH - TÀI KHOẢN <span
-      class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
+      class="account-id">{{sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
   <div class="inner">
 
     <p class="notification">
-      Hệ thống sẽ thực hiện chặn một danh sách các IP theo yêu cầu của bạn và <span style="color: red">không cho hiển thị</span> quảng cáo
+      Hệ thống sẽ thực hiện chặn một danh sách các IP theo yêu cầu của bạn và <span style="color: crimson; font-weight: bold">không cho hiển thị</span> quảng cáo
       trên thiết bị đang sử dụng các IP này.
     </p>
 
@@ -22,7 +22,7 @@
 
         </div>
         <div class="input-example" fxFlex="auto">
-          <p class="title3">Hướng Dẫn Chặn IP Tùy Chỉnh</p>
+          <p class="title3">HƯỚNG DẪN CHẶN IP TÙY CHỈNH</p>
           <p>
             Bạn có thể chặn <b>từng IP riêng lẻ</b>, vui lòng điền mỗi IP 1 dòng
           </p>
@@ -49,7 +49,7 @@
 
       <div class="button-area">
         <button type="submit" mat-raised-button color="warn" [disabled]="isProcessing">
-          <mat-icon>block</mat-icon> CHẶN THỦ CÔNG DANH SÁCH IP
+          <mat-icon style="font-size: 20px; margin-top: 5px">block</mat-icon> CHẶN THỦ CÔNG DANH SÁCH IP
         </button>
       </div>
     </form>
@@ -77,7 +77,7 @@
           <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <p class="status">
-              Chặn thành công <span style="color: gray; font-weight: bold">{{element._id}}</span> vào tổng <span
+              Đã chặn thành công vào tổng <span
                 style="color: crimson; font-weight: bold">{{element.campaignNumber}}</span> chiến dịch.
             </p>
           </mat-cell>
@@ -87,7 +87,7 @@
           <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
           <mat-cell *matCellDef>
             <span class="task">
-              <mat-icon>verified_user</mat-icon> đã chặn
+              <mat-icon style="font-size: 20px">verified_user</mat-icon> đã chặn
             </span>
           </mat-cell>
         </ng-container>

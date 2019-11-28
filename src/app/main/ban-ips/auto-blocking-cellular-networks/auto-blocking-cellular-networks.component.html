@@ -2,13 +2,13 @@
 
   <div class="title1">
     CẤU HÌNH CHẶN TỰ ĐỘNG 3G & 4G - TÀI KHOẢN <span
-      class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
+      class="account-id">{{sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
   <div class="inner">
-    <p class="title2"> Bằng việc cấu hình này, quảng cáo sẽ <span style="color: red">không hiển thị</span> trên hầu hết
+    <p class="title2"> Bằng việc cấu hình này, quảng cáo sẽ <span style="color: crimson; font-weight: bold">không hiển thị</span> trên hầu hết
       các thiết bị sử
-      dụng truy cập <span style="color: #039be5">3G & 4G</span> của các nhà mạng di động tại Việt Nam.</p>
+      dụng truy cập <span style="color: #0093e5; font-weight: bold">3G & 4G</span> của các nhà mạng di động tại Việt Nam.</p>
 
     <div class="checkbox-group" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-around">
       <mat-checkbox [checked]="mobileNetworks.viettel" (change)="selectNetwork($event,'viettel')"
@@ -38,7 +38,7 @@
     <p class="text-center">
       <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
         (click)="setAutoBlocking3G4G()" [disabled]="isProcessing">
-        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+        <mat-icon style="font-size: 20px">check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
       </button>
     </p>
   </div>

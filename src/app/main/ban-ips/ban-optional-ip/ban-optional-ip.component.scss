@@ -76,10 +76,6 @@
 
     .button-area {
       margin-top: 15px;
-
-      button {
-        border-radius: 0;
-      }
     }
 
     .table-title {
@@ -126,6 +122,7 @@
       mat-header-cell {
         background: rgba(217, 83, 79, 1);
         color: white;
+        font-weight: bold;
       }
 
       mat-cell {

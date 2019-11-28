@@ -86,7 +86,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     //   this.isTopbarDisplayed = false;
     // }
 
-    if(currentOffset > 380) {
+    if (currentOffset > 380) {
       this.isLoginButtonDisplayed = true;
       this.isTopbarTitleDisplayed = window.innerWidth > 600 ? true : false;
     } else {

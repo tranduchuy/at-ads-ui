@@ -7,6 +7,7 @@ import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-auto-ban-ip',
@@ -76,51 +77,55 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
 
   constructor(
     private _banIpsService: BanIpsService,
-    private _fuseProgressiveBarService: FuseProgressBarService,
-    public _sessionService: SessionService,
-    public _dialogService: DialogService,
-    private _router: Router
+    private _fuseProgresBarService: FuseProgressBarService,
+    public sessionService: SessionService,
+    private _dialogService: DialogService,
+    private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    const sub = this._sessionService.getAccountId()
+    this.isProcessing = true;
+    this._fuseProgresBarService.show();
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
-
         if (accountId) {
-          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
-            .subscribe(
-              (res) => {
-
-                if (res.data.adsAccount.isConnected) {
-                  this._fuseProgressiveBarService.hide();
-                  this.getBlockingIPSettting();
-                }
-                else {
-                  this._fuseProgressiveBarService.hide();
-                  this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-                  this._router.navigateByUrl('/danh-sach-tai-khoan');
-                }
-
-              },
-              (error: HttpErrorResponse) => {
-                this._fuseProgressiveBarService.hide();
-                this._dialogService._openErrorDialog(error.error);
-                this._router.navigateByUrl('/danh-sach-tai-khoan');
-              }
-            );
-          this.subscriptions.push(accountDetailSub);
+          this.getAccountDetail(accountId);
         }
-
       });
     this.subscriptions.push(sub);
   }
 
+  getAccountDetail(accountId: string) {
+    const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+      .subscribe(
+        (res) => {
+
+          if (res.data.adsAccount.isConnected) {
+            this._fuseProgresBarService.hide();
+            this.getBlockingIPSettting();
+          }
+          else {
+            this._fuseProgresBarService.hide();
+            this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+          }
+
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgresBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this._router.navigateByUrl('/danh-sach-tai-khoan');
+        }
+      );
+    this.subscriptions.push(accountDetailSub);
+  }
+
   getBlockingIPSettting() {
     this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
-
+    this._fuseProgresBarService.show();
     const getSettingsSub = this._banIpsService.getBlockingIPSettings()
       .subscribe(res => {
         this.checked = res.data.setting.autoBlockWithAiAndBigData;
@@ -129,10 +134,12 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
         this.selectedAutoRemove = res.data.setting.autoRemoveBlocking === false ? 1 : 2;
 
         this.isProcessing = false;
-        this._fuseProgressiveBarService.hide();
+        this._fuseProgresBarService.hide();
+        this._fuseSplashScreenService.hide();
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgresBarService.hide();
+          this._fuseSplashScreenService.hide();
 
           if (error.status === 404) {
             this._dialogService._openInfoDialog(
@@ -158,17 +165,13 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
 
   setAutoBlockingIP() {
     const params = this.generateAutoBlockingIpParams();
-
     this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
-
+    this._fuseProgresBarService.show();
     const sub = this._banIpsService.autoBlockingIP(params).subscribe((res: ILoginSuccess) => {
-
       this.getBlockingIPSettting();
-
       setTimeout(() => {
         this._dialogService._openSuccessDialog(res);
-        this._fuseProgressiveBarService.hide();
+        this._fuseProgresBarService.hide();
         this.isProcessing = false;
       }, 0);
     },
@@ -178,7 +181,7 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
           this._dialogService._openErrorDialog(error.error);
         }
 
-        this._fuseProgressiveBarService.hide();
+        this._fuseProgresBarService.hide();
         this.isProcessing = false;
       }
     );

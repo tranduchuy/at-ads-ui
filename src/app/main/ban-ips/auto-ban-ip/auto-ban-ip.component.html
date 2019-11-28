@@ -1,7 +1,7 @@
 <div class="container">
   <div class="title1">
     CẤU HÌNH CHẶN TỰ ĐỘNG THEO IP - TÀI KHOẢN <span
-      class="account-id">{{_sessionService.activeAdsAccountId || ''}}</span>
+      class="account-id">{{sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
   <div class="inner">
@@ -16,7 +16,7 @@
       <mat-checkbox [checked]="checked" (change)="checkSetting($event)" [disabled]="isProcessing">
       </mat-checkbox>
       <b>
-        Tự động chặn những IP đang phá hoại sử dụng <span style="color: red">AI</span> và <span style="color: red">Big
+        Tự động chặn những IP đang phá hoại sử dụng <span style="color: crimson">AI</span> và <span style="color: crimson">Big
           Data</span>.
       </b>
     </p>
@@ -25,7 +25,7 @@
       <div fxFlex="60">
         <p>
           <b>
-            Chặn sau khi 1 IP nhấn quảng cáo <span style="color: red">(thường là 2 lần)</span>
+            Chặn sau khi 1 IP nhấn quảng cáo <span style="color: crimson">(thường là 2 lần)</span>
           </b>
         </p>
 
@@ -56,7 +56,7 @@
 
     <p>
       <b>
-        Xóa hết IP đã chặn khi qua ngày mới <span style="color: red">(xóa vào lúc 0h-1h sáng)</span>
+        Xóa hết IP đã chặn khi qua ngày mới <span style="color: crimson">(xóa vào lúc 0h-1h sáng)</span>
       </b>
     </p>
 
@@ -70,7 +70,7 @@
     <p class="text-center">
       <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối" (click)="setAutoBlockingIP()"
         [disabled]="isProcessing">
-        <mat-icon>check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
+        <mat-icon style="font-size: 20px">check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
       </button>
     </p>
   </div>

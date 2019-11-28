@@ -7,6 +7,7 @@ import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { Router } from '@angular/router';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
   selector: 'app-auto-blocking-cellular-networks',
@@ -25,43 +26,48 @@ export class AutoBlockingCellularNetworksComponent extends PageBaseComponent imp
   }
 
   constructor(private _banIpsService: BanIpsService,
-    public _sessionService: SessionService,
-    private _fuseProgressiveBarService: FuseProgressBarService,
-    public _dialogService: DialogService,
-    private _router: Router
+    public sessionService: SessionService,
+    private _fuseProgressBarService: FuseProgressBarService,
+    private _dialogService: DialogService,
+    private _router: Router,
+    private _fuseSplashScreenService: FuseSplashScreenService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    const sub = this._sessionService.getAccountId()
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+    const sub = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
-            .subscribe(
-              (res) => {
-
-                if (res.data.adsAccount.isConnected) {
-                  this._fuseProgressiveBarService.hide();
-                  this.getAutoBlocking3G4GSetting();
-                }
-                else {
-                  this._fuseProgressiveBarService.hide();
-                  this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-                  this._router.navigateByUrl('/danh-sach-tai-khoan');
-                }
-
-              },
-              (error: HttpErrorResponse) => {
-                this._fuseProgressiveBarService.hide();
-                this._dialogService._openErrorDialog(error.error);
-                this._router.navigateByUrl('/danh-sach-tai-khoan');
-              }
-            );
-          this.subscriptions.push(accountDetailSub);
+          this.getAccountDetail(accountId);
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  getAccountDetail(accountId: string) {
+    const accountDetailSub = this._banIpsService.getAdwordsAccountDetail(accountId)
+      .subscribe(
+        (res) => {
+          if (res.data.adsAccount.isConnected) {
+            this.getAutoBlocking3G4GSetting();
+          }
+          else {
+            this._fuseProgressBarService.hide();
+            this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+            this._router.navigateByUrl('/danh-sach-tai-khoan');
+          }
+
+        },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+          this._router.navigateByUrl('/danh-sach-tai-khoan');
+        }
+      );
+    this.subscriptions.push(accountDetailSub);
   }
 
   selectNetwork(event, network: string) {
@@ -72,17 +78,17 @@ export class AutoBlockingCellularNetworksComponent extends PageBaseComponent imp
 
   getAutoBlocking3G4GSetting() {
     this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
-
+    this._fuseProgressBarService.show();
     const sub = this._banIpsService.getBlockingIPSettings()
       .subscribe(res => {
-        this._fuseProgressiveBarService.hide();
+        this._fuseProgressBarService.hide();
+        this._fuseSplashScreenService.hide();
         this.mobileNetworks = res.data.setting.mobileNetworks;
-
         this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
 
           if (error.status === 404) {
             this._dialogService._openInfoDialog(
@@ -92,28 +98,25 @@ export class AutoBlockingCellularNetworksComponent extends PageBaseComponent imp
             );
           }
           else this._dialogService._openErrorDialog(error.error);
-
         });
     this.subscriptions.push(sub);
   }
 
   setAutoBlocking3G4G() {
     this.isProcessing = true;
-    this._fuseProgressiveBarService.show();
+    this._fuseProgressBarService.show();
 
     const sub = this._banIpsService.autoBlocking3G4G(this.mobileNetworks)
       .subscribe((res: ILoginSuccess) => {
-
         this.getAutoBlocking3G4GSetting();
-
         setTimeout(() => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgressBarService.hide();
           this._dialogService._openSuccessDialog(res);
           this.isProcessing = false;
         }, 0);
       },
         (error: HttpErrorResponse) => {
-          this._fuseProgressiveBarService.hide();
+          this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
         });
