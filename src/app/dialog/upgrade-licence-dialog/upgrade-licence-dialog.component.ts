@@ -89,7 +89,7 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
         messages: [`
           <center><h2>Gửi yêu cầu thành công</h2>
           Vui lòng chuyển khoản số tiền <h3 style="display: inline !important"><b>${this.divideThousand(res.data.price)} VNĐ</b></h3>
-          với nội dung như sau: <h3><b>#${res.data.code}</b></h3></center>
+          với nội dung như sau: <h3><b>${res.data.code}</b></h3></center>
           <br><b>Thông tin tài khoản ngân hàng</b>
           <br><b>Ngân hàng:</b> Vietcombank
           <br><b>Chủ tài khoản:</b> Nguyen Binh Long
