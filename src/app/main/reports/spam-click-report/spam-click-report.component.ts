@@ -56,7 +56,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     doughnut: true,
     gradient: false,
     scheme: {
-      domain: ['#0093e5', '#ff0037']
+      domain: ['#40a5ec', '#ff0037']
     },
     dataSource: [
       {
@@ -96,8 +96,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     labels: [],
     colors: [
       {
-        borderColor: '#35afea',
-        //backgroundColor: 'rgba(3, 155, 229, 0.1)',
+        borderColor: '#40a5ec',
+        //backgroundColor: 'rgba(3, 155, 229, 0.05)',
         backgroundColor: 'rgba(0,0,0,0)',
         pointBackgroundColor: 'white',
         pointHoverBackgroundColor: '#35afea',
@@ -105,7 +105,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         pointHoverBorderColor: '#35afea'
       },
       {
-        borderColor: '#f44336',
+        borderColor: 'orangered',
         //backgroundColor: 'rgba(255, 0, 55, 0.1)',
         backgroundColor: 'rgba(0,0,0,0)',
         pointBackgroundColor: 'white',
@@ -307,6 +307,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         page: event,
       }
     });
+    this.sessionService.emitReportTableChanged(1);
   }
 
   setSelectedAdsId(accountId: string) {
@@ -349,6 +350,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
       }
     });
     this.getAccountReport(this.sessionService.activeAccountId, this.currentPageNumber);
+    this.sessionService.emitReportTableChanged(2);
   }
 
   onApplyDateRange() {
@@ -411,7 +413,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             doughnut: true,
             gradient: false,
             scheme: {
-              domain: ['#0093e5', '#ff0037']
+              domain: ['#40a5ec', '#ff0037']
             },
             dataSource: [
               realClickDetail, spamClickDetail

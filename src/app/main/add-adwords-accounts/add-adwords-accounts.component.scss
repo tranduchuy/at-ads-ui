@@ -49,7 +49,7 @@
     }
 
     .step {
-      color: #0093e5;
+      color: #40a5ec;
     }
     .box {
       padding: 30px;
@@ -140,12 +140,12 @@
             transition: 0.2s;
 
             &:hover {
-              background-color: rgba(3, 155, 229, 0.1);
+              background-color: rgba(3, 155, 229, 0.05);
             }
           }
 
           mat-cell {
-            color: #0093e5;
+            color: #40a5ec;
           }
 
           .disabled-cell {
@@ -164,7 +164,7 @@
           }
 
           mat-header-cell {
-            background: #0093e5;
+            background: #40a5ec;
             color: white;
             font-weight: bold;
           }

@@ -276,7 +276,7 @@
           text-shadow: 1px 1px 4px black;
           font-size: 16px;
           -webkit-animation: title2Appearance 1s ease-in;
-          filter: drop-shadow(0 1px 1px black);
+          filter: drop-shadow(0.5px 0.5px 0.5px black);
         }
 
         @keyframes title2Appearance {
@@ -398,7 +398,7 @@
           margin: 0 auto;
           display: table;
           width: 100%;
-          background: rgba(3, 155, 229, 0.1);
+          background: rgba(3, 155, 229, 0.05);
 
           img,
           mat-icon {
@@ -432,7 +432,7 @@
             }
 
             &:hover {
-              //background-color: rgba(3, 155, 229, 0.1);
+              //background-color: rgba(3, 155, 229, 0.05);
 
               mat-cell {
                 color: orange !important;

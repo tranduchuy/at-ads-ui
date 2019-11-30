@@ -75,14 +75,14 @@ export class FuseNavigationComponent implements OnInit {
 
     this.accounts.children.push({
       id: 'add-accounts',
-      title: 'Thêm Tài Khoản Mới',
+      title: 'Thêm tài khoản mới',
       type: 'item',
       icon: 'library_add',
       url: '/them-tai-khoan-moi'
     });
     this.accounts.children.push({
       id: 'account-list',
-      title: 'Quản Lý Tài Khoản',
+      title: 'Quản lý tài khoản',
       type: 'item',
       icon: 'dashboard',
       url: '/danh-sach-tai-khoan'
@@ -91,7 +91,7 @@ export class FuseNavigationComponent implements OnInit {
     if (this._sessionService.activeAccountId) {
       this.accounts.children.push({
         id: 'add-tracking-tags',
-        title: 'Gắn Tracking Chiến Dịch',
+        title: 'Gắn tracking chiến dịch',
         type: 'item',
         icon: 'location_searching',
         url: '/gan-tracking/chien-dich'
@@ -110,7 +110,7 @@ export class FuseNavigationComponent implements OnInit {
           if (userLicenceType !== 'FREE' && userLicenceType !== 'VIP1') {
             this.accounts.children.push({
               id: 'add-accounts',
-              title: 'Thêm Tài Khoản Mới',
+              title: 'Thêm tài khoản mới',
               type: 'item',
               icon: 'library_add',
               url: '/them-tai-khoan-moi'
@@ -134,7 +134,7 @@ export class FuseNavigationComponent implements OnInit {
         else {
           this.accounts.children.unshift({
             id: 'add-accounts',
-            title: 'Thêm Tài Khoản Mới',
+            title: 'Thêm tài khoản mới',
             type: 'item',
             icon: 'library_add',
             url: '/them-tai-khoan-moi'

@@ -1,17 +1,16 @@
 .container {
   // background-color: #537895;
   // background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
-  background-color: #ffffb5;
-  background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
+  background: url("../../../../assets/images/backgrounds/loading-bg1.jpg");
+  background-size: 100% 100%;
   background-attachment: fixed;
 
   width: 100%;
 
   .inner-container {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     .inner {
       padding: 100px 30px 30px 30px;
-      backdrop-filter: blur(3px);
 
       .form {
         width: 70%;

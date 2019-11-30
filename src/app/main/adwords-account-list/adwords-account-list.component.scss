@@ -120,8 +120,8 @@
       //font-size: 12px;
       text-align: center;
       margin-left: 5px;
-      //background: rgba(3, 155, 229, 0.1);
-      color: #0093e5;
+      //background: rgba(3, 155, 229, 0.05);
+      color: #40a5ec;
       font-weight: bold;
       //padding: 3px 4px 3px 4px;
     }
@@ -136,7 +136,7 @@
         height: 30px;
 
         &:hover {
-          background: rgba(3, 155, 229, 0.1);
+          background: rgba(3, 155, 229, 0.05);
         }
       }
 
@@ -162,10 +162,10 @@
         }
 
         .ggAds-icon {
-          height: 16px;
-          width: 16px;
+          height: 13px;
+          width: 13px;
           margin-right: 8px;
-          filter: drop-shadow(0.2px 0.7px 0.7px rgba(0, 0, 0, 0.4));
+          //filter: drop-shadow(0.2px 0.7px 0.7px rgba(0, 0, 0, 0.4));
         }
 
         mat-header-cell,
@@ -205,7 +205,7 @@
         }
 
         mat-header-cell {
-          background: #0093e5;
+          background: #40a5ec;
           color: white;
           font-weight: bold;
         }
@@ -231,7 +231,7 @@
     }
 
     .vip-service {
-      color: #0093e5;
+      color: #40a5ec;
       font-weight: bold;
     }
 
@@ -259,7 +259,7 @@
     }
 
     .no-tracking {
-      color: #0093e5;
+      color: #40a5ec;
     }
 
     .clear {

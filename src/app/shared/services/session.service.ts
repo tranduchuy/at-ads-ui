@@ -18,11 +18,24 @@ export class SessionService {
   private _listAccounts$ = new BehaviorSubject<any>(false);
   private _removedAccountId$ = new BehaviorSubject<string>('');
   private _activeAccountChanged$ = new BehaviorSubject<string>('');
+  private _reportTableChanged$ = new BehaviorSubject<number>(0);
 
   constructor(
     private cookieService: CookieService
   ) {
 
+  }
+
+  onReportTableChanged(): Observable<any> {
+    return this._reportTableChanged$.asObservable();
+  }
+
+  emitReportTableChanged(changeOption: number) {
+    this._reportTableChanged$.next(changeOption);
+  }
+
+  getValueOfReportTableChanged(): number {
+    return this._reportTableChanged$.getValue();
   }
 
   onSelectingActiveAccount(): Observable<string> {

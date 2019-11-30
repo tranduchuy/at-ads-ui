@@ -12,6 +12,7 @@
 
   ::ng-deep .ngx-charts {
     width: 70%;
+    margin-top: -20px;
   }
 
   ::ng-deep .chart-legend .legend-labels {
@@ -44,7 +45,7 @@
         }
 
         .datePicker {
-          color: #0093e5;
+          color: #40a5ec;
           width: 250px;
           margin-top: 15px;
 
@@ -67,7 +68,7 @@
         margin: 20px;
         background: white;
         box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
-        border-radius: 4px;
+        border-radius: 7px;
 
         .session-total {
           position: relative;
@@ -134,7 +135,7 @@
         width: 100%;
 
         .right-table-title {
-          color: #0093e5;
+          color: #40a5ec;
           font-weight: bold;
           font-size: 16px;
         }
@@ -159,7 +160,7 @@
               justify-content: left;
 
               .user-percentage {
-                color: #0093e5;
+                color: #40a5ec;
               }
             }
 
@@ -169,12 +170,12 @@
               justify-content: center;
 
               .user-percentage {
-                color: #0093e5;
+                color: #40a5ec;
               }
             }
 
             mat-header-cell {
-              background: #0093e5;
+              background: #40a5ec;
               color: white;
             }
 
@@ -182,7 +183,7 @@
               transition: 0.2s;
 
               &:hover {
-                background: rgba(3, 155, 229, 0.1);
+                background: rgba(3, 155, 229, 0.05);
               }
             }
 
@@ -199,15 +200,15 @@
     .overview {
       margin: 20px;
       box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
-      border-radius: 4px;
-      height: 95vh;
+      border-radius: 7px;
+      //height: 95vh;
       background: white;
       .overview-main {
         padding: 30px;
         padding-top: 0;
         padding-bottom: 0;
         background: white;
-        border-radius: 4px;
+        border-radius: 7px;
 
         .overview-title1 {
           padding: 20px 0 15px 0;
@@ -217,7 +218,7 @@
           color: rgba(0, 0, 0, 0.7);
 
           .datePicker {
-            color: #0093e5;
+            color: #40a5ec;
 
             input {
               color: white;
@@ -232,7 +233,8 @@
         }
 
         .pagination-buttons {
-          padding: 10px;
+          padding-top: 15px;
+          margin-bottom: -10px;
           color: gray;
 
           .item-per-page-options {
@@ -262,7 +264,7 @@
               font-size: 12px;
 
               &:hover {
-                background: rgba(3, 155, 229, 0.1);
+                background: rgba(3, 155, 229, 0.05);
               }
             }
 
@@ -299,7 +301,7 @@
             }
 
             mat-header-cell {
-              background: #0093e5;
+              background: #40a5ec;
               color: white;
               font-weight: bold;
             }
@@ -312,7 +314,7 @@
               transition: 0.2s;
 
               &:hover {
-                background: rgba(3, 155, 229, 0.1);
+                background: rgba(3, 155, 229, 0.05);
               }
             }
 
@@ -360,16 +362,16 @@
           height: 750px;
 
           .session-total {
-            -webkit-transform: translate(25%, 107vh);
-            transform: translate(25%, 107vh);
-            position: absolute;
+            -webkit-transform: translate(25%, -180px);
+            transform: translate(25%, -180px);
+            position: relative;
           }
         }
       }
 
       .overview {
         margin: 10px;
-        height: 123vh;
+        //height: 123vh;
         .overview-main {
           padding-left: 10px;
           padding-right: 10px;

@@ -8,8 +8,8 @@
   .main-title {
     box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 
-    background-color: #ffffb5;
-    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
+    background-color: #76daff;
+    background-image: linear-gradient(315deg, #76daff 0%, #fcd000 74%);
     background-attachment: fixed;
 
     .main-title-inner {
@@ -18,7 +18,7 @@
       color: white;
       font-size: 24px;
       font-weight: bold;
-      background: rgba(0, 0, 0, 0.5);
+      background-color: rgba(3, 155, 229, 0.5);
       width: 100%;
 
       .notice {
@@ -31,8 +31,8 @@
   }
 
   .shiny {
-    color: lightgreen;
-    background: -webkit-gradient(linear, left top, left bottom, from(lightgreen), to(#d17000));
+    color: lightyellow;
+    background: -webkit-gradient(linear, left top, left bottom, from(lightyellow), to(orange));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
