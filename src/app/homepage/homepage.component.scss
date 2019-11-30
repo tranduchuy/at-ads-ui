@@ -251,7 +251,7 @@
           margin-bottom: 6px;
           //display: none;
           img {
-            filter: drop-shadow(2px 3px 3px black);
+            filter: drop-shadow(2px 2px 2px black);
             transition: 0.2s;
 
             &:hover {
@@ -432,11 +432,7 @@
             }
 
             &:hover {
-              //background-color: rgba(3, 155, 229, 0.05);
-
-              mat-cell {
-                color: orange !important;
-              }
+              background-color: rgba(3, 155, 229, 0.2);
             }
           }
 
@@ -780,7 +776,7 @@
       // background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1)) !important;
       -webkit-animation: topbarAppearance 0.2s linear;
 
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(4px);
       background: rgba(3, 155, 229, 0.2);
     }
 
