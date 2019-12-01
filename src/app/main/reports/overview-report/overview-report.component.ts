@@ -77,8 +77,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     gradient: false,
     scheme: {
       domain: [
-        //'#87CEEB', '#f44336', '#0093e5', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
-        '#6FAAB0', '#C4C24A', '#8BC652', '#E94649', '#F6B53F', '#FB954F', '#005277', '#0093e5', '#9370DB', '#33495D', '#FF6384'
+        //'#87CEEB', '#f44336', '#40a5ec', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
+        '#6FAAB0', '#C4C24A', '#8BC652', '#E94649', '#F6B53F', '#FB954F', '#005277', '#40a5ec', '#9370DB', '#33495D', '#FF6384'
         //'hsl(200, 100%, 12%)','hsl(200, 100%, 20%)','hsl(200, 100%, 28%)','hsl(200, 100%, 38%)','hsl(200, 100%, 48%)','hsl(200, 100%, 58%)','hsl(200, 100%, 68%)','hsl(200, 100%, 78%)','hsl(200, 100%, 85%)','hsl(200, 100%, 95%)','hsl(200, 100%, 100%)'
       ]
     },
@@ -246,6 +246,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
       }
     });
     this.getSessionReport(this.currentPageNumber);
+    this.sessionService.emitReportTableChanged(2);
   }
 
   showReason(reason: any) {
@@ -434,5 +435,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
         page: event,
       }
     });
+    this.sessionService.emitReportTableChanged(1);
   }
 }

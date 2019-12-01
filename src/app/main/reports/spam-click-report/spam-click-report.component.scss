@@ -29,9 +29,8 @@
   }
 
   .section {
-    margin: 20px;
+    margin: 30px;
     box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
-    border-radius: 4px;
     padding-bottom: 10px;
     background-color: white;
 
@@ -83,12 +82,12 @@
       // background-color: #000000 !important;
       // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
       // color: white;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       color: rgba(0, 0, 0, 0.7);
 
       .datePicker {
-        color: #0093e5;
+        color: #40a5ec;
 
         input {
           color: white;
@@ -97,7 +96,8 @@
     }
 
     .pagination-buttons {
-      padding: 10px;
+      padding-top: 15px;
+      margin-bottom: -10px;
       color: gray;
 
       .item-per-page-options {
@@ -153,7 +153,7 @@
   .tables {
     padding-top: 0;
     background: white;
-    height: 95vh;
+    // height: 95vh;
 
     mat-table {
       box-shadow: none;
@@ -173,13 +173,13 @@
         transition: 0.2s;
 
         &:hover {
-          background-color: rgba(3, 155, 229, 0.1);
+          background-color: rgba(3, 155, 229, 0.05);
         }
       }
 
       mat-row,
       mat-header-row {
-        min-width: 1000px;
+        min-width: 1050px;
         width: 100%;
       }
 
@@ -199,7 +199,7 @@
       }
 
       mat-header-cell {
-        background-color: #0093e5;
+        background-color: #40a5ec;
         color: white;
         font-weight: bold;
       }
@@ -228,7 +228,7 @@
     margin-bottom: 0;
 
     .pie-label {
-      font-size: 20px !important;
+      font-size: 18px !important;
     }
   }
 }
@@ -292,7 +292,7 @@
     }
 
     .tables {
-      height: 123vh;
+      //height: 123vh;
     }
 
     :host ::ng-deep .pie-chart {

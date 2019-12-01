@@ -40,14 +40,14 @@
       padding: 15px;
       background-color: white;
 
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     }
 
     .list-ip {
       width: 100%;
 
       textarea {
-        height: 360px;;
+        height: 360px;
       }
 
       mat-form-field {
@@ -78,55 +78,66 @@
       margin-top: 15px;
     }
 
-    .table-title {
-      padding-top: 20px;
-      font-weight: bold;
-      color: gray;
-    }
+    .blacklist {
+      background: white;
+      padding: 15px;
+      margin-top: 30px;
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 
-    .table-wrapper {
-      max-height: 500px;
-      border: 0.5px solid #eee;
-      background-color: white;
-      overflow: auto;
-
-      mat-table {
-        width: 100%;
-        box-shadow: none;
-      }
-
-      mat-row {
-        transition: 0.2s;
-      }
-
-      mat-row:hover {
-        background-color: rgba(217, 83, 79, 0.1);
-      }
-
-      mat-header-cell:nth-child(1),
-      mat-cell:nth-child(1) {
-        flex: 0 0 10%;
-      }
-
-      mat-header-cell:nth-child(3),
-      mat-cell:nth-child(3) {
-        flex: 0 0 40%;
-      }
-
-      mat-row,
-      mat-header-row {
-        min-width: 1000px;
-        width: 100%;
-      }
-
-      mat-header-cell {
-        background: rgba(217, 83, 79, 1);
-        color: white;
+      .table-title {
+        padding-bottom: 10px;
         font-weight: bold;
+        color: rgba(0,0,0,0.7);
       }
 
-      mat-cell {
-        font-size: 12px;
+      .notification {
+        color: gray;
+      }
+
+      .table-wrapper {
+        max-height: 500px;
+        border: 0.5px solid #eee;
+        background-color: white;
+        overflow: auto;
+
+        mat-table {
+          width: 100%;
+          box-shadow: none;
+        }
+
+        mat-row {
+          transition: 0.2s;
+        }
+
+        mat-row:hover {
+          background-color: rgba(217, 83, 79, 0.1);
+        }
+
+        mat-header-cell:nth-child(1),
+        mat-cell:nth-child(1) {
+          flex: 0 0 10%;
+        }
+
+        mat-header-cell:nth-child(3),
+        mat-cell:nth-child(3) {
+          flex: 0 0 40%;
+        }
+
+        mat-row,
+        mat-header-row {
+          min-width: 1000px;
+          width: 100%;
+        }
+
+        mat-header-cell {
+          background: rgba(217, 83, 79, 1);
+          color: white;
+          font-weight: bold;
+        }
+
+        mat-cell {
+          font-size: 12px;
+        }
       }
     }
 
@@ -168,7 +179,7 @@
       background-color: crimson;
       color: white;
       padding: 4px;
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       font-size: 12px;
       font-weight: bold;
     }

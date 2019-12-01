@@ -48,8 +48,8 @@
           </button>
         </div>
         <br><span><b><span style="color: crimson">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
-            style="color: #0093e5; font-weight: bold">http://</span> hoặc <span
-            style="color: #0093e5; font-weight: bold">https://</span></span>
+            style="color: #40a5ec; font-weight: bold">http://</span> hoặc <span
+            style="color: #40a5ec; font-weight: bold">https://</span></span>
       </div>
       <p *ngIf="isAddingWebsiteAllowed === false" class="limit-website-notification">
         Số lượng website của tài khoản Google Ads này đã đạt tối đa. Vui
@@ -61,7 +61,7 @@
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center">
       <p><strong>CÁC WEBSITE TRONG TÀI KHOẢN <span [(ngModel)]="selectedAdsId" ngDefaultControl
-            style="color: #0093e5">{{selectedAdsId}}</span></strong></p>
+            style="color: #40a5ec">{{selectedAdsId}}</span></strong></p>
       <button mat-button class="update-website-list-button" color="accent" (click)="getWebsites()"
         [disabled]="isProcessing">
         <mat-icon style="font-size: 18px">sync</mat-icon>Cập nhật

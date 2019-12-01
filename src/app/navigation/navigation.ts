@@ -16,7 +16,7 @@ export const navigation: FuseNavigation[] = [
     children: [
       {
         id: 'overview-accessing-report',
-        title: 'Lưu Lượng Truy Cập',
+        title: 'Lưu lượng truy cập',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'bar_chart',
@@ -26,13 +26,13 @@ export const navigation: FuseNavigation[] = [
   },
   {
     id: 'report',
-    title: 'BÁO CÁO CLICK ẢO',
+    title: 'BÁO CÁO CLICK',
     translate: 'NAV.APPLICATIONS',
     type: 'group',
     children: [
       {
         id: 'spam-click-report',
-        title: 'Báo Cáo Click Ảo',
+        title: 'Báo cáo click ảo',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'data_usage',
@@ -40,7 +40,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'ip-clicking-report',
-        title: 'IP Đang Click',
+        title: 'IP đang click',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'touch_app',
@@ -48,7 +48,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'ip-range-on-click',
-        title: 'Nhóm IP Đang Click',
+        title: 'Nhóm IP đang click',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'blur_linear',
@@ -56,7 +56,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'blocked-ip-list',
-        title: 'Danh Sách IP Đã Chặn',
+        title: 'Danh sách IP đã chặn',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'block',
@@ -64,7 +64,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'user-statistic',
-        title: 'Thống Kê Người Dùng',
+        title: 'Thống kê người dùng',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'people',
@@ -80,10 +80,10 @@ export const navigation: FuseNavigation[] = [
     children: [
       {
         id: 'ban-an-ip',
-        title: 'Thử Chặn 1 IP',
+        title: 'Thử chặn 1 IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'remove_circle_outline',
+        icon: 'block',
         url: '/chan-ip/chan-1-ip',
       },
       {
@@ -104,7 +104,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'auto-ban-ip',
-        title: 'Chặn Tự Động IP',
+        title: 'Chặn tự động IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'verified_user',
@@ -112,7 +112,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'auto-ban-ip-range',
-        title: 'Chặn Tự Động Nhóm IP',
+        title: 'Chặn tự động nhóm IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'apps',
@@ -120,7 +120,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'ban-3g4g',
-        title: 'Chặn 3G & 4G',
+        title: 'Chặn theo mạng 3G & 4G',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'wifi',
@@ -128,7 +128,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'ban-device',
-        title: 'Chặn Theo Mobile/PC/Tablet',
+        title: 'Chặn theo Mobile/PC/Tablet',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'phonelink',
@@ -136,7 +136,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'ban-anonymous',
-        title: 'Chặn Trình Duyệt Ẩn Danh',
+        title: 'Chặn trình duyệt ẩn danh',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'vpn_lock',
@@ -152,7 +152,7 @@ export const navigation: FuseNavigation[] = [
     children: [
       {
         id: 'request-cash-back',
-        title: 'Yêu Cầu Bồi Hoàn Phí',
+        title: 'Yêu cầu bồi hoàn phí',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'monetization_on',
@@ -200,7 +200,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'user_profile',
-        title: 'Thông tin cá nhân',
+        title: 'Thông tin người dùng',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'account_circle',

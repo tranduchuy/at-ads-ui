@@ -89,11 +89,11 @@
             transition: 0.2s;
           }
           mat-row:hover {
-            background-color: rgba(3, 155, 229, 0.1);
+            background-color: rgba(3, 155, 229, 0.05);
           }
 
           mat-header-cell {
-            background: #0093e5;
+            background: #40a5ec;
             color: white;
           }
 
@@ -129,7 +129,7 @@
             font-size: 12px;
 
             &:hover {
-              background: rgba(3, 155, 229, 0.1);
+              background: rgba(3, 155, 229, 0.05);
             }
           }
 
@@ -152,7 +152,7 @@
           }
 
           mat-header-cell {
-            background: #0093e5;
+            background: #40a5ec;
             color: white;
             font-weight: bold;
           }
@@ -221,6 +221,7 @@
       .bottom {
         margin-top: 15px;
         padding: 15px;
+        font-size: 12px;
 
         .last-history-icon {
           text-align: center;

@@ -76,20 +76,19 @@
 @media screen and (max-width: 600px) {
   .container {
     .inner {
-      padding: 15px;
+      padding: 0 15px 0 15px;
+
+      .submit-button {
+        font-size: 12px;
+      }
+    
+      .checkbox-group {
+        width: 90%;
+        display: table;
+        margin: 0 auto;
+        line-height: 50px;
+        padding: 0 0 10px 20px;
+      }
     }
-  }
-
-  .submit-button {
-    font-size: 12px;
-  }
-
-  .checkbox-group {
-    width: 90%;
-    display: table;
-    margin: 0 auto;
-    line-height: 50px;
-    padding-top: 0;
-    padding-bottom: 0;
   }
 }
