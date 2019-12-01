@@ -65,10 +65,9 @@
       }
 
       .overview-chart {
-        margin: 20px;
+        margin: 30px;
         background: white;
         box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
-        border-radius: 7px;
 
         .session-total {
           position: relative;
@@ -198,9 +197,8 @@
     }
 
     .overview {
-      margin: 20px;
+      margin: 30px;
       box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
-      border-radius: 7px;
       //height: 95vh;
       background: white;
       .overview-main {
@@ -208,12 +206,11 @@
         padding-top: 0;
         padding-bottom: 0;
         background: white;
-        border-radius: 7px;
 
         .overview-title1 {
           padding: 20px 0 15px 0;
           background: white;
-          font-size: 16px;
+          font-size: 14px;
           font-weight: bold;
           color: rgba(0, 0, 0, 0.7);
 

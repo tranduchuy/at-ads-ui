@@ -83,7 +83,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Thử chặn 1 IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'remove_circle_outline',
+        icon: 'block',
         url: '/chan-ip/chan-1-ip',
       },
       {

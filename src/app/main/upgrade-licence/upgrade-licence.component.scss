@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  height: 100vh;
 
   .no-display {
     display: none;
@@ -13,26 +14,33 @@
     background-attachment: fixed;
 
     .main-title-inner {
-      padding: 140px 20px 250px 20px;
+      padding: 130px 20px 250px 20px;
       text-align: center;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
       background-color: rgba(3, 155, 229, 0.5);
       width: 100%;
+      backdrop-filter: blur(6px);
+
+      .title {
+        color: lightyellow;
+        font-size: 22px;
+        font-weight: bold;
+        filter: drop-shadow(0 1px 1px black);
+      }
 
       .notice {
+        color: white;
         font-size: 14px;
         font-weight: normal;
         font-style: italic;
         filter: drop-shadow(0 1px 1px black);
+        font-weight: bold;
       }
     }
   }
 
   .shiny {
-    color: lightyellow;
-    background: -webkit-gradient(linear, left top, left bottom, from(lightyellow), to(orange));
+    color: orange;
+    background: -webkit-gradient(linear, left top, left bottom, from(orange), to(darkorange));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
@@ -136,16 +144,27 @@
   .package-wrapper {
     position: relative;
     z-index: 100;
-    top: -31vh;
+    top: -32vh;
 
     .package {
       background: white;
-      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       padding-bottom: 20px;
       width: 21vw;
       margin: 35px;
       border-radius: 5px;
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+
       transition: 0.2s;
+      -webkit-animation: packageAnimation 0.4s ease-out;
+
+      @keyframes packageAnimation {
+        from {
+          transform: translateY(100vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
 
       &:hover {
         transform: translateY(-10px);
@@ -153,7 +172,9 @@
 
       .register-package-button {
         width: 100%;
+
         button {
+          background: #44b543;
           margin: 0 auto;
           display: table;
         }
@@ -162,7 +183,7 @@
       .package-price {
         width: 100%;
         padding-top: 20px;
-        font-size: 20px;
+        font-size: 16px;
         color: rgba(0, 0, 0, 0.8);
         text-align: center;
       }
@@ -172,7 +193,7 @@
         padding-top: 0;
 
         .benefit-title {
-          font-size: 18px;
+          font-size: 16px;
         }
 
         ul {
@@ -181,14 +202,15 @@
 
           .benefit-highline {
             font-weight: bold;
-            color: rgba(0, 0, 0, 0.8);
+            color: green;
           }
 
           li {
             padding-bottom: 5px;
+            font-size: 12px;
             mat-icon {
               color: #44b543;
-              font-size: 18px;
+              font-size: 16px;
             }
           }
         }
@@ -205,6 +227,7 @@
         margin: 0 auto;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+        text-shadow: 1px 0.8px 0.8px rgba(0, 0, 0, 0.5);
       }
 
       .free-label {

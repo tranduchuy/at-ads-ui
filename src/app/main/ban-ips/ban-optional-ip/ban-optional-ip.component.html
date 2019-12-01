@@ -8,7 +8,8 @@
   <div class="inner">
 
     <p class="notification">
-      Hệ thống sẽ thực hiện chặn một danh sách các IP theo yêu cầu của bạn và <span style="color: crimson; font-weight: bold">không cho hiển thị</span> quảng cáo
+      Hệ thống sẽ thực hiện chặn một danh sách các IP theo yêu cầu của bạn và <span
+        style="color: crimson; font-weight: bold">không cho hiển thị</span> quảng cáo
       trên thiết bị đang sử dụng các IP này.
     </p>
 
@@ -54,58 +55,63 @@
       </div>
     </form>
 
-    <p class="table-title">DANH SÁCH IP ĐÃ CHẶN GẦN ĐÂY</p>
+    <div class="blacklist">
+      <p class="table-title">DANH SÁCH IP ĐÃ CHẶN GẦN ĐÂY</p>
 
-    <div class="table-wrapper">
+      <div class="table-wrapper">
 
-      <mat-table [dataSource]="blockedIPs" class="mat-elevation-z8">
+        <mat-table [dataSource]="blockedIPs" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="order">
-          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-          <mat-cell *matCellDef="let element; let i = index"> <span [class.new]="element.order === 'MỚI'">{{i+1}}</span>
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="order">
+            <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index"> <span
+                [class.new]="element.order === 'MỚI'">{{i+1}}</span>
+            </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="ip">
-          <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span style="color: crimson; font-weight: bold">{{element._id}}</span>
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="ip">
+            <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span style="color: crimson; font-weight: bold">{{element._id}}</span>
+            </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="status">
-          <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <p class="status">
-              Đã chặn thành công vào tổng <span
-                style="color: crimson; font-weight: bold">{{element.campaignNumber}}</span> chiến dịch.
-            </p>
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <p class="status">
+                Đã chặn thành công vào tổng <span
+                  style="color: crimson; font-weight: bold">{{element.campaignNumber}}</span> chiến dịch.
+              </p>
+            </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="task">
-          <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
-          <mat-cell *matCellDef>
-            <span class="task">
-              <mat-icon style="font-size: 20px">verified_user</mat-icon> đã chặn
-            </span>
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="task">
+            <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
+            <mat-cell *matCellDef>
+              <span class="task">
+                <mat-icon style="font-size: 20px">verified_user</mat-icon> đã chặn
+              </span>
+            </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="unlockButton">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <button (click)="unblockSampleIP(element._id)" [disabled]="isProcessing" mat-icon-button color="accent"
-              matTooltip="Nhấn để mở chặn" class="unlock-button">
-              <mat-icon>lock_open</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="unlockButton">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button (click)="unblockSampleIP(element._id)" [disabled]="isProcessing" mat-icon-button color="accent"
+                matTooltip="Nhấn để mở chặn" class="unlock-button">
+                <mat-icon>lock_open</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
 
+      </div>
+
+      <div class="notification" *ngIf="blockedIPs.length === 0 && isProcessing === false">Chưa có ghi nhận nào.</div>
     </div>
   </div>
 </div>

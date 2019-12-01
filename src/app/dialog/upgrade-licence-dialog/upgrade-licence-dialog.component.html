@@ -5,7 +5,7 @@
       </div> -->
   <div mat-dialog-content style="text-align: justify">
     <p id="expirations-label">
-      Vui lòng lựa chọn các gói dưới đây:
+      Vui lòng lựa chọn các gói sau đây:
     </p>
     <mat-radio-group aria-labelledby="expirations-label" class="example-radio-group" [(ngModel)]="selectedExpiration">
       <mat-radio-button class="example-radio-button" *ngFor="let option of expirations" [value]="option.value"
@@ -19,7 +19,7 @@
       thêm thời hạn cho gói của bạn.
     </p>
   </div>
-  <div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">
+  <div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24" style="padding-bottom: 20px">
     <button mat-raised-button color="accent" (click)="sendRequest()" [disabled]="isProcessing">Gửi yêu cầu
     </button>
   </div>

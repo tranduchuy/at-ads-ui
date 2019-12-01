@@ -8,7 +8,7 @@
   width: 100%;
 
   .inner-container {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.5);
     .inner {
       padding: 100px 30px 30px 30px;
 
@@ -16,9 +16,19 @@
         width: 70%;
         display: table;
         margin: 0 auto;
-        filter: drop-shadow(1px 1px 2px gray);
+        filter: drop-shadow(2px 2px 3px black);
         background-color: whitesmoke;
         padding: 40px 50px 20px 50px;
+
+        -webkit-animation: formAnimation 0.4s ease-out;
+
+        @keyframes formAnimation {
+          from {
+            transform: translateY(-100vh)
+          } to {
+            transform: translateY(0vh)
+          }
+        }
 
         .title1 {
           background-color: whitesmoke;
@@ -36,7 +46,6 @@
           padding: 20px;
           padding-top: 10px;
           border-radius: 5px;
-          border: 1px solid #d2d2d2;
           box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
           background-color: white;
 
@@ -65,7 +74,6 @@
 
         .change-password {
           padding: 20px;
-          border: 1px solid #d2d2d2;
           background: white;
           border-radius: 5px;
           box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
