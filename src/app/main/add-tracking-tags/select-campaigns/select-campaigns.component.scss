@@ -1,5 +1,7 @@
 .container {
   width: 100%;
+  background: #eee;
+
   .title1 {
     padding: 94px 60px 27px 30px;
     background-color: #000000 !important;
@@ -13,7 +15,7 @@
     padding: 15px 30px 15px 30px;
 
     .title2 {
-      margin-top: 50px;
+      padding: 0;
       font-weight: bold;
       text-align: justify;
     }
@@ -34,93 +36,126 @@
 
       img {
         width: 100%;
-        box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+        box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       }
     }
 
-    .table-title {
-      font-weight: bold;
-      text-align: center;
-      padding: 10px;
-      padding-top: 20px;
-    }
-
-    .notification {
-      display: table;
-      margin: 0 auto;
-      text-align: center;
-      background-color: lightyellow;
-      width: 80%;
-      margin-top: 30px;
+    .select-tracking {
+      margin-top: 20px;
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      border-radius: 7px;
       padding: 20px;
-      border-left: 4px solid darkorange;
-    }
+      background: white;
 
-    .table-wrapper {
-      max-height: 500px;
-      border: 0.5px solid #eee;
-      background-color: white;
-      overflow: auto;
+      -webkit-animation: tableAni 0.4s ease-out;
+        @keyframes tableAni {
+          from {
+            transform: translateY(100vh);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
 
-      mat-table {
-        width: 100%;
-        box-shadow: none;
-      }
-
-      mat-row {
-        transition: 0.2s;
-      }
-
-      mat-row:hover {
-        background-color: rgba(3, 155, 229, 0.05);
-      }
-
-      mat-header-cell:nth-child(1),
-      mat-cell:nth-child(1) {
-        flex: 0 0 10%;
-      }
-
-      mat-header-cell:nth-child(3),
-      mat-cell:nth-child(3) {
-        flex: 0 0 40%;
-      }
-
-      mat-header-cell:nth-child(5),
-      mat-cell:nth-child(5) {
-        flex: 0 0 20%;
-        padding-left: 20px;
-      }
-
-      mat-header-cell {
-        background: #40a5ec;
-        color: white;
+      .table-title {
         font-weight: bold;
+        text-align: center;
+        padding: 10px;
+        padding-top: 20px;
       }
 
-      mat-cell {
-        font-size: 12px;
+      .notification {
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+        background-color: lightyellow;
+        width: 80%;
+        margin-top: 30px;
+        padding: 20px;
+        border-left: 4px solid darkorange;
+        border-radius: 5px;
+
+        -webkit-animation: notificationAni 0.2s ease-out;
+        @keyframes notificationAni {
+          from {
+            transform: translateY(5vh);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
       }
 
-      mat-row,
-      mat-header-row {
-        min-width: 600px;
-        width: 100%;
+      .searching {
+        
       }
-    }
 
-    .submit-button {
-      margin: 0 auto;
-      margin-top: 10px;
-      background-color: #44b543;
-      color: white;
-    }
+      .table-wrapper {
+        max-height: 500px;
+        border: 0.5px solid #eee;
+        background-color: white;
+        overflow: auto;
 
-    .enable-status {
-      color: #40a5ec;
-    }
+        mat-table {
+          width: 100%;
+          box-shadow: none;
+        }
 
-    .disabled-status {
-      color: silver;
+        mat-row {
+          transition: 0.2s;
+
+          &:hover {
+            background-color: rgba(3, 155, 229, 0.05);
+          }
+        }
+
+        mat-header-cell:nth-child(1),
+        mat-cell:nth-child(1) {
+          flex: 0 0 10%;
+        }
+
+        mat-header-cell:nth-child(3),
+        mat-cell:nth-child(3) {
+          flex: 0 0 40%;
+        }
+
+        mat-header-cell:nth-child(5),
+        mat-cell:nth-child(5) {
+          flex: 0 0 20%;
+          padding-left: 20px;
+        }
+
+        mat-header-cell {
+          background: #40a5ec;
+          color: white;
+          font-weight: bold;
+        }
+
+        mat-cell {
+          font-size: 12px;
+        }
+
+        mat-row,
+        mat-header-row {
+          min-width: 600px;
+          width: 100%;
+        }
+      }
+
+      .submit-button {
+        margin: 0 auto;
+        margin-top: 10px;
+        background-color: #44b543;
+        color: white;
+      }
+
+      .enable-status {
+        color: #40a5ec;
+      }
+
+      .disabled-status {
+        color: silver;
+      }
     }
   }
 }
@@ -130,12 +165,14 @@
     .inner {
       padding: 15px;
 
-      .submit-button {
-        font-size: 12px;
-      }
+      .select-tracking {
+        .submit-button {
+          font-size: 12px;
+        }
 
-      .notification {
-        width: 100%;
+        .notification {
+          width: 100%;
+        }
       }
     }
   }

@@ -38,8 +38,20 @@
       margin-top: 25px;
       padding: 15px;
 
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       background: white;
+
+      border-radius: 7px;
+
+      -webkit-animation: formAni 0.4s ease-out;
+      @keyframes formAni {
+        from {
+          transform: translateY(100vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
     }
 
     .list-ip {

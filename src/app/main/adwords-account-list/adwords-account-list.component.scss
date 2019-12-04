@@ -42,11 +42,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 5px;
 
       mat-icon {
         color: orange;
         font-size: 24px;
         margin-right: 10px;
+      }
+
+      -webkit-animation: notificationAni 0.2s ease-out;
+      @keyframes notificationAni {
+        from {
+          transform: translateY(5vh);
+        }
+        to {
+          transform: translateY(0);
+        }
       }
     }
 

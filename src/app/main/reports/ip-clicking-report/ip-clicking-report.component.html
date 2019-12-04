@@ -117,31 +117,31 @@
 
         <ng-container matColumnDef="keyword">
           <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].keyword || 'Unknown'}}
+          <mat-cell *matCellDef="let element"> {{element.info[0].keyword || ''}}
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="campaignType">
           <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].campaignType || 'Unknown'}}
+          <mat-cell *matCellDef="let element"> {{element.info[0].campaignType || ''}}
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="matchType">
           <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].matchType || 'Unknown'}}
+          <mat-cell *matCellDef="let element"> {{element.info[0].matchType || ''}}
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="page">
           <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].page || 'Unknown'}}
+          <mat-cell *matCellDef="let element"> {{element.info[0].page || ''}}
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="position">
           <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.info[0].position || 'Unknown'}}
+          <mat-cell *matCellDef="let element"> {{element.info[0].position || ''}}
           </mat-cell>
         </ng-container>
 

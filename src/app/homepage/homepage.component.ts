@@ -15,6 +15,7 @@ import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
 import * as moment from 'moment';
+import { take } from 'rxjs/operators';
 
 declare var gapi: any;
 

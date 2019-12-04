@@ -6,31 +6,34 @@
   </div>
 
   <div class="inner">
-    <p class="title2"> Bằng việc cấu hình này, quảng cáo sẽ <span style="color: crimson; font-weight: bold">không hiển thị</span> trên hầu hết
+    <p class="title2"> Bằng việc cấu hình này, quảng cáo sẽ <span style="color: crimson; font-weight: bold">không hiển
+        thị</span> trên hầu hết
       các thiết bị sử
-      dụng truy cập <span style="color: #40a5ec; font-weight: bold">3G & 4G</span> của các nhà mạng di động tại Việt Nam.</p>
+      dụng truy cập <span style="color: #40a5ec; font-weight: bold">3G & 4G</span> của các nhà mạng di động tại Việt
+      Nam.</p>
 
     <div class="checkbox-group" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-around">
       <mat-checkbox [checked]="mobileNetworks.viettel" (change)="selectNetwork($event,'viettel')"
-        [disabled]="isProcessing">
+        [disabled]="isProcessing" class="viettel-animation">
         <img src="https://dangky3gviettel.vn/wp-content/uploads/2018/10/cropped-logo-dang-ky-3g-viettel.png"
           class="network-logo" alt="">
       </mat-checkbox>
       <mat-checkbox [checked]="mobileNetworks.mobifone" (change)="selectNetwork($event,'mobifone')"
-        [disabled]="isProcessing">
+        [disabled]="isProcessing" class="mobifone-animation">
         <img src="https://brasol.vn/public/uploads/1521197514-brasol.vn-logo-mobifone-mobifone-logo.svg_.png"
           class="network-logo" alt="">
       </mat-checkbox>
       <mat-checkbox [checked]="mobileNetworks.vinafone" (change)="selectNetwork($event,'vinafone')"
-        [disabled]="isProcessing">
+        [disabled]="isProcessing" class="vinafone-animation">
         <img src="https://img2.thuthuatphanmem.vn/uploads/2018/12/13/logo-vinaphone_010429237.png" class="network-logo"
           alt="">
       </mat-checkbox>
       <mat-checkbox [checked]="mobileNetworks.vietnammobile" (change)="selectNetwork($event,'vietnammobile')"
-        [disabled]="isProcessing">
+        [disabled]="isProcessing" class="vietnammobile-animation">
         <img src="https://css.vietnamobile.com.vn/images/logo.png" class="network-logo" alt="">
       </mat-checkbox>
-      <mat-checkbox [checked]="mobileNetworks.fpt" (change)="selectNetwork($event,'fpt')" [disabled]="isProcessing">
+      <mat-checkbox [checked]="mobileNetworks.fpt" (change)="selectNetwork($event,'fpt')" [disabled]="isProcessing"
+        class="fpt-animation">
         <img src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png" class="fpt" alt="">
       </mat-checkbox>
     </div>

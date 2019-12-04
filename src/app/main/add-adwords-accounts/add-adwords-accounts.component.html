@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="limit-account-notify" *ngIf="disableAllControls">
+    <div class="limit-account-notify" *ngIf="disableAllControls && !isProcessing">
       <div class="limit-account-notify-content">
         Số lần kết nối tài khoản Google Ads của bạn đã hết. Vui lòng nâng cấp thêm <a routerLink="/nang-cap-vip">tại
           đây</a>

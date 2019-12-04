@@ -75,6 +75,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
         if (listAccounts) {
           if (listAccounts.length === 0) {
             this.showAccountListByEmail();
+            console.log('check account list');
             this.disableAllControls = false;
           }
           else {

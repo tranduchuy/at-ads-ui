@@ -25,7 +25,7 @@
 
       .highline {
         font-weight: bold;
-        color: rgba(0,0,0,0.8);
+        color: rgba(0, 0, 0, 0.8);
       }
 
       .advise {
@@ -43,14 +43,24 @@
       box-shadow: 1px 1px 2px silver;
       font-size: 10px;
       font-weight: bold;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       opacity: 0.9;
     }
 
     .table-wrapper {
       margin-top: 10px;
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       overflow: auto;
+
+      -webkit-animation: tableAni 0.4s ease-out;
+      @keyframes tableAni {
+        from {
+          transform: translateY(100vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
 
       mat-table {
         width: 100%;
@@ -86,7 +96,7 @@
       }
 
       .device-name {
-        color: rgba(0,0,0,0.6);
+        color: rgba(0, 0, 0, 0.6);
         font-weight: bold;
       }
 
@@ -111,6 +121,18 @@
       background-color: lightyellow;
       padding: 20px;
       border-left: 4px solid darkorange;
+      border-radius: 5px;
+      text-align: center;
+
+      -webkit-animation: notificationAni 0.2s ease-out;
+      @keyframes notificationAni {
+        from {
+          transform: translateY(5vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
     }
   }
 }

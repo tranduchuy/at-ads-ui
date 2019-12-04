@@ -5,7 +5,7 @@ import { SessionService } from '../session.service';
 import { DialogService } from '../dialog.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { AdwordsAccountsService } from '../ads-accounts/adwords-accounts.service';
-import { map, catchError } from 'rxjs/operators'; import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { map, catchError, take } from 'rxjs/operators'; import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 ;
 
 @Injectable({

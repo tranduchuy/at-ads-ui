@@ -34,7 +34,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   trackingCampaignList: string[] = [];
   selectedCampaigns: string[] = [];
   activatedAdsId: string;
-  isProcessing: boolean = false;
+  isProcessing: boolean;
   checkAll: boolean;
   hasCampaign: boolean;
   numberOfEnableCampaigns: number;
@@ -54,6 +54,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
   ngOnInit() {
     this._fuseProgressBarService.show();
+    this.isProcessing = true;
     const sub = this.sessionService.getAccountId()
       .pipe(distinctUntilChanged())
       .subscribe((accountId: string) => {

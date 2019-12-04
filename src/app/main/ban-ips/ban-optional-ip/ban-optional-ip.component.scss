@@ -42,6 +42,15 @@
       border-radius: 7px;
 
       box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+
+      -webkit-animation: formAni 0.4s ease-out;
+      @keyframes formAni {
+        from {
+          transform: translateY(100vh)
+        } to {
+          transform: translateY(0)
+        }
+      }
     }
 
     .list-ip {
@@ -85,6 +94,15 @@
       box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       border-top-left-radius: 7px;
       border-top-right-radius: 7px;
+
+      -webkit-animation: tableAni 0.6s ease-out;
+      @keyframes tableAni {
+        from {
+          transform: translateY(100vh)
+        } to {
+          transform: translateY(0)
+        }
+      }
 
       .table-title {
         padding: 15px;
