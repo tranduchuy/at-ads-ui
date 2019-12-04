@@ -452,9 +452,9 @@
 
           mat-header-cell:nth-child(8),
           mat-cell:nth-child(8) {
-            justify-content:  center;
+            justify-content: center;
           }
-          
+
           mat-header-cell:nth-child(9),
           mat-cell:nth-child(9),
           mat-header-cell:nth-child(10),
@@ -667,6 +667,7 @@
 
         .benefit-title {
           filter: drop-shadow(0.8px 0.8px 0.8px black);
+          font-size: 20px;
         }
 
         .secondary-benefit-title {
@@ -884,7 +885,7 @@
   .homepage {
     font-size: 14px;
 
-    background: #5F9EA0;
+    background: rgba(56, 166, 221, 0.6);
 
     .topbar-container {
       .topbar {
@@ -976,6 +977,7 @@
 
         .table-wrapper {
           overflow: auto;
+          filter: drop-shadow(0.8px 1px 1px black);
           mat-table {
             width: 100%;
           }
@@ -1047,6 +1049,8 @@
       }
 
       .benefit-container {
+        background-color: #7fcec5;
+        background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
         .benefit {
           padding: 60px 30px 60px 30px;
           .main-benefit {

@@ -23,7 +23,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   accounts = [];
   dataSource = new MatTableDataSource();
   accountConnectTypes = [];
-  isProcessing: boolean = false;
+  isProcessing: boolean;
   adsAccountIdPipe = new AdsAccountIdPipe();
   user: any;
 
@@ -39,6 +39,8 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   ngOnInit() {
+    this._fuseProgressiveBarService.show();
+    this.isProcessing = true;
     this.dataSource = new MatTableDataSource(this.accounts);
     this.getUser();
   }
