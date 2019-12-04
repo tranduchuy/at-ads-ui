@@ -177,7 +177,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   }
 
   unblockSampleIP(ip: string) {
-    const openCofirmDialogSub = this._dialogService._openConfirmDialog('Mở chặn IP này?')
+    const openCofirmDialogSub = this._dialogService._openConfirmDialog('Bỏ chặn IP này?')
       .subscribe(
         (res: boolean) => {
           if (res) {

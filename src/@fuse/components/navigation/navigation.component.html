@@ -3,7 +3,7 @@
   <!-- Vertical Navigation Layout -->
   <ng-container *ngIf="layout === 'vertical'">
 
-    <fuse-nav-vertical-group *ngIf="accounts.type=='group'" [item]="accounts"></fuse-nav-vertical-group>
+    <fuse-nav-vertical-collapsable *ngIf="accounts.type=='collapsable'" [item]="accounts"></fuse-nav-vertical-collapsable>
 
     <div *ngIf="_sessionService.activeAccountId">
       <ng-container *ngFor="let item of navigation">

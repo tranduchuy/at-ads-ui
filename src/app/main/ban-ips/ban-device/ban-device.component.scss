@@ -23,6 +23,11 @@
 
       text-align: justify;
 
+      .highline {
+        font-weight: bold;
+        color: rgba(0,0,0,0.8);
+      }
+
       .advise {
         font-size: 12px;
         color: gray;
@@ -103,7 +108,7 @@
     }
 
     .empty-report-notification {
-      background-color: #eee;
+      background-color: lightyellow;
       padding: 20px;
       border-left: 4px solid darkorange;
     }

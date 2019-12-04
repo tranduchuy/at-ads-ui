@@ -14,13 +14,13 @@
                </span>
             </div>
             <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin && isLoginButtonDisplayed"
-               class="topbar-google-button" fxFlex="nogrow">
+               class="topbar-google-button" fxFlex="nogrow" [disabled]="isProcessing">
                <img src="../../assets/icons/google-icon.png"
                   style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
                Google
             </button>
             <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()"
-               *ngIf="isOnLogin && isLoginButtonDisplayed" fxFlex="nogrow">
+               *ngIf="isOnLogin && isLoginButtonDisplayed" fxFlex="nogrow" [disabled]="isProcessing">
                TRUY CẬP HỆ THỐNG CHẶN CLICK ẢO<mat-icon style="font-size: 20px">navigate_next</mat-icon>
             </button>
          </div>
@@ -131,8 +131,6 @@
                         src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
                      <span *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
-                     <mat-icon *ngIf="!element.os?.name" class="unknown-icon">help_outline
-                     </mat-icon>
                      <span *ngIf="!element.os?.name">Unknown</span>
                   </mat-cell>
                </ng-container>
@@ -170,8 +168,6 @@
                      <span
                         *ngIf="element.browser?.name">{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
 
-                     <mat-icon *ngIf="!element.browser?.name" class="unknown-icon">help_outline
-                     </mat-icon>
                      <span *ngIf="!element.browser?.name">Unknown</span>
 
                   </mat-cell>
@@ -199,8 +195,6 @@
                      <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
                         *ngIf="element.network?.name === 'FPT'" alt="">
 
-                     <mat-icon *ngIf="!element.network?.name" class="unknown-icon">help_outline
-                     </mat-icon>
                      <span *ngIf="!element.network?.name">Unknown</span>
                   </mat-cell>
                </ng-container>
@@ -213,9 +207,47 @@
                         *ngIf="element.location?.city">
                      <span *ngIf="element.location?.city">{{element.location?.city}}</span>
 
-                     <mat-icon *ngIf="!element.location?.city" class="unknown-icon unknown-icon-city">help_outline
-                     </mat-icon>
                      <span *ngIf="!element.location?.city">Unknown</span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="keyword">
+                  <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.keyword">{{element.keyword}}</span>
+                     <span *ngIf="!element.keyword">Unknown</span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="campaignType">
+                  <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.campaignType">{{element.campaignType}}</span>
+                     <span *ngIf="!element.campaignType">Unknown</span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="matchType">
+                  <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.matchType">{{element.matchType}}</span>
+                     <span *ngIf="!element.matchType">Unknown</span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="page">
+                  <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.page">{{element.page}}</span>
+                     <span *ngIf="!element.page">Unknown</span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="position">
+                  <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.position">{{element.position}}</span>
+                     <span *ngIf="!element.position">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -302,7 +334,7 @@
                   tác trực tiếp đến quảng cáo của bạn, cải thiện nó giúp bạn tiết kiệm đáng kể chi phí và thời gian.
                   <br>
                   <div class="trial">
-                     <button mat-raised-button color="accent" (click)="checkLogin()">
+                     <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
                         DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
                      </button>
                   </div>
@@ -495,7 +527,7 @@
             hệ
             với chúng tôi.
             <div class="view-more-button">
-               <button mat-raised-button color="accent" (click)="checkLogin()">
+               <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
                   XEM THÊM <mat-icon style="font-size: 20px; color: white">navigate_next</mat-icon>
                </button>
             </div>

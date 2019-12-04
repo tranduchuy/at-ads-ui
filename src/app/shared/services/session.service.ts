@@ -4,6 +4,12 @@ import { environment } from '../../../environments/environment';
 
 import CookieNames from '../constants/cookies';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { ChangingListAccountsAction } from 'app/layout/components/toolbar/toolbar.component';
+
+export interface ChagingListAccountsAction {
+  status: 'SUCCESS' | 'ERROR' | 'INFO',
+  data: any
+}
 
 @Injectable()
 export class SessionService {
@@ -13,7 +19,7 @@ export class SessionService {
   private _user$ = new BehaviorSubject<any>({});
   private _accountAcceptance$ = new BehaviorSubject<boolean>(true);
   private _acceptedAdsId$ = new BehaviorSubject<string>('');
-  private _isListAccountChanged$ = new BehaviorSubject<boolean | any>(false);
+  private _isListAccountChanged$ = new BehaviorSubject<boolean | ChangingListAccountsAction>(false);
   private _doesUserHaveAccount$ = new BehaviorSubject<boolean>(false);
   private _listAccounts$ = new BehaviorSubject<any>(false);
   private _removedAccountId$ = new BehaviorSubject<string>('');
@@ -86,7 +92,7 @@ export class SessionService {
     return this._isListAccountChanged$.asObservable();
   }
 
-  notifyListAccountsChanged(action?: any): void {
+  notifyListAccountsChanged(action?: ChangingListAccountsAction): void {
     if (action) {
       this._isListAccountChanged$.next(action);
     }

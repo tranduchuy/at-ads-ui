@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="title1">
-    THEO DÕI KHÁCH ĐANG CLICK QUẢNG CÁO - TÀI KHOẢN <span
+    THEO DÕI IP ĐANG CLICK QUẢNG CÁO - TÀI KHOẢN <span
       style="color: yellow">{{sessionService.activeAdsAccountId}}</span>
   </div>
 
@@ -39,11 +39,11 @@
           <mat-cell *matCellDef="let element">
             <span *ngIf="element.info[0].isSpam === true" style="color: crimson; font-weight: bold"
               (mouseover)="showReason(element.info[0].reason || '')">
-              <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
+              <mat-icon>not_interested</mat-icon> Đã chặn
             </span>
             <span *ngIf="element.info[0].isSpam === false" style="color: #44b543; font-weight: bold"
               (mouseover)="showReason(element.info[0].reason || '')">
-              <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
+              <mat-icon>check_circle</mat-icon> Hợp lệ
             </span>
           </mat-cell>
         </ng-container>
@@ -104,7 +104,7 @@
           <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span *ngIf="element.info[0].isPrivateBrowsing === true" style="color: orange; font-weight: bold">
-              <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+              <mat-icon>report_problem</mat-icon>Có
             </span>
             <span *ngIf="element.info[0].isPrivateBrowsing === false" style="color:silver">Không</span>
           </mat-cell>
@@ -113,6 +113,36 @@
         <ng-container matColumnDef="network">
           <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.info[0].networkCompany?.name || 'Unknown'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="keyword">
+          <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].keyword || 'Unknown'}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="campaignType">
+          <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].campaignType || 'Unknown'}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="matchType">
+          <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].matchType || 'Unknown'}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="page">
+          <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].page || 'Unknown'}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.info[0].position || 'Unknown'}}
+          </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
@@ -135,8 +165,8 @@
 
     <div class="footer">
       <p>
-        Để theo dõi hành vi click quảng cáo của một IP, Bạn có thể tiến hành gắn mã tracking cho các website của tài khoản Google Ads <a
-        [routerLink]="['/gan-tracking/website', sessionService.activeAccountId]">tại đây</a>
+        Để theo dõi hành vi click quảng cáo của một IP, Bạn có thể tiến hành gắn mã tracking cho các website của tài
+        khoản Google Ads <a [routerLink]="['/gan-tracking/website', sessionService.activeAccountId]">tại đây</a>
       </p>
       <div class="button-area" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center center">
         <a [routerLink]="'/bao-cao/click-ao'" mat-raised-button color="warn">

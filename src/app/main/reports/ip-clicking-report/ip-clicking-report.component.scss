@@ -14,9 +14,9 @@
 
   .inner {
     .icon {
-      height: 22px;
-      width: 22px;
-      margin-right: 5px;
+      height: 15px;
+      width: 15px;
+      margin-right: 3px;
     }
 
     .pagination-buttons {
@@ -34,6 +34,10 @@
       text-align: center;
       padding: 30px;
       padding-top: 10px;
+
+      mat-icon {
+        font-size: 18px;
+      }
     }
 
     .table-wrapper {
@@ -51,7 +55,7 @@
           font-weight: bold;
           padding-left: 2px;
           transition: 0.2s;
-          font-size: 12px;
+          font-size: 11px;
 
           &:hover {
             background: rgba(3, 155, 229, 0.05);
@@ -60,21 +64,43 @@
 
         mat-header-cell:nth-child(1),
         mat-cell:nth-child(1) {
-          flex: 0 0 15%;
+          flex: 0 0 10%;
         }
 
-        mat-header-cell:nth-child(3),
-        mat-cell:nth-child(3) {
-          justify-content: center;
-        }
-
+        mat-header-cell:nth-child(2),
+        mat-cell:nth-child(2),
         mat-header-cell:nth-child(5),
         mat-cell:nth-child(5),
         mat-header-cell:nth-child(6),
         mat-cell:nth-child(6),
         mat-header-cell:nth-child(7),
         mat-cell:nth-child(7) {
-          flex: 0 0 11%;
+          flex: 0 0 8%;
+        }
+
+        mat-header-cell:nth-child(3),
+        mat-cell:nth-child(3),
+        mat-header-cell:nth-child(11),
+        mat-cell:nth-child(11) {
+          justify-content: center;
+        }
+
+        mat-cell {
+          mat-icon {
+            font-size: 14px;
+            margin-right: -5px;
+            margin-top: 5px;
+          }
+        }
+
+        mat-header-cell:nth-child(12),
+        mat-cell:nth-child(12),
+        mat-header-cell:nth-child(13),
+        mat-cell:nth-child(13),
+        mat-header-cell:nth-child(14),
+        mat-cell:nth-child(14) {
+          flex: 0 0 6%;
+          justify-content: center;
         }
 
         mat-header-cell:nth-child(8),
@@ -84,26 +110,31 @@
 
         mat-header-row,
         mat-row {
-          min-width: 1000px;
+          min-width: 1200px;
           width: 100%;
         }
 
         mat-row {
           transition: 0.2s;
+
+          &:nth-child(odd) {
+            background: whitesmoke;
+          }
+
+          &:hover {
+            background-color: rgba(3, 155, 229, 0.05);
+          }
         }
 
         mat-header-cell {
-          background: #40a5ec;
-          color: white;
+          background: whitesmoke;
+          color: rgba(0, 0, 0, 0.7);
           font-weight: bold;
         }
 
+        mat-header-cell,
         mat-cell {
-          font-size: 12px;
-        }
-
-        mat-row:hover {
-          background-color: rgba(3, 155, 229, 0.05);
+          font-size: 11px;
         }
       }
     }

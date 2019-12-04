@@ -142,12 +142,12 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     const minutes = -(timezone % 60);
 
     let startDate = moment(this.selectedDateRange.start).startOf('day');
-    if (hours >= 0) {
-      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
-    }
-    else {
-      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
-    }
+    // if (hours >= 0) {
+    //   startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    // }
+    // else {
+    //   startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    // }
 
     const params = {
       id: uuid,

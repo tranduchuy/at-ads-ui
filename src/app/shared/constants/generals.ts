@@ -2,8 +2,8 @@ export namespace Generals {
     export namespace Pagination {
         export const itemsPerPageOptions = [
             {
-                text: '10 record',
-                value: 10
+                text: '20 record',
+                value: 20
             },
             {
                 text: '30 record',

@@ -12,7 +12,7 @@
   <div class="main-inner">
     <div class="inner">
 
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" class="left-detail">
 
         <div fxLayout="column" fxFlex="20">
           <div class="left">
@@ -110,7 +110,7 @@
               <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
                 [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
                 <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
-                  <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+                  <mat-icon>report_problem</mat-icon>Có
                 </span>
                 <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
               </mat-cell>

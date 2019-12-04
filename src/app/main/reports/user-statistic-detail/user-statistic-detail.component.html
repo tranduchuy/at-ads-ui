@@ -18,7 +18,7 @@
 
   <div class="main-inner">
     <div class="inner">
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" class="left-detail">
 
         <div fxLayout="column" fxFlex="20">
           <div class="left">
@@ -179,7 +179,7 @@
                 [class.ads-click-ip]="element.isSpam === false && element.type === 1"
                 [class.visitor-ip]="element.type === 2">
                 <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
-                  <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+                  <mat-icon>report_problem</mat-icon>Có
                 </span>
                 <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
               </mat-cell>
@@ -206,7 +206,7 @@
       </div>
 
       <div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.xs="0" *ngIf="pageTotal !== 1">
-        <div fxFlex="18.5" fxFlex.xs="0"></div>
+        <div fxFlex="19" fxFlex.xs="0"></div>
         <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
           <div fxFlex="70" fxFlex.xs="100">
             <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"

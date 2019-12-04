@@ -24,7 +24,7 @@ declare var gapi: any;
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit, OnDestroy {
-  logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location'];
+  logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   logs = [];
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);
@@ -160,6 +160,11 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
               location: {
                 city: item.location !== undefined ? item.location.city : null
               },
+              keyword: item.keyword || null,
+              campaignType: item.campaignType || null,
+              matchType: item.matchType || null,
+              page: item.page || null,
+              position: item.position || null
             };
           });
 

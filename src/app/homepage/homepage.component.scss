@@ -31,7 +31,7 @@
     }
 
     .shiny::before {
-      // background-position: -180px;
+      // background-position: -200px;
       -webkit-animation: flare 2s infinite;
       -webkit-animation-timing-function: linear;
       background-image: linear-gradient(
@@ -103,7 +103,7 @@
     }
 
     .shiny2::before {
-      // background-position: -180px;
+      // background-position: -200px;
       -webkit-animation: flare 2s infinite;
       -webkit-animation-timing-function: linear;
       background-image: linear-gradient(
@@ -164,7 +164,7 @@
 
     @-webkit-keyframes flare {
       0% {
-        background-position: -180px;
+        background-position: -200px;
       }
       30% {
         background-position: 500px;
@@ -331,7 +331,7 @@
     }
 
     .table {
-      padding: 180px;
+      padding: 200px;
       padding-top: 50px;
       padding-bottom: 50px;
       background: rgba(0, 0, 0, 0.5);
@@ -350,13 +350,12 @@
 
         .unknown-icon {
           color: silver;
-          font-size: 20px;
-          margin-right: 4px;
+          font-size: 18px;
+          margin-top: 4px;
         }
 
         .unknown-icon-city {
-          margin-right: 2px;
-          margin-top: 2px;
+          margin-top: 4px;
           font-size: 18px;
         }
 
@@ -368,30 +367,32 @@
         }
 
         .vietnamobile {
-          height: 21px;
+          height: 18px;
         }
 
         .vnpt {
-          height: 45px;
+          height: 42px;
           width: 100px;
           margin-left: -15px;
           margin-top: -10px;
         }
 
         .fpt {
-          height: 26px;
+          height: 23px;
         }
 
         .icon {
-          height: 18px;
-          width: 18px;
-          margin-right: 10px;
+          height: 16px;
+          width: 16px;
+          margin-right: 5px;
         }
 
         .location-icon {
-          height: 36px;
-          width: 36px;
+          height: 34px;
+          width: 34px;
           margin-left: -10px;
+          margin-right: -5px;
+          margin-top: -3px;
         }
 
         mat-table {
@@ -412,7 +413,7 @@
           mat-cell,
           mat-header-cell {
             color: white;
-            font-size: 12px !important;
+            font-size: 11px !important;
           }
 
           mat-header-cell {
@@ -445,9 +446,32 @@
             }
           }
 
+          mat-header-cell:nth-child(3),
+          mat-cell:nth-child(3),
           mat-header-cell:nth-child(4),
-          mat-cell:nth-child(4) {
-            flex: 0 0 17%;
+          mat-cell:nth-child(4),
+          mat-header-cell:nth-child(5),
+          mat-cell:nth-child(5),
+          mat-header-cell:nth-child(6),
+          mat-cell:nth-child(6),
+          mat-header-cell:nth-child(7),
+          mat-cell:nth-child(7) {
+            flex: 0 0 10%;
+          }
+
+          mat-header-cell:nth-child(8),
+          mat-cell:nth-child(8) {
+            justify-content: center;
+          }
+
+          mat-header-cell:nth-child(9),
+          mat-cell:nth-child(9),
+          mat-header-cell:nth-child(10),
+          mat-cell:nth-child(10),
+          mat-header-cell:nth-child(11),
+          mat-cell:nth-child(11) {
+            flex: 0 0 7%;
+            justify-content: center;
           }
 
           mat-cell:nth-child(2) {
@@ -457,7 +481,7 @@
 
           mat-header-row,
           mat-row {
-            min-width: 850px;
+            min-width: 1200px;
             width: 100%;
           }
         }
@@ -466,7 +490,7 @@
 
     .instruction-container {
       .instruction {
-        padding: 30px 180px 30px 180px;
+        padding: 30px 200px 30px 200px;
         background: rgba(0, 0, 0, 0.5);
 
         .steps-main-title {
@@ -551,7 +575,7 @@
 
       .feature {
         background: rgba(0, 0, 0, 0.6);
-        padding: 70px 180px 70px 180px;
+        padding: 70px 200px 70px 200px;
         color: white;
 
         .overview {
@@ -638,7 +662,7 @@
       .benefit {
         background: rgba(0, 0, 0, 0.4);
         text-align: center;
-        padding: 90px 180px 90px 180px;
+        padding: 90px 200px 90px 200px;
         color: white;
         //background: rgba(125, 125, 125, 0.2);
         //background: rgba(3, 155, 229, 0.2);
@@ -680,7 +704,7 @@
     }
   }
   .footer {
-    padding: 100px 180px 30px 180px;
+    padding: 100px 200px 30px 200px;
     //background: rgba(0, 0, 0, 0.6);
     background: rgba(12, 20, 33, 1);
     background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
@@ -801,8 +825,8 @@
       width: 100%;
       top: 0;
       padding: 15px;
-      padding-left: 175px;
-      padding-right: 178px;
+      padding-left: 195px;
+      padding-right: 198px;
       border: 0 !important;
       outline: 0 !important;
       box-sizing: 0 !important;

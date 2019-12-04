@@ -261,12 +261,12 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     const minutes = -(timezone % 60);
 
     let startDate = moment(this.selectedDateRange.start).startOf('day');
-    if (hours >= 0) {
-      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
-    }
-    else {
-      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
-    }
+    // if (hours >= 0) {
+    //   startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    // }
+    // else {
+    //   startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    // }
 
     const params = {
       from: startDate.valueOf().toString(),
@@ -315,12 +315,12 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     const minutes = -(timezone % 60);
 
     let startDate = moment(this.selectedDateRange.start).startOf('day');
-    if (hours >= 0) {
-      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
-    }
-    else {
-      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
-    }
+    // if (hours >= 0) {
+    //   startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    // }
+    // else {
+    //   startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    // }
 
     const params = {
       from: startDate.valueOf().toString(),

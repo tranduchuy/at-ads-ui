@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 
   .title1 {
     padding: 92px 30px 43px 30px;
@@ -49,7 +49,11 @@
 
         .view-campaign-button {
           margin-left: 10px;
-          font-size: 12px;
+          font-size: 11px;
+          background: white;
+          height: 30px;
+          display: flex;
+          align-items: center;
         }
 
         mat-header-cell:nth-child(1),
@@ -65,14 +69,42 @@
           justify-content: center;
         }
 
+        mat-cell:nth-child(2) {
+          mat-icon {
+            margin-top: -5px;
+          }
+        }
+
+        mat-header-cell:nth-child(4),
+        mat-cell:nth-child(4) {
+          mat-icon {
+            margin-top: 5px;
+          }
+        }
+
         mat-header-cell:nth-child(6),
         mat-cell:nth-child(6) {
-          flex: 0 0 20%;
+          flex: 0 0 17%;
+        }
+
+        mat-header-cell:nth-child(8),
+        mat-cell:nth-child(8) {
+          justify-content: center;
+        }
+
+        mat-header-cell:nth-child(9),
+        mat-cell:nth-child(9),
+        mat-header-cell:nth-child(10),
+        mat-cell:nth-child(10),
+        mat-header-cell:nth-child(11),
+        mat-cell:nth-child(11) {
+          flex: 0 0 8%;
+          justify-content: center;
         }
 
         mat-header-row,
         mat-row {
-          min-width: 900px;
+          min-width: 1200px;
           width: 100%;
         }
 
@@ -86,10 +118,18 @@
           padding-top: 5px;
           padding-bottom: 5px;
           font-size: 12px;
+
+          mat-icon {
+            font-size: 16px;
+          }
         }
 
         mat-row {
           transition: 0.2s;
+
+          &:nth-child(odd) {
+            background: whitesmoke;
+          }
 
           &:hover {
             background-color: rgba(217, 83, 79, 0.1);

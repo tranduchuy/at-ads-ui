@@ -26,6 +26,11 @@ export interface Account {
   websites: Website[];
 }
 
+export interface ChangingListWebsitesAction {
+  status: 'SUCCESS' | 'ERROR' | 'INFO',
+  data: any
+}
+
 @Component({
   selector: 'app-website-management',
   templateUrl: './website-management.component.html',
@@ -120,7 +125,7 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     this.subscriptions.push(detailSub);
   }
 
-  getWebsites() {
+  getWebsites(action?: ChangingListWebsitesAction) {
     this.isProcessing = true;
     this._fuseProgressiveBarService.show();
 
@@ -131,6 +136,15 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
           this.isAddingWebsiteAllowed = (this.websites || []).length < this.limitWebsite;
           this._fuseProgressiveBarService.hide();
           this.isProcessing = false;
+
+          if (action) {
+            if (action.status === 'SUCCESS') {
+              this._dialogService._openSuccessDialog(action.data);
+            }
+            else if (action.status === 'ERROR') {
+              this._dialogService._openErrorDialog(action.data);
+            }
+          }
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressiveBarService.hide();
@@ -211,10 +225,11 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
     const sub = this._websiteManagementService.addWebsite(params)
       .subscribe(
         (res: ILoginSuccess) => {
-          this.getWebsites();
+          this.getWebsites({
+            status: 'SUCCESS',
+            data: res
+          });
           setTimeout(() => {
-            this._fuseProgressiveBarService.hide();
-            this._dialogService._openSuccessDialog(res);
             this.isProcessing = false;
           }, 2000);
         },
@@ -241,12 +256,17 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
   }
 
   removeWebsite(websiteId: string) {
+    this.isProcessing = true;
+    this._fuseProgressiveBarService.show();
     const sub = this._websiteManagementService.removeWebsite(websiteId)
       .subscribe(
         (res: ILoginSuccess) => {
-          this.getWebsites();
+          this.getWebsites({
+            status: 'SUCCESS',
+            data: res
+          });
           setTimeout(() => {
-            this._dialogService._openSuccessDialog(res);
+            this.isProcessing = false;
           }, 2000);
         },
         (error: HttpErrorResponse) => {

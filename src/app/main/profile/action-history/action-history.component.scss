@@ -15,6 +15,7 @@
       display: table;
       margin: 0 auto;
       padding-left: 10px;
+      color: gray;
     }
 
     .table-wrapper {
@@ -35,17 +36,26 @@
         flex: 0 0 80%;
       }
 
-      mat-row {
-        transition: 0.2s;
+      mat-header-cell,
+      mat-cell {
+        font-size: 12px;
       }
 
-      mat-row:hover {
-        background: rgba(3, 155, 229, 0.05);
+      mat-row {
+        transition: 0.2s;
+
+        &:nth-child(odd) {
+          background: whitesmoke;
+        }
+
+        &:hover {
+          background: rgba(3, 155, 229, 0.05);
+        }
       }
 
       mat-header-cell {
-        background: #40a5ec;
-        color: white;
+        background: whitesmoke;
+        color: rgba(0, 0, 0, 0.7);
         font-weight: bold;
       }
     }

@@ -10,6 +10,10 @@
     font-weight: bold;
     text-shadow: 1px 1px 2px black;
 
+    mat-icon {
+      font-size: 18px;
+    }
+
     .add-account-button {
       text-shadow: none;
     }
@@ -30,6 +34,22 @@
       font-size: 20px;
     }
 
+    .warning {
+      margin: 30px;
+      padding: 20px;
+      background: lightyellow;
+      border-left: 4px solid darkorange;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      mat-icon {
+        color: orange;
+        font-size: 24px;
+        margin-right: 10px;
+      }
+    }
+
     .website-list {
       width: 100%;
       max-height: 105px;
@@ -41,7 +61,7 @@
 
       li {
         a {
-          padding-left: 5px
+          padding-left: 5px;
         }
       }
     }

@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   padding-bottom: 50px;
+  background: #eee;
 
   .title1 {
     padding: 83px 30px 18px 30px;
@@ -20,13 +21,26 @@
   }
 
   .type3 {
-    background: rgba(217, 83, 79, 0.2);
+    background: rgba(217, 83, 79, 0.1);
   }
 
   .main-inner {
     .inner {
       padding: 50px 30px 30px 30px;
       margin-top: -18px;
+
+      .left-detail {
+        -webkit-animation: leftDetailAni 0.4s ease-out;
+
+        @keyframes leftDetailAni {
+          from {
+            transform: translateY(100vh);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
+      }
 
       .left {
         padding: 40px;
@@ -38,8 +52,8 @@
           width: 100%;
 
           .avatar {
-            height: 110px;
-            width: 110px;
+            height: 80px;
+            width: 80px;
             display: table;
             margin: 0 auto;
             margin-bottom: 15px;
@@ -113,9 +127,19 @@
 
       .ip-click-history {
         overflow: auto;
-        border: 0.5px solid #eee;
-        max-height: 450px;
-        box-shadow: none !important;
+        box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+        max-height: 520px;
+        background: white;
+
+        -webkit-animation: tableAni 0.6s ease-out;
+        @keyframes tableAni {
+          from {
+            transform: translateY(100vh);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
 
         mat-table {
           box-shadow: none;
@@ -152,14 +176,20 @@
           }
 
           mat-header-cell {
-            background: #40a5ec;
-            color: white;
+            background: whitesmoke;
+            color: rgba(0, 0, 0, 0.7);
             font-weight: bold;
           }
 
           mat-header-cell:nth-child(4),
           mat-cell:nth-child(4) {
             flex: 0 0 5%;
+
+            mat-icon {
+              font-size: 16px;
+              margin-top: 5px;
+              margin-right: -5px;
+            }
           }
 
           mat-header-cell:nth-child(5),
@@ -173,10 +203,8 @@
             }
           }
 
-          mat-header-cell:nth-child(6),
-          mat-cell:nth-child(6),
-          mat-header-cell:nth-child(7),
-          mat-cell:nth-child(7) {
+          mat-header-cell:nth-child(5),
+          mat-cell:nth-child(5) {
             flex: 0 0 13%;
           }
 
@@ -195,10 +223,10 @@
 
       .icon,
       .os-icon {
-        height: 20px;
-        width: 20px;
+        height: 16px;
+        width: 16px;
         //margin-top: -2px;
-        margin-right: 5px;
+        margin-right: 3px;
         //margin-left: 18px;
       }
 

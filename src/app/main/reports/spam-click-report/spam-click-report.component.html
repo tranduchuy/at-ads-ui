@@ -20,61 +20,85 @@
 
   </div>
 
-  <div class="section">
+  <p class="notification">
+    <mat-icon>check_circle</mat-icon>
+    <span>Bạn có thể tiết kiệm trong <span class="highline1" [(ngModel)]="selectedDateRange"
+        ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>
+      từ ngày <span class="highline2" [(ngModel)]="selectedDateRange"
+        ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
+      ngày <span class="highline2" [(ngModel)]="selectedDateRange"
+        ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
+      hạn chế <span class="highline2">click ảo</span>.</span>
+  </p>
 
-    <div class="div-pie-chart">
-      <p style="text-align: center">
-        Bạn có thể tiết kiệm trong <span style="color: crimson; font-weight: bold" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>
-        từ <span style="font-weight: bold; color: #0093e5" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
-        ngày <span style="font-weight: bold; color: #0093e5" [(ngModel)]="selectedDateRange"
-          ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
-        hạn chế chiến dịch ảo
-      </p>
-      <div class="h-400 pie-chart">
+  <div class="charts" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="15px">
+    <div class="section section-pie-chart" fxFlex="25">
 
-        <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
-          [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
-          [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" (select)="pieChart.onSelect($event)"
-          [labelFormatting]="pieChart.setLabelFormatting">
+      <div class="title1">
+        Tổng thể
+      </div>
 
-          <ng-template #tooltipTemplate let-model="model">
-            <p style="color: #fff">
-              {{model.name.split(':')[0] + ' (' + model.value + '%)'}}
-            </p>
-          </ng-template>
+      <div class="div-pie-chart">
+        <div class="h-200 pie-chart">
 
-        </ngx-charts-pie-chart>
+          <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
+            [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
+            [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" (select)="pieChart.onSelect($event)"
+            [labelFormatting]="pieChart.setLabelFormatting">
 
-        <div style="text-align: center" class="click-total" *ngIf="clickTotal">
-          <span class="click-number">{{abbreviateNumber(clickTotal)}}</span>
-          <br><span style="color: gray">click</span>
+            <ng-template #tooltipTemplate let-model="model">
+              <p style="color: #fff">
+                {{model.name.split(':')[0] + ' (' + model.value + '%)'}}
+              </p>
+            </ng-template>
+
+          </ngx-charts-pie-chart>
+
+          <div style="text-align: center" class="click-total" *ngIf="clickTotal">
+            <span class="click-number">{{abbreviateNumber(clickTotal)}}</span>
+            <br><span style="color: gray">click</span>
+          </div>
+
         </div>
 
+      </div>
+
+      <div class="click-detail" fxLayout="row" fxLayoutAlign="center center">
+        <div class="real-click" fxFlex="50">
+          <div class="number">
+            <span>{{abbreviateNumber(realClickTotal)}}</span>
+            <span class="percentage">{{realClickPercentage}}%</span>
+          </div>
+          Click thật
+        </div>
+        <div class="spam-click" fxFlex="50">
+          <div class="number">
+            <span>{{abbreviateNumber(spamClickTotal)}}</span>
+            <span class="percentage">{{spamClickPercentage}}%</span>
+          </div>
+          Click ảo
+        </div>
+      </div>
+    </div>
+    <div class="section div-line-chart" fxFlex="75">
+      <div class="title1">
+        <span>Thống kê theo từng ngày</span>
+        <!--<button mat-raised-button color="accent" style="border-radius: 15px">Xem Đầy Đủ</button>-->
+      </div>
+
+      <div class="position-relative h-300 pb-16">
+        <canvas baseChart [datasets]="lineChart.datasets.report" [labels]="lineChart.labels" [colors]="lineChart.colors"
+          [options]="lineChart.options" [chartType]="lineChart.chartType">
+        </canvas>
       </div>
 
     </div>
   </div>
 
-  <div class="section div-line-chart">
-    <div class="title1">
-      <span>THỐNG KÊ THEO TỪNG NGÀY</span>
-      <!--<button mat-raised-button color="accent" style="border-radius: 15px">Xem Đầy Đủ</button>-->
-    </div>
-
-    <div class="position-relative h-368 pb-16">
-      <canvas baseChart [datasets]="lineChart.datasets.report" [labels]="lineChart.labels" [colors]="lineChart.colors"
-        [options]="lineChart.options" [chartType]="lineChart.chartType">
-      </canvas>
-    </div>
-
-  </div>
-
   <div class="section tables">
 
-    <div class="title1">
-      DANH SÁCH IP CLICK QUẢNG CÁO
+    <div class="title1 title2">
+      Danh sách IP đã click quảng cáo
     </div>
 
     <div class="left">
@@ -93,11 +117,6 @@
 
               <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]"
                 class="ip-detail-link" mat-button color="accent">
-                <mat-icon *ngIf="element.isSpam === true" style="color: red" class="ip-symbol">not_interested
-                </mat-icon>
-                <mat-icon *ngIf="element.isSpam === false" style="color:silver" class="ip-symbol">
-                  not_interested
-                </mat-icon>
                 {{element.ip}}
               </a>
 
@@ -116,19 +135,14 @@
             <mat-cell *matCellDef="let element">
               <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold"
                 (mouseover)="showReason(element.reason || '')">
-                <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
+                <mat-icon>not_interested</mat-icon> Đã chặn
               </span>
               <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold"
                 (mouseover)="showReason(element.reason || '')">
-                <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
+                <mat-icon>check_circle</mat-icon> Hợp lệ
               </span>
             </mat-cell>
           </ng-container>
-
-          <!--<ng-container matColumnDef="keyword">-->
-          <!--<mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>-->
-          <!--<mat-cell *matCellDef="let element"> {{element.keyword}} </mat-cell>-->
-          <!--</ng-container>-->
 
           <ng-container matColumnDef="location">
             <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
@@ -140,25 +154,39 @@
             <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
-                <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+                <mat-icon>report_problem</mat-icon>Có
               </span>
               <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
             </mat-cell>
           </ng-container>
 
-          <!-- Keyword Column -->
           <ng-container matColumnDef="keyword">
             <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              {{element.gclidInfo?.keyword}}
+            <mat-cell *matCellDef="let element"> {{element.keyword || 'Unknown'}}
             </mat-cell>
           </ng-container>
 
-          <!-- Keyword Match Type Column -->
-          <ng-container matColumnDef="keywordMatchType">
+          <ng-container matColumnDef="campaignType">
+            <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.campaignType || 'Unknown'}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="matchType">
             <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              {{element.gclidInfo?.keywordMatchType}}
+            <mat-cell *matCellDef="let element"> {{element.matchType || 'Unknown'}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="page">
+            <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.page || 'Unknown'}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position || 'Unknown'}}
             </mat-cell>
           </ng-container>
 
@@ -167,11 +195,7 @@
         </mat-table>
       </div>
 
-      <!-- <button mat-raised-button color="accent" class="table-button" style="background-color:#4bb453">BÁO CÁO TOÀN BỘ
-        IP</button> -->
-
       <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
-        <!-- old: fxFlex="60" -->
         <div fxFlex="60">
           <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
               ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng

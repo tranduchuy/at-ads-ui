@@ -21,6 +21,11 @@ import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
+export interface ChangingListAccountsAction {
+    status: 'SUCCESS' | 'ERROR' | 'INFO',
+    data: any
+}
+
 @Component({
     selector: 'toolbar',
     templateUrl: './toolbar.component.html',
@@ -182,11 +187,10 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
     listenOnListAccountsChanged() {
         const sub = this._sessionService.onListAccountsChanged()
-            .subscribe(wasChanged => {
-                if (wasChanged) {
-                    if (typeof wasChanged === 'object') {
-                        const action: any = wasChanged;
-                        this.getAdsAccounts(action);
+            .subscribe(value => {
+                if (value) {
+                    if (typeof value === 'object') {
+                        this.getAdsAccounts(value);
                     }
                     else {
                         this.getAdsAccounts();
@@ -259,7 +263,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         this._sessionService.emitSelectedActiveAccount(this.accountCtrl.value.accountId);
     }
 
-    getAdsAccounts(action?: any): void {
+    getAdsAccounts(action?: ChangingListAccountsAction): void {
         this._fuseProgressiveBarService.show();
         this.isProcessing = true;
 
@@ -328,9 +332,11 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 this.isProcessing = false;
 
                 if (action) {
-                    const { name, message } = action;
-                    if (name === 'remove') {
-                        this._dialogService._openSuccessDialog({ messages: [message] });
+                    if (action.status === 'SUCCESS') {
+                        this._dialogService._openSuccessDialog(action.data);
+                    }
+                    else if (action.status === 'ERROR') {
+                        this._dialogService._openErrorDialog(action.data);
                     }
                 }
             },
@@ -342,12 +348,6 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     this._sessionService.unsetActiveGoogleAdsAccount();
                     this._fuseNavigationService.reloadNavigation();
                     this.isProcessing = false;
-                    if (action) {
-                        const { name, message } = action;
-                        if (name === 'remove') {
-                            this._dialogService._openSuccessDialog({ messages: [message] });
-                        }
-                    }
                 });
         this.subscriptions.push(sub);
     }
@@ -454,6 +454,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                         this._sessionService.remove();
                         this._sessionService.completeCheckingIfUserHasAccount(true);
                         this._sessionService.setListAccounts(false);
+                        this._sessionService.unsetActiveGoogleAdsAccount();
                         this._router.navigate(['/gioi-thieu']);
                     }
                 }

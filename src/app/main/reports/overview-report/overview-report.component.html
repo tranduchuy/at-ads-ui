@@ -160,8 +160,8 @@
 
     <div class="overview">
       <div class="overview-main">
-        <div class="overview-title1" fxLayout="row" fxLayout.xs="column">
-          <p class="overview-title2" fxFlex="80">BÁO CÁO TỔNG THỂ TRUY CẬP</p>
+        <div class="overview-title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+          Báo cáo tổng thể truy cập
         </div>
         <div class="overview-table">
 
@@ -179,11 +179,6 @@
               <mat-cell *matCellDef="let element">
                 <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]"
                   class="ip-detail-link" mat-button color="accent">
-                  <mat-icon *ngIf="element.isSpam === true" style="color: red" class="ip-symbol">not_interested
-                  </mat-icon>
-                  <mat-icon *ngIf="element.isSpam === false" style="color:silver" class="ip-symbol">
-                    not_interested
-                  </mat-icon>
                   {{element.ip}}
                 </a>
               </mat-cell>
@@ -204,11 +199,11 @@
               <mat-cell *matCellDef="let element">
                 <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold"
                   (mouseover)="showReason(element.reason || '')">
-                  <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
+                  <mat-icon>not_interested</mat-icon> Đã chặn
                 </span>
                 <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold"
                   (mouseover)="showReason(element.reason || '')">
-                  <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
+                  <mat-icon>check_circle</mat-icon> Hợp lệ
                 </span>
               </mat-cell>
             </ng-container>

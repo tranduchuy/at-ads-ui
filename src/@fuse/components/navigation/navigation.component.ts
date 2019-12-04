@@ -7,7 +7,6 @@ import { AdwordsAccountsService } from '../../../app/shared/services/ads-account
 import { SessionService } from '../../../app/shared/services/session.service';
 
 import { AdsAccountIdPipe } from '../../../app/shared/pipes/ads-account-id/ads-account-id.pipe';
-import { FuseProgressBarService } from '../progress-bar/progress-bar.service';
 
 @Component({
   selector: 'fuse-navigation',
@@ -26,13 +25,12 @@ export class FuseNavigationComponent implements OnInit {
 
   adsAccountIdPipe = new AdsAccountIdPipe();
 
-  accounts =
-    {
-      id: 'adwords-accounts',
-      title: 'TÀI KHOẢN GOOGLE ADS',
-      type: 'group',
-      children: []
-    };
+  accounts = {
+    id: 'adwords-accounts',
+    title: 'TÀI KHOẢN GOOGLE ADS',
+    type: 'collapsable',
+    children: []
+  };
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -45,8 +43,6 @@ export class FuseNavigationComponent implements OnInit {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseNavigationService: FuseNavigationService,
-    private _fuseProgressBarService: FuseProgressBarService,
-    private _adwordsAccountsService: AdwordsAccountsService,
     private _sessionService: SessionService,
   ) {
     this._fuseNavigationService._onReloadNavigation$.subscribe(() => {
@@ -75,7 +71,7 @@ export class FuseNavigationComponent implements OnInit {
 
     this.accounts.children.push({
       id: 'add-accounts',
-      title: 'Thêm tài khoản mới',
+      title: 'Kết nối tài khoản',
       type: 'item',
       icon: 'library_add',
       url: '/them-tai-khoan-moi'
@@ -110,7 +106,7 @@ export class FuseNavigationComponent implements OnInit {
           if (userLicenceType !== 'FREE' && userLicenceType !== 'VIP1') {
             this.accounts.children.push({
               id: 'add-accounts',
-              title: 'Thêm tài khoản mới',
+              title: 'Kết nối tài khoản',
               type: 'item',
               icon: 'library_add',
               url: '/them-tai-khoan-moi'
@@ -134,7 +130,7 @@ export class FuseNavigationComponent implements OnInit {
         else {
           this.accounts.children.unshift({
             id: 'add-accounts',
-            title: 'Thêm tài khoản mới',
+            title: 'Kết nối tài khoản',
             type: 'item',
             icon: 'library_add',
             url: '/them-tai-khoan-moi'
