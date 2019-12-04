@@ -176,7 +176,7 @@
                <ng-container matColumnDef="network">
                   <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.network?.name !== 'MOBIFONE'
+                     <!-- <span *ngIf="element.network?.name !== 'MOBIFONE'
                                  && element.network?.name !== 'VIETTEL'
                                  && element.network?.name !== 'VIETNAMOBILE'
                                  && element.network?.name !== 'VNPT'
@@ -193,8 +193,9 @@
                      <img class="vnpt" src="https://www.sunocean.com.vn/wp-content/uploads/2018/08/logo-vnpt.png"
                         *ngIf="element.network?.name === 'VNPT'" alt="">
                      <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
-                        *ngIf="element.network?.name === 'FPT'" alt="">
+                        *ngIf="element.network?.name === 'FPT'" alt=""> -->
 
+                     <span *ngIf="element.network?.name">{{element.network?.name}}</span>
                      <span *ngIf="!element.network?.name">Unknown</span>
                   </mat-cell>
                </ng-container>
@@ -203,8 +204,8 @@
                   <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
 
                   <mat-cell *matCellDef="let element">
-                     <img src="../../assets/icons/location.svg" alt="" class="location-icon"
-                        *ngIf="element.location?.city">
+                     <!-- <img src="../../assets/icons/location.svg" alt="" class="location-icon"
+                        *ngIf="element.location?.city"> -->
                      <span *ngIf="element.location?.city">{{element.location?.city}}</span>
 
                      <span *ngIf="!element.location?.city">Unknown</span>

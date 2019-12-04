@@ -344,7 +344,7 @@
       }
 
       .table-wrapper {
-        overflow: auto;
+        //overflow: auto;
         filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
         background: #002d41;
 
@@ -382,8 +382,8 @@
         }
 
         .icon {
-          height: 16px;
-          width: 16px;
+          height: 14px;
+          width: 14px;
           margin-right: 5px;
         }
 
@@ -408,12 +408,6 @@
 
           mat-header-row {
             background: rgba(0, 0, 0, 0.3);
-          }
-
-          mat-cell,
-          mat-header-cell {
-            color: white;
-            font-size: 11px !important;
           }
 
           mat-header-cell {
@@ -446,31 +440,25 @@
             }
           }
 
-          mat-header-cell:nth-child(3),
-          mat-cell:nth-child(3),
-          mat-header-cell:nth-child(4),
-          mat-cell:nth-child(4),
-          mat-header-cell:nth-child(5),
-          mat-cell:nth-child(5),
-          mat-header-cell:nth-child(6),
-          mat-cell:nth-child(6),
-          mat-header-cell:nth-child(7),
-          mat-cell:nth-child(7) {
+          mat-cell,
+          mat-header-cell {
+            color: white;
+            font-size: 10px !important;
             flex: 0 0 10%;
           }
 
           mat-header-cell:nth-child(8),
           mat-cell:nth-child(8) {
-            justify-content: center;
+            justify-content:  center;
           }
-
+          
           mat-header-cell:nth-child(9),
           mat-cell:nth-child(9),
           mat-header-cell:nth-child(10),
           mat-cell:nth-child(10),
           mat-header-cell:nth-child(11),
           mat-cell:nth-child(11) {
-            flex: 0 0 7%;
+            flex: 0 0 6%;
             justify-content: center;
           }
 
@@ -481,7 +469,7 @@
 
           mat-header-row,
           mat-row {
-            min-width: 1200px;
+            min-width: 1000px;
             width: 100%;
           }
         }
@@ -656,11 +644,16 @@
     }
 
     .benefit-container {
-      background-color: #7fcec5;
-      background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+      // background-color: #7fcec5;
+      // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+
+      background: url("../../assets/images/backgrounds/consulting-meeting.jpg");
+      background-size: 100% 100%;
+
       background-attachment: fixed;
       .benefit {
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
         text-align: center;
         padding: 90px 200px 90px 200px;
         color: white;
@@ -698,6 +691,7 @@
 
           .benefit-description-title {
             font-size: 14px;
+            font-weight: bold;
           }
         }
       }
@@ -980,8 +974,11 @@
           font-size: 12px;
         }
 
-        mat-table {
-          width: 100%;
+        .table-wrapper {
+          overflow: auto;
+          mat-table {
+            width: 100%;
+          }
         }
       }
 
