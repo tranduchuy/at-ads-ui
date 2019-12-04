@@ -131,7 +131,7 @@
                         src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
                      <span *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
-                     <span *ngIf="!element.os?.name">Unknown</span>
+                     <span *ngIf="!element.os?.name" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -168,7 +168,7 @@
                      <span
                         *ngIf="element.browser?.name">{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
 
-                     <span *ngIf="!element.browser?.name">Unknown</span>
+                     <span *ngIf="!element.browser?.name" class="UNKNOWN">Unknown</span>
 
                   </mat-cell>
                </ng-container>
@@ -195,8 +195,8 @@
                      <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
                         *ngIf="element.network?.name === 'FPT'" alt=""> -->
 
-                     <span *ngIf="element.network?.name">{{element.network?.name}}</span>
-                     <span *ngIf="!element.network?.name">Unknown</span>
+                     <span *ngIf="element.network?.name" class="{{element.network?.name}}">{{element.network?.name}}</span>
+                     <span *ngIf="!element.network?.name" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -208,7 +208,7 @@
                         *ngIf="element.location?.city"> -->
                      <span *ngIf="element.location?.city">{{element.location?.city}}</span>
 
-                     <span *ngIf="!element.location?.city">Unknown</span>
+                     <span *ngIf="!element.location?.city" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -216,7 +216,7 @@
                   <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
                   <mat-cell *matCellDef="let element">
                      <span *ngIf="element.keyword">{{element.keyword}}</span>
-                     <span *ngIf="!element.keyword">Unknown</span>
+                     <span *ngIf="!element.keyword" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -224,7 +224,7 @@
                   <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
                   <mat-cell *matCellDef="let element">
                      <span *ngIf="element.campaignType">{{element.campaignType}}</span>
-                     <span *ngIf="!element.campaignType">Unknown</span>
+                     <span *ngIf="!element.campaignType" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -232,7 +232,7 @@
                   <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
                   <mat-cell *matCellDef="let element">
                      <span *ngIf="element.matchType">{{element.matchType}}</span>
-                     <span *ngIf="!element.matchType">Unknown</span>
+                     <span *ngIf="!element.matchType" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -240,7 +240,7 @@
                   <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
                   <mat-cell *matCellDef="let element">
                      <span *ngIf="element.page">{{element.page}}</span>
-                     <span *ngIf="!element.page">Unknown</span>
+                     <span *ngIf="!element.page" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -248,7 +248,7 @@
                   <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
                   <mat-cell *matCellDef="let element">
                      <span *ngIf="element.position">{{element.position}}</span>
-                     <span *ngIf="!element.position">Unknown</span>
+                     <span *ngIf="!element.position" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 

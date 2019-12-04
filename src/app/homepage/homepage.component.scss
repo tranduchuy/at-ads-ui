@@ -359,26 +359,28 @@
           font-size: 18px;
         }
 
-        .network-logo,
-        .mobifone,
-        .fpt {
-          height: 16px;
-          width: 74px;
+        .MOBIFONE {
+          color: skyblue;
         }
 
-        .vietnamobile {
-          height: 18px;
+        .VIETTEL {
+          color: lightgreen;
         }
 
-        .vnpt {
-          height: 42px;
-          width: 100px;
-          margin-left: -15px;
-          margin-top: -10px;
+        .VNPT {
+          color: dodgerblue;
         }
 
-        .fpt {
-          height: 23px;
+        .VIETNAMOBILE {
+          color: orange;
+        }
+
+        .FPT {
+          color: lightcoral;
+        }
+
+        .UNKNOWN {
+          color: silver;
         }
 
         .icon {
@@ -444,6 +446,7 @@
           mat-header-cell {
             color: white;
             font-size: 10px !important;
+            font-weight: bold;
             flex: 0 0 10%;
           }
 
