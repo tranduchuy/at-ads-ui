@@ -24,7 +24,7 @@
                 <mat-label style="color: lightgreen">Đang kết nối tài khoản</mat-label>
                 
 
-                <input matInput [value]="adsAccounts[0].name" readonly *ngIf="user.licence.type !== 'CUSTOM'">
+                <input matInput [value]="accountCtrl.value.name" readonly *ngIf="user.licence.type !== 'CUSTOM'">
                 <mat-select [formControl]="accountCtrl" placeholder="Tài khoản Google Ads" #singleSelect
                     (selectionChange)="selectAccount()" *ngIf="user.licence.type === 'CUSTOM'">
                     <mat-option>

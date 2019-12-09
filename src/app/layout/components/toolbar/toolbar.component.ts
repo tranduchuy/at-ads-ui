@@ -344,7 +344,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     if (action.navigatedRoute) {
                         this._router.navigateByUrl(action.navigatedRoute);
                     }
-                    if(action.isNavigationReloaded)
+                    if (action.isNavigationReloaded)
                         this._fuseNavigationService.reloadNavigation();
                 }
             },
@@ -463,6 +463,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                         this._sessionService.completeCheckingIfUserHasAccount(true);
                         this._sessionService.setListAccounts(false);
                         this._sessionService.unsetActiveGoogleAdsAccount();
+                        this._sessionService.resetListAccountsChangedObserver();
                         this._router.navigate(['/gioi-thieu']);
                     }
                 }

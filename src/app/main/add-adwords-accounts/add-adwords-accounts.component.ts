@@ -218,9 +218,13 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   generateConnectAccountByEmailParam(): any {
+    if (this.selectedAccount.adsName)
+      return {
+        adWordId: this.selectedAccount.googleAdId.replace(/\D/g, ''),
+        adsName: this.selectedAccount.adsName
+      };
     return {
-      adWordId: this.selectedAccount.googleAdId.replace(/\D/g, ''),
-      adsName: this.selectedAccount.adsName || ''
+      adWordId: this.selectedAccount.googleAdId.replace(/\D/g, '')
     };
   }
 
@@ -333,23 +337,21 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
               navigatedRoute: '/danh-sach-tai-khoan',
               isNavigationReloaded: true
             });
+          } else {
+            this._sessionService.notifyListAccountsChanged({
+              status: 'SUCCESS',
+              data: {
+                messages: ['Kết nối tài khoản Google Ads thành công! Vui lòng thực hiện theo các bước tiếp theo để hoàn tất kết nối.']
+              },
+              isNavigationReloaded: true
+            });
 
-            return;
+            setTimeout(() => {
+              this.isAccountListShown = false;
+              this.isConnected = true;
+              this.isProcessing = false;
+            }, 2000);
           }
-
-          this._sessionService.notifyListAccountsChanged({
-            status: 'SUCCESS',
-            data: {
-              messages: ['Kết nối tài khoản Google Ads thành công! Vui lòng thực hiện theo các bước tiếp theo để hoàn tất kết nối.']
-            },
-            isNavigationReloaded: true
-          });
-
-          setTimeout(() => {
-            this.isAccountListShown = false;
-            this.isConnected = true;
-            this.isProcessing = false;
-          }, 2000);
         },
         (error: HttpErrorResponse) => {
           this.isConnected = false;

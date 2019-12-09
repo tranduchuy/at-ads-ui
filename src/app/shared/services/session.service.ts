@@ -101,7 +101,9 @@ export class SessionService {
     else this._isListAccountChanged$.next(true);
   }
 
-
+  resetListAccountsChangedObserver() {
+    this._isListAccountChanged$.next(false);
+  }
 
   getAcceptedAdsId(): Observable<string> {
     return this._acceptedAdsId$.asObservable();

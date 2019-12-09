@@ -74,12 +74,10 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
     const removeAccountSub = this._adwordsAccountListService.removeAccount(accountId)
       .subscribe(
-        (res: ILoginSuccess) => {
+        (res) => {
           this._sessionService.notifyListAccountsChanged({
             status: 'SUCCESS',
-            data: {
-              messages: ['Ngắt kết nối tài khoản Google Ads thành công']
-            }
+            data: res
           });
           setTimeout(() => {
             this.isProcessing = false;

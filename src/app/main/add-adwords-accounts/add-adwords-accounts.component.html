@@ -90,7 +90,7 @@
           <ng-container matColumnDef="adsId">
             <mat-header-cell *matHeaderCellDef>Google Ads ID </mat-header-cell>
             <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
-              {{element.googleAdId}}
+              <b>{{element.googleAdId}}</b>
             </mat-cell>
           </ng-container>
 

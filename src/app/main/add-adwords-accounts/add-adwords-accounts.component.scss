@@ -108,6 +108,16 @@
     .ads-account-list {
       padding-top: 20px;
 
+      -webkit-animation: tableAni 0.4s ease-out;
+      @keyframes tableAni {
+        from {
+          transform: translateY(100vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
       .div-connect-account-button {
         text-align: center;
         padding-top: 10px;
@@ -132,7 +142,7 @@
         max-height: 300px;
         overflow: auto;
         background-color: white;
-        box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+        box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 
         mat-table {
           box-shadow: none;
@@ -212,13 +222,13 @@
     .instruction-step3 {
       height: 50%;
       width: 50%;
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     }
 
     .instruction-step {
       font-size: 16px;
       padding-top: 20px;
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     }
   }
 }

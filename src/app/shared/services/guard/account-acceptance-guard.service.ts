@@ -5,9 +5,9 @@ import { SessionService } from '../session.service';
 import { DialogService } from '../dialog.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { AdwordsAccountsService } from '../ads-accounts/adwords-accounts.service';
-import { map, catchError, take } from 'rxjs/operators'; import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { map, catchError } from 'rxjs/operators'; import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { Generals } from 'app/shared/constants/generals';
-;
+import * as _ from 'lodash';
 
 @Injectable({
     providedIn: 'root'
@@ -28,11 +28,15 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
         state: RouterStateSnapshot,
     ): Observable<boolean> | boolean {
 
-        if (!this._sessionService.activeAccountId) {
+        const listAccounts = this._sessionService.getValueOfListAccounts();
+        const activeAccount = _.find(listAccounts, account => account.accountId === this._sessionService.activeAccountId);
+        if (!activeAccount) {
             this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
             this._router.navigateByUrl('/them-tai-khoan-moi');
             return false;
         }
+        if (activeAccount && activeAccount.connectType === Generals.AccountConnectionType.byGoogleAdsId)
+            return true;
 
         return this._adwordsAccountsService.getAccountAdwordsDetail(this._sessionService.activeAccountId)
             .pipe(
