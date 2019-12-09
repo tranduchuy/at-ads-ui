@@ -34,8 +34,6 @@
 
             <!-- <img src="https://i.pinimg.com/originals/c1/16/d0/c116d0bcd7663786a5a2d619a70fd2b7.png" class="decoration" alt=""> -->
 
-            <img src="../../assets/images/backgrounds/abc.png" class="decoration" alt="">
-
             <div class="title1 app-title">
                <div class="insider">
                   <span class="shiny">
@@ -49,9 +47,9 @@
             </div>
 
             <p class="title2">
-               <span style="color: orange; font-weight: bold">Giải Pháp Chặn Click Ảo</span> sử dụng Công nghệ <span
-                  style="color:orange; font-weight: bold">AI</span> và
-               <span style="color:orange; font-weight: bold">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
+               <span class="highline">Giải Pháp Chặn Click Ảo</span> sử dụng Công nghệ <span class="highline">AI</span>
+               và
+               <span class="highline">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
                giản và
                hiệu
                quả.
@@ -256,7 +254,7 @@
                   </mat-cell>
                </ng-container>
 
-               <mat-header-row *matHeaderRowDef="logColumns"></mat-header-row>
+               <mat-header-row *matHeaderRowDef="logColumns; sticky: true"></mat-header-row>
                <mat-row *matRowDef="let row; columns: logColumns;"></mat-row>
             </mat-table>
          </div>
@@ -275,12 +273,12 @@
                </button>
             </div> -->
 
-            <div class="step-wrapper" fxLayout="row" fxLayoutGap="15px" fxLayout.sm="column" fxLayout.xs="column">
+            <div class="step-wrapper" fxLayout="row" fxLayoutGap="30px" fxLayout.sm="column" fxLayout.xs="column">
 
                <div class="step step1" fxFlex="33.33">
                   <div class="step-image">
                      <img src="../../assets/images/step1.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step1.png')">
+                        (click)="showImageDialog('../../assets/images/step1.png')" loading="lazy">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 1: Liên kết Google Ads</span>
@@ -294,7 +292,7 @@
                <div class="step step2" fxFlex="33.33">
                   <div class="step-image">
                      <img src="../../assets/images/step2.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step2.png')">
+                        (click)="showImageDialog('../../assets/images/step2.png')" loading="lazy">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
@@ -308,7 +306,7 @@
                <div class="step step3" fxFlex="33.33">
                   <div class="step-image">
                      <img src="../../assets/images/step3.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step3.png')">
+                        (click)="showImageDialog('../../assets/images/step3.png')" loading="lazy">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 3: Chặn click ảo</span>
@@ -476,7 +474,7 @@
             <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="30px">
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/save-money.svg" alt="">
+                     <img src="../../assets/images/save-money.svg" alt="" loading="lazy">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
@@ -489,7 +487,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/timer.svg" alt="">
+                     <img src="../../assets/images/timer.svg" alt="" loading="lazy">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward
@@ -501,7 +499,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/customer.png" alt="">
+                     <img src="../../assets/images/customer.png" alt="" loading="lazy">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward

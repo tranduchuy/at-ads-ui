@@ -11,6 +11,8 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import * as _ from 'lodash';
 import { MatTableDataSource } from '@angular/material';
+import { Generals } from 'app/shared/constants/generals';
+import { take, last } from 'rxjs/operators';
 
 @Component({
   selector: 'app-adwords-account-list',
@@ -73,7 +75,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
     const removeAccountSub = this._adwordsAccountListService.removeAccount(accountId)
       .subscribe(
-        (res: ILoginSuccess) => {
+        (res) => {
           this._sessionService.notifyListAccountsChanged({
             status: 'SUCCESS',
             data: {
@@ -130,8 +132,9 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   getAccounts() {
     this._fuseProgressiveBarService.show();
     const sub = this._sessionService.getListAccounts()
-      .subscribe((listAccounts: any) => {
+      .subscribe(listAccounts => {
         if (listAccounts) {
+          this.isProcessing = false;
           this._fuseProgressiveBarService.hide();
           this.accounts = listAccounts;
           this.dataSource = new MatTableDataSource(this.accounts);
@@ -151,7 +154,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   checkAccountAcceptance(adsId: string, isConnected?: boolean, connectType?: string) {
-    if (connectType === 'GOOGLE_ADS_ID') {
+    if (connectType === Generals.AccountConnectionType.byGoogleAdsId) {
       this.isProcessing = true;
       this._fuseProgressiveBarService.show();
 

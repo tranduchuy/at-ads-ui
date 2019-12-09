@@ -41,21 +41,23 @@
     }
 
     .select-tracking {
-      margin-top: 20px;
+      margin-top: 40px;
       box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       border-radius: 7px;
       padding: 20px;
+      padding-top: 15px;
       background: white;
+      min-height: 300px;
 
       -webkit-animation: tableAni 0.4s ease-out;
-        @keyframes tableAni {
-          from {
-            transform: translateY(100vh);
-          }
-          to {
-            transform: translateY(0);
-          }
+      @keyframes tableAni {
+        from {
+          transform: translateY(100vh);
         }
+        to {
+          transform: translateY(0);
+        }
+      }
 
       .table-title {
         font-weight: bold;
@@ -70,7 +72,7 @@
         text-align: center;
         background-color: lightyellow;
         width: 80%;
-        margin-top: 30px;
+        margin-top: 80px;
         padding: 20px;
         border-left: 4px solid darkorange;
         border-radius: 5px;
@@ -87,7 +89,6 @@
       }
 
       .searching {
-        
       }
 
       .table-wrapper {

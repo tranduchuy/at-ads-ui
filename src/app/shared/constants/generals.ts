@@ -40,5 +40,8 @@ export namespace Generals {
             value: 5,
             route: '/bao-cao/click-ao'
         }
+    export namespace AccountConnectionType {
+        export const byEmail = 'EMAIL';
+        export const byGoogleAdsId = 'GOOGLE_ADS_ID';
     }
 };
