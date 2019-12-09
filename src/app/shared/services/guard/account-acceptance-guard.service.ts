@@ -6,6 +6,7 @@ import { DialogService } from '../dialog.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { AdwordsAccountsService } from '../ads-accounts/adwords-accounts.service';
 import { map, catchError, take } from 'rxjs/operators'; import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { Generals } from 'app/shared/constants/generals';
 ;
 
 @Injectable({
@@ -27,7 +28,7 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
         state: RouterStateSnapshot,
     ): Observable<boolean> | boolean {
 
-        if(!this._sessionService.activeAccountId) {
+        if (!this._sessionService.activeAccountId) {
             this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
             this._router.navigateByUrl('/them-tai-khoan-moi');
             return false;
@@ -40,7 +41,8 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
                     const isConnected = res.data.adsAccount.isConnected;
                     const connectType = res.data.adsAccount.connectType;
 
-                    if (route.routeConfig.path.includes('chan-ip') && isConnected === false && connectType === 'GOOGLE_ADS_ID') {
+                    if (route.routeConfig.path.includes('chan-ip')
+                        && isConnected === false && connectType === Generals.AccountConnectionType.byGoogleAdsId) {
                         this._router.navigateByUrl('/danh-sach-tai-khoan');
                         this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
                         return false;

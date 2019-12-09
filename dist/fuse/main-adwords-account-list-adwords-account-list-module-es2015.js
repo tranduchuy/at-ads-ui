@@ -80,6 +80,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fuse_components_navigation_navigation_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fuse/components/navigation/navigation.service */ "./src/@fuse/components/navigation/navigation.service.ts");
 /* harmony import */ var app_shared_pipes_ads_account_id_ads_account_id_pipe__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! app/shared/pipes/ads-account-id/ads-account-id.pipe */ "./src/app/shared/pipes/ads-account-id/ads-account-id.pipe.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! app/shared/constants/generals */ "./src/app/shared/constants/generals.ts");
+
 
 
 
@@ -188,6 +190,7 @@ let AdwordsAccountListComponent = class AdwordsAccountListComponent extends app_
         const sub = this._sessionService.getListAccounts()
             .subscribe((listAccounts) => {
             if (listAccounts) {
+                this.isProcessing = false;
                 this._fuseProgressiveBarService.hide();
                 this.accounts = listAccounts;
                 this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatTableDataSource"](this.accounts);
@@ -204,7 +207,7 @@ let AdwordsAccountListComponent = class AdwordsAccountListComponent extends app_
         this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
     }
     checkAccountAcceptance(adsId, isConnected, connectType) {
-        if (connectType === 'GOOGLE_ADS_ID') {
+        if (connectType === app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConnectionType.byGoogleAdsId) {
             this.isProcessing = true;
             this._fuseProgressiveBarService.show();
             const sub = this._adwordsAccountListService.checkAccountAcceptance({ adWordId: adsId })

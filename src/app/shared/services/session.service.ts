@@ -8,7 +8,9 @@ import { ChangingListAccountsAction } from 'app/layout/components/toolbar/toolba
 
 export interface ChagingListAccountsAction {
   status: 'SUCCESS' | 'ERROR' | 'INFO',
-  data: any
+  data: any,
+  navigatedRoute?: string,
+  isNavigationReloaded?: boolean;
 }
 
 @Injectable()

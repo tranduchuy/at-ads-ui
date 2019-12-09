@@ -20,10 +20,13 @@ import { MatSelect } from '@angular/material';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { Generals } from 'app/shared/constants/generals';
 
 export interface ChangingListAccountsAction {
     status: 'SUCCESS' | 'ERROR' | 'INFO',
-    data: any
+    data: any,
+    navigatedRoute?: string,
+    isNavigationReloaded?: boolean
 }
 
 @Component({
@@ -206,7 +209,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 if (adsId) {
                     this.accountCtrl.setValue(this.adsAccounts.find(account => account.name === adsId));
 
-                    if (this.accountConnectTypes[adsId] === 'GOOGLE_ADS_ID') {
+                    if (this.accountConnectTypes[adsId] === Generals.AccountConnectionType.byGoogleAdsId) {
                         this.checkAccountAcceptance();
                     }
                 }
@@ -335,9 +338,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     if (action.status === 'SUCCESS') {
                         this._dialogService._openSuccessDialog(action.data);
                     }
-                    else if (action.status === 'ERROR') {
+                    if (action.status === 'ERROR') {
                         this._dialogService._openErrorDialog(action.data);
                     }
+                    if (action.navigatedRoute) {
+                        this._router.navigateByUrl(action.navigatedRoute);
+                    }
+                    if(action.isNavigationReloaded)
+                        this._fuseNavigationService.reloadNavigation();
                 }
             },
                 (error: HttpErrorResponse) => {

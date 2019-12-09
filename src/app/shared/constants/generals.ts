@@ -19,4 +19,8 @@ export namespace Generals {
             }
         ];
     };
+    export namespace AccountConnectionType {
+        export const byEmail = 'EMAIL';
+        export const byGoogleAdsId = 'GOOGLE_ADS_ID';
+    }
 };

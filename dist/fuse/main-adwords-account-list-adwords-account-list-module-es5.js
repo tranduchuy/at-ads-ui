@@ -83,6 +83,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fuse_components_navigation_navigation_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fuse/components/navigation/navigation.service */ "./src/@fuse/components/navigation/navigation.service.ts");
 /* harmony import */ var app_shared_pipes_ads_account_id_ads_account_id_pipe__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! app/shared/pipes/ads-account-id/ads-account-id.pipe */ "./src/app/shared/pipes/ads-account-id/ads-account-id.pipe.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! app/shared/constants/generals */ "./src/app/shared/constants/generals.ts");
+
 
 
 
@@ -199,6 +201,7 @@ var AdwordsAccountListComponent = /** @class */ (function (_super) {
         var sub = this._sessionService.getListAccounts()
             .subscribe(function (listAccounts) {
             if (listAccounts) {
+                _this.isProcessing = false;
                 _this._fuseProgressiveBarService.hide();
                 _this.accounts = listAccounts;
                 _this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatTableDataSource"](_this.accounts);
@@ -216,7 +219,7 @@ var AdwordsAccountListComponent = /** @class */ (function (_super) {
     };
     AdwordsAccountListComponent.prototype.checkAccountAcceptance = function (adsId, isConnected, connectType) {
         var _this = this;
-        if (connectType === 'GOOGLE_ADS_ID') {
+        if (connectType === app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConnectionType.byGoogleAdsId) {
             this.isProcessing = true;
             this._fuseProgressiveBarService.show();
             var sub = this._adwordsAccountListService.checkAccountAcceptance({ adWordId: adsId })

@@ -54549,46 +54549,6 @@ function getVietnamesePaginatorIntl() {
 }
 
 
-/***/ }),
-
-/***/ "./src/app/shared/constants/generals.ts":
-/*!**********************************************!*\
-  !*** ./src/app/shared/constants/generals.ts ***!
-  \**********************************************/
-/*! exports provided: Generals */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Generals", function() { return Generals; });
-var Generals;
-(function (Generals) {
-    var Pagination;
-    (function (Pagination) {
-        Pagination.itemsPerPageOptions = [
-            {
-                text: '20 record',
-                value: 20
-            },
-            {
-                text: '30 record',
-                value: 30
-            },
-            {
-                text: '50 record',
-                value: 50
-            },
-            {
-                text: '100 record',
-                value: 100
-            }
-        ];
-    })(Pagination = Generals.Pagination || (Generals.Pagination = {}));
-    ;
-})(Generals || (Generals = {}));
-;
-
-
 /***/ })
 
 }]);
