@@ -10,7 +10,7 @@ export interface ChagingListAccountsAction {
   status: 'SUCCESS' | 'ERROR' | 'INFO',
   data: any,
   navigatedRoute?: string,
-  isNavigationReloaded?: boolean;
+  isNavigationReloaded?: boolean
 }
 
 @Injectable()
@@ -101,8 +101,19 @@ export class SessionService {
     else this._isListAccountChanged$.next(true);
   }
 
-  resetListAccountsChangedObserver() {
+  resetAllObservables() {
+    this._standByUser.next(null);
+    this._adsId$.next('');
+    this._accountId$.next('');
+    this._user$.next({});
+    this._accountAcceptance$.next(true);
+    this._acceptedAdsId$.next('');
     this._isListAccountChanged$.next(false);
+    this._doesUserHaveAccount$.next(false);
+    this._listAccounts$.next(false);
+    this._removedAccountId$.next('');
+    this._activeAccountChanged$.next('');
+    this._reportTableChanged$.next(0);
   }
 
   getAcceptedAdsId(): Observable<string> {

@@ -30,11 +30,11 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
 
         const listAccounts = this._sessionService.getValueOfListAccounts();
         const activeAccount = _.find(listAccounts, account => account.accountId === this._sessionService.activeAccountId);
-        if (!activeAccount) {
-            this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
-            this._router.navigateByUrl('/them-tai-khoan-moi');
-            return false;
-        }
+        // if (!activeAccount) {
+        //     this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
+        //     this._router.navigateByUrl('/them-tai-khoan-moi');
+        //     return false;
+        // }
         if (activeAccount && activeAccount.connectType === Generals.AccountConnectionType.byGoogleAdsId)
             return true;
 

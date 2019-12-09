@@ -12,6 +12,7 @@ import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id
 import * as _ from 'lodash';
 import { MatTableDataSource } from '@angular/material';
 import { Generals } from 'app/shared/constants/generals';
+import { take, last } from 'rxjs/operators';
 
 @Component({
   selector: 'app-adwords-account-list',
@@ -77,7 +78,9 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
         (res) => {
           this._sessionService.notifyListAccountsChanged({
             status: 'SUCCESS',
-            data: res
+            data: {
+              messages: ['Ngắt kết nối tài khoản Google Ads thành công']
+            }
           });
           setTimeout(() => {
             this.isProcessing = false;
@@ -129,7 +132,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   getAccounts() {
     this._fuseProgressiveBarService.show();
     const sub = this._sessionService.getListAccounts()
-      .subscribe((listAccounts: any) => {
+      .subscribe(listAccounts => {
         if (listAccounts) {
           this.isProcessing = false;
           this._fuseProgressiveBarService.hide();

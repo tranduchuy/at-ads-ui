@@ -190,7 +190,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   showSupportInfoDialog() {
     this._dialogService._openInfoDialog(`
     Vui lòng liên hệ
-    SĐT, Zalo, Viber 093.757.3139
+    SĐT, Zalo, Viber 093.757.3139 (Mr. Long)
     để được hỗ trợ thêm.
     `);
   }

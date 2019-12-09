@@ -188,7 +188,7 @@ let AdwordsAccountListComponent = class AdwordsAccountListComponent extends app_
     getAccounts() {
         this._fuseProgressiveBarService.show();
         const sub = this._sessionService.getListAccounts()
-            .subscribe((listAccounts) => {
+            .subscribe(listAccounts => {
             if (listAccounts) {
                 this.isProcessing = false;
                 this._fuseProgressiveBarService.hide();

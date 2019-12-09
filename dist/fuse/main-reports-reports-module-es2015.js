@@ -52925,8 +52925,8 @@ let SpamClickReportComponent = class SpamClickReportComponent extends app_shared
             colors: [
                 {
                     borderColor: '#40a5ec',
-                    backgroundColor: 'rgba(64, 165, 236, 0.6)',
-                    //backgroundColor: 'rgba(0,0,0,0)',
+                    //backgroundColor: 'rgba(64, 165, 236, 1)',
+                    backgroundColor: 'rgba(0,0,0,0)',
                     pointBackgroundColor: '#40a5ec',
                     pointHoverBackgroundColor: '#40a5ec',
                     pointBorderColor: 'white',
@@ -52934,8 +52934,8 @@ let SpamClickReportComponent = class SpamClickReportComponent extends app_shared
                 },
                 {
                     borderColor: 'orangered',
-                    backgroundColor: 'rgba(255, 0, 57, 0.3)',
-                    //backgroundColor: 'rgba(0,0,0,0)',
+                    //backgroundColor: 'rgba(255, 0, 57, 1)',
+                    backgroundColor: 'rgba(0,0,0,0)',
                     pointBackgroundColor: 'orangered',
                     pointHoverBackgroundColor: 'orangered',
                     pointBorderColor: 'white',
@@ -52963,12 +52963,12 @@ let SpamClickReportComponent = class SpamClickReportComponent extends app_shared
                 elements: {
                     point: {
                         radius: 4,
-                        borderWstatusth: 1,
+                        borderWstatusth: 10,
                         hoverRadius: 4,
-                        hoverBorderWstatusth: 2
+                        hoverBorderWstatusth: 10
                     },
                     line: {
-                        tension: 0.3
+                        tension: 0
                     }
                 },
                 scales: {

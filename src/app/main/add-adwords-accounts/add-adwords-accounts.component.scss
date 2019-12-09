@@ -131,11 +131,20 @@
       }
 
       .ads-account-list-title {
-        color: rgba(0, 0, 0, 0.8);
-        font-weight: bold;
-        font-size: 16px;
         padding-top: 10px;
         padding-bottom: 10px;
+
+        span {
+          font-weight: bold;
+          font-size: 13px;
+          color: rgba(0, 0, 0, 0.8);
+        }
+
+        img {
+          width: 16px;
+          height: 16px;
+          margin-right: 7px;
+        }
       }
 
       .ads-account-list-wrapper {
@@ -179,6 +188,11 @@
             color: white;
             font-weight: bold;
           }
+
+          mat-header-cell,
+          mat-cell {
+            font-size: 12px;
+          }
         }
       }
     }
@@ -219,16 +233,39 @@
       padding-top: 10px;
     }
 
-    .instruction-step3 {
-      height: 50%;
-      width: 50%;
-      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
-    }
+    .instruction-steps {
+      margin-top: 40px;
 
-    .instruction-step {
-      font-size: 16px;
-      padding-top: 20px;
-      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      -webkit-animation: instructionAni 0.4s ease-out;
+      @keyframes instructionAni {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .instruction-step {
+        font-size: 13px;
+
+        .step-highline {
+          color: #40a5ec;
+          font-weight: bold;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+
+      img {
+        margin: 15px;
+        box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      }
+
+      .instruction-image {
+        height: 50%;
+        width: 50%;
+      }
     }
   }
 }
@@ -238,9 +275,15 @@
     .inner {
       padding: 15px;
 
-      .instruction-step3 {
-        height: 100%;
-        width: 100%;
+      .instruction-steps {
+        margin-top: 10px;
+        text-align: justify;
+
+        img {
+          margin: 10px;
+          height: 90% !important;
+          width: 90% !important;
+        }
       }
     }
     .submit-button {

@@ -26,7 +26,7 @@ export interface ChangingListAccountsAction {
     status: 'SUCCESS' | 'ERROR' | 'INFO',
     data: any,
     navigatedRoute?: string,
-    isNavigationReloaded?: boolean
+    isNavigationReloaded?: boolean,
 }
 
 @Component({
@@ -190,14 +190,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
     listenOnListAccountsChanged() {
         const sub = this._sessionService.onListAccountsChanged()
+            .pipe(
+                takeUntil(this._unsubscribeAll)
+            )
             .subscribe(value => {
                 if (value) {
-                    if (typeof value === 'object') {
+                    if (typeof value === 'object')
                         this.getAdsAccounts(value);
-                    }
-                    else {
-                        this.getAdsAccounts();
-                    }
+                    else this.getAdsAccounts();
                 }
             });
         this.subscriptions.push(sub);
@@ -269,9 +269,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     getAdsAccounts(action?: ChangingListAccountsAction): void {
         this._fuseProgressiveBarService.show();
         this.isProcessing = true;
-
         const sub = this._adwordsAccountService.getAdwordsAccount()
-            .pipe()
             .subscribe(res => {
                 this.adsAccounts = (res.data.accounts || [])
                     .map((account: any) => {
@@ -297,6 +295,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
                 if (this.adsAccounts.length === 0) {
                     this.isAccountSelectionDisplayed = false;
+                    this.accountCtrl.setValue('');
                     this._sessionService.unsetActiveGoogleAdsAccount();
                     this._sessionService.completeCheckingIfUserHasAccount(false);
                     this._fuseNavigationService.reloadNavigation();
@@ -352,10 +351,26 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     this._fuseProgressiveBarService.hide();
                     this.adsAccounts = [];
                     this._sessionService.setListAccounts(this.adsAccounts);
+                    this.accountCtrl.setValue('');
                     this._sessionService.completeCheckingIfUserHasAccount(false);
                     this._sessionService.unsetActiveGoogleAdsAccount();
                     this._fuseNavigationService.reloadNavigation();
                     this.isProcessing = false;
+                    this.isAccountSelectionDisplayed = false;
+
+                    if (action) {
+                        if (action.status === 'SUCCESS') {
+                            this._dialogService._openSuccessDialog(action.data);
+                        }
+                        if (action.status === 'ERROR') {
+                            this._dialogService._openErrorDialog(action.data);
+                        }
+                        if (action.navigatedRoute) {
+                            this._router.navigateByUrl(action.navigatedRoute);
+                        }
+                        if (action.isNavigationReloaded)
+                            this._fuseNavigationService.reloadNavigation();
+                    }
                 });
         this.subscriptions.push(sub);
     }
@@ -463,7 +478,6 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                         this._sessionService.completeCheckingIfUserHasAccount(true);
                         this._sessionService.setListAccounts(false);
                         this._sessionService.unsetActiveGoogleAdsAccount();
-                        this._sessionService.resetListAccountsChangedObserver();
                         this._router.navigate(['/gioi-thieu']);
                     }
                 }

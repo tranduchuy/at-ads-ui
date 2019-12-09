@@ -5,12 +5,12 @@ import { Validators } from '@angular/forms';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 import { DialogService } from '../../shared/services/dialog.service';
-import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 import { SessionService } from 'app/shared/services/session.service';
 import { Router } from '@angular/router';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { environment } from 'environments/environment';
 import { MatTableDataSource } from '@angular/material';
+import * as _ from 'lodash';
 
 declare var gapi: any;
 
@@ -32,7 +32,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   adsAccountColumns: string[] = ['order', 'adsId', 'name', 'selection'];
   selectedAccount: any;
   disableAllControls: boolean;
-  isLimitAccountNotificationShown: boolean
+  isLimitAccountNotificationShown: boolean;
 
   auth2: any;
 
@@ -41,7 +41,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _fuseNavigationService: FuseNavigationService,
     private _addAdwordsAccountsService: AddAdwordsAccountsService,
     private _sessionService: SessionService,
     private _router: Router,
@@ -81,9 +80,15 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           }
           else {
             const user = JSON.parse(this._sessionService.user);
-            if (user.licence.type !== 'CUSTOM') {
-              this.disableAllControls = true;
-              this.isLimitAccountNotificationShown = true;
+            if (!this.isConnected) {
+              if (user.licence.type !== 'CUSTOM') {
+                this.disableAllControls = true;
+                this.isLimitAccountNotificationShown = true;
+              }
+              else {
+                this.disableAllControls = false;
+                this.isLimitAccountNotificationShown = false;
+              }
             }
             else {
               this.disableAllControls = false;
@@ -316,7 +321,6 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
 
   post(): void {
     this.isProcessing = true;
-    this.isLimitAccountNotificationShown = false;
     this._fuseProgressiveBarService.show();
 
     const params = this.generatePostObject();
@@ -346,9 +350,9 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
               isNavigationReloaded: true
             });
 
+            this.isAccountListShown = false;
+            this.isConnected = true;
             setTimeout(() => {
-              this.isAccountListShown = false;
-              this.isConnected = true;
               this.isProcessing = false;
             }, 2000);
           }

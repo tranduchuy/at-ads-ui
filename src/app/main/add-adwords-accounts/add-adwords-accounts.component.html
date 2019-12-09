@@ -3,9 +3,9 @@
     KẾT NỐI TÀI KHOẢN GOOGLE ADS CỦA BẠN
   </div>
   <div class="inner">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px" fxLayoutGap.xs="10px">
       <div gdArea="connect-button" class="connect-button">
-        <h4><strong><span class="step">[1]</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h4>
+        <h5><strong><span class="step">[1]</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h5>
         <p style="text-align: justify"> Sử dụng tài khoản Gmail quản lý Google Ads, bấm kết nối nhanh để hoàn tất
           quá
           trình kết nối</p>
@@ -29,10 +29,10 @@
 
       <div gdArea="input-side" class="input-side">
 
-        <h4><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h4>
-        <p style="text-align: justify"><strong>Bước 1: </strong> Đăng nhập <a
-            href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a>, ID tài
-          khoản Google Ads của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink;">VD: 552-999-5152</span>
+        <h5><strong><span class="step">[2]</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h5>
+        <p style="text-align: justify"><strong>Bước 1: </strong> Đăng nhập <b><a
+            href="https://ads.google.com/intl/vi_VN/home/" target="_blank">Awords.google.com</a></b>, ID tài
+          khoản Google Ads của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink; font-weight: bold">VD: 552-999-5152</span>
           là
           ID
           tài khoản Google Ads của bạn</p>
@@ -64,11 +64,12 @@
 
     <div class="ads-account-list" *ngIf="isAccountListShown">
 
-      <div class="ads-account-list-title">
-        <img src="../../../assets/icons/gg-ads.png" alt="" style="width: 20px; height: 20px; margin-right: 5px"> VUI
-        LÒNG LỰA CHỌN TÀI
-        KHOẢN
-        GOOGLE ADS CỦA BẠN
+      <div class="ads-account-list-title" fxLayout="row" fxLayoutAlgin="center center">
+        <img src="../../../assets/icons/gg-ads.png" alt="">
+        <span>VUI
+          LÒNG LỰA CHỌN TÀI
+          KHOẢN
+          GOOGLE ADS CỦA BẠN</span>
       </div>
 
       <mat-form-field>
@@ -97,7 +98,7 @@
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Tên tài khoản </mat-header-cell>
             <mat-cell *matCellDef="let element" [class.disabled-cell]="!element.availableToConnect">
-              {{element.name}}
+              {{element.name || 'Chưa có'}}
             </mat-cell>
           </ng-container>
 
@@ -128,24 +129,25 @@
       </p>
     </div>
 
-    <div gdArea="content" *ngIf="isConnected">
-      <mat-divider></mat-divider>
-      <h4><strong><span class="step">[3]</span> VUI LÒNG ĐỒNG Ý YÊU CẦU KẾT NỐI</strong></h4>
-      <p class="instruction-step"><strong>Bước 1: </strong> Truy cập lại tài khoản AdWords của bạn <a
-          href="https://ads.google.com/intl/vi_VN/home/" target="_blank">adwords.google.com</a> và bấm vào icon ở menu
+    <div gdArea="content" *ngIf="isConnected" class="instruction-steps">
+      <h5><strong><span class="step">[3]</span> CHẤP NHẬN YÊU CẦU KẾT NỐI</strong></h5>
+      <p class="instruction-step"><strong>Bước 1: </strong> Đăng nhập vào tài khoản Google Ads của bạn tại trang <b><a
+            href="https://ads.google.com/intl/vi_VN/home/" target="_blank">Adwords.google.com</a></b> và nhấn vào biểu tượng ở
+        menu
         bên
         trái </p>
-      <p class="text-center"><img src="/assets/images/adwords-caidat-b1-moi.jpg?v=1"></p>
-      <p class="instruction-step"><strong>Bước 2: </strong> Sau đó bấm vào <code> NGƯỜI QUẢN LÝ </code> và bấm
-        <code>CHẤP NHẬN</code> (nếu bạn
-        không thấy người quản lý vui lòng chờ khoảng 5 phút)</p>
+      <p class="text-center"><img src="/assets/images/adwords-caidat-b1-moi.jpg?v=1" class="instruction-image1"></p>
+      <p class="instruction-step"><strong>Bước 2: </strong> Nhấn vào <span class="step-highline"> NGƯỜI QUẢN LÝ
+        </span> và chọn
+        <span class="step-highline">CHẤP NHẬN</span> (nếu bạn
+        không thấy nút Người Quản Lý, vui lòng chờ khoảng 5 phút)</p>
       <p class="text-center">
-        <img src="../../../assets/images/connect-ads-account-step2.PNG">
+        <img src="../../../assets/images/connect-ads-account-step2.PNG" class="instruction-image">
       </p>
       <p class="instruction-step"><strong>Bước 3: </strong>Một thông báo hiện ra, bạn chọn
-        <code>CẤP QUYỀN TRUY CẬP</code></p>
+        <span class="step-highline">CẤP QUYỀN TRUY CẬP</span></p>
       <p class="text-center">
-        <img src="../../../assets/images/connect-ads-account-step3.PNG" class="instruction-step3">
+        <img src="../../../assets/images/connect-ads-account-step3.PNG" class="instruction-image">
       </p>
       <p class="text-center" style="padding-top: 20px">
         <button mat-raised-button [disabled]="isProcessing" aria-label="TÔI ĐÃ HOÀN TẤT KẾT NỐI"
