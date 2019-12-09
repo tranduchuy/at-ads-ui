@@ -285,7 +285,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                             createdAt: account.createdAt,
                             connectType: account.connectType,
                             websites: account.websites,
-                            limitWebsite: account.limitWebsite
+                            limitWebsite: account.limitWebsite,
+                            configStep: account.configStep
                         };
                     });
 
@@ -326,6 +327,9 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     .subscribe(() => {
                         this.filterAccounts();
                     });
+
+                // emit config step value
+                this._sessionService.completeConfigStep(this.adsAccounts[activeIndex].configStep);
 
                 this._fuseNavigationService.reloadNavigation();
                 this.isAccountSelectionDisplayed = true;
@@ -452,6 +456,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 (isAccepted: boolean) => {
                     if (isAccepted) {
                         this._sessionService.remove();
+                        this._sessionService.allowNoficationToShow(false);
                         this._sessionService.completeCheckingIfUserHasAccount(true);
                         this._sessionService.setListAccounts(false);
                         this._sessionService.unsetActiveGoogleAdsAccount();

@@ -19,4 +19,26 @@ export namespace Generals {
             }
         ];
     };
+    export namespace AccountConfigStep {
+        export const CONNECT_ACCOUNT = {
+            value: 1,
+            route: '/them-tai-khoan-moi'
+        }
+        export const SELECT_CAMPAIGN = {
+            value: 2,
+            route: '/gan-tracking/chien-dich'
+        };
+        export const ADD_WEBSITE = {
+            value: 3,
+            route: '/quan-ly-website/'
+        };
+        export const ADD_TRACKING = {
+            value: 4,
+            route: '/gan-tracking/website/'
+        };
+        export const SEE_REPORT = {
+            value: 5,
+            route: '/bao-cao/click-ao'
+        }
+    }
 };

@@ -6,26 +6,32 @@
   background: #eee;
 
   .main-title {
-    background-color: #000000 !important;
-    background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-    color: white;
+    // background-color: #000000 !important;
+    // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+    // color: white;
     font-size: 16px;
-    padding: 79px 30px 0px 30px;
+    // padding: 79px 30px 0px 30px;
+    padding: 25px 30px 0px 30px;
     font-weight: bold;
+    color: rgba(0, 0, 0, 0.7);
 
     .main-title-text {
       float: left;
       padding-top: 15px;
     }
 
+    .adsId {
+      color: #40a5ec;
+      margin-left: 5px;
+    }
+
     .datePicker {
       width: 250px;
       float: right;
-      color: black;
 
-      input {
-        color: white;
-      }
+      // input {
+      //   color: white;
+      // }
     }
   }
 
@@ -33,7 +39,7 @@
     background: rgba(68, 181, 67, 0.2);
     color: darkgreen;
     margin: 30px;
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 20px;
     padding: 15px;
     border-left: 4px solid green;
@@ -44,7 +50,7 @@
     -webkit-animation: notificationAni 0.4s ease-out;
     @keyframes notificationAni {
       from {
-        transform: translateY(-3vh);
+        transform: translateY(3vh);
       }
       to {
         transform: translateY(0);

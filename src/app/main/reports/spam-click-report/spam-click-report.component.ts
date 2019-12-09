@@ -247,6 +247,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   ];
 
   ngOnInit() {
+    this.sessionService.completeConfigStep(Generals.AccountConfigStep.SEE_REPORT.value);
     this._fuseProgressBarService.show();
     this.pageLimit = this.itemsPerPageOptions[0].value;
 

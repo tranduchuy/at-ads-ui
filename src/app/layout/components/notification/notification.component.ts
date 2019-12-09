@@ -1,0 +1,191 @@
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material';
+import { SessionService } from 'app/shared/services/session.service';
+import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
+import { Router } from '@angular/router';
+import { Generals } from 'app/shared/constants/generals';
+import { take } from 'rxjs/operators';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+
+@Component({
+  selector: 'app-notification',
+  templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.scss']
+})
+export class NotificationComponent extends PageBaseComponent implements OnInit, AfterViewInit {
+  @ViewChild('stepper', { static: false }) private stepper: MatStepper;
+
+  isLinear: boolean;
+  stepForm1: FormGroup;
+  stepForm2: FormGroup;
+  stepForm3: FormGroup;
+  stepForm4: FormGroup;
+  stepForm5: FormGroup;
+  stepForms: FormGroup[];
+  isNotificationShown: boolean;
+  isStepperShown: boolean;
+  activedRoute: string;
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _sessionService: SessionService,
+    private _adwordsAccountsService: AdwordsAccountsService,
+    private _router: Router,
+    private _fuseProgressBarService: FuseProgressBarService
+  ) {
+    super();
+
+    _router.events
+      .pipe(take(1))
+      .subscribe((url: any) => {
+        this.activedRoute = url.url;
+      });
+  }
+
+  ngOnInit() {
+    this._fuseProgressBarService.show();
+    this.isNotificationShown = false;
+    this.isStepperShown = false;
+  }
+
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.getUser();
+      this.checkIfNotificationShown();
+    }, 500);
+  }
+
+  getUser() {
+    const sub = this._sessionService.getUser()
+      .pipe(take(1))
+      .subscribe(user => {
+        if (user) {
+          this.getListAccounts();
+        }
+        else {
+          this._sessionService.allowNoficationToShow(false);
+          this.isNotificationShown = false;
+        }
+      });
+    this.subscriptions.push(sub);
+  }
+
+  checkIfNotificationShown() {
+    const sub = this._sessionService.checkNotificationShowing()
+      .subscribe((isAllowed: boolean) => {
+        this.isNotificationShown = isAllowed;
+      });
+    this.subscriptions.push(sub);
+  }
+
+  getListAccounts() {
+    const sub = this._sessionService.getListAccounts()
+      .subscribe((listAccounts => {
+        if (listAccounts) {
+          this._sessionService.allowNoficationToShow(true);
+          this.isStepperShown = true;
+          this.isLinear = true;
+
+          this.stepForms = [
+            this.stepForm1 = this._formBuilder.group({
+              step1: ['', Validators.required]
+            }),
+            this.stepForm2 = this._formBuilder.group({
+              step2: ['', Validators.required]
+            }),
+            this.stepForm3 = this._formBuilder.group({
+              step3: ['', Validators.required]
+            }),
+            this.stepForm4 = this._formBuilder.group({
+              step4: ['', Validators.required]
+            }),
+            this.stepForm5 = this._formBuilder.group({
+              step5: ['', Validators.required]
+            })
+          ];
+
+          setTimeout(() => {
+            this.onConfigStepCompleted();
+          }, 500);
+        }
+      }));
+    this.subscriptions.push(sub);
+  }
+
+  onConfigStepCompleted() {
+    const sub = this._sessionService.onConfigStepCompleted()
+      .subscribe((step: number) => {
+        if (
+          step >= Generals.AccountConfigStep.CONNECT_ACCOUNT.value
+          && step <= Generals.AccountConfigStep.ADD_WEBSITE.value
+        ) {
+          this.isStepperShown = true;
+          this.updateAccountConfigStep(step);
+        }
+        else if (
+          step >= Generals.AccountConfigStep.ADD_TRACKING.value
+          && step <= Generals.AccountConfigStep.SEE_REPORT.value
+        ) {
+          this.isStepperShown = false;
+          if (step === Generals.AccountConfigStep.ADD_TRACKING.value)
+            this.updateAccountConfigStep(Generals.AccountConfigStep.SEE_REPORT.value);
+          else this.navigateToStep(Generals.AccountConfigStep.SEE_REPORT.value);
+        }
+      });
+    this.subscriptions.push(sub);
+  }
+
+  updateAccountConfigStep(step: number) {
+    const sub = this._adwordsAccountsService.updateAccountConfigStep({ step })
+      .subscribe(res => {
+        this.goToStep(step + 1);
+      });
+    this.subscriptions.push(sub);
+  }
+
+  goToStep(step: number) {
+    for (let i = 0; i < step - 1; i++) {
+      this.stepForms[i].controls[`step${i + 1}`].setValue(i + 1);
+      this.stepper.next();
+    }
+  }
+
+  navigateToStep(step: number) {
+    switch (step) {
+      case 1:
+        this._router.navigateByUrl(Generals.AccountConfigStep.CONNECT_ACCOUNT.route);
+        break;
+      case 2:
+        this._router.navigateByUrl(Generals.AccountConfigStep.SELECT_CAMPAIGN.route);
+        break;
+      case 3:
+        this._router.navigateByUrl(`${Generals.AccountConfigStep.ADD_WEBSITE.route}${this._sessionService.activeAccountId}`);
+        break;
+      case 4:
+        this._router.navigateByUrl(`${Generals.AccountConfigStep.ADD_TRACKING.route}${this._sessionService.activeAccountId}`);
+        break;
+      case 5:
+        this._router.navigateByUrl(`${Generals.AccountConfigStep.SEE_REPORT.route}`);
+        break;
+      default:
+        break;
+    }
+  }
+
+  onStepperSelectionChanged(e) {
+    const selectedStepIndex = e.selectedIndex + 1;
+    this.navigateToStep(selectedStepIndex);
+    // if (
+    //   this.activedRoute.includes(Generals.AccountConfigStep.CONNECT_ACCOUNT.route)
+    //   || this.activedRoute.includes(Generals.AccountConfigStep.SELECT_CAMPAIGN.route)
+    //   || this.activedRoute.includes(Generals.AccountConfigStep.ADD_WEBSITE.route)
+    //   || this.activedRoute.includes(Generals.AccountConfigStep.ADD_TRACKING.route)
+    //   || this.activedRoute.includes(Generals.AccountConfigStep.SEE_REPORT.route)
+    // ) {
+    //   this.navigateToStep(selectedStepIndex);
+    // }
+  }
+}

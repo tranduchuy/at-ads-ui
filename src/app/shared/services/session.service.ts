@@ -25,11 +25,29 @@ export class SessionService {
   private _removedAccountId$ = new BehaviorSubject<string>('');
   private _activeAccountChanged$ = new BehaviorSubject<string>('');
   private _reportTableChanged$ = new BehaviorSubject<number>(0);
+  private _configStep$ = new BehaviorSubject<number>(0);
+  private _isNoficationShown$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private cookieService: CookieService
   ) {
 
+  }
+
+  checkNotificationShowing(): Observable<boolean> {
+    return this._isNoficationShown$.asObservable();
+  }
+
+  allowNoficationToShow(isAllowed: boolean) {
+    return this._isNoficationShown$.next(isAllowed);
+  }
+
+  onConfigStepCompleted(): Observable<number> {
+    return this._configStep$.asObservable();
+  }
+
+  completeConfigStep(step: number) {
+    this._configStep$.next(step);
   }
 
   onReportTableChanged(): Observable<any> {
