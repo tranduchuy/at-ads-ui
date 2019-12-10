@@ -29,11 +29,29 @@ export class SessionService {
   private _reportTableChanged$ = new BehaviorSubject<number>(0);
   private _doneConfigStep$ = new BehaviorSubject<number>(0);
   private _isNoficationShown$ = new BehaviorSubject<boolean>(false);
+  private _activeAccountConnection$ = new BehaviorSubject<string>('');
+  private _stepperStepOption$ = new BehaviorSubject<string>('');
 
   constructor(
     private cookieService: CookieService
   ) {
 
+  }
+
+  getStepperStepOption(): Observable<string> {
+    return this._stepperStepOption$.asObservable();
+  }
+
+  setStepperStepOption(option: string) {
+    this._stepperStepOption$.next(option);
+  }
+
+  noticeActiveAccountConnection(value: string) {
+    this._activeAccountConnection$.next(value);
+  }
+
+  getValueOfActiveAccountConnection(): string {
+    return this._activeAccountConnection$.getValue();
   }
 
   checkNotificationShowing(): Observable<boolean> {
@@ -137,6 +155,8 @@ export class SessionService {
     this._activeAccountChanged$.next('');
     this._reportTableChanged$.next(0);
     this._doneConfigStep$.next(0);
+    this._activeAccountConnection$.next('');
+    this._stepperStepOption$.next('');
   }
 
   getAcceptedAdsId(): Observable<string> {

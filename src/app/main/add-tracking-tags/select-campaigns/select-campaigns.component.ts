@@ -119,7 +119,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         if (params.campaigns.length > 0) {
           if (this.sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.SELECT_CAMPAIGN.value)
             this.sessionService.completeConfigStep(Generals.AccountConfigStep.SELECT_CAMPAIGN.value);
-            
+
           setTimeout(() => {
             this._dialogService._openSuccessDialog(res);
             this._fuseProgressBarService.hide();
@@ -160,14 +160,18 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         (error: HttpErrorResponse) => {
 
           if (error.error.messages) {
+            this._fuseProgressBarService.hide();
+            this._fuseSplashScreenService.hide();
+            this.isProcessing = false;
             this.campaignList = [];
             this.trackingCampaignList = [];
             this.hasCampaign = false;
-            this._dialogService._openErrorDialog(error.error);
-            this.isProcessing = false;
+            if (error.status === 400) {
+              this._dialogService._openInfoDialog('Tài khoản chưa được chấp nhận quyền quản lý hệ thống');
+            } else {
+              this._dialogService._openErrorDialog(error.error);
+            }
           }
-          this._fuseProgressBarService.hide();
-          this._fuseSplashScreenService.hide();
         }
       );
     this.subscriptions.push(sub);

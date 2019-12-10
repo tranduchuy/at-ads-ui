@@ -580,7 +580,7 @@
     .feature-container {
       background: url("../../assets/images/backgrounds/1457718481934.jpg");
       background-size: 100% 100%;
-      background-attachment: fixed;
+      // background-attachment: fixed;
 
       .feature {
         background: rgba(0, 0, 0, 0.6);
@@ -588,7 +588,7 @@
         color: white;
 
         .overview {
-          padding-top: 40px;
+          padding-top: 20px;
           padding-right: 80px;
           text-shadow: 1px 1px 4px black;
 
@@ -609,6 +609,11 @@
             line-height: 25px;
             text-align: justify;
             font-size: 12px;
+          }
+
+          .overview-image {
+            //width: 80%;
+            margin-top: 75px;
           }
 
           .trial {
@@ -636,31 +641,28 @@
       //border-radius: 7px;
       //filter: drop-shadow(0px 1px 4px black);
       //text-shadow: 1px 1px 4px black;
-      padding: 10px;
-      padding-top: 25px;
-      padding-bottom: 15px;
+      padding: 5px 15px 0 15px;
       transition: 0.2s;
       text-align: justify;
-      min-height: 100px;
+      display: flex;
+      align-items: center;
 
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
       mat-icon,
       img {
-        font-size: 35px;
-        min-width: 35px;
+        font-size: 42px;
+        min-width: 42px;
         color: skyblue;
         margin-left: 5px;
         filter: drop-shadow(1px 1px 1px black) !important;
       }
 
       img {
-        height: 35px;
+        height: 42px;
       }
 
       p {
-        padding: 5px;
-        padding-top: 0;
         font-size: 11px;
         color: #eee;
       }
@@ -668,6 +670,7 @@
       .feature-name {
         font-weight: bold;
         color: #c5e5ed;
+        font-size: 12px;
       }
 
       &:hover {
@@ -1037,6 +1040,8 @@
 
       .feature-container {
         //background: url("../../assets/images/backgrounds/maxresdefault.jpg");
+        background-color: #0d0a0b;
+        background-image: linear-gradient(315deg, #0d0a0b 0%, #009fc2 74%);
 
         .feature {
           padding: 10px;
@@ -1053,6 +1058,10 @@
               }
             }
 
+            .overview-image {
+              display: none;
+            }
+
             .overview-info {
               line-height: 25px;
             }
@@ -1066,7 +1075,8 @@
       }
 
       .feature-item {
-        padding-bottom: 5px;
+        padding-top: 15px;
+        padding-bottom: 10px;
 
         mat-icon,
         img {

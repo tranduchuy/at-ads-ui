@@ -350,6 +350,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
               isNavigationReloaded: true
             });
 
+            this._sessionService.noticeActiveAccountConnection('Connected by id but is not refreshed');
             this.isAccountListShown = false;
             this.isConnected = true;
             setTimeout(() => {

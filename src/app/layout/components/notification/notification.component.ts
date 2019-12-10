@@ -212,8 +212,19 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
         this.stepper.next();
       }
     }
+    const activeAccountConnection = this._sessionService.getValueOfActiveAccountConnection();
     if (!this._router.url.includes('danh-sach-tai-khoan')) {
-      this.navigateToStep(step);
+      if (activeAccountConnection === 'Connected by id but is not refreshed') {
+        if (doneStep > Generals.AccountConfigStep.CONNECT_ACCOUNT.value) {
+          this.stepper.next();
+          this.navigateToStep(step);
+        } else {
+          this.stepper.previous();
+        }
+      } else {
+        this.stepper.next();
+        this.navigateToStep(step);
+      }
     }
   }
 
