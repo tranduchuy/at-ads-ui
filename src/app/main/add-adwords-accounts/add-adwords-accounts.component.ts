@@ -338,7 +338,7 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
               data: {
                 messages: ['Kết nối tài khoản Google Ads thành công']
               },
-              navigatedRoute: '/danh-sach-tai-khoan',
+              //navigatedRoute: '/danh-sach-tai-khoan',
               isNavigationReloaded: true
             });
           } else {

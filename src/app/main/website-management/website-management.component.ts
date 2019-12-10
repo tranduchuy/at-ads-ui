@@ -10,6 +10,7 @@ import { Validators } from '@angular/forms';
 import { WebsiteManagementService } from './website-management.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Generals } from 'app/shared/constants/generals';
 
 export interface Website {
   domain: string;
@@ -136,6 +137,11 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
           this.isAddingWebsiteAllowed = (this.websites || []).length < this.limitWebsite;
           this._fuseProgressiveBarService.hide();
           this.isProcessing = false;
+
+          if (this.websites.length > 0
+            && this._sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.ADD_WEBSITE.value) {
+            this._sessionService.completeConfigStep(Generals.AccountConfigStep.ADD_WEBSITE.value);
+          }
 
           if (action) {
             if (action.status === 'SUCCESS') {

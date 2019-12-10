@@ -287,7 +287,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                             connectType: account.connectType,
                             websites: account.websites,
                             limitWebsite: account.limitWebsite,
-                            configStep: account.configStep
+                            configStep: account.configStep || Generals.AccountConfigStep.CONNECT_ACCOUNT.value
                         };
                     });
 
@@ -299,6 +299,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     this.accountCtrl.setValue('');
                     this._sessionService.unsetActiveGoogleAdsAccount();
                     this._sessionService.completeCheckingIfUserHasAccount(false);
+                    this._sessionService.completeConfigStep(0);
                     this._fuseNavigationService.reloadNavigation();
                     return;
                 }
@@ -358,6 +359,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                     this.accountCtrl.setValue('');
                     this._sessionService.completeCheckingIfUserHasAccount(false);
                     this._sessionService.unsetActiveGoogleAdsAccount();
+                    this._sessionService.completeConfigStep(0);
                     this._fuseNavigationService.reloadNavigation();
                     this.isProcessing = false;
                     this.isAccountSelectionDisplayed = false;

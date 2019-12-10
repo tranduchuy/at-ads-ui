@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { Generals } from 'app/shared/constants/generals';
 import { take } from 'rxjs/operators';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import * as _ from 'lodash';
+import { PreviousRouteService } from 'app/shared/services/previous-route.service';
 
 @Component({
   selector: 'app-notification',
@@ -33,7 +35,7 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
     private _sessionService: SessionService,
     private _adwordsAccountsService: AdwordsAccountsService,
     private _router: Router,
-    private _fuseProgressBarService: FuseProgressBarService
+    private _fuseProgressBarService: FuseProgressBarService,
   ) {
     super();
 
@@ -48,6 +50,27 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
     this._fuseProgressBarService.show();
     this.isNotificationShown = false;
     this.isStepperShown = false;
+    //this.initStepForms();
+  }
+
+  initStepForms() {
+    this.stepForms = [
+      this.stepForm1 = this._formBuilder.group({
+        step1: ['', Validators.required]
+      }),
+      this.stepForm2 = this._formBuilder.group({
+        step2: ['', Validators.required]
+      }),
+      this.stepForm3 = this._formBuilder.group({
+        step3: ['', Validators.required]
+      }),
+      this.stepForm4 = this._formBuilder.group({
+        step4: ['', Validators.required]
+      }),
+      this.stepForm5 = this._formBuilder.group({
+        step5: ['', Validators.required]
+      })
+    ];
   }
 
 
@@ -73,6 +96,22 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
     this.subscriptions.push(sub);
   }
 
+  getAccountId() {
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
+          const activeAccount: any = _.find(
+            this._sessionService.getValueOfListAccounts(),
+            account => account.accountId === this._sessionService.activeAccountId);
+          if (activeAccount) {
+            this.initStepForms();
+            this._sessionService.completeConfigStep(activeAccount.configStep);
+          }
+        }
+      });
+    this.subscriptions.push(sub);
+  }
+
   checkIfNotificationShown() {
     const sub = this._sessionService.checkNotificationShowing()
       .subscribe((isAllowed: boolean) => {
@@ -86,28 +125,28 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
       .subscribe((listAccounts => {
         if (listAccounts) {
           this._sessionService.allowNoficationToShow(true);
-          this.isStepperShown = true;
           this.isLinear = true;
 
-          this.stepForms = [
-            this.stepForm1 = this._formBuilder.group({
-              step1: ['', Validators.required]
-            }),
-            this.stepForm2 = this._formBuilder.group({
-              step2: ['', Validators.required]
-            }),
-            this.stepForm3 = this._formBuilder.group({
-              step3: ['', Validators.required]
-            }),
-            this.stepForm4 = this._formBuilder.group({
-              step4: ['', Validators.required]
-            }),
-            this.stepForm5 = this._formBuilder.group({
-              step5: ['', Validators.required]
-            })
-          ];
+          // this.stepForms = [
+          //   this.stepForm1 = this._formBuilder.group({
+          //     step1: ['', Validators.required]
+          //   }),
+          //   this.stepForm2 = this._formBuilder.group({
+          //     step2: ['', Validators.required]
+          //   }),
+          //   this.stepForm3 = this._formBuilder.group({
+          //     step3: ['', Validators.required]
+          //   }),
+          //   this.stepForm4 = this._formBuilder.group({
+          //     step4: ['', Validators.required]
+          //   }),
+          //   this.stepForm5 = this._formBuilder.group({
+          //     step5: ['', Validators.required]
+          //   })
+          // ];
 
           setTimeout(() => {
+            this.getAccountId();
             this.onConfigStepCompleted();
           }, 500);
         }
@@ -132,14 +171,32 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
           this.isStepperShown = false;
           if (step === Generals.AccountConfigStep.ADD_TRACKING.value)
             this.updateAccountConfigStep(Generals.AccountConfigStep.SEE_REPORT.value);
-          else this.navigateToStep(Generals.AccountConfigStep.SEE_REPORT.value);
+
+          if (!this._router.url.includes('danh-sach-tai-khoan')) {
+            this.navigateToStep(Generals.AccountConfigStep.SEE_REPORT.value);
+          }
+        }
+        else if (step === 0) {
+          this.isStepperShown = false;
         }
       });
     this.subscriptions.push(sub);
   }
 
+  onClickStepper(e) {
+    const stepLabel = e.srcElement.innerText;
+    const stepInfo = _.find(Generals.AccountConfigStep, step => stepLabel.includes(step.name));
+    if (stepInfo) {
+      const stepFormValue = this.stepForms[stepInfo.value - 1].controls[`step${stepInfo.value}`].value;
+      if (stepFormValue || stepInfo.value === this._sessionService.getValueOfDoneConfigStep() + 1) {
+        this.navigateToStep(stepInfo.value);
+      }
+    }
+  }
+
   updateAccountConfigStep(step: number) {
     const sub = this._adwordsAccountsService.updateAccountConfigStep({ step })
+      .pipe(take(1))
       .subscribe(res => {
         this.goToStep(step + 1);
       });
@@ -147,9 +204,16 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
   }
 
   goToStep(step: number) {
-    for (let i = 0; i < step - 1; i++) {
-      this.stepForms[i].controls[`step${i + 1}`].setValue(i + 1);
-      this.stepper.next();
+    const doneStep = this._sessionService.getValueOfDoneConfigStep();
+    if (doneStep < Generals.AccountConfigStep.ADD_TRACKING.value) {
+      this.stepper.reset();
+      for (let i = 0; i < step - 1; i++) {
+        this.stepForms[i].controls[`step${i + 1}`].setValue(i + 1);
+        this.stepper.next();
+      }
+    }
+    if (!this._router.url.includes('danh-sach-tai-khoan')) {
+      this.navigateToStep(step);
     }
   }
 
@@ -176,8 +240,8 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
   }
 
   onStepperSelectionChanged(e) {
-    const selectedStepIndex = e.selectedIndex + 1;
-    this.navigateToStep(selectedStepIndex);
+    // const selectedStepIndex = e.selectedIndex + 1;
+    // this.navigateToStep(selectedStepIndex);
     // if (
     //   this.activedRoute.includes(Generals.AccountConfigStep.CONNECT_ACCOUNT.route)
     //   || this.activedRoute.includes(Generals.AccountConfigStep.SELECT_CAMPAIGN.route)

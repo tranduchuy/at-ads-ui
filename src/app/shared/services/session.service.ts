@@ -27,7 +27,7 @@ export class SessionService {
   private _removedAccountId$ = new BehaviorSubject<string>('');
   private _activeAccountChanged$ = new BehaviorSubject<string>('');
   private _reportTableChanged$ = new BehaviorSubject<number>(0);
-  private _configStep$ = new BehaviorSubject<number>(0);
+  private _doneConfigStep$ = new BehaviorSubject<number>(0);
   private _isNoficationShown$ = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -45,11 +45,15 @@ export class SessionService {
   }
 
   onConfigStepCompleted(): Observable<number> {
-    return this._configStep$.asObservable();
+    return this._doneConfigStep$.asObservable();
   }
 
   completeConfigStep(step: number) {
-    this._configStep$.next(step);
+    this._doneConfigStep$.next(step);
+  }
+
+  getValueOfDoneConfigStep(): number {
+    return this._doneConfigStep$.getValue();
   }
 
   onReportTableChanged(): Observable<any> {
@@ -132,6 +136,7 @@ export class SessionService {
     this._removedAccountId$.next('');
     this._activeAccountChanged$.next('');
     this._reportTableChanged$.next(0);
+    this._doneConfigStep$.next(0);
   }
 
   getAcceptedAdsId(): Observable<string> {
