@@ -55,7 +55,7 @@
 
         .datePicker {
           width: 250px;
-          margin-top: 15px
+          margin-top: 15px;
         }
 
         .no-website-notify {
@@ -290,7 +290,7 @@
               font-weight: bold;
               padding-left: 2px;
               transition: 0.2s;
-              font-size: 12px;
+              font-size: 10px;
 
               &:hover {
                 background: rgba(3, 155, 229, 0.05);
@@ -298,35 +298,44 @@
             }
 
             mat-header-cell:nth-child(1),
-            mat-cell:nth-child(1),
-            mat-header-cell:nth-child(2),
-            mat-cell:nth-child(2) {
-              flex: 0 0 14%;
+            mat-cell:nth-child(1) {
+              flex: 0 0 10%;
             }
 
             mat-header-cell:nth-child(3),
             mat-cell:nth-child(3),
-            mat-header-cell:nth-child(5),
-            mat-cell:nth-child(5) {
-              flex: 0 0 8%;
-            }
-
             mat-header-cell:nth-child(4),
             mat-cell:nth-child(4),
             mat-header-cell:nth-child(8),
-            mat-cell:nth-child(8) {
+            mat-cell:nth-child(8),
+            mat-header-cell:nth-child(11),
+            mat-cell:nth-child(11),
+            mat-header-cell:nth-child(12),
+            mat-cell:nth-child(12) {
               justify-content: center;
             }
 
+            mat-header-cell:nth-child(2),
+            mat-cell:nth-child(2),
             mat-header-cell:nth-child(6),
             mat-cell:nth-child(6),
             mat-header-cell:nth-child(7),
             mat-cell:nth-child(7),
             mat-header-cell:nth-child(9),
             mat-cell:nth-child(9),
-            mat-header-cell:nth-child(10),
-            mat-cell:nth-child(10) {
-              flex: 0 0 10%;
+            mat-header-cell:nth-child(11),
+            mat-cell:nth-child(11) {
+              flex: 0 0 8%;
+            }
+
+            mat-header-cell:nth-child(13),
+            mat-cell:nth-child(13),
+            mat-header-cell:nth-child(14),
+            mat-cell:nth-child(14),
+            mat-header-cell:nth-child(15),
+            mat-cell:nth-child(15) {
+              flex: 0 0 5%;
+              justify-content: center;
             }
 
             mat-header-cell {
@@ -336,12 +345,10 @@
             }
 
             mat-cell {
-              font-size: 12px;
-
               mat-icon {
-                font-size: 16px;
-                margin-top: 5px;
+                font-size: 14px;
                 margin-right: -5px;
+                margin-top: 5px;
               }
             }
 
@@ -355,6 +362,11 @@
               &:hover {
                 background: rgba(3, 155, 229, 0.05);
               }
+            }
+
+            mat-header-cell,
+            mat-cell {
+              font-size: 10px;
             }
 
             mat-header-row,

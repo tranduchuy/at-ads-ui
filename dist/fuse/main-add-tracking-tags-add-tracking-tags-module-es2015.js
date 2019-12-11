@@ -334,6 +334,11 @@ let SelectCampaignsComponent = class SelectCampaignsComponent extends app_shared
             .subscribe(res => {
             this.trackingCampaignList = res.data.campaignIds;
             this.selectedCampaigns = this.trackingCampaignList;
+            if (this.trackingCampaignList.length > 0) {
+                if (this.sessionService.getValueOfDoneConfigStep() < app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConfigStep.SELECT_CAMPAIGN.value) {
+                    this.sessionService.completeConfigStep(app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConfigStep.SELECT_CAMPAIGN.value);
+                }
+            }
             this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
             this.numberOfEnableCampaigns = this.campaignList.filter(item => item.status === 'Hoạt động').length;
             this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_9__["MatTableDataSource"](this.campaignList);

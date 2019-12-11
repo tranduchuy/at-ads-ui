@@ -176,10 +176,6 @@
             }
           }
 
-          mat-cell {
-            font-size: 12px;
-          }
-
           mat-header-cell {
             background: whitesmoke;
             color: rgba(0, 0, 0, 0.7);
@@ -188,7 +184,8 @@
 
           mat-header-cell:nth-child(4),
           mat-cell:nth-child(4) {
-            flex: 0 0 5%;
+            flex: 0 0 6%;
+            justify-content: center;
 
             mat-icon {
               font-size: 16px;
@@ -197,10 +194,16 @@
             }
           }
 
+          mat-header-cell:nth-child(1),
+          mat-cell:nth-child(1) {
+            flex: 0 0 11%;
+          }
+
           mat-header-cell:nth-child(5),
           mat-cell:nth-child(5) {
+            flex: 0 0 11%;
             a {
-              width: 150px;
+              width: 130px;
               display: block;
               white-space: nowrap;
               text-overflow: ellipsis;
@@ -208,14 +211,24 @@
             }
           }
 
-          mat-header-cell:nth-child(5),
-          mat-cell:nth-child(5) {
-            flex: 0 0 13%;
+          mat-header-cell:nth-child(11),
+          mat-cell:nth-child(11) {
+            justify-content: center;
           }
 
-          mat-header-cell:nth-child(1),
-          mat-cell:nth-child(1) {
-            flex: 0 0 12%;
+          mat-header-cell:nth-child(12),
+          mat-cell:nth-child(12),
+          mat-header-cell:nth-child(13),
+          mat-cell:nth-child(13),
+          mat-header-cell:nth-child(14),
+          mat-cell:nth-child(14) {
+            flex: 0 0 6%;
+            justify-content: center;
+          }
+
+          mat-header-cell,
+          mat-cell {
+            font-size: 10px;
           }
 
           mat-row,

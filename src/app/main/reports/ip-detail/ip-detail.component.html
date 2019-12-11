@@ -189,6 +189,46 @@
               </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="keyword">
+              <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
+                {{element.keyword || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="campaignType">
+              <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
+                {{element.campaignType || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="matchType">
+              <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
+                {{element.matchType || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="page">
+              <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
+                {{element.page || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="position">
+              <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+              <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
+                [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
+                {{element.position || ''}}
+              </mat-cell>
+            </ng-container>
+
             <mat-header-row *matHeaderRowDef="clicksDataSourceCols; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: clicksDataSourceCols;"></mat-row>
           </mat-table>

@@ -349,6 +349,11 @@ var SelectCampaignsComponent = /** @class */ (function (_super) {
             .subscribe(function (res) {
             _this.trackingCampaignList = res.data.campaignIds;
             _this.selectedCampaigns = _this.trackingCampaignList;
+            if (_this.trackingCampaignList.length > 0) {
+                if (_this.sessionService.getValueOfDoneConfigStep() < app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConfigStep.SELECT_CAMPAIGN.value) {
+                    _this.sessionService.completeConfigStep(app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConfigStep.SELECT_CAMPAIGN.value);
+                }
+            }
             _this.checkAll = _this.campaignList.every(function (item) { return _this.selectedCampaigns.includes(item.id); });
             _this.numberOfEnableCampaigns = _this.campaignList.filter(function (item) { return item.status === 'Hoạt động'; }).length;
             _this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_9__["MatTableDataSource"](_this.campaignList);

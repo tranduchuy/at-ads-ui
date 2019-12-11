@@ -92,8 +92,7 @@
       <div class="hl2-title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center"
         fxLayoutAlign.xs="center start" fxLayoutGap="50px" fxLayoutGap.xs="10px">
         <div class="hl2-title3" fxFlex="55">
-          THỐNG KÊ LƯU LƯỢNG TRUY CẬP - TÀI KHOẢN <span
-            class="adsId">{{sessionService.activeAdsAccountId}}</span>
+          THỐNG KÊ LƯU LƯỢNG TRUY CẬP - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
         </div>
 
         <div class="no-website-notify" *ngIf="hasWebsite === false">
@@ -274,6 +273,36 @@
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="keyword">
+              <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.keyword || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="campaignType">
+              <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.campaignType || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="matchType">
+              <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.matchType || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="page">
+              <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.page || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="position">
+              <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.position || ''}}
               </mat-cell>
             </ng-container>
 

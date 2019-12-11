@@ -65,7 +65,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     '1 tuần': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
   };
 
-  overviewTableCols: string[] = ['createdAt', 'ip', 'trafficSource', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'location'];
+  overviewTableCols: string[] = ['createdAt', 'ip', 'trafficSource', 'session', 'status', 'os', 'browser', 'isPrivateBrowsing', 'networkCompany', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   overviewTable = [];
   itemsPerPageOptions = Generals.Pagination.itemsPerPageOptions;
 

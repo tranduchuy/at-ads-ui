@@ -187,6 +187,12 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         this.trackingCampaignList = res.data.campaignIds;
         this.selectedCampaigns = this.trackingCampaignList;
 
+        if (this.trackingCampaignList.length > 0) {
+          if (this.sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.SELECT_CAMPAIGN.value) {
+            this.sessionService.completeConfigStep(Generals.AccountConfigStep.SELECT_CAMPAIGN.value);
+          }
+        }
+
         this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
         this.numberOfEnableCampaigns = this.campaignList.filter(item => item.status === 'Hoạt động').length;
 
