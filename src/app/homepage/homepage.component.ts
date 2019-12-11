@@ -30,6 +30,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);
   isOnLogin: boolean;
+  isProcessing: boolean;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
@@ -234,6 +235,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   private submitGoogleLoginForm(accessToken: string, refreshToken?: string): void {
     this._fuseSplashScreenService.show();
+    this.isProcessing = true;
     const params: any = { accessToken };
     if (refreshToken) {
       params.refreshToken = refreshToken;
@@ -249,6 +251,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         this._sessionService.resetAllObservables();
 
         this._ngZone.run(() => {
+          this.isProcessing = false;
           this._fuseSplashScreenService.hide();
           this._router.navigateByUrl('/them-tai-khoan-moi');
         });
