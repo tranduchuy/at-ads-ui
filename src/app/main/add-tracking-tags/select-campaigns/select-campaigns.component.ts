@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { Generals } from 'app/shared/constants/generals';
 
 export interface Campaign {
   id: string;
@@ -34,7 +35,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   trackingCampaignList: string[] = [];
   selectedCampaigns: string[] = [];
   activatedAdsId: string;
-  isProcessing: boolean = false;
+  isProcessing: boolean;
   checkAll: boolean;
   hasCampaign: boolean;
   numberOfEnableCampaigns: number;
@@ -54,6 +55,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
   ngOnInit() {
     this._fuseProgressBarService.show();
+    this.isProcessing = true;
     const sub = this.sessionService.getAccountId()
       .pipe(distinctUntilChanged())
       .subscribe((accountId: string) => {
@@ -114,14 +116,28 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
         //this.getOriginalCampaigns();
 
-        setTimeout(() => {
+        if (params.campaigns.length > 0) {
+          if (this.sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.SELECT_CAMPAIGN.value) {
+            this.sessionService.completeConfigStep(Generals.AccountConfigStep.SELECT_CAMPAIGN.value);
+            this._dialogService._openSuccessDialog(res);
+            this._fuseProgressBarService.hide();
+            this._fuseSplashScreenService.hide();
+            this.isProcessing = false;
+          }
+          else {
+            this._dialogService._openSuccessDialog(res);
+            this._fuseProgressBarService.hide();
+            this._fuseSplashScreenService.hide();
+            this.isProcessing = false;
+            this._router.navigateByUrl(`/gan-tracking/website/${this.sessionService.activeAccountId}`);
+          }
+        }
+        else {
           this._dialogService._openSuccessDialog(res);
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
           this.isProcessing = false;
-
-          this._router.navigateByUrl(`/gan-tracking/website/${this.sessionService.activeAccountId}`);
-        }, 0);
+        }
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
@@ -148,14 +164,18 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         (error: HttpErrorResponse) => {
 
           if (error.error.messages) {
+            this._fuseProgressBarService.hide();
+            this._fuseSplashScreenService.hide();
+            this.isProcessing = false;
             this.campaignList = [];
             this.trackingCampaignList = [];
             this.hasCampaign = false;
-            this._dialogService._openErrorDialog(error.error);
-            this.isProcessing = false;
+            if (error.status === 400) {
+              this._dialogService._openInfoDialog('Tài khoản chưa được chấp nhận quyền quản lý hệ thống');
+            } else {
+              this._dialogService._openErrorDialog(error.error);
+            }
           }
-          this._fuseProgressBarService.hide();
-          this._fuseSplashScreenService.hide();
         }
       );
     this.subscriptions.push(sub);
@@ -166,6 +186,12 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
       .subscribe(res => {
         this.trackingCampaignList = res.data.campaignIds;
         this.selectedCampaigns = this.trackingCampaignList;
+
+        if (this.trackingCampaignList.length > 0) {
+          if (this.sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.SELECT_CAMPAIGN.value) {
+            this.sessionService.completeConfigStep(Generals.AccountConfigStep.SELECT_CAMPAIGN.value);
+          }
+        }
 
         this.checkAll = this.campaignList.every(item => this.selectedCampaigns.includes(item.id));
         this.numberOfEnableCampaigns = this.campaignList.filter(item => item.status === 'Hoạt động').length;
@@ -189,7 +215,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   showSupportInfoDialog() {
     this._dialogService._openInfoDialog(`
     Vui lòng liên hệ
-    SĐT, Zalo, Viber 093.757.3139
+    SĐT, Zalo, Viber 093.757.3139 (Mr. Long)
     để được hỗ trợ thêm.
     `);
   }

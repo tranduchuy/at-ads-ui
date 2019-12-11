@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  background: #eee;
 
   .title1 {
     padding: 35px 30px 22px 30px;
@@ -8,6 +9,7 @@
     color: white;
     font-weight: bold;
     font-size: 16px;
+    display: none;
   }
 
   ::ng-deep .ngx-charts {
@@ -23,12 +25,19 @@
     .highline2 {
       .hl2-title1 {
         // padding: 55px 30px 17px 30px;
-        padding: 7px 30px 0 30px;
+        // padding: 7px 30px 0 30px;
         background-color: #000000 !important;
         background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
         color: white;
         font-size: 16px;
         font-weight: bold;
+        // color: rgba(0, 0, 0, 0.7);
+        padding: 0 30px 0 30px;
+
+        .adsId {
+          color: yellow;
+          margin-left: 5px;
+        }
 
         .website-selection {
           margin-top: 15px;
@@ -45,13 +54,8 @@
         }
 
         .datePicker {
-          color: #40a5ec;
           width: 250px;
           margin-top: 15px;
-
-          input {
-            color: white;
-          }
         }
 
         .no-website-notify {
@@ -66,8 +70,21 @@
 
       .overview-chart {
         margin: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
         background: white;
-        box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+        box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+        border-radius: 7px;
+
+        -webkit-animation: chartWidgetAni 0.4s ease-out;
+        @keyframes chartWidgetAni {
+          from {
+            transform: translateY(100vh);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
 
         .session-total {
           position: relative;
@@ -140,7 +157,7 @@
         }
 
         .right-table {
-          box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+          box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
           margin-top: 12px;
           overflow: auto;
 
@@ -197,22 +214,36 @@
     }
 
     .overview {
+      border-radius: 7px;
       margin: 30px;
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      margin-top: 20px;
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       //height: 95vh;
       background: white;
+
+      -webkit-animation: overviewTableAni 0.6s ease-out;
+      @keyframes overviewTableAni {
+        from {
+          transform: translateY(100vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
       .overview-main {
-        padding: 30px;
-        padding-top: 0;
-        padding-bottom: 0;
+        border-radius: 7px;
+        padding: 0;
         background: white;
 
         .overview-title1 {
-          padding: 20px 0 15px 0;
+          padding: 15px;
           background: white;
-          font-size: 14px;
-          font-weight: bold;
+          font-size: 16px;
           color: rgba(0, 0, 0, 0.7);
+          width: 100%;
+          border-top-left-radius: 7px;
+          border-top-right-radius: 7px;
 
           .datePicker {
             color: #40a5ec;
@@ -224,13 +255,15 @@
         }
 
         .icon {
-          height: 22px;
-          width: 22px;
-          margin-right: 5px;
+          height: 16px;
+          width: 16px;
+          margin-right: 3px;
         }
 
         .pagination-buttons {
+          padding: 10px;
           padding-top: 15px;
+          padding-bottom: 0;
           margin-bottom: -10px;
           color: gray;
 
@@ -242,7 +275,6 @@
         }
 
         .overview-table {
-          border: 0.5px solid #eee;
           overflow: auto;
 
           mat-table {
@@ -258,7 +290,7 @@
               font-weight: bold;
               padding-left: 2px;
               transition: 0.2s;
-              font-size: 12px;
+              font-size: 10px;
 
               &:hover {
                 background: rgba(3, 155, 229, 0.05);
@@ -266,53 +298,75 @@
             }
 
             mat-header-cell:nth-child(1),
-            mat-cell:nth-child(1),
-            mat-header-cell:nth-child(2),
-            mat-cell:nth-child(2) {
-              flex: 0 0 14%;
+            mat-cell:nth-child(1) {
+              flex: 0 0 10%;
             }
 
             mat-header-cell:nth-child(3),
             mat-cell:nth-child(3),
-            mat-header-cell:nth-child(5),
-            mat-cell:nth-child(5) {
-              flex: 0 0 8%;
-            }
-
             mat-header-cell:nth-child(4),
             mat-cell:nth-child(4),
             mat-header-cell:nth-child(8),
-            mat-cell:nth-child(8) {
+            mat-cell:nth-child(8),
+            mat-header-cell:nth-child(11),
+            mat-cell:nth-child(11),
+            mat-header-cell:nth-child(12),
+            mat-cell:nth-child(12) {
               justify-content: center;
             }
 
+            mat-header-cell:nth-child(2),
+            mat-cell:nth-child(2),
             mat-header-cell:nth-child(6),
             mat-cell:nth-child(6),
             mat-header-cell:nth-child(7),
             mat-cell:nth-child(7),
             mat-header-cell:nth-child(9),
             mat-cell:nth-child(9),
-            mat-header-cell:nth-child(10),
-            mat-cell:nth-child(10) {
-              flex: 0 0 10%;
+            mat-header-cell:nth-child(11),
+            mat-cell:nth-child(11) {
+              flex: 0 0 8%;
+            }
+
+            mat-header-cell:nth-child(13),
+            mat-cell:nth-child(13),
+            mat-header-cell:nth-child(14),
+            mat-cell:nth-child(14),
+            mat-header-cell:nth-child(15),
+            mat-cell:nth-child(15) {
+              flex: 0 0 5%;
+              justify-content: center;
             }
 
             mat-header-cell {
-              background: #40a5ec;
-              color: white;
+              background: whitesmoke;
+              color: rgba(0, 0, 0, 0.7);
               font-weight: bold;
             }
 
             mat-cell {
-              font-size: 12px;
+              mat-icon {
+                font-size: 14px;
+                margin-right: -5px;
+                margin-top: 5px;
+              }
             }
 
             mat-row {
               transition: 0.2s;
 
+              &:nth-child(odd) {
+                background: whitesmoke;
+              }
+
               &:hover {
                 background: rgba(3, 155, 229, 0.05);
               }
+            }
+
+            mat-header-cell,
+            mat-cell {
+              font-size: 10px;
             }
 
             mat-header-row,
@@ -359,8 +413,8 @@
           height: 750px;
 
           .session-total {
-            -webkit-transform: translate(25%, -180px);
-            transform: translate(25%, -180px);
+            -webkit-transform: translate(25%, -300px);
+            transform: translate(25%, -300px);
             position: relative;
           }
         }

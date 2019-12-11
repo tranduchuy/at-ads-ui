@@ -20,6 +20,6 @@ export class MainGuardService implements CanActivate {
     }
 
     this._router.navigateByUrl('/gioi-thieu');
-    return false;
+    return true;
   }
 }

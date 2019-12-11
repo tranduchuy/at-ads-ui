@@ -5,12 +5,12 @@ import { Validators } from '@angular/forms';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { AddAdwordsAccountsService } from './add-adwords-accounts.service';
 import { DialogService } from '../../shared/services/dialog.service';
-import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 import { SessionService } from 'app/shared/services/session.service';
 import { Router } from '@angular/router';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { environment } from 'environments/environment';
 import { MatTableDataSource } from '@angular/material';
+import * as _ from 'lodash';
 
 declare var gapi: any;
 
@@ -32,6 +32,7 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   adsAccountColumns: string[] = ['order', 'adsId', 'name', 'selection'];
   selectedAccount: any;
   disableAllControls: boolean;
+  isLimitAccountNotificationShown: boolean;
 
   auth2: any;
 
@@ -40,7 +41,6 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   constructor(
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
-    private _fuseNavigationService: FuseNavigationService,
     private _addAdwordsAccountsService: AddAdwordsAccountsService,
     private _sessionService: SessionService,
     private _router: Router,
@@ -75,13 +75,25 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
         if (listAccounts) {
           if (listAccounts.length === 0) {
             this.showAccountListByEmail();
+            this.isLimitAccountNotificationShown = false;
             this.disableAllControls = false;
           }
           else {
             const user = JSON.parse(this._sessionService.user);
-            if (user.licence.type !== 'CUSTOM')
-              this.disableAllControls = true;
-            else this.disableAllControls = false;
+            if (!this.isConnected) {
+              if (user.licence.type !== 'CUSTOM') {
+                this.disableAllControls = true;
+                this.isLimitAccountNotificationShown = true;
+              }
+              else {
+                this.disableAllControls = false;
+                this.isLimitAccountNotificationShown = false;
+              }
+            }
+            else {
+              this.disableAllControls = false;
+              this.isLimitAccountNotificationShown = false;
+            }
 
             this._fuseProgressiveBarService.hide();
             this.isProcessing = false;
@@ -211,14 +223,19 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
   }
 
   generateConnectAccountByEmailParam(): any {
-    return { 
-      adWordId: this.selectedAccount.googleAdId.replace(/\D/g, ''),
-      adsName: this.selectedAccount.adsName || ''
+    if (this.selectedAccount.adsName)
+      return {
+        adWordId: this.selectedAccount.googleAdId.replace(/\D/g, ''),
+        adsName: this.selectedAccount.adsName
+      };
+    return {
+      adWordId: this.selectedAccount.googleAdId.replace(/\D/g, '')
     };
   }
 
   connectAccountByEmail(): void {
     this.isProcessing = true;
+    this.isLimitAccountNotificationShown = false;
     this._fuseProgressiveBarService.show();
 
     const param = this.generateConnectAccountByEmailParam();
@@ -230,14 +247,18 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
           this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-          this._sessionService.notifyListAccountsChanged();
+          this._sessionService.notifyListAccountsChanged({
+            status: 'SUCCESS',
+            data: {
+              messages: ['Kết nối tài khoản Google Ads thành công']
+            },
+            navigatedRoute: '/gan-tracking/chien-dich',
+            isNavigationReloaded: true
+          });
 
           setTimeout(() => {
-            this._fuseNavigationService.reloadNavigation();
             this._fuseProgressiveBarService.hide();
             this.isProcessing = false;
-            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
-            this._router.navigateByUrl('/gan-tracking/chien-dich');
           }, 2000);
         },
         (error: HttpErrorResponse) => {
@@ -310,25 +331,32 @@ hoặc tài khoản này đã tồn tại trong hệ thống.
           this.connectedAdsId = this._adsAccountIdPipe.transform(res.data.account.adsId);
 
           this._sessionService.setActiveGoogleAdsAccount(this.connectedAccountId, this.connectedAdsId);
-          this._sessionService.notifyListAccountsChanged();
 
           if (res.data.isRefresh === true) {
-            setTimeout(() => {
-              this._fuseNavigationService.reloadNavigation();
-              this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công'] });
-              this._router.navigateByUrl('/danh-sach-tai-khoan');
-            }, 2000);
+            this._sessionService.notifyListAccountsChanged({
+              status: 'SUCCESS',
+              data: {
+                messages: ['Kết nối tài khoản Google Ads thành công']
+              },
+              //navigatedRoute: '/danh-sach-tai-khoan',
+              isNavigationReloaded: true
+            });
+          } else {
+            this._sessionService.notifyListAccountsChanged({
+              status: 'SUCCESS',
+              data: {
+                messages: ['Kết nối tài khoản Google Ads thành công! Vui lòng thực hiện theo các bước tiếp theo để hoàn tất kết nối.']
+              },
+              isNavigationReloaded: true
+            });
 
-            return;
-          }
-
-          setTimeout(() => {
-            this._fuseNavigationService.reloadNavigation();
-            this._dialogService._openSuccessDialog({ messages: ['Kết nối tài khoản Google Ads thành công! Vui lòng thực hiện theo các bước tiếp theo để hoàn tất kết nối.'] });
+            this._sessionService.noticeActiveAccountConnection('Connected by id but is not refreshed');
             this.isAccountListShown = false;
             this.isConnected = true;
-            this.isProcessing = false;
-          }, 2000);
+            setTimeout(() => {
+              this.isProcessing = false;
+            }, 2000);
+          }
         },
         (error: HttpErrorResponse) => {
           this.isConnected = false;

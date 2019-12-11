@@ -152,7 +152,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
   }
 
   unblockSampleIP() {
-    this._dialogService._openConfirmDialog('Mở chặn IP này?')
+    this._dialogService._openConfirmDialog('Bỏ chặn IP này?')
       .subscribe(
         (result: boolean) => {
 

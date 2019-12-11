@@ -4,6 +4,14 @@ import { environment } from '../../../environments/environment';
 
 import CookieNames from '../constants/cookies';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { ChangingListAccountsAction } from 'app/layout/components/toolbar/toolbar.component';
+
+export interface ChagingListAccountsAction {
+  status: 'SUCCESS' | 'ERROR' | 'INFO',
+  data: any,
+  navigatedRoute?: string,
+  isNavigationReloaded?: boolean
+}
 
 @Injectable()
 export class SessionService {
@@ -13,17 +21,57 @@ export class SessionService {
   private _user$ = new BehaviorSubject<any>({});
   private _accountAcceptance$ = new BehaviorSubject<boolean>(true);
   private _acceptedAdsId$ = new BehaviorSubject<string>('');
-  private _isListAccountChanged$ = new BehaviorSubject<boolean | any>(false);
+  private _isListAccountChanged$ = new BehaviorSubject<boolean | ChangingListAccountsAction>(false);
   private _doesUserHaveAccount$ = new BehaviorSubject<boolean>(false);
   private _listAccounts$ = new BehaviorSubject<any>(false);
   private _removedAccountId$ = new BehaviorSubject<string>('');
   private _activeAccountChanged$ = new BehaviorSubject<string>('');
   private _reportTableChanged$ = new BehaviorSubject<number>(0);
+  private _doneConfigStep$ = new BehaviorSubject<number>(0);
+  private _isNoficationShown$ = new BehaviorSubject<boolean>(false);
+  private _activeAccountConnection$ = new BehaviorSubject<string>('');
+  private _stepperStepOption$ = new BehaviorSubject<string>('');
 
   constructor(
     private cookieService: CookieService
   ) {
 
+  }
+
+  getStepperStepOption(): Observable<string> {
+    return this._stepperStepOption$.asObservable();
+  }
+
+  setStepperStepOption(option: string) {
+    this._stepperStepOption$.next(option);
+  }
+
+  noticeActiveAccountConnection(value: string) {
+    this._activeAccountConnection$.next(value);
+  }
+
+  getValueOfActiveAccountConnection(): string {
+    return this._activeAccountConnection$.getValue();
+  }
+
+  checkNotificationShowing(): Observable<boolean> {
+    return this._isNoficationShown$.asObservable();
+  }
+
+  allowNoficationToShow(isAllowed: boolean) {
+    return this._isNoficationShown$.next(isAllowed);
+  }
+
+  onConfigStepCompleted(): Observable<number> {
+    return this._doneConfigStep$.asObservable();
+  }
+
+  completeConfigStep(step: number) {
+    this._doneConfigStep$.next(step);
+  }
+
+  getValueOfDoneConfigStep(): number {
+    return this._doneConfigStep$.getValue();
   }
 
   onReportTableChanged(): Observable<any> {
@@ -86,14 +134,30 @@ export class SessionService {
     return this._isListAccountChanged$.asObservable();
   }
 
-  notifyListAccountsChanged(action?: any): void {
+  notifyListAccountsChanged(action?: ChangingListAccountsAction): void {
     if (action) {
       this._isListAccountChanged$.next(action);
     }
     else this._isListAccountChanged$.next(true);
   }
 
-
+  resetAllObservables() {
+    this._standByUser.next(null);
+    this._adsId$.next('');
+    this._accountId$.next('');
+    this._user$.next({});
+    this._accountAcceptance$.next(true);
+    this._acceptedAdsId$.next('');
+    this._isListAccountChanged$.next(false);
+    this._doesUserHaveAccount$.next(false);
+    this._listAccounts$.next(false);
+    this._removedAccountId$.next('');
+    this._activeAccountChanged$.next('');
+    this._reportTableChanged$.next(0);
+    this._doneConfigStep$.next(0);
+    this._activeAccountConnection$.next('');
+    this._stepperStepOption$.next('');
+  }
 
   getAcceptedAdsId(): Observable<string> {
     return this._acceptedAdsId$.asObservable();

@@ -1,9 +1,9 @@
 .container {
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 
   .title1 {
-    padding: 77px 30px 18px 30px;
+    padding: 15px 30px 18px 30px;
     background-color: #000000 !important;
     background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
     color: white;
@@ -17,12 +17,17 @@
         color: white;
       }
     }
+
+    .adsId {
+      color: yellow;
+      margin-left: 5px;
+    }
   }
 
   .icon {
-    height: 22px;
-    width: 22px;
-    margin-right: 5px;
+    height: 16px;
+    width: 16px;
+    margin-right: 3px;
   }
 
   .inner {
@@ -96,6 +101,11 @@
         mat-header-cell:nth-child(4),
         mat-cell:nth-child(4) {
           justify-content: center;
+
+          mat-icon {
+            font-size: 16px;
+            margin-top: 5px;
+          }
         }
 
         mat-header-cell:nth-child(2),
@@ -118,17 +128,24 @@
         }
 
         mat-header-cell {
-          background: #40a5ec;
-          color: white;
+          background: whitesmoke;
+          color: rgba(0, 0, 0, 0.7);
           font-weight: bold;
-        }
-
-        mat-row:hover {
-          background-color: rgba(3, 155, 229, 0.05);
         }
 
         mat-cell {
           font-size: 12px;
+        }
+
+        mat-row {
+
+          &:nth-child(odd) {
+            background: whitesmoke;
+          }
+
+          &:hover {
+            background-color: rgba(3, 155, 229, 0.05);
+          }
         }
 
         ul {
@@ -147,4 +164,5 @@
   }
 }
 
-@media screen and (max-width: 600px) {}
+@media screen and (max-width: 600px) {
+}

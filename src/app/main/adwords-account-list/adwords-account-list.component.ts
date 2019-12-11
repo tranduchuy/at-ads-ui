@@ -11,6 +11,8 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import * as _ from 'lodash';
 import { MatTableDataSource } from '@angular/material';
+import { Generals } from 'app/shared/constants/generals';
+import { take, last } from 'rxjs/operators';
 
 @Component({
   selector: 'app-adwords-account-list',
@@ -23,7 +25,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   accounts = [];
   dataSource = new MatTableDataSource();
   accountConnectTypes = [];
-  isProcessing: boolean = false;
+  isProcessing: boolean;
   adsAccountIdPipe = new AdsAccountIdPipe();
   user: any;
 
@@ -39,6 +41,8 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   ngOnInit() {
+    this._fuseProgressiveBarService.show();
+    this.isProcessing = true;
     this.dataSource = new MatTableDataSource(this.accounts);
     this.getUser();
   }
@@ -71,18 +75,14 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
 
     const removeAccountSub = this._adwordsAccountListService.removeAccount(accountId)
       .subscribe(
-        (res: ILoginSuccess) => {
-          // this._sessionService.notifyListAccountsChanged({
-          //   name: 'remove',
-          //   message: 'Ngắt kết nối tài khoản Google Ads thành công'
-          // });
-          // this._sessionService.notifyListAccountsChanged('remove');
-          // _.remove(this.accounts, account => account.accountId === accountId);
-          // this._sessionService.completeRemovingAccount(accountId);
-          // this.dataSource = new MatTableDataSource(this.accounts);
-          this._sessionService.notifyListAccountsChanged();
+        (res) => {
+          this._sessionService.notifyListAccountsChanged({
+            status: 'SUCCESS',
+            data: {
+              messages: ['Ngắt kết nối tài khoản Google Ads thành công']
+            }
+          });
           setTimeout(() => {
-            this._dialogService._openSuccessDialog({ messages: ['Ngắt kết nối tài khoản Google Ads thành công'] });
             this.isProcessing = false;
           }, 2000);
         },
@@ -111,14 +111,11 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     const sub = this._adwordsAccountListService.removeWebsite(websiteId)
       .subscribe(
         (res: ILoginSuccess) => {
-          // this._sessionService.notifyListAccountsChanged({
-          //   name: 'remove',
-          //   message: res.messages[0]
-          // });
-          this._sessionService.notifyListAccountsChanged();
-
+          this._sessionService.notifyListAccountsChanged({
+            status: 'SUCCESS',
+            data: res
+          });
           setTimeout(() => {
-            this._dialogService._openSuccessDialog(res);
             this.isProcessing = false;
           }, 2000);
         },
@@ -135,8 +132,9 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   getAccounts() {
     this._fuseProgressiveBarService.show();
     const sub = this._sessionService.getListAccounts()
-      .subscribe((listAccounts: any) => {
+      .subscribe(listAccounts => {
         if (listAccounts) {
+          this.isProcessing = false;
           this._fuseProgressiveBarService.hide();
           this.accounts = listAccounts;
           this.dataSource = new MatTableDataSource(this.accounts);
@@ -156,7 +154,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   }
 
   checkAccountAcceptance(adsId: string, isConnected?: boolean, connectType?: string) {
-    if (connectType === 'GOOGLE_ADS_ID') {
+    if (connectType === Generals.AccountConnectionType.byGoogleAdsId) {
       this.isProcessing = true;
       this._fuseProgressiveBarService.show();
 

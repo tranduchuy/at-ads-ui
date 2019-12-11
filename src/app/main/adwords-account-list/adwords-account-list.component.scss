@@ -2,13 +2,22 @@
   width: 100%;
 
   .title1 {
-    padding: 86px 20px 16px 0px;
+    //padding: 86px 20px 16px 0px;
     background: url("../../../assets/images/backgrounds/adword-bg3.jpg");
     background-size: 100% 100%;
     color: white;
+    text-shadow: 1px 1px 2px black;
     font-size: 16px;
     font-weight: bold;
-    text-shadow: 1px 1px 2px black;
+    padding: 20px 20px 20px 0px;
+
+    .title1-main {
+      padding-top: 5px;
+    }
+
+    mat-icon {
+      font-size: 18px;
+    }
 
     .add-account-button {
       text-shadow: none;
@@ -30,6 +39,33 @@
       font-size: 20px;
     }
 
+    .warning {
+      margin: 30px;
+      padding: 20px;
+      background: lightyellow;
+      border-left: 4px solid darkorange;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+
+      mat-icon {
+        color: orange;
+        font-size: 24px;
+        margin-right: 10px;
+      }
+
+      -webkit-animation: notificationAni 0.2s ease-out;
+      @keyframes notificationAni {
+        from {
+          transform: translateY(5vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+    }
+
     .website-list {
       width: 100%;
       max-height: 105px;
@@ -41,7 +77,7 @@
 
       li {
         a {
-          padding-left: 5px
+          padding-left: 5px;
         }
       }
     }

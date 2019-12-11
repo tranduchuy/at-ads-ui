@@ -2,12 +2,28 @@
   width: 100%;
 
   .title1 {
-    padding: 94px 30px 27px 30px;
-    background-color: #000000 !important;
-    background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-    color: white;
+    // padding: 94px 30px 27px 30px;
+    // background-color: #000000 !important;
+    // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+    // color: white;
+    // font-size: 16px;
+    // font-weight: bold;
+    // padding: 40px 30px 0px 30px;
+    // color: rgba(0, 0, 0, 0.7);
+
+    background: url("../../../assets/images/backgrounds/adword-bg3.jpg");
+    background-size: 100% 100%;
+    text-shadow: 1px 1px 2px black;
     font-size: 16px;
     font-weight: bold;
+    color: white;
+    //padding: 94px 30px 27px 30px;
+    padding: 30px 30px 25px 30px;
+
+    .adsId {
+      color: yellow;
+      margin-left: 5px;
+    }
   }
 
   .inner {
@@ -40,91 +56,112 @@
         width: 100%;
         padding: 20px;
         border-left: 4px solid darkorange;
-        background: #eee;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        background: lightyellow;
       }
     }
 
-    .table-wrapper {
-      background-color: white;
-      border: 0.5px solid #eee;
-      max-height: 500px;
-      margin-top: 10px;
-      overflow: auto;
-      box-shadow: none !important;
+    .no-website-notification {
+      color: gray;
+      padding: 10px;
+    }
 
-      mat-table {
-        box-shadow: none;
+    .website-list {
+      margin-top: 30px;
+      padding-top: 10px;
+      background: white;
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      border-radius: 7px;
+
+      .table-title {
+        color: rgba(0, 0, 0, 0.7);
+        padding-left: 15px;
       }
 
-      mat-row,
-      mat-header-row {
-        min-width: 600px;
-        width: 100%;
-      }
+      .table-wrapper {
+        background-color: white;
+        border: 0.5px solid #eee;
+        max-height: 500px;
+        margin-top: 10px;
+        overflow: auto;
+        box-shadow: none !important;
 
-      mat-row {
-        transition: 0.2s;
-      }
+        mat-table {
+          box-shadow: none;
+        }
 
-      mat-row:hover {
-        background-color: rgba(3, 155, 229, 0.05);
-      }
-
-      mat-header-cell:nth-child(1),
-      mat-cell:nth-child(1) {
-        flex: 0 0 10%;
-      }
-
-      mat-header-cell:nth-child(2),
-      mat-cell:nth-child(2) {
-        flex: 0 0 70%;
-      }
-
-      mat-cell:nth-child(3) {
-        button:not(.delete-button) {
+        mat-row,
+        mat-header-row {
+          min-width: 600px;
           width: 100%;
-          text-align: left !important;
-          border: 0;
-          padding-left: 0;
         }
 
-        .delete-button {
-          margin-left: 20px;
-        }
-      }
-
-      mat-cell {
-        font-size: 12px;
-
-        mat-icon {
-          font-size: 20px;
+        mat-row {
+          transition: 0.2s;
         }
 
-        .tracking-status {
+        mat-row:hover {
+          background-color: rgba(3, 155, 229, 0.05);
+        }
+
+        mat-header-cell:nth-child(1),
+        mat-cell:nth-child(1) {
+          flex: 0 0 10%;
+        }
+
+        mat-header-cell:nth-child(2),
+        mat-cell:nth-child(2) {
+          flex: 0 0 70%;
+        }
+
+        mat-cell:nth-child(3) {
+          button:not(.delete-button) {
+            width: 100%;
+            text-align: left !important;
+            border: 0;
+            padding-left: 0;
+          }
+
+          .delete-button {
+            margin-left: 20px;
+          }
+        }
+
+        mat-cell {
           font-size: 12px;
-          border: 0;
-          padding-left: 0;
-          max-width: 100px;
+
+          mat-icon {
+            font-size: 20px;
+          }
+
+          .tracking-status {
+            font-size: 12px;
+            border: 0;
+            padding-left: 0;
+            max-width: 100px;
+          }
         }
-      }
 
-      mat-header-cell {
-        background: #40a5ec;
-        color: white;
-        font-weight: bold;
-      }
+        mat-header-cell {
+          background: #40a5ec;
+          color: white;
+          font-weight: bold;
+        }
 
-      mat-header-row,
-      mat-row {
-        min-width: 650px;
-        width: 100%;
+        mat-header-row,
+        mat-row {
+          min-width: 650px;
+          width: 100%;
+        }
       }
     }
 
     li {
       text-align: justify;
+      font-size: 12px;
+
+      mat-icon {
+        font-size: 14px;
+      }
     }
   }
 }

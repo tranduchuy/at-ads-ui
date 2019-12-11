@@ -19,13 +19,17 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 })
 export class SpamClickReportComponent extends PageBaseComponent implements OnInit {
   clickTotal: number;
-  advertisementClickReportColumns = ['time', 'ip', 'click', 'status', 'location', 'isPrivateBrowsing', 'keyword', 'keywordMatchType'];
+  advertisementClickReportColumns = ['time', 'ip', 'click', 'status', 'location', 'isPrivateBrowsing', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   advertisementClickReport = [];
   pageTotal: number;
   currentPageNumber: number;
   totalItems: number;
   selectedAccountId: string;
   pageLimit: number = 20;
+  realClickTotal: number = 0;
+  realClickPercentage: number = 0;
+  spamClickTotal: number = 0;
+  spamClickPercentage: number = 0;
 
   locale: any = {
     format: 'DD/MM/YYYY',
@@ -52,7 +56,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   pieChart: any = {
     legend: false,
     explodeSlices: false,
-    labels: true,
+    labels: false,
     doughnut: true,
     gradient: false,
     scheme: {
@@ -97,21 +101,21 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     colors: [
       {
         borderColor: '#40a5ec',
-        //backgroundColor: 'rgba(3, 155, 229, 0.05)',
+        //backgroundColor: 'rgba(64, 165, 236, 1)',
         backgroundColor: 'rgba(0,0,0,0)',
-        pointBackgroundColor: 'white',
-        pointHoverBackgroundColor: '#35afea',
-        pointBorderColor: '#35afea',
-        pointHoverBorderColor: '#35afea'
+        pointBackgroundColor: '#40a5ec',
+        pointHoverBackgroundColor: '#40a5ec',
+        pointBorderColor: 'white',
+        pointHoverBorderColor: 'white'
       },
       {
         borderColor: 'orangered',
-        //backgroundColor: 'rgba(255, 0, 55, 0.1)',
+        //backgroundColor: 'rgba(255, 0, 57, 1)',
         backgroundColor: 'rgba(0,0,0,0)',
-        pointBackgroundColor: 'white',
-        pointHoverBackgroundColor: '#f44336',
-        pointBorderColor: '#f44336',
-        pointHoverBorderColor: '#f44336'
+        pointBackgroundColor: 'orangered',
+        pointHoverBackgroundColor: 'orangered',
+        pointBorderColor: 'white',
+        pointHoverBorderColor: 'white'
       }
     ],
     options: {
@@ -135,9 +139,9 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
       elements: {
         point: {
           radius: 4,
-          borderWstatusth: 2,
+          borderWstatusth: 10,
           hoverRadius: 4,
-          hoverBorderWstatusth: 2
+          hoverBorderWstatusth: 10
         },
         line: {
           tension: 0
@@ -243,6 +247,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   ];
 
   ngOnInit() {
+    //this.sessionService.completeConfigStep(Generals.AccountConfigStep.SEE_REPORT.value);
     this._fuseProgressBarService.show();
     this.pageLimit = this.itemsPerPageOptions[0].value;
 
@@ -370,12 +375,12 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     const minutes = -(timezone % 60);
 
     let startDate = moment(this.selectedDateRange.start).startOf('day');
-    if (hours >= 0) {
-      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
-    }
-    else {
-      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
-    }
+    // if (hours >= 0) {
+    //   startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    // }
+    // else {
+    //   startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    // }
 
     const params = {
       from: startDate.valueOf().toString(),
@@ -394,22 +399,24 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         res => {
           this.clickTotal = res.data.pieChart.realClick + res.data.pieChart.spamClick;
 
-          const realClickPercentage = _.round(res.data.pieChart.realClick * 100 / this.clickTotal, 2) || 0;
+          this.realClickTotal = res.data.pieChart.realClick;
+          this.realClickPercentage = _.round(res.data.pieChart.realClick * 100 / this.clickTotal, 2) || 0;
           const realClickDetail: any = {
             name: 'Click thật: ' + this.abbreviateNumber(res.data.pieChart.realClick),
-            value: realClickPercentage
+            value: this.realClickPercentage
           };
 
-          const spamClickPercentage = _.round(res.data.pieChart.spamClick * 100 / this.clickTotal, 2) || 0;
+          this.spamClickTotal = res.data.pieChart.spamClick;
+          this.spamClickPercentage = _.round(res.data.pieChart.spamClick * 100 / this.clickTotal, 2) || 0;
           const spamClickDetail: any = {
             name: 'Click ảo: ' + this.abbreviateNumber(res.data.pieChart.spamClick),
-            value: spamClickPercentage
+            value: this.spamClickPercentage
           };
 
           this.pieChart = {
             legend: false,
             explodeSlices: false,
-            labels: true,
+            labels: false,
             doughnut: true,
             gradient: false,
             scheme: {
@@ -466,12 +473,12 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     const minutes = -(timezone % 60);
 
     let startDate = moment(this.selectedDateRange.start).startOf('day');
-    if (hours >= 0) {
-      startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
-    }
-    else {
-      startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
-    }
+    // if (hours >= 0) {
+    //   startDate = startDate.add({ 'hours': hours, 'minutes': minutes });
+    // }
+    // else {
+    //   startDate = startDate.subtract({ 'hours': -(hours), 'minutes': minutes });
+    // }
 
     const params = {
       from: startDate.valueOf().toString(),

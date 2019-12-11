@@ -6,6 +6,8 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import * as _ from 'lodash';
+import { Generals } from 'app/shared/constants/generals';
 
 export interface AdwordsAccount {
   accountId: string;
@@ -50,6 +52,12 @@ export class CheckWebsiteTrackingDialogComponent extends PageBaseComponent imple
     const sub = this._addTrackingTagsService.getWebsiteTrackingInfo(this.account.accountId)
       .subscribe(res => {
         this.websites = res.data.websites;
+        if (this.websites.length > 0 && this._sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.ADD_TRACKING.value) {
+          const websiteOnTracking = _.find(this.websites, website => website.isTracking === true);
+          if (websiteOnTracking) {
+            this._sessionService.completeConfigStep(Generals.AccountConfigStep.ADD_TRACKING.value);
+          }
+        }
         this.isProcessing = false;
         this._fuseProgressBarService.hide();
       },

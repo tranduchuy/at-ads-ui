@@ -39,7 +39,7 @@ export class AddAwordsAccountsGuardService implements CanActivate {
           else return true;
         }),
         catchError(() => {
-          return of(null);
+          return of(false);
         })
       );
   }

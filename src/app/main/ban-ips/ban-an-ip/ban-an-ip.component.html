@@ -2,7 +2,7 @@
 
   <div class="title1">
     CẤU HÌNH THỬ CHẶN 1 IP - TÀI KHOẢN <span
-      class="account-id">{{sessionService.activeAdsAccountId || ''}}</span>
+      class="adsId">{{sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
   <div class="inner">
@@ -27,7 +27,7 @@
     <div class="banned-ip-info" *ngIf="hasBlockedIP === true">
       <p>
         IP <span [(ngModel)]="blockedIPs[0]" ngDefaultControl
-          style="color: crimson; font-weight: bolder">{{blockedIPs[0]}}</span> đã được chặn thành công
+          class="blocked-ip">{{blockedIPs[0]}}</span> đã được chặn thành công
         trong hệ thống Google Ads.
         <br><br><b>Cách kiểm tra hệ thống hoạt động:</b>
         <br><b>Bước 1:</b> Truy cập vào tài khoản Google Ads tại trang <a href="https://ads.google.com/intl/vi_VN/home/"
@@ -45,7 +45,7 @@
         <br>Sau khi kiểm tra, bạn có thể bỏ IP đang bị chặn. Bấm vào nút dưới đây
       </p>
       <div>
-        <button mat-raised-button style="background-color: #4bb353; color: white" (click)="unblockSampleIP()"
+        <button mat-raised-button (click)="unblockSampleIP()"
           class="unblock-ip-button" [disabled]="isProcessing">
           <mat-icon style="font-size: 20px">lock_open</mat-icon>
           MỞ CHẶN IP CỦA BẠN

@@ -1,0 +1,27 @@
+<div class="notification" *ngIf="isNotificationShown">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper *ngIf="isStepperShown"
+    (selectionChange)="onStepperSelectionChanged($event)" (click)="onClickStepper($event)">
+
+    <ng-template matStepperIcon="edit">
+      <mat-icon>done</mat-icon>
+    </ng-template>
+
+    <mat-step [stepControl]="stepForms[0]" state="step1">
+      <ng-template matStepLabel>Kết nối Google Ads</ng-template>
+    </mat-step>
+    <mat-step [stepControl]="stepForms[1]">
+      <ng-template matStepLabel>Gắn tracking chiến dịch</ng-template>
+    </mat-step>
+    <mat-step [stepControl]="stepForms[2]" (click)="alert()">
+      <ng-template matStepLabel>Thêm website</ng-template>
+    </mat-step>
+    <mat-step [stepControl]="stepForms[3]">
+      <ng-template matStepLabel>Gắn mã tracking vào website</ng-template>
+    </mat-step>
+    <mat-step [stepControl]="stepForms[4]">
+      <ng-template matStepLabel>Xem báo cáo click ảo</ng-template>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+</div>

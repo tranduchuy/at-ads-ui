@@ -1,7 +1,6 @@
 <div class="container">
   <div class="title1">
-    GẮN TRACKING THEO DÕI CHIẾN DỊCH TÀI KHOẢN <span
-      style="color: yellow; font-weight: bolder">{{sessionService.activeAdsAccountId}}</span>
+    GẮN TRACKING THEO DÕI CHIẾN DỊCH TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
   </div>
 
   <div class="inner">
@@ -15,84 +14,89 @@
       <img mat-card-image src="../../../../assets/images/select-tracking1.png" alt="Photo about tracking">
     </div>
 
-    <p class="title2">
-      <span style="color: #40a5ec">[GẮN MÃ]</span> CHỌN CHIẾN DỊCH CẦN GẮN MÃ <span
-        style="color: #40a5ec; font-weight: bold">(NÊN CHỌN TẤT CẢ)</span>
-    </p>
-
-    <form class="form">
-
-      <mat-form-field *ngIf="hasCampaign === true">
-        <mat-icon matPrefix style="font-size: 20px; color: rgba(0,0,0,0.6);">search</mat-icon>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiếm">
-      </mat-form-field>
-
-      <div class="table-wrapper" *ngIf="campaignList.length > 0 && !isProcessing">
-
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-          <ng-container matColumnDef="order">
-            <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-            <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <span *ngIf="element.status === 'Hoạt động'"
-                style="color: #40a5ec; font-weight: bold">{{element.status}}</span>
-              <span *ngIf="element.status !== 'Hoạt động'"
-                style="color: silver; font-weight: bold">{{element.status}}</span>
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="tracking">
-            <mat-header-cell *matHeaderCellDef>
-              <p>
-                <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px"
-                  matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="selectedCampaigns.length === numberOfEnableCampaigns">
-                </mat-checkbox> Gắn mã
-              </p>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-
-              <mat-checkbox (change)="onSelectCampaign($event, element.id)"
-                [checked]="selectedCampaigns.includes(element.id)" *ngIf="element.status === 'Hoạt động'">
-              </mat-checkbox>
-
-              <mat-checkbox *ngIf="element.status !== 'Hoạt động'" disabled></mat-checkbox>
-            </mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-
-      </div>
-
-      <p style="text-align: center" *ngIf="campaignList.length > 0 && !isProcessing">
-        <button (click)="addCampaignTracking()" mat-raised-button class="submit-button" [disabled]="isProcessing">
-          <mat-icon style="font-size: 20px">location_searching</mat-icon> GẮN MÃ TRACKING
-        </button>
+    <div class="select-tracking" *ngIf="isProcessing === false">
+      <p class="title2">
+        <span style="color: #40a5ec">[GẮN MÃ]</span> CHỌN CHIẾN DỊCH CẦN GẮN MÃ <span
+          style="color: #40a5ec; font-weight: bold">(NÊN CHỌN TẤT CẢ)</span>
       </p>
 
-      <p class="notification" *ngIf="hasCampaign === false">
-        Chúng tôi không tìm thấy chiến dịch nào trên tài khoản Google Ads này. Vui lòng <a (click)="getOriginalCampaigns()"
-          class="link-button">thử lại</a> hoặc <a class="link-button" (click)="showSupportInfoDialog()">liên
-          hệ</a> với hỗ trợ viên để được giúp đỡ.
-      </p>
+      <form class="form">
 
-    </form>
+        <div class="searching">
+          <mat-form-field *ngIf="hasCampaign === true">
+            <mat-icon matPrefix style="font-size: 20px; color: rgba(0,0,0,0.6);">search</mat-icon>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiếm">
+          </mat-form-field>
+        </div>
+
+        <div class="table-wrapper" *ngIf="campaignList.length > 0 && !isProcessing">
+
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="order">
+              <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+              <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span *ngIf="element.status === 'Hoạt động'"
+                  style="color: #40a5ec; font-weight: bold">{{element.status}}</span>
+                <span *ngIf="element.status !== 'Hoạt động'"
+                  style="color: silver; font-weight: bold">{{element.status}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="tracking">
+              <mat-header-cell *matHeaderCellDef>
+                <p>
+                  <mat-checkbox (change)="onSelectAllCampaign($event)" style="margin-right: 5px"
+                    matTooltip="Chọn/ Bỏ chọn tất cả" [checked]="selectedCampaigns.length === numberOfEnableCampaigns">
+                  </mat-checkbox> Gắn mã
+                </p>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+
+                <mat-checkbox (change)="onSelectCampaign($event, element.id)"
+                  [checked]="selectedCampaigns.includes(element.id)" *ngIf="element.status === 'Hoạt động'">
+                </mat-checkbox>
+
+                <mat-checkbox *ngIf="element.status !== 'Hoạt động'" disabled></mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+        </div>
+
+        <p style="text-align: center" *ngIf="campaignList.length > 0 && !isProcessing">
+          <button (click)="addCampaignTracking()" mat-raised-button class="submit-button" [disabled]="isProcessing">
+            <mat-icon style="font-size: 20px">location_searching</mat-icon> GẮN MÃ TRACKING
+          </button>
+        </p>
+
+        <p class="notification" *ngIf="hasCampaign === false">
+          Chúng tôi không tìm thấy chiến dịch nào trên tài khoản Google Ads này. Vui lòng <a
+            (click)="getOriginalCampaigns()" class="link-button">thử lại</a> hoặc <a class="link-button"
+            (click)="showSupportInfoDialog()">liên
+            hệ</a> với hỗ trợ viên để được giúp đỡ.
+        </p>
+
+      </form>
+    </div>
   </div>
 
 </div>

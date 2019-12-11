@@ -15,6 +15,7 @@ import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
 import * as moment from 'moment';
+import { take } from 'rxjs/operators';
 
 declare var gapi: any;
 
@@ -24,11 +25,12 @@ declare var gapi: any;
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit, OnDestroy {
-  logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location'];
+  logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   logs = [];
   auth2: any;
   dataSource = new MatTableDataSource<Element>(this.logs);
   isOnLogin: boolean;
+  isProcessing: boolean;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
@@ -160,6 +162,11 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
               location: {
                 city: item.location !== undefined ? item.location.city : null
               },
+              keyword: item.keyword || null,
+              campaignType: item.campaignType || null,
+              matchType: item.matchType || null,
+              page: item.page || null,
+              position: item.position || null
             };
           });
 
@@ -228,6 +235,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
   private submitGoogleLoginForm(accessToken: string, refreshToken?: string): void {
     this._fuseSplashScreenService.show();
+    this.isProcessing = true;
     const params: any = { accessToken };
     if (refreshToken) {
       params.refreshToken = refreshToken;
@@ -240,8 +248,10 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         this._sessionService.set(token, user);
         this._sessionService.setUser(user);
         this._sessionService.setGoogleAccountToken(accessToken, refreshToken);
+        this._sessionService.resetAllObservables();
 
         this._ngZone.run(() => {
+          this.isProcessing = false;
           this._fuseSplashScreenService.hide();
           this._router.navigateByUrl('/them-tai-khoan-moi');
         });

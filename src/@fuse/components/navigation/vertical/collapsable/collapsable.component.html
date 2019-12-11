@@ -42,15 +42,18 @@
         <!-- <mat-icon class="nav-link-icon" *ngIf="item.icon && !item.icon.includes('golden-shield.png')">{{item.icon}}
         </mat-icon> -->
         <img src="{{item.icon}}" alt="" *ngIf="item.icon" class="ggAds-icon">
-        <span class="nav-link-title" [translate]="item.translate">
-            <span *ngIf="item.icon && !item.icon.includes('vip')" class="free-title">{{item.title}}
+        <div class="nav-link-title" [translate]="item.translate">
+            <!-- <span *ngIf="item.icon && !item.icon.includes('vip')" class="free-title">{{item.title}}
                 <span class="free-label">FREE</span>
             </span>
             <span *ngIf="item.icon && item.icon.includes('vip')" class="vip-title">{{item.title}}
                 <span class="vip-label">VIP</span>
                 <span class="vip-expiration">{{(item.id | date: 'dd/MM/yyyy') || 'Unknown'}}</span>
-            </span>
-        </span>
+            </span> -->
+            <img src="../../../../../assets/icons/gg-ads.png" alt="" class="ggAds-icon" *ngIf="item.id === 'adwords-accounts'">
+            <mat-icon class="config-icon" *ngIf="item.id === 'configuration'">settings</mat-icon>
+            <b>{{item.title}}</b>
+        </div>
         <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"
             [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}">
             {{item.badge.title}}

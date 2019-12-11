@@ -9,6 +9,8 @@ import { AddAdwordsAccountsService } from 'app/main/add-adwords-accounts/add-adw
 import { environment } from 'environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import * as _ from 'lodash';
+import { Generals } from 'app/shared/constants/generals';
 
 declare var gapi: any;
 
@@ -44,6 +46,17 @@ export class CheckRefreshTokenGuardService extends PageBaseComponent implements 
   canActivate(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean> | boolean {
+
+    const listAccounts = this._sessionService.getValueOfListAccounts();
+    const activeAccount = _.find(listAccounts, account => account.accountId === this._sessionService.activeAccountId);
+    // if(!activeAccount) {
+    //   this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
+    //   this._router.navigateByUrl('/them-tai-khoan-moi');
+    //   return false;
+    // }
+    if(activeAccount &&  activeAccount.connectType === Generals.AccountConnectionType.byGoogleAdsId)
+      return true;
+
     return this._addAdwordsAccountsService.checkRefreshToken()
       .pipe(
         map(res => {

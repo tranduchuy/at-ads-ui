@@ -14,7 +14,7 @@
     background-attachment: fixed;
 
     .main-title-inner {
-      padding: 130px 20px 250px 20px;
+      padding: 70px 20px 250px 20px;
       text-align: center;
       background-color: rgba(3, 155, 229, 0.5);
       width: 100%;
@@ -28,7 +28,7 @@
       }
 
       .notice {
-        color: white;
+        color: lightyellow;
         font-size: 14px;
         font-weight: normal;
         font-style: italic;
@@ -150,12 +150,22 @@
       background: white;
       padding-bottom: 20px;
       width: 21vw;
-      margin: 35px;
-      border-radius: 5px;
+      margin: 25px;
+      border-radius: 7px;
       box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-
       transition: 0.2s;
-      -webkit-animation: packageAnimation 0.4s ease-out;
+
+      &.free-package {
+        -webkit-animation: packageAnimation 0.4s ease-out;
+      }
+
+      &.vip-package {
+        -webkit-animation: packageAnimation 0.6s ease-out;
+      }
+
+      &.custom-package {
+        -webkit-animation: packageAnimation 0.8s ease-out;
+      }
 
       @keyframes packageAnimation {
         from {

@@ -20,6 +20,14 @@ import { MatSelect } from '@angular/material';
 import { AdwordsAccountsService } from 'app/shared/services/ads-accounts/adwords-accounts.service';
 import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id.pipe';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { Generals } from 'app/shared/constants/generals';
+
+export interface ChangingListAccountsAction {
+    status: 'SUCCESS' | 'ERROR' | 'INFO',
+    data: any,
+    navigatedRoute?: string,
+    isNavigationReloaded?: boolean,
+}
 
 @Component({
     selector: 'toolbar',
@@ -182,15 +190,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
     listenOnListAccountsChanged() {
         const sub = this._sessionService.onListAccountsChanged()
-            .subscribe(wasChanged => {
-                if (wasChanged) {
-                    if (typeof wasChanged === 'object') {
-                        const action: any = wasChanged;
-                        this.getAdsAccounts(action);
-                    }
-                    else {
-                        this.getAdsAccounts();
-                    }
+            .pipe(
+                takeUntil(this._unsubscribeAll)
+            )
+            .subscribe(value => {
+                if (value) {
+                    if (typeof value === 'object')
+                        this.getAdsAccounts(value);
+                    else this.getAdsAccounts();
                 }
             });
         this.subscriptions.push(sub);
@@ -202,7 +209,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 if (adsId) {
                     this.accountCtrl.setValue(this.adsAccounts.find(account => account.name === adsId));
 
-                    if (this.accountConnectTypes[adsId] === 'GOOGLE_ADS_ID') {
+                    if (this.accountConnectTypes[adsId] === Generals.AccountConnectionType.byGoogleAdsId) {
                         this.checkAccountAcceptance();
                     }
                 }
@@ -259,12 +266,10 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         this._sessionService.emitSelectedActiveAccount(this.accountCtrl.value.accountId);
     }
 
-    getAdsAccounts(action?: any): void {
+    getAdsAccounts(action?: ChangingListAccountsAction): void {
         this._fuseProgressiveBarService.show();
         this.isProcessing = true;
-
         const sub = this._adwordsAccountService.getAdwordsAccount()
-            .pipe()
             .subscribe(res => {
                 this.adsAccounts = (res.data.accounts || [])
                     .map((account: any) => {
@@ -281,7 +286,8 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                             createdAt: account.createdAt,
                             connectType: account.connectType,
                             websites: account.websites,
-                            limitWebsite: account.limitWebsite
+                            limitWebsite: account.limitWebsite,
+                            configStep: account.configStep || Generals.AccountConfigStep.CONNECT_ACCOUNT.value
                         };
                     });
 
@@ -290,8 +296,10 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
                 if (this.adsAccounts.length === 0) {
                     this.isAccountSelectionDisplayed = false;
+                    this.accountCtrl.setValue('');
                     this._sessionService.unsetActiveGoogleAdsAccount();
                     this._sessionService.completeCheckingIfUserHasAccount(false);
+                    this._sessionService.completeConfigStep(0);
                     this._fuseNavigationService.reloadNavigation();
                     return;
                 }
@@ -323,30 +331,51 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                         this.filterAccounts();
                     });
 
+                // emit config step value
+                this._sessionService.completeConfigStep(this.adsAccounts[activeIndex].configStep);
+
                 this._fuseNavigationService.reloadNavigation();
                 this.isAccountSelectionDisplayed = true;
                 this.isProcessing = false;
 
                 if (action) {
-                    const { name, message } = action;
-                    if (name === 'remove') {
-                        this._dialogService._openSuccessDialog({ messages: [message] });
+                    if (action.status === 'SUCCESS') {
+                        this._dialogService._openSuccessDialog(action.data);
                     }
+                    if (action.status === 'ERROR') {
+                        this._dialogService._openErrorDialog(action.data);
+                    }
+                    if (action.navigatedRoute) {
+                        this._router.navigateByUrl(action.navigatedRoute);
+                    }
+                    if (action.isNavigationReloaded)
+                        this._fuseNavigationService.reloadNavigation();
                 }
             },
                 (error: HttpErrorResponse) => {
                     this._fuseProgressiveBarService.hide();
                     this.adsAccounts = [];
                     this._sessionService.setListAccounts(this.adsAccounts);
+                    this.accountCtrl.setValue('');
                     this._sessionService.completeCheckingIfUserHasAccount(false);
                     this._sessionService.unsetActiveGoogleAdsAccount();
+                    this._sessionService.completeConfigStep(0);
                     this._fuseNavigationService.reloadNavigation();
                     this.isProcessing = false;
+                    this.isAccountSelectionDisplayed = false;
+
                     if (action) {
-                        const { name, message } = action;
-                        if (name === 'remove') {
-                            this._dialogService._openSuccessDialog({ messages: [message] });
+                        if (action.status === 'SUCCESS') {
+                            this._dialogService._openSuccessDialog(action.data);
                         }
+                        if (action.status === 'ERROR') {
+                            this._dialogService._openErrorDialog(action.data);
+                        }
+                        if (action.navigatedRoute) {
+                            this._router.navigateByUrl(action.navigatedRoute);
+                        }
+                        if (action.isNavigationReloaded)
+                            this._fuseNavigationService.reloadNavigation();
                     }
                 });
         this.subscriptions.push(sub);
@@ -452,8 +481,10 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 (isAccepted: boolean) => {
                     if (isAccepted) {
                         this._sessionService.remove();
+                        this._sessionService.allowNoficationToShow(false);
                         this._sessionService.completeCheckingIfUserHasAccount(true);
                         this._sessionService.setListAccounts(false);
+                        this._sessionService.unsetActiveGoogleAdsAccount();
                         this._router.navigate(['/gioi-thieu']);
                     }
                 }

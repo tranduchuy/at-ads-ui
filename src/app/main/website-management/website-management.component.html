@@ -1,11 +1,11 @@
 <div class="container">
   <div class="title1">
     WEBSITE ĐANG QUẢNG CÁO TRONG TÀI KHOẢN <b><span [(ngModel)]="selectedAdsId" ngDefaultControl
-        style="color:yellow">{{selectedAdsId}}</span></b>
+        class="adsId">{{selectedAdsId}}</span></b>
   </div>
 
   <div class="inner">
-    <p style="margin-top: 30px">
+    <p>
       <b>Bạn cần thêm 1 website để sử dụng các tính năng của hệ thống</b>
     </p>
     <ul style="list-style: none">
@@ -59,52 +59,57 @@
 
     <hr style="border: 0.5px solid #DCDCDC; margin-bottom: 20px">
 
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center">
-      <p><strong>CÁC WEBSITE TRONG TÀI KHOẢN <span [(ngModel)]="selectedAdsId" ngDefaultControl
-            style="color: #40a5ec">{{selectedAdsId}}</span></strong></p>
-      <button mat-button class="update-website-list-button" color="accent" (click)="getWebsites()"
-        [disabled]="isProcessing">
-        <mat-icon style="font-size: 18px">sync</mat-icon>Cập nhật
-      </button>
-    </div>
+    <div class="website-list">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center">
+        <div class="table-title">Các website đang quảng cáo</div>
+        <button mat-button class="update-website-list-button" color="accent" (click)="getWebsites()"
+          [disabled]="isProcessing">
+          <mat-icon style="font-size: 18px">sync</mat-icon>Cập nhật
+        </button>
+      </div>
 
-    <div class="table-wrapper">
-      <mat-table [dataSource]="websites" class="mat-elevation-z8">
+      <div class="table-wrapper">
+        <mat-table [dataSource]="websites" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="order">
-          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-          <mat-cell *matCellDef="let i = index"> {{i + 1}} </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="order">
+            <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+            <mat-cell *matCellDef="let i = index"> {{i + 1}} </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="website">
-          <mat-header-cell *matHeaderCellDef> Website cần gắn tracking </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <a href="{{element.domain}}" target="_blank">{{element.domain}}</a>
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="website">
+            <mat-header-cell *matHeaderCellDef> Website cần gắn tracking </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <a href="{{element.domain}}" target="_blank">{{element.domain}}</a>
+            </mat-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="tracking">
-          <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <button *ngIf="element.isTracking === true" mat-stroked-button color="accent" class="tracking-status">
-              <mat-icon>check</mat-icon> Hoàn
-              thành
-            </button>
-            <button *ngIf="element.isTracking === false" mat-stroked-button matTooltip="Nhấn để tiến hành gắn tracking"
-              style="color: crimson" class="tracking-status"
-              [routerLink]="['/gan-tracking/website', selectedAccountId]">
-              <mat-icon>close</mat-icon> Chưa có
-            </button>
-            <button (click)="openRemoveWebsiteConfirmDialog(element.code)" class="delete-button" mat-icon-button
-              color="accent" matTooltip="Xóa website" [disabled]="isProcessing">
-              <mat-icon style="color: silver">delete</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="tracking">
+            <mat-header-cell *matHeaderCellDef> Gắn tracking </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button *ngIf="element.isTracking === true" mat-stroked-button color="accent" class="tracking-status">
+                <mat-icon>check</mat-icon> Hoàn
+                thành
+              </button>
+              <button *ngIf="element.isTracking === false" mat-stroked-button
+                matTooltip="Nhấn để tiến hành gắn tracking" style="color: crimson" class="tracking-status"
+                [routerLink]="['/gan-tracking/website', selectedAccountId]">
+                <mat-icon>close</mat-icon> Chưa có
+              </button>
+              <button (click)="openRemoveWebsiteConfirmDialog(element.code)" class="delete-button" mat-icon-button
+                color="accent" matTooltip="Xóa website" [disabled]="isProcessing">
+                <mat-icon style="color: silver">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+      <div class="no-website-notification" *ngIf="websites.length === 0 && isProcessing === false">
+        Chưa có ghi nhận nào
+      </div>
     </div>
   </div>
 

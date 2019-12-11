@@ -16,7 +16,7 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 })
 export class BlockedIpListComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'keyword', 'keywordMatchType'];
+  displayedColumns: string[] = ['order', 'task', 'ip', 'isPrivateBrowsing', 'network', 'blockingOver', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
 
   dataSource = [];
 
@@ -24,7 +24,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
   pageTotal: number;
   isProcessing: boolean = false;
   totalItems: number;
-  pageLimit: number = 10;
+  pageLimit: number = 20;
 
   constructor(
     public sessionService: SessionService,
@@ -114,7 +114,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
   }
 
   openRemoveAutoBlockedIPConfirmDialog(ip: string) {
-    const openConfirmDialogSub = this._dialogService._openConfirmDialog('Mở chặn IP này?')
+    const openConfirmDialogSub = this._dialogService._openConfirmDialog('Bỏ chặn IP này?')
       .subscribe(
         (isAccepted: boolean) => {
           if (isAccepted)

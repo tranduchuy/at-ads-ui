@@ -1,6 +1,7 @@
 .container {
+  background: #eee;
   .title1 {
-    padding: 94px 60px 27px 30px;
+    padding: 30px 60px 27px 30px;
 
     background-color: #000000 !important;
     background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
@@ -8,8 +9,9 @@
     font-size: 16px;
     font-weight: bold;
 
-    .account-id {
+    .adsId {
       color: yellow;
+      margin-left: 5px;
     }
   }
 
@@ -34,8 +36,12 @@
       margin-top: 25px;
       padding: 15px;
 
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       background-color: white;
+
+      border-radius: 7px;
+
+      -webkit-animation: formAni 0.4s ease-out;
     }
 
     .button-area {
@@ -47,18 +53,33 @@
     }
 
     .banned-ip-info {
+      border-radius: 7px;
       margin-top: 30px;
       padding: 20px;
-
-      background-color: rgba(217, 83, 79, 0.1);
-      border-left: 7px solid rgba(217, 83, 79, 1);
-
+      background: rgba(68, 181, 67, 0.2);
+      border-left: 6px solid green;
       text-align: justify;
+      color: darkgreen;
 
-      box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      -webkit-animation: formAni 0.4s ease-out;
 
-      button {
-        border-radius: 0;
+      .blocked-ip {
+        color: darkgreen;
+        font-weight: bold;
+      }
+
+      .unblock-ip-button {
+        background-color: #4bb353;
+        color: white;
+      }
+    }
+
+    @keyframes formAni {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(0);
       }
     }
 
@@ -75,7 +96,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .container{
+  .container {
     .inner {
       padding: 15px;
     }

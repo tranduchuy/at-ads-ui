@@ -14,13 +14,13 @@
                </span>
             </div>
             <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin && isLoginButtonDisplayed"
-               class="topbar-google-button" fxFlex="nogrow">
+               class="topbar-google-button" fxFlex="nogrow" [disabled]="isProcessing">
                <img src="../../assets/icons/google-icon.png"
                   style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
                Google
             </button>
             <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()"
-               *ngIf="isOnLogin && isLoginButtonDisplayed" fxFlex="nogrow">
+               *ngIf="isOnLogin && isLoginButtonDisplayed" fxFlex="nogrow" [disabled]="isProcessing">
                TRUY CẬP HỆ THỐNG CHẶN CLICK ẢO<mat-icon style="font-size: 20px">navigate_next</mat-icon>
             </button>
          </div>
@@ -33,8 +33,6 @@
          <div class="banner">
 
             <!-- <img src="https://i.pinimg.com/originals/c1/16/d0/c116d0bcd7663786a5a2d619a70fd2b7.png" class="decoration" alt=""> -->
-
-            <img src="../../assets/images/backgrounds/abc.png" class="decoration" alt="">
 
             <div class="title1 app-title">
                <div class="insider">
@@ -49,15 +47,15 @@
             </div>
 
             <p class="title2">
-               <span style="color: orange; font-weight: bold">Giải Pháp Chặn Click Ảo</span> sử dụng Công nghệ <span
-                  style="color:orange; font-weight: bold">AI</span> và
-               <span style="color:orange; font-weight: bold">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
+               <span class="highline">Giải Pháp Chặn Click Ảo</span> sử dụng Công nghệ <span class="highline">AI</span>
+               và
+               <span class="highline">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
                giản và
                hiệu
                quả.
             </p>
 
-            <!-- <div class="login-with-google" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px"
+            <!-- <div class="login-with-google" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px"
                fxLayoutAlign="center center">
                <a routerLink="/auth/register">
                   <button mat-raised-button class="register-button">
@@ -131,9 +129,7 @@
                         src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
                      <span *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
-                     <mat-icon *ngIf="!element.os?.name" class="unknown-icon">help_outline
-                     </mat-icon>
-                     <span *ngIf="!element.os?.name">Unknown</span>
+                     <span *ngIf="!element.os?.name" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -167,12 +163,13 @@
                      <img *ngIf="element.browser?.name === 'Tor'"
                         src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
                         alt="" class="icon">
-                     <span
-                        *ngIf="element.browser?.name">{{element.browser?.name + ' ' + (element.browser?.version || '')}}</span>
 
-                     <mat-icon *ngIf="!element.browser?.name" class="unknown-icon">help_outline
-                     </mat-icon>
-                     <span *ngIf="!element.browser?.name">Unknown</span>
+                     <span *ngIf="element.browser?.name">
+                        <span>{{element.browser?.name}}</span>
+                        <br>
+                        <span>{{element.browser?.version || ''}}</span>
+                     </span>
+                     <span *ngIf="!element.browser?.name" class="UNKNOWN">Unknown</span>
 
                   </mat-cell>
                </ng-container>
@@ -180,7 +177,7 @@
                <ng-container matColumnDef="network">
                   <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.network?.name !== 'MOBIFONE'
+                     <!-- <span *ngIf="element.network?.name !== 'MOBIFONE'
                                  && element.network?.name !== 'VIETTEL'
                                  && element.network?.name !== 'VIETNAMOBILE'
                                  && element.network?.name !== 'VNPT'
@@ -197,11 +194,11 @@
                      <img class="vnpt" src="https://www.sunocean.com.vn/wp-content/uploads/2018/08/logo-vnpt.png"
                         *ngIf="element.network?.name === 'VNPT'" alt="">
                      <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
-                        *ngIf="element.network?.name === 'FPT'" alt="">
+                        *ngIf="element.network?.name === 'FPT'" alt=""> -->
 
-                     <mat-icon *ngIf="!element.network?.name" class="unknown-icon">help_outline
-                     </mat-icon>
-                     <span *ngIf="!element.network?.name">Unknown</span>
+                     <span *ngIf="element.network?.name"
+                        class="{{element.network?.name}}">{{element.network?.name}}</span>
+                     <span *ngIf="!element.network?.name" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
@@ -209,17 +206,55 @@
                   <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
 
                   <mat-cell *matCellDef="let element">
-                     <img src="../../assets/icons/location.svg" alt="" class="location-icon"
-                        *ngIf="element.location?.city">
+                     <!-- <img src="../../assets/icons/location.svg" alt="" class="location-icon"
+                        *ngIf="element.location?.city"> -->
                      <span *ngIf="element.location?.city">{{element.location?.city}}</span>
 
-                     <mat-icon *ngIf="!element.location?.city" class="unknown-icon unknown-icon-city">help_outline
-                     </mat-icon>
-                     <span *ngIf="!element.location?.city">Unknown</span>
+                     <span *ngIf="!element.location?.city" class="UNKNOWN">Unknown</span>
                   </mat-cell>
                </ng-container>
 
-               <mat-header-row *matHeaderRowDef="logColumns"></mat-header-row>
+               <ng-container matColumnDef="keyword">
+                  <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.keyword">{{element.keyword}}</span>
+                     <span *ngIf="!element.keyword" class="UNKNOWN"></span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="campaignType">
+                  <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.campaignType">{{element.campaignType}}</span>
+                     <span *ngIf="!element.campaignType" class="UNKNOWN"></span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="matchType">
+                  <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.matchType">{{element.matchType}}</span>
+                     <span *ngIf="!element.matchType" class="UNKNOWN"></span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="page">
+                  <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.page">{{element.page}}</span>
+                     <span *ngIf="!element.page" class="UNKNOWN"></span>
+                  </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="position">
+                  <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                     <span *ngIf="element.position">{{element.position}}</span>
+                     <span *ngIf="!element.position" class="UNKNOWN"></span>
+                  </mat-cell>
+               </ng-container>
+
+               <mat-header-row *matHeaderRowDef="logColumns; sticky: true"></mat-header-row>
                <mat-row *matRowDef="let row; columns: logColumns;"></mat-row>
             </mat-table>
          </div>
@@ -238,12 +273,12 @@
                </button>
             </div> -->
 
-            <div class="step-wrapper" fxLayout="row" fxLayoutGap="15px" fxLayout.sm="column" fxLayout.xs="column">
+            <div class="step-wrapper" fxLayout="row" fxLayoutGap="40px" fxLayout.sm="column" fxLayout.xs="column">
 
                <div class="step step1" fxFlex="33.33">
                   <div class="step-image">
                      <img src="../../assets/images/step1.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step1.png')">
+                        (click)="showImageDialog('../../assets/images/step1.png')" loading="lazy">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 1: Liên kết Google Ads</span>
@@ -257,7 +292,7 @@
                <div class="step step2" fxFlex="33.33">
                   <div class="step-image">
                      <img src="../../assets/images/step2.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step2.png')">
+                        (click)="showImageDialog('../../assets/images/step2.png')" loading="lazy">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
@@ -271,7 +306,7 @@
                <div class="step step3" fxFlex="33.33">
                   <div class="step-image">
                      <img src="../../assets/images/step3.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step3.png')">
+                        (click)="showImageDialog('../../assets/images/step3.png')" loading="lazy">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 3: Chặn click ảo</span>
@@ -286,7 +321,7 @@
       </div>
 
       <div class="feature-container">
-         <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+         <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
             <div class="overview" fxFlex="30">
                <p class="overview-title">
                   <img src="http://icons.iconarchive.com/icons/vexels/office/512/bulb-icon.png" alt="">
@@ -302,15 +337,16 @@
                   tác trực tiếp đến quảng cáo của bạn, cải thiện nó giúp bạn tiết kiệm đáng kể chi phí và thời gian.
                   <br>
                   <div class="trial">
-                     <button mat-raised-button color="accent" (click)="checkLogin()">
+                     <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
                         DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
                      </button>
                   </div>
                </div>
+               <img src="../../assets/images/analytics-graphic.png" alt="" class="overview-image">
             </div>
             <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
-               <div class="feature-left" fxLayout="column" fxLayoutGap="10px">
-                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
+               <div class="feature-left" fxLayout="column" fxLayoutGap="20px">
+                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
                      <div class="icon">
                         <mat-icon color="accent">verified_user</mat-icon>
                      </div>
@@ -322,7 +358,7 @@
                         </p>
                      </div>
                   </div>
-                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
+                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
                      <div class="icon">
                         <!-- <mat-icon color="accent" >public</mat-icon> -->
                         <img src="../../assets/icons/incognito.png" alt="">
@@ -336,7 +372,7 @@
                         </p>
                      </div>
                   </div>
-                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
+                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
                      <div class="icon">
                         <mat-icon color="accent">wifi</mat-icon>
                      </div>
@@ -348,7 +384,7 @@
                         </p>
                      </div>
                   </div>
-                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
+                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
                      <div class="icon">
                         <mat-icon color="accent">timeline</mat-icon>
                      </div>
@@ -364,8 +400,8 @@
                   </div>
                </div>
             </div>
-            <div class="feature-right" fxLayout="column" fxLayoutGap="10px">
-               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
+            <div class="feature-right" fxLayout="column" fxLayoutGap="20px">
+               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
                   <div class="icon">
                      <mat-icon color="accent">phonelink</mat-icon>
                   </div>
@@ -378,7 +414,7 @@
                      </p>
                   </div>
                </div>
-               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
+               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
                   <div class="icon">
                      <mat-icon color="accent">apps</mat-icon>
                   </div>
@@ -392,7 +428,7 @@
                      </p>
                   </div>
                </div>
-               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
+               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
                   <div class="icon">
                      <mat-icon color="accent">location_on</mat-icon>
                   </div>
@@ -405,7 +441,7 @@
                      </p>
                   </div>
                </div>
-               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="15px">
+               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
                   <div class="icon">
                      <mat-icon color="accent">view_list</mat-icon>
                   </div>
@@ -426,19 +462,20 @@
          <div class="benefit">
 
             <div class="benefit-title">
-               <span class="shiny2">
+               <!-- <span class="shiny2">
                   <span class="inner-shiny2">Lợi ích khi sử dụng chặn click ảo</span>
-               </span>
+               </span> -->
+               <span>LỢI ÍCH KHI SỬ DỤNG CHẶN CLICK ẢO</span>
             </div>
 
             <p class="secondary-benefit-title">
                Lợi ích thấy ngay khi đăng ký và sử dụng Công cụ Chặn Click Ảo
             </p>
 
-            <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="60px">
+            <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="30px">
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/save-money.svg" alt="">
+                     <img src="../../assets/images/save-money.svg" alt="" loading="lazy">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
@@ -451,7 +488,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/timer.svg" alt="">
+                     <img src="../../assets/images/timer.svg" alt="" loading="lazy">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward
@@ -463,7 +500,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/customer.png" alt="">
+                     <img src="../../assets/images/customer.png" alt="" loading="lazy">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward
@@ -495,7 +532,7 @@
             hệ
             với chúng tôi.
             <div class="view-more-button">
-               <button mat-raised-button color="accent" (click)="checkLogin()">
+               <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
                   XEM THÊM <mat-icon style="font-size: 20px; color: white">navigate_next</mat-icon>
                </button>
             </div>

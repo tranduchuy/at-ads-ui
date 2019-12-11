@@ -26,7 +26,7 @@ export const navigation: FuseNavigation[] = [
   },
   {
     id: 'report',
-    title: 'BÁO CÁO CLICK',
+    title: 'BÁO CÁO CLICK QUẢNG CÁO',
     translate: 'NAV.APPLICATIONS',
     type: 'group',
     children: [
@@ -46,17 +46,17 @@ export const navigation: FuseNavigation[] = [
         icon: 'touch_app',
         url: '/bao-cao/ip-dang-click'
       },
-      {
-        id: 'ip-range-on-click',
-        title: 'Nhóm IP đang click',
-        translate: 'NAV.SAMPLE.TITLE',
-        type: 'item',
-        icon: 'blur_linear',
-        url: 'bao-cao/nhom-ip-dang-click'
-      },
+      // {
+      //   id: 'ip-range-on-click',
+      //   title: 'Nhóm IP đang click',
+      //   translate: 'NAV.SAMPLE.TITLE',
+      //   type: 'item',
+      //   icon: 'blur_linear',
+      //   url: 'bao-cao/nhom-ip-dang-click'
+      // },
       {
         id: 'blocked-ip-list',
-        title: 'Danh sách IP đã chặn',
+        title: 'IP đã bị chặn',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'block',
@@ -74,16 +74,16 @@ export const navigation: FuseNavigation[] = [
   },
   {
     id: 'configuration',
-    title: 'CẤU HÌNH',
+    title: 'CẤU HÌNH NÂNG CAO',
     translate: 'NAV.APPLICATIONS',
-    type: 'group',
+    type: 'collapsable',
     children: [
       {
         id: 'ban-an-ip',
         title: 'Thử chặn 1 IP',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'block',
+        icon: 'lock',
         url: '/chan-ip/chan-1-ip',
       },
       {
@@ -123,7 +123,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Chặn theo mạng 3G & 4G',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'wifi',
+        icon: 'signal_wifi_4_bar_lock',
         url: '/chan-ip/chan-ip-theo-mang-di-dong',
       },
       {
@@ -200,10 +200,10 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'user_profile',
-        title: 'Thông tin người dùng',
+        title: 'Cập nhật thông tin',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'account_circle',
+        icon: 'featured_play_list',
         url: '/nguoi-dung/thong-tin-ca-nhan',
       },
       {

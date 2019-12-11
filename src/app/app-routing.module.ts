@@ -8,7 +8,7 @@ import { CheckRefreshTokenGuardService } from './shared/services/guard/check-ref
 const appRoutes: Routes = [
   {
     path: 'chan-ip',
-    canActivate: [MainGuardService, AccountAcceptanceGuardService, CheckRefreshTokenGuardService],
+    canActivate: [MainGuardService, CheckRefreshTokenGuardService, AccountAcceptanceGuardService],
     loadChildren: './main/ban-ips/ban-ips.module#BanIPsModule'
   },
   {
@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'gan-tracking',
-    canActivate: [MainGuardService, AccountAcceptanceGuardService, CheckRefreshTokenGuardService],
+    canActivate: [MainGuardService, CheckRefreshTokenGuardService, AccountAcceptanceGuardService],
     loadChildren: './main/add-tracking-tags/add-tracking-tags.module#AddTrackingTagsModule'
   },
   {
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'bao-cao',
-    canActivate: [MainGuardService, AccountAcceptanceGuardService, CheckRefreshTokenGuardService],
+    canActivate: [MainGuardService, CheckRefreshTokenGuardService, AccountAcceptanceGuardService],
     loadChildren: './main/reports/reports.module#ReportsModule'
   },
   {

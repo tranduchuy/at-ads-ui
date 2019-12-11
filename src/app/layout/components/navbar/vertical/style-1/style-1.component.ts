@@ -171,6 +171,10 @@ export class NavbarVerticalStyle1Component extends PageBaseComponent implements 
     this._fuseSidebarService.getSidebar('navbar').toggleOpen();
   }
 
+  navigateToIntroPage() {
+    this._router.navigateByUrl('/gioi-thieu');
+  }
+
   /**
    * Toggle sidebar folded status
    */

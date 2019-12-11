@@ -1,130 +1,128 @@
 <div class="container">
   <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="15px">
-    <span fxFlex="75">QUẢN LÝ TÀI KHOẢN GOOGLE ADS & WEBSITE</span>
+    <span fxFlex="70" class="title1-main">QUẢN LÝ TÀI KHOẢN GOOGLE ADS & WEBSITE</span>
     <a [routerLink]="'/them-tai-khoan-moi'" mat-raised-button color="warn" class="add-account-button">
-      <mat-icon>library_add</mat-icon> Thêm tài khoản mới
+      <mat-icon>library_add</mat-icon> Kết nối tài khoản Google Ads
     </a>
   </div>
 
   <div class="inner">
-    <form>
 
-      <div class="table-container">
+    <div class="table-container">
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="task">
+          <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" matTooltip="Cập nhật tài khoản"
+              (click)="checkAccountAcceptance(element.adsId, element.isConnected, element.connectType)"
+              [disabled]="isProcessing">
+              <mat-icon>sync</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
 
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Ngày kết nối </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="task">
-            <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <button mat-icon-button color="accent" matTooltip="Cập nhật tài khoản"
-                (click)="checkAccountAcceptance(element.adsId, element.isConnected, element.connectType)"
-                [disabled]="isProcessing">
-                <mat-icon>sync</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="adwords">
+          <mat-header-cell *matHeaderCellDef>
+            <img src="../../../assets/icons/gg-ads.png" alt="" class="ggAds-icon">
+            Tài khoản</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div fxLayout="row">
+              <p style="color: #4bb543" *ngIf="element.isConnected && element.websites.length > 0" fxFlex="75">
+                <span class="ads-account" matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">
+                  <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
+                  <span class="ads-account-name">{{element.adsName}}</span>
+                </span>
+              </p>
+              <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="75">
+                <span class="ads-account" matTooltip="Tài khoản chưa có website nào.">
+                  <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
+                  <span class="ads-account-name">{{element.adsName}}</span>
+                </span>
+              </p>
+              <p style="color: silver" *ngIf="!element.isConnected" fxFlex="75">
+                <span class="ads-account" matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
+                  <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
+                  <span class="ads-account-name">{{element.adsName}}</span>
+                </span>
+              </p>
+              <div fxLayout="row" fxFlex="25" fxLayoutAlign="center center">
+                <button mat-icon-button color="accent" matTooltip="Xem báo cáo click ảo"
+                  (click)="navigateToSpamClickReport(element.accountId, element.adsId)">
+                  <mat-icon>data_usage</mat-icon>
+                </button>
+                <a [routerLink]="['/gan-tracking/website', element.accountId]" mat-icon-button color="accent"
+                  matTooltip="Gắn mã tracking cho các website" class="tracking-button">
+                  <mat-icon>code</mat-icon>
+                </a>
+                <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản"
+                  (click)="openRemoveAccountConfirmDialog(element.accountId)" [disabled]="isProcessing">
+                  <mat-icon style="color: silver">close</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="date">
-            <mat-header-cell *matHeaderCellDef> Ngày kết nối </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="accepted">
+          <mat-header-cell *matHeaderCellDef> Quyền quản lý </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" matTooltip="Đã được chấp nhận"
+              *ngIf="element.connectType !== 'GOOGLE_ADS_ID' || element.isConnected === true">
+              <mat-icon style="color: #4bb543">check_circle</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" matTooltip="Chưa được chấp nhận"
+              *ngIf="element.connectType === 'GOOGLE_ADS_ID' && element.isConnected === false">
+              <mat-icon style="color: crimson">highlight_off</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="adwords">
-            <mat-header-cell *matHeaderCellDef>
-              <img src="../../../assets/icons/gg-ads.png" alt="" class="ggAds-icon">
-              Tài khoản</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <div fxLayout="row">
-                <p style="color: #4bb543" *ngIf="element.isConnected && element.websites.length > 0" fxFlex="75">
-                  <span class="ads-account" matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">
-                    <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
-                    <span class="ads-account-name">{{element.adsName}}</span>
-                  </span>
-                </p>
-                <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="75">
-                  <span class="ads-account" matTooltip="Tài khoản chưa có website nào.">
-                    <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
-                    <span class="ads-account-name">{{element.adsName}}</span>
-                  </span>
-                </p>
-                <p style="color: silver" *ngIf="!element.isConnected" fxFlex="75">
-                  <span class="ads-account" matTooltip="Tài khoản chưa được chấp nhận quyền quản lý hệ thống.">
-                    <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
-                    <span class="ads-account-name">{{element.adsName}}</span>
-                  </span>
-                </p>
-                <div fxLayout="row" fxFlex="25" fxLayoutAlign="center center">
-                  <button mat-icon-button color="accent" matTooltip="Xem báo cáo click ảo"
-                    (click)="navigateToSpamClickReport(element.accountId, element.adsId)">
-                    <mat-icon>data_usage</mat-icon>
-                  </button>
-                  <a [routerLink]="['/gan-tracking/website', element.accountId]" mat-icon-button color="accent"
-                    matTooltip="Gắn mã tracking cho các website" class="tracking-button">
-                    <mat-icon>code</mat-icon>
-                  </a>
-                  <button mat-icon-button color="accent" matTooltip="Ngắt kết nối tài khoản"
-                    (click)="openRemoveAccountConfirmDialog(element.accountId)" [disabled]="isProcessing">
-                    <mat-icon style="color: silver">close</mat-icon>
+        <ng-container matColumnDef="website">
+          <mat-header-cell *matHeaderCellDef> Website của tài khoản </mat-header-cell>
+          <mat-cell *matCellDef="let element" fxLayout="column" fxLayoutAlign="start">
+            <ul class="website-list" *ngIf="element.websites.length > 0">
+              <li *ngFor="let website of element.websites, let i = index" fxLayout="row" fxLayoutAlign="center center">
+                <div fxFlex="90">
+                  <a href="{{website.domain}}" target="_blank">
+                    {{website.domain}}</a>
+                </div>
+                <div fxFlex="10">
+                  <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
+                    matTooltip="Xóa website" [disabled]="isProcessing">
+                    <mat-icon style="color: silver; font-size: 20px">delete</mat-icon>
                   </button>
                 </div>
-              </div>
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="accepted">
-            <mat-header-cell *matHeaderCellDef> Quyền quản lý </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <button mat-icon-button color="accent" matTooltip="Đã được chấp nhận"
-                *ngIf="element.connectType !== 'GOOGLE_ADS_ID' || element.isConnected === true">
-                <mat-icon style="color: #4bb543">check_circle</mat-icon>
-              </button>
-              <button mat-icon-button color="accent" matTooltip="Chưa được chấp nhận"
-                *ngIf="element.connectType === 'GOOGLE_ADS_ID' && element.isConnected === false">
-                <mat-icon style="color: crimson">highlight_off</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="website">
-            <mat-header-cell *matHeaderCellDef> Website của tài khoản </mat-header-cell>
-            <mat-cell *matCellDef="let element" fxLayout="column" fxLayoutAlign="start">
-              <ul class="website-list" *ngIf="element.websites.length > 0">
-                <li *ngFor="let website of element.websites, let i = index" fxLayout="row"
-                  fxLayoutAlign="center center">
-                  <div fxFlex="90">
-                    <a href="{{website.domain}}" target="_blank">
-                      {{website.domain}}</a>
-                  </div>
-                  <div fxFlex="10">
-                    <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
-                      matTooltip="Xóa website" [disabled]="isProcessing">
-                      <mat-icon style="color: silver; font-size: 20px">delete</mat-icon>
-                    </button>
-                  </div>
-                </li>
-              </ul>
-              <button (click)="navigateToWebsiteManagement(element.accountId, element.campaignNumber)" mat-button
-                class="add-domain-button" [disabled]="isProcessing" color="accent"
-                *ngIf="element.websites.length < element.limitWebsite">
+              </li>
+            </ul>
+            <button (click)="navigateToWebsiteManagement(element.accountId, element.campaignNumber)" mat-button
+              class="add-domain-button" [disabled]="isProcessing" color="accent"
+              *ngIf="element.websites.length < element.limitWebsite">
+              <mat-icon>add</mat-icon>Thêm website
+            </button>
+            <span *ngIf="element.websites.length >= element.limitWebsite">
+              <button mat-button class="add-domain-button" color="accent" disabled>
                 <mat-icon>add</mat-icon>Thêm website
               </button>
-              <span *ngIf="element.websites.length >= element.limitWebsite">
-                <button mat-button class="add-domain-button" color="accent" disabled>
-                  <mat-icon>add</mat-icon>Thêm website
-                </button>
-                <span class="caution"><span style="color: red">*</span><b>Chú ý:</b> Số lượng website của tài khoản này
-                  đã đạt tối đa. Vui lòng nâng cấp thêm <a routerLink="/nang-cap-vip">tại đây</a></span>
-              </span>
-            </mat-cell>
-          </ng-container>
+              <span class="caution"><span style="color: red">*</span><b>Chú ý:</b> Số lượng website của tài khoản này
+                đã đạt tối đa. Vui lòng nâng cấp thêm <a routerLink="/nang-cap-vip">tại đây</a></span>
+            </span>
+          </mat-cell>
+        </ng-container>
 
-          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
 
-      </div>
-
-    </form>
+    <div *ngIf="dataSource.filteredData.length === 0 && isProcessing === false" class="warning">
+      <span>Bạn chưa kết nối tài khoản Google Ads nào. Vui lòng thực hiện kết nối <a
+          routerLink="/them-tai-khoan-moi">tại đây</a></span>
+    </div>
   </div>
 
 </div>

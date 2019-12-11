@@ -6,7 +6,6 @@ import { ReportService } from '../report.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PreviousRouteService } from 'app/shared/services/previous-route.service';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
 @Component({
@@ -16,7 +15,7 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 })
 export class IpClickingReportComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['time', 'ip', 'clicks', 'status', 'location', 'os', 'browser', 'isPrivateBrowsing', 'network'];
+  displayedColumns: string[] = ['time', 'ip', 'clicks', 'status', 'location', 'os', 'browser', 'isPrivateBrowsing', 'network', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
 
   dataSource = [];
 
@@ -36,7 +35,7 @@ export class IpClickingReportComponent extends PageBaseComponent implements OnIn
   pageTotal: number;
   currentPageNumber: number;
   totalItems: number;
-  pageLimit: number = 10;
+  pageLimit: number = 20;
 
   ngOnInit() {
     this._fuseProgressBarService.show();

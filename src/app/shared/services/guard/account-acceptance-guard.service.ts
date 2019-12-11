@@ -5,7 +5,9 @@ import { SessionService } from '../session.service';
 import { DialogService } from '../dialog.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { AdwordsAccountsService } from '../ads-accounts/adwords-accounts.service';
-import { map, catchError } from 'rxjs/operators';;
+import { map, catchError } from 'rxjs/operators'; import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { Generals } from 'app/shared/constants/generals';
+import * as _ from 'lodash';
 
 @Injectable({
     providedIn: 'root'
@@ -15,8 +17,9 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
     constructor(
         private _router: Router,
         private _sessionService: SessionService,
-        private adwordsAccountService: AdwordsAccountsService,
+        private _adwordsAccountsService: AdwordsAccountsService,
         private _dialogService: DialogService,
+        private _fuseSplashScreenService: FuseSplashScreenService
     ) {
         super();
     }
@@ -25,46 +28,25 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
         state: RouterStateSnapshot,
     ): Observable<boolean> | boolean {
 
-        let activeAdsAccountId = this._sessionService.activeAdsAccountId;
+        const listAccounts = this._sessionService.getValueOfListAccounts();
+        const activeAccount = _.find(listAccounts, account => account.accountId === this._sessionService.activeAccountId);
+        // if (!activeAccount) {
+        //     this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
+        //     this._router.navigateByUrl('/them-tai-khoan-moi');
+        //     return false;
+        // }
+        if (activeAccount && activeAccount.connectType === Generals.AccountConnectionType.byGoogleAdsId)
+            return true;
 
-        if (!activeAdsAccountId) {
-            this._router.navigateByUrl('/them-tai-khoan-moi');
-            this._dialogService._openInfoDialog('Vui lòng kết nối tài khoản Google Ads');
-            return false;
-        }
-
-        activeAdsAccountId = activeAdsAccountId.match(/\D/g).join('');
-        let activeAccountId = this._sessionService.activeAccountId;
-
-        // if (route.params.accountId !== undefined)
-        //     return this.adwordsAccountService.getAccountAdwordsDetail(route.params.accountId)
-        //         .pipe(
-        //             map((res: any) => {
-
-        //                 if (route.routeConfig.path.includes('quan-ly-website') && res.data.campaignNumber !== undefined && res.data.campaignNumber === 0) {
-        //                     this._dialogService._openErrorDialog({ messages: ['Tài khoản hiện chưa được thêm chiến dịch.'] });
-        //                     this._router.navigateByUrl('/danh-sach-tai-khoan');
-        //                     return false;
-        //                 }
-
-        //                 const isConnected = res.data.adsAccount.isConnected;
-        //                 if (!isConnected)
-        //                     this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-        //                 return isConnected;
-        //             }),
-        //             catchError(err => {
-        //                 this._router.navigateByUrl('/danh-sach-tai-khoan');
-        //                 return throwError(err);
-        //             })
-        //         );
-
-        return this.adwordsAccountService.getAccountAdwordsDetail(activeAccountId)
+        return this._adwordsAccountsService.getAccountAdwordsDetail(this._sessionService.activeAccountId)
             .pipe(
                 map((res: any) => {
+                    this._fuseSplashScreenService.hide();
                     const isConnected = res.data.adsAccount.isConnected;
                     const connectType = res.data.adsAccount.connectType;
 
-                    if (route.routeConfig.path.includes('chan-ip') && isConnected === false && connectType === 'GOOGLE_ADS_ID') {
+                    if (route.routeConfig.path.includes('chan-ip')
+                        && isConnected === false && connectType === Generals.AccountConnectionType.byGoogleAdsId) {
                         this._router.navigateByUrl('/danh-sach-tai-khoan');
                         this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
                         return false;
@@ -73,7 +55,8 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
                     return true;
                 }),
                 catchError(() => {
-                    return of(null);
+                    this._fuseSplashScreenService.hide();
+                    return of(false);
                 })
             );
     }

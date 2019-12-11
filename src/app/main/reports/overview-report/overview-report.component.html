@@ -92,8 +92,7 @@
       <div class="hl2-title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center"
         fxLayoutAlign.xs="center start" fxLayoutGap="50px" fxLayoutGap.xs="10px">
         <div class="hl2-title3" fxFlex="55">
-          THỐNG KÊ LƯU LƯỢNG TRUY CẬP - TÀI KHOẢN <span
-            style="color: yellow">{{sessionService.activeAdsAccountId}}</span>
+          THỐNG KÊ LƯU LƯỢNG TRUY CẬP - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
         </div>
 
         <div class="no-website-notify" *ngIf="hasWebsite === false">
@@ -160,8 +159,8 @@
 
     <div class="overview">
       <div class="overview-main">
-        <div class="overview-title1" fxLayout="row" fxLayout.xs="column">
-          <p class="overview-title2" fxFlex="80">BÁO CÁO TỔNG THỂ TRUY CẬP</p>
+        <div class="overview-title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+          Báo cáo tổng thể truy cập
         </div>
         <div class="overview-table">
 
@@ -179,11 +178,6 @@
               <mat-cell *matCellDef="let element">
                 <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]"
                   class="ip-detail-link" mat-button color="accent">
-                  <mat-icon *ngIf="element.isSpam === true" style="color: red" class="ip-symbol">not_interested
-                  </mat-icon>
-                  <mat-icon *ngIf="element.isSpam === false" style="color:silver" class="ip-symbol">
-                    not_interested
-                  </mat-icon>
                   {{element.ip}}
                 </a>
               </mat-cell>
@@ -204,11 +198,11 @@
               <mat-cell *matCellDef="let element">
                 <span *ngIf="element.isSpam === true" style="color: crimson; font-weight: bold"
                   (mouseover)="showReason(element.reason || '')">
-                  <mat-icon style="font-size: 18px">not_interested</mat-icon> Đã chặn
+                  <mat-icon>not_interested</mat-icon> Đã chặn
                 </span>
                 <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold"
                   (mouseover)="showReason(element.reason || '')">
-                  <mat-icon style="font-size: 18px">check_circle</mat-icon> Hợp lệ
+                  <mat-icon>check_circle</mat-icon> Hợp lệ
                 </span>
               </mat-cell>
             </ng-container>
@@ -279,6 +273,36 @@
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="keyword">
+              <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.keyword || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="campaignType">
+              <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.campaignType || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="matchType">
+              <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.matchType || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="page">
+              <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.page || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="position">
+              <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.position || ''}}
               </mat-cell>
             </ng-container>
 

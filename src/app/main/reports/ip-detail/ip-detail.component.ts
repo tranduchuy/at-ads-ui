@@ -42,7 +42,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   collapsedNodes: string[] = [];
 
   clicksDataSource = [];
-  clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isPrivateBrowsing', 'href', 'os', 'browser', 'networkCompany', 'location'];
+  clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isPrivateBrowsing', 'href', 'os', 'browser', 'networkCompany', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   lastClickHistory: any;
 
   treeControl = new NestedTreeControl<Node>(node => node.children);

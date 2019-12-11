@@ -2,7 +2,7 @@
 
   <div class="title1" fxLayout="row" fxLayout.xs="column">
     <p class="title2" fxFlex="80">BÁO CÁO THỐNG KÊ NGƯỜI DÙNG - TÀI KHOẢN <span
-        style="color:yellow">{{sessionService.activeAdsAccountId}}</span></p>
+        class="adsId">{{sessionService.activeAdsAccountId}}</span></p>
     <mat-form-field class="datePicker" fxFlex="20">
       <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
       <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
@@ -43,7 +43,7 @@
           <mat-header-cell *matHeaderCellDef>Ẩn danh</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
-              <mat-icon style="font-size: 18px">report_problem</mat-icon>Có
+              <mat-icon>report_problem</mat-icon>Có
             </span>
             <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>
           </mat-cell>
@@ -103,7 +103,7 @@
         </ng-container>
 
         <ng-container matColumnDef="location">
-          <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
           </mat-cell>
         </ng-container>
