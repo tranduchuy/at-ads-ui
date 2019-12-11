@@ -285,15 +285,20 @@ var SelectCampaignsComponent = /** @class */ (function (_super) {
             .subscribe(function (res) {
             //this.getOriginalCampaigns();
             if (params.campaigns.length > 0) {
-                if (_this.sessionService.getValueOfDoneConfigStep() < app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConfigStep.SELECT_CAMPAIGN.value)
+                if (_this.sessionService.getValueOfDoneConfigStep() < app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConfigStep.SELECT_CAMPAIGN.value) {
                     _this.sessionService.completeConfigStep(app_shared_constants_generals__WEBPACK_IMPORTED_MODULE_11__["Generals"].AccountConfigStep.SELECT_CAMPAIGN.value);
-                setTimeout(function () {
+                    _this._dialogService._openSuccessDialog(res);
+                    _this._fuseProgressBarService.hide();
+                    _this._fuseSplashScreenService.hide();
+                    _this.isProcessing = false;
+                }
+                else {
                     _this._dialogService._openSuccessDialog(res);
                     _this._fuseProgressBarService.hide();
                     _this._fuseSplashScreenService.hide();
                     _this.isProcessing = false;
                     _this._router.navigateByUrl("/gan-tracking/website/" + _this.sessionService.activeAccountId);
-                }, 500);
+                }
             }
             else {
                 _this._dialogService._openSuccessDialog(res);

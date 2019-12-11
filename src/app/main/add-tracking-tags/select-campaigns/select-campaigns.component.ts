@@ -117,16 +117,20 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         //this.getOriginalCampaigns();
 
         if (params.campaigns.length > 0) {
-          if (this.sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.SELECT_CAMPAIGN.value)
+          if (this.sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.SELECT_CAMPAIGN.value) {
             this.sessionService.completeConfigStep(Generals.AccountConfigStep.SELECT_CAMPAIGN.value);
-
-          setTimeout(() => {
+            this._dialogService._openSuccessDialog(res);
+            this._fuseProgressBarService.hide();
+            this._fuseSplashScreenService.hide();
+            this.isProcessing = false;
+          }
+          else {
             this._dialogService._openSuccessDialog(res);
             this._fuseProgressBarService.hide();
             this._fuseSplashScreenService.hide();
             this.isProcessing = false;
             this._router.navigateByUrl(`/gan-tracking/website/${this.sessionService.activeAccountId}`);
-          }, 500);
+          }
         }
         else {
           this._dialogService._openSuccessDialog(res);
