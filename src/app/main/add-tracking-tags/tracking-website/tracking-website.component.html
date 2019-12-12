@@ -6,7 +6,8 @@
 
   <div class="inner">
     <p class="info">
-      <span class="bold-text">Tại sao cần gắn mã:</span> Hệ thống đưa vào mã tracking để phát hiện số điện thoại truy cập vào website của bạn.
+      <span class="bold-text">Tại sao cần gắn mã:</span> Hệ thống đưa vào mã tracking để phát hiện số điện thoại truy
+      cập vào website của bạn.
       Bạn
       có thể bỏ mã vào bất cứ vị trí nào trong website. Tuy nhiên tốt nhất hãy bỏ mã vào trong
       <span class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span>
@@ -17,7 +18,7 @@
       <div fxLayout="row" style="padding-top: 10px">
         <input class="key" type="text" #inputKey
           value='&lt;script type="text/javascript" src="{{hostTracking}}?key={{key}}"&gt;&lt;/script&gt;' readonly>
-        <button mat-icon-button (click)="copyKey(inputKey.value)" class="copy-button" matTooltip="Nhấn vào để sao chép">
+        <button mat-icon-button (click)="copyKey(inputKey.value)" class="copy-button" matTooltip="Nhấn vào để copy">
           <mat-icon style="font-size: 20px">file_copy</mat-icon>
         </button>
       </div>

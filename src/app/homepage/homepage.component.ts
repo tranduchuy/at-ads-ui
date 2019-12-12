@@ -249,6 +249,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         this._sessionService.setUser(user);
         this._sessionService.setGoogleAccountToken(accessToken, refreshToken);
         this._sessionService.resetAllObservables();
+        this._sessionService.setUserLoginChecker(true);
 
         this._ngZone.run(() => {
           this.isProcessing = false;

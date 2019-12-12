@@ -31,11 +31,20 @@ export class SessionService {
   private _isNoficationShown$ = new BehaviorSubject<boolean>(false);
   private _activeAccountConnection$ = new BehaviorSubject<string>('');
   private _stepperStepOption$ = new BehaviorSubject<string>('');
+  private _userLoginChecker$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private cookieService: CookieService
   ) {
 
+  }
+
+  getValueOfUserLoginChecker(): boolean {
+    return this._userLoginChecker$.getValue();
+  }
+
+  setUserLoginChecker(value: boolean) {
+    this._userLoginChecker$.next(value);
   }
 
   getStepperStepOption(): Observable<string> {
@@ -157,6 +166,7 @@ export class SessionService {
     this._doneConfigStep$.next(0);
     this._activeAccountConnection$.next('');
     this._stepperStepOption$.next('');
+    this._userLoginChecker$.next(false);
   }
 
   getAcceptedAdsId(): Observable<string> {

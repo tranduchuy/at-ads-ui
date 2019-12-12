@@ -127,24 +127,6 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
           this._sessionService.allowNoficationToShow(true);
           this.isLinear = true;
 
-          // this.stepForms = [
-          //   this.stepForm1 = this._formBuilder.group({
-          //     step1: ['', Validators.required]
-          //   }),
-          //   this.stepForm2 = this._formBuilder.group({
-          //     step2: ['', Validators.required]
-          //   }),
-          //   this.stepForm3 = this._formBuilder.group({
-          //     step3: ['', Validators.required]
-          //   }),
-          //   this.stepForm4 = this._formBuilder.group({
-          //     step4: ['', Validators.required]
-          //   }),
-          //   this.stepForm5 = this._formBuilder.group({
-          //     step5: ['', Validators.required]
-          //   })
-          // ];
-
           setTimeout(() => {
             this.getAccountId();
             this.onConfigStepCompleted();
@@ -157,22 +139,20 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
   onConfigStepCompleted() {
     const sub = this._sessionService.onConfigStepCompleted()
       .subscribe((step: number) => {
-        if (
-          step >= Generals.AccountConfigStep.CONNECT_ACCOUNT.value
-          && step <= Generals.AccountConfigStep.ADD_WEBSITE.value
+        if (step >= Generals.AccountConfigStep.CONNECT_ACCOUNT.value && step <= Generals.AccountConfigStep.ADD_WEBSITE.value
         ) {
           this.isStepperShown = true;
           this.updateAccountConfigStep(step);
         }
-        else if (
-          step >= Generals.AccountConfigStep.ADD_TRACKING.value
-          && step <= Generals.AccountConfigStep.SEE_REPORT.value
+        else if (step >= Generals.AccountConfigStep.ADD_TRACKING.value && step <= Generals.AccountConfigStep.SEE_REPORT.value
         ) {
           this.isStepperShown = false;
-          if (step === Generals.AccountConfigStep.ADD_TRACKING.value)
+          if (step === Generals.AccountConfigStep.ADD_TRACKING.value) {
             this.updateAccountConfigStep(Generals.AccountConfigStep.SEE_REPORT.value);
+          }
 
-          if (!this._router.url.includes('danh-sach-tai-khoan')) {
+          if (step === Generals.AccountConfigStep.SEE_REPORT.value && this._sessionService.getValueOfUserLoginChecker()) {
+            this._sessionService.setUserLoginChecker(false);
             this.navigateToStep(Generals.AccountConfigStep.SEE_REPORT.value);
           }
         }
@@ -222,8 +202,12 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
           this.stepper.previous();
         }
       } else {
-        this.stepper.next();
-        this.navigateToStep(step);
+        if (doneStep >= Generals.AccountConfigStep.ADD_TRACKING.value) {
+          this.navigateToStep(Generals.AccountConfigStep.SEE_REPORT.value);
+        } else {
+          this.stepper.next();
+          this.navigateToStep(step);
+        }
       }
     }
   }
