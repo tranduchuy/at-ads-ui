@@ -31,7 +31,7 @@
           <mat-cell *matCellDef="let element">
 
             <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id, router.url]"
-              class="ip-detail-link" mat-button color="accent">
+              class="ip-detail-link" mat-button color="warn">
               {{element._id}}
             </a>
 
@@ -61,7 +61,7 @@
             <span style="color: crimson; font-weight: bold; margin-right: 5px">{{element.numberOfCampaigns}}</span>
             chiến
             dịch
-            <button mat-stroked-button class="view-campaign-button"
+            <button mat-raised-button color="accent" class="view-campaign-button"
               (click)="showCampaignListDialog(element.campaigns)">Xem
               tất cả</button></mat-cell>
         </ng-container>

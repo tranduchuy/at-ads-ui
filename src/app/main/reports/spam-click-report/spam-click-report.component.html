@@ -10,7 +10,7 @@
     </div>
 
     <mat-form-field class="datePicker">
-      <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
+      <mat-label style="color: white; font-weight: bold">Khoảng thời gian thống kê</mat-label>
       <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
         startKey="start" endKey="end" [material]="true" [ranges]="ranges" (datesUpdated)="onSelectDateRange($event)"
         (change)="onApplyDateRange()" ngDefaultControl />
@@ -117,7 +117,8 @@
 
               <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]"
                 class="ip-detail-link" mat-button color="accent">
-                {{element.ip}}
+                <span *ngIf="element.isSpam === true" style="color: crimson">{{element.ip}}</span>
+                <span *ngIf="element.isSpam === false" style="color: #44b543">{{element.ip}}</span>
               </a>
 
             </mat-cell>

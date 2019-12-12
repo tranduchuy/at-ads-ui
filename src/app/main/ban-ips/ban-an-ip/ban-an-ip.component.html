@@ -24,6 +24,8 @@
       </div>
     </form>
 
+    <mat-divider *ngIf="hasBlockedIP === true"></mat-divider>
+
     <div class="banned-ip-info" *ngIf="hasBlockedIP === true">
       <p>
         IP <span [(ngModel)]="blockedIPs[0]" ngDefaultControl

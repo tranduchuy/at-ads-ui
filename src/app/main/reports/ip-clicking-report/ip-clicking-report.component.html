@@ -1,8 +1,7 @@
 <div class="container">
 
   <div class="title1">
-    THEO DÕI IP ĐANG CLICK QUẢNG CÁO - TÀI KHOẢN <span
-      class="adsId">{{sessionService.activeAdsAccountId}}</span>
+    THEO DÕI IP ĐANG CLICK QUẢNG CÁO - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
   </div>
 
   <div class="inner">
@@ -23,7 +22,8 @@
 
             <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id, router.url]"
               class="ip-detail-link" mat-button color="accent">
-              {{element._id}}
+              <span *ngIf="element.info[0].isSpam === true" style="color: crimson">{{element._id}}</span>
+              <span *ngIf="element.info[0].isSpam === false" style="color: #44b543">{{element._id}}</span>
             </a>
 
           </mat-cell>

@@ -19,6 +19,10 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
   isProcessing: boolean = true;
   classC: number;
   classD: number;
+  countMaxClickClassCInMinnutes: number
+  autoBlockIpClassCByMaxClick: number;
+  countMaxClickClassDInMinnutes: number
+  autoBlockIpClassDByMaxClick: number;
 
   constructor(private _banIpsService: BanIpsService,
     public sessionService: SessionService,
@@ -50,7 +54,79 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
         text: 'Kích hoạt',
         value: 2
       }
-    ]
+    ],
+    countMaxClickClassCInMinnutes: [
+      {
+        text: '10 click',
+        value: 10
+      },
+      {
+        text: '20 click',
+        value: 20
+      },
+      {
+        text: '30 click',
+        value: 30
+      },
+      {
+        text: '50 click',
+        value: 50
+      }
+    ],
+    autoBlockIpClassCByMaxClick: [
+      {
+        text: '10 phút',
+        value: 10
+      },
+      {
+        text: '30 phút',
+        value: 30
+      },
+      {
+        text: '60 phút',
+        value: 60
+      },
+      {
+        text: '90 phút',
+        value: 90
+      }
+    ],
+    countMaxClickClassDInMinnutes: [
+      {
+        text: '5 click',
+        value: 5
+      },
+      {
+        text: '15 click',
+        value: 15
+      },
+      {
+        text: '30 click',
+        value: 30
+      },
+      {
+        text: '60 click',
+        value: 60
+      }
+    ],
+    autoBlockIpClassDByMaxClick: [
+      {
+        text: '5 phút',
+        value: 5
+      },
+      {
+        text: '10 phút',
+        value: 10
+      },
+      {
+        text: '20 phút',
+        value: 20
+      },
+      {
+        text: '30 phút',
+        value: 30
+      }
+    ],
   };
 
   ngOnInit(): void {
@@ -63,6 +139,11 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
         }
       });
     this.subscriptions.push(sub);
+
+    this.countMaxClickClassCInMinnutes = this.itemsSource.countMaxClickClassCInMinnutes[1].value;
+    this.autoBlockIpClassCByMaxClick = this.itemsSource.autoBlockIpClassCByMaxClick[1].value;
+    this.countMaxClickClassDInMinnutes = this.itemsSource.countMaxClickClassDInMinnutes[1].value;
+    this.autoBlockIpClassDByMaxClick = this.itemsSource.autoBlockIpClassDByMaxClick[1].value;
   }
 
   getAccountDetail(accountId: string) {
@@ -96,6 +177,16 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
 
         this.classC = res.data.setting.autoBlackListIpRanges.classC === false ? 1 : 2;
         this.classD = res.data.setting.autoBlackListIpRanges.classD === false ? 1 : 2;
+
+        this.countMaxClickClassCInMinnutes = res.data.setting.autoBlackListIpRanges.countMaxClickClassCInMinnutes
+          || this.itemsSource.countMaxClickClassCInMinnutes[1].value;
+        this.autoBlockIpClassCByMaxClick = res.data.setting.autoBlackListIpRanges.autoBlockIpClassCByMaxClick
+          || this.itemsSource.autoBlockIpClassCByMaxClick[1].value;
+
+        this.countMaxClickClassDInMinnutes = res.data.setting.autoBlackListIpRanges.countMaxClickClassDInMinnutes
+          || this.itemsSource.countMaxClickClassDInMinnutes[1].value;
+        this.autoBlockIpClassDByMaxClick = res.data.setting.autoBlackListIpRanges.autoBlockIpClassDByMaxClick
+          || this.itemsSource.autoBlockIpClassDByMaxClick[1].value;
 
         this.isProcessing = false;
         this._fuseSplashScreenService.hide();
@@ -146,7 +237,11 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
   private generateAutoBlockingIPRangeParams(): any {
     const params = {
       classC: this.classC === 1 ? false : true,
-      classD: this.classD === 1 ? false : true
+      classD: this.classD === 1 ? false : true,
+      countMaxClickClassCInMinnutes: this.countMaxClickClassCInMinnutes,
+      autoBlockIpClassCByMaxClick: this.autoBlockIpClassCByMaxClick,
+      countMaxClickClassDInMinnutes: this.countMaxClickClassDInMinnutes,
+      autoBlockIpClassDByMaxClick: this.autoBlockIpClassDByMaxClick,
     }
 
     return params;

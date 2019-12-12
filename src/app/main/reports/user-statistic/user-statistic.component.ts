@@ -16,7 +16,7 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 })
 export class UserStatisticComponent extends PageBaseComponent implements OnInit {
 
-  displayedColumns: string[] = ['time', 'uuid', 'clicks', 'isPrivateBrowsing', 'os', 'browser', 'network', 'location'];
+  displayedColumns: string[] = ['time', 'uuid', 'clicks', 'isPrivateBrowsing', 'os', 'browser', 'network', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
 
   locale: any = {
     format: 'DD/MM/YYYY',
