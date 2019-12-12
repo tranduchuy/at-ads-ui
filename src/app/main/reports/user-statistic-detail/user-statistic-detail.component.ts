@@ -20,7 +20,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
 
   uuid: string;
   shortUuid: string;
-  historyColumns: string[] = ['accessTime', 'ip', 'action', 'website', 'os', 'browser', 'isPrivateBrowsing', 'location'];
+  historyColumns: string[] = ['accessTime', 'ip', 'action', 'website', 'os', 'browser', 'isPrivateBrowsing', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   history = [];
   lastHistory: any = {
     createdAt: '',

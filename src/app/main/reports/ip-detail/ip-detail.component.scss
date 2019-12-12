@@ -5,8 +5,11 @@
 
   .title1 {
     padding: 20px 30px 18px 30px;
-    background-color: #000000 !important;
-    background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+    // background-color: #000000 !important;
+    // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+    background-color: #ffffb5;
+    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
+    text-shadow: 1px 1px 2px black;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -18,7 +21,7 @@
   }
 
   .type1 {
-    background: rgba(255, 165, 0, 0.1);
+    //background: rgba(255, 165, 0, 0.1);
   }
 
   .type2 {
@@ -26,7 +29,7 @@
   }
 
   .type3 {
-    background: rgba(217, 83, 79, 0.1);
+    //background: rgba(217, 83, 79, 0.1);
   }
 
   .main-inner {
@@ -155,7 +158,7 @@
             overflow: hidden;
             white-space: nowrap;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 10px;
 
             &:hover {
               background: rgba(3, 155, 229, 0.05);
@@ -171,8 +174,13 @@
           mat-row {
             transition: 0.2s;
 
+            &:nth-child(odd) {
+              background: whitesmoke;
+            }
+
             &:hover {
-              font-weight: bolder;
+              background-color: rgba(3, 155, 229, 0.05);
+              //font-weight: bold;
             }
           }
 
@@ -182,26 +190,18 @@
             font-weight: bold;
           }
 
-          mat-header-cell:nth-child(4),
-          mat-cell:nth-child(4) {
-            flex: 0 0 6%;
-            justify-content: center;
-
-            mat-icon {
-              font-size: 16px;
-              margin-top: 5px;
-              margin-right: -5px;
-            }
-          }
-
           mat-header-cell:nth-child(1),
-          mat-cell:nth-child(1) {
-            flex: 0 0 11%;
+          mat-cell:nth-child(1),
+          mat-header-cell:nth-child(2),
+          mat-cell:nth-child(2),
+          mat-header-cell:nth-child(3),
+          mat-cell:nth-child(3) {
+            flex: 0 0 9%;
           }
 
           mat-header-cell:nth-child(5),
           mat-cell:nth-child(5) {
-            flex: 0 0 11%;
+            flex: 0 0 9%;
             a {
               width: 130px;
               display: block;
@@ -211,6 +211,8 @@
             }
           }
 
+          mat-header-cell:nth-child(4),
+          mat-cell:nth-child(4),
           mat-header-cell:nth-child(11),
           mat-cell:nth-child(11) {
             justify-content: center;
@@ -229,6 +231,14 @@
           mat-header-cell,
           mat-cell {
             font-size: 10px;
+          }
+
+          mat-cell {
+            mat-icon {
+              font-size: 16px;
+              margin-top: 5px;
+              margin-right: -5px;
+            }
           }
 
           mat-row,
@@ -253,8 +263,8 @@
       }
 
       .user-image {
-        height: 30px;
-        width: 30px;
+        height: 24px;
+        width: 24px;
         margin-right: 10px;
         border-radius: 50%;
       }

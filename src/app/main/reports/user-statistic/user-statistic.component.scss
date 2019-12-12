@@ -4,8 +4,11 @@
 
   .title1 {
     padding: 15px 30px 18px 30px;
-    background-color: #000000 !important;
-    background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+    // background-color: #000000 !important;
+    // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+    background-color: #ffffb5;
+    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
+    text-shadow: 1px 1px 2px black;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -15,6 +18,8 @@
 
       input {
         color: white;
+        text-shadow: 1px 1px 2px black;
+        font-weight: bold;
       }
     }
 
@@ -32,8 +37,8 @@
 
   .inner {
     .user-image {
-      height: 30px;
-      width: 30px;
+      height: 24px;
+      width: 24px;
       margin-right: 10px;
       border-radius: 50%;
     }
@@ -80,16 +85,11 @@
           overflow: hidden;
           white-space: nowrap;
           font-weight: bold;
-          font-size: 12px;
+          font-size: 11px;
 
           &:hover {
             background: rgba(3, 155, 229, 0.05);
           }
-        }
-
-        mat-header-cell:nth-child(1),
-        mat-cell:nth-child(1) {
-          flex: 0 0 14%;
         }
 
         mat-header-cell:nth-child(3),
@@ -98,33 +98,39 @@
           justify-content: center;
         }
 
-        mat-header-cell:nth-child(4),
-        mat-cell:nth-child(4) {
-          justify-content: center;
-
-          mat-icon {
-            font-size: 16px;
-            margin-top: 5px;
-          }
+        mat-header-cell:nth-child(1),
+        mat-cell:nth-child(1) {
+          flex: 0 0 10%;
         }
 
         mat-header-cell:nth-child(2),
-        mat-cell:nth-child(2) {
-          flex: 0 0 17%;
-        }
-
+        mat-cell:nth-child(2),
         mat-header-cell:nth-child(5),
         mat-cell:nth-child(5),
         mat-header-cell:nth-child(6),
         mat-cell:nth-child(6),
         mat-header-cell:nth-child(7),
         mat-cell:nth-child(7) {
-          flex: 0 0 12%;
+          flex: 0 0 8%;
         }
 
-        mat-cell:nth-child(4) {
-          padding-top: 10px;
-          padding-bottom: 10px;
+        mat-header-cell:nth-child(3),
+        mat-cell:nth-child(3),
+        mat-header-cell:nth-child(4),
+        mat-cell:nth-child(4),
+        mat-header-cell:nth-child(10),
+        mat-cell:nth-child(10) {
+          justify-content: center;
+        }
+
+        mat-header-cell:nth-child(11),
+        mat-cell:nth-child(11),
+        mat-header-cell:nth-child(12),
+        mat-cell:nth-child(12),
+        mat-header-cell:nth-child(13),
+        mat-cell:nth-child(13) {
+          flex: 0 0 6%;
+          justify-content: center;
         }
 
         mat-header-cell {
@@ -133,12 +139,20 @@
           font-weight: bold;
         }
 
+        mat-header-cell,
         mat-cell {
-          font-size: 12px;
+          font-size: 11px;
+        }
+
+        mat-cell {
+          mat-icon {
+            font-size: 14px;
+            margin-right: -5px;
+            margin-top: 5px;
+          }
         }
 
         mat-row {
-
           &:nth-child(odd) {
             background: whitesmoke;
           }

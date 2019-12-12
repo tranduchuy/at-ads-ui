@@ -14,7 +14,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="ban-ip-form">
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
-        <div fxFlex="60">
+        <div fxFlex="65">
 
           <app-input-textarea [formControlName]="'whitelistIPs'" [errors]="getMessageErrors('whitelistIPs')"
             title="Nhập danh sách IP không cho phép chặn" height="260px" [isDisabled]="isProcessing">

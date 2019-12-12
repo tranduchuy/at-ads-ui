@@ -5,10 +5,11 @@
       <button mat-icon-button (click)="backToMainReport()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <p class="title2">CHI TIẾT NGƯỜI DÙNG - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span></p>
+      <p class="title2">CHI TIẾT NGƯỜI DÙNG - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
+      </p>
     </div>
     <mat-form-field class="datePicker" fxFlex="20">
-      <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
+      <mat-label style="color: white; font-weight: bold">Khoảng thời gian thống kê</mat-label>
       <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
         startKey="start" endKey="end" [material]="true" [ranges]="ranges" (datesUpdated)="onSelectDateRange($event)"
         (change)="onApplyDateRange()" ngDefaultControl />
@@ -81,7 +82,7 @@
                   class="user-action-icon" matTooltip="Đã chặn và không bị tính tiền">verified_user
                 </mat-icon>
 
-                <mat-icon *ngIf="element.isSpam === false && element.type === 1" style="color: gold"
+                <mat-icon *ngIf="element.isSpam === false && element.type === 1" style="color: orange"
                   class="user-action-icon" matTooltip="Click chuột quảng cáo bị tính tiền">monetization_on</mat-icon>
 
                 {{(element.createdAt | date: 'HH:mm dd/MM/yyyy') || 'Unknown'}}
@@ -95,7 +96,9 @@
                 [class.visitor-ip]="element.type === 2">
                 <a [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]" mat-button color="accent"
                   class="ip-detail-link" matTooltip="Nhấn vào để xem chi tiết">
-                  {{element.ip}}
+                  <span *ngIf="element.isSpam === true && element.type === 1" style="color: crimson">{{element.ip}}</span>
+                  <span *ngIf="element.isSpam === false && element.type === 1" style="color: orange">{{element.ip}}</span>
+                  <span *ngIf="element.type === 2" style="color: #44b543">{{element.ip}}</span>
                 </a>
               </mat-cell>
             </ng-container>
@@ -184,17 +187,42 @@
               </mat-cell>
             </ng-container>
 
-            <!--<ng-container matColumnDef="keyword">-->
-            <!--<mat-header-cell *matHeaderCellDef>Từ khóa</mat-header-cell>-->
-            <!--<mat-cell *matCellDef="let element"></mat-cell>-->
-            <!--</ng-container>-->
-
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef>Tại (địa điểm)</mat-header-cell>
               <mat-cell *matCellDef="let element" [class.blocked-ip]="element.isSpam === true && element.type === 1"
                 [class.ads-click-ip]="element.isSpam === false && element.type === 1"
                 [class.visitor-ip]="element.type === 2">
                 {{element.location?.city || 'Unknown'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="keyword">
+              <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.keyword || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="campaignType">
+              <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.campaignType || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="matchType">
+              <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.matchType || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="page">
+              <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.page || ''}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="position">
+              <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.position || ''}}
               </mat-cell>
             </ng-container>
 
@@ -205,7 +233,7 @@
       </div>
 
       <div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.xs="0" *ngIf="pageTotal !== 1">
-        <div fxFlex="19" fxFlex.xs="0"></div>
+        <div fxFlex="20.5" fxFlex.xs="0"></div>
         <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column">
           <div fxFlex="70" fxFlex.xs="100">
             <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"

@@ -24,7 +24,7 @@ import { AutoBanIPComponent } from './auto-ban-ip/auto-ban-ip.component';
 import { AutoBlockingRangeIpsComponent } from './auto-blocking-range-ips/auto-blocking-range-ips.component';
 import { AutoBlockingCellularNetworksComponent } from './auto-blocking-cellular-networks/auto-blocking-cellular-networks.component';
 import { BanDeviceComponent } from './ban-device/ban-device.component';
-import { MatSelectModule, MatCheckboxModule } from '@angular/material';
+import { MatSelectModule, MatCheckboxModule, MatDividerModule } from '@angular/material';
 import { WhitelistIpComponent } from './whitelist-ip/whitelist-ip.component';
 import { AnonymousBrowserComponent } from './anonymous-browser/anonymous-browser.component';
 
@@ -50,6 +50,7 @@ import { AnonymousBrowserComponent } from './anonymous-browser/anonymous-browser
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatDividerModule,
 
     CheckboxGroupModule,
     ReactiveFormsModule,

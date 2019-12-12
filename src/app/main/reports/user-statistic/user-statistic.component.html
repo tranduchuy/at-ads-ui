@@ -4,7 +4,7 @@
     <p class="title2" fxFlex="80">BÁO CÁO THỐNG KÊ NGƯỜI DÙNG - TÀI KHOẢN <span
         class="adsId">{{sessionService.activeAdsAccountId}}</span></p>
     <mat-form-field class="datePicker" fxFlex="20">
-      <mat-label style="color: white">Khoảng thời gian thống kê</mat-label>
+      <mat-label style="color: white; font-weight: bold">Khoảng thời gian thống kê</mat-label>
       <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
         startKey="start" endKey="end" [material]="true" [ranges]="ranges" (datesUpdated)="onSelectDateRange($event)"
         (change)="onApplyDateRange()" ngDefaultControl />
@@ -105,6 +105,36 @@
         <ng-container matColumnDef="location">
           <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.location?.city || 'Unknown'}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="keyword">
+          <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.keyword || ''}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="campaignType">
+          <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.campaignType || ''}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="matchType">
+          <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.matchType || ''}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="page">
+          <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.page || ''}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.position || ''}}
           </mat-cell>
         </ng-container>
 
