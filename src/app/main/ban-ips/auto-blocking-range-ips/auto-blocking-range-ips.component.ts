@@ -57,26 +57,12 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
     ],
     countMaxClickClassCInMinnutes: [
       {
-        text: '10 click',
-        value: 10
-      },
-      {
-        text: '20 click',
-        value: 20
-      },
-      {
-        text: '30 click',
-        value: 30
-      },
-      {
-        text: '50 click',
-        value: 50
-      }
-    ],
-    autoBlockIpClassCByMaxClick: [
-      {
         text: '10 phút',
         value: 10
+      },
+      {
+        text: '20 phút',
+        value: 20
       },
       {
         text: '30 phút',
@@ -91,25 +77,29 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
         value: 90
       }
     ],
-    countMaxClickClassDInMinnutes: [
+    autoBlockIpClassCByMaxClick: [
       {
-        text: '5 click',
-        value: 5
+        text: '10 click',
+        value: 10
       },
       {
-        text: '15 click',
-        value: 15
+        text: '20 click',
+        value: 20
       },
       {
         text: '30 click',
         value: 30
       },
       {
-        text: '60 click',
-        value: 60
+        text: '50 click',
+        value: 50
+      },
+      {
+        text: '90 click',
+        value: 90
       }
     ],
-    autoBlockIpClassDByMaxClick: [
+    countMaxClickClassDInMinnutes: [
       {
         text: '5 phút',
         value: 5
@@ -119,13 +109,47 @@ export class AutoBlockingRangeIpsComponent extends PageBaseComponent implements 
         value: 10
       },
       {
+        text: '15 phút',
+        value: 15
+      },
+      {
         text: '20 phút',
         value: 20
       },
       {
         text: '30 phút',
         value: 30
+      },
+      {
+        text: '50 phút',
+        value: 50
       }
+    ],
+    autoBlockIpClassDByMaxClick: [
+      {
+        text: '5 click',
+        value: 5
+      },
+      {
+        text: '10 click',
+        value: 10
+      },
+      {
+        text: '15 click',
+        value: 15
+      },
+      {
+        text: '20 click',
+        value: 20
+      },
+      {
+        text: '30 click',
+        value: 30
+      },
+      {
+        text: '60 click',
+        value: 60
+      },
     ],
   };
 

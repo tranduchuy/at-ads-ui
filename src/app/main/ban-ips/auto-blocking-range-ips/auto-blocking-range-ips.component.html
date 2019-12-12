@@ -40,8 +40,8 @@
 
                 <mat-form-field style="width: 100%" appearance="outline">
                     <mat-label>Chọn số lần click</mat-label>
-                    <mat-select [(value)]="countMaxClickClassDInMinnutes" [disabled]="isProcessing">
-                        <mat-option *ngFor="let item of itemsSource.countMaxClickClassDInMinnutes" [value]="item.value">
+                    <mat-select [(value)]="autoBlockIpClassDByMaxClick" [disabled]="isProcessing">
+                        <mat-option *ngFor="let item of itemsSource.autoBlockIpClassDByMaxClick" [value]="item.value">
                             {{item.text}}
                         </mat-option>
                     </mat-select>
@@ -56,8 +56,8 @@
 
                 <mat-form-field style="width: 100%" appearance="outline">
                     <mat-label>Chọn khoảng thời gian</mat-label>
-                    <mat-select [(value)]="autoBlockIpClassDByMaxClick" [disabled]="isProcessing">
-                        <mat-option *ngFor="let item of itemsSource.autoBlockIpClassDByMaxClick" [value]="item.value">
+                    <mat-select [(value)]="countMaxClickClassDInMinnutes" [disabled]="isProcessing">
+                        <mat-option *ngFor="let item of itemsSource.countMaxClickClassDInMinnutes" [value]="item.value">
                             {{item.text}}
                         </mat-option>
                     </mat-select>
@@ -93,8 +93,8 @@
 
                 <mat-form-field style="width: 100%" appearance="outline">
                     <mat-label>Chọn số lần click</mat-label>
-                    <mat-select [(value)]="countMaxClickClassCInMinnutes" [disabled]="isProcessing">
-                        <mat-option *ngFor="let item of itemsSource.countMaxClickClassCInMinnutes" [value]="item.value">
+                    <mat-select [(value)]="autoBlockIpClassCByMaxClick" [disabled]="isProcessing">
+                        <mat-option *ngFor="let item of itemsSource.autoBlockIpClassCByMaxClick" [value]="item.value">
                             {{item.text}}
                         </mat-option>
                     </mat-select>
@@ -109,8 +109,8 @@
 
                 <mat-form-field style="width: 100%" appearance="outline">
                     <mat-label>Chọn khoảng thời gian</mat-label>
-                    <mat-select [(value)]="autoBlockIpClassCByMaxClick" [disabled]="isProcessing">
-                        <mat-option *ngFor="let item of itemsSource.autoBlockIpClassCByMaxClick" [value]="item.value">
+                    <mat-select [(value)]="countMaxClickClassCInMinnutes" [disabled]="isProcessing">
+                        <mat-option *ngFor="let item of itemsSource.countMaxClickClassCInMinnutes" [value]="item.value">
                             {{item.text}}
                         </mat-option>
                     </mat-select>
