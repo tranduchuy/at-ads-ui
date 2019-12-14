@@ -76,6 +76,14 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
     this.subscriptions.push(sub);
   }
 
+  parseIP(ip: string): string {
+    if (ip.includes('.*.*'))
+      return ip.replace('.*.*', '.0.0') + '/16';
+    if (ip.includes('.*'))
+      return ip.replace('.*', '.0') + '/24';
+    return ip;
+  }
+
   showCampaignListDialog(campaigns: any) {
     this._dialogService._openCampaignDialog(campaigns);
   }
@@ -126,8 +134,7 @@ export class BlockedIpListComponent extends PageBaseComponent implements OnInit 
   removeAutoBlockedIP(ip: string) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-
-    const sub = this._reportService.removeAutoBlockedIP({ ips: [ip] })
+    const sub = this._reportService.removeAutoBlockedIP({ ips: [this.parseIP(ip)] })
       .subscribe(
         (res: ILoginSuccess) => {
 

@@ -59,7 +59,7 @@ export namespace API {
   export namespace Report {
     export const getAccountStatisticReport = environment.hostApi + '/api/account-adwords/{account_id}/report-statistic?from={from}&to={to}&timeZone={timeZone}';
     export const getAccountReport = environment.hostApi + '/api/account-adwords/{account_id}/report?from={from}&to={to}';
-    export const getDailyClickingReport = environment.hostApi + '/api/account-adwords/{account_id}/report/daily-clicking?page={page}&limit={limit}';
+    export const getDailyClickingReport = environment.hostApi + '/api/account-adwords/{account_id}/report/daily-clicking?page={page}&limit={limit}&from={from}&to={to}';
     export const getClassDClickingReport = environment.hostApi + '/api/account-adwords/{account_id}/report/clicking-class-d-ips?from={from}&to={to}&page={page}&limit={limit}';
     export const getBlockedIPsListReport = environment.hostApi + '/api/reports/{account_id}/blocked-ips';
     export const removeAutoBLockedIP = environment.hostApi + '/api/account-adwords/{account_id}/blocked-ips';

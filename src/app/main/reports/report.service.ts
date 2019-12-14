@@ -3,6 +3,7 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { API } from '../../shared/constants/api.constant';
 import { SessionService } from 'app/shared/services/session.service';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 export interface IAccountStatisticReportParams {
   from: string;
@@ -138,6 +139,8 @@ export class ReportService {
     let url = API.Report.getDailyClickingReport.replace('{account_id}', activeAccountId);
     url = url.replace('{page}', params.page.toString());
     url = url.replace('{limit}', params.limit.toString());
+    url = url.replace('{from}', moment().startOf('day').valueOf().toString());
+    url = url.replace('{to}', moment().endOf('day').valueOf().toString());
 
     return this._http.get(url);
   }

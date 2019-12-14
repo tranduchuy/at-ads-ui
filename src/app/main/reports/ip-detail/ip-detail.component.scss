@@ -182,6 +182,16 @@
               background-color: rgba(3, 155, 229, 0.05);
               //font-weight: bold;
             }
+
+            -webkit-animation: rowAppearance 0.4s linear;
+            @keyframes rowAppearance {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+              }
+            }
           }
 
           mat-header-cell {
@@ -235,8 +245,8 @@
 
           mat-cell {
             mat-icon {
-              font-size: 16px;
-              margin-top: 5px;
+              font-size: 14px;
+              margin-top: 8px;
               margin-right: -5px;
             }
           }
@@ -251,8 +261,8 @@
 
       .icon,
       .os-icon {
-        height: 16px;
-        width: 16px;
+        height: 14px;
+        width: 14px;
         //margin-top: -2px;
         margin-right: 3px;
         //margin-left: 18px;

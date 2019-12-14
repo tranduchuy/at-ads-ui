@@ -159,7 +159,7 @@ export class WhitelistIpComponent extends EditableFormBaseComponent implements O
       ips: { ...this.form.value }.whitelistIPs.split('\n')
     }
 
-    param.ips = param.ips.filter(item => item);
+    param.ips = param.ips.filter((ip: string) => ip);
 
     return param;
   }

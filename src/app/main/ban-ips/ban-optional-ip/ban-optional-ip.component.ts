@@ -5,7 +5,6 @@ import { BanIpsService } from '../ban-ips.service';
 import { ILoginSuccess } from '../../../authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
-import { DialogService } from '../../../shared/services/dialog.service';
 import { SessionService } from '../../../shared/services/session.service';
 import { Router } from '@angular/router';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
@@ -103,10 +102,9 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   }
 
   post(): void {
+    const params = this.generatePostObject();
     this.isProcessing = true;
     this._fuseProgresBarService.show();
-    const params = this.generatePostObject();
-
     const sub = this._banIpsService.blockIPs(params)
       .subscribe(
         (res: ILoginSuccess) => {
@@ -142,36 +140,27 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
   }
 
   initForm(): void {
-    // this.form = this.fb.group({
-    //   listBannedIP: ['']
-    // });
-
     this.form = this.fb.group({
-      listBannedIP: ['', [Validators.required, this.validatorService.checkListIP]]
+      listBannedIP: ['', [Validators.required, this.validatorService.checkWhiteListIP]]
     });
   }
 
+  parseIP(ip: string): string {
+    if (ip.includes('.*.*'))
+      return ip.replace('.*.*', '.0.0') + '/16';
+    if (ip.includes('.*'))
+      return ip.replace('.*', '.0') + '/24';
+    return ip;
+  }
+
   private generatePostObject(): any {
-
-
-    // this.listIPs = [...new Set(this.listIPs)];
-
-    // const ips = [];
-
-    // for (let i = 81; i < this.listIPs.length; i++)
-    //   ips.push(this.listIPs[i]);
-
-    // const params = {
-    //   action: 'ADD',
-    //   ips
-    // };
-
     const params = {
       action: 'ADD',
       ips: { ...this.form.value }.listBannedIP.split(/\r?\n/)
     };
 
-    params.ips = params.ips.filter(item => item);
+    params.ips = params.ips.filter((ip: string) => ip);
+    params.ips = params.ips.map((ip: string) => this.parseIP(ip));
 
     return params;
   }
@@ -186,7 +175,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
             const sub = this._banIpsService.removeBlockedIPs({
               action: 'REMOVE',
-              ips: [ip]
+              ips: [this.parseIP(ip)]
             })
               .subscribe((res: ILoginSuccess) => {
 

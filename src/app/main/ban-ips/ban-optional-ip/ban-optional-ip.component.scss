@@ -91,9 +91,9 @@
     }
 
     .input-example {
-      margin-top: -10px;
+      margin-top: -15px;
       color: gray;
-      font-size: 12px !important;
+      font-size: 11px !important;
     }
 
     .button-area {
@@ -101,7 +101,7 @@
     }
 
     .blacklist {
-      background: rgba(217, 83, 79, 1);
+      //background: rgba(217, 83, 79, 1);
       margin-top: 40px;
       //box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -110,16 +110,17 @@
 
       .table-title {
         padding: 15px;
-        padding-bottom: 0;
         font-size: 14px;
         color: white;
         font-weight: bold;
+        background: rgba(217, 83, 79, 1);
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
       }
 
-      .notification {
-        color: white;
-        padding-left: 10px;
-        padding-bottom: 10px;
+      .no-notice {
+        color: gray;
+        padding: 10px;
       }
 
       .table-wrapper {
@@ -142,6 +143,16 @@
 
           &:hover {
             background-color: rgba(217, 83, 79, 0.1);
+          }
+
+          -webkit-animation: rowAppearance 0.4s linear;
+          @keyframes rowAppearance {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
           }
         }
 

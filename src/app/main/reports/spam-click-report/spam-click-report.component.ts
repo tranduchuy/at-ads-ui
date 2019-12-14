@@ -81,6 +81,9 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   };
 
   lineChart: any = {
+    chartOptions: {
+      responsive: true
+    },
     chartType: 'line',
     datasets: {
       report: [
@@ -100,9 +103,9 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     labels: [],
     colors: [
       {
-        borderColor: '#40a5ec',
-        //backgroundColor: 'rgba(64, 165, 236, 1)',
-        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: 'dodgerblue',
+        backgroundColor: 'rgba(0, 204, 255,0.5)',
+        //backgroundColor: 'rgba(0,0,0,0)',
         pointBackgroundColor: '#40a5ec',
         pointHoverBackgroundColor: '#40a5ec',
         pointBorderColor: 'white',
@@ -110,8 +113,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
       },
       {
         borderColor: 'orangered',
-        //backgroundColor: 'rgba(255, 0, 57, 1)',
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: 'rgba(255, 0, 57, 0.4)',
+        //backgroundColor: 'rgba(0,0,0,0)',
         pointBackgroundColor: 'orangered',
         pointHoverBackgroundColor: 'orangered',
         pointBorderColor: 'white',
@@ -144,7 +147,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
           hoverBorderWstatusth: 10
         },
         line: {
-          tension: 0
+          tension: 0.3
         }
       },
       scales: {
@@ -154,7 +157,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             status: 'y-axis-0',
             position: 'left',
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
             }
           }
         ]
@@ -384,7 +387,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
     const params = {
       from: startDate.valueOf().toString(),
-      to: moment(this.selectedDateRange.end).valueOf().toString(),
+      to: moment(this.selectedDateRange.end).endOf('day').valueOf().toString(),
       timeZone: moment().format('Z')
     }
 
@@ -447,8 +450,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
           lineChartLabels.forEach((item, index) => {
             if (lineChartData[item] !== undefined) {
-              realClickDataSets[index] = this.abbreviateNumber(lineChartData[item].realClick);
-              spamClickDataSets[index] = this.abbreviateNumber(lineChartData[item].spamClick);
+              realClickDataSets[index] = lineChartData[item].realClick;
+              spamClickDataSets[index] = lineChartData[item].spamClick;
             }
             else {
               realClickDataSets[index] = 0;
@@ -482,7 +485,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
     const params = {
       from: startDate.valueOf().toString(),
-      to: moment(this.selectedDateRange.end).valueOf().toString(),
+      to: moment(this.selectedDateRange.end).endOf('day').valueOf().toString(),
       page,
       limit: this.pageLimit
     }
