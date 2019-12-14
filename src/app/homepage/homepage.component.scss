@@ -550,7 +550,8 @@
 
             .step-image {
               height: 65%;
-              
+              background: #eee;
+
               img {
                 width: 100%;
                 height: 100%;
@@ -577,8 +578,20 @@
       }
     }
 
+    .onLoadingImage {
+      -webkit-animation: ani 0.5s ease-in;
+      @keyframes ani {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    }
+
     .feature-container {
-      background: url("../../assets/images/backgrounds/1457718481934.jpg");
+      //background: url("../../assets/images/backgrounds/1457718481934.jpg");
       background-size: 100% 100%;
       // background-attachment: fixed;
 
@@ -685,7 +698,7 @@
       // background-color: #7fcec5;
       // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
-      background: url("../../assets/images/backgrounds/Analytics-digital-analytics-HD-1980x990.jpg");
+      // background: url("../../assets/images/backgrounds/Analytics-digital-analytics-HD-1980x990.jpg");
       background-size: 100% 100%;
       background-position: center center;
 
@@ -723,6 +736,17 @@
             &:hover {
               transform: scale(1.05, 1.05);
             }
+
+            // -webkit-animation: imgAni 5s ease-in-out;
+            // @keyframes imgAni {
+            //   from {
+            //     transform: translateY(5vh);
+            //     opacity: 0
+            //   } to {
+            //     transform: translateY(0);
+            //     opacity: 1
+            //   }
+            // }
           }
         }
 
