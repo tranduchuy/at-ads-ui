@@ -73,6 +73,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   isTopbarTitleDisplayed: boolean = true;
   isContactDisplayed: boolean = false;
   isLoginButtonDisplayed: boolean = false;
+  onLoadingImage: boolean = false;
 
   scroll = (event: any): void => {
     const currentOffset = event.srcElement.scrollTop;

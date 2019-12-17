@@ -76,7 +76,11 @@
         text-align: center;
         padding: 40px 30px 50px 30px;
         font-size: 12px;
-        color: rgba(0, 0, 0, 0.7);
+        color: green;
+
+        span {
+          font-weight: bold;
+        }
       }
 
       .overview-chart {
@@ -250,7 +254,7 @@
         .overview-title1 {
           padding: 15px;
           background: white;
-          font-size: 16px;
+          font-size: 14px;
           color: rgba(0, 0, 0, 0.7);
           width: 100%;
           border-top-left-radius: 7px;
@@ -266,8 +270,8 @@
         }
 
         .icon {
-          height: 16px;
-          width: 16px;
+          height: 14px;
+          width: 14px;
           margin-right: 3px;
         }
 
@@ -372,6 +376,16 @@
 
               &:hover {
                 background: rgba(3, 155, 229, 0.05);
+              }
+
+              -webkit-animation: rowAppearance 0.4s linear;
+              @keyframes rowAppearance {
+                from {
+                  opacity: 0;
+                }
+                to {
+                  opacity: 1;
+                }
               }
             }
 

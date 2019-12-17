@@ -127,7 +127,8 @@
 @media screen and (max-width: 600px) {
   .container {
     .inner {
-      padding: 0 15px 0 15px;
+      padding: 0 15px 15px 15px;
+      margin: 15px;
 
       .submit-button {
         font-size: 12px;

@@ -88,7 +88,7 @@
 
       <div class="position-relative h-300 pb-16">
         <canvas baseChart [datasets]="lineChart.datasets.report" [labels]="lineChart.labels" [colors]="lineChart.colors"
-          [options]="lineChart.options" [chartType]="lineChart.chartType">
+          [options]="lineChart.options" [chartType]="lineChart.chartType" [options]="lineChart.chartOptions">
         </canvas>
       </div>
 
@@ -154,7 +154,7 @@
           <ng-container matColumnDef="isPrivateBrowsing">
             <mat-header-cell *matHeaderCellDef> Ẩn danh </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <span *ngIf="element.isPrivateBrowsing === true" style="color: orange; font-weight: bold">
+              <span *ngIf="element.isPrivateBrowsing === true" style="color: darkorange; font-weight: bold">
                 <mat-icon>report_problem</mat-icon>Có
               </span>
               <span *ngIf="element.isPrivateBrowsing === false" style="color:silver">Không</span>

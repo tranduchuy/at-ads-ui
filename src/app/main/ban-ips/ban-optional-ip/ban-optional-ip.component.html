@@ -33,15 +33,15 @@
             <br>127.0.0.2
             <br>127.0.0.3
           </p>
-          <!-- <p>
-            Hoặc chặn <b>từng nhóm IP</b>, thêm dấu <span style="color: red">(*)</span> tượng trưng cho nhóm IP muốn
+          <p>
+            Hoặc chặn <b>từng nhóm IP</b>, thêm dấu <span style="color: crimson">(*)</span> tượng trưng cho nhóm IP muốn
             chặn
           </p>
           <b>Ví dụ nhóm IP:</b>
           <p>
             IP4: 127.0.0.*
             <br>IP4: 127.0.*.*
-          </p> -->
+          </p>
           <span>
             Hệ thống sẽ tự động chuyển đổi IP và chặn trong Google Ads sau một khoảng thời gian.
           </span>
@@ -56,7 +56,7 @@
     </form>
 
     <div class="blacklist">
-      <p class="table-title">Danh sách IP đã chặn gần đây</p>
+      <div class="table-title">Danh sách IP đã chặn gần đây</div>
 
       <div class="table-wrapper">
 
@@ -98,9 +98,9 @@
           <ng-container matColumnDef="unlockButton">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <button (click)="unblockSampleIP(element._id)" [disabled]="isProcessing" mat-icon-button color="accent"
+              <button (click)="unblockSampleIP(element._id)" [disabled]="isProcessing" mat-icon-button
                 matTooltip="Nhấn để bỏ chặn" class="unlock-button">
-                <mat-icon>lock_open</mat-icon>
+                <mat-icon style="color: #44b543">lock_open</mat-icon>
               </button>
             </mat-cell>
           </ng-container>
@@ -111,7 +111,7 @@
 
       </div>
 
-      <div class="notification" *ngIf="blockedIPs.length === 0 && isProcessing === false">Chưa có ghi nhận nào.</div>
+      <div class="no-notice" *ngIf="blockedIPs.length === 0 && isProcessing === false">Chưa có ghi nhận nào.</div>
     </div>
   </div>
 </div>

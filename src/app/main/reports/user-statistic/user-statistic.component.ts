@@ -109,7 +109,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
 
     const params = {
       startDate: startDate.valueOf().toString(),
-      endDate: moment(this.selectedDateRange.end).valueOf().toString(),
+      endDate: moment(this.selectedDateRange.end).endOf('day').valueOf().toString(),
       page,
       limit: this.pageLimit
     }

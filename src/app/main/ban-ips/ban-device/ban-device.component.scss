@@ -75,10 +75,20 @@
 
       mat-row {
         transition: 0.2s;
-      }
 
-      mat-row:hover {
-        background-color: rgba(3, 155, 229, 0.05);
+        -webkit-animation: rowAppearance 0.4s linear;
+        @keyframes rowAppearance {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        &:hover {
+          background-color: rgba(3, 155, 229, 0.05);
+        }
       }
 
       mat-cell,

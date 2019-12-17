@@ -113,21 +113,19 @@
                <ng-container matColumnDef="os">
                   <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <img *ngIf="element.os?.name === 'Windows'"
-                        src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
-                     <img *ngIf="element.os?.name === 'iOS'"
-                        src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
-                        alt="" class="icon">
-                     <img *ngIf="element.os?.name === 'Android'"
-                        src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
-                     <img *ngIf="element.os?.name === 'Mac OS'"
-                        src="https://www.pinclipart.com/picdir/big/204-2040230_post-mac-os-7-logo-clipart.png" alt=""
-                        class="icon">
-                     <img *ngIf="element.os?.name === 'Linux'"
-                        src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
-                     <img *ngIf="element.os?.name === 'Ubuntu'"
-                        src="https://s24255.pcdn.co/wp-content/uploads/2014/03/ubuntu-logo.png" alt="" class="icon">
-                     <span *ngIf="element.os?.name">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
+                     <img *ngIf="element.os?.name === 'Windows'" src="../../assets/icons/windows.svg" alt=""
+                        class="icon" loading="lazy">
+                     <img *ngIf="element.os?.name === 'iOS'" src="../../assets/icons/ios.svg" alt="" class="icon"
+                        loading="lazy">
+                     <img *ngIf="element.os?.name === 'Android'" src="../../assets/icons/android.svg" alt=""
+                        class="icon" loading="lazy">
+                     <img *ngIf="element.os?.name === 'Mac OS'" src="../../assets/icons/macos.svg" alt="" class="icon"
+                        loading="lazy">
+                     <img *ngIf="element.os?.name === 'Linux'" src="https://img.icons8.com/color/48/000000/linux.png"
+                        alt="" class="icon" loading="lazy">
+                     <img *ngIf="element.os?.name === 'Ubuntu'" src="../../assets/icons/ubuntu.png" alt="" class="icon">
+                     <span *ngIf="element.os?.name"
+                        loading="lazy">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
                      <span *ngIf="!element.os?.name" class="UNKNOWN">Unknown</span>
                   </mat-cell>
@@ -136,33 +134,25 @@
                <ng-container matColumnDef="browser">
                   <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <img *ngIf="element.browser?.name === 'Edge'"
-                        src="https://cdn1.vox-cdn.com/uploads/chorus_asset/file/3665120/Microsoft_Edge_logo.svg.0.png"
-                        alt="" class="icon">
-                     <img *ngIf="element.browser?.name === 'Firefox'"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png"
-                        alt="" class="icon">
-                     <img *ngIf="element.browser?.name === 'Chrome'"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png"
-                        alt="" class="icon">
+                     <img *ngIf="element.browser?.name === 'Edge'" src="../../assets/icons/edge.svg" alt="" class="icon"
+                        loading="lazy">
+                     <img *ngIf="element.browser?.name === 'Firefox'" src="../../assets/icons/firefox.svg" alt=""
+                        class="icon" loading="lazy">
+                     <img *ngIf="element.browser?.name === 'Chrome'" src="../../assets/icons/chrome.svg" alt=""
+                        class="icon" loading="lazy">
                      <img *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png"
-                        alt="" class="icon">
-                     <img *ngIf="element.browser?.name === 'IE'"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png"
-                        alt="" class="icon">
-                     <img *ngIf="element.browser?.name === 'Chromium'"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Chromium_11_Logo.svg/1024px-Chromium_11_Logo.svg.png"
-                        alt="" class="icon">
-                     <img *ngIf="element.browser?.name === 'Cốc Cốc'"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png"
-                        alt="" class="icon">
-                     <img *ngIf="element.browser?.name === 'Opera'"
-                        src="https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png" alt=""
-                        class="icon">
+                        src="../../assets/icons/safari.png" alt="" class="icon" loading="lazy">
+                     <img *ngIf="element.browser?.name === 'IE'" src="../../assets/icons/ie.svg" alt="" class="icon"
+                        loading="lazy">
+                     <img *ngIf="element.browser?.name === 'Chromium'" src="../../assets/icons/chromium.svg" alt=""
+                        class="icon" loading="lazy">
+                     <img *ngIf="element.browser?.name === 'Cốc Cốc'" src="../../assets/icons/coccoc.png" alt=""
+                        class="icon" loading="lazy">
+                     <img *ngIf="element.browser?.name === 'Opera'" src="../../assets/icons/opera.svg" alt=""
+                        class="icon" loading="lazy">
                      <img *ngIf="element.browser?.name === 'Tor'"
                         src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
-                        alt="" class="icon">
+                        alt="" class="icon" loading="lazy">
 
                      <span *ngIf="element.browser?.name">
                         <span>{{element.browser?.name}}</span>
@@ -277,8 +267,9 @@
 
                <div class="step step1" fxFlex="33.33">
                   <div class="step-image">
-                     <img src="../../assets/images/step1.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step1.png')" loading="lazy">
+                     <img [lazyLoad]="'../../assets/images/step1.png'" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step1.png')" (load)="onLoadingImage = true"
+                        [class.onLoadingImage]="onLoadingImage">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 1: Liên kết Google Ads</span>
@@ -291,8 +282,9 @@
 
                <div class="step step2" fxFlex="33.33">
                   <div class="step-image">
-                     <img src="../../assets/images/step2.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step2.png')" loading="lazy">
+                     <img [lazyLoad]="'../../assets/images/step2.png'" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step2.png')" (load)="onLoadingImage = true"
+                        [class.onLoadingImage]="onLoadingImage">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
@@ -305,8 +297,9 @@
 
                <div class="step step3" fxFlex="33.33">
                   <div class="step-image">
-                     <img src="../../assets/images/step3.png" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step3.png')" loading="lazy">
+                     <img [lazyLoad]="'../../assets/images/step3.png'" alt="" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step3.png')" (load)="onLoadingImage = true"
+                        [class.onLoadingImage]="onLoadingImage">
                   </div>
                   <div class="step-description">
                      <span class="step-name">Bước 3: Chặn click ảo</span>
@@ -320,7 +313,8 @@
          </div>
       </div>
 
-      <div class="feature-container">
+      <div class="feature-container" [lazyLoad]="'../../assets/images/backgrounds/1457718481934.jpg'"
+         (load)="onLoadingImage = true" [class.onLoadingImage]="onLoadingImage">
          <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
             <div class="overview" fxFlex="32.7">
                <p class="overview-title">
@@ -458,7 +452,9 @@
          </div>
       </div>
 
-      <div class="benefit-container">
+      <div class="benefit-container"
+         [lazyLoad]="'../../assets/images/backgrounds/Analytics-digital-analytics-HD-1980x990.jpg'"
+         (load)="onLoadingImage = true" [class.onLoadingImage]="onLoadingImage">
          <div class="benefit">
 
             <div class="benefit-title">
@@ -475,7 +471,7 @@
             <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="30px">
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/save-money.svg" alt="" loading="lazy">
+                     <img src="../../assets/images/save-money.svg" alt="">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
@@ -488,7 +484,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/timer.svg" alt="" loading="lazy">
+                     <img src="../../assets/images/timer.svg" alt="">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward
@@ -500,7 +496,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/customer.png" alt="" loading="lazy">
+                     <img src="../../assets/images/customer.png">
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward

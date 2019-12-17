@@ -28,10 +28,10 @@ import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
 import { IpDetailComponent } from './ip-detail/ip-detail.component';
 import { BlockedIpListComponent } from './blocked-ip-list/blocked-ip-list.component';
 
-import {getVietnamesePaginatorIntl} from './vietnamese-paginator-intl';
+import { getVietnamesePaginatorIntl } from './vietnamese-paginator-intl';
 import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-report.component';
 
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 

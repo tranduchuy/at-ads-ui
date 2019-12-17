@@ -22,8 +22,8 @@
 
   .inner {
     .icon {
-      height: 15px;
-      width: 15px;
+      height: 14px;
+      width: 14px;
       margin-right: 3px;
     }
 
@@ -97,7 +97,7 @@
           mat-icon {
             font-size: 14px;
             margin-right: -5px;
-            margin-top: 5px;
+            margin-top: 8px;
           }
         }
 
@@ -131,6 +131,16 @@
 
           &:hover {
             background-color: rgba(3, 155, 229, 0.05);
+          }
+
+          -webkit-animation: rowAppearance 0.4s linear;
+          @keyframes rowAppearance {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
           }
         }
 

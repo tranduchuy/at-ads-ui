@@ -270,7 +270,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
     const params = {
       from: startDate.valueOf().toString(),
-      to: moment(this.selectedDateRange.end).valueOf().toString(),
+      to: moment(this.selectedDateRange.end).endOf('day').valueOf().toString(),
       page,
       limit: this.pageLimit,
       website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null
@@ -324,7 +324,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
     const params = {
       from: startDate.valueOf().toString(),
-      to: moment(this.selectedDateRange.end).valueOf().toString(),
+      to: moment(this.selectedDateRange.end).endOf('day').valueOf().toString(),
       website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null
     }
 

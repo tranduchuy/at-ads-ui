@@ -152,7 +152,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     const params = {
       id: uuid,
       startDate: startDate.valueOf().toString(),
-      endDate: moment(this.selectedDateRange.end).valueOf().toString(),
+      endDate: moment(this.selectedDateRange.end).endOf('day').valueOf().toString(),
       page,
       limit: this.pageLimit
     }

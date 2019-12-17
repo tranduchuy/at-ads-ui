@@ -121,6 +121,11 @@
   .container {
     .inner {
       padding: 15px;
+      margin: 15px;
+
+      .banned-ip-info {
+        font-size: 11px;
+      }
     }
   }
 }
