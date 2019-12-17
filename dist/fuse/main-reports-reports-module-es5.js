@@ -53675,9 +53675,9 @@ var SpamClickReportComponent = /** @class */ (function (_super) {
             labels: [],
             colors: [
                 {
-                    borderColor: 'dodgerblue',
-                    backgroundColor: 'rgba(0, 204, 255,0.5)',
-                    //backgroundColor: 'rgba(0,0,0,0)',
+                    borderColor: '#40a5ec',
+                    //backgroundColor: 'rgba(0, 204, 255,0.5)',
+                    backgroundColor: 'rgba(0,0,0,0)',
                     pointBackgroundColor: '#40a5ec',
                     pointHoverBackgroundColor: '#40a5ec',
                     pointBorderColor: 'white',
@@ -53685,8 +53685,8 @@ var SpamClickReportComponent = /** @class */ (function (_super) {
                 },
                 {
                     borderColor: 'orangered',
-                    backgroundColor: 'rgba(255, 0, 57, 0.4)',
-                    //backgroundColor: 'rgba(0,0,0,0)',
+                    //backgroundColor: 'rgba(255, 0, 57, 0.4)',
+                    backgroundColor: 'rgba(0,0,0,0)',
                     pointBackgroundColor: 'orangered',
                     pointHoverBackgroundColor: 'orangered',
                     pointBorderColor: 'white',
@@ -53719,7 +53719,7 @@ var SpamClickReportComponent = /** @class */ (function (_super) {
                         hoverBorderWstatusth: 10
                     },
                     line: {
-                        tension: 0.3
+                        tension: 0
                     }
                 },
                 scales: {
