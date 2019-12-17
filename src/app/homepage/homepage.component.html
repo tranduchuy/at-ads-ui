@@ -115,11 +115,11 @@
                   <mat-cell *matCellDef="let element">
                      <img *ngIf="element.os?.name === 'Windows'" src="../../assets/icons/windows.svg" alt=""
                         class="icon" loading="lazy">
-                     <img *ngIf="element.os?.name === 'iOS'" src="../../assets/icons/ios.svg" alt="" class="icon"
+                     <img *ngIf="element.os?.name === 'iOS'" src="../../assets/icons/ios.png" alt="" class="icon"
                         loading="lazy">
                      <img *ngIf="element.os?.name === 'Android'" src="../../assets/icons/android.svg" alt=""
                         class="icon" loading="lazy">
-                     <img *ngIf="element.os?.name === 'Mac OS'" src="../../assets/icons/macos.svg" alt="" class="icon"
+                     <img *ngIf="element.os?.name === 'Mac OS'" src="../../assets/icons/macos.png" alt="" class="icon"
                         loading="lazy">
                      <img *ngIf="element.os?.name === 'Linux'" src="https://img.icons8.com/color/48/000000/linux.png"
                         alt="" class="icon" loading="lazy">
@@ -313,8 +313,7 @@
          </div>
       </div>
 
-      <div class="feature-container" [lazyLoad]="'../../assets/images/backgrounds/1457718481934.jpg'"
-         (load)="onLoadingImage = true" [class.onLoadingImage]="onLoadingImage">
+      <div class="feature-container">
          <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
             <div class="overview" fxFlex="32.7">
                <p class="overview-title">
@@ -336,7 +335,8 @@
                      </button>
                   </div>
                </div>
-               <img src="../../assets/images/analytics-graphic.png" alt="" class="overview-image" loading="lazy">
+               <img [lazyLoad]="'https://discovermediagroups.com/myimage/banner.svg'" (load)="onLoadingImage = true"
+                  [class.onLoadingImage]="onLoadingImage" alt="" class="overview-image">
             </div>
             <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
                <div class="feature-left" fxLayout="column" fxLayoutGap="20px">

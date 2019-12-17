@@ -592,11 +592,14 @@
 
     .feature-container {
       //background: url("../../assets/images/backgrounds/1457718481934.jpg");
-      background-size: 100% 100%;
-      // background-attachment: fixed;
+      //background-size: 100% 100%;
+      //background-attachment: fixed;
+
+      background-color: #ffffb5 !important;
+      background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%) !important;
 
       .feature {
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.04);
         padding: 70px 250px 70px 250px;
         color: white;
 
@@ -625,8 +628,10 @@
           }
 
           .overview-image {
-            //width: 80%;
-            display: none;
+            width: 70%;
+            display:  table;
+            margin: 0 auto;
+            //display: none;
             margin-top: 75px;
           }
 
@@ -649,7 +654,8 @@
       // background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
       // background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
       // background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-      background: rgba(255, 255, 255, 0.1);
+      // background: rgba(255, 255, 255, 0.1);
+      background: rgba(7, 87, 115, 1);
       backdrop-filter: blur(6px);
       color: white;
       //border-radius: 7px;
@@ -663,19 +669,19 @@
 
       min-height: 120px;
 
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
       mat-icon,
       img {
-        font-size: 42px;
-        min-width: 42px;
+        font-size: 36px;
+        min-width: 36px;
         color: skyblue;
         margin-left: 5px;
-        filter: drop-shadow(1px 1px 1px black) !important;
+        //filter: drop-shadow(1px 1px 1px black) !important;
       }
 
       img {
-        height: 42px;
+        height: 36px;
       }
 
       p {
@@ -690,7 +696,8 @@
       }
 
       &:hover {
-        background: rgba(7, 87, 115, 1);
+        transform: scale(1.02,1.02);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
       }
     }
 
@@ -715,7 +722,7 @@
         //background: url("../../assets/images/backgrounds/QL5I0O.jpg");
 
         .benefit-title {
-          filter: drop-shadow(0.8px 0.8px 0.8px black);
+          //filter: drop-shadow(0.8px 0.8px 0.8px black);
           font-size: 20px;
         }
 
@@ -976,6 +983,7 @@
       .banner-container {
         // background: url("../../assets/images/backgrounds/bg2.jpeg");
         // background-size: 100% 100%;
+        background: url("https://img.freepik.com/free-vector/illustration-data-analysis-graph_53876-37531.jpg?size=626&ext=jpg") !important;
 
         .banner {
           padding-left: 30px;
@@ -994,6 +1002,7 @@
             margin-top: 20px;
             font-size: 20px !important;
             padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
           }
 
           .logo {
@@ -1067,11 +1076,9 @@
 
       .feature-container {
         //background: url("../../assets/images/backgrounds/maxresdefault.jpg");
-        background-color: #0d0a0b;
-        background-image: linear-gradient(315deg, #0d0a0b 0%, #009fc2 74%);
-
         .feature {
-          padding: 10px;
+          background: none;
+          padding: 20px;
           padding-bottom: 30px;
           padding-top: 30px;
 
@@ -1081,7 +1088,7 @@
             .overview-title {
               img {
                 margin-right: 5px;
-                margin-top: -20px;
+                margin-top: -10px;
               }
             }
 
@@ -1119,7 +1126,7 @@
       .benefit-container {
         // background-color: #7fcec5;
         // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-        background: none;
+        background-image: none !important;
         .benefit {
           padding: 30px;
           .main-benefit {
