@@ -205,4 +205,15 @@
 }
 
 @media screen and (max-width: 600px) {
+  .container {
+    .title1 {
+      height: 30vh;
+    }
+    .inner {
+      .table-wrapper {
+        margin: 10px;
+        margin-top: 0;
+      }
+    }
+  }
 }

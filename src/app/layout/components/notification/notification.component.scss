@@ -8,9 +8,10 @@
   -webkit-animation: notificationAni 0.2s ease-out;
   @keyframes notificationAni {
     from {
-      transform: translateY(-5vh)
-    } to {
-      transform: translateY(0)
+      transform: translateY(-5vh);
+    }
+    to {
+      transform: translateY(0);
     }
   }
 
@@ -21,9 +22,14 @@
   ::ng-deep .mat-horizontal-stepper-header-container {
     width: 80%;
     padding-left: 5px;
+    padding-top: 5px;
   }
 
   ::ng-deep .mat-step-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
     .mat-step-icon-selected {
       background-color: #44b543;
     }
@@ -34,6 +40,28 @@
 
     a {
       color: inherit;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .notification {
+    padding-top: 55px;
+
+    ::ng-deep .mat-horizontal-stepper-header-container {
+      width: 100%;
+      padding: 0;
+    }
+
+    ::ng-deep .mat-step-header {
+      font-size: 11px !important;
+
+      .mat-step-icon-selected,
+      .mat-step-icon-state-edit,
+      .mat-step-icon-state-number {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 }
