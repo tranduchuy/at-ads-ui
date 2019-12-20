@@ -1,15 +1,18 @@
 .container {
   width: 100%;
+  background: url("../../../assets/images/backgrounds/gg-material_1.png");
+  background-size: 100% 100%;
 
   .title1 {
     //padding: 86px 20px 16px 0px;
-    background: url("../../../assets/images/backgrounds/adword-bg3.jpg");
-    background-size: 100% 100%;
+    background-color: #ffffb5;
+    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
     color: white;
     text-shadow: 1px 1px 2px black;
     font-size: 16px;
     font-weight: bold;
-    padding: 20px 20px 20px 0px;
+    padding: 40px 30px 30px 30px;
+    height: 22vh;
 
     .title1-main {
       padding-top: 5px;
@@ -21,6 +24,8 @@
 
     .add-account-button {
       text-shadow: none;
+      max-height: 40px;
+      max-width: 250px;
     }
   }
 
@@ -35,6 +40,17 @@
   }
 
   .inner {
+    margin: 30px;
+    -webkit-animation: formAni 0.4s ease-out;
+    @keyframes formAni {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
     mat-icon {
       font-size: 20px;
     }
@@ -162,9 +178,14 @@
     }
 
     .table-container {
+      position: relative;
+      top: -11.5vh;
+      min-height: 60vh;
+      background: white;
       border-bottom: 0.5px solid #eee;
-      background-color: white;
       overflow: auto;
+      border-radius: 7px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
       li {
         transition: 0.2s;
@@ -240,13 +261,23 @@
         }
 
         mat-header-cell {
-          background: #40a5ec;
-          color: white;
+          background: whitesmoke;
+          color: rgba(0, 0, 0, 0.7);
           font-weight: bold;
         }
 
         mat-row {
           transition: 0.2s;
+
+          -webkit-animation: rowAppearance 0.4s linear;
+          @keyframes rowAppearance {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
         }
 
         mat-cell {
@@ -255,7 +286,7 @@
 
         mat-row,
         mat-header-row {
-          min-width: 1200px;
+          min-width: 1000px;
           width: 100%;
         }
       }
@@ -311,16 +342,24 @@
 
 @media screen and (max-width: 600px) {
   .container {
+    .title1 {
+      
+    }
     .title1,
     .title2 {
       font-size: 14px !important;
       text-align: center;
     }
 
-    .table-container {
-      .ads-account {
-        .ads-account-id {
-          font-size: 13px !important;
+    .inner {
+      margin: 10px;
+
+      .table-container {
+        top: 0;
+        .ads-account {
+          .ads-account-id {
+            font-size: 13px !important;
+          }
         }
       }
     }

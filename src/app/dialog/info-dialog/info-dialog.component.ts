@@ -33,11 +33,12 @@ export class InfoDialogComponent {
     const account = this.data['select-campaign'];
 
     //set account to be on activated
-    this._sessionService.setActiveAccountId(account.accountId);
-    this._sessionService.setActiveAdsAccountId(account.adsId);
-    this._sessionService.setAccountId(account.accountId);
-    this._sessionService.setAdwordId(account.adsId);
-    this._fuseNavigationService.reloadNavigation();
+    // this._sessionService.setActiveAccountId(account.accountId);
+    // this._sessionService.setActiveAdsAccountId(account.adsId);
+    // this._sessionService.setAccountId(account.accountId);
+    // this._sessionService.setAdwordId(account.adsId);
+    // this._fuseNavigationService.reloadNavigation();
+    this._sessionService.setActiveGoogleAdsAccount(account.accountId, account.adsId);
 
     this._router.navigateByUrl('/gan-tracking/chien-dich');
     this.dialogRef.close();

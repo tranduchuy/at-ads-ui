@@ -32,10 +32,12 @@
 
     .mat-step-icon-selected {
       background-color: #44b543;
+      pointer-events: none;
     }
 
     .mat-step-icon-state-edit {
       background-color: #44b543;
+      pointer-events: none;
     }
 
     a {

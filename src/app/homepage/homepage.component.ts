@@ -31,6 +31,18 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   dataSource = new MatTableDataSource<Element>(this.logs);
   isOnLogin: boolean;
   isProcessing: boolean;
+  lastOffset = 0;
+  isContactFooterDisplayed: boolean = false;
+  isTopbarDisplayed: boolean = true;
+  isTopbarTitleDisplayed: boolean = true;
+  isContactDisplayed: boolean = false;
+  isLoginButtonDisplayed: boolean = false;
+  onLoadingImage: boolean = false;
+  isTableDisplayed: boolean = false;
+  isInstructionDisplayed: boolean = false;
+  isFeatureDisplayed: boolean = false;
+  isBenefitDisplayed: boolean = false;
+  isFooterDisplayed: boolean = false;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
@@ -67,14 +79,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     };
   }
 
-  lastOffset = 0;
-  isContactFooterDisplayed: boolean = true;
-  isTopbarDisplayed: boolean = true;
-  isTopbarTitleDisplayed: boolean = true;
-  isContactDisplayed: boolean = false;
-  isLoginButtonDisplayed: boolean = false;
-  onLoadingImage: boolean = false;
-
   scroll = (event: any): void => {
     const currentOffset = event.srcElement.scrollTop;
 
@@ -97,6 +101,20 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
       this.isTopbarTitleDisplayed = true;
     }
 
+    if(currentOffset >= 1300)
+      this.isInstructionDisplayed = true;
+
+    if(currentOffset > 1600)
+      this.isFeatureDisplayed = true;
+      
+    if(currentOffset > 1900)
+      this.isBenefitDisplayed = true;
+
+    if(currentOffset > 2200) {
+      this.isFooterDisplayed = true;
+      this.isContactFooterDisplayed = true;
+    }
+
     this.lastOffset = currentOffset;
   }
 
@@ -109,6 +127,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   ngOnInit(): void {
+    this.isProcessing = true;
     this.isOnLogin = !!this._sessionService.user;
 
     // this._firebaseMessagingService.getPermission();
@@ -137,7 +156,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   }
 
   get30FirstIPLogs(): void {
-    this._fuseProgressBarService.show();
     const sub = this._homepageService.get30FirstIPLogs()
       .subscribe(res => {
 
@@ -175,7 +193,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
         this.receiveMessage();
 
-        this._fuseProgressBarService.hide();
+        this.isProcessing = false;
       });
     this.subscriptions.push(sub);
   }

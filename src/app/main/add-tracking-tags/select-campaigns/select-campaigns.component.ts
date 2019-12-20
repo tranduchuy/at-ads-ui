@@ -119,13 +119,13 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
         if (params.campaigns.length > 0) {
           if (this.sessionService.getValueOfDoneConfigStep() < Generals.AccountConfigStep.SELECT_CAMPAIGN.value) {
             this.sessionService.completeConfigStep(Generals.AccountConfigStep.SELECT_CAMPAIGN.value);
-            this._dialogService._openSuccessDialog(res);
+            this._dialogService._openSuccessDialog({ messages: ['Thiết lập thành công'] });
             this._fuseProgressBarService.hide();
             this._fuseSplashScreenService.hide();
             this.isProcessing = false;
           }
           else {
-            this._dialogService._openSuccessDialog(res);
+            this._dialogService._openSuccessDialog({ messages: ['Thiết lập thành công'] });
             this._fuseProgressBarService.hide();
             this._fuseSplashScreenService.hide();
             this.isProcessing = false;
@@ -133,7 +133,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
           }
         }
         else {
-          this._dialogService._openSuccessDialog(res);
+          this._dialogService._openSuccessDialog({ messages: ['Thiết lập thành công'] });
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
           this.isProcessing = false;

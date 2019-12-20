@@ -33,7 +33,7 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
     private _fuseProgressiveBarService: FuseProgressBarService,
     public _dialogService: DialogService,
     private _adwordsAccountListService: AdwordsAccountListService,
-    private _router: Router,
+    public router: Router,
     private _sessionService: SessionService,
     private _fuseNavigationService: FuseNavigationService,
   ) {
@@ -146,11 +146,11 @@ export class AdwordsAccountListComponent extends PageBaseComponent implements On
   navigateToSpamClickReport(accountId: string, adsId: string) {
     this._sessionService.setActiveGoogleAdsAccount(accountId, this.adsAccountIdPipe.transform(adsId));
     this._fuseNavigationService.reloadNavigation();
-    this._router.navigateByUrl('/bao-cao/click-ao');
+    this.router.navigateByUrl('/bao-cao/click-ao');
   }
 
   navigateToWebsiteManagement(accountId: string, campaignNumber: number) {
-    this._router.navigateByUrl(`/quan-ly-website/${accountId}`);
+    this.router.navigateByUrl(`/quan-ly-website/${accountId}`);
   }
 
   checkAccountAcceptance(adsId: string, isConnected?: boolean, connectType?: string) {
