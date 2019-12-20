@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  background: #e7ecf0;
 
   .title1 {
     // padding: 94px 30px 27px 30px;
@@ -11,8 +12,8 @@
     // padding: 40px 30px 0px 30px;
     // color: rgba(0, 0, 0, 0.7);
 
-    background: url("../../../assets/images/backgrounds/adword-bg3.jpg");
-    background-size: 100% 100%;
+    background-color: #ffffb5;
+    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
     text-shadow: 1px 1px 2px black;
     font-size: 16px;
     font-weight: bold;
@@ -27,7 +28,21 @@
   }
 
   .inner {
-    padding: 15px 30px 15px 30px;
+    padding: 15px 30px 30px 30px;
+    margin: 30px;
+    box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    background: white;
+    border-radius: 7px;
+
+    -webkit-animation: formAni 0.4s ease-out;
+    @keyframes formAni {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
 
     .list-check {
       font-size: 16px;
@@ -48,8 +63,11 @@
         height: 58px;
         margin: 2px;
         margin-top: 4px;
-        padding-left: 5px;
         font-size: 12px;
+        min-width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .limit-website-notification {
@@ -67,21 +85,28 @@
 
     .website-list {
       margin-top: 30px;
-      padding-top: 10px;
-      background: white;
-      box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+      border: 0.5px solid #d2d2d2;
       border-radius: 7px;
+      background: white;
 
       .table-title {
-        color: rgba(0, 0, 0, 0.7);
-        padding-left: 15px;
+        color: white;
+        padding: 5px 20px 5px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        background: #40a5ec;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+
+        button {
+          font-weight: normal !important;
+        }
       }
 
       .table-wrapper {
         background-color: white;
         border: 0.5px solid #eee;
         max-height: 500px;
-        margin-top: 10px;
         overflow: auto;
         box-shadow: none !important;
 
@@ -97,10 +122,20 @@
 
         mat-row {
           transition: 0.2s;
-        }
 
-        mat-row:hover {
-          background-color: rgba(3, 155, 229, 0.05);
+          -webkit-animation: rowAppearance 0.4s linear;
+          @keyframes rowAppearance {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+
+          &::hover {
+            background-color: rgba(3, 155, 229, 0.05);
+          }
         }
 
         mat-header-cell:nth-child(1),
@@ -142,8 +177,8 @@
         }
 
         mat-header-cell {
-          background: #40a5ec;
-          color: white;
+          background: whitesmoke;
+          color: rgba(0, 0, 0, 0.7);
           font-weight: bold;
         }
 

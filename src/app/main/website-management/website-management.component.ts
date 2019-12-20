@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TestabilityRegistry } from '@angular/core';
 import { EditableFormBaseComponent } from '../../shared/components/base/editable-form-base.component';
 import { FuseProgressBarService } from '../../../@fuse/components/progress-bar/progress-bar.service';
 import { ILoginSuccess } from '../../authentication/login/models/i-login-success';
@@ -165,8 +165,9 @@ export class WebsiteManagementComponent extends EditableFormBaseComponent implem
             };
 
             this._dialogService._openInfoDialog(
-              'Tài khoản bạn chọn hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch ',
-              '', '', 'select-campaign', data
+              'Tài khoản bạn chọn hiện chưa có chiến dịch nào được gắn tracking. Vui lòng gắn tracking chiến dịch',
+              'tại đây',
+              '/gan-tracking/chien-dich'
             );
           }
           else this._dialogService._openErrorDialog(error.error);

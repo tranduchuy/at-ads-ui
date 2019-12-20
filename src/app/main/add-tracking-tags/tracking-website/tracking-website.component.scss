@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  background: #e7ecf0;
 
   .title1 {
     // padding: 94px 30px 27px 30px;
@@ -7,14 +8,17 @@
     // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
     // color: white;
 
-    background: url("../../../../assets/images/backgrounds/adword-bg3.jpg");
-    background-size: 100% 100%;
+    //background: url("https://image.freepik.com/free-vector/shiny-blue-geometric-background-design_1055-3184.jpg");
+    background-color: #7fcec5;
+    background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     text-shadow: 1px 1px 2px black;
     font-size: 16px;
     font-weight: bold;
     color: white;
     //padding: 94px 30px 27px 30px;
-    padding: 30px 30px 25px 30px;
+    padding: 60px 30px 0 30px;
+    height: 45vh;
+    text-align: center;
 
     .adsId {
       color: yellow;
@@ -23,10 +27,31 @@
   }
 
   .inner {
-    padding: 15px 30px 15px 30px;
+    width: 60%;
+    margin: 0 auto;
+    padding: 30px 30px 30px 30px;
+    background: white;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border-radius: 7px;
+    color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    z-index: 10;
+    top: -26vh;
+    height: 50vh;
+
+    -webkit-animation: innerAni 0.4s ease-out;
+    @keyframes innerAni {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
 
     .info {
       line-height: 30px;
+      font-size: 11px;
     }
 
     .hightline {
@@ -34,7 +59,7 @@
       padding-left: 10px;
       padding-right: 10px;
       border-radius: 5px;
-      background-color: #eee;
+      background-color: whitesmoke;
       color: deeppink;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
@@ -46,10 +71,15 @@
       font-weight: bold;
     }
 
+    .highline {
+      font-weight: bold;
+      color: green;
+    }
+
     .key {
       padding: 10px;
       padding-right: 0;
-      width: 50%;
+      width: 100%;
       border-right: 0;
       border-radius: 5px;
       border-top-right-radius: 0;
@@ -57,7 +87,7 @@
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       // background-color: rgba(0,0,0,0.8);
       // color: skyblue;
-      background: #eee;
+      background: whitesmoke;
       color: deeppink;
     }
 
@@ -72,7 +102,7 @@
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
       border: 0;
-      background: #eee;
+      background: whitesmoke;
     }
   }
 }
@@ -81,6 +111,11 @@
   .container {
     .inner {
       padding: 15px;
+      padding-bottom: 30px;
+      margin: 0 auto;
+      margin-top: 15px;
+      width: 95vw;
+      height: auto;
 
       .key {
         width: 100%;

@@ -1,16 +1,49 @@
 @import "src/@fuse/scss/fuse";
 
 fuse-progress-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 99998;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 99998;
 
-    mat-progress-bar {
-        .mat-progress-bar-buffer {
-            background-color: #C5C6CB !important;
-        }
+  mat-progress-bar {
+    .mat-progress-bar-buffer {
+      background-color: #c5c6cb !important;
     }
+  }
+}
+
+.loading {
+  background: rgba(0, 0, 0, 0.55);
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  color: white;
+
+  .progress-spinner {
+    position: fixed;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -46%);
+  }
+
+  .progress-label {
+    position: fixed;
+    top: 53%;
+    left: 51.2%;
+    transform: translate(-51.2%, -53%);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .loading {
+    .progress-spinner {
+      left: 47%;
+      transform: translateX(-47%);
+    }
+  }
 }

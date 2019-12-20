@@ -1,5 +1,10 @@
 <ng-container *ngIf="visible">
 
-    <mat-progress-bar color="accent" [bufferValue]="bufferValue" [mode]="mode" [value]="value"></mat-progress-bar>
+    <div class="loading">
+        <!-- <mat-progress-bar color="accent" [bufferValue]="bufferValue" [mode]="mode" [value]="value"></mat-progress-bar> -->
+        <mat-progress-spinner color="accent" [mode]="mode" [value]="value" diameter="30" class="progress-spinner">
+        </mat-progress-spinner>
+        <div class="progress-label">Vui lòng chờ</div>
+    </div>
 
 </ng-container>

@@ -128,7 +128,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
           this.hasBlockedIP = true;
 
           setTimeout(() => {
-            this._dialogService._openSuccessDialog(res);
+            this._dialogService._openSuccessDialog({messages: ['Chặn IP thành công']});
             this.isProcessing = false;
           }, 0);
         },
@@ -165,7 +165,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
                 this._fuseProgresBarService.hide();
                 this.blockedIPs = [];
                 this.hasBlockedIP = false;
-                this._dialogService._openSuccessDialog(res);
+                this._dialogService._openSuccessDialog({messages: ['Bỏ chặn IP thành công']});
                 this.isProcessing = false;
               },
                 (error: HttpErrorResponse) => {

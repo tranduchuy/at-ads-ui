@@ -95,7 +95,7 @@
             lệ <span style="color: orange; font-weight: bold">17.50%</span>
          </div> -->
 
-         <div class="table-wrapper">
+         <div class="table-wrapper" *ngIf="!isProcessing">
             <mat-table [dataSource]="dataSource">
 
                <ng-container matColumnDef="datetime">
@@ -251,7 +251,7 @@
 
       </div>
 
-      <div class="instruction-container">
+      <div class="instruction-container" *ngIf="isInstructionDisplayed">
          <div class="instruction">
             <p class="steps-main-title">
                3 BƯỚC PHÁT HIỆN VÀ CHẶN CLICK ẢO
@@ -266,46 +266,44 @@
             <div class="step-wrapper" fxLayout="row" fxLayoutGap="40px" fxLayout.sm="column" fxLayout.xs="column">
 
                <div class="step step1" fxFlex="33.33">
-                  <div class="step-image">
-                     <img [lazyLoad]="'../../assets/images/step1.png'" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step1.png')" (load)="onLoadingImage = true"
-                        [class.onLoadingImage]="onLoadingImage">
-                  </div>
-                  <div class="step-description">
-                     <span class="step-name">Bước 1: Liên kết Google Ads</span>
-                     <p>
-                        Liên kết tài khoản quảng cáo <span style="color:skyblue">Google Ads</span> của bạn với hệ thống
-                        của Appnet Technology.
-                     </p>
+                  <div class="step-image" [lazyLoad]="'../../assets/images/step1.png'" matTooltip="Phóng to ảnh"
+                     (click)="showImageDialog('../../assets/images/step1.png')" (load)="onLoadingImage = true"
+                     [class.onLoadingImage]="onLoadingImage">
+                     <div class="step-description">
+                        <span class="step-name">Bước 1: Liên kết Google Ads</span>
+                        <p>
+                           Liên kết tài khoản quảng cáo <span style="color:skyblue">Google Ads</span> của bạn với hệ
+                           thống
+                           của Appnet Technology.
+                        </p>
+                     </div>
                   </div>
                </div>
 
                <div class="step step2" fxFlex="33.33">
-                  <div class="step-image">
-                     <img [lazyLoad]="'../../assets/images/step2.png'" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step2.png')" (load)="onLoadingImage = true"
-                        [class.onLoadingImage]="onLoadingImage">
-                  </div>
-                  <div class="step-description">
-                     <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
-                     <p>
-                        Theo dõi thiết bị, trình duyệt, vị trí đang click quảng cáo của bạn. Xác định đối tượng phá
-                        hoại.
-                     </p>
+                  <div class="step-image" [lazyLoad]="'../../assets/images/step2.png'" matTooltip="Phóng to ảnh"
+                     (click)="showImageDialog('../../assets/images/step2.png')" (load)="onLoadingImage = true"
+                     [class.onLoadingImage]="onLoadingImage">
+                     <div class="step-description">
+                        <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
+                        <p>
+                           Theo dõi thiết bị, trình duyệt, vị trí đang click quảng cáo của bạn. Xác định đối tượng phá
+                           hoại.
+                        </p>
+                     </div>
                   </div>
                </div>
 
                <div class="step step3" fxFlex="33.33">
-                  <div class="step-image">
-                     <img [lazyLoad]="'../../assets/images/step3.png'" alt="" matTooltip="Phóng to ảnh"
-                        (click)="showImageDialog('../../assets/images/step3.png')" (load)="onLoadingImage = true"
-                        [class.onLoadingImage]="onLoadingImage">
-                  </div>
-                  <div class="step-description">
-                     <span class="step-name">Bước 3: Chặn click ảo</span>
-                     <p>
-                        Thực hiện chặn những IP đang phá hoại bằng tác vụ thủ công hoặc tự động.
-                     </p>
+                  <div class="step-image" [lazyLoad]="'../../assets/images/step3.png'" matTooltip="Phóng to ảnh"
+                     (click)="showImageDialog('../../assets/images/step3.png')" (load)="onLoadingImage = true"
+                     [class.onLoadingImage]="onLoadingImage">
+                     <div class="step-description">
+                        <span class="step-name">Bước 3: Chặn click ảo</span>
+                        <p>
+                           Thực hiện chặn những IP đang phá hoại bằng tác vụ thủ công hoặc tự động.
+                        </p>
+                     </div>
                   </div>
                </div>
 
@@ -313,7 +311,7 @@
          </div>
       </div>
 
-      <div class="feature-container">
+      <div class="feature-container" *ngIf="isFeatureDisplayed">
          <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
             <div class="overview" fxFlex="32.7">
                <p class="overview-title">
@@ -335,7 +333,7 @@
                      </button>
                   </div>
                </div>
-               <img [lazyLoad]="'https://discovermediagroups.com/myimage/banner.svg'" (load)="onLoadingImage = true"
+               <img [lazyLoad]="'https://flowcentric.com/wp-content/uploads/2019/08/FlowCentric-Technologies-9-1030x734.png'" (load)="onLoadingImage = true"
                   [class.onLoadingImage]="onLoadingImage" alt="" class="overview-image">
             </div>
             <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
@@ -452,9 +450,8 @@
          </div>
       </div>
 
-      <div class="benefit-container"
-         [lazyLoad]="'../../assets/images/backgrounds/Analytics-digital-analytics-HD-1980x990.jpg'"
-         (load)="onLoadingImage = true" [class.onLoadingImage]="onLoadingImage">
+      <div class="benefit-container" *ngIf="isBenefitDisplayed"
+         [lazyLoad]="'../../assets/images/backgrounds/Analytics-digital-analytics-HD-1980x990.jpg'">
          <div class="benefit">
 
             <div class="benefit-title">
@@ -514,7 +511,7 @@
       </div>
    </div>
 
-   <div class="footer" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px">
+   <div class="footer" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px" *ngIf="isFooterDisplayed">
 
       <div class="footer-col1" fxFlex="33.33">
          <div class="footer-title1">FAQ</div>

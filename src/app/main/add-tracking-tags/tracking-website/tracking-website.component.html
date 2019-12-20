@@ -1,20 +1,20 @@
 <div class="container">
 
   <div class="title1">
-    GẮN MÃ TRACKING VÀO WEBSITE TÀI KHOẢN <span class="adsId">{{adsId}}</span>
+    GẮN MÃ TRACKING CHO WEBSITE - TÀI KHOẢN <span class="adsId">{{adsId}}</span>
   </div>
 
   <div class="inner">
     <p class="info">
-      <span class="bold-text">Tại sao cần gắn mã:</span> Hệ thống đưa vào mã tracking để phát hiện số điện thoại truy
-      cập vào website của bạn.
-      Bạn
-      có thể bỏ mã vào bất cứ vị trí nào trong website. Tuy nhiên tốt nhất hãy bỏ mã vào trong
+      <span class="bold-text">Tại sao cần gắn mã tracking:
+        <br></span> Hệ thống sẽ dựa vào một đoạn mã được gắn trên website của bạn để tiến hành <span class="highline">theo dõi
+        hành vi </span> của các thiết bị đang truy cập.
+      Bạn có thể nhúng mã vào bất cứ vị trí nào trong website. Tuy nhiên tốt nhất hãy nhúng mã vào trong
       <span class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span>
     </p>
 
     <div style="padding-top: 10px">
-      <span class="step"><span class="bold-text">Bước 1:</span> Copy mã tracking</span>
+      <span class="step"><span class="bold-text">Bước 1:</span> Copy mã</span>
       <div fxLayout="row" style="padding-top: 10px">
         <input class="key" type="text" #inputKey
           value='&lt;script type="text/javascript" src="{{hostTracking}}?key={{key}}"&gt;&lt;/script&gt;' readonly>
@@ -27,12 +27,10 @@
           <span class="hightline">&lt;head&gt;[mã tracking]&lt;/head&gt;</span></span>
       </p>
       <div style="padding-top: 10px">
-        <span class="step"><span class="bold-text">Bước 3:</span> Kiểm tra mã</span>
-        <p>
-          <button mat-raised-button color="accent" (click)="checkWebsiteTracking()">
-            BẤM ĐỂ KIỂM TRA MÃ
-          </button>
-        </p>
+        <span class="step">
+          <span class="bold-text">Bước 3:</span> Kiểm tra các website đã được gắn mã
+          <u><a (click)="checkWebsiteTracking()" style="cursor: pointer;">tại đây</a></u>
+        </span>
       </div>
     </div>
   </div>
