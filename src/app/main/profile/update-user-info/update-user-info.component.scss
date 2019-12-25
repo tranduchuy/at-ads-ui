@@ -1,16 +1,10 @@
 .container {
-  // background-color: #537895;
-  // background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
-  // background: url("../../../../assets/images/backgrounds/loading-bg1.jpg");
-  // background-size: 100% 100%;
-  background-color: #ffffb5;
-  background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
-  background-attachment: fixed;
-
+  background-color: #7fcec5;
+  background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
   width: 100%;
 
   .inner-container {
-    background: rgba(0, 0, 0, 0.3);
+    //background: rgba(0, 0, 0, 0.3);
     .inner {
       padding: 50px 30px 30px 30px;
 
@@ -19,7 +13,7 @@
         display: table;
         margin: 0 auto;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-        background-color: whitesmoke;
+        background-color: white;
         padding: 40px 50px 20px 50px;
 
         -webkit-animation: formAnimation 0.4s ease-out;
@@ -34,13 +28,12 @@
         }
 
         .title1 {
-          background-color: whitesmoke;
+          background-color: white;
           display: table;
           margin: 0 auto;
           font-size: 18px;
           width: 70%;
-          font-size: 16px;
-          font-weight: bold;
+          font-size: 18px;
           color: rgba(0, 0, 0, 0.7);
           padding-bottom: 30px;
         }

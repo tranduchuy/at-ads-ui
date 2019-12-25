@@ -21,7 +21,7 @@
             <div class="chart-legend">
               <div style="background:#F44336" class="chart-label"></div><span>Máy tính</span>
               <br>
-              <div style="background:#44b543" class="chart-label"></div><span>Điện thoại</span>
+              <div style="background:green" class="chart-label"></div><span>Điện thoại</span>
               <br>
               <div style="background:#0093e5" class="chart-label"></div><span>Máy tính bảng</span>
             </div>
@@ -92,7 +92,7 @@
       <div class="hl2-title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center"
         fxLayoutAlign.xs="center start" fxLayoutGap="50px" fxLayoutGap.xs="10px">
         <div class="hl2-title3" fxFlex="55">
-          THỐNG KÊ LƯU LƯỢNG TRUY CẬP - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
+          THỐNG KÊ LƯU LƯỢNG TRUY CẬP WEBSITE - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
         </div>
 
         <div class="no-website-notify" *ngIf="hasWebsite === false">
@@ -132,7 +132,7 @@
           hạn chế <span>click ảo</span>.
         </div>
 
-        <div class="h-400 hl2-pie-chart">
+        <div class="h-300 hl2-pie-chart">
 
           <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
             [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
@@ -179,7 +179,7 @@
                 <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element.ip, router.url]"
                   class="ip-detail-link" mat-button color="accent">
                   <span *ngIf="element.isSpam === true" style="color: crimson">{{element.ip}}</span>
-                  <span *ngIf="element.isSpam === false" style="color: #44b543">{{element.ip}}</span>
+                  <span *ngIf="element.isSpam === false" style="color: green">{{element.ip}}</span>
                 </a>
               </mat-cell>
             </ng-container>
@@ -201,7 +201,7 @@
                   (mouseover)="showReason(element.reason || '')">
                   <mat-icon>not_interested</mat-icon> Đã chặn
                 </span>
-                <span *ngIf="element.isSpam === false" style="color: #44b543; font-weight: bold"
+                <span *ngIf="element.isSpam === false" style="color: green; font-weight: bold"
                   (mouseover)="showReason(element.reason || '')">
                   <mat-icon>check_circle</mat-icon> Hợp lệ
                 </span>

@@ -78,8 +78,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     scheme: {
       domain: [
         //'#87CEEB', '#f44336', '#40a5ec', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
-        '#6FAAB0', '#C4C24A', '#8BC652', '#E94649', '#F6B53F', '#FB954F', '#005277', '#40a5ec', '#9370DB', '#33495D', '#FF6384'
-        //'hsl(200, 100%, 12%)','hsl(200, 100%, 20%)','hsl(200, 100%, 28%)','hsl(200, 100%, 38%)','hsl(200, 100%, 48%)','hsl(200, 100%, 58%)','hsl(200, 100%, 68%)','hsl(200, 100%, 78%)','hsl(200, 100%, 85%)','hsl(200, 100%, 95%)','hsl(200, 100%, 100%)'
+        //'#6FAAB0', '#C4C24A', '#8BC652', '#E94649', '#F6B53F', '#FB954F', '#005277', '#40a5ec', '#9370DB', '#33495D', '#FF6384'
+        'hsl(200, 100%, 12%)', 'hsl(200, 100%, 20%)', 'hsl(200, 100%, 29%)', 'hsl(200, 100%, 36%)', 'hsl(200, 100%, 45%)', 'hsl(200, 100%, 54%)', 'hsl(200, 100%, 63%)', 'hsl(200, 100%, 72%)', 'hsl(200, 100%, 81%)', 'hsl(200, 100%, 90%)', 'hsl(200, 100%, 95%)'
       ]
     },
     dataSource: [],
@@ -201,8 +201,9 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this.overviewTable = [];
           this.hasWebsite = false;
           this.pageTotal = 0;
-          this._fuseProgressBarService.hide();
           this.isProcessing = false;
+          this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
           this._dialogService._openInfoDialog(
             'Tài khoản chưa có website nào. Vui lòng thêm',
             'tại đây',
@@ -361,14 +362,18 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           let data = JSON.parse(JSON.stringify(res.data.TrafficSourceData));
 
           // let data = [
-          //   { _id: 10, sessionCount: 174 },
-          //   { _id: 1, sessionCount: 96 },
-          //   { _id: 11, sessionCount: 53 },
-          //   { _id: 2, sessionCount: 34 },
-          //   { _id: 3, sessionCount: 12 },
-          //   { _id: 9, sessionCount: 2 },
-          //   { _id: 5, sessionCount: 1 },
-          // ]
+          //   { _id: 1, sessionCount: 100 },
+          //   { _id: 2, sessionCount: 100 },
+          //   { _id: 3, sessionCount: 100 },
+          //   { _id: 4, sessionCount: 100 },
+          //   { _id: 5, sessionCount: 100 },
+          //   { _id: 6, sessionCount: 100 },
+          //   { _id: 7, sessionCount: 100 },
+          //   { _id: 8, sessionCount: 100 },
+          //   { _id: 9, sessionCount: 100 },
+          //   { _id: 10, sessionCount: 100 },
+          //   { _id: 11, sessionCount: 100 },
+          // ];
 
           let sessionCountTotal = 0;
           data.forEach(element => {
@@ -377,16 +382,30 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
           this.sessionTotal = sessionCountTotal;
 
-          const noIDs = data.filter(item => !item);
+          // Get total of NO_ID Source's session count
+          const noIDs = data.filter(item => !item._id);
           let noIDSessionCountTotal = 0;
           noIDs.forEach(element => {
             noIDSessionCountTotal += element.sessionCount;
           });
 
-          data = data.filter(item => item);
-          const len = data.length;
-          const dataSource = data.map((item, index) => {
-            const sessionCount = index < len - 1 ? item.sessionCount : (item.sessionCount + noIDSessionCountTotal)
+          const directNoneSrcIndex = this.TRAFFIC_SOURCE_TYPES.indexOf('other/referral');
+          if (directNoneSrcIndex >= 0 && noIDSessionCountTotal > 0) {
+            const directNoneSrc = _.find(data, src => src._id === directNoneSrcIndex + 1);
+            if (directNoneSrc) {
+              directNoneSrc.sessionCount += noIDSessionCountTotal;
+            } else {
+              const directNoneSrc = {
+                _id: directNoneSrcIndex + 1,
+                sessionCount: noIDSessionCountTotal
+              };
+              data.push(directNoneSrc);
+            }
+          }
+
+          data = data.filter(item => item._id);
+          const dataSource = data.map(item => {
+            const sessionCount = item.sessionCount;
             return {
               name: (this.TRAFFIC_SOURCE_TYPES[item._id - 1] || 'Unknown')
                 + ': ' + this.abbreviateNumber(sessionCount) + ' phiên'
@@ -395,7 +414,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
             }
           });
 
-          this.pieChart.dataSource = dataSource;
+          this.pieChart.dataSource = _.sortBy(dataSource, 'value').reverse();
           this._fuseProgressBarService.hide();
           this.isProcessing = false;
         },
