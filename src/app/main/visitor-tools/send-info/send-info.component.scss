@@ -1,0 +1,215 @@
+.container {
+  width: 100%;
+  background: #e7ecf0;
+
+  .main-title {
+    background-color: #7fcec5;
+    background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+    text-shadow: 1px 1px 2px black;
+    color: white;
+    font-size: 16px;
+    padding: 50px 0 0 50px;
+    height: 22vh;
+    font-weight: bold;
+
+    mat-icon {
+      font-size: 14px;
+      margin: 4px 0 0 10px;
+    }
+
+    .selected-website {
+      color: yellow;
+      margin-left: 5px;
+    }
+  }
+
+  .inner {
+    min-height: 200px;
+    width: 94%;
+    background: white;
+    margin: 40px;
+    margin-bottom: 0;
+    padding: 50px;
+    padding-bottom: 0;
+    border-radius: 7px;
+    box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    position: relative;
+    z-index: 10;
+    top: -13vh;
+
+    -webkit-animation: formAni 0.4s ease-out;
+    @keyframes formAni {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .no-website-notify {
+
+    }
+
+    .website-selection {
+      width: 250px;
+      margin-top: -10px;
+    }
+
+    .title2 {
+      color: gray;
+
+      &.popup-config-title {
+        padding: 15px 0 15px 0;
+      }
+    }
+
+    .popup-config {
+      .tabs {
+        min-height: 300px;
+
+        .example-stretched-tabs {
+          width: 100%;
+          box-shadow: none;
+        }
+
+        .tab-content {
+          padding: 20px;
+
+          .theme-color-selection {
+            padding-top: 10px;
+          }
+
+          .background-image-selection {
+            padding-top: 20px;
+
+            img {
+              cursor: pointer;
+              height: 100%;
+              width: 100%;
+
+              -webkit-animation: fade 1.2s ease-in-out;
+              @keyframes fade {
+                from {
+                  opacity: 0;
+                }
+                to {
+                  opacity: 1;
+                }
+              }
+
+              &:hover {
+                opacity: 0.8;
+              }
+            }
+          }
+
+          .form-control {
+            padding-top: 15px;
+          }
+        }
+      }
+
+      .popup-example {
+        padding: 60px 30px 30px 30px;
+
+        .browser {
+          width: 100%;
+          height: 300px;
+          background: url("https://browserframe.com/assets/chrome-mac-light.png");
+          background-size: 100% 100%;
+          border: 0.5px solid #d2d2d2;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 5px;
+
+          .website-domain {
+            font-size: 11px;
+          }
+        }
+
+        .popup {
+          border: 0.5px solid #d2d2d2;
+          margin-top: 40px;
+          width: 60%;
+          height: 55%;
+          background: white;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+          .header {
+            width: 100%;
+            height: 8%;
+            padding: 2px 4px 2px 0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 7px;
+            color: white;
+          }
+
+          .content {
+            .info {
+              padding: 8px;
+
+              .title {
+                font-weight: bold;
+                font-size: 11px;
+                text-align: center;
+              }
+
+              .notice {
+                font-size: 8px;
+                color: gray;
+              }
+
+              .input {
+                background: #eee;
+                padding: 3px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 9px;
+                margin-top: 5px;
+                color: rgba(0, 0, 0, 0.7);
+              }
+
+              .button {
+                text-align: center;
+                font-size: 9px;
+                padding: 3px;
+                background: silver;
+                color: white;
+              }
+            }
+
+            .background-img {
+              height: 151.2px;
+              background: white;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      .submit-area {
+        padding: 30px;
+        width: 100%;
+        text-align: center;
+
+        button {
+          padding: 5px;
+          padding-top: 2px;
+          padding-right: 12px;
+          mat-icon {
+            margin-left: 5px;
+            margin-top: 5px;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
