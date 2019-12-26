@@ -80,25 +80,38 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     this.popupStyleForm.controls['themeColor'].setValue(e.color.hex);
   }
 
-  selectBackgroundImage(url: string) {
-    this.popupStyleForm.controls['backgroundImage'].setValue(url);
+  selectSupporterAvatar(url: string) {
+    this.popupStyleForm.controls['supporterAvatar'].setValue(url);
   }
 
   selectWebsite(e) {
 
   }
 
+  changePopupStyleFormControlValue(value: string, controlName: string) {
+    this.popupStyleForm.controls[controlName].setValue(value);
+  }
+
   initForms() {
     this.popupStyleForm = new FormGroup({
       themeColor: new FormControl('#9c27b0'),
-      backgroundImage: new FormControl(this.images[0].url)
+      supporterAvatar: new FormControl(this.images[0].url),
+      supporterName: new FormControl('Nguyễn Thị A'),
+      supporterMajor: new FormControl('Hỗ trợ viên')
     });
   }
 
   submitAllForms() {
     const data = {
       website: this.websiteCtrl.value.id || '',
-      popupConfig: JSON.stringify({ ... this.popupStyleForm.value })
+      config: {
+        themeColor: this.popupStyleForm.controls['themeColor'].value,
+        supporter: {
+          name: this.popupStyleForm.controls['supporterName'].value,
+          major: this.popupStyleForm.controls['supporterMajor'].value,
+          avatar: this.popupStyleForm.controls['supporterAvatar'].value
+        }
+      }
     };
     console.log(data);
   }

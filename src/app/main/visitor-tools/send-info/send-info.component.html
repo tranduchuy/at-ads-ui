@@ -39,17 +39,29 @@
                 <div class="tab-content popup-style">
                   <form [formGroup]="popupStyleForm" (ngSubmit)="submitPopupStyleForm()">
                     <div class="theme-color-selection">
-                      <mat-label>Màu sắc chủ đề</mat-label>
+                      <mat-label style="color: gray">Màu sắc chủ đề</mat-label>
                       <div class="form-control">
                         <color-circle (onChangeComplete)="selectColorCircle($event)"></color-circle>
                       </div>
                     </div>
                     <div class="background-image-selection">
-                      <mat-label>Hình nền</mat-label>
+                      <p class="background-image-selection-title">
+                        Thông tin hỗ trợ viên
+                      </p>
+                      <div class="supporter-details" fxLayout="row" fxLayoutGap="15px">
+                        <mat-form-field class="example-full-width" fxFlex="65">
+                          <input matInput placeholder="Họ và tên" formControlName="supporterName"
+                            (input)="changePopupStyleFormControlValue($event.target.value, 'supporterName')">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width" fxFlex="35">
+                          <input matInput placeholder="Chuyên môn" formControlName="supporterMajor">
+                        </mat-form-field>
+                      </div>
+                      <mat-label style="color: gray; font-size: 12px">Ảnh đại diện</mat-label>
                       <div class="form-control">
-                        <mat-grid-list cols="4" rowHeight="100px" gutterSize="5px">
+                        <mat-grid-list cols="4" rowHeight="100px" gutterSize="10px">
                           <mat-grid-tile *ngFor="let img of images" [colspan]="img.cols" [rowspan]="img.rows">
-                            <img src="{{img.url}}" alt="" (click)="selectBackgroundImage(img.url)">
+                            <img src="{{img.url}}" alt="" (click)="selectSupporterAvatar(img.url)">
                           </mat-grid-tile>
                         </mat-grid-list>
                       </div>
@@ -74,20 +86,24 @@
             <div class="browser" fxLayout="column">
               <div class="website-domain">{{websiteCtrl.value.name}}</div>
               <div class="popup">
-                <div class="header" [style.background]="popupStyleForm.controls['themeColor'].value">
+                <div class="header">
                   <span>x</span>
                 </div>
                 <div class="content" fxLayout="row">
                   <div class="info" fxFlex="60">
-                    <p class="title" [style.color]="popupStyleForm.controls['themeColor'].value">Trợ giúp qua điện thoại
-                    </p>
-                    <div class="notice">Nhập số di động của bạn, chúng tôi sẽ gọi lại bạn ngay!</div>
+                    <div class="title" [style.color]="popupStyleForm.controls['themeColor'].value">Trợ giúp qua điện
+                      thoại
+                    </div>
+                    <div class="notice">Vui lòng nhập họ tên và số điện thoại của bạn, chúng tôi sẽ gọi lại bạn ngay!
+                    </div>
                     <div class="input">Họ và tên</div>
                     <div class="input">Số điện thoại</div>
                     <p class="button" [style.background]="popupStyleForm.controls['themeColor'].value">Gửi yêu cầu</p>
                   </div>
                   <div class="background-img" fxFlex="40">
-                    <img src="{{popupStyleForm.controls['backgroundImage'].value}}" alt="">
+                    <img src="{{popupStyleForm.controls['supporterAvatar'].value}}" alt="">
+                    <div class="name">{{popupStyleForm.controls['supporterName'].value || ''}}</div>
+                    <div class="major">{{popupStyleForm.controls['supporterMajor'].value || ''}}</div>
                   </div>
                 </div>
               </div>

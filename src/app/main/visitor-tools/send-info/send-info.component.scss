@@ -30,6 +30,7 @@
     margin: 40px;
     margin-bottom: 0;
     padding: 50px;
+    padding-right: 20px;
     padding-bottom: 0;
     border-radius: 7px;
     box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
@@ -37,7 +38,7 @@
     z-index: 10;
     top: -13vh;
 
-    -webkit-animation: formAni 0.4s ease-out;
+    -webkit-animation: formAni 0.8s ease-out;
     @keyframes formAni {
       from {
         transform: translateY(100vh);
@@ -48,7 +49,6 @@
     }
 
     .no-website-notify {
-
     }
 
     .website-selection {
@@ -83,6 +83,14 @@
           .background-image-selection {
             padding-top: 20px;
 
+            .background-image-selection-title {
+              color: gray;
+            }
+
+            .supporter-details {
+              width: 100%;
+            }
+
             img {
               cursor: pointer;
               height: 100%;
@@ -111,11 +119,13 @@
       }
 
       .popup-example {
-        padding: 60px 30px 30px 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .browser {
           width: 100%;
-          height: 300px;
+          height: 400px;
           background: url("https://browserframe.com/assets/chrome-mac-light.png");
           background-size: 100% 100%;
           border: 0.5px solid #d2d2d2;
@@ -126,16 +136,17 @@
 
           .website-domain {
             font-size: 11px;
+            margin-top: -18px;
           }
         }
 
         .popup {
-          border: 0.5px solid #d2d2d2;
-          margin-top: 40px;
-          width: 60%;
-          height: 55%;
+          border-radius: 3px;
+          margin-top: 60px;
+          width: 72%;
+          height: 48%;
           background: white;
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
           .header {
             width: 100%;
@@ -145,49 +156,71 @@
             justify-content: flex-end;
             align-items: center;
             font-size: 7px;
-            color: white;
+            color: gray;
           }
 
           .content {
             .info {
-              padding: 8px;
+              padding: 14px;
+              padding-top: 5px;
 
               .title {
                 font-weight: bold;
-                font-size: 11px;
+                font-size: 12px;
                 text-align: center;
+                padding: 8px 0 5px 0;
               }
 
               .notice {
-                font-size: 8px;
+                font-size: 9px;
                 color: gray;
+                text-align: justify;
               }
 
               .input {
                 background: #eee;
-                padding: 3px;
+                padding: 5px;
                 text-align: center;
                 font-weight: bold;
-                font-size: 9px;
-                margin-top: 5px;
+                font-size: 11px;
+                margin-top: 8px;
                 color: rgba(0, 0, 0, 0.7);
               }
 
               .button {
                 text-align: center;
                 font-size: 9px;
-                padding: 3px;
+                padding: 5px;
                 background: silver;
                 color: white;
+                font-weight: bold;
               }
             }
 
             .background-img {
-              height: 151.2px;
+              height: 170px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              line-height: 14px;
               background: white;
               img {
-                width: 100%;
-                height: 100%;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+              }
+
+              .name {
+                padding-top: 5px;
+                color: rgba(0, 0, 0, 0.7);
+                font-weight: bold;
+                font-size: 10px;
+              }
+
+              .major {
+                color: gray;
+                font-size: 9px;
               }
             }
           }

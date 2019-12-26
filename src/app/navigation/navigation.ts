@@ -145,6 +145,22 @@ export const navigation: FuseNavigation[] = [
     ]
   },
   {
+    id: 'visitor-tools',
+    title: 'CÔNG CỤ KHÁCH HÀNG',
+    translate: 'NAV.APPLICATIONS',
+    type: 'collapsable',
+    children: [
+      {
+        id: 'send-info',
+        title: 'Gửi thông tin tư vấn',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'live_help',
+        url: '/cong-cu-khach-hang/gui-thong-tin-tu-van',
+      }
+    ]
+  },
+  {
     id: 'cash-back',
     title: 'HƯỚNG DẪN HOÀN TIỀN',
     translate: 'NAV.APPLICATIONS',
@@ -203,7 +219,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Cập nhật thông tin',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
-        icon: 'featured_play_list',
+        icon: 'account_circle',
         url: '/nguoi-dung/thong-tin-ca-nhan',
       },
       {

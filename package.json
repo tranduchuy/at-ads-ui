@@ -55,6 +55,7 @@
         "ng-lazyload-image": "^7.0.1",
         "ng2-charts": "2.2.4",
         "ngrx-store-freeze": "0.2.4",
+        "ngx-color": "^4.1.0",
         "ngx-color-picker": "7.5.0",
         "ngx-cookie": "^4.1.2",
         "ngx-cookie-service": "2.2.0",
