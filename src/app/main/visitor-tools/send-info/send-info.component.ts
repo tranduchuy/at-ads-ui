@@ -135,7 +135,7 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
             id: website._id,
             name: website.domain,
             popupConfig: {
-              a: 123
+              website: website._id
             }
           } as SelectedWebsite
         });
