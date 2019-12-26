@@ -13,6 +13,7 @@ import { SessionService } from 'app/shared/services/session.service';
 interface SelectedWebsite {
   id: string;
   name: string;
+  popupConfig: any;
 }
 
 @Component({
@@ -84,8 +85,8 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     this.popupStyleForm.controls['supporterAvatar'].setValue(url);
   }
 
-  selectWebsite(e) {
-
+  selectWebsite() {
+    document.getElementById('send-info-popup-config').innerHTML = JSON.stringify(this.websiteCtrl.value.popupConfig);
   }
 
   changePopupStyleFormControlValue(value: string, controlName: string) {
@@ -104,14 +105,7 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
   submitAllForms() {
     const data = {
       website: this.websiteCtrl.value.id || '',
-      config: {
-        themeColor: this.popupStyleForm.controls['themeColor'].value,
-        supporter: {
-          name: this.popupStyleForm.controls['supporterName'].value,
-          major: this.popupStyleForm.controls['supporterMajor'].value,
-          avatar: this.popupStyleForm.controls['supporterAvatar'].value
-        }
-      }
+      ...this.popupStyleForm.value
     };
     console.log(data);
   }
@@ -139,7 +133,10 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
         this.websites = (res.data.website || []).map(website => {
           return {
             id: website._id,
-            name: website.domain
+            name: website.domain,
+            popupConfig: {
+              a: 123
+            }
           } as SelectedWebsite
         });
 
@@ -158,6 +155,8 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
 
           // set default option is the first item of list websites
           this.websiteCtrl.setValue(this.websites[0]);
+          document.getElementById('send-info-popup-config').innerHTML = JSON.stringify(this.websiteCtrl.value.popupConfig);
+
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
           this.isProcessing = false;
