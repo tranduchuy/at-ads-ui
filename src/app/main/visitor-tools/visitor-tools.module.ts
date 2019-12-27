@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { VisitorToolsRoutingModule } from './visitor-tools-routing.module';
 import { SendInfoComponent } from './send-info/send-info.component';
-import { MatIconModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatTabsModule, MatButtonModule, MatDividerModule, MatGridListModule, MatInputModule } from '@angular/material';
+import { MatIconModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatTabsModule, MatButtonModule, MatDividerModule, MatGridListModule, MatInputModule, MatSlideToggleModule } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -19,6 +19,7 @@ import { ColorCircleModule } from 'ngx-color/circle';
     MatDividerModule,
     MatGridListModule,
     MatInputModule,
+    MatSlideToggleModule,
 
     ColorCircleModule,
 

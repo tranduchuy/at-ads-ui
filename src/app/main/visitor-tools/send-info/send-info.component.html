@@ -67,11 +67,22 @@
                       </div>
                     </div>
                   </form>
+                  <div class="submit-area">
+                    <button mat-raised-button color="accent" (click)="submitAllForms()">
+                      <mat-icon>check</mat-icon>
+                      <span>LƯU CẤU HÌNH</span>
+                    </button>
+                  </div>
                 </div>
               </mat-tab>
-              <mat-tab label="2. Cài đặt hiển thị" [disabled]="true">
+              <mat-tab label="2. Cài đặt hiển thị">
                 <div class="tab-content popup-display">
-                  Chúng tôi đang xây dựng chức năng này.
+                  <mat-slide-toggle class="example-margin" [color]="popupDisplayEnableSlideToggle.color"
+                    [checked]="popupDisplayEnableSlideToggle.checked"
+                    [disabled]="popupDisplayEnableSlideToggle.disabled"
+                    (change)="onCheckPopupDisplayEnableSlideToggle($event)">
+                    {{popupDisplayEnableSlideToggle.label}}
+                  </mat-slide-toggle>
                 </div>
               </mat-tab>
               <mat-tab label="3. Nội dung thành công" [disabled]="true">
@@ -82,7 +93,7 @@
             </mat-tab-group>
           </div>
 
-          <div class="popup-example" fxFlex="50">
+          <div class="popup-example" fxFlex="50" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
             <div class="browser" fxLayout="column">
               <div class="website-domain">{{websiteCtrl.value.name}}</div>
               <div class="popup">
@@ -108,15 +119,17 @@
                 </div>
               </div>
             </div>
+
+            <!-- <div class="popup-scripts-title">
+              Để thêm popup vào website của bạn, vui lòng nhúng mã dưới đây vào vào bất cứ vị trí nào trong website. Tuy nhiên tốt nhất hãy nhúng mã vào trong
+              <span class="highline">&lt;head&gt;[mã của bạn]&lt;/head&gt;</span>
+            </div>
+            <div class="popup-scripts">
+              <div>{{popupScripts[0]}}</div>
+              <div>{{popupScripts[1]}}</div>
+            </div> -->
+
           </div>
-
-        </div>
-
-        <div class="submit-area">
-          <button mat-raised-button color="accent" (click)="submitAllForms()">
-            <mat-icon>check</mat-icon>
-            <span>LƯU CẤU HÌNH</span>
-          </button>
         </div>
 
       </div>

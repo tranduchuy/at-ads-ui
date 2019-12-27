@@ -9,6 +9,10 @@ import { WebsiteManagementService } from 'app/main/website-management/website-ma
 import { DialogService } from 'app/shared/services/dialog.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { SessionService } from 'app/shared/services/session.service';
+import { VisitorToolsService } from '../visitor-tools.service';
+import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
+import { HttpErrorResponse } from '@angular/common/http';
+import * as _ from 'lodash';
 
 interface SelectedWebsite {
   id: string;
@@ -23,7 +27,6 @@ interface SelectedWebsite {
 })
 export class SendInfoComponent extends PageBaseComponent implements OnInit {
   websites: SelectedWebsite[] = [];
-
   hasWebsite: boolean;
   isProcessing: boolean;
 
@@ -48,7 +51,19 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
       cols: 1,
       rows: 1
     }
-  ]
+  ];
+
+  popupScripts: string[] = [
+    '<link href="http://localhost:3333/css/send-info-popup.style.css" rel="stylesheet">',
+    '<script type="text/javascript" src="http://localhost:3333/js/send-info-popup.js" id="send-info-popup-script" code="123456"></script>'
+  ];
+
+  popupDisplayEnableSlideToggle = {
+    label: 'Cho phép hiển thị',
+    color: 'accent',
+    checked: true,
+    disabled: false
+  }
 
   /** control for selected website */
   public websiteCtrl: FormControl = new FormControl();
@@ -72,9 +87,32 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     private _fuseSplashScreenService: FuseSplashScreenService,
     private _websiteManagementService: WebsiteManagementService,
     private _dialogService: DialogService,
-    private _sessionService: SessionService
+    private _sessionService: SessionService,
+    private _visitorToolsService: VisitorToolsService
   ) {
     super();
+  }
+
+  ngOnInit() {
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
+    this.initForms();
+    this.websiteCtrl.setValue({
+      id: '',
+      name: ''
+    });
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId) {
+          this.getWebsites(accountId);
+        }
+      });
+    this.subscriptions.push(sub);
+  }
+  
+  onCheckPopupDisplayEnableSlideToggle(e) {
+    const isChecked = e.checked;
+    console.log('Toggle checked:', isChecked);
   }
 
   selectColorCircle(e) {
@@ -86,7 +124,23 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
   }
 
   selectWebsite() {
-    document.getElementById('send-info-popup-config').innerHTML = JSON.stringify(this.websiteCtrl.value.popupConfig);
+    this.setPopupConfig();
+  }
+
+  setPopupConfig() {
+    const config = this.websiteCtrl.value.popupConfig;
+    if (config) {
+      this.popupStyleForm.controls['themeColor'].setValue(config.themeColor);
+      this.popupStyleForm.controls['supporterAvatar'].setValue(config.supporter.avatar);
+      this.popupStyleForm.controls['supporterName'].setValue(config.supporter.name);
+      this.popupStyleForm.controls['supporterMajor'].setValue(config.supporter.major);
+    }
+    else {
+      this.popupStyleForm.controls['themeColor'].setValue('#9c27b0');
+      this.popupStyleForm.controls['supporterAvatar'].setValue(this.images[0].url);
+      this.popupStyleForm.controls['supporterName'].setValue('Nguyễn Thị A');
+      this.popupStyleForm.controls['supporterMajor'].setValue('Hỗ trợ viên');
+    }
   }
 
   changePopupStyleFormControlValue(value: string, controlName: string) {
@@ -102,41 +156,45 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     });
   }
 
-  submitAllForms() {
-    const data = {
-      website: this.websiteCtrl.value.id || '',
+  generatePopupStyleParams() {
+    const params = {
       ...this.popupStyleForm.value
     };
-    console.log(data);
+
+    return params;
   }
 
-  ngOnInit() {
-    this.initForms();
-    this.websiteCtrl.setValue({
-      id: '',
-      name: ''
-    });
-    const sub = this._sessionService.getAccountId()
-      .subscribe((accountId: string) => {
-        if (accountId) {
-          this.getWebsites(accountId);
+  submitAllForms() {
+    const popupStyleParams = this.generatePopupStyleParams();
+    this._fuseProgressBarService.show();
+    const sub = this._visitorToolsService.updatePopupConfig(popupStyleParams, this.websiteCtrl.value.id)
+      .subscribe((res: any) => {
+        const config = res.data.popupConfig || null;
+        if (config) {
+          const selectedWebsite = _.find(this.websites, w => w.id === res.data._id);
+          if (selectedWebsite) {
+            selectedWebsite.popupConfig = config;
+          }
         }
-      });
+
+        this._dialogService._openSuccessDialog({ messages: ['Thiết lập thành công'] });
+        this._fuseProgressBarService.hide();
+      },
+        (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+        });
     this.subscriptions.push(sub);
   }
 
   getWebsites(accountId: string) {
-    this.isProcessing = true;
-    this._fuseProgressBarService.show();
     const sub = this._websiteManagementService.getWebsites(accountId)
       .subscribe(res => {
         this.websites = (res.data.website || []).map(website => {
           return {
             id: website._id,
             name: website.domain,
-            popupConfig: {
-              website: website._id
-            }
+            popupConfig: website.popupConfig || null
           } as SelectedWebsite
         });
 
@@ -155,7 +213,7 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
 
           // set default option is the first item of list websites
           this.websiteCtrl.setValue(this.websites[0]);
-          document.getElementById('send-info-popup-config').innerHTML = JSON.stringify(this.websiteCtrl.value.popupConfig);
+          this.setPopupConfig();
 
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
