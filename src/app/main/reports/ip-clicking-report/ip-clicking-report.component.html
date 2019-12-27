@@ -1,10 +1,60 @@
 <div class="container">
 
-  <div class="title1">
-    THEO DÕI IP ĐANG CLICK QUẢNG CÁO - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
+  <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutAlign.xs="center start"
+    fxLayoutGap="50px" fxLayoutGap.xs="10px">
+    <div class="main-title" fxFlex="75">
+      THEO DÕI IP ĐANG CLICK QUẢNG CÁO - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
+    </div>
+    <div class="no-website-notify" *ngIf="hasWebsite === false">
+      Không tìm thấy website nào.
+    </div>
+
+    <mat-form-field class="website-selection" *ngIf="hasWebsite === true">
+      <mat-label style="color: white; font-weight: bold">Thống kê theo</mat-label>
+      <mat-select [formControl]="websiteCtrl" #singleSelect (selectionChange)="selectWebsite()"
+        [disabled]="isProcessing === true">
+        <mat-option>
+          <ngx-mat-select-search [formControl]="websiteFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
+            [noEntriesFoundLabel]="'Không tìm thấy website nào'"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let website of filteredWebsites | async" [value]="website">
+          {{website.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
 
   <div class="inner">
+
+    <div class="statistic" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.xs="10px">
+      <div class="section total" fxFlex="33.33" fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxFlex="80">
+          <div class="title">Tổng số click</div>
+          <div class="number">{{abbreviateNumber(clickTotal || 0)}}</div>
+        </div>
+        <div fxFlex="20">
+          <mat-icon>touch_app</mat-icon>
+        </div>
+      </div>
+      <div fxFlex="66.66" fxLayout="row" fxLayoutGap="20px" fxLayoutGap.xs="10px" fxLayoutAlign="start center">
+        <div class="section real-click" fxFlex="50">
+          <div fxFlex="80" fxFlex.xs="75">
+            <div class="title">Click thật</div>
+            <div class="number">{{abbreviateNumber(realClick || 0)}}</div>
+          </div>
+          <mat-icon fxFlex="20" fxFlex.xs="25">check_circle</mat-icon>
+        </div>
+        <div class="section spam-click" fxFlex="50">
+          <div fxFlex="80" fxFlex.xs="75">
+            <div class="title">Click ảo</div>
+            <div class="number">{{abbreviateNumber(spamClick || 0)}}</div>
+          </div>
+          <mat-icon fxFlex="20" fxFlex.xs="25">not_interested</mat-icon>
+        </div>
+      </div>
+    </div>
+
     <div class="table-wrapper">
 
       <mat-table
@@ -23,7 +73,7 @@
             <a matTooltip="Nhấn vào để xem chi tiết" [routerLink]="['/bao-cao/chi-tiet-ip', element._id, router.url]"
               class="ip-detail-link" mat-button color="accent">
               <span *ngIf="element.info[0].isSpam === true" style="color: crimson">{{element._id}}</span>
-              <span *ngIf="element.info[0].isSpam === false" style="color: #44b543">{{element._id}}</span>
+              <span *ngIf="element.info[0].isSpam === false" style="color: green">{{element._id}}</span>
             </a>
 
           </mat-cell>
@@ -41,7 +91,7 @@
               (mouseover)="showReason(element.info[0].reason || '')">
               <mat-icon>not_interested</mat-icon> Đã chặn
             </span>
-            <span *ngIf="element.info[0].isSpam === false" style="color: #44b543; font-weight: bold"
+            <span *ngIf="element.info[0].isSpam === false" style="color: green; font-weight: bold"
               (mouseover)="showReason(element.info[0].reason || '')">
               <mat-icon>check_circle</mat-icon> Hợp lệ
             </span>
@@ -152,7 +202,8 @@
 
     </div>
 
-    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
+    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column"
+      *ngIf="pageTotal !== 1 && isProcessing === false">
       <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
           ngDefaultControl>{{currentPageNumber === undefined ? 1 : currentPageNumber}}</span> trong tổng
         {{pageTotal}} trang</p>

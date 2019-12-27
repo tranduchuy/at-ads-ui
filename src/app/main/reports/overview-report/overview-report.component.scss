@@ -3,7 +3,7 @@
   background: #e7ecf0;
 
   .title1 {
-    padding: 35px 30px 22px 30px;
+    padding: 35px 30px 22px 40px;
     background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
     background-size: 100% 100%;
     color: white;
@@ -19,6 +19,7 @@
 
   ::ng-deep .chart-legend .legend-labels {
     width: auto;
+    max-height: 100% !important;
   }
 
   .inner {
@@ -35,7 +36,7 @@
         font-size: 16px;
         font-weight: bold;
         // color: rgba(0, 0, 0, 0.7);
-        padding: 0 30px 0 30px;
+        padding: 30px 30px 0 45px;
 
         .adsId {
           color: yellow;
@@ -76,11 +77,15 @@
         text-align: center;
         padding: 40px 30px 50px 30px;
         font-size: 12px;
-        color: green;
+        color: #00527c;
 
         span {
           font-weight: bold;
         }
+      }
+
+      .hl2-title3 {
+        
       }
 
       .overview-chart {
@@ -104,13 +109,12 @@
         .session-total {
           position: relative;
           left: 41.2%;
-          top: -110px;
+          top: -60px;
           width: 50px;
-          -webkit-transform: translate(-41.2%, -110px);
           transform: translate(-41.2%, -110px);
 
           .session-number {
-            font-size: 20px;
+            font-size: 18px;
           }
         }
       }
@@ -291,6 +295,7 @@
 
         .overview-table {
           overflow: auto;
+          border-radius: 7px;
 
           mat-table {
             box-shadow: none;
@@ -414,13 +419,13 @@
     }
     ::ng-deep .chart-legend .legend-labels {
       margin: 10px;
-      margin-top: 0;
-      margin-left: 155%;
+      margin-left: 151%;
     }
     .inner {
       .highline2 {
         .hl2-title1 {
-          padding-top: 30px;
+          padding: 30px;
+          padding-bottom: 0;
           .website-selection {
             margin-top: 10px;
           }
@@ -430,27 +435,25 @@
         }
 
         .hl2-title2 {
-          padding-bottom: 0;
+          padding-bottom: 30px;
         }
 
         .overview-chart {
-          margin: 10px;
-          height: 750px;
+          margin: 15px;
+          min-height: 700px;
 
           .session-total {
-            -webkit-transform: translate(25%, -300px);
-            transform: translate(25%, -300px);
-            position: relative;
+            transform: translate(25%, -950%);
           }
         }
       }
 
       .overview {
-        margin: 10px;
+        margin: 15px;
         //height: 123vh;
         .overview-main {
-          padding-left: 10px;
-          padding-right: 10px;
+          // padding-left: 10px;
+          // padding-right: 10px;
           .overview-title1 {
             text-align: center;
           }

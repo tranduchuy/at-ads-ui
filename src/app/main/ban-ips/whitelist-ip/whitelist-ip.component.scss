@@ -6,8 +6,8 @@
     padding: 30px 30px 27px 30px;
     // background-color: #000000 !important;
     // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-    background-color: #ffffb5;
-    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
+    background-color: #3bb78f;
+    background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);
     text-shadow: 1px 1px 2px black;
     color: white;
     font-size: 16px;
@@ -33,6 +33,15 @@
       }
       to {
         transform: translateY(0);
+      }
+    }
+
+    .submit-button {
+      background: #44b543;
+      color: white;
+      mat-icon {
+        font-size: 20px;
+        margin-top: 5px;
       }
     }
 

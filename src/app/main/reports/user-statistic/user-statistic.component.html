@@ -143,7 +143,7 @@
       </mat-table>
     </div>
 
-    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
+    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1 && isProcessing === false">
       <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
           ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
         trong tổng

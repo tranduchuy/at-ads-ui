@@ -4,7 +4,7 @@
   background: #e7ecf0;
 
   .title1 {
-    padding: 15px 30px 18px 30px;
+    padding: 45px 30px 15px 45px;
     // background-color: #000000 !important;
     // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
     background-color: #7fcec5;
@@ -190,4 +190,9 @@
 }
 
 @media screen and (max-width: 600px) {
+  .container {
+    .title1 {
+      padding: 25px;
+    }
+  }
 }

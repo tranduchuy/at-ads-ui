@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { SessionService } from 'app/shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
@@ -11,6 +11,16 @@ import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id
 import { Generals } from 'app/shared/constants/generals';
 import * as _ from 'lodash';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { FormControl } from '@angular/forms';
+import { ReplaySubject, Subject } from 'rxjs';
+import { MatSelect } from '@angular/material';
+import { takeUntil } from 'rxjs/operators';
+import { WebsiteManagementService } from 'app/main/website-management/website-management.service';
+
+interface SelectedWebsite {
+  id: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-spam-click-report',
@@ -30,6 +40,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
   realClickPercentage: number = 0;
   spamClickTotal: number = 0;
   spamClickPercentage: number = 0;
+  isProcessing: boolean;
 
   locale: any = {
     format: 'DD/MM/YYYY',
@@ -60,7 +71,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     doughnut: true,
     gradient: false,
     scheme: {
-      domain: ['#40a5ec', '#ff0037']
+      domain: ['#44b543', 'crimson']
     },
     dataSource: [
       {
@@ -103,20 +114,20 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     labels: [],
     colors: [
       {
-        borderColor: '#40a5ec',
+        borderColor: 'green',
         //backgroundColor: 'rgba(0, 204, 255,0.5)',
         backgroundColor: 'rgba(0,0,0,0)',
-        pointBackgroundColor: '#40a5ec',
-        pointHoverBackgroundColor: '#40a5ec',
+        pointBackgroundColor: 'green',
+        pointHoverBackgroundColor: 'green',
         pointBorderColor: 'white',
         pointHoverBorderColor: 'white'
       },
       {
-        borderColor: 'orangered',
+        borderColor: 'crimson',
         //backgroundColor: 'rgba(255, 0, 57, 0.4)',
         backgroundColor: 'rgba(0,0,0,0)',
-        pointBackgroundColor: 'orangered',
-        pointHoverBackgroundColor: 'orangered',
+        pointBackgroundColor: 'crimson',
+        pointHoverBackgroundColor: 'crimson',
         pointBorderColor: 'white',
         pointHoverBorderColor: 'white'
       }
@@ -170,6 +181,22 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     }
   }
 
+  websites: SelectedWebsite[] = [];
+  hasWebsite: boolean;
+
+  /** control for selected website */
+  public websiteCtrl: FormControl = new FormControl();
+
+  /** control for the MatSelect filter keyword */
+  public websiteFilterCtrl: FormControl = new FormControl();
+
+  /** list of websites filterd by search keyword */
+  public filteredWebsites: ReplaySubject<any[]> = new ReplaySubject<SelectedWebsite[]>(1);
+
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+
+  private _onDestroy = new Subject<void>();
+
   abbreviateNumber(number: number): string | number {
     const SI_POSTFIXES: string[] = ["", "k", "M", "B", "T", "P", "E"];
     const tier = Math.log10(Math.abs(number)) / 3 | 0;
@@ -195,7 +222,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
     public router: Router,
-    private _fuseSplashScreenService: FuseSplashScreenService
+    private _fuseSplashScreenService: FuseSplashScreenService,
+    private _websiteManagementService: WebsiteManagementService
   ) {
     super();
   };
@@ -257,38 +285,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     const getAccountId = this.sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
-          this.pageTotal = 0;
-          this.selectedAccountId = accountId;
-          this.setSelectedAdsId(accountId);
-          this.getAccountStatisticReport(accountId);
-
-          const selectedActiveAccount = this.sessionService.getValueOfSelectedActiveAccount();
-          if (selectedActiveAccount) {
-            this.currentPageNumber = 1;
-            this.pageLimit = this.itemsPerPageOptions[0].value;
-          }
-          else {
-            const page = this._activatedRoute.snapshot.queryParamMap.get('page');
-
-            if (page) {
-              if (isNaN(Number(page))) {
-                this.currentPageNumber = 1;
-              }
-              else {
-                this.currentPageNumber = Number(page);
-              }
-            }
-            else {
-              this.currentPageNumber = 1;
-            }
-          }
-          this.router.navigate([], {
-            queryParams: {
-              page: this.currentPageNumber,
-            }
-          });
-
-          this.getAccountReport(accountId, this.currentPageNumber);
+          this.getWebsites(accountId);
         }
       });
     this.subscriptions.push(getAccountId);
@@ -300,6 +297,116 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         top: 0
       };
     }
+  }
+
+  getReport(accountId: string) {
+    this.pageTotal = 0;
+    this.selectedAccountId = accountId;
+    this.setSelectedAdsId(accountId);
+    this.getAccountStatisticReport(accountId);
+
+    const selectedActiveAccount = this.sessionService.getValueOfSelectedActiveAccount();
+    if (selectedActiveAccount) {
+      this.currentPageNumber = 1;
+      this.pageLimit = this.itemsPerPageOptions[0].value;
+    }
+    else {
+      const page = this._activatedRoute.snapshot.queryParamMap.get('page');
+
+      if (page) {
+        if (isNaN(Number(page))) {
+          this.currentPageNumber = 1;
+        }
+        else {
+          this.currentPageNumber = Number(page);
+        }
+      }
+      else {
+        this.currentPageNumber = 1;
+      }
+    }
+    this.router.navigate([], {
+      queryParams: {
+        page: this.currentPageNumber,
+      }
+    });
+
+    this.getAccountReport(accountId, this.currentPageNumber)
+  }
+
+  getWebsites(accountId: string) {
+    const sub = this._websiteManagementService.getWebsites(accountId)
+      .subscribe(res => {
+        this.websites = (res.data.website || []).map(website => {
+          return {
+            id: website._id,
+            name: website.domain
+          } as SelectedWebsite
+        });
+
+        if (this.websites.length > 0) {
+          this.hasWebsite = true;
+          this.websites.unshift({
+            id: 'VIEW_ALL',
+            name: 'Tất cả website'
+          } as SelectedWebsite);
+
+          // load the initial account list
+          this.filteredWebsites.next(this.websites.slice());
+
+          // listen for search field value changes
+          this.websiteFilterCtrl.valueChanges
+            .pipe(takeUntil(this._onDestroy))
+            .subscribe(() => {
+              this.filterWebsites();
+            });
+
+          // set default option is the first item of list websites
+          this.websiteCtrl.setValue(this.websites[0]);
+
+          this.getReport(accountId);
+        }
+        else {
+          this.pieChart.dataSource = [];
+          this.advertisementClickReport = [];
+          this.hasWebsite = false;
+          this.pageTotal = 0;
+          this.isProcessing = false;
+          this._fuseProgressBarService.hide();
+          this._fuseSplashScreenService.hide();
+          this._dialogService._openInfoDialog(
+            'Tài khoản chưa có website nào. Vui lòng thêm',
+            'tại đây',
+            `/quan-ly-website/${this.sessionService.activeAccountId}`
+          )
+        }
+      });
+    this.subscriptions.push(sub);
+  }
+
+  selectWebsite(): void {
+    const selectedId = this.websiteCtrl.value.id;
+    const selectedIndex = _.findIndex(this.websites, website => website.id === selectedId);
+    this.websiteCtrl.setValue(this.websites[selectedIndex]);
+    this.getReport(this.sessionService.activeAccountId);
+  }
+
+  private filterWebsites(): void {
+    if (!this.websites) {
+      return;
+    }
+    // get the search keyword
+    let search = this.websiteFilterCtrl.value;
+    if (!search) {
+      this.filteredWebsites.next(this.websites.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the websites
+    this.filteredWebsites.next(
+      this.websites.filter(website => website.name.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   showReason(reason: any) {
@@ -388,7 +495,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     const params = {
       from: startDate.valueOf().toString(),
       to: moment(this.selectedDateRange.end).endOf('day').valueOf().toString(),
-      timeZone: moment().format('Z')
+      timeZone: moment().format('Z'),
+      website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null
     }
 
     return params;
@@ -423,7 +531,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             doughnut: true,
             gradient: false,
             scheme: {
-              domain: ['#40a5ec', '#ff0037']
+              domain: ['green', 'crimson']
             },
             dataSource: [
               realClickDetail, spamClickDetail
@@ -487,7 +595,8 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
       from: startDate.valueOf().toString(),
       to: moment(this.selectedDateRange.end).endOf('day').valueOf().toString(),
       page,
-      limit: this.pageLimit
+      limit: this.pageLimit,
+      website: this.websiteCtrl.value ? (this.websiteCtrl.value.id !== 'VIEW_ALL' ? this.websiteCtrl.value.id : null) : null
     }
 
     return params;
@@ -505,10 +614,12 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
+          this.isProcessing = false;
         },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
-          this._fuseSplashScreenService.hide()
+          this._fuseSplashScreenService.hide();
+          this.isProcessing = false;
           this._dialogService._openErrorDialog(error.error);
           this.advertisementClickReport = [];
           this.totalItems = 0;

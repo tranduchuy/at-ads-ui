@@ -43,24 +43,24 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
       {
         text: '4 lần',
         value: 4
-      },
-      {
-        text: '5 lần',
-        value: 5
-      },
+      }
     ],
     maxClickHours: [
       {
-        text: '6 giờ',
-        value: 6
+        text: '5 phút',
+        value: 5
       },
       {
-        text: '12 giờ',
-        value: 12
+        text: '30 phút',
+        value: 30
       },
       {
-        text: '24 giờ',
-        value: 24
+        text: '60 phút',
+        value: 60
+      },
+      {
+        text: '180 phút',
+        value: 180
       },
     ],
     autoRemove: [
@@ -129,8 +129,8 @@ export class AutoBanIPComponent extends PageBaseComponent implements OnInit {
     const getSettingsSub = this._banIpsService.getBlockingIPSettings()
       .subscribe(res => {
         this.checked = res.data.setting.autoBlockWithAiAndBigData;
-        this.selectedMaxClick = res.data.setting.autoBlockByMaxClick;
-        this.selectedMaxClickHours = res.data.setting.countMaxClickInHours || 24;
+        this.selectedMaxClick = res.data.setting.autoBlockByMaxClick || 2;
+        this.selectedMaxClickHours = res.data.setting.countMaxClickInHours || 60;
         this.selectedAutoRemove = res.data.setting.autoRemoveBlocking === false ? 1 : 2;
 
         this.isProcessing = false;

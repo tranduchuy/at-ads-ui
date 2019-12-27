@@ -9,6 +9,7 @@ export interface IAccountStatisticReportParams {
   from: string;
   to: string;
   timeZone: string;
+  website?: string
 }
 
 export interface IAccountReportParams {
@@ -16,6 +17,7 @@ export interface IAccountReportParams {
   to: string;
   page?: number;
   limit?: number;
+  website?: string;
 }
 
 export interface IGetStatisticUserReport {
@@ -28,6 +30,7 @@ export interface IGetStatisticUserReport {
 export interface IDailyClickingReportParams {
   page?: number;
   limit?: number;
+  website?: string;
 }
 
 export interface IClassDClickingReportParams {
@@ -103,6 +106,10 @@ export class ReportService {
     url = url.replace('{to}', params.to);
     url = url.replace('{timeZone}', params.timeZone);
 
+    if (params.website) {
+      url += `&website=${params.website}`
+    }
+
     return this._http.get(url);
   }
 
@@ -116,6 +123,10 @@ export class ReportService {
       url += `&page=${params.page}`;
     if (params.limit)
       url += `&limit=${params.limit}`;
+
+    if (params.website) {
+      url += `&website=${params.website}`;
+    }
 
     return this._http.get(url);
   }
@@ -141,6 +152,10 @@ export class ReportService {
     url = url.replace('{limit}', params.limit.toString());
     url = url.replace('{from}', moment().startOf('day').valueOf().toString());
     url = url.replace('{to}', moment().endOf('day').valueOf().toString());
+
+    if (params.website) {
+      url += `&website=${params.website}`;
+    }
 
     return this._http.get(url);
   }

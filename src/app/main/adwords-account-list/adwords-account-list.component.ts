@@ -12,7 +12,7 @@ import { AdsAccountIdPipe } from 'app/shared/pipes/ads-account-id/ads-account-id
 import * as _ from 'lodash';
 import { MatTableDataSource } from '@angular/material';
 import { Generals } from 'app/shared/constants/generals';
-import { take, last } from 'rxjs/operators';
+import { take, last, takeLast } from 'rxjs/operators';
 
 @Component({
   selector: 'app-adwords-account-list',
