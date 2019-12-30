@@ -10,7 +10,6 @@ import { DialogService } from 'app/shared/services/dialog.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { SessionService } from 'app/shared/services/session.service';
 import { VisitorToolsService } from '../visitor-tools.service';
-import { ILoginSuccess } from 'app/authentication/login/models/i-login-success';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as _ from 'lodash';
 

@@ -38,7 +38,7 @@
     z-index: 10;
     top: -13vh;
 
-    -webkit-animation: formAni 0.8s ease-out;
+    -webkit-animation: formAni 0.4s ease-out;
     @keyframes formAni {
       from {
         transform: translateY(100vh);
@@ -78,6 +78,21 @@
           padding-top: 30px;
 
           .theme-color-selection {
+            .select-color-panel {
+              -webkit-animation: fade 1.2s ease-in-out;
+              @keyframes fade {
+                from {
+                  opacity: 0;
+                }
+                to {
+                  opacity: 1;
+                }
+              }
+
+              &:hover {
+                opacity: 0.8;
+              }
+            }
           }
 
           .background-image-selection {
@@ -123,14 +138,7 @@
             text-align: center;
 
             button {
-              padding: 5px;
-              padding-top: 2px;
-              padding-right: 12px;
-              mat-icon {
-                margin-left: 5px;
-                margin-top: 5px;
-                font-size: 20px;
-              }
+              padding-top: 0;
             }
           }
         }
@@ -142,7 +150,7 @@
           height: 400px;
           background: url("https://browserframe.com/assets/chrome-mac-light.png");
           background-size: 100% 100%;
-          border: 2px solid #f1f3f4;
+          border: 1.5px solid #f1f3f4;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -150,14 +158,14 @@
 
           .website-domain {
             font-size: 11px;
-            margin-top: -18px;
+            margin-top: -16px;
           }
 
           .popup {
             border-radius: 5px;
             margin-top: 60px;
-            width: 72%;
-            height: 48%;
+            width: 60%;
+            height: 49%;
             background: white;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
@@ -169,7 +177,7 @@
               justify-content: flex-end;
               align-items: center;
               font-size: 7px;
-              color: gray;
+              color: silver;
             }
 
             .content {
@@ -192,12 +200,13 @@
 
                 .input {
                   background: whitesmoke;
-                  padding: 3px;
+                  padding: 5px;
                   text-align: center;
                   font-weight: bold;
-                  font-size: 11px;
+                  font-size: 9px;
                   margin-top: 8px;
                   color: rgba(0, 0, 0, 0.5);
+                  border-radius: 3.5px;
                 }
 
                 .button {
@@ -207,6 +216,7 @@
                   background: silver;
                   color: white;
                   font-weight: bold;
+                  border-radius: 3.5px;
                 }
               }
 
@@ -234,6 +244,15 @@
                 .major {
                   color: gray;
                   font-size: 9px;
+                }
+
+                .footer {
+                  color: gray;
+                  font-size: 7px;
+                  width: 100%;
+                  text-align: center;
+                  position: relative;
+                  top: 23%;
                 }
               }
             }

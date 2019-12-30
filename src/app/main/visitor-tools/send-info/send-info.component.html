@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <div class="inner">
+  <div class="inner" *ngIf="isProcessing === false">
 
     <div class="no-website-notify" *ngIf="hasWebsite === false">
       Không tìm thấy website nào.
@@ -40,7 +40,7 @@
                   <form [formGroup]="popupStyleForm" (ngSubmit)="submitPopupStyleForm()">
                     <div class="theme-color-selection">
                       <mat-label style="color: gray">Màu sắc chủ đề</mat-label>
-                      <div class="form-control">
+                      <div class="form-control select-color-panel">
                         <color-circle (onChangeComplete)="selectColorCircle($event)"></color-circle>
                       </div>
                     </div>
@@ -69,8 +69,7 @@
                   </form>
                   <div class="submit-area">
                     <button mat-raised-button color="accent" (click)="submitAllForms()">
-                      <mat-icon>check</mat-icon>
-                      <span>LƯU CẤU HÌNH</span>
+                      Lưu cấu hình
                     </button>
                   </div>
                 </div>
@@ -85,11 +84,11 @@
                   </mat-slide-toggle>
                 </div>
               </mat-tab>
-              <mat-tab label="3. Nội dung thành công" [disabled]="true">
+              <!-- <mat-tab label="3. Nội dung thành công" [disabled]="true">
                 <div class="tab-content popup-done">
                   Chúng tôi đang xây dựng chức năng này.
                 </div>
-              </mat-tab>
+              </mat-tab> -->
             </mat-tab-group>
           </div>
 
@@ -105,7 +104,7 @@
                     <div class="title" [style.color]="popupStyleForm.controls['themeColor'].value">Trợ giúp qua điện
                       thoại
                     </div>
-                    <div class="notice">Vui lòng nhập họ tên và số điện thoại của bạn, chúng tôi sẽ gọi lại bạn ngay!
+                    <div class="notice">Vui lòng nhập họ tên và số điện thoại của bạn, chúng tôi sẽ gọi lại bạn ngay.
                     </div>
                     <div class="input">Họ và tên</div>
                     <div class="input">Số điện thoại</div>
@@ -115,6 +114,7 @@
                     <img src="{{popupStyleForm.controls['supporterAvatar'].value}}" alt="">
                     <div class="name">{{popupStyleForm.controls['supporterName'].value || ''}}</div>
                     <div class="major">{{popupStyleForm.controls['supporterMajor'].value || ''}}</div>
+                    <div class="footer">Phát triển bởi Appnet Technology</div>
                   </div>
                 </div>
               </div>

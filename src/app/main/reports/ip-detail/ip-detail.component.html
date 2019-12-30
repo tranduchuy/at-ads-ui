@@ -67,7 +67,7 @@
               <mat-header-cell *matHeaderCellDef>Click Ads/Xem trang</mat-header-cell>
               <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
                 [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
-                <mat-icon *ngIf="element.type === 2" style="color: #44b543" class="user-action-icon"
+                <mat-icon *ngIf="element.type === 2" style="color: green" class="user-action-icon"
                   matTooltip="Xem trang">
                   remove_red_eye</mat-icon>
 
@@ -99,9 +99,11 @@
                 <a mat-button color="accent" *ngIf="element.uuid" class="uuid-detail-link"
                   matTooltip="Nhấn vào để xem chi tiết"
                   [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid, router.url]">
-                  <span *ngIf="element.isSpam === true && element.type === 1" style="color: crimson">*{{element.uuid.slice(-12)}}*</span>
-                  <span *ngIf="element.isSpam === false && element.type === 1" style="color: orange">*{{element.uuid.slice(-12)}}*</span>
-                  <span *ngIf="element.type === 2" style="color: #44b543">*{{element.uuid.slice(-12)}}*</span>
+                  <span *ngIf="element.isSpam === true && element.type === 1"
+                    style="color: crimson">*{{element.uuid.slice(-12)}}*</span>
+                  <span *ngIf="element.isSpam === false && element.type === 1"
+                    style="color: orange">*{{element.uuid.slice(-12)}}*</span>
+                  <span *ngIf="element.type === 2" style="color: green">*{{element.uuid.slice(-12)}}*</span>
                 </a>
                 <span style="color:silver; font-weight: bold" *ngIf="!element.uuid">Unknown</span>
               </mat-cell>
@@ -122,8 +124,7 @@
               <mat-header-cell *matHeaderCellDef>Trang truy cập</mat-header-cell>
               <mat-cell *matCellDef="let element" [class.type1]="element.isSpam === false && element.type === 1"
                 [class.type2]="element.type === 2" [class.type3]="element.isSpam === true && element.type === 1">
-                <a
-                  href="{{element.href}}">{{element.pathname}}</a>
+                <a href="{{element.href}}">{{element.pathname}}</a>
               </mat-cell>
             </ng-container>
 

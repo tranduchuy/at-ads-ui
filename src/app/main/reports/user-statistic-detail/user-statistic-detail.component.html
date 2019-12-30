@@ -74,7 +74,7 @@
                 [class.ads-click-ip]="element.isSpam === false && element.type === 1"
                 [class.visitor-ip]="element.type === 2">
 
-                <mat-icon *ngIf="element.type === 2" style="color: #44b543" class="user-action-icon"
+                <mat-icon *ngIf="element.type === 2" style="color: green" class="user-action-icon"
                   matTooltip="Xem trang">
                   remove_red_eye</mat-icon>
 
@@ -98,7 +98,7 @@
                   class="ip-detail-link" matTooltip="Nhấn vào để xem chi tiết">
                   <span *ngIf="element.isSpam === true && element.type === 1" style="color: crimson">{{element.ip}}</span>
                   <span *ngIf="element.isSpam === false && element.type === 1" style="color: darkorange">{{element.ip}}</span>
-                  <span *ngIf="element.type === 2" style="color: #44b543">{{element.ip}}</span>
+                  <span *ngIf="element.type === 2" style="color: green">{{element.ip}}</span>
                 </a>
               </mat-cell>
             </ng-container>

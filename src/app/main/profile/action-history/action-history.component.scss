@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  background: #e7ecf0;
 
   .title1 {
     padding: 30px 30px 45px 30px;
@@ -53,6 +52,16 @@
 
         &:hover {
           background: rgba(3, 155, 229, 0.05);
+        }
+
+        -webkit-animation: rowAppearance 0.4s linear;
+        @keyframes rowAppearance {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
       }
 

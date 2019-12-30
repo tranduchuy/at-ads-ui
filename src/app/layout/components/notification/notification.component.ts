@@ -9,7 +9,6 @@ import { Generals } from 'app/shared/constants/generals';
 import { take } from 'rxjs/operators';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import * as _ from 'lodash';
-import { PreviousRouteService } from 'app/shared/services/previous-route.service';
 
 @Component({
   selector: 'app-notification',
