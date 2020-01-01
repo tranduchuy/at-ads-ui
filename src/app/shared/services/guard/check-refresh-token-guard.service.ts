@@ -12,7 +12,7 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import * as _ from 'lodash';
 import { Generals } from 'app/shared/constants/generals';
 
-declare var gapi: any;
+declare let gapi: any;
 
 @Injectable({
   providedIn: 'root'

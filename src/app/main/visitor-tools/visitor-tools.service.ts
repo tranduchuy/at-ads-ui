@@ -10,6 +10,10 @@ export interface IUpdatePopupConfigParams {
   supporterMajor: string;
 }
 
+export interface IEnablePopupDisplay {
+  popupStatus: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,6 +25,11 @@ export class VisitorToolsService {
 
   updatePopupConfig(params: IUpdatePopupConfigParams, websiteId: string): Observable<any> {
     const url = API.Website.updateWebsiteSendInfoPopupConfig.replace('{website_id}', websiteId);
+    return this._http.put(url, params);
+  }
+
+  enablePopupDislay(params: IEnablePopupDisplay, websiteId: string): Observable<any> {
+    const url = API.Website.enablePopupDisplay.replace('{website_id}', websiteId);
     return this._http.put(url, params);
   }
 }

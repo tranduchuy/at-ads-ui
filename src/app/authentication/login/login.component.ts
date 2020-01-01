@@ -15,7 +15,7 @@ import { environment } from '../../../environments/environment';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { ValidatorsService } from 'app/shared/services/validator.service';
 
-declare var gapi: any;
+declare let gapi: any;
 
 @Component({
   selector: 'login',

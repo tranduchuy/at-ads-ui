@@ -12,7 +12,7 @@ import { environment } from 'environments/environment';
 import { MatTableDataSource } from '@angular/material';
 import * as _ from 'lodash';
 
-declare var gapi: any;
+declare let gapi: any;
 
 @Component({
   selector: 'app-add-adwords-accounts',

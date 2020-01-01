@@ -90,7 +90,7 @@
             <mat-header-cell *matHeaderCellDef>Tác vụ</mat-header-cell>
             <mat-cell *matCellDef>
               <span class="task">
-                <mat-icon>verified_user</mat-icon>đã chặn
+                <mat-icon style="margin-top: 5px">verified_user</mat-icon>đã chặn
               </span>
             </mat-cell>
           </ng-container>
@@ -100,7 +100,7 @@
             <mat-cell *matCellDef="let element">
               <button (click)="unblockSampleIP(element._id)" [disabled]="isProcessing" mat-icon-button
                 matTooltip="Nhấn để bỏ chặn" class="unlock-button">
-                <mat-icon style="color: #44b543">lock_open</mat-icon>
+                <mat-icon style="color: silver">delete</mat-icon>
               </button>
             </mat-cell>
           </ng-container>

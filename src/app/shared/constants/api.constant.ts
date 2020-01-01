@@ -56,6 +56,7 @@ export namespace API {
     export const removeWebsite = environment.hostApi + '/api/websites/{website_id}';
     export const getWebsiteTrackingInfo = environment.hostApi + '/api/account-adwords/{account_id}/verify-acctached-code-domains';
     export const updateWebsiteSendInfoPopupConfig = environment.hostApi + '/api/websites/{website_id}/popup';
+    export const enablePopupDisplay = environment.hostApi + '/api/websites/{website_id}/status-popup';
   }
   export namespace Report {
     export const getAccountStatisticReport = environment.hostApi + '/api/account-adwords/{account_id}/report-statistic?from={from}&to={to}&timeZone={timeZone}';

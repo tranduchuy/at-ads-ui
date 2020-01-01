@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { MatSelect } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { SessionService } from 'app/shared/services/session.service';
 import { VisitorToolsService } from '../visitor-tools.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as _ from 'lodash';
+import { invalidPhoneNumberValidator } from 'app/shared/validators/phone-number.validator';
 
 interface SelectedWebsite {
   id: string;
@@ -78,8 +79,6 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
   private _onDestroy = new Subject<void>();
 
   popupStyleForm: FormGroup;
-  popupDisplayForm: FormGroup;
-  popupDoneForm: FormGroup;
 
   constructor(
     private _fuseProgressBarService: FuseProgressBarService,
@@ -108,10 +107,18 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
       });
     this.subscriptions.push(sub);
   }
-  
+
   onCheckPopupDisplayEnableSlideToggle(e) {
-    const isChecked = e.checked;
-    console.log('Toggle checked:', isChecked);
+    this.enablePopupDisplay(e.checked);
+  }
+
+  enablePopupDisplay(popupStatus: boolean) {
+    const sub = this._visitorToolsService.enablePopupDislay({ popupStatus }, this.websiteCtrl.value.id)
+      .subscribe(() => { },
+        (error: HttpErrorResponse) => {
+          this._dialogService._openErrorDialog(error.error);
+        });
+    this.subscriptions.push(sub);
   }
 
   selectColorCircle(e) {
@@ -127,18 +134,21 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
   }
 
   setPopupConfig() {
+    this.popupDisplayEnableSlideToggle['checked'] = this.websiteCtrl.value.isPopupOpening;
     const config = this.websiteCtrl.value.popupConfig;
     if (config) {
       this.popupStyleForm.controls['themeColor'].setValue(config.themeColor);
       this.popupStyleForm.controls['supporterAvatar'].setValue(config.supporter.avatar);
       this.popupStyleForm.controls['supporterName'].setValue(config.supporter.name);
       this.popupStyleForm.controls['supporterMajor'].setValue(config.supporter.major);
+      this.popupStyleForm.controls['supporterPhone'].setValue(config.supporter.phone);
     }
     else {
-      this.popupStyleForm.controls['themeColor'].setValue('#9c27b0');
+      this.popupStyleForm.controls['themeColor'].setValue('#2196f3');
       this.popupStyleForm.controls['supporterAvatar'].setValue(this.images[0].url);
       this.popupStyleForm.controls['supporterName'].setValue('Nguyễn Thị A');
       this.popupStyleForm.controls['supporterMajor'].setValue('Hỗ trợ viên');
+      this.popupStyleForm.controls['supporterPhone'].setValue('0999999999');
     }
   }
 
@@ -148,23 +158,46 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
 
   initForms() {
     this.popupStyleForm = new FormGroup({
-      themeColor: new FormControl('#9c27b0'),
+      themeColor: new FormControl('#2196f3'),
       supporterAvatar: new FormControl(this.images[0].url),
-      supporterName: new FormControl('Nguyễn Thị A'),
-      supporterMajor: new FormControl('Hỗ trợ viên')
+      supporterName: new FormControl('Nguyễn Thị A', [
+        Validators.required
+      ]),
+      supporterMajor: new FormControl('Hỗ trợ viên'),
+      supporterPhone: new FormControl('0999999999', [
+        Validators.required,
+        invalidPhoneNumberValidator
+      ])
     });
   }
 
-  generatePopupStyleParams() {
+  get supporterName(): AbstractControl {
+    return this.popupStyleForm.get('supporterName');
+  }
+
+  get supporterPhone(): AbstractControl {
+    return this.popupStyleForm.get('supporterPhone');
+  }
+
+  generatePopupStyleParams(): any | null {
     const params = {
       ...this.popupStyleForm.value
     };
+
+    for (const key in params)
+      if (!params[key])
+        return null;
 
     return params;
   }
 
   submitAllForms() {
     const popupStyleParams = this.generatePopupStyleParams();
+    if (!popupStyleParams) {
+      this._dialogService._openErrorDialog({ messages: ['Vui lòng điền đầy đủ thông tin'] });
+      return;
+    }
+
     this._fuseProgressBarService.show();
     const sub = this._visitorToolsService.updatePopupConfig(popupStyleParams, this.websiteCtrl.value.id)
       .subscribe((res: any) => {
@@ -186,6 +219,11 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
+  numberWithSpaces(value: string, pattern: string) {
+    let i = 0, phone = value.toString();
+    return pattern.replace(/#/g, (_: any) => phone[i++]);
+  }
+
   getWebsites(accountId: string) {
     const sub = this._websiteManagementService.getWebsites(accountId)
       .subscribe(res => {
@@ -193,6 +231,7 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
           return {
             id: website._id,
             name: website.domain,
+            isPopupOpening: website.isPopupOpening || false,
             popupConfig: website.popupConfig || null
           } as SelectedWebsite
         });

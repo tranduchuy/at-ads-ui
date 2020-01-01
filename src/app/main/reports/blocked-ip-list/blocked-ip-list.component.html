@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="inner">
-    <div class="mat-elevation-z8 table-wrapper">
+    <div class="table-wrapper">
       <mat-table
         [dataSource]="dataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }">
 
@@ -24,8 +24,8 @@
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <button mat-icon-button color="accent" matTooltip="Nhấn để bỏ chặn" [disabled]="isProcessing"
-              style="color: #44b543" (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
-              <mat-icon>lock_open</mat-icon>
+              style="color: silver" (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
+              <mat-icon>delete</mat-icon>
             </button>
           </mat-cell>
         </ng-container>

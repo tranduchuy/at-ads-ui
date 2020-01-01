@@ -1,8 +1,10 @@
 .container {
   width: 100%;
+  height: 90vh;
 
   .title1 {
-    padding: 30px 30px 45px 30px;
+    padding: 45px 30px 0 45px;
+    height: 22vh;
     background-color: #7fcec5;
     background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
@@ -13,6 +15,13 @@
   }
 
   .inner {
+    border-radius: 7px;
+    box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    background: white;
+    margin: 30px;
+    top: -86px;
+    position: relative;
+
     .pagination-buttons {
       display: table;
       margin: 0 auto;
@@ -21,54 +30,62 @@
     }
 
     .table-wrapper {
-      height: auto;
-      background-color: white;
-      border-bottom: 0.5px solid #eee;
-      margin-top: -18px;
-      overflow: auto;
-      overflow-y: hidden;
-
+      border-radius: 7px;
       mat-table {
         box-shadow: none;
         width: 100%;
-      }
+        border-radius: 7px;
 
-      mat-header-cell:nth-child(2),
-      mat-cell:nth-child(2) {
-        flex: 0 0 80%;
-      }
+        mat-header-cell:nth-child(2),
+        mat-cell:nth-child(2) {
+          flex: 0 0 80%;
+        }
 
-      mat-header-cell,
-      mat-cell {
-        font-size: 12px;
-      }
+        mat-header-cell,
+        mat-cell {
+          font-size: 12px;
+        }
 
-      mat-row {
-        transition: 0.2s;
+        mat-row {
+          transition: 0.2s;
 
-        &:nth-child(odd) {
+          &:nth-child(odd) {
+            background: whitesmoke;
+          }
+
+          &:hover {
+            background: rgba(3, 155, 229, 0.05);
+          }
+
+          -webkit-animation: rowAppearance 0.4s linear;
+          @keyframes rowAppearance {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+        }
+
+        mat-header-row {
+          border-top-left-radius: 7px;
+          border-top-right-radius: 7px;
+        }
+
+        mat-header-cell {
           background: whitesmoke;
-        }
+          color: rgba(0, 0, 0, 0.7);
+          font-weight: bold;
 
-        &:hover {
-          background: rgba(3, 155, 229, 0.05);
-        }
-
-        -webkit-animation: rowAppearance 0.4s linear;
-        @keyframes rowAppearance {
-          from {
-            opacity: 0;
+          &:first-child {
+            border-top-left-radius: 7px;
           }
-          to {
-            opacity: 1;
+
+          &:last-child {
+            border-top-right-radius: 7px;
           }
         }
-      }
-
-      mat-header-cell {
-        background: whitesmoke;
-        color: rgba(0, 0, 0, 0.7);
-        font-weight: bold;
       }
     }
   }

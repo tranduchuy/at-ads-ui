@@ -32,7 +32,7 @@
       </mat-form-field>
 
       <div class="popup-config">
-        <div fxLayout="row" fxLayoutGap="50px">
+        <div fxLayout="row" fxLayoutGap="40px">
           <div class="tabs" fxFlex="50">
             <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
               <mat-tab label="1. Nội dung popup">
@@ -48,22 +48,47 @@
                       <p class="background-image-selection-title">
                         Thông tin hỗ trợ viên
                       </p>
-                      <div class="supporter-details" fxLayout="row" fxLayoutGap="15px">
-                        <mat-form-field class="example-full-width" fxFlex="65">
-                          <input matInput placeholder="Họ và tên" formControlName="supporterName"
-                            (input)="changePopupStyleFormControlValue($event.target.value, 'supporterName')">
+                      <div class="supporter-details">
+                        <mat-form-field class="example-full-width" class="popup-style-form-field">
+                          <input matInput placeholder="Họ và tên" formControlName="supporterName" maxlength="30">
                         </mat-form-field>
-                        <mat-form-field class="example-full-width" fxFlex="35">
-                          <input matInput placeholder="Chuyên môn" formControlName="supporterMajor">
-                        </mat-form-field>
+                        <div *ngIf="supporterName.invalid && (supporterName.dirty || supporterName.touch)"
+                          class="errors">
+                          <div *ngIf="supporterName.errors.required">
+                            Bắt buộc
+                          </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="15px" class="popup-style-form-field">
+                          <mat-form-field class="example-full-width" fxFlex="65">
+                            <input matInput placeholder="Chuyên môn" formControlName="supporterMajor" maxlength="30">
+                          </mat-form-field>
+                          <div fxFlex="35">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Số điện thoại" formControlName="supporterPhone"
+                                maxlength="10">
+                            </mat-form-field>
+                            <div *ngIf="supporterPhone.invalid && (supporterPhone.dirty || supporterPhone.touch)"
+                              class="errors">
+                              <div *ngIf="supporterPhone.errors.required">
+                                Bắt buộc
+                              </div>
+                              <div *ngIf="supporterPhone.errors.invalidPhoneNumber">
+                                Số điện thoại không hợp lệ
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
-                      <mat-label style="color: gray; font-size: 12px">Ảnh đại diện</mat-label>
-                      <div class="form-control">
-                        <mat-grid-list cols="4" rowHeight="100px" gutterSize="10px">
-                          <mat-grid-tile *ngFor="let img of images" [colspan]="img.cols" [rowspan]="img.rows">
-                            <img src="{{img.url}}" alt="" (click)="selectSupporterAvatar(img.url)">
-                          </mat-grid-tile>
-                        </mat-grid-list>
+                      <div class="background-image-selection-storage">
+                        <mat-label style="color: gray; font-size: 12px">Ảnh đại diện</mat-label>
+                        <div class="form-control">
+                          <mat-grid-list cols="4" rowHeight="100px" gutterSize="10px">
+                            <mat-grid-tile *ngFor="let img of images" [colspan]="img.cols" [rowspan]="img.rows">
+                              <img src="{{img.url}}" alt="" (click)="selectSupporterAvatar(img.url)">
+                            </mat-grid-tile>
+                          </mat-grid-list>
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -92,29 +117,43 @@
             </mat-tab-group>
           </div>
 
-          <div class="popup-example" fxFlex="50" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+          <div class="popup-example" fxFlex="50" fxLayout="column" fxLayoutGap="20px">
             <div class="browser" fxLayout="column">
               <div class="website-domain">{{websiteCtrl.value.name}}</div>
               <div class="popup">
                 <div class="header">
                   <span>x</span>
                 </div>
-                <div class="content" fxLayout="row">
-                  <div class="info" fxFlex="60">
-                    <div class="title" [style.color]="popupStyleForm.controls['themeColor'].value">Trợ giúp qua điện
-                      thoại
+                <div class="content">
+                  <div fxLayout="row">
+                    <div class="info" fxFlex="60">
+                      <div class="title" [style.color]="popupStyleForm.controls['themeColor'].value">Trợ giúp qua điện
+                        thoại
+                      </div>
+                      <div class="notice">
+                        Vui lòng nhập họ tên, số điện thoại và email của bạn, chúng tôi sẽ gọi lại bạn ngay. Hoặc bạn có
+                        thể <span [style.color]="popupStyleForm.controls['themeColor'].value">nhấn vào đây</span> để gọi
+                        trực tiếp cho chúng tôi.
+                      </div>
+                      <div class="input">Họ và tên</div>
+                      <div class="input">Số điện thoại</div>
+                      <div class="input">Địa chỉ email</div>
+                      <p class="button" [style.background]="popupStyleForm.controls['themeColor'].value">Gửi yêu cầu</p>
                     </div>
-                    <div class="notice">Vui lòng nhập họ tên và số điện thoại của bạn, chúng tôi sẽ gọi lại bạn ngay.
+                    <div class="background-img" fxFlex="40">
+                      <img src="{{popupStyleForm.controls['supporterAvatar'].value}}" alt="">
+                      <div class="supporter-name">{{popupStyleForm.controls['supporterName'].value || ''}}</div>
+                      <div class="supporter-major">{{popupStyleForm.controls['supporterMajor'].value || ''}}</div>
+                      <div class="supporter-phone">
+                        <img src="https://ducanhduhoc.vn/wp-content/themes/zen/asset/img/phone-flat.png" alt=""
+                          class="phone-icon">
+                        <span class="phone-number">{{popupStyleForm.controls['supporterPhone'].value || ''}}</span>
+                      </div>
                     </div>
-                    <div class="input">Họ và tên</div>
-                    <div class="input">Số điện thoại</div>
-                    <p class="button" [style.background]="popupStyleForm.controls['themeColor'].value">Gửi yêu cầu</p>
                   </div>
-                  <div class="background-img" fxFlex="40">
-                    <img src="{{popupStyleForm.controls['supporterAvatar'].value}}" alt="">
-                    <div class="name">{{popupStyleForm.controls['supporterName'].value || ''}}</div>
-                    <div class="major">{{popupStyleForm.controls['supporterMajor'].value || ''}}</div>
-                    <div class="footer">Phát triển bởi Appnet Technology</div>
+                  <div class="footer">
+                    <img src="https://image.flaticon.com/icons/png/128/222/222506.png" alt="">
+                    <span>x2.com.vn</span>
                   </div>
                 </div>
               </div>
