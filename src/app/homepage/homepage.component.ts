@@ -14,10 +14,8 @@ import { DialogService } from '../shared/services/dialog.service';
 import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
-import * as moment from 'moment';
-import { take } from 'rxjs/operators';
 
-declare var gapi: any;
+declare let gapi: any;
 
 @Component({
   selector: 'app-homepage',

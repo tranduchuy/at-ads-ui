@@ -542,7 +542,12 @@
             //border-radius: 5px;
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
             transition: 0.2s;
-            pointer-events: none;
+            cursor: pointer;
+            // pointer-events: none;
+
+            &:hover {
+              transform: translateY(-5px);
+            }
 
             .step-image {
               height: 100%;
@@ -551,11 +556,11 @@
 
               .step-description {
                 background: rgba(0, 0, 0, 0.6);
-                padding: 10px 15px 5px 15px;
+                padding: 20px 15px 5px 15px;
                 text-align: justify;
                 font-size: 11px;
                 position: relative;
-                top: 62%;
+                top: 57%;
 
                 .step-name {
                   font-size: 13px;
@@ -564,10 +569,6 @@
               }
             }
           }
-        }
-
-        .step:hover {
-          transform: translateY(-5px);
         }
       }
     }
@@ -920,7 +921,7 @@
       -webkit-animation: topbarAppearance 0.2s linear;
 
       backdrop-filter: blur(5px);
-      background: rgba(7, 87, 115, 0.5);
+      background: rgba(7, 87, 115, 0.4);
     }
 
     .topbar {
@@ -1124,6 +1125,7 @@
 
           .step-wrapper {
             .step {
+              pointer-events: none;
               .step-image {
                 .step-description {
                 }

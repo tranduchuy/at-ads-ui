@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  background: #e7ecf0;
+  height: 80vh;
 
   .title1 {
     // padding: 94px 30px 27px 30px;
@@ -50,18 +50,19 @@
     }
 
     .info {
-      line-height: 30px;
-      font-size: 11px;
+      line-height: 20px;
+      font-size: 12px;
+      color: gray;
     }
 
-    .hightline {
+    .highline1 {
       padding: 5px;
       padding-left: 10px;
       padding-right: 10px;
-      border-radius: 5px;
+      border-radius: 3px;
       background-color: whitesmoke;
       color: deeppink;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 12px;
     }
 
     .step {
@@ -77,6 +78,7 @@
     }
 
     .key {
+      font-size: 12px;
       padding: 10px;
       padding-right: 0;
       width: 100%;

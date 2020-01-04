@@ -24,13 +24,25 @@
         <ng-container matColumnDef="uuid">
           <mat-header-cell *matHeaderCellDef> Người dùng (uid) </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <img [src]="'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'" class="user-image">
             <a mat-button color="accent" *ngIf="element.uuid" class="uuid-detail-link"
               matTooltip="Nhấn vào để xem chi tiết"
               [routerLink]="['/bao-cao/chi-tiet-thong-ke-nguoi-dung', element.uuid, router.url]">
-              <span>*{{element.uuid.slice(-12)}}*</span>
+              <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+                <ngx-avatar size="24" name="{{element.customerInfo.name.split(' ').slice(-1)[0]}}" *ngIf="element.customerInfo?.name">
+                </ngx-avatar>
+                <ngx-avatar size="24" src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png"
+                  *ngIf="!element.customerInfo?.name"></ngx-avatar>
+                <span
+                  *ngIf="element.customerInfo?.phoneNumber">{{numberWithSpaces(element.customerInfo.phoneNumber, '### ### ####')}}</span>
+                <span *ngIf="!element.customerInfo?.phoneNumber && element.uuid">*{{element.uuid.slice(-12)}}*</span>
+              </div>
             </a>
-            <span style="color:silver; font-weight: bold" *ngIf="!element.uuid">Unknown</span>
+            <div *ngIf="!element.customerInfo?.phoneNumber && !element.uuid" fxLayout="row" fxLayoutGap="8px"
+              fxLayoutAlign="start center">
+              <ngx-avatar size="24" src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png">
+              </ngx-avatar>
+              <span style="color:silver; font-weight: bold">Unknown</span>
+            </div>
           </mat-cell>
         </ng-container>
 
@@ -143,12 +155,12 @@
       </mat-table>
     </div>
 
-    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1 && isProcessing === false">
+    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
       <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
           ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
         trong tổng
         {{pageTotal}} trang</p>
-      <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+      <p *ngIf="pageTotal === 0 && !isProcessing">Chưa có ghi nhận nào.</p>
       <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
         nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
     </div>

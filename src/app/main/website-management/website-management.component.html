@@ -44,7 +44,7 @@
           </app-input-text>
           <button type="submit" mat-raised-button color="accent" class="add-website-button"
             [disabled]="isProcessing === true">
-            <mat-icon style="font-size: 16px">add</mat-icon> THÊM WEBSITE
+            <mat-icon>add</mat-icon> THÊM WEBSITE
           </button>
         </div>
         <br><span><b><span style="color: crimson">*</span>Lưu ý:</b> Tên miền phải kèm theo <span
@@ -60,7 +60,7 @@
     <hr style="border: 0.5px solid #DCDCDC; margin-bottom: 20px">
 
     <div class="website-list">
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="start center" class="table-title">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="center center" class="table-title">
         <p>Các website đang quảng cáo</p>
         <button mat-button class="update-website-list-button" (click)="getWebsites()"
           [disabled]="isProcessing">

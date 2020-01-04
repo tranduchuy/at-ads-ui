@@ -25,20 +25,18 @@
         <ng-container matColumnDef="device">
           <mat-header-cell *matHeaderCellDef> Thiết bị </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span *ngIf="element.device === 'Điện thoại'" fxLayout="row" fxLayoutAlign="center start"
-              fxLayoutGap="10px">
+            <div *ngIf="element.device === 'Điện thoại'" class="device-name-wrapper">
               <mat-icon color="accent">smartphone</mat-icon>
               <span class="device-name">{{element.device}}</span>
-            </span>
-            <span *ngIf="element.device === 'Máy tính bảng'" fxLayout="row" fxLayoutAlign="center start"
-              fxLayoutGap="10px">
+            </div>
+            <div *ngIf="element.device === 'Máy tính bảng'" class="device-name-wrapper">
               <mat-icon color="accent">tablet_mac</mat-icon>
               <span class="device-name">{{element.device}}</span>
-            </span>
-            <span *ngIf="element.device === 'Máy tính'" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+            </div>
+            <div *ngIf="element.device === 'Máy tính'" class="device-name-wrapper">
               <mat-icon color="accent">laptop_chromebook</mat-icon>
               <span class="device-name">{{element.device}}</span>
-            </span>
+            </div>
           </mat-cell>
         </ng-container>
 

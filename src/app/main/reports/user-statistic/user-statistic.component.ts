@@ -88,13 +88,13 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
             }
           });
 
-          this.getStatisticUserReport(accountId, this.currentPageNumber);
+          this.getUserStatisticReport(accountId, this.currentPageNumber);
         }
       });
     this.subscriptions.push(sub);
   }
 
-  generateStatisticUserReportParams(page: number) {
+  generateUserStatisticReportParams(page: number) {
     const timezone = new Date().getTimezoneOffset();
     const hours = -(parseInt((timezone / 60).toString()));
     const minutes = -(timezone % 60);
@@ -117,13 +117,12 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
     return params;
   }
 
-  getStatisticUserReport(accountId: string, page?: number) {
+  getUserStatisticReport(accountId: string, page?: number) {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-    const params = this.generateStatisticUserReportParams(page);
-    const sub = this._reportService.getStatisticUserReport(params, accountId)
+    const params = this.generateUserStatisticReportParams(page);
+    const sub = this._reportService.getUserStatisticReport(params, accountId)
       .subscribe(res => {
-
         this.dataSource = res.data.users;
 
         this.totalItems = res.data.meta.totalItems;
@@ -146,7 +145,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
   }
 
   changePage(event) {
-    this.getStatisticUserReport(this.selectedAccountId, event);
+    this.getUserStatisticReport(this.selectedAccountId, event);
     this.router.navigate([], {
       queryParams: {
         page: event,
@@ -161,7 +160,7 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
         page: this.currentPageNumber,
       }
     });
-    this.getStatisticUserReport(this.selectedAccountId, this.currentPageNumber);
+    this.getUserStatisticReport(this.selectedAccountId, this.currentPageNumber);
   }
 
   onSelectDateRange(event) {
@@ -170,5 +169,10 @@ export class UserStatisticComponent extends PageBaseComponent implements OnInit 
       return false;
     }
     return true;
+  }
+
+  numberWithSpaces(value: string, pattern: string) {
+    let i = 0, phone = value.toString();
+    return pattern.replace(/#/g, (_: any) => phone[i++]);
   }
 }

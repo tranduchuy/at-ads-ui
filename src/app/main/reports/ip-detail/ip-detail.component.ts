@@ -11,17 +11,6 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import * as Url from 'url-parse';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 
-interface Node {
-  name: string[];
-  id: string;
-  index: number;
-  device?: any;
-  os?: any;
-  browser?: any;
-  children?: Node[];
-  logs?: any[];
-}
-
 @Component({
   selector: 'app-ip-detail',
   templateUrl: './ip-detail.component.html',
@@ -44,10 +33,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
   clicksDataSource = [];
   clicksDataSourceCols: string[] = ['type', 'createdAt', 'uuid', 'isPrivateBrowsing', 'href', 'os', 'browser', 'networkCompany', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   lastClickHistory: any;
-
-  treeControl = new NestedTreeControl<Node>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<Node>();
-  hasChild = (_: number, node: Node) => !!node.children && node.children.length > 0;
+  onLoadIpInfo: boolean = true;
 
   constructor(
     private _fuseProgressBarService: FuseProgressBarService,
@@ -107,9 +93,12 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
           this.totalItems = res.data.meta.totalItems;
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
+          
+
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
           this.isProcessing = false;
+          this.onLoadIpInfo = false;
         },
         (error: HttpErrorResponse) => {
           this.clicksDataSource = [];
@@ -119,6 +108,7 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
           this.isProcessing = false;
+          this.onLoadIpInfo = false;
           this._dialogService._openErrorDialog(error.error);
         });
     this.subscriptions.push(sub);
@@ -163,35 +153,6 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
-  getIPHistory(ip: string, page: number, limit: number) {
-    this.isProcessing = true;
-    this._fuseProgressBarService.show();
-
-    const sub = this._reportService.getIPHistory({ ip, page, limit })
-      .subscribe(
-        res => {
-          this.history = res.data.history;
-          this.lastHistory = res.data.last;
-
-          this.totalItems = res.data.totalItems;
-          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
-
-          this._fuseProgressBarService.hide();
-          this.isProcessing = false;
-        },
-        (error: HttpErrorResponse) => {
-          this.history = [];
-          this.lastHistory = [];
-          this.pageTotal = 0;
-          this.totalItems = 0;
-
-          this._fuseProgressBarService.hide();
-          this.isProcessing = false;
-        }
-      );
-    this.subscriptions.push(sub);
-  }
-
   changePage(event) {
     this.getIPClicksList(event);
     this.router.navigate([], {
@@ -201,4 +162,8 @@ export class IpDetailComponent extends PageBaseComponent implements OnInit {
     });
   }
 
+  numberWithSpaces(value: string, pattern: string) {
+    let i = 0, phone = value.toString();
+    return pattern.replace(/#/g, (_: any) => phone[i++]);
+  }
 }

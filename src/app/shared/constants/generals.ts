@@ -1,4 +1,56 @@
+export interface TrafficSourceType {
+    id: number;
+    name: string;
+}
 export namespace Generals {
+    export namespace TrafficSourceReport {
+        export const TRAFFIC_SOURCE_TYPES: TrafficSourceType[] = [
+            {
+                id: 1,
+                name: 'google/cpc',
+            },
+            {
+                id: 2,
+                name: 'google/organic'
+            },
+            {
+                id: 3,
+                name: 'google/display'
+            },
+            {
+                id: 4,
+                name: 'facebook/cpc'
+            },
+            {
+                id: 5,
+                name: 'facebook/referral'
+            },
+            {
+                id: 6,
+                name: 'bing/cpc'
+            },
+            {
+                id: 7,
+                name: 'bing/organic'
+            },
+            {
+                id: 8,
+                name: 'coccoc/cpc'
+            },
+            {
+                id: 9,
+                name: 'coccoc/organic'
+            },
+            {
+                id: 10,
+                name: 'direct/none'
+            },
+            {
+                id: 11,
+                name: 'other/referral'
+            }
+        ];
+    }
     export namespace Pagination {
         export const itemsPerPageOptions = [
             {

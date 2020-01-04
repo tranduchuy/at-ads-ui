@@ -21,6 +21,11 @@ interface SelectedWebsite {
   name: string;
 }
 
+interface TrafficSourceType {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-overview-report',
   templateUrl: './overview-report.component.html',
@@ -34,20 +39,6 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   totalItems: number;
   pageLimit: number;
   sessionTotal: number;
-
-  TRAFFIC_SOURCE_TYPES: string[] = [
-    'google/cpc',
-    'google/organic',
-    'google/display',
-    'facebook/cpc',
-    'facebook/referral',
-    'bing/cpc',
-    'bing/organic',
-    'coccoc/cpc',
-    'coccoc/organic',
-    'direct/none',
-    'other/referral'
-  ];
 
   locale: any = {
     format: 'DD/MM/YYYY',
@@ -84,6 +75,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     },
     dataSource: [],
   };
+
+  TRAFFIC_SOURCE_TYPES: TrafficSourceType[] = Generals.TrafficSourceReport.TRAFFIC_SOURCE_TYPES;
 
   websites: SelectedWebsite[] = [];
   hasWebsite: boolean;
@@ -257,9 +250,9 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   }
 
   generateSessionReportParams(page: number) {
-    const timezone = new Date().getTimezoneOffset();
-    const hours = -(parseInt((timezone / 60).toString()));
-    const minutes = -(timezone % 60);
+    // const timezone = new Date().getTimezoneOffset();
+    // const hours = -(parseInt((timezone / 60).toString()));
+    // const minutes = -(timezone % 60);
 
     let startDate = moment(this.selectedDateRange.start).startOf('day');
     // if (hours >= 0) {
@@ -294,6 +287,21 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
           this.totalItems = res.data.totalItems;
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
+          for (const item of this.overviewTable) {
+            if (item.trafficSource) {
+              const itemTrafficSourceId = item.trafficSource;
+              const itemOriginalTrafficSource: TrafficSourceType = _.find(this.TRAFFIC_SOURCE_TYPES, src => src.id === itemTrafficSourceId);
+
+              if (itemOriginalTrafficSource) {
+                item['trafficSourceName'] = itemOriginalTrafficSource.name;
+              } else {
+                item['trafficSourceName'] = 'other/referral';
+              }
+            } else {
+              item['trafficSourceName'] = 'other/referral';
+            }
+          }
+
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
           this.isProcessing = false;
@@ -312,8 +320,8 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
 
   generateStatisticTrafficSourceReportParams() {
     const timezone = new Date().getTimezoneOffset();
-    const hours = -(parseInt((timezone / 60).toString()));
-    const minutes = -(timezone % 60);
+    // const hours = -(parseInt((timezone / 60).toString()));
+    // const minutes = -(timezone % 60);
 
     let startDate = moment(this.selectedDateRange.start).startOf('day');
     // if (hours >= 0) {
@@ -389,30 +397,46 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
             noIDSessionCountTotal += element.sessionCount;
           });
 
-          const directNoneSrcIndex = this.TRAFFIC_SOURCE_TYPES.indexOf('other/referral');
-          if (directNoneSrcIndex >= 0 && noIDSessionCountTotal > 0) {
-            const directNoneSrc = _.find(data, src => src._id === directNoneSrcIndex + 1);
-            if (directNoneSrc) {
-              directNoneSrc.sessionCount += noIDSessionCountTotal;
-            } else {
-              const directNoneSrc = {
-                _id: directNoneSrcIndex + 1,
-                sessionCount: noIDSessionCountTotal
-              };
-              data.push(directNoneSrc);
+          const otherSource = _.find(this.TRAFFIC_SOURCE_TYPES, src => src.name === 'other/referral');
+
+          if (otherSource) {
+            const otherSourceId = otherSource.id;
+
+            if (otherSourceId >= 0 && noIDSessionCountTotal > 0) {
+              const otherSource = _.find(data, src => src._id === otherSourceId);
+
+              if (otherSource) {
+                otherSource.sessionCount += noIDSessionCountTotal;
+              } else {
+                const otherSource = {
+                  _id: otherSourceId,
+                  sessionCount: noIDSessionCountTotal
+                };
+                data.push(otherSource);
+              }
             }
           }
 
           data = data.filter(item => item._id);
-          const dataSource = data.map(item => {
+          const dataSource = [];
+
+          for (const item of data) {
             const sessionCount = item.sessionCount;
-            return {
-              name: (this.TRAFFIC_SOURCE_TYPES[item._id - 1] || 'Unknown')
-                + ': ' + this.abbreviateNumber(sessionCount) + ' phiên'
-                + ` (${_.round(sessionCount * 100 / this.sessionTotal, 2) || 0}%)`,
-              value: _.round(sessionCount * 100 / this.sessionTotal, 2) || 0
+
+            if (item._id && sessionCount > 0) {
+              const itemOriginalTrafficSource = _.find(this.TRAFFIC_SOURCE_TYPES, src => src.id === item._id);
+
+              if (itemOriginalTrafficSource) {
+                const dataSourceItem = {
+                  name: itemOriginalTrafficSource.name
+                    + ': ' + this.abbreviateNumber(sessionCount) + ' phiên'
+                    + ` (${_.round(sessionCount * 100 / this.sessionTotal, 2) || 0}%)`,
+                  value: _.round(sessionCount * 100 / this.sessionTotal, 2) || 0
+                };
+                dataSource.push(dataSourceItem);
+              }
             }
-          });
+          }
 
           this.pieChart.dataSource = _.sortBy(dataSource, 'value').reverse();
           this._fuseProgressBarService.hide();

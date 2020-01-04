@@ -23,7 +23,7 @@ import { SpamClickReportComponent } from './spam-click-report/spam-click-report.
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { ChartsModule } from 'ng2-charts';
-import { MatRadioModule, MatDatepickerModule, MatPaginatorModule, MatPaginatorIntl, MatDividerModule, MatTabsModule, MatTreeModule, MatProgressBarModule, MatMenuModule, MatExpansionModule, MatSelectModule } from '@angular/material';
+import { MatRadioModule, MatDatepickerModule, MatPaginatorModule, MatPaginatorIntl, MatDividerModule, MatTabsModule, MatTreeModule, MatProgressBarModule, MatMenuModule, MatExpansionModule, MatSelectModule, MatListModule } from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
 import { IpDetailComponent } from './ip-detail/ip-detail.component';
 import { BlockedIpListComponent } from './blocked-ip-list/blocked-ip-list.component';
@@ -32,8 +32,8 @@ import { getVietnamesePaginatorIntl } from './vietnamese-paginator-intl';
 import { IpClickingReportComponent } from './ip-clicking-report/ip-clicking-report.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AvatarModule } from 'ngx-avatar';
 
 import { IpRangesClickingReportComponent } from './ip-ranges-clicking-report/ip-ranges-clicking-report.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
@@ -63,6 +63,7 @@ import { OverviewReportComponent } from './overview-report/overview-report.compo
     MatMenuModule,
     MatExpansionModule,
     MatSelectModule,
+    MatListModule,
 
     CheckboxGroupModule,
     ReactiveFormsModule,
@@ -76,6 +77,7 @@ import { OverviewReportComponent } from './overview-report/overview-report.compo
     NgxDaterangepickerMd,
     NgxPaginationModule,
     NgxMatSelectSearchModule,
+    AvatarModule,
 
     FuseSharedModule,
 

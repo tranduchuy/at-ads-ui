@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="inner">
-    <div class="mat-elevation-z8 table-wrapper">
+    <div class="table-wrapper">
       <mat-table
         [dataSource]="dataSource | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }">
 
@@ -24,8 +24,8 @@
           <mat-header-cell *matHeaderCellDef> Tác vụ </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <button mat-icon-button color="accent" matTooltip="Nhấn để bỏ chặn" [disabled]="isProcessing"
-              style="color: #44b543" (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
-              <mat-icon>lock_open</mat-icon>
+              style="color: silver" (click)="openRemoveAutoBlockedIPConfirmDialog(element._id)">
+              <mat-icon>delete</mat-icon>
             </button>
           </mat-cell>
         </ng-container>
@@ -106,12 +106,12 @@
       </mat-table>
     </div>
 
-    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1 && !isProcessing">
+    <div class="pagination-buttons" fxLayout="row" fxLayout.xs="column" *ngIf="pageTotal !== 1">
       <p *ngIf="pageTotal > 0">Trang <span [(ngModel)]="currentPageNumber"
           ngDefaultControl>{{currentPageNumber === 0 || currentPageNumber === undefined ? 1 : currentPageNumber}}</span>
         trong tổng
         {{pageTotal}} trang</p>
-      <p *ngIf="pageTotal === 0">Chưa có ghi nhận nào.</p>
+      <p *ngIf="pageTotal === 0 && !isProcessing">Chưa có ghi nhận nào.</p>
       <pagination-controls (pageChange)="changePage($event); currentPageNumber = $event" previousLabel="Trước"
         nextLabel="Sau" fxFlex fxLayoutAlign="end start" *ngIf="pageTotal > 0"></pagination-controls>
     </div>

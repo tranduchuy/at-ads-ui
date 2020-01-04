@@ -146,9 +146,36 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
   }
 
   getDeviceReport() {
+    this._fuseProgressBarService.show();
     const sub = this._banIpsService.getDeviceReport()
       .subscribe(res => {
         this.deviceReports = res.data.reportDevice;
+        // this.deviceReports = [
+        //   {
+        //     avgPosition: null,
+        //     clicks: 326,
+        //     cost: 4343464.627782,
+        //     ctr: 0.055,
+        //     device: "Máy tính",
+        //     impressions: 5962
+        //   },
+        //   {
+        //     avgPosition: null,
+        //     clicks: 326,
+        //     cost: 4343464.627782,
+        //     ctr: 0.055,
+        //     device: "Điện thoại",
+        //     impressions: 5962
+        //   },
+        //   {
+        //     avgPosition: null,
+        //     clicks: 326,
+        //     cost: 4343464.627782,
+        //     ctr: 0.055,
+        //     device: "Máy tính bảng",
+        //     impressions: 5962
+        //   }
+        // ];
         this.getDeviceSettings();
       },
         (error: HttpErrorResponse) => {
@@ -168,14 +195,9 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
 
     const sub = this._banIpsService.setDeviceCampaignRunning({ device: deviceId, isEnabled: event.value })
       .subscribe((res: ILoginSuccess) => {
-
-        this.getDeviceSettings();
-
-        setTimeout(() => {
-          this._fuseProgressBarService.hide();
-          this.dialogService._openSuccessDialog(res);
-          this.isProcessing = false;
-        }, 0);
+        this._fuseProgressBarService.hide();
+        this.dialogService._openSuccessDialog(res);
+        this.isProcessing = false;
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();

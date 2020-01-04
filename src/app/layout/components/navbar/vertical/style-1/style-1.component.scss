@@ -111,11 +111,13 @@ navbar {
         // background-color: #d2a813;
         // background-image: linear-gradient(315deg, #d2a813 0%, #000000 74%);
         font-weight: bold;
-        padding: 8px 4px 4px 4px;
+        padding: 0 4px 0 4px;
         color: white;
-        background: green;
-        margin-left: -1px;
-        margin-top: -2px;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 25px;
       }
       .vip-label {
         background: radial-gradient(
@@ -193,8 +195,8 @@ navbar {
         align-items: center;
 
         .logo-icon {
-          width: 28px;
-          height: 28px;
+          width: 22px;
+          height: 22px;
         }
 
         .logo-text {
@@ -228,6 +230,7 @@ navbar {
 
       background: url("../../../../../../assets/images/backgrounds/Patterns-Wallpaper-1080x2280-380x802.jpg");
       background-size: 100% 100%;
+      backdrop-filter: blur(6px);
 
       .user {
         position: relative;
@@ -240,8 +243,8 @@ navbar {
         max-height: 136px;
         padding: 40px 0 64px 0;
 
-        background: url("../../../../../../assets/images/backgrounds/3d384d829dbf4b678cfea617114e149d.jpg");
-        background-size: 100% 100%;
+        background-color: #7fcec5;
+        background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
         .avatar-container {
           position: absolute;

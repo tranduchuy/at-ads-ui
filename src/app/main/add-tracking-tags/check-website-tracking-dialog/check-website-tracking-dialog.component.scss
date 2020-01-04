@@ -9,10 +9,16 @@
     }
   }
 
+  .adsId {
+    color: #40a5ec;
+    margin-left: 5px;
+  }
+
   .table-wrapper {
     max-height: 350px;
     overflow: auto;
     border: 0.5px solid #eee;
+    border-radius: 7px;
 
     mat-table {
       box-shadow: none;
@@ -35,8 +41,8 @@
       }
 
       mat-header-cell {
-        background: #40a5ec;
-        color: white;
+        background: whitesmoke;
+        color: rgba(0, 0, 0, 0.7);
         font-weight: bold;
       }
 

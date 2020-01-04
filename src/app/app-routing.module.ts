@@ -52,6 +52,11 @@ const appRoutes: Routes = [
     loadChildren: './main/reports/reports.module#ReportsModule'
   },
   {
+    path: 'cong-cu-khach-hang',
+    canActivate: [MainGuardService],
+    loadChildren: './main/visitor-tools/visitor-tools.module#VisitorToolsModule'
+  },
+  {
     path: 'yeu-cau-boi-hoan-phi',
     canActivate: [MainGuardService],
     loadChildren: './main/request-cash-back/request-cash-back.module#RequestCashBackModule'

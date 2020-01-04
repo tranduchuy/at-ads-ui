@@ -40,21 +40,21 @@
 
             <ng-container matColumnDef="id">
               <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+              <mat-cell *matCellDef="let element" [class.disabled-status]="element.status !== 'Hoạt động'"> {{element.id}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="name">
               <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+              <mat-cell *matCellDef="let element" [class.disabled-status]="element.status !== 'Hoạt động'">
+                {{element.name}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="status">
               <mat-header-cell *matHeaderCellDef> Trạng thái </mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <span *ngIf="element.status === 'Hoạt động'"
-                  style="color: #40a5ec; font-weight: bold">{{element.status}}</span>
-                <span *ngIf="element.status !== 'Hoạt động'"
-                  style="color: silver; font-weight: bold">{{element.status}}</span>
+              <mat-cell *matCellDef="let element" [class.enabled-status]="element.status === 'Hoạt động'"
+                [class.disabled-status]="element.status !== 'Hoạt động'">
+                <span *ngIf="element.status === 'Hoạt động'"><b>{{element.status}}</b></span>
+                <span *ngIf="element.status !== 'Hoạt động'"><b>{{element.status}}</b></span>
               </mat-cell>
             </ng-container>
 
