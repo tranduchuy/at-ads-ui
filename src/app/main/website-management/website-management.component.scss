@@ -31,7 +31,7 @@
   .inner {
     padding: 30px;
     margin: 30px;
-    box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     background: white;
     border-radius: 7px;
     position: relative;
@@ -97,19 +97,18 @@
 
     .website-list {
       margin-top: 30px;
-      border: 0.5px solid #d2d2d2;
+      border: 0.5px solid #eee;
       border-radius: 7px;
       background: white;
 
       .table-title {
         color: white;
-        padding: 5px 20px 5px 20px;
+        padding: 2.5px 20px 2.5px 20px;
         font-size: 14px;
         font-weight: bold;
         background: #40a5ec;
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
-        text-align: center;
 
         button {
           font-weight: normal !important;

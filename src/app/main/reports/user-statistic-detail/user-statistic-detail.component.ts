@@ -22,17 +22,14 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
   shortUuid: string;
   historyColumns: string[] = ['accessTime', 'ip', 'action', 'website', 'os', 'browser', 'isPrivateBrowsing', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   history = [];
-  lastHistory: any = {
-    createdAt: '',
-    location: {},
-    device: {}
-  };
+  lastHistory: any;
   isProcessing: boolean = false;
   currentPageNumber: number;
   totalItems: number;
   pageTotal: number;
   pageLimit: number;
   mainReportUrl: any;
+  onLoadUserInfo: boolean = true;
 
   locale: any = {
     format: 'DD/MM/YYYY',
@@ -49,6 +46,10 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     'Hôm qua': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
     '1 tuần': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
   };
+
+  detailPanelOpenState: boolean;
+  lastAccessPanelOpenState: boolean;
+  customerInfo: any;
 
   constructor(
     private _fuseProgressBarService: FuseProgressBarService,
@@ -165,23 +166,23 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
     this._fuseProgressBarService.show();
     const params = this.generateUserStatisticDetailParams(id, page);
     const sub = this._reportService.getUserStatisticDetail(params)
-      .subscribe(
-        res => {
+      .subscribe(res => {
+        this.history = (res.data.logs || []).map((l: any) => {
+          l.domain = l.domain.replace('http://', '').replace('https://', '');
+          return l;
+        });
 
-          this.history = res.data.logs.map(l => {
-            l.domain = l.domain.replace('http://', '').replace('https://', '');
-            return l;
-          });
+        this.totalItems = res.data.meta.totalItems;
+        this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
-          this.totalItems = res.data.meta.totalItems;
-          this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
+        this.customerInfo = res.data.customerInfo;
+        this.lastHistory = res.data.last;
 
-          this.lastHistory = res.data.last;
-
-          this._fuseProgressBarService.hide();
-          this._fuseSplashScreenService.hide();
-          this.isProcessing = false;
-        },
+        this._fuseProgressBarService.hide();
+        this._fuseSplashScreenService.hide();
+        this.isProcessing = false;
+        this.onLoadUserInfo = false;
+      },
         (error: HttpErrorResponse) => {
           this.history = [];
           this.lastHistory = [];
@@ -191,6 +192,7 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
           this.isProcessing = false;
+          this.onLoadUserInfo = false;
           this._dialogService._openErrorDialog(error.error);
         }
       );
@@ -222,6 +224,11 @@ export class UserStatisticDetailComponent extends PageBaseComponent implements O
       }
     });
     this.getUserStatisticDetail(this.uuid, this.currentPageNumber);
+  }
+
+  numberWithSpaces(value: string, pattern: string) {
+    let i = 0, phone = value.toString();
+    return pattern.replace(/#/g, (_: any) => phone[i++]);
   }
 }
 

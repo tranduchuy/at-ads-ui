@@ -20,7 +20,7 @@ export interface IAccountReportParams {
   website?: string;
 }
 
-export interface IGetStatisticUserReport {
+export interface IGetUserStatisticReport {
   startDate: string;
   endDate: string;
   page?: number;
@@ -131,9 +131,9 @@ export class ReportService {
     return this._http.get(url);
   }
 
-  getStatisticUserReport(params: IGetStatisticUserReport, accountId: string): Observable<any> {
+  getUserStatisticReport(params: IGetUserStatisticReport, accountId: string): Observable<any> {
 
-    let url = API.Report.getStatisticUserReport.replace('{account_id}', accountId);
+    let url = API.Report.getUserStatisticReport.replace('{account_id}', accountId);
     url = url.replace('{from}', params.startDate);
     url = url.replace('{to}', params.endDate);
 
