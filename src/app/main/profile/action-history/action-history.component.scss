@@ -3,8 +3,8 @@
   height: 90vh;
 
   .title1 {
-    padding: 45px 30px 0 45px;
-    height: 22vh;
+    padding: 60px 30px 0 60px;
+    height: 25vh;
     background-color: #7fcec5;
     background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
@@ -18,8 +18,8 @@
     border-radius: 7px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     background: white;
-    margin: 30px;
-    top: -86px;
+    margin: 40px;
+    top: -13vh;
     position: relative;
 
     .pagination-buttons {
@@ -93,7 +93,13 @@
 
 @media screen and (max-width: 600px) {
   .container {
+    .title1 {
+      text-align: center;
+      padding: 45px 20px 20vh 20px;
+      height: 15vh;
+    }
     .inner {
+      margin: 33px 15px 15px 15px;
       .table-wrapper {
         mat-table {
           mat-header-cell:nth-child(2),

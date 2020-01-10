@@ -10,8 +10,11 @@ export interface IUpdatePopupConfigParams {
   supporterMajor: string;
 }
 
-export interface IEnablePopupDisplay {
-  popupStatus: boolean;
+export interface IPopupDisplaySettings {
+  popupStatus?: boolean
+  popupPosition?: number;
+  autoShowPopupRepeatTime?: number,
+  autoShowPopup?: number,
 }
 
 @Injectable({
@@ -28,7 +31,7 @@ export class VisitorToolsService {
     return this._http.put(url, params);
   }
 
-  enablePopupDislay(params: IEnablePopupDisplay, websiteId: string): Observable<any> {
+  setPopupDislay(params: IPopupDisplaySettings, websiteId: string): Observable<any> {
     const url = API.Website.enablePopupDisplay.replace('{website_id}', websiteId);
     return this._http.put(url, params);
   }

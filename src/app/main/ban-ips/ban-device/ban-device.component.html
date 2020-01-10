@@ -3,7 +3,7 @@
     CẤU HÌNH CHẶN THEO THIẾT BỊ - TÀI KHOẢN <span class="account-id">{{sessionService.activeAdsAccountId}}</span>
   </div>
 
-  <div class="inner">
+  <div class="inner" *ngIf="!onLoadDeviceReport">
     <div class="title2">
       <p>
         Kết quả có được theo thống kê từ ngày <span class="highline">{{startDate | date: 'dd/MM/yyyy'}}</span> đến ngày

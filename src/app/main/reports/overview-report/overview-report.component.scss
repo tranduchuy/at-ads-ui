@@ -1,18 +1,63 @@
 .container {
   width: 100%;
+  height: 90vh;
 
-  .title1 {
-    padding: 35px 30px 22px 40px;
-    background: url("../../../../assets/images/backgrounds/dark-material-bg.jpg");
-    background-size: 100% 100%;
+  .main-title {
+    // padding: 55px 30px 17px 30px;
+    // padding: 7px 30px 0 30px;
+    // background-color: #000000 !important;
+    // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+    background-color: #7fcec5;
+    background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+    text-shadow: 1px 1px 2px black;
     color: white;
-    font-weight: bold;
     font-size: 16px;
-    display: none;
+    font-weight: bold;
+    background: url("../../../../assets/images/backgrounds/212-2125652_background-image-material-design2.jpg");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    padding: 45px 60px 0 60px;
+    height: 35vh;
+
+    .adsId {
+      color: yellow;
+      margin-left: 5px;
+    }
+
+    .website-selection {
+      width: 250px;
+
+      ::ng-deep .mat-select {
+        .mat-select-value {
+          color: white !important;
+          font-weight: bold;
+        }
+        .mat-select-arrow {
+          color: white !important;
+        }
+      }
+    }
+
+    .datePicker {
+      width: 250px;
+
+      input {
+        text-shadow: 1px 1px 2px black;
+        font-weight: bold;
+      }
+    }
+
+    .no-website-notify {
+      font-size: 14px;
+    }
+
+    .main-title-text {
+      padding-top: 20px;
+    }
   }
 
   ::ng-deep .ngx-charts {
-    width: 70%;
+    width: 75%;
     margin-top: -20px;
   }
 
@@ -22,223 +67,83 @@
   }
 
   .inner {
-    .highline2 {
-      .hl2-title1 {
-        // padding: 55px 30px 17px 30px;
-        // padding: 7px 30px 0 30px;
-        // background-color: #000000 !important;
-        // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-        background-color: #7fcec5;
-        background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-        text-shadow: 1px 1px 2px black;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        // color: rgba(0, 0, 0, 0.7);
-        padding: 30px 30px 0 45px;
+    margin: 40px;
+    padding: 20px;
+    padding-bottom: 0;
+    border-radius: 7px;
+    position: relative;
+    top: -20vh;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-        .adsId {
-          color: yellow;
-          margin-left: 5px;
-        }
-
-        .website-selection {
-          margin-top: 15px;
-          width: 250px;
-
-          ::ng-deep .mat-select {
-            .mat-select-value {
-              color: white !important;
-              font-weight: bold;
-            }
-            .mat-select-arrow {
-              color: white !important;
-            }
-          }
-        }
-
-        .datePicker {
-          width: 250px;
-          margin-top: 15px;
-
-          input {
-            text-shadow: 1px 1px 2px black;
-            font-weight: bold;
-          }
-        }
-
-        .no-website-notify {
-          font-size: 14px;
-        }
-      }
-
-      .hl2-title2 {
-        text-align: center;
-        padding: 40px 30px 50px 30px;
-        font-size: 12px;
-        color: #00527c;
-
-        span {
-          font-weight: bold;
-        }
-      }
-
-      .hl2-title3 {
-        
-      }
-
-      .overview-chart {
-        margin: 30px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        background: white;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        border-radius: 7px;
-
-        -webkit-animation: chartWidgetAni 0.4s ease-out;
-        @keyframes chartWidgetAni {
-          from {
-            transform: translateY(100vh);
-          }
-          to {
-            transform: translateY(0);
-          }
-        }
-
-        .session-total {
-          position: relative;
-          left: 41.2%;
-          top: -60px;
-          width: 50px;
-          transform: translate(-41.2%, -110px);
-
-          .session-number {
-            font-size: 18px;
-          }
-        }
-      }
-    }
-
-    .highline {
-      padding: 60px 30px 50px 15px;
-      background: white;
-
-      .left {
-        .visitor {
-          .visitor-title {
-            font-size: 24px;
-            text-align: center;
-          }
-
-          .visitor-number {
-            color: rgba(0, 0, 0, 0.7);
-            font-size: 70px;
-            font-weight: bold;
-            text-align: center;
-          }
-
-          .visitor-number-note {
-            text-align: center;
-          }
-
-          .device-chart {
-            padding-top: 40px;
-
-            .chart-legend {
-              padding: 20px;
-              padding-bottom: 0;
-
-              .chart-label {
-                height: 12px;
-                width: 12px;
-                display: inline-block;
-                margin-right: 10px;
-                border-radius: 2px;
-              }
-            }
-          }
-        }
-      }
-
-      :host ::ng-deep .ngx-charts-bar-horizontal-stacked {
-        display: table;
-        margin: 0 auto;
-      }
-
-      .right {
-        width: 100%;
-
-        .right-table-title {
-          color: #40a5ec;
-          font-weight: bold;
-          font-size: 16px;
-        }
-
-        .right-table {
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-          margin-top: 12px;
-          overflow: auto;
-
-          mat-table {
-            box-shadow: none;
-            width: 100%;
-
-            mat-header-cell:nth-child(1),
-            mat-cell:nth-child(1) {
-              flex: 0 0 10%;
-            }
-
-            mat-header-cell:nth-child(3),
-            mat-cell:nth-child(3) {
-              flex: 0 0 10%;
-              justify-content: left;
-
-              .user-percentage {
-                color: #40a5ec;
-              }
-            }
-
-            mat-header-cell:nth-child(4),
-            mat-cell:nth-child(4) {
-              flex: 0 0 5%;
-              justify-content: center;
-
-              .user-percentage {
-                color: #40a5ec;
-              }
-            }
-
-            mat-header-cell {
-              background: #40a5ec;
-              color: white;
-            }
-
-            mat-row {
-              transition: 0.2s;
-
-              &:hover {
-                background: rgba(3, 155, 229, 0.05);
-              }
-            }
-
-            mat-header-row,
-            mat-row {
-              min-width: 600px;
-              width: 100%;
-            }
-          }
-        }
-      }
-    }
-
-    .overview {
-      border-radius: 7px;
-      margin: 30px;
-      margin-top: 20px;
+    .notification {
+      background: #c4e9c3;
+      color: darkgreen;
+      padding: 15px;
+      border-left: 4px solid darkgreen;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      position: relative;
+      top: -7vh;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-      //height: 95vh;
-      background: white;
 
+      -webkit-animation: notificationAni 0.4s ease-out;
+      @keyframes notificationAni {
+        from {
+          transform: translateY(3vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .highline {
+        font-weight: bold;
+        color: darkgreen;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
+
+    .overview-chart {
+      position: relative;
+      top: -5vh;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 40px 20px 0 20px;
+      border-radius: 7px;
+      border: 1px solid #dcdcdc;
+      -webkit-animation: chartWidgetAni 0.4s ease-out;
+      @keyframes chartWidgetAni {
+        from {
+          transform: translateY(100vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .session-total {
+        position: relative;
+        left: 41.2%;
+        top: -60px;
+        width: 50px;
+        transform: translate(-41.2%, -110px);
+
+        .session-number {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .overview-report {
+      position: relative;
+      top: -5vh;
+      border-radius: 7px;
+      border: 1px solid #dcdcdc;
       -webkit-animation: overviewTableAni 0.6s ease-out;
       @keyframes overviewTableAni {
         from {
@@ -249,12 +154,8 @@
         }
       }
 
-      .overview-main {
-        border-radius: 7px;
-        padding: 0;
-        background: white;
-
-        .overview-title1 {
+      .overview-report-content {
+        .overview-report-title {
           padding: 15px;
           background: white;
           font-size: 14px;
@@ -292,8 +193,10 @@
           }
         }
 
-        .overview-table {
+        .overview-report-table {
           overflow: auto;
+          border-bottom-left-radius: 7px;
+          border-bottom-right-radius: 7px;
 
           mat-table {
             box-shadow: none;
@@ -419,49 +322,28 @@
       margin: 10px;
       margin-left: 151%;
     }
-    .inner {
-      .highline2 {
-        .hl2-title1 {
-          padding: 30px;
-          padding-bottom: 0;
-          .website-selection {
-            margin-top: 10px;
-          }
-          .datePicker {
-            margin-top: -5px;
-          }
-        }
 
-        .hl2-title2 {
-          padding-bottom: 30px;
-        }
+    .main-title {
+      padding: 30px 20px 25vh 20px;
+      height: 60vh;
+      text-align: center;
 
-        .overview-chart {
-          margin: 15px;
-          min-height: 700px;
-
-          .session-total {
-            left: 50%;
-            top: -45%;
-          }
-        }
+      .website-selection {
+        margin-top: 10px;
+        width: 100%;
       }
+      .datePicker {
+        margin-top: -10px;
+        width: 100%;
+      }
+    }
 
-      .overview {
-        margin: 15px;
-        //height: 123vh;
-        .overview-main {
-          // padding-left: 10px;
-          // padding-right: 10px;
-          .overview-title1 {
-            text-align: center;
-          }
+    .inner {
+      margin: 15px;
+      padding: 15px;
 
-          .pagination-buttons {
-            .item-per-page-options {
-              width: 50%;
-            }
-          }
+      .overview-report {
+        .overview-report-content {
         }
       }
     }

@@ -5,9 +5,9 @@
 
 			<form [formGroup]="form" novalidate class="form" (ngSubmit)="submitForm()">
 
-				<div class="title1 text-center">
+				<!-- <div class="title1 text-center">
 					CẬP NHẬT THÔNG TIN
-				</div>
+				</div> -->
 
 				<div class="user-info">
 
@@ -30,7 +30,7 @@
 								[icon]="'person_outline'" [errors]="getMessageErrors('name')" [(ngModel)]="userInfo.name">
 							</app-input-text>
 
-							<div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.xs="0" fxLayout.xs="column">
+							<div fxLayout="row" fxLayoutGap="10px" fxLayoutGap.xs="0" fxLayout.xs="column">
 								<app-input-text [formControlName]="'email'" [title]="'Email'" [pristine]="true" [icon]="'mail'"
 									[(ngModel)]="userInfo.email" [readonly]="true"></app-input-text>
 
@@ -44,7 +44,7 @@
 
 				</div>
 
-				<div class="change-password">
+				<!-- <div class="change-password">
 					<p class="title2">CẬP NHẬT MẬT KHẨU</p>
 					<mat-divider></mat-divider>
 
@@ -60,12 +60,12 @@
 						[type]="'password'" [icon]="'vpn_key'" [errors]="getMessageErrors('confirmedPassword')">
 					</app-input-text>
 
-				</div>
+				</div> -->
 
 				<p class="text-center">
 					<button mat-raised-button color="accent" class="submit-button" aria-label="Cập nhật" [disabled]="isProcessing"
 						type="submit">
-						<mat-icon style="font-size: 20px">sync</mat-icon>CẬP NHẬT
+						<mat-icon>sync</mat-icon>CẬP NHẬT
 					</button>
 				</p>
 

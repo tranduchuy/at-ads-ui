@@ -1,168 +1,79 @@
 <div class="container">
 
-  <div class="title1"></div>
+  <div class="main-title" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start"
+    fxLayoutAlign.xs="center start" fxLayoutGap="50px" fxLayoutGap.xs="10px">
+    <div class="main-title-text" fxFlex="55">
+      THỐNG KÊ LƯU LƯỢNG TRUY CẬP WEBSITE - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
+    </div>
+
+    <div class="no-website-notify" *ngIf="hasWebsite === false">
+      Không tìm thấy website nào.
+    </div>
+
+    <mat-form-field class="website-selection" *ngIf="hasWebsite === true">
+      <mat-label style="color: white; font-weight: bold">Thống kê theo</mat-label>
+      <mat-select [formControl]="websiteCtrl" #singleSelect (selectionChange)="selectWebsite()"
+        [disabled]="isProcessing === true">
+        <mat-option>
+          <ngx-mat-select-search [formControl]="websiteFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
+            [noEntriesFoundLabel]="'Không tìm thấy website nào'"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let website of filteredWebsites | async" [value]="website">
+          {{website.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="datePicker">
+      <mat-label style="color: white; font-weight: bold">Khoảng thời gian thống kê</mat-label>
+      <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
+        startKey="start" endKey="end" [material]="true" [ranges]="ranges" (datesUpdated)="onSelectDateRange($event)"
+        (change)="onApplyDateRange()" ngDefaultControl [disabled]="isProcessing === true" />
+    </mat-form-field>
+  </div>
 
   <div class="inner">
 
-    <!-- <div class="highline" fxLayout="row" fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="20px">
-
-      <div class="left" fxFlex="26">
-
-        <div class="visitor">
-
-          <div class="visitor-title">Ngay bây giờ</div>
-
-          <div class="visitor-number">9</div>
-
-          <div class="visitor-number-note">người dùng đang hoạt động trên trang web</div>
-
-          <div class="device-chart">
-
-            <div class="chart-legend">
-              <div style="background:#F44336" class="chart-label"></div><span>Máy tính</span>
-              <br>
-              <div style="background:green" class="chart-label"></div><span>Điện thoại</span>
-              <br>
-              <div style="background:#0093e5" class="chart-label"></div><span>Máy tính bảng</span>
-            </div>
-
-            <ngx-charts-bar-horizontal-stacked [view]="view" [scheme]="colorScheme" [results]="multi"
-              [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
-              [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel" style="max-width: 100%">
-
-              <ng-template #tooltipTemplate let-model="model">
-                <pre>{{model.value}}%</pre>
-              </ng-template>
-
-            </ngx-charts-bar-horizontal-stacked>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="right">
-        <div class="right-table-title">
-          Trang hoạt động hàng đầu
-        </div>
-
-        <div class="right-table">
-
-          <mat-table [dataSource]="highlinePages" class="mat-elevation-z8">
-
-            <ng-container matColumnDef="order">
-              <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-              <mat-cell *matCellDef="let element; let i = index"> {{i+1}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="activePage">
-              <mat-header-cell *matHeaderCellDef> Trang hoạt động </mat-header-cell>
-              <mat-cell *matCellDef="let element"> <a href="{{element.activePage}}">{{element.activePage}}</a>
-              </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="userOnAction">
-              <mat-header-cell *matHeaderCellDef> Người dùng đang hoạt động <mat-icon
-                  style="font-size: 18px; margin-left: 5px">arrow_downward</mat-icon>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let element" fxLayout="row">
-                <div class="user-number" fxFlex="30">
-                  {{element.userOnAction.number}}
-                </div>
-                <div class="user-percentage">
-                  {{element.userOnAction.percentage}}%
-                </div>
-              </mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="highlinePagesCols"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: highlinePagesCols;"></mat-row>
-
-          </mat-table>
-
-        </div>
-
-      </div>
-
-    </div> -->
-
-    <div class="highline2">
-      <div class="hl2-title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center"
-        fxLayoutAlign.xs="center start" fxLayoutGap="50px" fxLayoutGap.xs="10px">
-        <div class="hl2-title3" fxFlex="55">
-          THỐNG KÊ LƯU LƯỢNG TRUY CẬP WEBSITE - TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
-        </div>
-
-        <div class="no-website-notify" *ngIf="hasWebsite === false">
-          Không tìm thấy website nào.
-        </div>
-
-        <mat-form-field class="website-selection" *ngIf="hasWebsite === true">
-          <mat-label style="color: white; font-weight: bold">Thống kê theo</mat-label>
-          <mat-select [formControl]="websiteCtrl" #singleSelect (selectionChange)="selectWebsite()"
-            [disabled]="isProcessing === true">
-            <mat-option>
-              <ngx-mat-select-search [formControl]="websiteFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
-                [noEntriesFoundLabel]="'Không tìm thấy website nào'"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let website of filteredWebsites | async" [value]="website">
-              {{website.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="datePicker">
-          <mat-label style="color: white; font-weight: bold">Khoảng thời gian thống kê</mat-label>
-          <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
-            startKey="start" endKey="end" [material]="true" [ranges]="ranges" (datesUpdated)="onSelectDateRange($event)"
-            (change)="onApplyDateRange()" ngDefaultControl [disabled]="isProcessing === true" />
-        </mat-form-field>
-      </div>
-
-      <div class="overview-chart">
-        <div class="hl2-title2">
-          Bạn có thể tiết kiệm trong <span [(ngModel)]="selectedDateRange"
-            ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span>
-          từ <span [(ngModel)]="selectedDateRange"
-            ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến
-          ngày <span [(ngModel)]="selectedDateRange"
-            ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
-          hạn chế <span>click ảo</span>.
-        </div>
-
-        <div class="h-300 hl2-pie-chart">
-
-          <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
-            [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
-            [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient"
-            [labelFormatting]="pieChart.setLabelFormatting" [legend]="pieChart.legend" [legendTitle]="''">
-
-            <ng-template #tooltipTemplate let-model="model">
-              <p style="color: #fff; text-align: left">
-                {{model.name}}
-              </p>
-            </ng-template>
-
-          </ngx-charts-pie-chart>
-
-          <div style="text-align: center" class="session-total" *ngIf="sessionTotal">
-            <span class="session-number">{{abbreviateNumber(sessionTotal)}}</span>
-            <br><span style="color: gray">phiên</span>
-          </div>
-
-        </div>
-      </div>
-
+    <div class="notification">
+      Bạn có thể tiết kiệm trong <span [(ngModel)]="selectedDateRange" class="highline"
+        ngDefaultControl>{{selectedDateRange.end.diff(selectedDateRange.start, 'days') + 1}} ngày</span> từ <span
+        class="highline" [(ngModel)]="selectedDateRange"
+        ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> đến ngày <span class="highline"
+        [(ngModel)]="selectedDateRange" ngDefaultControl>{{selectedDateRange.end | date: 'dd/MM/yyyy'}}</span> bằng việc
+      hạn chế click ảo.
     </div>
 
-    <div class="overview">
-      <div class="overview-main">
-        <div class="overview-title1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+    <div class="overview-chart">
+
+      <div class="h-300 pie-chart">
+
+        <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
+          [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
+          [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" [labelFormatting]="pieChart.setLabelFormatting"
+          [legend]="pieChart.legend" [legendTitle]="''">
+
+          <ng-template #tooltipTemplate let-model="model">
+            <p style="color: #fff; text-align: left">
+              {{model.name}}
+            </p>
+          </ng-template>
+
+        </ngx-charts-pie-chart>
+
+        <div style="text-align: center" class="session-total" *ngIf="sessionTotal">
+          <span class="session-number">{{abbreviateNumber(sessionTotal)}}</span>
+          <br><span style="color: gray">phiên</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="overview-report">
+      <div class="overview-report-content">
+        <div class="overview-report-title" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
           Báo cáo tổng thể truy cập
         </div>
-        <div class="overview-table">
+        <div class="overview-report-table">
 
           <mat-table
             [dataSource]="overviewTable | paginate: { itemsPerPage: pageLimit, currentPage: currentPageNumber, totalItems: totalItems }"

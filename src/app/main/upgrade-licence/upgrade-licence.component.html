@@ -2,10 +2,10 @@
 
   <div class="main-title" fxLayout="column" fxLayoutAlign="center center">
     <div class="main-title-inner">
-      <!-- <span class="shiny">
+      <span class="shiny">
         <span class="inner-shiny">Nâng cấp tài khoản</span>
-      </span> -->
-      <span class="title">NÂNG CẤP TÀI KHOẢN</span>
+      </span>
+      <!-- <span class="title">NÂNG CẤP TÀI KHOẢN</span> -->
       <p class="notice">
         Hãy nâng cấp tài khoản của bạn để trải nghiệm những tính năng tuyệt vời nhất!
       </p>
@@ -14,7 +14,7 @@
 
   <div class="package-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
     <div class="package free-package">
-      <span class="label-base free-label">CƠ BẢN</span>
+      <span class="label-base free-label">DÙNG THỬ</span>
       <p class="package-price">
         Miễn phí
       </p>
@@ -47,6 +47,7 @@
       </div>
     </div>
     <div class="package vip-package">
+      <span class="recommended">Khuyên dùng</span>
       <span class="label-base vip-label">TỐI ƯU</span>
       <p class="package-price">
         500.000 VNĐ/Tháng
@@ -91,7 +92,7 @@
         </ul>
       </div>
       <div class="register-package-button" (click)="openUpgradeLicenceDialog('VIP1', 'Tối ưu')"
-        [class.no-display]="isRegisterButtonNotDisplayed">
+        *ngIf="isRegisterButtonNotDisplayed">
         <button mat-raised-button color="accent">Đăng ký ngay</button>
       </div>
     </div>
@@ -142,6 +143,9 @@
             Có 1 nhân viên hỗ trợ riêng
           </li>
         </ul>
+      </div>
+      <div class="contact-button" *ngIf="isRegisterButtonNotDisplayed">
+        <button mat-raised-button color="accent" (click)="openContactInfoDialog()">Liên hệ ngay</button>
       </div>
     </div>
   </div>

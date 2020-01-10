@@ -19,7 +19,7 @@
         <input class="key" type="text" #inputKey
           value='&lt;script type="text/javascript" src="{{hostTracking}}?key={{key}}"&gt;&lt;/script&gt;' readonly>
         <button mat-icon-button (click)="copyKey(inputKey.value)" class="copy-button" matTooltip="Nhấn vào để copy">
-          <mat-icon style="font-size: 20px">file_copy</mat-icon>
+          <mat-icon style="font-size: 16px">file_copy</mat-icon>
         </button>
       </div>
       <p style="padding-top: 10px; line-height: 30px">
@@ -29,7 +29,7 @@
       <div style="padding-top: 10px">
         <span class="step">
           <span class="bold-text">Bước 3:</span> Kiểm tra các website đã được gắn mã
-          <u><a (click)="checkWebsiteTracking()" style="cursor: pointer;">tại đây</a></u>
+          <a (click)="checkWebsiteTracking()" style="cursor: pointer;">tại đây</a>
         </span>
       </div>
     </div>
