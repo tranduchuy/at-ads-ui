@@ -20,8 +20,10 @@
 
     .shiny {
       //color: #f5c21b;
-      color: lightgreen;
-      background: -webkit-gradient(linear, left top, left bottom, from(lightgreen), to(#d17000));
+      // color: lightgreen;
+      // background: -webkit-gradient(linear, left top, left bottom, from(lightgreen), to(#d17000));
+      color: lightyellow;
+      background: -webkit-gradient(linear, left top, left bottom, from(lightyellow), to(#039be5));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
@@ -544,7 +546,7 @@
             }
           }
           .step {
-            height: 220px;
+            height: 200px;
             color: white;
             //border-radius: 5px;
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -563,11 +565,12 @@
 
               .step-description {
                 background: rgba(0, 0, 0, 0.6);
-                padding: 20px 15px 5px 15px;
+                padding: 10px 15px 1px 15px;
                 text-align: justify;
                 font-size: 11px;
                 position: relative;
-                top: 57%;
+                top: 60%;
+                // border-bottom: 4px solid #039be5;
 
                 .step-name {
                   font-size: 13px;
@@ -648,6 +651,7 @@
             margin: 0 auto;
             //display: none;
             margin-top: 75px;
+            filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
           }
 
           .trial {
@@ -740,18 +744,18 @@
 
       background-attachment: fixed;
       .benefit {
-        background: rgba(7, 87, 115, 0.4);
+        background: rgba(0, 0, 0, 0.6);
         // backdrop-filter: blur(4px);
         text-align: center;
-        padding: 90px 250px 90px 250px;
+        padding: 120px 250px 120px 250px;
         color: white;
-        filter: drop-shadow(0.8px 1px 1px black);
+
         //background: rgba(125, 125, 125, 0.2);
         //background: rgba(3, 155, 229, 0.2);
         //background: url("../../assets/images/backgrounds/QL5I0O.jpg");
 
+        //filter: drop-shadow(0.8px 0.8px 0.8px black);
         .benefit-title {
-          //filter: drop-shadow(0.8px 0.8px 0.8px black);
           font-size: 20px;
           -webkit-animation: ani 1.4s ease-in;
           @keyframes ani {
@@ -760,8 +764,8 @@
               transform: translateY(10vh);
             }
             to {
-              opacity: 1;
               transform: translateY(0);
+              opacity: 1;
             }
           }
         }
@@ -820,6 +824,11 @@
             //   }
             // }
           }
+
+          svg {
+            font-size: 60px;
+            color: lightblue;
+          }
         }
 
         .benefit-description {
@@ -836,12 +845,8 @@
   .footer {
     padding: 100px 250px 30px 250px;
     //background: rgba(0, 0, 0, 0.6);
-    // background: rgba(12, 20, 33, 1);
-    // background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    // background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    // background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-
-    background: rgba(0, 0, 0, 0.5);
+    background: #006486;
+    // background: rgba(0, 0, 0, 0.5);
 
     color: #eee;
     text-align: justify;
@@ -891,7 +896,7 @@
     //background-color: rgba(0, 0, 0, 0.3);
     //filter: drop-shadow(0px 1px 4px black);
     .footer-contact {
-      background: #012234;
+      background: #093c50;
       color: white;
       padding: 15px;
       text-align: center;
@@ -948,7 +953,6 @@
       //background: #20222a;
 
       //filter: drop-shadow(0px 1px 4px black);
-      text-shadow: 1px 1px 4px black;
       font-weight: bold;
       position: absolute;
       z-index: 200;
@@ -1200,8 +1204,6 @@
       .benefit-container {
         // background-color: #7fcec5;
         // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-        background: url("../../assets/images/backgrounds/gg-material_1.png") !important;
-        background-size: 100% 100%;
 
         .benefit {
           padding: 30px;
@@ -1216,9 +1218,14 @@
           }
 
           .benefit-symbol {
+            padding-top: 10px;
             img {
               width: 70px;
               height: 70px;
+            }
+
+            svg {
+              font-size: 50px;
             }
           }
         }

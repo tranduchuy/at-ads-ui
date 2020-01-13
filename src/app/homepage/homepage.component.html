@@ -133,11 +133,15 @@
                   <mat-cell *matCellDef="let element">
 
                      <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge" style="color: #0066d7"></i>
-                     <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser" style="color: orange"></i>
-                     <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome" style="color: lightgreen"></i>
+                     <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"
+                        style="color: orange"></i>
+                     <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
+                        class="fab fa-chrome" style="color: lightgreen"></i>
                      <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome" style="color: skyblue"></i>
-                     <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'" class="fab fa-safari" style="color: #00baee"></i>
-                     <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer" style="color: #00baee"></i>
+                     <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
+                        class="fab fa-safari" style="color: #00baee"></i>
+                     <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"
+                        style="color: #00baee"></i>
                      <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome" style="color: lightgreen"></i>
                      <i *ngIf="element.browser?.name === 'Opera'" class="fab fa-opera" style="color: red"></i>
 
@@ -438,7 +442,7 @@
       </div>
 
       <div class="benefit-container" *ngIf="isBenefitDisplayed"
-         [lazyLoad]="'../../assets/images/backgrounds/Analytics-digital-analytics-HD-1980x990.jpg'">
+         [lazyLoad]="'https://www.marketreportgazette.com/images/Automotive-Data-Analytics-Market.png'">
          <div class="benefit">
 
             <div class="benefit-title">
@@ -455,7 +459,7 @@
             <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="40px">
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/save-money.svg" alt="">
+                     <i class="fas fa-hand-holding-usd"></i>
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
@@ -468,7 +472,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/timer.svg" alt="">
+                     <i class="fas fa-history"></i>
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward
@@ -480,7 +484,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/customer.png">
+                     <i class="fas fa-user-plus"></i>
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward
