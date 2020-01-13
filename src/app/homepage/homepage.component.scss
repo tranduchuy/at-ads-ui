@@ -470,7 +470,7 @@
 
           mat-header-cell:nth-child(1),
           mat-cell:nth-child(1) {
-            flex: 0 0 11%;
+            flex: 0 0 12%;
           }
 
           mat-header-cell:nth-child(8),
@@ -502,7 +502,7 @@
 
           mat-header-row,
           mat-row {
-            min-width: 900px;
+            min-width: 1000px;
             width: 100%;
           }
         }
@@ -843,7 +843,7 @@
 
     background: rgba(0, 0, 0, 0.5);
 
-    color: silver;
+    color: #eee;
     text-align: justify;
     font-size: 12px;
 
@@ -1019,15 +1019,14 @@
 @media screen and (max-width: 600px) {
   .homepage {
     font-size: 14px;
-    background: none;
-    background-color: #05e8ba;
-    background-image: linear-gradient(315deg, #05e8ba 0%, #087ee1 74%);
-
+    background-color: #ffffb5;
+    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
     //background: rgba(56, 166, 221, 0.6);
 
     .topbar-container {
       .topbar {
         padding: 10px;
+        padding-top: 20px;
 
         .topbar-access-system-button {
           font-size: 12.5px;
@@ -1055,9 +1054,6 @@
       .banner-container {
         // background: url("../../assets/images/backgrounds/bg2.jpeg");
         // background-size: 100% 100%;
-        background: none;
-        background-color: #ffffb5;
-        background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
 
         .banner {
           padding-left: 30px;
@@ -1204,6 +1200,8 @@
       .benefit-container {
         // background-color: #7fcec5;
         // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+        background: url("../../assets/images/backgrounds/gg-material_1.png") !important;
+        background-size: 100% 100%;
 
         .benefit {
           padding: 30px;
