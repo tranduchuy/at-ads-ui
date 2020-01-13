@@ -5,7 +5,7 @@
   // background-color: #7fcec5;
   // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
-  background: url("../../assets/images/backgrounds/Division.png");
+  background: url("../../assets/images/backgrounds/simple2.png");
   background-size: 100% 100%;
   background-attachment: fixed;
 
@@ -352,7 +352,7 @@
       padding: 250px;
       padding-top: 50px;
       padding-bottom: 50px;
-      background: rgba(7, 87, 115, 0.5);
+      background: rgba(255, 255, 255, 0.1);
 
       .table-title {
         padding: 20px;
@@ -489,8 +489,15 @@
           }
 
           mat-cell:nth-child(2) {
-            color: skyblue;
+            color: lightblue;
             font-weight: bold;
+          }
+
+          mat-cell {
+            svg {
+              font-size: 12px;
+              margin-right: 7px;
+            }
           }
 
           mat-header-row,
@@ -505,7 +512,7 @@
     .instruction-container {
       .instruction {
         padding: 15px 250px 45px 250px;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(7, 87, 115, 0.4);
 
         .steps-main-title {
           font-size: 20px;
@@ -829,10 +836,13 @@
   .footer {
     padding: 100px 250px 30px 250px;
     //background: rgba(0, 0, 0, 0.6);
-    background: rgba(12, 20, 33, 1);
-    background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    // background: rgba(12, 20, 33, 1);
+    // background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    // background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+    // background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+
+    background: rgba(0, 0, 0, 0.5);
+
     color: silver;
     text-align: justify;
     font-size: 12px;
@@ -1191,6 +1201,7 @@
         background-image: none !important;
         .benefit {
           padding: 30px;
+          padding-top: 60px;
           .main-benefit {
             padding-top: 10px;
             padding-bottom: 10px;

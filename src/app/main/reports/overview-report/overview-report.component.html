@@ -45,12 +45,12 @@
 
     <div class="overview-chart">
 
-      <div class="h-300 pie-chart">
+      <div class="pie-chart">
 
         <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
           [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
           [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" [labelFormatting]="pieChart.setLabelFormatting"
-          [legend]="pieChart.legend" [legendTitle]="''">
+          [legend]="true" [legendTitle]="''" (window:resize)="onResizeWindow($event)" [view]="view">
 
           <ng-template #tooltipTemplate let-model="model">
             <p style="color: #fff; text-align: left">
@@ -60,9 +60,9 @@
 
         </ngx-charts-pie-chart>
 
-        <div style="text-align: center" class="session-total" *ngIf="sessionTotal">
+        <div class="session-total" *ngIf="sessionTotal">
           <span class="session-number">{{abbreviateNumber(sessionTotal)}}</span>
-          <br><span style="color: gray">phiên</span>
+          <br><span class="session-label">phiên</span>
         </div>
 
       </div>

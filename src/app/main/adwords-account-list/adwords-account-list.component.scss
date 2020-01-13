@@ -28,7 +28,7 @@
       max-height: 40px;
       max-width: 250px;
       color: white;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.2);
       box-shadow: none;
     }
   }
@@ -62,7 +62,6 @@
     }
 
     .warning {
-      margin: 30px;
       padding: 20px;
       background: lightyellow;
       border-left: 4px solid darkorange;
@@ -75,6 +74,7 @@
       width: 60%;
       display: table;
       margin: 0 auto;
+      margin-top: 30px;
       text-align: center;
 
       mat-icon {
@@ -353,8 +353,8 @@
 @media screen and (max-width: 600px) {
   .container {
     .title1 {
-      padding: 45px 20px 20vh 20px;
-      height: 35vh;
+      padding: 30px 20px 20vh 20px;
+      height: 40vh;
     }
     .title1,
     .title2 {
