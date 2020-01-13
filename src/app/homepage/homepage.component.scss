@@ -502,7 +502,7 @@
 
           mat-header-row,
           mat-row {
-            min-width: 800px;
+            min-width: 900px;
             width: 100%;
           }
         }
@@ -1019,6 +1019,9 @@
 @media screen and (max-width: 600px) {
   .homepage {
     font-size: 14px;
+    background: none;
+    background-color: #05e8ba;
+    background-image: linear-gradient(315deg, #05e8ba 0%, #087ee1 74%);
 
     //background: rgba(56, 166, 221, 0.6);
 
@@ -1052,6 +1055,9 @@
       .banner-container {
         // background: url("../../assets/images/backgrounds/bg2.jpeg");
         // background-size: 100% 100%;
+        background: none;
+        background-color: #ffffb5;
+        background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
 
         .banner {
           padding-left: 30px;
@@ -1198,7 +1204,7 @@
       .benefit-container {
         // background-color: #7fcec5;
         // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-        background-image: none !important;
+
         .benefit {
           padding: 30px;
           padding-top: 60px;
