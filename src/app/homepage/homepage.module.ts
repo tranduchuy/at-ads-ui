@@ -7,6 +7,7 @@ import { HomepageComponent } from './homepage.component';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { AuthGuardService } from 'app/shared/services/guard/auth-guard.service';
 import { LazyLoadImageModule, intersectionObserverPreset } from 'ng-lazyload-image';
+import { FontAwesomeModule } from 'ngx-icons';
 
 const routes = [
   {
@@ -35,6 +36,8 @@ const routes = [
     MatIconModule,
     MatTooltipModule,
     ScrollEventModule,
+
+    FontAwesomeModule,
 
     FuseSharedModule
   ]

@@ -7,7 +7,7 @@
   .inner-container {
     //background: rgba(0, 0, 0, 0.3);
     .inner {
-      padding: 50px 30px 30px 30px;
+      padding: 60px 30px 30px 30px;
 
       .form {
         width: 70%;
@@ -15,7 +15,8 @@
         margin: 0 auto;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
         background-color: white;
-        padding: 40px 50px 20px 50px;
+        padding: 80px 50px 20px 50px;
+        border-radius: 7px;
 
         -webkit-animation: formAnimation 0.4s ease-out;
 
@@ -43,7 +44,8 @@
           padding: 20px;
           padding-top: 10px;
           border-radius: 5px;
-          box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+          //box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          border: 1px solid #eee;
           background-color: white;
 
           .avatar {
@@ -52,8 +54,8 @@
 
             img {
               border-radius: 50%;
-              height: 122px;
-              width: 122px;
+              height: 100px;
+              width: 100px;
               display: table;
               margin: 0 auto;
             }
@@ -73,7 +75,7 @@
           padding: 20px;
           background: white;
           border-radius: 5px;
-          box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           margin-top: 20px;
         }
 
@@ -81,6 +83,10 @@
           margin-top: 20px;
           background-color: #44b453;
           color: white;
+
+          mat-icon {
+            font-size: 18px;
+          }
         }
       }
     }
@@ -92,7 +98,6 @@
     .inner-container {
       .inner {
         padding: 15px;
-        padding-top: 80px;
 
         .form {
           width: 100%;

@@ -23,6 +23,7 @@
     .datePicker {
       color: #40a5ec;
       margin-top: 10px;
+      width: 250px;
 
       input {
         color: white;
@@ -77,14 +78,9 @@
         background-color: white;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-        .right {
-          height: 500px;
-          overflow: auto;
-          border-radius: 7px;
-        }
+        -webkit-animation: rightDetailAni 0.6s ease-out;
 
-        -webkit-animation: tableAni 0.6s ease-out;
-        @keyframes tableAni {
+        @keyframes rightDetailAni {
           from {
             transform: translateY(100vh);
           }
@@ -93,137 +89,143 @@
           }
         }
 
-        .user-action-icon {
-          margin-right: 10px;
-          font-size: 20px;
-          margin-top: 5px;
-        }
-
-        .blocked-ip {
-          //background: rgba(217, 83, 79, 0.1);
-        }
-
-        .visitor-ip {
-          //background: rgba(0, 128, 0, 0.1);
-        }
-
-        .ads-click-ip {
-          //background: rgba(255, 165, 0, 0.1);
-        }
-
-        mat-table {
-          box-shadow: none;
+        .right {
+          height: 520px;
+          overflow: auto;
           border-radius: 7px;
 
-          .ip-detail-link {
-            font-weight: bold;
-            padding-left: 2px;
-            transition: 0.2s;
-            font-size: 11px;
+          .user-action-icon {
+            margin-right: 10px;
+            font-size: 20px;
+            margin-top: 5px;
+          }
 
-            &:hover {
-              background: rgba(3, 155, 229, 0.05);
+          .blocked-ip {
+            //background: rgba(217, 83, 79, 0.1);
+          }
+
+          .visitor-ip {
+            //background: rgba(0, 128, 0, 0.1);
+          }
+
+          .ads-click-ip {
+            //background: rgba(255, 165, 0, 0.1);
+          }
+
+          mat-table {
+            box-shadow: none;
+            border-radius: 7px;
+
+            .icon {
+              height: 14px;
+              width: 14px;
+              margin-right: 3px;
             }
-          }
 
-          mat-header-cell:nth-child(1),
-          mat-cell:nth-child(1) {
-            flex: 0 0 12%;
+            .ip-detail-link {
+              font-weight: bold;
+              padding-left: 2px;
+              transition: 0.2s;
+              font-size: 11px;
 
-            mat-icon {
-              margin-top: 10px;
+              &:hover {
+                background: rgba(3, 155, 229, 0.05);
+              }
             }
-          }
 
-          mat-header-cell:nth-child(4),
-          mat-cell:nth-child(4) {
-            flex: 0 0 11%;
-            a {
-              width: 130px;
-              display: block;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              overflow: hidden;
+            mat-header-cell:nth-child(1),
+            mat-cell:nth-child(1) {
+              flex: 0 0 12%;
+
+              mat-icon {
+                margin-top: 10px;
+              }
             }
-          }
 
-          mat-header-cell:nth-child(7),
-          mat-cell:nth-child(7),
-          mat-header-cell:nth-child(10),
-          mat-cell:nth-child(10) {
-            justify-content: center;
-          }
+            mat-header-cell:nth-child(4),
+            mat-cell:nth-child(4) {
+              flex: 0 0 11%;
+              a {
+                width: 130px;
+                display: block;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+            }
 
-          mat-header-cell:nth-child(11),
-          mat-cell:nth-child(11),
-          mat-header-cell:nth-child(12),
-          mat-cell:nth-child(12),
-          mat-header-cell:nth-child(13),
-          mat-cell:nth-child(13) {
-            flex: 0 0 6%;
-            justify-content: center;
-          }
+            mat-header-cell:nth-child(7),
+            mat-cell:nth-child(7),
+            mat-header-cell:nth-child(10),
+            mat-cell:nth-child(10) {
+              justify-content: center;
+            }
 
-          mat-row {
-            transition: 0.2s;
+            mat-header-cell:nth-child(11),
+            mat-cell:nth-child(11),
+            mat-header-cell:nth-child(12),
+            mat-cell:nth-child(12),
+            mat-header-cell:nth-child(13),
+            mat-cell:nth-child(13) {
+              flex: 0 0 6%;
+              justify-content: center;
+            }
 
-            &:nth-child(odd) {
+            mat-row {
+              transition: 0.2s;
+
+              &:nth-child(odd) {
+                background: whitesmoke;
+              }
+
+              &:hover {
+                background-color: rgba(3, 155, 229, 0.05);
+                //font-weight: bold;
+              }
+
+              -webkit-animation: rowAppearance 0.4s linear;
+              @keyframes rowAppearance {
+                from {
+                  opacity: 0;
+                }
+                to {
+                  opacity: 1;
+                }
+              }
+            }
+
+            mat-header-cell {
               background: whitesmoke;
+              color: rgba(0, 0, 0, 0.7);
+              font-weight: bold;
             }
 
-            &:hover {
-              background-color: rgba(3, 155, 229, 0.05);
-              //font-weight: bold;
-            }
-
-            -webkit-animation: rowAppearance 0.4s linear;
-            @keyframes rowAppearance {
-              from {
-                opacity: 0;
-              }
-              to {
-                opacity: 1;
+            mat-cell {
+              mat-icon {
+                font-size: 14px;
+                margin-top: 6px;
+                margin-right: -5px;
               }
             }
-          }
 
-          mat-header-cell {
-            background: whitesmoke;
-            color: rgba(0, 0, 0, 0.7);
-            font-weight: bold;
-          }
+            mat-header-cell,
+            mat-cell {
+              font-size: 11px;
+            }
 
-          mat-cell {
-            mat-icon {
-              font-size: 14px;
-              margin-top: 6px;
-              margin-right: -5px;
+            mat-row,
+            mat-header-row {
+              min-width: 1400px;
+              width: 100%;
             }
           }
 
-          mat-header-cell,
-          mat-cell {
-            font-size: 11px;
-          }
-
-          mat-row,
-          mat-header-row {
-            min-width: 1400px;
-            width: 100%;
+          .adwords-badge {
+            border: 1px solid #4bb543;
+            border-radius: 5px;
+            padding: 5px;
           }
         }
-
-        .adwords-badge {
-          border: 1px solid #4bb543;
-          border-radius: 5px;
-          padding: 5px;
-        }
-      }
-
-      .icon {
-        height: 14px;
-        width: 14px;
-        margin-right: 3px;
       }
 
       .pagination-wrapper {
@@ -331,20 +333,13 @@
 @media screen and (max-width: 600px) {
   .container {
     .title1 {
+      padding: 30px 20px 15vh 20px;
+      height: 33vh;
       text-align: center;
-      padding: 15px;
-      padding-bottom: 0;
-
-      .datePicker {
-        margin-left: 10px;
-      }
     }
 
     .main-inner {
-      .inner {
-        padding-left: 15px;
-        padding-right: 15px;
-      }
+      padding: 22px 15px 15px 15px;
     }
   }
 }

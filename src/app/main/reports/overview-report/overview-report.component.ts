@@ -66,6 +66,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     labels: true,
     doughnut: true,
     gradient: false,
+    view: [],
     scheme: {
       domain: [
         //'#87CEEB', '#f44336', '#40a5ec', '#ADFF2F', '#FF1493', '#44b543', '#FFD700', '#008080', '#FFA07A', '#8B008B', '#D3D3D3',
@@ -121,6 +122,18 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     this.subscriptions.push(sub);
 
     this.pieChart.labels = window.innerWidth > 600;
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', this.onResizeWindow, true);
+  }
+
+  ngAfterViewInit(): void {
+    window.addEventListener('resize', this.onResizeWindow, true);
+  }
+
+  onResizeWindow = (event: any): void => {
+    this.pieChart.view = [event.target.innerWidth - 900, 280 ];
   }
 
   getReport() {

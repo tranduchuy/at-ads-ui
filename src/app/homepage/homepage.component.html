@@ -113,17 +113,14 @@
                <ng-container matColumnDef="os">
                   <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <img *ngIf="element.os?.name === 'Windows'" src="../../assets/icons/windows.svg" alt=""
-                        class="icon" loading="lazy">
-                     <img *ngIf="element.os?.name === 'iOS'" src="../../assets/icons/ios.png" alt="" class="icon"
-                        loading="lazy">
-                     <img *ngIf="element.os?.name === 'Android'" src="../../assets/icons/android.svg" alt=""
-                        class="icon" loading="lazy">
-                     <img *ngIf="element.os?.name === 'Mac OS'" src="../../assets/icons/macos.png" alt="" class="icon"
-                        loading="lazy">
-                     <img *ngIf="element.os?.name === 'Linux'" src="https://img.icons8.com/color/48/000000/linux.png"
-                        alt="" class="icon" loading="lazy">
-                     <img *ngIf="element.os?.name === 'Ubuntu'" src="../../assets/icons/ubuntu.png" alt="" class="icon">
+
+                     <i *ngIf="element.os?.name === 'Windows'" class="fab fa-windows" style="color: #00baee"></i>
+                     <i *ngIf="element.os?.name === 'iOS'" class="fab fa-apple" style="color: silver"></i>
+                     <i *ngIf="element.os?.name === 'Android'" class="fab fa-android" style="color: lightgreen"></i>
+                     <i *ngIf="element.os?.name === 'Mac OS'" class="fab fa-apple" style="color: silver"></i>
+                     <i *ngIf="element.os?.name === 'Linux'" class="fab fa-linux" style="color: white"></i>
+                     <i *ngIf="element.os?.name === 'Ubuntu'" class="fab fa-ubuntu" style="color: orange"></i>
+
                      <span *ngIf="element.os?.name"
                         loading="lazy">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
 
@@ -134,25 +131,19 @@
                <ng-container matColumnDef="browser">
                   <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <img *ngIf="element.browser?.name === 'Edge'" src="../../assets/icons/edge.svg" alt="" class="icon"
-                        loading="lazy">
-                     <img *ngIf="element.browser?.name === 'Firefox'" src="../../assets/icons/firefox.svg" alt=""
-                        class="icon" loading="lazy">
-                     <img *ngIf="element.browser?.name === 'Chrome'" src="../../assets/icons/chrome.svg" alt=""
-                        class="icon" loading="lazy">
-                     <img *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
-                        src="../../assets/icons/safari.png" alt="" class="icon" loading="lazy">
-                     <img *ngIf="element.browser?.name === 'IE'" src="../../assets/icons/ie.svg" alt="" class="icon"
-                        loading="lazy">
-                     <img *ngIf="element.browser?.name === 'Chromium'" src="../../assets/icons/chromium.svg" alt=""
-                        class="icon" loading="lazy">
-                     <img *ngIf="element.browser?.name === 'Cốc Cốc'" src="../../assets/icons/coccoc.png" alt=""
-                        class="icon" loading="lazy">
-                     <img *ngIf="element.browser?.name === 'Opera'" src="../../assets/icons/opera.svg" alt=""
-                        class="icon" loading="lazy">
-                     <img *ngIf="element.browser?.name === 'Tor'"
-                        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
-                        alt="" class="icon" loading="lazy">
+
+                     <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge" style="color: #0066d7"></i>
+                     <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"
+                        style="color: orange"></i>
+                     <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
+                        class="fab fa-chrome" style="color: lightgreen"></i>
+                     <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome" style="color: skyblue"></i>
+                     <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
+                        class="fab fa-safari" style="color: #00baee"></i>
+                     <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"
+                        style="color: #00baee"></i>
+                     <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome" style="color: lightgreen"></i>
+                     <i *ngIf="element.browser?.name === 'Opera'" class="fab fa-opera" style="color: red"></i>
 
                      <span *ngIf="element.browser?.name">
                         <span>{{element.browser?.name}}</span>
@@ -333,8 +324,8 @@
                      </button>
                   </div>
                </div>
-               <img [lazyLoad]="'https://flowcentric.com/wp-content/uploads/2019/08/FlowCentric-Technologies-9-1030x734.png'" (load)="onLoadingImage = true"
-                  [class.onLoadingImage]="onLoadingImage" alt="" class="overview-image">
+               <img [lazyLoad]="'../../assets/images/backgrounds/FlowCentric-Technologies-9-1030x734.png'"
+                  (load)="onLoadingImage = true" [class.onLoadingImage]="onLoadingImage" alt="" class="overview-image">
             </div>
             <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
                <div class="feature-left" fxLayout="column" fxLayoutGap="20px">
@@ -451,7 +442,7 @@
       </div>
 
       <div class="benefit-container" *ngIf="isBenefitDisplayed"
-         [lazyLoad]="'../../assets/images/backgrounds/Analytics-digital-analytics-HD-1980x990.jpg'">
+         [lazyLoad]="'../../assets/images/backgrounds/Automotive-Data-Analytics-Market.png'">
          <div class="benefit">
 
             <div class="benefit-title">
@@ -465,10 +456,10 @@
                Lợi ích thấy ngay khi đăng ký và sử dụng Công cụ Chặn Click Ảo
             </p>
 
-            <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="30px">
+            <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="40px">
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/save-money.svg" alt="">
+                     <i class="fas fa-hand-holding-usd"></i>
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
@@ -481,7 +472,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/timer.svg" alt="">
+                     <i class="fas fa-history"></i>
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward
@@ -493,7 +484,7 @@
                </div>
                <div class="main-benefit-item">
                   <div class="benefit-symbol">
-                     <img src="../../assets/images/customer.png">
+                     <i class="fas fa-user-plus"></i>
                   </div>
                   <div class="benefit-description">
                      <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward
@@ -511,7 +502,8 @@
       </div>
    </div>
 
-   <div class="footer" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px" *ngIf="isFooterDisplayed">
+   <div class="footer" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px"
+      *ngIf="isFooterDisplayed">
 
       <div class="footer-col1" fxFlex="33.33">
          <div class="footer-title1">FAQ</div>

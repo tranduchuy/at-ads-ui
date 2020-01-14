@@ -5,7 +5,7 @@
   // background-color: #7fcec5;
   // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
-  background: url("../../assets/images/backgrounds/Division.png");
+  background: url("../../assets/images/backgrounds/simple2.png");
   background-size: 100% 100%;
   background-attachment: fixed;
 
@@ -20,8 +20,10 @@
 
     .shiny {
       //color: #f5c21b;
-      color: lightgreen;
-      background: -webkit-gradient(linear, left top, left bottom, from(lightgreen), to(#d17000));
+      // color: lightgreen;
+      // background: -webkit-gradient(linear, left top, left bottom, from(lightgreen), to(#d17000));
+      color: lightyellow;
+      background: -webkit-gradient(linear, left top, left bottom, from(lightyellow), to(#039be5));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
@@ -352,7 +354,7 @@
       padding: 250px;
       padding-top: 50px;
       padding-bottom: 50px;
-      background: rgba(7, 87, 115, 0.5);
+      background: rgba(255, 255, 255, 0.1);
 
       .table-title {
         padding: 20px;
@@ -470,7 +472,7 @@
 
           mat-header-cell:nth-child(1),
           mat-cell:nth-child(1) {
-            flex: 0 0 11%;
+            flex: 0 0 12%;
           }
 
           mat-header-cell:nth-child(8),
@@ -489,13 +491,20 @@
           }
 
           mat-cell:nth-child(2) {
-            color: skyblue;
+            color: lightblue;
             font-weight: bold;
+          }
+
+          mat-cell {
+            svg {
+              font-size: 12px;
+              margin-right: 7px;
+            }
           }
 
           mat-header-row,
           mat-row {
-            min-width: 800px;
+            min-width: 1000px;
             width: 100%;
           }
         }
@@ -505,7 +514,7 @@
     .instruction-container {
       .instruction {
         padding: 15px 250px 45px 250px;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(7, 87, 115, 0.4);
 
         .steps-main-title {
           font-size: 20px;
@@ -537,7 +546,7 @@
             }
           }
           .step {
-            height: 220px;
+            height: 200px;
             color: white;
             //border-radius: 5px;
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -556,11 +565,12 @@
 
               .step-description {
                 background: rgba(0, 0, 0, 0.6);
-                padding: 20px 15px 5px 15px;
+                padding: 10px 15px 1px 15px;
                 text-align: justify;
                 font-size: 11px;
                 position: relative;
-                top: 57%;
+                top: 60%;
+                // border-bottom: 4px solid #039be5;
 
                 .step-name {
                   font-size: 13px;
@@ -603,16 +613,15 @@
         .overview {
           padding-top: 20px;
           padding-right: 80px;
-          text-shadow: 1px 1px 1px black;
-          -webkit-animation: ani 1s ease-in;
-          @keyframes ani {
+          -webkit-animation: overviewInfoAni 1.2s ease-out;
+          @keyframes overviewInfoAni {
             from {
               opacity: 0;
-              transform: translateY(10vh);
+              transform: translateX(-10vw);
             }
             to {
               opacity: 1;
-              transform: translateY(0);
+              transform: translateX(0);
             }
           }
 
@@ -641,6 +650,7 @@
             margin: 0 auto;
             //display: none;
             margin-top: 75px;
+            filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
           }
 
           .trial {
@@ -679,7 +689,7 @@
 
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
-      -webkit-animation: ani 1.4s ease-in;
+      -webkit-animation: ani 1s ease-in;
       @keyframes ani {
         from {
           opacity: 0;
@@ -733,18 +743,18 @@
 
       background-attachment: fixed;
       .benefit {
-        background: rgba(7, 87, 115, 0.4);
+        background: rgba(0, 0, 0, 0.6);
         // backdrop-filter: blur(4px);
         text-align: center;
-        padding: 90px 250px 90px 250px;
+        padding: 125px 250px 125px 250px;
         color: white;
-        filter: drop-shadow(0.8px 1px 1px black);
+
         //background: rgba(125, 125, 125, 0.2);
         //background: rgba(3, 155, 229, 0.2);
         //background: url("../../assets/images/backgrounds/QL5I0O.jpg");
 
+        //filter: drop-shadow(0.8px 0.8px 0.8px black);
         .benefit-title {
-          //filter: drop-shadow(0.8px 0.8px 0.8px black);
           font-size: 20px;
           -webkit-animation: ani 1.4s ease-in;
           @keyframes ani {
@@ -753,8 +763,8 @@
               transform: translateY(10vh);
             }
             to {
-              opacity: 1;
               transform: translateY(0);
+              opacity: 1;
             }
           }
         }
@@ -813,6 +823,11 @@
             //   }
             // }
           }
+
+          svg {
+            font-size: 60px;
+            color: lightblue;
+          }
         }
 
         .benefit-description {
@@ -821,6 +836,10 @@
           .benefit-description-title {
             font-size: 14px;
             font-weight: bold;
+
+            mat-icon {
+              font-size: 18px;
+            }
           }
         }
       }
@@ -829,11 +848,10 @@
   .footer {
     padding: 100px 250px 30px 250px;
     //background: rgba(0, 0, 0, 0.6);
-    background: rgba(12, 20, 33, 1);
-    background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    color: silver;
+    background: #006486;
+    //background: #00608c;
+
+    color: #eee;
     text-align: justify;
     font-size: 12px;
 
@@ -881,7 +899,7 @@
     //background-color: rgba(0, 0, 0, 0.3);
     //filter: drop-shadow(0px 1px 4px black);
     .footer-contact {
-      background: #012234;
+      background: #093c50;
       color: white;
       padding: 15px;
       text-align: center;
@@ -938,7 +956,6 @@
       //background: #20222a;
 
       //filter: drop-shadow(0px 1px 4px black);
-      text-shadow: 1px 1px 4px black;
       font-weight: bold;
       position: absolute;
       z-index: 200;
@@ -1009,12 +1026,14 @@
 @media screen and (max-width: 600px) {
   .homepage {
     font-size: 14px;
-
+    background-color: #ffffb5;
+    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
     //background: rgba(56, 166, 221, 0.6);
 
     .topbar-container {
       .topbar {
         padding: 10px;
+        padding-top: 20px;
 
         .topbar-access-system-button {
           font-size: 12.5px;
@@ -1188,9 +1207,10 @@
       .benefit-container {
         // background-color: #7fcec5;
         // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-        background-image: none !important;
+
         .benefit {
           padding: 30px;
+          padding-top: 60px;
           .main-benefit {
             padding-top: 10px;
             padding-bottom: 10px;
@@ -1201,9 +1221,14 @@
           }
 
           .benefit-symbol {
+            padding-top: 10px;
             img {
               width: 70px;
               height: 70px;
+            }
+
+            svg {
+              font-size: 50px;
             }
           }
         }

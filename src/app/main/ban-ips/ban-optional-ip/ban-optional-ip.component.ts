@@ -49,7 +49,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
         (res) => {
 
           if (res.data.adsAccount.isConnected) {
-            this._fuseProgresBarService.hide();
+            // this._fuseProgresBarService.hide();
             this.getBlockedCustomIPs();
           }
           else {
@@ -70,7 +70,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
 
   getBlockedCustomIPs() {
     this.isProcessing = true;
-    this._fuseProgresBarService.show();
+    // this._fuseProgresBarService.show();
     const sub = this._banIpsService.getBlockedCustomIPs()
       .subscribe(res => {
         this._fuseProgresBarService.hide();
@@ -185,7 +185,7 @@ export class BanOptionalIPComponent extends EditableFormBaseComponent implements
                   this._fuseProgresBarService.hide();
                   this._dialogService._openSuccessDialog(res);
                   this.isProcessing = false;
-                }, 0);
+                }, 1000);
               },
                 (error: HttpErrorResponse) => {
                   this._fuseProgresBarService.hide();

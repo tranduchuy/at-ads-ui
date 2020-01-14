@@ -1,20 +1,26 @@
 .container {
   width: 100%;
+  height: 50vh;
+  // background: url("../../../../assets/images/backgrounds/simple2.png");
+  // background-size: 100% 100%;
+  background-color: #7fcec5;
+  background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
   .main-title {
     // background-color: #000000 !important;
     // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-    background-color: #7fcec5;
-    background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+    // background-color: #7fcec5;
+    // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+    padding: 45px 60px 0 60px;
+    height: 35vh;
     text-shadow: 1px 1px 2px black;
     color: white;
     font-size: 16px;
-    padding: 30px 30px 0 45px;
     font-weight: bold;
     //color: rgba(0, 0, 0, 0.7);
 
     .main-title-text {
-      
+      padding-top: 15px;
     }
 
     .adsId {
@@ -24,7 +30,6 @@
     }
 
     .website-selection {
-      margin-top: 15px;
       width: 250px;
 
       ::ng-deep .mat-select {
@@ -40,7 +45,6 @@
 
     .datePicker {
       width: 250px;
-      margin-top: 15px;
 
       input {
         font-weight: bold;
@@ -53,62 +57,220 @@
     }
   }
 
-  .notification {
-    background: rgba(68, 181, 67, 0.2);
-    color: darkgreen;
-    margin: 20px 30px 20px 30px;
-    padding: 15px;
-    border-left: 4px solid green;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-
-    -webkit-animation: notificationAni 0.4s ease-out;
-    @keyframes notificationAni {
-      from {
-        transform: translateY(3vh);
-      }
-      to {
-        transform: translateY(0);
-      }
-    }
-
-    mat-icon {
-      font-size: 18px;
-      margin-top: 7px;
-      margin-right: 3px;
-      color: #44b543;
-    }
-
-    .highline1 {
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .highline2 {
-      font-size: 12px;
-      font-weight: bold;
-    }
-  }
-
-  .charts {
-    margin: 30px;
-    margin-top: 0;
-    margin-bottom: 15px;
-  }
-
-  .section {
-    // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  .inner {
+    margin: 40px;
+    padding: 20px;
+    padding-bottom: 0;
     border-radius: 7px;
-    background-color: white;
+    position: relative;
+    top: -22vh;
+    background: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-    &.section-pie-chart {
-      -webkit-animation: animation1 0.4s ease-out;
-      padding: 0;
+    .notification {
+      background: #c4e9c3;
+      color: darkgreen;
+      padding: 15px;
+      border-left: 4px solid darkgreen;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      position: relative;
+      top: -7vh;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-      @keyframes animation1 {
+      -webkit-animation: notificationAni 0.4s ease-out;
+      @keyframes notificationAni {
+        from {
+          transform: translateY(3vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .highline1 {
+        font-size: 12px;
+        font-weight: bold;
+        color: darkgreen;
+      }
+
+      .highline2 {
+        font-size: 12px;
+        font-weight: bold;
+        color: darkgreen;
+      }
+    }
+
+    .section {
+      // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      border-radius: 7px;
+      border: 1px solid #dcdcdc;
+      position: relative;
+      top: -5vh;
+
+      &.section-pie-chart {
+        -webkit-animation: animation1 0.4s ease-out;
+        padding: 0;
+
+        @keyframes animation1 {
+          from {
+            transform: translateY(100vh);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
+
+        .click-detail {
+          width: 100%;
+          display: table;
+          margin: 0 auto;
+          text-align: center;
+          margin-top: 20px;
+          font-weight: bold;
+
+          //box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.1);
+
+          // -webkit-animation: clickDetailAni 0.6s ease-out;
+          // @keyframes clickDetailAni {
+          //   from {
+          //     transform: translateY(60px)
+          //   } to {
+          //     transform: translateY(0)
+          //   }
+          // }
+
+          .number {
+            font-size: 20px;
+
+            .percentage {
+              font-size: 12px;
+              margin-left: 10px;
+            }
+          }
+
+          .real-click {
+            color: green;
+            padding: 10px 5px 0px 5px;
+            border-bottom-left-radius: 7px;
+            border-right: 1px solid #dcdcdc;
+            border-top: 1px solid #dcdcdc;
+            min-height: 75px;
+          }
+
+          .spam-click {
+            color: crimson;
+            padding: 10px 5px 0px 5px;
+            border-bottom-right-radius: 7px;
+            border-top: 1px solid #dcdcdc;
+            min-height: 75px;
+          }
+        }
+      }
+
+      .datePicker {
+        width: 250px;
+        float: right;
+      }
+
+      .click-total {
+        position: relative;
+        left: 50%;
+        top: -48%;
+        width: 50px;
+        height: 50px;
+        -webkit-transform: translate(-50%, -48%);
+        transform: translate(-50%, -48%);
+      }
+
+      .invalid-click-info {
+        position: relative;
+        left: 30%;
+        top: -350px;
+        height: 70px;
+        width: 70px;
+      }
+
+      .valid-click-info {
+        position: relative;
+        left: 64.5%;
+        top: -15px;
+        height: 70px;
+        width: 70px;
+      }
+
+      .click-number {
+        font-size: 20px;
+      }
+
+      .click-percentage {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 2px 4px 2px 4px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+
+      .title1 {
+        padding: 30px;
+        padding-bottom: 20px;
+        // background-color: #000000 !important;
+        // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
+        // color: white;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.7);
+
+        &.title2 {
+          text-align: center;
+          padding: 15px;
+          border-top-left-radius: 7px;
+          border-top-right-radius: 7px;
+        }
+
+        .datePicker {
+          color: #40a5ec;
+
+          input {
+            color: white;
+          }
+        }
+      }
+
+      .pagination-buttons {
+        padding: 15px 15px 0 15px;
+        margin-bottom: -10px;
+        color: gray;
+
+        .item-per-page-options {
+          mat-form-field {
+            width: 100%;
+          }
+        }
+      }
+
+      .pie-chart-report-title {
+        padding-bottom: 0;
+      }
+
+      .div-pie-chart {
+        width: 100%;
+      }
+    }
+
+    .full-view-button {
+      border-radius: 15px;
+      background-color: #dcdcdc;
+      color: gray;
+    }
+
+    .div-line-chart {
+      padding-bottom: 0;
+      -webkit-animation: animation2 0.6s ease-out;
+
+      @keyframes animation2 {
         from {
           transform: translateY(100vh);
         }
@@ -116,308 +278,154 @@
           transform: translateY(0);
         }
       }
+    }
 
-      .click-detail {
-        width: 100%;
-        display: table;
-        margin: 0 auto;
-        text-align: center;
-        margin-top: 20px;
-        font-weight: bold;
+    .line-chart-options {
+      padding: 20px;
 
-        //box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.1);
+      .mat-radio-button ~ .mat-radio-button {
+        margin-left: 16px;
+      }
+    }
 
-        // -webkit-animation: clickDetailAni 0.6s ease-out;
-        // @keyframes clickDetailAni {
-        //   from {
-        //     transform: translateY(60px)
-        //   } to {
-        //     transform: translateY(0)
-        //   }
-        // }
+    .left,
+    .right {
+      margin: 10px;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
 
-        .number {
-          font-size: 20px;
+    .left {
+      margin: 0;
+      border-radius: 0;
+      padding: 0;
+    }
 
-          .percentage {
-            font-size: 12px;
-            margin-left: 10px;
+    .tables {
+      margin-top: 20px;
+      border-radius: 7px;
+      // height: 95vh;
+
+      -webkit-animation: animation3 0.8s ease-out;
+      @keyframes animation3 {
+        from {
+          transform: translateY(100vh);
+        }
+        to {
+          transform: translateY(0vh);
+        }
+      }
+
+      mat-table {
+        box-shadow: none;
+
+        .ip-detail-link {
+          font-weight: bold;
+          padding-left: 2px;
+          transition: 0.2s;
+          font-size: 11px;
+
+          &:hover {
+            background: rgba(3, 155, 229, 0.1);
           }
         }
 
-        .real-click {
-          color: green;
-          padding: 10px 5px 0px 5px;
-          border-bottom-left-radius: 7px;
-          border-right: 0.5px solid #d2d2d2;
-          border-top: 0.5px solid #d2d2d2;
-          min-height: 75px;
+        mat-row {
+          transition: 0.2s;
+
+          &:nth-child(odd) {
+            background: whitesmoke;
+          }
+
+          &:hover {
+            background-color: rgba(3, 155, 229, 0.05);
+          }
+
+          -webkit-animation: rowAppearance 0.4s linear;
+          @keyframes rowAppearance {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
         }
 
-        .spam-click {
-          color: crimson;
-          padding: 10px 5px 0px 5px;
-          border-bottom-right-radius: 7px;
-          border-top: 0.5px solid #d2d2d2;
-          min-height: 75px;
-        }
-      }
-    }
-
-    .datePicker {
-      width: 250px;
-      float: right;
-    }
-
-    .click-total {
-      position: relative;
-      left: 50%;
-      top: -48%;
-      width: 50px;
-      height: 50px;
-      -webkit-transform: translate(-50%, -48%);
-      transform: translate(-50%, -48%);
-    }
-
-    .invalid-click-info {
-      position: relative;
-      left: 30%;
-      top: -350px;
-      height: 70px;
-      width: 70px;
-    }
-
-    .valid-click-info {
-      position: relative;
-      left: 64.5%;
-      top: -15px;
-      height: 70px;
-      width: 70px;
-    }
-
-    .click-number {
-      font-size: 18px;
-    }
-
-    .click-percentage {
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 2px 4px 2px 4px;
-      border-radius: 6px;
-      font-size: 12px;
-    }
-
-    .title1 {
-      padding: 30px;
-      padding-bottom: 20px;
-      // background-color: #000000 !important;
-      // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-      // color: white;
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.7);
-
-      &.title2 {
-        text-align: center;
-        padding: 15px;
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-      }
-
-      .datePicker {
-        color: #40a5ec;
-
-        input {
-          color: white;
-        }
-      }
-    }
-
-    .pagination-buttons {
-      padding: 15px 15px 0 15px;
-      margin-bottom: -10px;
-      color: gray;
-
-      .item-per-page-options {
-        mat-form-field {
+        mat-row,
+        mat-header-row {
+          min-width: 1100px;
           width: 100%;
         }
-      }
-    }
 
-    .pie-chart-report-title {
-      padding-bottom: 0;
-    }
-
-    .div-pie-chart {
-      width: 100%;
-      padding-top: 20px;
-    }
-  }
-
-  .full-view-button {
-    border-radius: 15px;
-    background-color: #eee;
-    color: gray;
-  }
-
-  .div-line-chart {
-    padding-bottom: 0;
-    -webkit-animation: animation2 0.6s ease-out;
-
-    @keyframes animation2 {
-      from {
-        transform: translateY(100vh);
-      }
-      to {
-        transform: translateY(0);
-      }
-    }
-  }
-
-  .line-chart-options {
-    padding: 20px;
-
-    .mat-radio-button ~ .mat-radio-button {
-      margin-left: 16px;
-    }
-  }
-
-  .left,
-  .right {
-    margin: 10px;
-    margin-bottom: 0;
-    border-radius: 0;
-  }
-
-  .left {
-    margin: 0;
-    border-radius: 0;
-    padding: 0;
-  }
-
-  .tables {
-    margin: 30px;
-    margin-top: 20px;
-    border-radius: 7px;
-    // height: 95vh;
-
-    -webkit-animation: animation3 0.8s ease-out;
-    @keyframes animation3 {
-      from {
-        transform: translateY(100vh);
-      }
-      to {
-        transform: translateY(0vh);
-      }
-    }
-
-    mat-table {
-      box-shadow: none;
-
-      .ip-detail-link {
-        font-weight: bold;
-        padding-left: 2px;
-        transition: 0.2s;
-        font-size: 11px;
-
-        &:hover {
-          background: rgba(3, 155, 229, 0.1);
+        mat-header-cell:nth-child(2),
+        mat-cell:nth-child(2),
+        mat-header-cell:nth-child(7),
+        mat-cell:nth-child(7) {
+          flex: 0 0 10%;
         }
-      }
 
-      mat-row {
-        transition: 0.2s;
+        mat-header-cell:nth-child(8),
+        mat-cell:nth-child(8) {
+          justify-content: center;
+        }
 
-        &:nth-child(odd) {
+        mat-header-cell:nth-child(3),
+        mat-cell:nth-child(3),
+        mat-header-cell:nth-child(6),
+        mat-cell:nth-child(6),
+        mat-header-cell:nth-child(9),
+        mat-cell:nth-child(9),
+        mat-header-cell:nth-child(10),
+        mat-cell:nth-child(10),
+        mat-header-cell:nth-child(11),
+        mat-cell:nth-child(11) {
+          flex: 0 0 8%;
+          justify-content: center;
+        }
+
+        mat-header-cell {
           background: whitesmoke;
+          color: rgba(0, 0, 0, 0.7);
+          font-weight: bold;
         }
 
-        &:hover {
-          background-color: rgba(3, 155, 229, 0.05);
-        }
-
-        -webkit-animation: rowAppearance 0.4s linear;
-        @keyframes rowAppearance {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
+        mat-cell {
+          mat-icon {
+            font-size: 14px;
+            margin-top: 6px;
+            margin-right: -5px;
           }
         }
-      }
 
-      mat-row,
-      mat-header-row {
-        min-width: 1100px;
-        width: 100%;
-      }
-
-      mat-header-cell:nth-child(2),
-      mat-cell:nth-child(2),
-      mat-header-cell:nth-child(7),
-      mat-cell:nth-child(7) {
-        flex: 0 0 10%;
-      }
-
-      mat-header-cell:nth-child(8),
-      mat-cell:nth-child(8) {
-        justify-content: center;
-      }
-
-      mat-header-cell:nth-child(3),
-      mat-cell:nth-child(3),
-      mat-header-cell:nth-child(6),
-      mat-cell:nth-child(6),
-      mat-header-cell:nth-child(9),
-      mat-cell:nth-child(9),
-      mat-header-cell:nth-child(10),
-      mat-cell:nth-child(10),
-      mat-header-cell:nth-child(11),
-      mat-cell:nth-child(11) {
-        flex: 0 0 8%;
-        justify-content: center;
-      }
-
-      mat-header-cell {
-        background: whitesmoke;
-        color: rgba(0, 0, 0, 0.7);
-        font-weight: bold;
-      }
-
-      mat-cell {
-        mat-icon {
-          font-size: 14px;
-          margin-top: 6px;
-          margin-right: -5px;
+        mat-header-cell,
+        mat-cell {
+          font-size: 11px;
         }
-      }
-
-      mat-header-cell,
-      mat-cell {
-        font-size: 11px;
       }
     }
-  }
 
-  .left-table,
-  .right-table {
-    overflow: auto;
-  }
+    .left-table,
+    .right-table {
+      overflow: auto;
+      border-bottom-left-radius: 7px;
+      border-bottom-right-radius: 7px;
+    }
 
-  .table-button {
-    display: table;
-    margin: 0 auto;
-    margin-top: 20px;
-    border-radius: 0;
-  }
+    .table-button {
+      display: table;
+      margin: 0 auto;
+      margin-top: 20px;
+      border-radius: 0;
+    }
 
-  :host ::ng-deep .pie-chart {
-    margin-bottom: 0;
-    margin-top: -15px;
+    :host ::ng-deep .pie-chart {
+      margin-bottom: 0;
+      margin-top: -15px;
 
-    .pie-label {
-      font-size: 18px !important;
+      .pie-label {
+        font-size: 18px !important;
+      }
     }
   }
 }
@@ -425,76 +433,55 @@
 @media screen and (max-width: 600px) {
   .container {
     :host ::ng-deep .pie-chart {
-      padding-top: 15px;
       .pie-label {
         font-size: 16px !important;
       }
     }
 
     .main-title {
-      padding: 30px;
-      padding-bottom: 0;
-      
-      .main-title-text {
-        padding-bottom: 10px;
-      }
+      padding: 20px 20px 25vh 20px;
+      height: 60vh;
+      text-align: center;
 
       .website-selection {
-        margin-top: 0;
+        margin-top: 10px;
+        width: 100%;
       }
       .datePicker {
-        margin-top: -5px;
+        margin-top: -10px;
+        width: 100%;
       }
     }
 
-    .notification {
+    .inner {
+      padding: 15px;
       margin: 15px;
-      font-size: 12px !important;
-      padding: 10px;
-      text-align: justify;
-    }
 
-    .charts {
-      margin: 15px;
-    }
-
-    .section {
-      .title1 {
-        padding-left: 0;
-        padding-right: 0;
-        text-align: center;
+      .notification {
+        font-size: 12px !important;
+        padding: 10px;
+        text-align: justify;
       }
 
-      .click-total {
-        font-size: 12px;
-      }
+      .section {
+        .title1 {
+          padding-left: 0;
+          padding-right: 0;
+          padding-bottom: 10px;
+          text-align: center;
+        }
 
-      .click-number {
-        font-size: 14px;
-      }
-
-      .div-pie-chart {
-        padding: 0;
-        padding-top: 30px;
-      }
-
-      .pagination-buttons {
-        .item-per-page-options {
-          width: 50%;
+        .pagination-buttons {
+          .item-per-page-options {
+            width: 50%;
+          }
         }
       }
-    }
 
-    .tables {
-      //height: 123vh;
-      margin: 15px;
-    }
-
-    :host ::ng-deep .pie-chart {
-      margin-top: -60px;
-
-      .pie-label {
-        font-size: 12px !important;
+      :host ::ng-deep .pie-chart {
+        .pie-label {
+          font-size: 12px !important;
+        }
       }
     }
   }

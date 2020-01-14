@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import { MatSelect } from '@angular/material';
+import { MatSelect, MatSlideToggleChange, MatRadioChange } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
@@ -17,6 +17,7 @@ import { invalidPhoneNumberValidator } from 'app/shared/validators/phone-number.
 interface SelectedWebsite {
   id: string;
   name: string;
+  isPopupOpening: boolean;
   popupConfig: any;
 }
 
@@ -53,17 +54,84 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     }
   ];
 
-  popupScripts: string[] = [
-    '<link href="http://localhost:3333/css/send-info-popup.style.css" rel="stylesheet">',
-    '<script type="text/javascript" src="http://localhost:3333/js/send-info-popup.js" id="send-info-popup-script" code="123456"></script>'
+  popupDisplayEnableSlideToggle = {
+    label: 'Hiển thị nút mở popup',
+    color: 'accent',
+    checked: false,
+    disabled: false
+  };
+
+  openPopupButtonPositionStyle: number;
+  openPopupButtonPositions: any = [
+    {
+      name: 'Dưới - Trái',
+      value: 1,
+      checked: false,
+      style: 'bottom-left'
+    },
+    {
+      name: 'Dưới - Phải',
+      value: 2,
+      checked: false,
+      style: 'bottom-right'
+    },
+    {
+      name: 'Giữa - Phải',
+      value: 3,
+      checked: false,
+      style: 'center-right'
+    },
+    {
+      name: 'Giữa - Trái',
+      value: 4,
+      checked: false,
+      style: 'center-left'
+    },
+    {
+      name: 'Trên - Trái',
+      value: 5,
+      checked: false,
+      style: 'top-left'
+    },
+    {
+      name: 'Trên - Phải',
+      value: 6,
+      checked: false,
+      style: 'top-right'
+    }
   ];
 
-  popupDisplayEnableSlideToggle = {
-    label: 'Cho phép hiển thị',
+  autoDisplayPopupSlideToggle = {
+    label: 'Tự động hiển thị popup khi vào trang',
     color: 'accent',
-    checked: true,
+    checked: false,
     disabled: false
-  }
+  };
+
+  displayPopupBeforeExitPageToggle = {
+    label: 'Tự động hiển thị popup trước khi thoát trang',
+    color: 'accent',
+    checked: false,
+    disabled: false
+  };
+
+  autoDisplayPopupTimeOptions = [
+    {
+      name: 'Sau mỗi 5 phút',
+      value: 5,
+      checked: false
+    },
+    {
+      name: 'Sau mỗi 10 phút',
+      value: 10,
+      checked: false
+    },
+    {
+      name: 'Sau mỗi 15 phút',
+      value: 15,
+      checked: false
+    },
+  ];
 
   /** control for selected website */
   public websiteCtrl: FormControl = new FormControl();
@@ -108,13 +176,40 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
-  onCheckPopupDisplayEnableSlideToggle(e) {
-    this.enablePopupDisplay(e.checked);
+  onCheckPopupDisplayEnableSlideToggle(e: MatSlideToggleChange) {
+    this.websiteCtrl.value.isPopupOpening = e.checked;
+    this.setPopupDisplay({ popupStatus: e.checked });
   }
 
-  enablePopupDisplay(popupStatus: boolean) {
-    const sub = this._visitorToolsService.enablePopupDislay({ popupStatus }, this.websiteCtrl.value.id)
-      .subscribe(() => { },
+  onCheckAutoDisplayPopupSlideToggle(e: MatSlideToggleChange) {
+    this.setPopupDisplay({ autoShowPopup: e.checked });
+  }
+
+  changeOpenPopupButtonPosition(e: MatRadioChange) {
+    this.setPopupDisplay({ popupPosition: e.value });
+    // for (const item of this.openPopupButtonPositions) {
+    //   if (item.value === e.value) {
+    //     item.checked = true;
+    //     this.openPopupButtonPositionStyle = item.value;
+    //   } else {
+    //     item.checked = false;
+    //   }
+    // }
+  }
+
+  changeAutoDisplayPopupTime(e: MatRadioChange) {
+    this.setPopupDisplay({ autoShowPopupRepeatTime: e.value });
+  }
+
+  onCheckDisplayPopupBeforeExitPageToggle(e: MatSlideToggleChange) {
+    console.log(e.checked);
+  }
+
+  setPopupDisplay(property: any) {
+    const sub = this._visitorToolsService.setPopupDislay(property, this.websiteCtrl.value.id)
+      .subscribe(res => {
+        this.setPopupConfig(res.data.popupConfig || null);
+      },
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);
         });
@@ -133,22 +228,84 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     this.setPopupConfig();
   }
 
-  setPopupConfig() {
-    this.popupDisplayEnableSlideToggle['checked'] = this.websiteCtrl.value.isPopupOpening;
+  updateWebsiteInCurrentList(websiteId: string, data: any) {
+    const website = _.find(this.websites, w => w.id === websiteId);
+    website[data.name] = data.value;
+  }
+
+  setPopupConfig(optionalConfig?: any) {
+    if (optionalConfig)
+      this.websiteCtrl.value.popupConfig = optionalConfig;
+
+    this.popupDisplayEnableSlideToggle.checked = this.websiteCtrl.value.isPopupOpening;
+
     const config = this.websiteCtrl.value.popupConfig;
+    let popupStyleConfig = {}, popupDisplayConfig = {};
     if (config) {
-      this.popupStyleForm.controls['themeColor'].setValue(config.themeColor);
-      this.popupStyleForm.controls['supporterAvatar'].setValue(config.supporter.avatar);
-      this.popupStyleForm.controls['supporterName'].setValue(config.supporter.name);
-      this.popupStyleForm.controls['supporterMajor'].setValue(config.supporter.major);
-      this.popupStyleForm.controls['supporterPhone'].setValue(config.supporter.phone);
+      popupStyleConfig = {
+        themeColor: config.themeColor,
+        supporterAvatar: config.supporter.avatar,
+        supporterName: config.supporter.name,
+        supporterMajor: config.supporter.major,
+        supporterPhone: config.supporter.phone,
+      };
+
+      popupDisplayConfig = {
+        popupPosition: config.popupPosition,
+        autoShowPopupRepeatTime: config.autoShowPopupRepeatTime,
+        autoShowPopup: config.autoShowPopup
+      };
+    } else {
+      popupStyleConfig = {
+        themeColor: '#2196f3',
+        supporterAvatar: this.images[0].url,
+        supporterName: 'Nguyễn Thị A',
+        supporterMajor: 'Hỗ trợ viên',
+        supporterPhone: '0999999999',
+      };
+      this.submitPopupStyleForm(true);
     }
-    else {
-      this.popupStyleForm.controls['themeColor'].setValue('#2196f3');
-      this.popupStyleForm.controls['supporterAvatar'].setValue(this.images[0].url);
-      this.popupStyleForm.controls['supporterName'].setValue('Nguyễn Thị A');
-      this.popupStyleForm.controls['supporterMajor'].setValue('Hỗ trợ viên');
-      this.popupStyleForm.controls['supporterPhone'].setValue('0999999999');
+
+    //set popup style config
+    for (const key in popupStyleConfig) {
+      this.popupStyleForm.controls[key].setValue(popupStyleConfig[key]);
+    }
+
+    this.setPopupDisplayConfig(popupDisplayConfig);
+  }
+
+  setPopupDisplayConfig(popupDisplayConfig: any) {
+    //Automatically initialize popup display config values if they have not been initialized yet
+    if (!popupDisplayConfig.popupPosition) {
+      this.setPopupDisplay({ popupPosition: this.openPopupButtonPositions[1].value });
+      this.websiteCtrl.value.popupConfig['popupPosition'] = this.openPopupButtonPositions[1].value;
+    }
+    if (!popupDisplayConfig.autoShowPopupRepeatTime) {
+      this.setPopupDisplay({ autoShowPopupRepeatTime: this.autoDisplayPopupTimeOptions[0].value });
+      this.websiteCtrl.value.popupConfig['autoShowPopupRepeatTime'] = this.autoDisplayPopupTimeOptions[0].value;
+    }
+    if (popupDisplayConfig.autoShowPopup === undefined) {
+      this.setPopupDisplay({ autoShowPopup: false });
+      this.websiteCtrl.value.popupConfig['autoShowPopup'] = false;
+    }
+
+    this.autoDisplayPopupSlideToggle.checked = this.websiteCtrl.value.popupConfig['autoShowPopup'];
+
+    for (const item of this.openPopupButtonPositions) {
+      if (item.value === this.websiteCtrl.value.popupConfig['popupPosition']) {
+        item.checked = true;
+        this.openPopupButtonPositionStyle = item.value;
+      } else {
+        item.checked = false;
+      }
+    }
+
+    for (const item of this.autoDisplayPopupTimeOptions) {
+      if (item.value === this.websiteCtrl.value.popupConfig['autoShowPopupRepeatTime']) {
+        item.checked = true;
+      } else {
+        item.checked = false;
+      }
     }
   }
 
@@ -191,7 +348,7 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     return params;
   }
 
-  submitAllForms() {
+  submitPopupStyleForm(isInit: boolean) {
     const popupStyleParams = this.generatePopupStyleParams();
     if (!popupStyleParams) {
       this._dialogService._openErrorDialog({ messages: ['Vui lòng điền đầy đủ thông tin'] });
@@ -201,20 +358,26 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     this._fuseProgressBarService.show();
     const sub = this._visitorToolsService.updatePopupConfig(popupStyleParams, this.websiteCtrl.value.id)
       .subscribe((res: any) => {
-        const config = res.data.popupConfig || null;
-        if (config) {
-          const selectedWebsite = _.find(this.websites, w => w.id === res.data._id);
-          if (selectedWebsite) {
-            selectedWebsite.popupConfig = config;
-          }
-        }
-
-        this._dialogService._openSuccessDialog({ messages: ['Thiết lập thành công'] });
+        this.setPopupConfig(res.data.popupConfig || null);
         this._fuseProgressBarService.hide();
+
+        if (!isInit) {
+          this._dialogService._openSuccessDialog({
+            messages: [`
+              <center>
+                Thiết lập thành công!
+                <br>Kiểm tra website của bạn <a href="${this.websiteCtrl.value.name}" target="_blank">tại đây</a>
+              </center>
+            `]
+          });
+        }
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
-          this._dialogService._openErrorDialog(error.error);
+
+          if (!isInit) {
+            this._dialogService._openErrorDialog(error.error);
+          }
         });
     this.subscriptions.push(sub);
   }

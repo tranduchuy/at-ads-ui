@@ -5,28 +5,32 @@
 
   .title1 {
     //padding: 86px 20px 16px 0px;
-    background-color: #ffffb5;
-    background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
+    // background-color: #ffffb5;
+    // background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
     color: white;
     text-shadow: 1px 1px 2px black;
     font-size: 16px;
     font-weight: bold;
-    padding-top: 30px;
-    height: 22vh;
+    padding: 30px 30px 30px 30px;
+    height: 25vh;
 
     .title1-main {
       padding-top: 15px;
-      padding-left: 20px;
     }
 
     mat-icon {
       font-size: 18px;
     }
 
-    .add-account-button {
-      text-shadow: none;
-      max-height: 40px;
-      max-width: 250px;
+    .add-account {
+      padding-top: 5px;
+      .add-account-button {
+        text-shadow: none;
+        max-width: 250px;
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: none;
+      }
     }
   }
 
@@ -42,6 +46,8 @@
 
   .inner {
     margin: 30px;
+    position: relative;
+    top: -15vh;
     -webkit-animation: formAni 0.4s ease-out;
     @keyframes formAni {
       from {
@@ -57,7 +63,6 @@
     }
 
     .warning {
-      margin: 30px;
       padding: 20px;
       background: lightyellow;
       border-left: 4px solid darkorange;
@@ -70,6 +75,7 @@
       width: 60%;
       display: table;
       margin: 0 auto;
+      margin-top: 30px;
       text-align: center;
 
       mat-icon {
@@ -185,8 +191,6 @@
     }
 
     .table-container {
-      position: relative;
-      top: -11.5vh;
       min-height: 60vh;
       background: white;
       border-bottom: 0.5px solid #eee;
@@ -225,8 +229,8 @@
         }
 
         .ggAds-icon {
-          height: 13px;
-          width: 13px;
+          height: 12px;
+          width: 12px;
           margin-right: 8px;
           //filter: drop-shadow(0.2px 0.7px 0.7px rgba(0, 0, 0, 0.4));
         }
@@ -350,19 +354,18 @@
 @media screen and (max-width: 600px) {
   .container {
     .title1 {
-      
+      padding: 30px 20px 20vh 20px;
+      height: 40vh;
     }
     .title1,
     .title2 {
-      font-size: 14px !important;
       text-align: center;
     }
 
     .inner {
-      margin: 10px;
+      margin: 15px;
 
       .table-container {
-        top: 0;
         .ads-account {
           .ads-account-id {
             font-size: 13px !important;

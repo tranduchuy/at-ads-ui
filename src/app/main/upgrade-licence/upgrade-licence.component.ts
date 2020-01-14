@@ -28,8 +28,8 @@ export class UpgradeLicenceComponent extends PageBaseComponent implements OnInit
         if (user) {
           this.loggedInUser = user;
           if (user.licence.type === 'CUSTOM')
-            this.isRegisterButtonNotDisplayed = true;
-          else this.isRegisterButtonNotDisplayed = false;
+            this.isRegisterButtonNotDisplayed = false;
+          else this.isRegisterButtonNotDisplayed = true;
           this._fuseProgressBarService.hide();
         }
       });
@@ -38,6 +38,10 @@ export class UpgradeLicenceComponent extends PageBaseComponent implements OnInit
 
   openUpgradeLicenceDialog(licenceType: string, licenceName: string) {
     this._dialogService._openUpgradeLicenceDialog(licenceType, licenceName);
+  }
+
+  openContactInfoDialog() {
+    this._dialogService._openInfoDialog('Vui lòng liên hệ hỗ trợ viên Mr.Long - SĐT, Zalo, Viber 093.757.3139 để được hỗ trợ nâng cấp gói này.');
   }
 
 }

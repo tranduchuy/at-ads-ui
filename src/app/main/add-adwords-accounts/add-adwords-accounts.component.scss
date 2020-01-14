@@ -103,7 +103,7 @@
       width: 100%;
       background: lightyellow;
       padding: 20px;
-      margin-top: 40px;
+      margin-top: 20px;
       border-left: 4px solid darkorange;
       border-radius: 5px;
     }
@@ -210,6 +210,11 @@
           mat-cell {
             font-size: 12px;
           }
+
+          mat-header-row,
+          mat-row {
+            min-width: 400px;
+          }
         }
       }
     }
@@ -289,8 +294,13 @@
 
 @media screen and(max-width: 600px) {
   .container {
+    .title {
+      padding: 45px 20px 20px 20px;
+      height: 15vh;
+      text-align: center;
+    }
     .inner {
-      padding: 15px;
+      margin: 15px;
 
       .instruction-steps {
         margin-top: 10px;
@@ -300,6 +310,15 @@
           margin: 10px;
           height: 90% !important;
           width: 90% !important;
+        }
+      }
+
+      .ads-account-list {
+        padding: 10px;
+        padding-top: 20px;
+
+        .ads-account-list-title {
+          text-align: center;
         }
       }
     }

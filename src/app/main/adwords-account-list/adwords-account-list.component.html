@@ -1,9 +1,12 @@
 <div class="container">
-  <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="space-around" fxLayoutAlign.xs="center center">
-    <span fxFlex="70" class="title1-main">TÀI KHOẢN GOOGLE ADS & WEBSITE</span>
-    <button (click)="router.navigateByUrl('/them-tai-khoan-moi')" mat-raised-button color="warn" class="add-account-button">
-      <mat-icon>library_add</mat-icon> Kết nối tài khoản Google Ads
-    </button>
+  <div class="title1" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="10px" fxLayoutAlign="space-around"
+    fxLayoutAlign.xs="center center">
+    <div fxFlex="70" class="title1-main">TÀI KHOẢN GOOGLE ADS & WEBSITE</div>
+    <div class="add-account">
+      <button (click)="router.navigateByUrl('/them-tai-khoan-moi')" mat-raised-button class="add-account-button">
+        <mat-icon>library_add</mat-icon> Kết nối tài khoản Google Ads
+      </button>
+    </div>
   </div>
 
   <div class="inner">
@@ -32,13 +35,15 @@
             Tài khoản</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div fxLayout="row">
-              <p style="color: #4bb543" *ngIf="element.isConnected && element.websites.length > 0" fxFlex="75" fxFlex.xs="55">
+              <p style="color: #4bb543" *ngIf="element.isConnected && element.websites.length > 0" fxFlex="75"
+                fxFlex.xs="55">
                 <span class="ads-account" matTooltip="Tài khoản đã được chấp nhận quyền quản lý hệ thống.">
                   <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
                   <span class="ads-account-name">{{element.adsName}}</span>
                 </span>
               </p>
-              <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="75" fxFlex.xs="55">
+              <p style="color: orange" *ngIf="element.isConnected && element.websites.length === 0" fxFlex="75"
+                fxFlex.xs="55">
                 <span class="ads-account" matTooltip="Tài khoản chưa có website nào.">
                   <span class="ads-account-id">{{element.adsId | adsAccountId}}</span>
                   <span class="ads-account-name">{{element.adsName}}</span>

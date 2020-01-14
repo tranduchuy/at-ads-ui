@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { CheckWebsiteTrackingDialogComponent } from '../check-website-tracking-dialog/check-website-tracking-dialog.component';
 import { environment } from '../../../../environments/environment';
 import { AddTrackingTagsService } from '../add-tracking-tags.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tracking-website',
@@ -24,7 +25,8 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _matDialog: MatDialog,
-    private _addTrackingTagsService: AddTrackingTagsService
+    private _addTrackingTagsService: AddTrackingTagsService,
+    private _snackBar: MatSnackBar
   ) {
     super();
   }
@@ -44,6 +46,13 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
     this.subscriptions.push(sub);
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['customClass']
+    });
+  }
+
   copyKey(item) {
     document.addEventListener('copy', (e: ClipboardEvent) => {
       e.clipboardData.setData('text/plain', (item));
@@ -51,6 +60,7 @@ export class TrackingWebsiteComponent extends PageBaseComponent implements OnIni
       document.removeEventListener('copy', null);
     });
     document.execCommand('copy');
+    this.openSnackBar('Đã copy mã tracking', 'OK');
   }
 
   checkWebsiteTracking() {

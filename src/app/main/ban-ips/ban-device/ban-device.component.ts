@@ -36,6 +36,7 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
     tablet: false,
     computer: false
   };
+  onLoadDeviceReport: boolean = true;
 
   deviceSettingsItemsSource = {
     mobile: [
@@ -126,11 +127,13 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
         this._fuseProgressBarService.hide();
         this._fuseSplashScreenService.hide();
         this.isProcessing = false;
+        this.onLoadDeviceReport = false;
       },
         (error: HttpErrorResponse) => {
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
           this.isProcessing = false;
+          this.onLoadDeviceReport = false;
 
           if (error.status === 404) {
             this.dialogService._openInfoDialog(

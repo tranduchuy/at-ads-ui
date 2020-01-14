@@ -18,6 +18,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { SelectCampaignsComponent } from './select-campaigns/select-campaigns.component';
 import { AddTrackingTagsService } from './add-tracking-tags.service';
 import { TrackingWebsiteComponent } from './tracking-website/tracking-website.component';
+import { MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [SelectCampaignsComponent, TrackingWebsiteComponent],
@@ -31,6 +32,7 @@ import { TrackingWebsiteComponent } from './tracking-website/tracking-website.co
     MatBadgeModule,
     MatCheckboxModule,
     MatCardModule,
+    MatSnackBarModule,
 
     CheckboxGroupModule,
     ReactiveFormsModule,
