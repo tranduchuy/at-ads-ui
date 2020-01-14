@@ -91,7 +91,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     //   this.isTopbarDisplayed = false;
     // }
 
-    if (currentOffset > 520) {
+    if (currentOffset > 450) {
       this.isLoginButtonDisplayed = true;
       this.isTopbarTitleDisplayed = window.innerWidth > 600 ? true : false;
     } else {
@@ -102,7 +102,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     if(currentOffset >= 1300)
       this.isInstructionDisplayed = true;
 
-    if(currentOffset > 1600)
+    if(currentOffset > 1700)
       this.isFeatureDisplayed = true;
       
     if(currentOffset > 1900)

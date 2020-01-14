@@ -613,16 +613,15 @@
         .overview {
           padding-top: 20px;
           padding-right: 80px;
-          text-shadow: 1px 1px 1px black;
-          -webkit-animation: ani 1s ease-in;
-          @keyframes ani {
+          -webkit-animation: overviewInfoAni 1.2s ease-out;
+          @keyframes overviewInfoAni {
             from {
               opacity: 0;
-              transform: translateY(10vh);
+              transform: translateX(-10vw);
             }
             to {
               opacity: 1;
-              transform: translateY(0);
+              transform: translateX(0);
             }
           }
 
@@ -690,7 +689,7 @@
 
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
-      -webkit-animation: ani 1.4s ease-in;
+      -webkit-animation: ani 1s ease-in;
       @keyframes ani {
         from {
           opacity: 0;
@@ -747,7 +746,7 @@
         background: rgba(0, 0, 0, 0.6);
         // backdrop-filter: blur(4px);
         text-align: center;
-        padding: 120px 250px 120px 250px;
+        padding: 125px 250px 125px 250px;
         color: white;
 
         //background: rgba(125, 125, 125, 0.2);
@@ -837,6 +836,10 @@
           .benefit-description-title {
             font-size: 14px;
             font-weight: bold;
+
+            mat-icon {
+              font-size: 18px;
+            }
           }
         }
       }
@@ -846,7 +849,7 @@
     padding: 100px 250px 30px 250px;
     //background: rgba(0, 0, 0, 0.6);
     background: #006486;
-    // background: rgba(0, 0, 0, 0.5);
+    //background: #00608c;
 
     color: #eee;
     text-align: justify;
