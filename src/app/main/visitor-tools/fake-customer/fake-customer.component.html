@@ -1,0 +1,137 @@
+<div class="container">
+
+  <div class="main-title" fxLayout="row" fxLayout.xs="column">
+    <div class="parent-title">CÔNG CỤ KHÁCH HÀNG
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </div>
+    <div class="subtitle">CẤU HÌNH GIẢ KHÁCH MUA HÀNG - WEBSITE
+      <span class="selected-website">
+        {{(websiteCtrl.value.name || '') | uppercase}}
+      </span>
+    </div>
+  </div>
+
+  <div class="inner" *ngIf="isProcessing === false">
+
+    <div class="no-website-notify" *ngIf="hasWebsite === false">
+      Không tìm thấy website nào.
+    </div>
+
+    <div *ngIf="hasWebsite === true">
+      <mat-form-field class="website-selection">
+        <mat-label>Lựa chọn website</mat-label>
+        <mat-select [formControl]="websiteCtrl" #singleSelect (selectionChange)="selectWebsite()"
+          [disabled]="isProcessing === true">
+          <mat-option>
+            <ngx-mat-select-search [formControl]="websiteFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
+              [noEntriesFoundLabel]="'Không tìm thấy website nào'"></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let website of filteredWebsites | async" [value]="website">
+            {{website.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="fake-customer-config">
+        <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column" fxLayoutGap.xs="0">
+          <div class="config" fxFlex="50">
+            <mat-accordion>
+              <mat-expansion-panel (opened)="configPanelOpenState = true" (closed)="configPanelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-description>
+                    <span class="step-label">1</span>
+                    Vị trí, thời gian hiển thị
+                    <!-- <mat-icon>more_horiz</mat-icon> -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="panel-content">
+                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start center">
+                    <div class="item-title" fxFlex="20">Vị trí</div>
+                    <div class="item-content" fxFlex="80">
+                      <div class="position-selection" fxLayout="row" fxLayoutGap="25px">
+                        <div class="position-option-wrapper" *ngFor="let element of positionOptions"
+                          [class.selected]="element.selected" (click)="onSelectPositionOption(element.value)">
+                          <div class="position-option">
+                            <div class="notification {{element.name}}"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start center">
+                    <div class="item-title" fxFlex="20">Thời gian hiển thị</div>
+                    <div class="item-content" fxFlex="80">
+                      <div class="time-setting">
+                        <span>10 giây</span>
+                        <mat-slider class="example-margin" [disabled]="false" [invert]="false" [max]="90" [min]="10"
+                          [step]="1" [thumbLabel]="true" [tickInterval]="10" [vertical]="false" color="accent">
+                        </mat-slider>
+                        <span>90 giây</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel (opened)="configPanelOpenState = true" (closed)="configPanelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-description>
+                    <span class="step-label">2</span>
+                    Nội dung
+                    <!-- <mat-icon>more_horiz</mat-icon> -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="panel-content">
+                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
+                    <div class="item-title" fxFlex="20">Ảnh đại diện</div>
+                    <div class="item-content" fxFlex="80">
+                      <div class="avatar-selection">
+                        <mat-radio-group fxLayout="row" fxLayoutGap="10px grid" fxLayoutAlign="center center"
+                          (change)="onSelectAvatarOption($event)">
+                          <mat-radio-button *ngFor="let item of avatarOptions" [value]="item.value"
+                            [checked]="item.checked">
+                            {{item.name}}
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                      <div class="avatar-storage" fxLayout="row wrap" fxLayoutAlign="center center">
+                        <img src="{{url}}" alt="" *ngFor="let url of avatars">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel (opened)="configPanelOpenState = true" (closed)="configPanelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-description>
+                    <span class="step-label">3</span>
+                    Màu sắc, định dạng
+                    <!-- <mat-icon>more_horiz</mat-icon> -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="panel-content">
+                  Panel content
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+
+          <div class="sample" fxFlex="50">
+            <div class="browser-container">
+              <div class="browser" fxLayout="column">
+                <div class="website-domain">
+                  <a href="{{websiteCtrl.value.name}}" target="_blank"
+                    matTooltip="Nhấn để truy cập website của bạn">{{websiteCtrl.value.name}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
