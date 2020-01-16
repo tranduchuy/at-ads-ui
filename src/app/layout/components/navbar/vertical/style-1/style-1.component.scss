@@ -243,6 +243,7 @@ navbar {
         max-height: 136px;
         padding: 40px 0 64px 0;
 
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         background-color: #7fcec5;
         background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
@@ -253,7 +254,7 @@ navbar {
           padding: 8px;
           transform: translateX(-50%);
           left: 50%;
-          background: rgba(0, 0, 0, 0.8) !important;
+          background: rgba(0, 0, 0, 0.7) !important;
 
           .avatar {
             width: 62px;
@@ -266,7 +267,7 @@ navbar {
       .navbar-content {
         flex: 1 1 auto;
         padding-top: 32px;
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.7);
       }
     }
   }

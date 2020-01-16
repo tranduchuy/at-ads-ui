@@ -39,6 +39,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   checkAll: boolean;
   hasCampaign: boolean;
   numberOfEnableCampaigns: number;
+  isLoadingCampaigns: boolean;
 
   dataSource = new MatTableDataSource(this.campaignList);
 
@@ -56,6 +57,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
   ngOnInit() {
     this._fuseProgressBarService.show();
     this.isProcessing = true;
+    this.isLoadingCampaigns = true;
     const sub = this.sessionService.getAccountId()
       .pipe(distinctUntilChanged())
       .subscribe((accountId: string) => {
@@ -200,6 +202,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
 
         this._fuseProgressBarService.hide();
         this.isProcessing = false;
+        this.isLoadingCampaigns = false;
         this._fuseSplashScreenService.hide();
       },
         (error: HttpErrorResponse) => {
@@ -207,6 +210,7 @@ export class SelectCampaignsComponent extends PageBaseComponent implements OnIni
           this._fuseProgressBarService.hide();
           this._dialogService._openErrorDialog(error.error);
           this.isProcessing = false;
+          this.isLoadingCampaigns = false;
           this._fuseSplashScreenService.hide();
         });
     this.subscriptions.push(sub);
