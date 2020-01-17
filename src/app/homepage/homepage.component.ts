@@ -36,11 +36,11 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   isContactDisplayed: boolean = false;
   isLoginButtonDisplayed: boolean = false;
   onLoadingImage: boolean = false;
-  isTableDisplayed: boolean = false;
-  isInstructionDisplayed: boolean = false;
-  isFeatureDisplayed: boolean = false;
-  isBenefitDisplayed: boolean = false;
-  isFooterDisplayed: boolean = false;
+  isTableDisplayed: boolean = true;
+  isInstructionDisplayed: boolean = true;
+  isFeatureDisplayed: boolean = true;
+  isBenefitDisplayed: boolean = true;
+  isFooterDisplayed: boolean = true;
 
   constructor(
     private _fuseConfigService: FuseConfigService,
