@@ -8,6 +8,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ColorCircleModule } from 'ngx-color/circle';
 import { FakeCustomerComponent } from './fake-customer/fake-customer.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     SendInfoComponent,
@@ -36,6 +38,8 @@ import { FakeCustomerComponent } from './fake-customer/fake-customer.component';
     MatExpansionModule,
     MatSliderModule,
     MatCheckboxModule,
+
+    DragDropModule,
 
     FuseSharedModule,
 

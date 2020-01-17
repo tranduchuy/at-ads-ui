@@ -11,6 +11,7 @@ import { MatSelect, MatRadioChange, MatSlideToggleChange } from '@angular/materi
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 interface SelectedWebsite {
   id: string;
@@ -152,6 +153,10 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     {
       name: 'Địa điểm',
       value: 4
+    },
+    {
+      name: 'Văn bản',
+      value: 5
     }
   ];
 
@@ -189,6 +194,10 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.selectedTitleFakeDataFields, event.previousIndex, event.currentIndex);
   }
 
   loadAvatarsByOption(option: number) {
@@ -242,7 +251,7 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   onSelectFakeDataField(field: any, option: number) {
     //Title
     if (option === 1) {
-      if (!_.find(this.selectedTitleFakeDataFields, item => item.value === field.value))
+      // if (!_.find(this.selectedTitleFakeDataFields, item => item.value === field.value))
         this.selectedTitleFakeDataFields.push(field);
     }
 

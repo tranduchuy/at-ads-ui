@@ -102,7 +102,7 @@
                 <mat-expansion-panel-header>
                   <mat-panel-description>
                     <span class="step-label">2</span>
-                    Nội dung
+                    Nội dung hiển thị
                     <!-- <mat-icon>more_horiz</mat-icon> -->
                   </mat-panel-description>
                 </mat-expansion-panel-header>
@@ -133,9 +133,10 @@
                     </div>
                   </div>
 
-                  <div class="notice">
-                    <span style="color: crimson; margin-right: 5px">*</span> Vui lòng nhấn chọn nội dung cần hiển thị,
-                    các nội dung sẽ được hiển thị theo thứ tự đã chọn.</div>
+                  <div class="notice" fxLayout="row" fxLayoutGap="10px">
+                    <span style="color: crimson">*</span><span>Vui lòng nhấn chọn thẻ hoặc điền nội
+                      dung
+                      vào thẻ cần hiển thị, nội dung sẽ được hiển thị theo thứ tự các thẻ đã được sắp xếp.</span></div>
 
                   <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="14.3">Tiêu đề</div>
@@ -147,13 +148,16 @@
                             value: item.value
                           }, 1)">{{item.name}}</span>
                         </div>
-                        <div class="fake-data-collection" fxLayout="row wrap" fxLayoutGap="grid"
-                          fxLayoutAlign="start start">
-                          <span class="fake-data selected no-select"
-                            *ngFor="let item of selectedTitleFakeDataFields; let i = index">
+                        <div class="fake-data-collection example-list" fxLayout="row wrap" fxLayoutGap="grid"
+                          fxLayoutAlign="start start" cdkDropList cdkDropListOrientation="horizontal"
+                          (cdkDropListDropped)="drop($event)">
+                          <div class="fake-data selected {{item.value !== 5 ? 'info' : 'text'}} no-select example-box"
+                            *ngFor="let item of selectedTitleFakeDataFields; let i = index" cdkDrag>
                             {{item.name}}
-                            <span class="btn-remove" (click)="removeSelectedFakeDataField(i, 1)">x</span>
-                          </span>
+                            <button mat-icon-button class="btn-remove" (click)="removeSelectedFakeDataField(i, 1)">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
                           <span *ngIf="selectedTitleFakeDataFields.length === 0" class="placeholder">Chưa có nội
                             dung</span>
                         </div>
