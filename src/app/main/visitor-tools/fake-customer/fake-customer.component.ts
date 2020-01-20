@@ -7,7 +7,7 @@ import { SessionService } from 'app/shared/services/session.service';
 import { VisitorToolsService } from '../visitor-tools.service';
 import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import { MatSelect, MatRadioChange, MatSlideToggleChange } from '@angular/material';
+import { MatSelect, MatRadioChange, MatSlideToggleChange, MatSliderChange, MatCheckboxChange } from '@angular/material';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
@@ -20,6 +20,31 @@ interface SelectedWebsite {
   popupConfig: any;
 }
 
+interface FakeCustomerRunningDevice {
+  name: string;
+  value: number;
+  checked: boolean;
+}
+
+interface FakeCustomerDisplayConfig {
+  isEnabled: boolean;
+  runningDevices: FakeCustomerRunningDevice[];
+  positionOnPage: number;
+  autoDisplayTime: number;
+}
+
+interface FakeCustomerContentConfig {
+  avatarType: number;
+  title: string;
+  body: string;
+  pageUrl: string;
+}
+
+interface FakeCustomerStyleConfig {
+  themeColor: string;
+  shape: number;
+}
+
 @Component({
   selector: 'app-fake-customer',
   templateUrl: './fake-customer.component.html',
@@ -29,12 +54,6 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   websites: SelectedWebsite[] = [];
   hasWebsite: boolean;
   isProcessing: boolean;
-  configPanelOpenState: boolean;
-  isAvatarStorageShown: boolean = false;
-
-  selectedPosition: any;
-  selectedThemeColor: string = '#2196f3';
-  selectedShape: any;
 
   /** control for selected website */
   public websiteCtrl: FormControl = new FormControl();
@@ -48,6 +67,13 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
   private _onDestroy = new Subject<void>();
+
+  enableDisplayToggle = {
+    label: 'Cho phép hiển thị',
+    color: 'accent',
+    checked: true,
+    disabled: false
+  };
 
   positionOptions = [
     {
@@ -95,6 +121,8 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     }
   ];
 
+  avatars: string[] = [];
+
   shapeOptions = [
     {
       name: 'Bo góc vuông',
@@ -110,56 +138,76 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     }
   ];
 
-  enabledDeviceOptions = [
-    {
-      name: 'Máy tính',
-      value: 1,
-      checked: true
-    },
-    {
-      name: 'Điện thoại',
-      value: 2,
-      checked: true
-    },
-    {
-      name: 'Máy tính bảng',
-      value: 3,
-      checked: true
-    }
-  ];
-
-  avatars: string[] = [];
-
-  enableDisplayToggle = {
-    label: 'Cho phép hiển thị',
-    color: 'accent',
-    checked: true,
-    disabled: false
+  displayConfig: FakeCustomerDisplayConfig = {
+    isEnabled: false,
+    runningDevices: [
+      {
+        name: 'Máy tính',
+        value: 1,
+        checked: true
+      },
+      {
+        name: 'Điện thoại',
+        value: 2,
+        checked: true
+      },
+      {
+        name: 'Máy tính bảng',
+        value: 3,
+        checked: true
+      }
+    ],
+    positionOnPage: 1,
+    autoDisplayTime: 30
   }
+
+  contentConfig: FakeCustomerContentConfig = {
+    avatarType: this.avatarOptions[0].value,
+    title: 'Khách đang xem sản phẩm',
+    body: '#fake_name đã để lại thông tin: sđt #fake_phone, email #fake_email',
+    pageUrl: 'https://x2.com.vn'
+  }
+
+  styleConfig: FakeCustomerStyleConfig = {
+    themeColor: '#2196f3',
+    shape: 1
+  }
+
+  configPanelOpenState: boolean;
+  isAvatarStorageShown: boolean = false;
+
+  minAutoDisplayTime: number = 10;   // seconds
+  maxAutoDisplayTime: number = 90;   // seconds
+
+  selectedPosition: any;
+  selectedShape: any;
+  sampleTitle: string;
+  sampleBody: string;
+
+  //===================
 
   fakeDataFields = [
     {
-      name: 'Họ tên',
-      value: 1
+      name: '#fake_name',
+      fieldName: '#fake_name',
+      value: 1,
     },
     {
-      name: 'Số điện thoại',
+      name: '#fake_phone',
+      fieldName: '#fake_phone',
       value: 2
     },
     {
-      name: 'Email',
+      name: '#fake_email',
+      fieldName: '#fake_email',
       value: 3
     },
     {
-      name: 'Địa điểm',
+      name: '#fake_location',
+      fieldName: '#fake_location',
       value: 4
-    },
-    {
-      name: 'Văn bản',
-      value: 5
     }
   ];
-
   selectedTitleFakeDataFields = [];
   selectedBodyFakeDataFields = [];
 
@@ -172,11 +220,6 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     private _visitorToolsService: VisitorToolsService
   ) {
     super();
-  }
-
-  ngOnInit() {
-    this.isProcessing = true;
-    this._fuseProgressBarService.show();
 
     this.websiteCtrl.setValue({
       id: '',
@@ -186,6 +229,13 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     this.loadAvatarsByOption(1);
     this.selectedPosition = this.positionOptions[0];
     this.selectedShape = this.shapeOptions[0];
+    this.sampleTitle = this.mapFakeData(this.contentConfig.title);
+    this.sampleBody = this.mapFakeData(this.contentConfig.body);
+  }
+
+  ngOnInit() {
+    this.isProcessing = true;
+    this._fuseProgressBarService.show();
 
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
@@ -194,6 +244,10 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
         }
       });
     this.subscriptions.push(sub);
+  }
+
+  onChangeAutoDisplayTime(e: MatSliderChange) {
+    this.displayConfig.autoDisplayTime = e.value;
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -248,35 +302,121 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     }
   }
 
+  onInputFakeDataText(text: string, data: any) {
+    const { option, index } = data;
+
+    //Title
+    if (option === 1)
+      this.selectedTitleFakeDataFields[index]['text'] = text;
+
+    //Body
+    if (option === 2)
+      this.selectedBodyFakeDataFields[index]['text'] = text;
+  }
+
+  onInputContent(e, opt: number) {
+    const text = e.target.value;
+
+    // Title
+    if (opt === 1) {
+      this.contentConfig.title = text;
+      this.sampleTitle = this.mapFakeData(this.contentConfig.title);
+    }
+
+    // Body
+    if (opt === 2) {
+      this.contentConfig.body = text;
+      this.sampleBody = this.mapFakeData(this.contentConfig.body);
+    }
+  }
+
   onSelectFakeDataField(field: any, option: number) {
+
+    const selectedField = field.fieldName;
+
     //Title
     if (option === 1) {
       // if (!_.find(this.selectedTitleFakeDataFields, item => item.value === field.value))
-        this.selectedTitleFakeDataFields.push(field);
+      // this.selectedTitleFakeDataFields.push(field);
+      this.contentConfig.title += selectedField;
+      this.sampleTitle = this.mapFakeData(this.contentConfig.title);
     }
 
     //Body
     if (option === 2) {
-      if (!_.find(this.selectedBodyFakeDataFields, item => item.value === field.value))
-        this.selectedBodyFakeDataFields.push(field);
+      // if (!_.find(this.selectedBodyFakeDataFields, item => item.value === field.value))
+      // this.selectedBodyFakeDataFields.push(field);
+      this.contentConfig.body += selectedField;
+      this.sampleBody = this.mapFakeData(this.contentConfig.body);
     }
   }
 
-  onCheckEnableDisplayToggle(e: MatSlideToggleChange) {
-    console.log(e);
+  clearAllSelectedFakeData(option: number) {
+    //Title
+    if (option === 1) {
+      // this.selectedTitleFakeDataFields = [];
+      this.contentConfig.title = '';
+      this.sampleTitle = '';
+    }
+
+    //Body
+    if (option === 2)
+      // this.selectedBodyFakeDataFields = [];
+      this.contentConfig.body = '';
+    this.sampleBody = '';
   }
 
-  onSelectThemeColor(e) {
-    this.selectedThemeColor = e.color.hex;
+  generateFakeCustomerConfig(opt: number): FakeCustomerDisplayConfig | FakeCustomerContentConfig | FakeCustomerStyleConfig | null {
+    if (opt === 1)
+      return this.displayConfig;
+
+    if (opt === 2)
+      return this.contentConfig;
+
+    if (opt === 3)
+      return this.styleConfig;
+
+    return null;
+  }
+
+  mapFakeData(text: string) {
+    const mappedText = text
+      .replace(/#fake_name/g, 'Tue Vo')
+      .replace(/#fake_phone/g, '0932 659 211')
+      .replace(/#fake_email/g, 'tuevo.it@gmail.com')
+      .replace(/#fake_location/g, '31 Vo Van Tan');
+
+    return mappedText;
+  }
+
+  applyFakeCustomerConfig(opt: number): any {
+    const params = this.generateFakeCustomerConfig(opt);
+    if (params) {
+      console.log(params);
+    }
+  }
+
+  onInputPageUrl(e: any) {
+    this.contentConfig.pageUrl = e.target.value;
+  }
+
+  onCheckEnableDisplayToggle(e: MatSlideToggleChange) {
+    this.displayConfig.isEnabled = e.checked;
+  }
+
+  onSelectThemeColor(e: any) {
+    this.styleConfig.themeColor = e.color.hex;
   }
 
   onSelectPositionOption(value: number) {
-    for (const option of this.positionOptions)
-      if (option.value === value) {
-        option.selected = true;
-        this.selectedPosition = option;
+    for (const opt of this.positionOptions)
+      if (opt.value === value) {
+        opt.selected = true;
+        this.selectedPosition = opt;
       }
-      else option.selected = false;
+      else opt.selected = false;
+
+    this.displayConfig.positionOnPage = value;
   }
 
   onSelectAvatarOption(e: MatRadioChange) {
@@ -285,6 +425,7 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
         option.checked = true;
       else option.checked = false;
 
+    this.contentConfig.avatarType = e.value;
     this.loadAvatarsByOption(e.value);
   }
 
@@ -295,10 +436,13 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
         this.selectedShape = option;
       }
       else option.checked = false;
+
+    this.styleConfig.shape = e.value;
   }
 
-  onSelectEnabledDeviceCheckBox(value: number) {
-    console.log(value);
+  onSelectRunningDeviceCheckBox(e: MatCheckboxChange, value: number) {
+    const checkedDevice = _.find(this.displayConfig.runningDevices, d => d.value === value);
+    checkedDevice.checked = e.checked;
   }
 
   getWebsites(accountId: string) {

@@ -33,7 +33,7 @@
       </mat-form-field>
 
       <div class="fake-customer-config">
-        <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column" fxLayoutGap.xs="0">
+        <div fxLayout="row" fxLayoutGap="25px" fxLayout.xs="column" fxLayoutGap.xs="0">
           <div class="config" fxFlex="50">
             <mat-accordion>
               <mat-expansion-panel (opened)="configPanelOpenState = true" (closed)="configPanelOpenState = false">
@@ -46,33 +46,33 @@
                 </mat-expansion-panel-header>
                 <div class="panel-content">
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Cho phép hiển thị</div>
                     <div class="item-content" fxFlex="80">
                       <div class="enabled-toggle">
-                        <mat-slide-toggle [color]="enableDisplayToggle.color" [checked]="enableDisplayToggle.checked"
+                        <mat-slide-toggle [color]="enableDisplayToggle.color" [checked]="displayConfig.isEnabled"
                           [disabled]="enableDisplayToggle.disabled" (change)="onCheckEnableDisplayToggle($event)">
                         </mat-slide-toggle>
                       </div>
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Thiết bị</div>
                     <div class="item-content" fxFlex="80">
                       <div class="enabled-device-selection">
-                        <mat-checkbox *ngFor="let item of enabledDeviceOptions" [checked]="item.checked"
-                          (change)="onSelectEnabledDeviceCheckBox(item.value)">
+                        <mat-checkbox *ngFor="let item of displayConfig.runningDevices" [checked]="item.checked"
+                          (change)="onSelectRunningDeviceCheckBox($event, item.value)">
                           {{item.name}}
                         </mat-checkbox>
                       </div>
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start center">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start center">
                     <div class="item-title" fxFlex="20">Vị trí</div>
                     <div class="item-content" fxFlex="80">
-                      <div class="position-selection" fxLayout="row" fxLayoutGap="36px">
+                      <div class="position-selection" fxLayout="row" fxLayoutGap="31px">
                         <div class="position-option-wrapper" *ngFor="let element of positionOptions"
                           [class.selected]="element.selected" (click)="onSelectPositionOption(element.value)">
                           <div class="position-option">
@@ -83,18 +83,25 @@
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start center">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start center">
                     <div class="item-title" fxFlex="20">Thời gian hiển thị</div>
                     <div class="item-content" fxFlex="80">
                       <div class="time-setting">
-                        <span>10 giây</span>
-                        <mat-slider class="example-margin" [disabled]="false" [invert]="false" [max]="90" [min]="10"
-                          [step]="1" [thumbLabel]="true" [tickInterval]="10" [vertical]="false" color="accent">
+                        <span>{{minAutoDisplayTime}} giây</span>
+                        <mat-slider class="example-margin" [value]="displayConfig.autoDisplayTime" [disabled]="false"
+                          [invert]="false" [min]="minAutoDisplayTime" [max]="maxAutoDisplayTime" [step]="1"
+                          [thumbLabel]="true" [tickInterval]="10" [vertical]="false" color="accent"
+                          (change)="onChangeAutoDisplayTime($event)">
                         </mat-slider>
-                        <span>90 giây</span>
+                        <span>{{maxAutoDisplayTime}} giây</span>
                       </div>
                     </div>
                   </div>
+
+                  <div class="btn-apply">
+                    <button mat-stroked-button (click)="applyFakeCustomerConfig(1)">Áp dụng</button>
+                  </div>
+
                 </div>
               </mat-expansion-panel>
 
@@ -108,7 +115,7 @@
                 </mat-expansion-panel-header>
                 <div class="panel-content">
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Ảnh đại diện</div>
                     <div class="item-content" fxFlex="80">
                       <div class="avatar-selection">
@@ -134,69 +141,130 @@
                   </div>
 
                   <div class="notice" fxLayout="row" fxLayoutGap="10px">
-                    <span style="color: crimson">*</span><span>Vui lòng nhấn chọn thẻ hoặc điền nội
-                      dung
-                      vào thẻ cần hiển thị, nội dung sẽ được hiển thị theo thứ tự các thẻ đã được sắp xếp.</span></div>
+                    <span style="color: crimson">*</span><span>
+                      Bạn có thể sử dụng cú pháp <span class="highline">#fake_name</span> <span
+                        class="highline">#fake_phone</span> <span class="highline">#fake_email</span> hoặc
+                      <span class="highline">#fake_location</span> để thêm vào tiêu đề và nội dung. Cú pháp sẽ làm cho
+                      nội
+                      dung sinh động hơn.
+                    </span>
+                  </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="14.3">Tiêu đề</div>
                     <div class="item-content" fxFlex="85.7">
                       <div class="custom-content">
                         <div class="fake-data-selection" fxLayout="row wrap" fxLayoutGap="grid">
-                          <span class="fake-data sample no-select" *ngFor="let item of fakeDataFields" (click)="onSelectFakeDataField({
+
+                          <span class="fake-data sample no-select {{item.value !== 5 ? 'info' : 'text'}}"
+                            *ngFor="let item of fakeDataFields" (click)="onSelectFakeDataField({
                             name: item.name,
+                            fieldName: item.fieldName,
                             value: item.value
                           }, 1)">{{item.name}}</span>
+
+                          <div class="btn-clear-all-selected">
+                            <span class="no-select" (click)="clearAllSelectedFakeData(1)">Clear all</span>
+                          </div>
+
                         </div>
-                        <div class="fake-data-collection example-list" fxLayout="row wrap" fxLayoutGap="grid"
+
+                        <!-- <div class="fake-data-collection no-select example-list" fxLayout="row wrap" fxLayoutGap="grid"
                           fxLayoutAlign="start start" cdkDropList cdkDropListOrientation="horizontal"
                           (cdkDropListDropped)="drop($event)">
+
                           <div class="fake-data selected {{item.value !== 5 ? 'info' : 'text'}} no-select example-box"
                             *ngFor="let item of selectedTitleFakeDataFields; let i = index" cdkDrag>
-                            {{item.name}}
+
+                            <span *ngIf="item.value !== 5">{{item.name}}</span>
+
+                            <textarea *ngIf="item.value === 5" type="text" placeholder="Nhập nội dung" autofocus
+                              (input)="onInputFakeDataText($event.target.value, {option: 1, index: i})"></textarea>
+
                             <button mat-icon-button class="btn-remove" (click)="removeSelectedFakeDataField(i, 1)">
                               <mat-icon>close</mat-icon>
                             </button>
+
                           </div>
+
                           <span *ngIf="selectedTitleFakeDataFields.length === 0" class="placeholder">Chưa có nội
                             dung</span>
-                        </div>
+
+                        </div> -->
+
+                        <textarea class="fake-data-input" placeholder="Chưa có nội dung"
+                          [(ngModel)]="contentConfig.title" (input)="onInputContent($event, 1)">{{contentConfig.title}}</textarea>
+
                       </div>
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="14.3">Nội dung</div>
                     <div class="item-content" fxFlex="85.7">
                       <div class="custom-content">
                         <div class="fake-data-selection" fxLayout="row wrap" fxLayoutGap="grid">
-                          <span class="fake-data sample no-select" *ngFor="let item of fakeDataFields" (click)="onSelectFakeDataField({
-                              name: item.name,
-                              value: item.value
-                            }, 2)">{{item.name}}</span>
+
+                          <span class="fake-data sample no-select {{item.value !== 5 ? 'info' : 'text'}}"
+                            *ngFor="let item of fakeDataFields" (click)="onSelectFakeDataField({
+                            name: item.name,
+                            fieldName: item.fieldName,
+                            value: item.value
+                          }, 2)">{{item.name}}</span>
+
+                          <div class="btn-clear-all-selected">
+                            <span class="no-select" (click)="clearAllSelectedFakeData(2)">Clear all</span>
+                          </div>
+
                         </div>
-                        <div class="fake-data-collection" fxLayout="row wrap" fxLayoutGap="grid"
-                          fxLayoutAlign="start start">
-                          <span class="fake-data selected no-select"
-                            *ngFor="let item of selectedBodyFakeDataFields; let i = index">
-                            {{item.name}}
-                            <span class="btn-remove" (click)="removeSelectedFakeDataField(i, 2)">x</span>
-                          </span>
+
+                        <!-- <div class="fake-data-collection no-select example-list" fxLayout="row wrap" fxLayoutGap="grid"
+                          fxLayoutAlign="start start" cdkDropList cdkDropListOrientation="horizontal"
+                          (cdkDropListDropped)="drop($event)">
+
+                          <div class="fake-data selected {{item.value !== 5 ? 'info' : 'text'}} no-select example-box"
+                            *ngFor="let item of selectedBodyFakeDataFields; let i = index" cdkDrag>
+
+                            <span *ngIf="item.value !== 5">{{item.name}}</span>
+
+                            <textarea *ngIf="item.value === 5" type="text" placeholder="Nhập nội dung" autofocus
+                              (input)="onInputFakeDataText($event.target.value, {option: 2, index: i})"></textarea>
+
+                            <button mat-icon-button class="btn-remove" (click)="removeSelectedFakeDataField(i, 2)">
+                              <mat-icon>close</mat-icon>
+                            </button>
+
+                          </div>
+
                           <span *ngIf="selectedBodyFakeDataFields.length === 0" class="placeholder">Chưa có nội
                             dung</span>
+
+                        </div> -->
+
+                        <textarea class="fake-data-input" placeholder="Chưa có nội dung"
+                          [(ngModel)]="contentConfig.body" (input)="onInputContent($event, 2)">{{contentConfig.body}}</textarea>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                    <div class="item-title" fxFlex="14.3">Link đến trang</div>
+                    <div class="item-content" fxFlex="85.7">
+                      <div class="enter-page-url">
+                        <input type="text" placeholder="Chưa có đường dẫn" value="{{contentConfig.pageUrl}}"
+                          (input)="onInputPageUrl($event)">
+
+                        <div class="enter-page-url__notice">
+                          <span style="color: crimson">*</span> Đường dẫn phải kèm theo <span
+                            class="highline">http://</span> hoặc <span class="highline">https://</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
-                    <div class="item-title" fxFlex="14.3">Link trang</div>
-                    <div class="item-content" fxFlex="85.7">
-                      <div class="enter-page-url">
-                        <input type="text" placeholder="Đường dẫn phải kèm theo http:// hoặc https://"
-                          value="https://x2.com.vn">
-                      </div>
-                    </div>
+                  <div class="btn-apply">
+                    <button mat-stroked-button (click)="applyFakeCustomerConfig(2)">Áp dụng</button>
                   </div>
 
                 </div>
@@ -211,18 +279,18 @@
                   </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="panel-content">
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Màu sắc chủ đề</div>
                     <div class="item-content" fxFlex="80">
                       <div class="theme-color-selection">
-                        <color-circle [color]="selectedThemeColor" (onChangeComplete)="onSelectThemeColor($event)"
+                        <color-circle [color]="styleConfig.themeColor" (onChangeComplete)="onSelectThemeColor($event)"
                           circleSize="15" width="100%">
                         </color-circle>
                       </div>
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Hình dạng</div>
                     <div class="item-content" fxFlex="80">
                       <div class="shape-selection">
@@ -234,6 +302,10 @@
                         </mat-radio-group>
                       </div>
                     </div>
+                  </div>
+
+                  <div class="btn-apply">
+                    <button mat-stroked-button (click)="applyFakeCustomerConfig(3)">Áp dụng</button>
                   </div>
 
                 </div>
@@ -249,21 +321,19 @@
                     matTooltip="Nhấn để truy cập website của bạn">{{websiteCtrl.value.name}}</a>
                 </div>
                 <div class="fake-customer {{selectedPosition.name}} {{selectedShape.style}}" fxLayout="row"
-                  fxLayoutGap="5px" fxLayoutAlign="start center"
-                  [style.border-left]="'4px solid ' + selectedThemeColor">
+                  fxLayoutAlign="start center" [style.border-left]="'4px solid ' + styleConfig.themeColor">
                   <div class="avatar-area">
                     <div class="avatar">
                       <img src="{{avatars[0]}}" alt="">
                     </div>
                   </div>
                   <div class="content">
-                    <div class="title">Tue Vo</div>
-                    <div class="body" fxLayout="column">
-                      <span class="phone">0932 659 211</span>
-                      <span class="email">tuevo.it@gmail.com</span>
-                      <span class="location">31 Vo Van Tan, District 3</span>
+                    <div class="title">{{sampleTitle || 'Chưa có tiêu đề'}}</div>
+                    <div class="body" fxLayout="column">{{sampleBody || 'Chưa có nội dung'}}</div>
+                    <div class="page-url">
+                      <a href="{{contentConfig.pageUrl}} || ''"
+                        [style.color]="styleConfig.themeColor">{{contentConfig.pageUrl || 'Chưa có link'}}</a>
                     </div>
-                    <div class="page-link"></div>
                   </div>
                 </div>
               </div>
