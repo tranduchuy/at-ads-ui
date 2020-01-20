@@ -7,7 +7,7 @@ export const environment = {
   hmr: false,
   hostApi: 'http://localhost:3000',
   googleAuth2ClientID: '246364548184-qi67l6sl8p9rlv8e8ev1p6329caf8gfr.apps.googleusercontent.com',
-  hostTracking: '//159.65.11.195:3001/static/tracking.js',
+  hostTracking: 'https://159.65.11.195:3001/static/tracking.js',
   oauth2RedirectUri: 'http://localhost:4200',
   cookieDomain: 'localhost'
 };
