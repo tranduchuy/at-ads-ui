@@ -89,12 +89,8 @@
                       </div>
                       <div class="background-image-selection-storage">
                         <mat-label style="color: gray; font-size: 12px">Ảnh đại diện</mat-label>
-                        <div class="form-control">
-                          <mat-grid-list cols="4" rowHeight="100px" gutterSize="10px">
-                            <mat-grid-tile *ngFor="let img of images" [colspan]="img.cols" [rowspan]="img.rows">
-                              <img src="{{img.url}}" alt="" (click)="selectSupporterAvatar(img.url)">
-                            </mat-grid-tile>
-                          </mat-grid-list>
+                        <div class="form-control" fxLayout="row wrap" fxLayoutGap="grid">
+                          <img src="{{url}}" alt="" *ngFor="let url of images" (click)="selectSupporterAvatar(url)">
                         </div>
                       </div>
                     </div>
@@ -200,7 +196,7 @@
                         </p>
                       </div>
                       <div class="background-img" fxFlex="40">
-                        <img src="{{popupStyleForm.controls['supporterAvatar'].value}}" alt="">
+                        <div class="supporter-avatar" [style.background-image]="'url(' + popupStyleForm.controls['supporterAvatar'].value + ')'"></div>
                         <div class="supporter-name">{{popupStyleForm.controls['supporterName'].value || ''}}</div>
                         <div class="supporter-major">{{popupStyleForm.controls['supporterMajor'].value || ''}}</div>
                         <div class="supporter-phone">

@@ -3,7 +3,7 @@
     GẮN TRACKING THEO DÕI CHIẾN DỊCH TÀI KHOẢN <span class="adsId">{{sessionService.activeAdsAccountId}}</span>
   </div>
 
-  <div class="inner">
+  <div class="inner" *ngIf="!isLoadingCampaigns">
     <p class="usage">
       <b>Công dụng của Tracking:</b> Tracking là đoạn mã nhỏ, tích hợp vào trong quảng cáo Google Ads để theo dõi hoạt
       động

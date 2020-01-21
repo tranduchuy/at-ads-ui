@@ -32,26 +32,10 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
   isProcessing: boolean;
 
   images = [
-    {
-      url: 'http://vaytienkhongthechap.net.vn/wp-content/uploads/2016/04/telephone_skills.jpg',
-      cols: 1,
-      rows: 1
-    },
-    {
-      url: 'https://tekshanghai.com/wp-content/uploads/2018/12/tek-contact-us-support-man.png.png',
-      cols: 1,
-      rows: 1
-    },
-    {
-      url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRxpmxve4G01hSCfB-D1bmdznjBweo6vgAD_ZM06cxUeBAHmtf1',
-      cols: 1,
-      rows: 1
-    },
-    {
-      url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFcmk67STyYb6HciXbcTguIXPJ69M9iLT5PjM2sFBU_xatnOi-',
-      cols: 1,
-      rows: 1
-    }
+    'http://vaytienkhongthechap.net.vn/wp-content/uploads/2016/04/telephone_skills.jpg',
+    'https://tekshanghai.com/wp-content/uploads/2018/12/tek-contact-us-support-man.png.png',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRxpmxve4G01hSCfB-D1bmdznjBweo6vgAD_ZM06cxUeBAHmtf1',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFcmk67STyYb6HciXbcTguIXPJ69M9iLT5PjM2sFBU_xatnOi-'
   ];
 
   popupDisplayEnableSlideToggle = {
@@ -157,6 +141,9 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     private _visitorToolsService: VisitorToolsService
   ) {
     super();
+
+    for (let i = 11; i <= 30; i++)
+      this.images.push(`//w.cokhach.com/assets/images/background/popup-bg-${i}.jpg`);
   }
 
   ngOnInit() {
@@ -258,7 +245,7 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     } else {
       popupStyleConfig = {
         themeColor: '#2196f3',
-        supporterAvatar: this.images[0].url,
+        supporterAvatar: this.images[0],
         supporterName: 'Nguyễn Thị A',
         supporterMajor: 'Hỗ trợ viên',
         supporterPhone: '0999999999',
@@ -316,7 +303,7 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
   initForms() {
     this.popupStyleForm = new FormGroup({
       themeColor: new FormControl('#2196f3'),
-      supporterAvatar: new FormControl(this.images[0].url),
+      supporterAvatar: new FormControl(this.images[0]),
       supporterName: new FormControl('Nguyễn Thị A', [
         Validators.required
       ]),
