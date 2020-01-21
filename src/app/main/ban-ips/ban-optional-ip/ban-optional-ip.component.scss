@@ -97,6 +97,11 @@
 
     .button-area {
       margin-top: 15px;
+
+      mat-icon {
+        font-size: 18px;
+        margin-top: 3px;
+      }
     }
 
     .blacklist {
