@@ -157,7 +157,15 @@ export const navigation: FuseNavigation[] = [
         type: 'item',
         icon: 'live_help',
         url: '/cong-cu-khach-hang/gui-thong-tin-tu-van',
-      }
+      },
+      // {
+      //   id: 'fake-customer',
+      //   title: 'Giả khách mua hàng',
+      //   translate: 'NAV.SAMPLE.TITLE',
+      //   type: 'item',
+      //   icon: 'person_pin',
+      //   url: '/cong-cu-khach-hang/gia-khach-mua-hang',
+      // }
     ]
   },
   {
