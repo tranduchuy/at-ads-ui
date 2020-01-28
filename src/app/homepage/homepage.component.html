@@ -1,7 +1,7 @@
 <div class="homepage">
 
    <div class="contact" *ngIf="isContactDisplayed">
-      Vui lòng liên hệ email <span style="color: orange">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
+      Vui lòng liên hệ email <span class="feature-info-highline2">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
    </div>
 
    <div class="topbar-container" *ngIf="isTopbarDisplayed">
@@ -10,19 +10,18 @@
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
                <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
                <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed">
-                  CHẶN CLICK ẢO 2019
+                  {{APP_INFO.name + ' ' + APP_INFO.yearOfRelease}}
                </span>
             </div>
             <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin && isLoginButtonDisplayed"
                class="topbar-google-button" fxFlex="nogrow" [disabled]="isProcessing">
-               <img src="../../assets/icons/google-icon.png"
-                  style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
+               <img src="../../assets/icons/google-icon.png" alt=""> Đăng nhập bằng
                Google
             </button>
-            <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()"
+            <!-- <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()"
                *ngIf="isOnLogin && isLoginButtonDisplayed" fxFlex="nogrow" [disabled]="isProcessing">
                TRUY CẬP HỆ THỐNG CHẶN CLICK ẢO<mat-icon style="font-size: 20px">navigate_next</mat-icon>
-            </button>
+            </button> -->
          </div>
       </div>
    </div>
@@ -37,7 +36,8 @@
             <div class="title1 app-title">
                <div class="insider">
                   <span class="shiny">
-                     <span class="inner-shiny">Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads</span>
+                     <span class="inner-shiny">Chặn Click Ảo {{APP_INFO.yearOfRelease}} - Giảm đến 50% phí quảng cáo
+                        Google Ads</span>
                   </span>
                </div>
             </div>
@@ -75,13 +75,13 @@
                   <img src="../../assets/icons/google-icon.png" class="gg-icon" alt=""> Đăng nhập bằng
                   Google
                </button>
-               <button mat-raised-button class="access-system-button" (click)="checkLogin()" *ngIf="isOnLogin">
+               <!-- <button mat-raised-button class="access-system-button" (click)="checkLogin()" *ngIf="isOnLogin">
                   TRUY CẬP HỆ THỐNG CHẶN CLICK ẢO<mat-icon style="font-size: 20px">navigate_next</mat-icon>
-               </button>
+               </button> -->
             </div>
 
             <!-- <div class="login">
-               <a routerLink="/auth/login" style="color: skyblue">Đăng nhập tài khoản</a>
+               <a routerLink="/auth/login" class="feature-info-highline">Đăng nhập tài khoản</a>
             </div> -->
 
          </div>
@@ -133,11 +133,10 @@
                   <mat-cell *matCellDef="let element">
 
                      <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge" style="color: #0066d7"></i>
-                     <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"
-                        style="color: orange"></i>
+                     <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser" style="color: orange"></i>
                      <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
                         class="fab fa-chrome" style="color: lightgreen"></i>
-                     <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome" style="color: skyblue"></i>
+                     <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome" style="color: lightblue"></i>
                      <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
                         class="fab fa-safari" style="color: #00baee"></i>
                      <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"
@@ -261,9 +260,10 @@
                      (click)="showImageDialog('../../assets/images/step1.png')" (load)="onLoadingImage = true"
                      [class.onLoadingImage]="onLoadingImage">
                      <div class="step-description">
-                        <span class="step-name">Bước 1: Liên kết Google Ads</span>
+                        <span class="step-label">1</span>
+                        <span class="step-name">Liên kết Google Ads</span>
                         <p>
-                           Liên kết tài khoản quảng cáo <span style="color:skyblue">Google Ads</span> của bạn với hệ
+                           Liên kết tài khoản quảng cáo <span class="step-highline">Google Ads</span> của bạn với hệ
                            thống
                            của Appnet Technology.
                         </p>
@@ -276,7 +276,8 @@
                      (click)="showImageDialog('../../assets/images/step2.png')" (load)="onLoadingImage = true"
                      [class.onLoadingImage]="onLoadingImage">
                      <div class="step-description">
-                        <span class="step-name">Bước 2: Theo dõi click quảng cáo</span>
+                        <span class="step-label">2</span>
+                        <span class="step-name">Theo dõi click quảng cáo</span>
                         <p>
                            Theo dõi thiết bị, trình duyệt, vị trí đang click quảng cáo của bạn. Xác định đối tượng phá
                            hoại.
@@ -290,7 +291,8 @@
                      (click)="showImageDialog('../../assets/images/step3.png')" (load)="onLoadingImage = true"
                      [class.onLoadingImage]="onLoadingImage">
                      <div class="step-description">
-                        <span class="step-name">Bước 3: Chặn click ảo</span>
+                        <span class="step-label">3</span>
+                        <span class="step-name">Chặn click ảo</span>
                         <p>
                            Thực hiện chặn những IP đang phá hoại bằng tác vụ thủ công hoặc tự động.
                         </p>
@@ -309,7 +311,7 @@
                   <img src="../../assets/icons/bulb-icon.png" alt="" loading="lazy">
                   <span>Thông minh hơn</span>
                </p>
-               <mat-divider style="border: 0.5px solid gray"></mat-divider>
+               <mat-divider></mat-divider>
                <div class="overview-info">
                   Tích hợp 10 công cụ giảm chi phí trong 1 tool duy nhất.
                   <br>
@@ -318,9 +320,9 @@
                   tương
                   tác trực tiếp đến quảng cáo của bạn, cải thiện nó giúp bạn tiết kiệm đáng kể chi phí và thời gian.
                   <br>
-                  <div class="trial">
+                  <div class="trial-button">
                      <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
-                        DÙNG THỬ NGAY <mat-icon style="font-size: 20px">navigate_next</mat-icon>
+                        DÙNG THỬ NGAY <mat-icon>navigate_next</mat-icon>
                      </button>
                   </div>
                </div>
@@ -337,7 +339,7 @@
                         <span class="feature-name">Chặn theo IP</span>
                         <p>
                            Giải pháp chặn click ảo theo IP này được cải tiến hơn nhờ sự đồng bộ với toàn bộ mạng lưới
-                           <span style="color: skyblue">Big Data</span> giúp chặn chính xác hơn.
+                           <span class="feature-info-highline">Big Data</span> giúp chặn chính xác hơn.
                         </p>
                      </div>
                   </div>
@@ -349,8 +351,9 @@
                      <div class="feature-description">
                         <span class="feature-name">Chặn trình duyệt ẩn danh</span>
                         <p>
-                           Nhận diện người dùng đang sử dụng <span style="color:skyblue">Trình duyệt Ẩn danh</span>, từ
-                           đó có thể <span style="color: orange">ngừng quảng cáo</span>, giúp
+                           Nhận diện người dùng đang sử dụng <span class="feature-info-highline">Trình duyệt Ẩn
+                              danh</span>, từ
+                           đó có thể <span class="feature-info-highline2">ngừng quảng cáo</span>, giúp
                            tiết kiệm chi phí với những người dùng muốn dấu thông tin truy cập vào quảng cáo.
                         </p>
                      </div>
@@ -363,7 +366,7 @@
                         <span class="feature-name">Chặn theo 3G & 4G</span>
                         <p>
                            Chỉ với 1 thao tác bạn có thể chặn quảng cáo trên toàn bộ mạng 3G & 4G, giúp ngăn chặn <span
-                              style="color: orange">Click ảo</span> hiệu quả.
+                              class="feature-info-highline2">Click ảo</span> hiệu quả.
                         </p>
                      </div>
                   </div>
@@ -374,7 +377,8 @@
                      <div class="feature-description">
                         <span class="feature-name">Chặn theo Big Data</span>
                         <p>
-                           Dựa vào thống kê các IP đang phá hoại bằng <span style="color: orange">Click ảo</span> trên
+                           Dựa vào thống kê các IP đang phá hoại bằng <span class="feature-info-highline2">Click
+                              ảo</span> trên
                            toàn bộ
                            mạng
                            lưới, bạn có thể thiết lập chặn toàn bộ các IP này.
@@ -392,7 +396,7 @@
                      <span class="feature-name">Chặn theo thiết bị</span>
                      <p>
                         Dễ dàng theo dõi tình trạng bật/tắt quảng cáo theo từng thiết bị: <span
-                           style="color: skyblue">Mobile,
+                           class="feature-info-highline">Mobile,
                            Tablet, PC</span>. Nếu bạn muốn tắt quảng cáo trên các thiết bị này chỉ cần bấm là xong.
                      </p>
                   </div>
@@ -404,10 +408,12 @@
                   <div class="feature-description">
                      <span class="feature-name">Chặn theo mạng lưới</span>
                      <p>
-                        Xem xét quảng cáo đang hiển thị ở đâu trên <span style="color: skyblue">Google Search</span> hay
+                        Xem xét quảng cáo đang hiển thị ở đâu trên <span class="feature-info-highline">Google
+                           Search</span> hay
                         trên
-                        <span style="color: skyblue">đối tác</span> của Google. Liều thuốc đơn giản nhưng tiết kiệm đến
-                        <span style="color: orange; font-weight: bold">30%</span> chi phí.
+                        <span class="feature-info-highline">Đối tác</span> của Google. Liều thuốc đơn giản nhưng tiết
+                        kiệm đến
+                        <span class="feature-info-highline2">30%</span> chi phí.
                      </p>
                   </div>
                </div>
@@ -418,9 +424,10 @@
                   <div class="feature-description">
                      <span class="feature-name">Tỉnh-Thành quảng cáo</span>
                      <p>
-                        Biết chính xác các <span style="color: skyblue">tỉnh, thành</span> đang hiện quảng cáo. Bạn có
+                        Biết chính xác các <span class="feature-info-highline">tỉnh, thành</span> đang hiện quảng cáo.
+                        Bạn có
                         thể
-                        <span style="color: orange">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
+                        <span class="feature-info-highline2">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
                      </p>
                   </div>
                </div>
@@ -432,7 +439,7 @@
                      <span class="feature-name">Blacklist / Whitelist</span>
                      <p>
                         Nếu bạn biết chính xác địa chỉ IP của đối thủ, hoặc của khách hàng, bạn có thể <span
-                           style="color: orange">ngưng quảng cáo</span>
+                           class="feature-info-highline2">ngưng quảng cáo</span>
                         với đối thủ để tránh mất thêm chi phí và luôn hiển thị quảng cáo tới khách hàng của mình.
                      </p>
                   </div>
@@ -462,9 +469,10 @@
                      <i class="fas fa-hand-holding-usd"></i>
                   </div>
                   <div class="benefit-description">
-                     <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon style="color: lime">add</mat-icon>
+                     <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon>add</mat-icon>
                      </p>
-                     Giảm thiểu đến 50% chi phí quảng cáo <span style="color: orange">lãng phí vô ích</span> do đối thủ
+                     Giảm thiểu đến 50% chi phí quảng cáo <span class="benefit-info-highline">lãng phí vô ích</span> do
+                     đối thủ
                      phá
                      hoại
                      hay virus, bot click quảng cáo.
@@ -475,7 +483,7 @@
                      <i class="fas fa-history"></i>
                   </div>
                   <div class="benefit-description">
-                     <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon style="color: lime">arrow_downward
+                     <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon>arrow_downward
                         </mat-icon>
                      </p>
                      Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn 24h/ngày và 7
@@ -483,14 +491,15 @@
                   </div>
                </div>
                <div class="main-benefit-item">
-                  <div class="benefit-symbol">
+                  <div class="benefit-symbol increase-customer">
                      <i class="fas fa-user-plus"></i>
                   </div>
                   <div class="benefit-description">
-                     <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon style="color: lime">arrow_upward
+                     <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon>arrow_upward
                         </mat-icon>
                      </p>
-                     Giảm các chi phí <span style="color:orange">lãng phí</span> do click ảo, bạn sẽ có thêm chi phí
+                     Giảm các chi phí <span class="benefit-info-highline">lãng phí</span> do click ảo, bạn sẽ có thêm
+                     chi phí
                      quảng
                      cáo.
                      Từ
@@ -517,8 +526,8 @@
             hệ
             với chúng tôi.
             <div class="view-more-button">
-               <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
-                  XEM THÊM <mat-icon style="font-size: 20px; color: white">navigate_next</mat-icon>
+               <button mat-button (click)="checkLogin()" [disabled]="isProcessing">
+                  XEM THÊM <mat-icon>navigate_next</mat-icon>
                </button>
             </div>
          </div>
@@ -579,8 +588,8 @@
                   Chi phí là bao nhiêu?
                </span>
                <p>
-                  Chi phí bạn thanh toán hàng tháng đối với mỗi tài khoản Google Ads được tối ưu là <strong>600.000
-                     VNĐ/tháng</strong>. Bạn sẽ có thể thêm không giới hạn tài khoản Google Ads.
+                  Chi phí bạn thanh toán hàng tháng đối với mỗi tài khoản Google Ads được tối ưu là
+                  <strong>{{LICENCE.VIP.price}}</strong>. Bạn sẽ có thể thêm không giới hạn tài khoản Google Ads.
                </p>
             </div>
          </div>
@@ -622,7 +631,7 @@
 
    <div class="footer-contact-container" *ngIf="isContactFooterDisplayed">
       <div class="footer-contact">
-         Vui lòng liên hệ <a href="tel:0937573139" style="color: orange">SĐT, Zalo,
+         Vui lòng liên hệ <a href="tel:0937573139">SĐT, Zalo,
             Viber 093.757.3139</a> khi bạn cần trợ giúp. <br>
          Phát triển bởi Appnet Technology
       </div>

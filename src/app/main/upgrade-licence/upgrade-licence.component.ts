@@ -3,6 +3,7 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { DialogService } from '../../shared/services/dialog.service';
 import { SessionService } from 'app/shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import { Generals } from 'app/shared/constants/generals';
 
 @Component({
   selector: 'app-upgrade-licence',
@@ -12,6 +13,7 @@ import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-b
 export class UpgradeLicenceComponent extends PageBaseComponent implements OnInit {
   loggedInUser: any;
   isRegisterButtonNotDisplayed: boolean;
+  LICENCE = Generals.Licence;
 
   constructor(
     private _dialogService: DialogService,

@@ -9,6 +9,7 @@ import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scr
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { SessionService } from '../../../../../shared/services/session.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import { Generals } from 'app/shared/constants/generals';
 
 @Component({
   selector: 'navbar-vertical-style-1',
@@ -20,6 +21,7 @@ export class NavbarVerticalStyle1Component extends PageBaseComponent implements 
   fuseConfig: any;
   navigation: any;
   user: any = {};
+  APP_INFO = Generals.AppInfo;
 
   // Private
   private _fusePerfectScrollbar: FusePerfectScrollbarDirective;

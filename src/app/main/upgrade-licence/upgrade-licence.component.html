@@ -14,9 +14,9 @@
 
   <div class="package-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
     <div class="package free-package">
-      <span class="label-base free-label">DÙNG THỬ</span>
+      <span class="label-base free-label">{{LICENCE.FREE.name | uppercase}}</span>
       <p class="package-price">
-        Miễn phí
+        {{LICENCE.FREE.price}}
       </p>
       <div style="padding: 10px 25px 10px 25px">
         <mat-divider></mat-divider>
@@ -48,9 +48,9 @@
     </div>
     <div class="package vip-package">
       <span class="recommended">Khuyên dùng</span>
-      <span class="label-base vip-label">TỐI ƯU</span>
+      <span class="label-base vip-label">{{LICENCE.VIP.name | uppercase}}</span>
       <p class="package-price">
-        600.000 VNĐ/Tháng
+        {{LICENCE.VIP.price}}
       </p>
       <div style="padding: 10px 25px 10px 25px">
         <mat-divider></mat-divider>
@@ -97,9 +97,9 @@
       </div>
     </div>
     <div class="package custom-package">
-      <span class="label-base custom-label">ĐỐI TÁC</span>
+      <span class="label-base custom-label">{{LICENCE.CUSTOM.name | uppercase}}</span>
       <p class="package-price">
-        Liên hệ
+        {{LICENCE.CUSTOM.price}}
       </p>
       <div style="padding: 10px 25px 10px 25px">
         <mat-divider></mat-divider>
