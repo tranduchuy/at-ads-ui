@@ -3,6 +3,24 @@ export interface TrafficSourceType {
     name: string;
 }
 export namespace Generals {
+    export namespace AppInfo {
+        export const name = 'Chống click tặc';
+        export const yearOfRelease = '2019';
+    }
+    export namespace Licence {
+        export const FREE = {
+            name: 'Dùng thử',
+            price: 'Miễn phí'
+        };
+        export const VIP = {
+            name: 'Tối ưu',
+            price: '600.000 VNĐ/Tháng'
+        };
+        export const CUSTOM = {
+            name: 'Đối tác',
+            price: 'Liên hệ'
+        }
+    }
     export namespace TrafficSourceReport {
         export const TRAFFIC_SOURCE_TYPES: TrafficSourceType[] = [
             {

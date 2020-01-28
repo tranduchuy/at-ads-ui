@@ -14,6 +14,7 @@ import { DialogService } from '../shared/services/dialog.service';
 import { SessionService } from '../shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
+import { Generals } from 'app/shared/constants/generals';
 
 declare let gapi: any;
 
@@ -23,6 +24,8 @@ declare let gapi: any;
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit, OnDestroy {
+  APP_INFO = Generals.AppInfo;
+  LICENCE = Generals.Licence;
   logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   logs = [];
   auth2: any;
@@ -99,16 +102,16 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
       this.isTopbarTitleDisplayed = true;
     }
 
-    if(currentOffset >= 1300)
+    if (currentOffset >= 1300)
       this.isInstructionDisplayed = true;
 
-    if(currentOffset > 1700)
+    if (currentOffset > 1700)
       this.isFeatureDisplayed = true;
-      
-    if(currentOffset > 1900)
+
+    if (currentOffset > 1900)
       this.isBenefitDisplayed = true;
 
-    if(currentOffset > 2200) {
+    if (currentOffset > 2200) {
       this.isFooterDisplayed = true;
       this.isContactFooterDisplayed = true;
     }
