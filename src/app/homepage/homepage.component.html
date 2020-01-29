@@ -158,25 +158,6 @@
                <ng-container matColumnDef="network">
                   <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                     <!-- <span *ngIf="element.network?.name !== 'MOBIFONE'
-                                 && element.network?.name !== 'VIETTEL'
-                                 && element.network?.name !== 'VIETNAMOBILE'
-                                 && element.network?.name !== 'VNPT'
-                                 && element.network?.name !== 'FPT'">{{element.network?.name}}</span>
-
-                     <img class="mobifone"
-                        src="https://brasol.vn/public/uploads/1521197514-brasol.vn-logo-mobifone-mobifone-logo.svg_.png"
-                        *ngIf="element.network?.name === 'MOBIFONE'" alt="">
-                     <img class="network-logo"
-                        src="https://dangky3gviettel.vn/wp-content/uploads/2018/10/cropped-logo-dang-ky-3g-viettel.png"
-                        *ngIf="element.network?.name === 'VIETTEL'" alt="">
-                     <img class="vietnamobile" src="https://css.vietnamobile.com.vn/images/logo.png"
-                        *ngIf="element.network?.name === 'VIETNAMOBILE'" alt="">
-                     <img class="vnpt" src="https://www.sunocean.com.vn/wp-content/uploads/2018/08/logo-vnpt.png"
-                        *ngIf="element.network?.name === 'VNPT'" alt="">
-                     <img class="fpt" src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png"
-                        *ngIf="element.network?.name === 'FPT'" alt=""> -->
-
                      <span *ngIf="element.network?.name"
                         class="{{element.network?.name}}">{{element.network?.name}}</span>
                      <span *ngIf="!element.network?.name" class="UNKNOWN">Unknown</span>
@@ -187,8 +168,6 @@
                   <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
 
                   <mat-cell *matCellDef="let element">
-                     <!-- <img src="../../assets/icons/location.svg" alt="" class="location-icon"
-                        *ngIf="element.location?.city"> -->
                      <span *ngIf="element.location?.city">{{element.location?.city}}</span>
 
                      <span *ngIf="!element.location?.city" class="UNKNOWN">Unknown</span>
@@ -235,7 +214,7 @@
                   </mat-cell>
                </ng-container>
 
-               <mat-header-row *matHeaderRowDef="logColumns; sticky: true"></mat-header-row>
+               <mat-header-row *matHeaderRowDef="logColumns"></mat-header-row>
                <mat-row *matRowDef="let row; columns: logColumns;"></mat-row>
             </mat-table>
          </div>

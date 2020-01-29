@@ -191,7 +191,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
             };
           });
 
-        this.dataSource = new MatTableDataSource<Element>(this.logs.splice(0,0));
+        this.dataSource = new MatTableDataSource<Element>(this.logs);
 
         this.receiveMessage();
 

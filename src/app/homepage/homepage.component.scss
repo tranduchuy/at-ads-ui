@@ -1,5 +1,10 @@
 $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
+:focus,
+:active {
+  outline: none;
+}
+
 .homepage {
   font-size: 14px;
   width: 100%;
@@ -365,7 +370,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       }
 
       .table-wrapper {
-        overflow: hidden;
+        overflow-x: hidden;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
         background: #002d41;
 
@@ -420,9 +425,9 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
         mat-table {
           margin: 0 auto;
-          display: table;
           width: 100%;
           background: rgba(3, 155, 229, 0.1);
+          transform: translate3d(0, 0, 0);
 
           img,
           mat-icon {
@@ -439,7 +444,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
           mat-row {
             transition: 0.2s;
-            -webkit-animation: rowAppearance 0.4s linear;
+            animation: rowAppearance 0.4s linear;
 
             // &:nth-child(odd) {
             //   background-color: whitesmoke;
@@ -862,7 +867,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
         }
 
         .main-benefit-item {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.15);
           padding: 20px;
           padding-top: 30px;
           backdrop-filter: blur(2px);
@@ -881,7 +886,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           }
 
           &:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
           }
         }
 
@@ -988,12 +993,9 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
         padding-top: 20px;
 
         button {
+          background: rgba(255, 255, 255, 0.1);
           border-radius: 15px;
           transition: 0.2s;
-
-          &:hover {
-            transform: scale(1.05, 1.05);
-          }
         }
 
         mat-icon {
@@ -1032,24 +1034,24 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
     }
   }
 
-  .contact {
-    background: rgba(12, 20, 33, 1);
-    background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-    // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
-    // background-size: 100% 100%;
-    filter: drop-shadow(0px 1px 2px black);
-    color: silver;
-    font-weight: bold;
-    position: fixed;
-    z-index: 200;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
-    padding: 15px;
-    -webkit-animation: contactAppearance 0.4s linear;
-  }
+  // .contact {
+  //   background: rgba(12, 20, 33, 1);
+  //   background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+  //   background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+  //   background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
+  //   // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
+  //   // background-size: 100% 100%;
+  //   filter: drop-shadow(0px 1px 2px black);
+  //   color: silver;
+  //   font-weight: bold;
+  //   position: fixed;
+  //   z-index: 200;
+  //   width: 100%;
+  //   bottom: 0;
+  //   text-align: center;
+  //   padding: 15px;
+  //   -webkit-animation: contactAppearance 0.4s linear;
+  // }
 
   .topbar-container {
     //background: rgba(0, 0, 0, 0.6);
@@ -1174,12 +1176,14 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       }
     }
 
-    .contact {
-      font-size: 12px;
-    }
+    // .contact {
+    //   font-size: 12px;
+    // }
 
-    .footer-contact {
-      font-size: 12px;
+    .footer-contact-container {
+      .footer-contact {
+        font-size: 10px;
+      }
     }
 
     .main-content {
@@ -1222,7 +1226,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           }
 
           .title2 {
-            font-size: 14px;
+            font-size: 12px;
           }
 
           .login-with-google {
@@ -1288,7 +1292,9 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       }
 
       .feature-container {
-        //background: url("../../assets/images/backgrounds/maxresdefault.jpg");
+        background-color: #7fcec5;
+        background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+
         .feature {
           background: none;
           padding: 20px;
