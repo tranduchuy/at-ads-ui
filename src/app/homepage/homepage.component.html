@@ -520,125 +520,133 @@
       </div>
    </div>
 
-   <div class="footer" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px"
-      *ngIf="isFooterDisplayed">
+   <div class="footer-container">
+      <div class="footer" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px"
+         *ngIf="isFooterDisplayed">
 
-      <div class="footer-col1" fxFlex="33.33">
-         <div class="footer-title1">FAQ</div>
-         <mat-divider class="footer-divider"></mat-divider>
-         <div class="footer-col1-info">
-            <span class="question-title">
-               Mỗi đóng góp ý kiến của bạn là động lực giúp chúng tôi tồn tại và phát triển
-            </span>
-            <br><br>
-            Trong quá trình sử dụng sản phẩm, nếu bạn chưa hài lòng hoặc có bất kì ý kiến đóng góp nào xin vui lòng liên
-            hệ
-            với chúng tôi.
-            <div class="view-more-button">
-               <button mat-button (click)="checkLogin()" [disabled]="isProcessing">
-                  XEM THÊM <mat-icon>navigate_next</mat-icon>
-               </button>
-            </div>
-         </div>
-      </div>
-
-      <div class="footer-col2" fxFlex="33.33">
-
-         <div class="footer-col footer-col2-1" fxLayout="row">
-            <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
-            <div>
+         <div class="footer-col1" fxFlex="33.33">
+            <div class="footer-title1">FAQ</div>
+            <mat-divider class="footer-divider"></mat-divider>
+            <div class="footer-col1-info">
                <span class="question-title">
-                  Chặn click ảo là gì?
+                  Mỗi đóng góp ý kiến của bạn là động lực giúp chúng tôi tồn tại và phát triển
                </span>
-               <p>
-                  Chặn click ảo không còn là chặn các IP phá hoại mà là một giải pháp tổng thể giúp bạn tiết kiệm chi
-                  phí quảng cáo.
-               </p>
+               <br><br>
+               Trong quá trình sử dụng sản phẩm, nếu bạn chưa hài lòng hoặc có bất kì ý kiến đóng góp nào xin vui lòng
+               liên
+               hệ
+               với chúng tôi.
+               <div class="view-more-button">
+                  <button mat-button (click)="checkLogin()" [disabled]="isProcessing">
+                     XEM THÊM <mat-icon>navigate_next</mat-icon>
+                  </button>
+               </div>
             </div>
          </div>
 
-         <div class="footer-col footer-col2-2" fxLayout="row">
-            <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
-            <div>
-               <span class="question-title">
-                  Thật sự giảm được 50% chi phí?
-               </span>
-               <p>
-                  Chi phí quảng cáo của bạn gồm: hữu ích và lãng phí. Hữu ích là chi phí có sinh ra khách hàng. Lãng phí
-                  là chi phí không (hoặc ít) sinh ra khách hàng. Hệ thống sẽ giúp bạn giảm toàn bộ chi phí lãng phí và
-                  chuyển chi phí lãng phí thành hữu ích. Vì thế nó vừa giảm chi phí, vừa giúp bạn tăng khách hàng.
-               </p>
+         <div class="footer-col2" fxFlex="33.33">
+
+            <div class="footer-col footer-col2-1" fxLayout="row">
+               <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
+               <div>
+                  <span class="question-title">
+                     Chặn click ảo là gì?
+                  </span>
+                  <p>
+                     Chặn click ảo không còn là chặn các IP phá hoại mà là một giải pháp tổng thể giúp bạn tiết kiệm chi
+                     phí quảng cáo.
+                  </p>
+               </div>
             </div>
+
+            <div class="footer-col footer-col2-2" fxLayout="row">
+               <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
+               <div>
+                  <span class="question-title">
+                     Thật sự giảm được 50% chi phí?
+                  </span>
+                  <p>
+                     Chi phí quảng cáo của bạn gồm: hữu ích và lãng phí. Hữu ích là chi phí có sinh ra khách hàng. Lãng
+                     phí
+                     là chi phí không (hoặc ít) sinh ra khách hàng. Hệ thống sẽ giúp bạn giảm toàn bộ chi phí lãng phí
+                     và
+                     chuyển chi phí lãng phí thành hữu ích. Vì thế nó vừa giảm chi phí, vừa giúp bạn tăng khách hàng.
+                  </p>
+               </div>
+            </div>
+
+            <div class="footer-col footer-col2-3" fxLayout="row">
+               <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
+               <div>
+                  <span class="question-title">
+                     Thời gian dùng thử bao lâu?
+                  </span>
+                  <p>
+                     Hệ thống không giới hạn thời gian dùng thử. Các gói dùng thử các thể xem được tất cả các báo cáo,
+                     để
+                     thực
+                     hiện
+                     giảm chi phí bạn cần phải trả phí.
+                  </p>
+               </div>
+            </div>
+
          </div>
 
-         <div class="footer-col footer-col2-3" fxLayout="row">
-            <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
-            <div>
-               <span class="question-title">
-                  Thời gian dùng thử bao lâu?
-               </span>
-               <p>
-                  Hệ thống không giới hạn thời gian dùng thử. Các gói dùng thử các thể xem được tất cả các báo cáo, để
-                  thực
-                  hiện
-                  giảm chi phí bạn cần phải trả phí.
-               </p>
+         <div class="footer-col3" fxFlex="33.33">
+
+            <div class="footer-col footer-col3-1" fxLayout="row">
+               <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
+               <div>
+                  <span class="question-title">
+                     Chi phí là bao nhiêu?
+                  </span>
+                  <p>
+                     Chi phí bạn thanh toán hàng tháng đối với mỗi tài khoản Google Ads được tối ưu là
+                     <strong>{{LICENCE.VIP.price}}</strong>. Bạn sẽ có thể thêm không giới hạn tài khoản Google Ads.
+                  </p>
+               </div>
             </div>
-         </div>
 
-      </div>
-
-      <div class="footer-col3" fxFlex="33.33">
-
-         <div class="footer-col footer-col3-1" fxLayout="row">
-            <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
-            <div>
-               <span class="question-title">
-                  Chi phí là bao nhiêu?
-               </span>
-               <p>
-                  Chi phí bạn thanh toán hàng tháng đối với mỗi tài khoản Google Ads được tối ưu là
-                  <strong>{{LICENCE.VIP.price}}</strong>. Bạn sẽ có thể thêm không giới hạn tài khoản Google Ads.
-               </p>
+            <div class="footer-col footer-col3-2" fxLayout="row">
+               <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
+               <div>
+                  <span class="question-title">
+                     Bảo mật tài khoản Google Ads?
+                  </span>
+                  <p>
+                     Toàn bộ thông tin tài khoản của bạn sẽ được bảo mật theo quy định bảo mật của công ty Appnet
+                     Technology. Vì
+                     thế
+                     bạn hãy yên tâm trong việc kết nối và tối ưu tài khoản. Khi ngừng sử dụng, vui lòng ngắt kết nối
+                     với
+                     chúng
+                     tôi.
+                  </p>
+               </div>
             </div>
-         </div>
 
-         <div class="footer-col footer-col3-2" fxLayout="row">
-            <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
-            <div>
-               <span class="question-title">
-                  Bảo mật tài khoản Google Ads?
-               </span>
-               <p>
-                  Toàn bộ thông tin tài khoản của bạn sẽ được bảo mật theo quy định bảo mật của công ty Appnet
-                  Technology. Vì
-                  thế
-                  bạn hãy yên tâm trong việc kết nối và tối ưu tài khoản. Khi ngừng sử dụng, vui lòng ngắt kết nối với
-                  chúng
-                  tôi.
-               </p>
+            <div class="footer-col footer-col3-3">
+               <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
+               <div>
+                  <span class="question-title">
+                     Tôi phải làm gì khi cần trợ giúp thêm?
+                  </span>
+                  <p>
+                     Trong trường hợp bạn cần thêm trợ giúp hãy liên hệ địa chỉ email bên dưới tài khoản của bạn hoặc
+                     chat
+                     với
+                     nhân
+                     viên hỗ trợ ngay cạnh bên phải màn hình.
+                  </p>
+               </div>
             </div>
-         </div>
 
-         <div class="footer-col footer-col3-3">
-            <mat-icon color="accent" class="s-30" fxFlex="10">help</mat-icon>
-            <div>
-               <span class="question-title">
-                  Tôi phải làm gì khi cần trợ giúp thêm?
-               </span>
-               <p>
-                  Trong trường hợp bạn cần thêm trợ giúp hãy liên hệ địa chỉ email bên dưới tài khoản của bạn hoặc chat
-                  với
-                  nhân
-                  viên hỗ trợ ngay cạnh bên phải màn hình.
-               </p>
-            </div>
          </div>
-
       </div>
    </div>
 
-   <div class="footer-contact-container" *ngIf="isContactFooterDisplayed">
+   <div class="footer-contact-container">
       <div class="footer-contact">
          Vui lòng liên hệ <a href="tel:0937573139">SĐT, Zalo,
             Viber 093.757.3139 (Mr. Long)</a> khi bạn cần trợ giúp. <br>
