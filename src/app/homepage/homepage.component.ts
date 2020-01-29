@@ -39,6 +39,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
   isContactDisplayed: boolean = false;
   isLoginButtonDisplayed: boolean = false;
   onLoadingImage: boolean = false;
+
   isTableDisplayed: boolean = true;
   isInstructionDisplayed: boolean = true;
   isFeatureDisplayed: boolean = true;
@@ -190,7 +191,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
             };
           });
 
-        this.dataSource = new MatTableDataSource<Element>(this.logs);
+        this.dataSource = new MatTableDataSource<Element>(this.logs.slice(0, 10));
 
         this.receiveMessage();
 

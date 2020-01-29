@@ -22,6 +22,7 @@ export class NavbarVerticalStyle1Component extends PageBaseComponent implements 
   navigation: any;
   user: any = {};
   APP_INFO = Generals.AppInfo;
+  LICENCE_INTERESTS = Generals.Licence;
 
   // Private
   private _fusePerfectScrollbar: FusePerfectScrollbarDirective;

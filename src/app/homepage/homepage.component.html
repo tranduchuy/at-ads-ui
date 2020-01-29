@@ -9,7 +9,7 @@
          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="10px">
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
                <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
-               <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed">
+               <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed || true">
                   {{APP_INFO.name + ' ' + APP_INFO.yearOfRelease}}
                </span>
             </div>
@@ -133,9 +133,10 @@
                   <mat-cell *matCellDef="let element">
 
                      <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge" style="color: #0066d7"></i>
-                     <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser" style="color: orange"></i>
+                     <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"
+                        style="color: orange"></i>
                      <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
-                        class="fab fa-chrome" style="color: lightgreen"></i>
+                        class="fab fa-chrome" style="color: white"></i>
                      <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome" style="color: lightblue"></i>
                      <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
                         class="fab fa-safari" style="color: #00baee"></i>
@@ -260,8 +261,8 @@
                      (click)="showImageDialog('../../assets/images/step1.png')" (load)="onLoadingImage = true"
                      [class.onLoadingImage]="onLoadingImage">
                      <div class="step-description">
-                        <span class="step-label">1</span>
-                        <span class="step-name">Liên kết Google Ads</span>
+                        <div class="step-name" fxLayoutAlign="start center"><span class="step-label">1</span>Liên kết
+                           Google Ads</div>
                         <p>
                            Liên kết tài khoản quảng cáo <span class="step-highline">Google Ads</span> của bạn với hệ
                            thống
@@ -276,8 +277,8 @@
                      (click)="showImageDialog('../../assets/images/step2.png')" (load)="onLoadingImage = true"
                      [class.onLoadingImage]="onLoadingImage">
                      <div class="step-description">
-                        <span class="step-label">2</span>
-                        <span class="step-name">Theo dõi click quảng cáo</span>
+                        <div class="step-name" fxLayoutAlign="start center"><span class="step-label">2</span>Theo dõi
+                           click quảng cáo</div>
                         <p>
                            Theo dõi thiết bị, trình duyệt, vị trí đang click quảng cáo của bạn. Xác định đối tượng phá
                            hoại.
@@ -291,8 +292,8 @@
                      (click)="showImageDialog('../../assets/images/step3.png')" (load)="onLoadingImage = true"
                      [class.onLoadingImage]="onLoadingImage">
                      <div class="step-description">
-                        <span class="step-label">3</span>
-                        <span class="step-name">Chặn click ảo</span>
+                        <div class="step-name" fxLayoutAlign="start center"><span class="step-label">3</span>Chặn click
+                           ảo</div>
                         <p>
                            Thực hiện chặn những IP đang phá hoại bằng tác vụ thủ công hoặc tự động.
                         </p>
@@ -308,17 +309,18 @@
          <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
             <div class="overview" fxFlex="32.7">
                <p class="overview-title">
-                  <img src="../../assets/icons/bulb-icon.png" alt="" loading="lazy">
+                  <i class="fas fa-lightbulb"></i>
                   <span>Thông minh hơn</span>
                </p>
                <mat-divider></mat-divider>
                <div class="overview-info">
-                  Tích hợp 10 công cụ giảm chi phí trong 1 tool duy nhất.
-                  <br>
-                  Tất cả các công cụ hoạt động theo cơ chế tự động hóa, không chỉ cung cấp báo cáo trực quan mà còn có
+                  Tích hợp nhiều tiện ích giúp giảm chi phí quảng cáo trong 1 công cụ duy nhất.
+                  <br><br>
+                  Công cụ hoạt động theo cơ chế tự động hóa, không chỉ cung cấp báo cáo trực quan mà còn có
                   thể
                   tương
-                  tác trực tiếp đến quảng cáo của bạn, cải thiện nó giúp bạn tiết kiệm đáng kể chi phí và thời gian.
+                  tác trực tiếp đến quảng cáo của bạn, cải thiện và giúp bạn tiết kiệm đáng kể chi phí và thời gian chạy
+                  quảng cáo.
                   <br>
                   <div class="trial-button">
                      <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
@@ -331,9 +333,10 @@
             </div>
             <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
                <div class="feature-left" fxLayout="column" fxLayoutGap="20px">
-                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
-                     <div class="icon">
-                        <mat-icon color="accent">verified_user</mat-icon>
+                  <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                     <div class="feature-item-icon">
+                        <!-- <mat-icon color="accent">verified_user</mat-icon> -->
+                        <i class="fas fa-user-shield"></i>
                      </div>
                      <div class="feature-description">
                         <span class="feature-name">Chặn theo IP</span>
@@ -343,10 +346,11 @@
                         </p>
                      </div>
                   </div>
-                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
-                     <div class="icon">
+                  <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                     <div class="feature-item-icon">
                         <!-- <mat-icon color="accent" >public</mat-icon> -->
-                        <img src="../../assets/icons/incognito.png" alt="">
+                        <!-- <img src="../../assets/icons/incognito.png" alt=""> -->
+                        <i class="fas fa-user-secret"></i>
                      </div>
                      <div class="feature-description">
                         <span class="feature-name">Chặn trình duyệt ẩn danh</span>
@@ -358,9 +362,10 @@
                         </p>
                      </div>
                   </div>
-                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
-                     <div class="icon">
-                        <mat-icon color="accent">wifi</mat-icon>
+                  <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                     <div class="feature-item-icon">
+                        <!-- <mat-icon color="accent">wifi</mat-icon> -->
+                        <i class="fas fa-wifi"></i>
                      </div>
                      <div class="feature-description">
                         <span class="feature-name">Chặn theo 3G & 4G</span>
@@ -370,9 +375,10 @@
                         </p>
                      </div>
                   </div>
-                  <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
-                     <div class="icon">
-                        <mat-icon color="accent">timeline</mat-icon>
+                  <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                     <div class="feature-item-icon">
+                        <!-- <mat-icon color="accent">timeline</mat-icon> -->
+                        <i class="fas fa-database"></i>
                      </div>
                      <div class="feature-description">
                         <span class="feature-name">Chặn theo Big Data</span>
@@ -388,8 +394,8 @@
                </div>
             </div>
             <div class="feature-right" fxLayout="column" fxLayoutGap="20px">
-               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
-                  <div class="icon">
+               <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                  <div class="feature-item-icon">
                      <mat-icon color="accent">phonelink</mat-icon>
                   </div>
                   <div class="feature-description">
@@ -401,9 +407,10 @@
                      </p>
                   </div>
                </div>
-               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
-                  <div class="icon">
-                     <mat-icon color="accent">apps</mat-icon>
+               <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                  <div class="feature-item-icon">
+                     <!-- <mat-icon color="accent">apps</mat-icon> -->
+                     <i class="fas fa-th"></i>
                   </div>
                   <div class="feature-description">
                      <span class="feature-name">Chặn theo mạng lưới</span>
@@ -417,12 +424,13 @@
                      </p>
                   </div>
                </div>
-               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
-                  <div class="icon">
-                     <mat-icon color="accent">location_on</mat-icon>
+               <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                  <div class="feature-item-icon">
+                     <!-- <mat-icon color="accent">location_on</mat-icon> -->
+                     <i class="fas fa-search-location"></i>
                   </div>
                   <div class="feature-description">
-                     <span class="feature-name">Tỉnh-Thành quảng cáo</span>
+                     <span class="feature-name">Xác định Tỉnh-Thành quảng cáo</span>
                      <p>
                         Biết chính xác các <span class="feature-info-highline">tỉnh, thành</span> đang hiện quảng cáo.
                         Bạn có
@@ -431,15 +439,16 @@
                      </p>
                   </div>
                </div>
-               <div class="feature-item" fxFlex="25" fxLayout="row" fxLayoutGap="20px">
-                  <div class="icon">
-                     <mat-icon color="accent">view_list</mat-icon>
+               <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                  <div class="feature-item-icon">
+                     <!-- <mat-icon color="accent">view_list</mat-icon> -->
+                     <i class="fas fa-address-book"></i>
                   </div>
                   <div class="feature-description">
                      <span class="feature-name">Blacklist / Whitelist</span>
                      <p>
                         Nếu bạn biết chính xác địa chỉ IP của đối thủ, hoặc của khách hàng, bạn có thể <span
-                           class="feature-info-highline2">ngưng quảng cáo</span>
+                           class="feature-info-highline2">ngừng quảng cáo</span>
                         với đối thủ để tránh mất thêm chi phí và luôn hiển thị quảng cáo tới khách hàng của mình.
                      </p>
                   </div>
@@ -632,7 +641,7 @@
    <div class="footer-contact-container" *ngIf="isContactFooterDisplayed">
       <div class="footer-contact">
          Vui lòng liên hệ <a href="tel:0937573139">SĐT, Zalo,
-            Viber 093.757.3139</a> khi bạn cần trợ giúp. <br>
+            Viber 093.757.3139 (Mr. Long)</a> khi bạn cần trợ giúp. <br>
          Phát triển bởi Appnet Technology
       </div>
    </div>

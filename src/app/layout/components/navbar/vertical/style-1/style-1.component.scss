@@ -103,17 +103,19 @@ navbar {
       position: absolute;
       top: 0;
       right: 0;
-      filter: drop-shadow(0px 1px 1px black);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       .vip-expiration,
       .custom-expiration {
         font-size: 9.5px;
         text-align: center;
         // background-color: #d2a813;
         // background-image: linear-gradient(315deg, #d2a813 0%, #000000 74%);
-        font-weight: bold;
+        font-weight: bolder;
         padding: 0 4px 0 4px;
-        color: white;
-        background: rgba(255, 255, 255, 0.2);
+        color: #1a65bd;
+        text-shadow: 1px 1px 2px gray;
+        background: lightblue;
+        border-right: 3px solid #039be5;
         display: flex;
         justify-content: center;
         align-items: center;

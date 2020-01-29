@@ -10,15 +10,37 @@ export namespace Generals {
     export namespace Licence {
         export const FREE = {
             name: 'Dùng thử',
-            price: 'Miễn phí'
+            price: 'Miễn phí',
+            interests: `(*) QUYỀN LỢI: Chặn click ảo theo tần suất
+                        . Chặn click ảo theo nhà mạng (3G/4G)
+                        . Chặn click ảo tự động ít hơn 5 giây
+                        . Tùy chỉnh danh sách IP cần chặn
+                        . Báo cáo quản trị IP click.`
         };
         export const VIP = {
             name: 'Tối ưu',
-            price: '600.000 VNĐ/Tháng'
+            price: '600.000 VNĐ/Tháng',
+            interests: `(*) QUYỀN LỢI: Chặn click ảo theo tần suất
+                        . Chặn click ảo theo nhà mạng (3G/4G)
+                        . Chặn click ảo tự động ít hơn 5 giây
+                        . Tùy chỉnh danh sách IP cần chặn
+                        . Báo cáo quản trị IP click
+                        . Chặn click ảo theo hành vi người dùng
+                        . Chặn click ảo theo nhắm chọn vị trí
+                        . Hỗ trợ gửi bồi hoàn phí từ Google.`
         };
         export const CUSTOM = {
             name: 'Đối tác',
-            price: 'Liên hệ'
+            price: 'Liên hệ',
+            interests: `(*) QUYỀN LỢI: Chặn click ảo theo tần suất
+                        . Chặn click ảo theo nhà mạng (3G/4G)
+                        . Chặn click ảo tự động ít hơn 5 giây
+                        . Tùy chỉnh danh sách IP cần chặn
+                        . Báo cáo quản trị IP click
+                        . Chặn click ảo theo hành vi người dùng
+                        . Chặn click ảo theo nhắm chọn vị trí
+                        . Hỗ trợ gửi bồi hoàn phí từ Google
+                        . Có 1 nhân viên hỗ trợ riêng.`
         }
     }
     export namespace TrafficSourceReport {
