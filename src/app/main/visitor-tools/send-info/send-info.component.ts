@@ -150,9 +150,34 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
     this.initForms();
+
+    // themeColor: config.themeColor,
+    //     supporterAvatar: config.supporter.avatar,
+    //     supporterName: config.supporter.name,
+    //     supporterMajor: config.supporter.major,
+    //     supporterPhone: config.supporter.phone,
+    //   };
+
+    //   popupDisplayConfig = {
+    //     popupPosition: config.popupPosition,
+    //     autoShowPopupRepeatTime: config.autoShowPopupRepeatTime,
+    //     autoShowPopup: config.autoShowPopup
+
     this.websiteCtrl.setValue({
       id: '',
-      name: ''
+      name: '',
+      isPopupOpening: false,
+      popupConfig: {
+        themeColor: '#2196f3',
+        popupPosition: this.openPopupButtonPositions[0].value,
+        autoShowPopupRepeatTime: this.autoDisplayPopupTimeOptions[0].value,
+        autoShowPopup: false,
+        supporter: {
+          name: 'Nguyễn Thị A',
+          major: 'Hỗ trợ viên',
+          phone: '0999999999'
+        }
+      }
     });
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {

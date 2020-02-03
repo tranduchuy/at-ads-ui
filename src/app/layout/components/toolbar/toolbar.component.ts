@@ -276,7 +276,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                         this.accountConnectTypes[this._adsAccountPipe.transform(account.adsId)] = account.connectType;
                         return {
                             name: this._adsAccountPipe.transform(account.adsId)
-                                + (account.adsName ? ` (${account.adsName})` : ''),
+                                + (account.adsName ? ` | ${account.adsName}` : ''),
                             accountId: account.id,
                             adsId: account.adsId,
                             adsName: account.adsName || '',
