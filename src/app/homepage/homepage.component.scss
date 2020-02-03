@@ -564,6 +564,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
               height: 100%;
               background: whitesmoke;
               background-size: 100% 100%;
+              position: relative;
 
               .step-description {
                 background: rgba(0, 0, 0, 0.6);
@@ -571,8 +572,9 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
                 padding: 10px 15px 1px 15px;
                 text-align: justify;
                 font-size: 11px;
-                position: relative;
-                top: 59.8%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
                 // border-bottom: 4px solid #039be5;
 
                 text-shadow: $textShadow0;
@@ -756,10 +758,9 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
       .feature-item-icon {
         svg,
-        mat-icon,
-        img {
-          font-size: 36px;
-          min-width: 36px;
+        mat-icon {
+          font-size: 34px;
+          width: 34px;
           color: white;
           margin-left: 5px;
           //filter: drop-shadow(1px 1px 1px black) !important;
@@ -767,11 +768,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
         svg {
           font-size: 30px;
-          min-width: 30px;
-        }
-
-        img {
-          height: 36px;
+          width: 34px;
         }
       }
 
@@ -793,7 +790,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
       .feature-name {
         font-weight: bold;
-        color: #c5e5ed;
+        color: white;
         font-size: 12px;
       }
 
@@ -861,9 +858,13 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
         }
 
         .main-benefit-item {
-          background: rgba(255, 255, 255, 0.15);
-          padding: 20px;
-          padding-top: 30px;
+          background: rgba(255, 255, 255, 0.2);
+          height: 210px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 20px 20px 0 20px;
           backdrop-filter: blur(2px);
           transition: 0.2s;
 
@@ -880,7 +881,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           }
 
           &:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
           }
         }
 

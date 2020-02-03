@@ -19,7 +19,7 @@ export namespace Generals {
         };
         export const VIP = {
             name: 'Tối ưu',
-            price: '600.000 VNĐ/Tháng',
+            price: '1.000.000 VNĐ/Tháng',
             interests: `(*) QUYỀN LỢI: Chặn click ảo theo tần suất
                         . Chặn click ảo theo nhà mạng (3G/4G)
                         . Chặn click ảo tự động ít hơn 5 giây
