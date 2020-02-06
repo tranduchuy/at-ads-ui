@@ -226,12 +226,58 @@
                 }
 
                 .time-setting {
-                  color: gray;
                   font-size: 10px;
-                  mat-slider {
-                    width: 195px;
-                    margin-left: 10px;
-                    margin-right: 5px;
+                  // mat-slider {
+                  //   width: 195px;
+                  //   margin-left: 10px;
+                  //   margin-right: 5px;
+                  // }
+
+                  // We need to use ::ng-deep to overcome view encapsulation
+                  ::ng-deep {
+                    .auto-display-time-slider .ng5-slider .ng5-slider-bar {
+                      background: #ffe4d1;
+                      height: 2px;
+                    }
+                    .auto-display-time-slider .ng5-slider .ng5-slider-selection {
+                      background: orange;
+                    }
+
+                    .auto-display-time-slider .ng5-slider .ng5-slider-pointer {
+                      width: 8px;
+                      height: 16px;
+                      top: auto; /* to remove the default positioning */
+                      bottom: 0;
+                      background-color: #333;
+                      border-top-left-radius: 3px;
+                      border-top-right-radius: 3px;
+                    }
+
+                    .auto-display-time-slider .ng5-slider .ng5-slider-pointer:after {
+                      display: none;
+                    }
+
+                    .auto-display-time-slider .ng5-slider .ng5-slider-bubble {
+                      bottom: 14px;
+                    }
+
+                    .auto-display-time-slider .ng5-slider .ng5-slider-limit {
+                      font-weight: bold;
+                      color: orange;
+                    }
+
+                    .auto-display-time-slider .ng5-slider .ng5-slider-tick {
+                      width: 1px;
+                      height: 10px;
+                      margin-left: 4px;
+                      border-radius: 0;
+                      background: #ffe4d1;
+                      top: -1px;
+                    }
+
+                    .auto-display-time-slider .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+                      background: orange;
+                    }
                   }
                 }
 
@@ -275,7 +321,7 @@
                 }
 
                 .avatar-storage {
-                  height: 180px;
+                  min-height: 180px;
                   border-radius: 5px;
                   margin: 10px 0 5px 0;
                   padding: 5px;
@@ -611,8 +657,8 @@
 
             .fake-customer {
               padding: 5px 5px 0 5px;
-              width: 33.33%;
-              height: 80px;
+              width: 200px;
+              height: 88px;
               background: white;
               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
               position: absolute;
@@ -647,23 +693,52 @@
 
               .content {
                 overflow: hidden;
+
+                .title,
+                .body,
+                .page-url {
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-box-orient: vertical;
+                }
+
                 .title {
                   color: rgba(0, 0, 0, 0.7);
                   font-size: 9px;
+                  font-weight: bold;
+                  -webkit-line-clamp: 1;
                 }
 
                 .body {
                   padding-top: 5px;
                   font-size: 8px;
                   color: gray;
+                  -webkit-line-clamp: 3;
                 }
 
                 .page-url {
                   padding-top: 5px;
                   font-size: 8px;
+                  -webkit-line-clamp: 1;
 
                   a {
                     text-decoration: none;
+                  }
+                }
+
+                .footer {
+                  color: gray;
+                  font-size: 6px;
+                  position: absolute;
+                  bottom: 2px;
+                  right: 2px;
+
+                  img {
+                    height: 6px;
+                    width: 6px;
+                    margin-top: 2px;
+                    margin-right: 1px;
                   }
                 }
               }
@@ -671,32 +746,32 @@
               &.bottom-left {
                 top: 75%;
                 left: 2%;
-                -webkit-animation-name: bounceInLeft;
-                animation-name: bounceInLeft;
+                -webkit-animation-name: bounceInLeft2;
+                animation-name: bounceInLeft2;
               }
 
               &.bottom-right {
                 top: 75%;
-                left: 64%;
-                -webkit-animation-name: bounceInRight;
-                animation-name: bounceInRight;
+                right: 2%;
+                -webkit-animation-name: bounceInRight2;
+                animation-name: bounceInRight2;
               }
 
               &.top-left {
                 top: 28%;
                 left: 2%;
-                -webkit-animation-name: bounceInLeft;
-                animation-name: bounceInLeft;
+                -webkit-animation-name: bounceInLeft2;
+                animation-name: bounceInLeft2;
               }
 
               &.top-right {
                 top: 28%;
-                left: 64%;
-                -webkit-animation-name: bounceInRight;
-                animation-name: bounceInRight;
+                right: 2%;
+                -webkit-animation-name: bounceInRight2;
+                animation-name: bounceInRight2;
               }
 
-              @-webkit-keyframes bounceInLeft {
+              @-webkit-keyframes bounceInLeft2 {
                 0% {
                   opacity: 0;
                   -webkit-transform: translateX(-10px);
@@ -712,7 +787,7 @@
                   -webkit-transform: translateX(0);
                 }
               }
-              @keyframes bounceInLeft {
+              @keyframes bounceInLeft2 {
                 0% {
                   opacity: 0;
                   transform: translateX(-10px);
@@ -728,7 +803,7 @@
                   transform: translateX(0);
                 }
               }
-              @-webkit-keyframes bounceInRight {
+              @-webkit-keyframes bounceInRight2 {
                 0% {
                   opacity: 0;
                   -webkit-transform: translateX(10px);
@@ -744,7 +819,7 @@
                   -webkit-transform: translateX(0);
                 }
               }
-              @keyframes bounceInRight {
+              @keyframes bounceInRight2 {
                 0% {
                   opacity: 0;
                   transform: translateX(10px);

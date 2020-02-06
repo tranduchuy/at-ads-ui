@@ -87,13 +87,17 @@
                     <div class="item-title" fxFlex="20">Thời gian hiển thị</div>
                     <div class="item-content" fxFlex="80">
                       <div class="time-setting">
-                        <span>{{minAutoDisplayTime}} giây</span>
-                        <mat-slider class="example-margin" [value]="displayConfig.autoDisplayTime" [disabled]="false"
+                        <!-- <mat-slider class="example-margin" [value]="displayConfig.autoDisplayTime" [disabled]="false"
                           [invert]="false" [min]="minAutoDisplayTime" [max]="maxAutoDisplayTime" [step]="1"
                           [thumbLabel]="true" [tickInterval]="10" [vertical]="false" color="accent"
                           (change)="onChangeAutoDisplayTime($event)">
-                        </mat-slider>
-                        <span>{{maxAutoDisplayTime}} giây</span>
+                        </mat-slider> -->
+
+                        <div class="auto-display-time-slider">
+                          <ng5-slider [(value)]="autoDisplayTimeSlider.value"
+                            [(highValue)]="autoDisplayTimeSlider.highValue" [options]="autoDisplayTimeSlider.options"></ng5-slider>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -193,7 +197,8 @@
                         </div> -->
 
                         <textarea class="fake-data-input" placeholder="Chưa có nội dung"
-                          [(ngModel)]="contentConfig.title" (input)="onInputContent($event, 1)">{{contentConfig.title}}</textarea>
+                          [(ngModel)]="contentConfig.title"
+                          (input)="onInputContent($event, 1)">{{contentConfig.title}}</textarea>
 
                       </div>
                     </div>
@@ -242,7 +247,8 @@
                         </div> -->
 
                         <textarea class="fake-data-input" placeholder="Chưa có nội dung"
-                          [(ngModel)]="contentConfig.body" (input)="onInputContent($event, 2)">{{contentConfig.body}}</textarea>
+                          [(ngModel)]="contentConfig.body"
+                          (input)="onInputContent($event, 2)">{{contentConfig.body}}</textarea>
 
                       </div>
                     </div>
@@ -328,11 +334,15 @@
                     </div>
                   </div>
                   <div class="content">
-                    <div class="title">{{sampleTitle || 'Chưa có tiêu đề'}}</div>
-                    <div class="body" fxLayout="column">{{sampleBody || 'Chưa có nội dung'}}</div>
+                    <div class="title">{{sampleTitle || ''}}</div>
+                    <div class="body">{{sampleBody || ''}}</div>
                     <div class="page-url">
                       <a href="{{contentConfig.pageUrl}} || ''"
-                        [style.color]="styleConfig.themeColor">{{contentConfig.pageUrl || 'Chưa có link'}}</a>
+                        [style.color]="styleConfig.themeColor">{{contentConfig.pageUrl || ''}}</a>
+                    </div>
+                    <div class="footer">
+                      <img src="https://image.flaticon.com/icons/png/128/222/222506.png" alt="">
+                      <span>x2.com.vn</span>
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,8 @@
 .container {
-  background-color: #7fcec5;
-  background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+  // background-color: #7fcec5;
+  // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+  background: url("../../../../assets/images/backgrounds/simple2.png");
+  background-size: 100% 100%;
   background-attachment: fixed;
   width: 100%;
 
@@ -10,7 +12,7 @@
       padding: 60px 30px 30px 30px;
 
       .form {
-        width: 70%;
+        width: 60%;
         display: table;
         margin: 0 auto;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -18,9 +20,10 @@
         padding: 80px 50px 20px 50px;
         border-radius: 7px;
 
-        -webkit-animation: formAnimation 0.4s ease-out;
+        -webkit-animation: InDown 0.4s ease-out;
+        animation: InDown 0.4s ease-out;
 
-        @keyframes formAnimation {
+        @keyframes InDown {
           from {
             transform: translateY(-100vh);
           }

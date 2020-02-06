@@ -12,12 +12,12 @@ import { PageBaseComponent } from 'app/shared/components/base/page-base.componen
 import { takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { HttpErrorResponse } from '@angular/common/http';
 
 interface SelectedWebsite {
   id: string;
   name: string;
-  isPopupOpening: boolean;
-  popupConfig: any;
+  fakeCustomerConfig: any
 }
 
 interface FakeCustomerRunningDevice {
@@ -30,7 +30,7 @@ interface FakeCustomerDisplayConfig {
   isEnabled: boolean;
   runningDevices: FakeCustomerRunningDevice[];
   positionOnPage: number;
-  autoDisplayTime: number;
+  autoDisplayTime: any;
 }
 
 interface FakeCustomerContentConfig {
@@ -78,21 +78,25 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   positionOptions = [
     {
       name: 'bottom-left',
+      animation: 'bounceInLeft',
       value: 1,
       selected: true
     },
     {
       name: 'bottom-right',
+      animation: 'bounceInRight',
       value: 2,
       selected: false
     },
     {
       name: 'top-left',
+      animation: 'bounceInLeft',
       value: 3,
       selected: false
     },
     {
       name: 'top-right',
+      animation: 'bounceInRight',
       value: 4,
       selected: false
     }
@@ -144,28 +148,28 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
       {
         name: 'Máy tính',
         value: 1,
-        checked: true
+        checked: false
       },
       {
         name: 'Điện thoại',
         value: 2,
-        checked: true
+        checked: false
       },
       {
         name: 'Máy tính bảng',
         value: 3,
-        checked: true
+        checked: false
       }
     ],
     positionOnPage: 1,
-    autoDisplayTime: 30
+    autoDisplayTime: [10, 90]
   }
 
   contentConfig: FakeCustomerContentConfig = {
     avatarType: this.avatarOptions[0].value,
-    title: 'Khách đang xem sản phẩm',
-    body: '#fake_name đã để lại thông tin: sđt #fake_phone, email #fake_email',
-    pageUrl: 'https://x2.com.vn'
+    title: 'Mới mua hàng!',
+    body: 'Khách hàng #fake_email vừa mới mua hàng thành công!',
+    pageUrl: ''
   }
 
   styleConfig: FakeCustomerStyleConfig = {
@@ -176,8 +180,16 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   configPanelOpenState: boolean;
   isAvatarStorageShown: boolean = false;
 
-  minAutoDisplayTime: number = 10;   // seconds
-  maxAutoDisplayTime: number = 90;   // seconds
+  autoDisplayTimeSlider = {
+    value: 10,
+    highValue: 90,
+    options: {
+      floor: 10,
+      ceil: 90,
+      step: 1,
+      showTicks: false
+    }
+  }
 
   selectedPosition: any;
   selectedShape: any;
@@ -367,8 +379,19 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   }
 
   generateFakeCustomerConfig(opt: number): FakeCustomerDisplayConfig | FakeCustomerContentConfig | FakeCustomerStyleConfig | null {
-    if (opt === 1)
-      return this.displayConfig;
+    if (opt === 1) {
+      let devices = ((this.displayConfig.runningDevices || []).map(item => item)).filter(d => d.checked).map(d => d.value);
+      delete this.displayConfig.runningDevices;
+
+      const params: FakeCustomerDisplayConfig = {
+        runningDevices: devices,
+        ...this.displayConfig
+      };
+
+      params.autoDisplayTime = [this.autoDisplayTimeSlider.value, this.autoDisplayTimeSlider.highValue];
+
+      return params;
+    }
 
     if (opt === 2)
       return this.contentConfig;
@@ -381,10 +404,10 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
 
   mapFakeData(text: string) {
     const mappedText = text
-      .replace(/#fake_name/g, 'Tue Vo')
-      .replace(/#fake_phone/g, '0932 659 211')
-      .replace(/#fake_email/g, 'tuevo.it@gmail.com')
-      .replace(/#fake_location/g, '31 Vo Van Tan');
+      .replace(/#fake_name/g, 'Nguyễn Văn A')
+      .replace(/#fake_phone/g, '0999 999 999')
+      .replace(/#fake_email/g, 'nva@gmail.com')
+      .replace(/#fake_location/g, '31 Võ Văn Tần, Q.3');
 
     return mappedText;
   }
@@ -392,7 +415,23 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   applyFakeCustomerConfig(opt: number): any {
     const params = this.generateFakeCustomerConfig(opt);
     if (params) {
-      console.log(params);
+      this._fuseProgressBarService.show();
+      const sub = this._visitorToolsService.updateFakeCustomer(params, this.websiteCtrl.value.id)
+        .subscribe(() => {
+          this._fuseProgressBarService.hide();
+          this._dialogService._openSuccessDialog({
+            messages: [`
+              <center>
+                Thiết lập thành công!
+                <br>Kiểm tra website của bạn <a href="${this.websiteCtrl.value.name}" target="_blank">tại đây</a>
+              </center>
+            `]
+          });
+        }, (error: HttpErrorResponse) => {
+          this._fuseProgressBarService.hide();
+          this._dialogService._openErrorDialog(error.error);
+        });
+      this.subscriptions.push(sub);
     }
   }
 
@@ -445,13 +484,42 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     checkedDevice.checked = e.checked;
   }
 
+  setFakeCustomerConfig() {
+    const config = this.websiteCtrl.value.fakeCustomerConfig;
+
+    if (config) {
+      //Display
+      this.displayConfig.isEnabled = config.isEnabled;
+
+      this.displayConfig.positionOnPage = config.positionOnPage;
+      for (const pos of this.positionOptions) {
+        if (pos.value === this.displayConfig.positionOnPage)
+          pos.selected = true;
+        else pos.selected = false;
+      }
+
+      this.displayConfig.autoDisplayTime = config.autoDisplayTime;
+      this.autoDisplayTimeSlider.value = this.displayConfig.autoDisplayTime[0];
+      this.autoDisplayTimeSlider.highValue = this.displayConfig.autoDisplayTime[1];
+
+      for (const value of config.runningDevices) {
+        const index = _.findIndex(this.displayConfig.runningDevices, item => item.value === value);
+        if (index >= 0)
+          this.displayConfig.runningDevices[index].checked = true;
+      }
+
+      
+    }
+  }
+
   getWebsites(accountId: string) {
     const sub = this._websiteManagementService.getWebsites(accountId)
       .subscribe(res => {
         this.websites = (res.data.website || []).map(website => {
           return {
             id: website._id,
-            name: website.domain
+            name: website.domain,
+            fakeCustomerConfig: website.fakeCustomerConfig
           } as SelectedWebsite
         });
 
@@ -470,6 +538,7 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
 
           // set default option is the first item of list websites
           this.websiteCtrl.setValue(this.websites[0]);
+          this.setFakeCustomerConfig();
 
           this._fuseProgressBarService.hide();
           this._fuseSplashScreenService.hide();
@@ -506,6 +575,10 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     this.filteredWebsites.next(
       this.websites.filter(website => website.name.toLowerCase().indexOf(search) > -1)
     );
+  }
+
+  selectWebsite() {
+    this.setFakeCustomerConfig();
   }
 
 }

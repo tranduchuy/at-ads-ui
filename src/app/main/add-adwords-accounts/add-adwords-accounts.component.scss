@@ -142,7 +142,7 @@
       border-radius: 7px;
       padding: 30px;
       padding-bottom: 0;
-      border: 0.5px solid #dcdcdc;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
       .div-connect-account-button {
         text-align: center;
@@ -184,6 +184,7 @@
 
           mat-row {
             transition: 0.2s;
+            
             -webkit-animation: rowAppearance 0.4s linear;
             @keyframes rowAppearance {
               from {

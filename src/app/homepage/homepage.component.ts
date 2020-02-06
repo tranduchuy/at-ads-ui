@@ -25,7 +25,6 @@ declare let gapi: any;
 })
 export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   APP_INFO = Generals.AppInfo;
-  LICENCE = Generals.Licence;
   logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   logs = [];
   auth2: any;

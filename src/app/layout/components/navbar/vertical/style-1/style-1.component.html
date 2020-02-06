@@ -36,7 +36,7 @@
         <div class="user-licence" *ngIf="user.email && user.licence" fxLayout="row" fxLayoutAlign="center center">
             <span [class.free-label]="user.licence.type === 'FREE'" [class.vip-label]="user.licence.type === 'VIP1'"
                 [class.custom-label]="user.licence.type === 'CUSTOM'" fxLayout="row"
-                matTooltip="{{LICENCE_INTERESTS[user.licence.type].interests}}">
+                matTooltip="{{'(*)QUYỀN LỢI: ' + user.licence.interests.join(' ')}}">
                 {{user.licence?.name}}
             </span>
             <span [class.vip-expiration]="user.licence.type === 'VIP1'"

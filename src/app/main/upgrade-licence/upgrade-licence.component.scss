@@ -1,3 +1,5 @@
+@import "../../../assets/styles/animate.css";
+
 .container {
   width: 100%;
   height: 90vh;
@@ -7,11 +9,11 @@
     // background-image: linear-gradient(315deg, #76daff 0%, #fcd000 74%);
     // background-color: #7fcec5;
     // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-    // background: url("../../../assets/images/backgrounds/simple2.png");
-    // background-size: 100% 100%;
-    // background-attachment: fixed;
-    background-color: #7fcec5;
-    background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+    background: url("../../../assets/images/backgrounds/simple2.png");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    // background-color: #7fcec5;
+    // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
     .main-title-inner {
       padding: 70px 20px 250px 20px;
@@ -148,31 +150,25 @@
     .package {
       background: white;
       padding-bottom: 20px;
-      width: 19vw;
+      width: 280px;
       margin: 25px;
       border-radius: 7px;
       box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
       transition: 0.2s;
 
-      &.free-package {
-        -webkit-animation: packageAnimation 0.4s ease-out;
+      &.package-FREE {
+        -webkit-animation-duration: 0.3s;
+        animation-duration: 0.3s;
       }
 
-      &.vip-package {
-        -webkit-animation: packageAnimation 0.6s ease-out;
+      &.package-VIP1 {
+        -webkit-animation-duration: 0.6s;
+        animation-duration: 0.6s;
       }
 
-      &.custom-package {
-        -webkit-animation: packageAnimation 0.8s ease-out;
-      }
-
-      @keyframes packageAnimation {
-        from {
-          transform: translateY(100vh);
-        }
-        to {
-          transform: translateY(0);
-        }
+      &.package-CUSTOM {
+        -webkit-animation-duration: 0.9s;
+        animation-duration: 0.9s;
       }
 
       &:hover {
@@ -190,6 +186,10 @@
         }
       }
 
+      mat-divider {
+        margin: 25px;
+      }
+
       .package-price {
         width: 100%;
         padding-top: 20px;
@@ -199,9 +199,8 @@
       }
 
       .package-benefit {
-        padding: 20px;
-        padding-top: 0;
-        height: 250px;
+        padding: 0 20px;
+        min-height: 230px;
 
         .benefit-title {
           font-size: 16px;
@@ -218,9 +217,12 @@
 
           li {
             font-size: 11px;
+            color: rgba(0, 0, 0, 0.7);
+            font-weight: bold;
+
             mat-icon {
-              color: #44b543;
-              font-size: 16px;
+              color: green;
+              font-size: 14px;
             }
           }
         }
@@ -256,7 +258,7 @@
         align-items: center;
       }
 
-      .free-label {
+      .label-FREE {
         background-color: #63d471;
         background-image: linear-gradient(315deg, #63d471 0%, #233329 74%);
         color: white;
@@ -264,7 +266,7 @@
         font-weight: bold;
       }
 
-      .vip-label {
+      .label-VIP1 {
         background: radial-gradient(
             ellipse farthest-corner at right bottom,
             #fedb37 0%,
@@ -286,7 +288,7 @@
         font-weight: bold;
       }
 
-      .custom-label {
+      .label-CUSTOM {
         font-weight: bold;
         color: gold;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;

@@ -6,10 +6,19 @@ export namespace Generals {
     export namespace AppInfo {
         export const name = 'Chống click tặc';
         export const yearOfRelease = '2019';
-    }
+    };
+    export namespace Contact {
+        export const supporters = [
+            {
+                phone: '0937573139',
+                moreInfo: 'Mr.Long - SĐT, Zalo, Viber 093.757.3139',
+            }
+        ];
+    };
     export namespace Licence {
         export const FREE = {
             name: 'Dùng thử',
+            type: 'FREE',
             price: 'Miễn phí',
             interests: `(*) QUYỀN LỢI: Chặn click ảo theo tần suất
                         . Chặn click ảo theo nhà mạng (3G/4G)
@@ -17,8 +26,9 @@ export namespace Generals {
                         . Tùy chỉnh danh sách IP cần chặn
                         . Báo cáo quản trị IP click.`
         };
-        export const VIP = {
+        export const VIP1 = {
             name: 'Tối ưu',
+            type: 'VIP1',
             price: '1.000.000 VNĐ/Tháng',
             interests: `(*) QUYỀN LỢI: Chặn click ảo theo tần suất
                         . Chặn click ảo theo nhà mạng (3G/4G)
@@ -31,6 +41,7 @@ export namespace Generals {
         };
         export const CUSTOM = {
             name: 'Đối tác',
+            type: 'CUSTOM',
             price: 'Liên hệ',
             interests: `(*) QUYỀN LỢI: Chặn click ảo theo tần suất
                         . Chặn click ảo theo nhà mạng (3G/4G)
@@ -42,7 +53,7 @@ export namespace Generals {
                         . Hỗ trợ gửi bồi hoàn phí từ Google
                         . Có 1 nhân viên hỗ trợ riêng.`
         }
-    }
+    };
     export namespace TrafficSourceReport {
         export const TRAFFIC_SOURCE_TYPES: TrafficSourceType[] = [
             {
@@ -90,7 +101,7 @@ export namespace Generals {
                 name: 'other/referral'
             }
         ];
-    }
+    };
     export namespace Pagination {
         export const itemsPerPageOptions = [
             {
@@ -141,5 +152,5 @@ export namespace Generals {
     export namespace AccountConnectionType {
         export const byEmail = 'EMAIL';
         export const byGoogleAdsId = 'GOOGLE_ADS_ID';
-    }
+    };
 }

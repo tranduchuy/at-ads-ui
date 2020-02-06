@@ -9,6 +9,7 @@ import { ColorCircleModule } from 'ngx-color/circle';
 import { FakeCustomerComponent } from './fake-customer/fake-customer.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatInputModule,
     MatSlideToggleModule,
 
-    ColorCircleModule,
-
     ReactiveFormsModule,
     MatFormFieldModule,
-    NgxMatSelectSearchModule,
     MatOptionModule,
     MatSelectModule,
     MatRadioModule,
@@ -40,6 +38,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatCheckboxModule,
 
     DragDropModule,
+
+    NgxMatSelectSearchModule,
+    ColorCircleModule,
+
+    Ng5SliderModule,
 
     FuseSharedModule,
 
