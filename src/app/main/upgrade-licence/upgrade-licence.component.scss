@@ -5,20 +5,13 @@
   height: 90vh;
 
   .main-title {
-    // background-color: #76daff;
-    // background-image: linear-gradient(315deg, #76daff 0%, #fcd000 74%);
-    // background-color: #7fcec5;
-    // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     background: url("../../../assets/images/backgrounds/simple2.png");
     background-size: 100% 100%;
     background-attachment: fixed;
-    // background-color: #7fcec5;
-    // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
     .main-title-inner {
       padding: 70px 20px 250px 20px;
       text-align: center;
-      //background-color: rgba(3, 155, 229, 0.5);
       width: 100%;
 
       .title {
@@ -53,9 +46,10 @@
   }
 
   .shiny::before {
-    // background-position: -180px;
     -webkit-animation: flare 2s infinite;
     -webkit-animation-timing-function: linear;
+    animation: flare 2s infinite;
+    animation-timing-function: linear;
     background-image: linear-gradient(
       65deg,
       transparent 20%,
@@ -88,6 +82,8 @@
   .inner-shiny::before {
     -webkit-animation: sparkle 5s infinite;
     -webkit-animation-timing-function: linear;
+    animation: sparkle 5s infinite;
+    animation-timing-function: linear;
     background: #fff;
     border-radius: 100%;
     box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 25px #fff, 0 0 30px #fff, 0 0 35px #fff;
@@ -101,6 +97,7 @@
 
   .inner-shiny::before {
     -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
     height: 7px;
     left: 0.12em;
     top: 0.8em;
@@ -112,9 +109,9 @@
     right: -5px;
   }
 
-  @-webkit-keyframes flare {
+  @keyframes flare {
     0% {
-      background-position: -180px;
+      background-position: -17vw;
     }
     30% {
       background-position: 500px;
@@ -123,7 +120,34 @@
       background-position: 500px;
     }
   }
-
+  @-webkit-keyframes flare {
+    0% {
+      background-position: -17vw;
+    }
+    30% {
+      background-position: 500px;
+    }
+    100% {
+      background-position: 500px;
+    }
+  }
+  @keyframes sparkle {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.8;
+    }
+    60% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
   @-webkit-keyframes sparkle {
     0% {
       opacity: 0;

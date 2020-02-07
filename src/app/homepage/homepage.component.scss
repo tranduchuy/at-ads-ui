@@ -92,6 +92,63 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       right: -5px;
     }
 
+    @keyframes flare {
+      0% {
+        background-position: -17vw;
+      }
+      30% {
+        background-position: 500px;
+      }
+      100% {
+        background-position: 500px;
+      }
+    }
+    @-webkit-keyframes flare {
+      0% {
+        background-position: -17vw;
+      }
+      30% {
+        background-position: 500px;
+      }
+      100% {
+        background-position: 500px;
+      }
+    }
+    @keyframes sparkle {
+      0% {
+        opacity: 0;
+      }
+      30% {
+        opacity: 0;
+      }
+      40% {
+        opacity: 0.8;
+      }
+      60% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    @-webkit-keyframes sparkle {
+      0% {
+        opacity: 0;
+      }
+      30% {
+        opacity: 0;
+      }
+      40% {
+        opacity: 0.8;
+      }
+      60% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
     .banner-container {
       background-image: url("../../assets/images/backgrounds/consulting-meeting.jpg");
       background-attachment: fixed;
