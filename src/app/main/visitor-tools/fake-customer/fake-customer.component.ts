@@ -45,6 +45,11 @@ interface FakeCustomerStyleConfig {
   shape: number;
 }
 
+interface InputError {
+  from: string;
+  message: string;
+}
+
 @Component({
   selector: 'app-fake-customer',
   templateUrl: './fake-customer.component.html',
@@ -195,6 +200,7 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   selectedShape: any;
   sampleTitle: string;
   sampleBody: string;
+  inputErrors: InputError[] = [];
 
   //===================
 
@@ -220,8 +226,6 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
       value: 4
     }
   ];
-  selectedTitleFakeDataFields = [];
-  selectedBodyFakeDataFields = [];
 
   constructor(
     private _fuseProgressBarService: FuseProgressBarService,
@@ -262,10 +266,6 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     this.displayConfig.autoDisplayTime = e.value;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.selectedTitleFakeDataFields, event.previousIndex, event.currentIndex);
-  }
-
   loadAvatarsByOption(option: number) {
     this.avatars = [];
     switch (option) {
@@ -300,32 +300,6 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
     }
   }
 
-  removeSelectedFakeDataField(index: number, option: number) {
-    //Title
-    if (option === 1) {
-      let list = this.selectedTitleFakeDataFields.filter((item, i) => i !== index);
-      this.selectedTitleFakeDataFields = list;
-    }
-
-    //Body
-    if (option === 2) {
-      let list = this.selectedBodyFakeDataFields.filter((item, i) => i !== index);
-      this.selectedBodyFakeDataFields = list;
-    }
-  }
-
-  onInputFakeDataText(text: string, data: any) {
-    const { option, index } = data;
-
-    //Title
-    if (option === 1)
-      this.selectedTitleFakeDataFields[index]['text'] = text;
-
-    //Body
-    if (option === 2)
-      this.selectedBodyFakeDataFields[index]['text'] = text;
-  }
-
   onInputContent(e, opt: number) {
     const text = e.target.value;
 
@@ -343,7 +317,6 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   }
 
   onSelectFakeDataField(field: any, option: number) {
-
     const selectedField = field.fieldName;
 
     //Title
@@ -379,6 +352,11 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   }
 
   generateFakeCustomerConfig(opt: number): FakeCustomerDisplayConfig | FakeCustomerContentConfig | FakeCustomerStyleConfig | null {
+    if (this.inputErrors.length > 0) {
+      this._dialogService._openErrorDialog({ messages: ['Vui lòng kiểm tra lại thông tin đã nhập.'] });
+      return null;
+    }
+
     if (opt === 1) {
       let devices = ((this.displayConfig.runningDevices || []).map(item => item)).filter(d => d.checked).map(d => d.value);
       delete this.displayConfig.runningDevices;
@@ -436,7 +414,23 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
   }
 
   onInputPageUrl(e: any) {
-    this.contentConfig.pageUrl = e.target.value;
+    const pageUrl = e.target.value;
+    const from = 'PAGE_URL';
+    
+    if (!(/^(?:http(s)?:\/\/)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/).test(pageUrl)) {
+      this.inputErrors.push({
+        from,
+        message: 'Đường dẫn không hợp lệ'
+      });
+    } else {
+      this.contentConfig.pageUrl = pageUrl;
+      this.inputErrors = this.inputErrors.filter(err => err.from !== from);
+    }
+  }
+
+  getInputErrorMessage(from: string) {
+    const error = this.inputErrors.find(err => err.from === from);
+    return error ? error.message : null;
   }
 
   onCheckEnableDisplayToggle(e: MatSlideToggleChange) {
@@ -493,14 +487,12 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
 
       this.displayConfig.positionOnPage = config.positionOnPage;
       for (const pos of this.positionOptions) {
-        if (pos.value === this.displayConfig.positionOnPage)
+        if (pos.value === this.displayConfig.positionOnPage) {
           pos.selected = true;
+          this.selectedPosition = pos;
+        }
         else pos.selected = false;
       }
-
-      this.displayConfig.autoDisplayTime = config.autoDisplayTime;
-      this.autoDisplayTimeSlider.value = this.displayConfig.autoDisplayTime[0];
-      this.autoDisplayTimeSlider.highValue = this.displayConfig.autoDisplayTime[1];
 
       for (const value of config.runningDevices) {
         const index = _.findIndex(this.displayConfig.runningDevices, item => item.value === value);
@@ -508,7 +500,38 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
           this.displayConfig.runningDevices[index].checked = true;
       }
 
-      
+      this.displayConfig.autoDisplayTime = config.autoDisplayTime;
+      this.autoDisplayTimeSlider.value = this.displayConfig.autoDisplayTime[0];
+      this.autoDisplayTimeSlider.highValue = this.displayConfig.autoDisplayTime[1];
+
+      //Content
+      this.contentConfig.avatarType = config.avatarType;
+      for (const opt of this.avatarOptions) {
+        if (opt.value === this.contentConfig.avatarType)
+          opt.checked = true;
+        else opt.checked = false;
+      }
+      this.loadAvatarsByOption(this.contentConfig.avatarType);
+
+      this.contentConfig.title = config.title;
+      this.sampleTitle = this.mapFakeData(this.contentConfig.title);
+
+      this.contentConfig.body = config.body;
+      this.sampleBody = this.mapFakeData(this.contentConfig.body);
+
+      this.contentConfig.pageUrl = config.pageUrl;
+
+      //Style
+      this.styleConfig.themeColor = config.themeColor;
+
+      this.styleConfig.shape = config.shape;
+      for (const opt of this.shapeOptions) {
+        if (opt.value === this.styleConfig.shape) {
+          opt.checked = true;
+          this.selectedShape = opt;
+        }
+        else opt.checked = false;
+      }
     }
   }
 
@@ -519,7 +542,7 @@ export class FakeCustomerComponent extends PageBaseComponent implements OnInit {
           return {
             id: website._id,
             name: website.domain,
-            fakeCustomerConfig: website.fakeCustomerConfig
+            fakeCustomerConfig: website.fakeCustomerConfig || null
           } as SelectedWebsite
         });
 

@@ -30,6 +30,7 @@
     top: -15vh;
 
     -webkit-animation: formAni 0.4s ease-out;
+    animation: formAni 0.4s ease-out;
     @keyframes formAni {
       from {
         transform: translateY(100vh);

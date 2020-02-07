@@ -3,10 +3,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 .homepage {
   font-size: 14px;
   width: 100%;
-
-  // background-color: #7fcec5;
-  // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-
   background: url("../../assets/images/backgrounds/simple2.png");
   background-size: 100% 100%;
   background-attachment: fixed;
@@ -21,9 +17,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
     }
 
     .shiny {
-      //color: #f5c21b;
-      // color: lightgreen;
-      // background: -webkit-gradient(linear, left top, left bottom, from(lightgreen), to(#d17000));
       color: lightyellow;
       background: -webkit-gradient(linear, left top, left bottom, from(lightyellow), to(#039be5));
       -webkit-background-clip: text;
@@ -36,9 +29,10 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
     }
 
     .shiny::before {
-      // background-position: -17vw;
       -webkit-animation: flare 2s infinite;
       -webkit-animation-timing-function: linear;
+      animation: flare 2s infinite;
+      animation-timing-function: linear;
       background-image: linear-gradient(
         65deg,
         transparent 20%,
@@ -71,6 +65,8 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
     .inner-shiny::before {
       -webkit-animation: sparkle 3s infinite;
       -webkit-animation-timing-function: linear;
+      animation: sparkle 3s infinite;
+      animation-timing-function: linear;
       background: #fff;
       border-radius: 100%;
       box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 25px #fff, 0 0 30px #fff, 0 0 35px #fff;
@@ -84,6 +80,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
     .inner-shiny::before {
       -webkit-animation-delay: 0.2s;
+      animation-delay: 0.2s;
       height: 7px;
       left: 0.12em;
       top: 0.8em;
@@ -95,116 +92,12 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       right: -5px;
     }
 
-    .shiny2 {
-      color: lightyellow;
-      background: -webkit-gradient(linear, left top, left bottom, from(lightyellow), to(#d17000));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-      font-size: 22px !important;
-      font-weight: 900;
-      position: relative;
-      text-transform: uppercase;
-    }
-
-    .shiny2::before {
-      // background-position: -17vw;
-      -webkit-animation: flare 2s infinite;
-      -webkit-animation-timing-function: linear;
-      background-image: linear-gradient(
-        65deg,
-        transparent 20%,
-        rgba(255, 255, 255, 0.2) 20%,
-        rgba(255, 255, 255, 0.3) 27%,
-        transparent 27%,
-        transparent 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      content: "Lợi ích khi sử dụng chặn click ảo";
-      color: #fff;
-      display: block;
-      // padding-right: 140px;
-      position: absolute;
-    }
-
-    .shiny2::after {
-      // content: "Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads";
-      color: #fff;
-      display: block;
-      position: absolute;
-      text-shadow: 0 1px #6e4414, 0 2px #6e4414, 0 3px #6e4414, 0 4px #6e4414, 0 5px #6e4414, 0 6px #6e4414,
-        0 7px #6e4414, 0 8px #6e4414, 0 9px #6e4414, 0 10px #6e4414;
-      top: 0;
-      z-index: -1;
-    }
-
-    .inner-shiny2::after,
-    .inner-shiny2::before {
-      -webkit-animation: sparkle 3s infinite;
-      -webkit-animation-timing-function: linear;
-      background: #fff;
-      border-radius: 100%;
-      box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 25px #fff, 0 0 30px #fff, 0 0 35px #fff;
-      content: "Lợi ích khi sử dụng chặn click ảo";
-      display: block;
-      height: 10px;
-      opacity: 0.7;
-      position: absolute;
-      width: 10px;
-    }
-
-    .inner-shiny2::before {
-      -webkit-animation-delay: 0.2s;
-      height: 7px;
-      left: 0.12em;
-      top: 0.8em;
-      width: 7px;
-    }
-
-    .inner-shiny2::after {
-      top: 0.32em;
-      right: -5px;
-    }
-
-    @-webkit-keyframes flare {
-      0% {
-        background-position: -17vw;
-      }
-      30% {
-        background-position: 500px;
-      }
-      100% {
-        background-position: 500px;
-      }
-    }
-
-    @-webkit-keyframes sparkle {
-      0% {
-        opacity: 0;
-      }
-      30% {
-        opacity: 0;
-      }
-      40% {
-        opacity: 0.8;
-      }
-      60% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 0;
-      }
-    }
-
     .banner-container {
       background-image: url("../../assets/images/backgrounds/consulting-meeting.jpg");
       background-attachment: fixed;
       background-size: 100% 100%;
-      // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
       .banner {
-        //background: rgba(0, 0, 0, 0.6);
         background: rgba(7, 87, 115, 0.6);
         color: white;
         height: 550px;
@@ -236,17 +129,16 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
           .insider {
             -webkit-animation: titleAppearance 0.8s ease-in;
+            animation: titleAppearance 0.8s ease-in;
           }
         }
 
         @keyframes titleAppearance {
           from {
             opacity: 0;
-            //transform: translateX(-100vw);
           }
           to {
             opacity: 1;
-            //transform: translateX(0);
           }
         }
 
@@ -254,7 +146,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           width: 120px;
           margin: 25px auto;
           margin-bottom: 6px;
-          //display: none;
+
           img {
             filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
             transition: 0.2s;
@@ -264,14 +156,13 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
             }
 
             -webkit-animation: logoAppearance 0.8s ease-in;
+            animation: logoAppearance 0.8s ease-in;
             @keyframes logoAppearance {
               from {
                 opacity: 0;
-                //transform: translateX(-100vw);
               }
               to {
                 opacity: 1;
-                //transform: translateX(0);
               }
             }
           }
@@ -292,6 +183,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           text-align: center;
           font-size: 16px;
           -webkit-animation: title2Appearance 0.8s ease-in;
+          animation: title2Appearance 0.8s ease-in;
           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 
           .highline {
@@ -303,11 +195,9 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
         @keyframes title2Appearance {
           from {
             opacity: 0;
-            //transform: translateX(100vw);
           }
           to {
             opacity: 1;
-            //transform: translateX(0);
           }
         }
 
@@ -322,9 +212,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
             margin-right: 2px;
           }
 
-          .login-google-button {
-          }
-
           .access-system-button {
             background: #44b543;
             color: white;
@@ -333,6 +220,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           button {
             transition: 0.2s;
             -webkit-animation: buttonAppearance 0.8s ease-in;
+            animation: buttonAppearance 0.8s ease-in;
 
             &:hover {
               transform: scale(1.05, 1.05);
@@ -423,11 +311,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           width: 100%;
           background: rgba(3, 155, 229, 0.1);
 
-          img,
-          mat-icon {
-            //filter: drop-shadow(0.2px 1px 1px black);
-          }
-
           mat-header-row {
             background: rgba(0, 0, 0, 0.1);
           }
@@ -438,11 +321,8 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
           mat-row {
             transition: 0.2s;
+            -webkit-animation: rowAppearance 0.4s linear;
             animation: rowAppearance 0.4s linear;
-
-            // &:nth-child(odd) {
-            //   background-color: whitesmoke;
-            // }
 
             &:nth-child(odd) {
               background: rgba(0, 0, 0, 0.02);
@@ -514,7 +394,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
     .instruction-container {
       .instruction {
         padding: 45px 17vw 45px 17vw;
-        //background: rgba(7, 87, 115, 0.4);
         background: rgba(7, 87, 115, 0.6);
 
         .steps-main-title {
@@ -536,6 +415,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
         .step-wrapper {
           -webkit-animation: ani 0.8s ease-in;
+          animation: ani 0.8s ease-in;
           @keyframes ani {
             from {
               opacity: 0;
@@ -550,11 +430,9 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
             position: relative;
             height: 200px;
             color: white;
-            //border-radius: 5px;
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
             transition: 0.2s;
             cursor: pointer;
-            // pointer-events: none;
 
             &:hover {
               transform: translateY(-5px);
@@ -575,8 +453,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
                 position: absolute;
                 bottom: 0;
                 left: 0;
-                // border-bottom: 4px solid #039be5;
-
                 text-shadow: $textShadow0;
 
                 .step-name {
@@ -614,22 +490,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       }
     }
 
-    .onLoadingImage {
-      // -webkit-animation: ani 0.5s ease-in;
-      // @keyframes ani {
-      //   from {
-      //     opacity: 0;
-      //   }
-      //   to {
-      //     opacity: 1;
-      //   }
-      // }
-    }
-
     .feature-container {
-      // background-color: #7fcec5;
-      // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-
       background-color: #0d0a0b;
       background-image: linear-gradient(315deg, #0d0a0b 0%, #009fc2 74%);
 
@@ -637,7 +498,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       z-index: 2;
 
       .feature {
-        // background: rgba(0, 0, 0, 0.2);
         background: rgba(7, 87, 115, 0.6);
         padding: 70px 17vw 70px 17vw;
         color: white;
@@ -647,6 +507,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           padding-right: 80px;
           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
           -webkit-animation: overviewInfoAni 1.2s ease-out;
+          animation: overviewInfoAni 1.2s ease-out;
           @keyframes overviewInfoAni {
             from {
               opacity: 0;
@@ -684,13 +545,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           }
 
           .overview-image {
-            //width: 80%;
-            // display: table;
-            // margin: 0 auto;
-            //display: none;
-            // margin-top: 75px;
-            // filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
-
             position: absolute;
             z-index: 3;
             width: 15%;
@@ -715,36 +569,18 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
     }
 
     .feature-item {
-      //background: rgba(3, 155, 229, 0.25);
-      // background: rgba(12, 20, 33, 1);
-      // background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-      // background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-      // background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-      // background: rgba(255, 255, 255, 0.1);
-
-      // background: rgba(0, 0, 0, 0.5);
-      // backdrop-filter: blur(10px);
-
       background: rgba(0, 0, 0, 0.4);
-      // text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-
       color: white;
-      //border-radius: 7px;
-      //filter: drop-shadow(0px 1px 4px black);
-      //text-shadow: 1px 1px 4px black;
       padding: 15px;
       transition: 0.2s;
       text-align: justify;
       display: flex;
       align-items: center;
-
       min-height: 130px;
       text-shadow: $textShadow0;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-
-      // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-
       -webkit-animation: ani 1s ease-in;
+      animation: ani 1s ease-in;
       @keyframes ani {
         from {
           opacity: 0;
@@ -796,37 +632,24 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
       &:hover {
         background: rgba(0, 0, 0, 0.3);
-        // p {
-        //   color: #c5e5ed !important;
-        // }
       }
     }
 
     .benefit-container {
-      // background-color: #7fcec5;
-      // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-
-      // background: url("../../assets/images/backgrounds/Analytics-digital-analytics-HD-1980x990.jpg");
       background-size: 100% 100%;
       background-position: center center;
-
       background-attachment: fixed;
       .benefit {
         background: rgba(0, 0, 0, 0.65);
-        // backdrop-filter: blur(4px);
         text-align: center;
         padding: 125px 17vw 125px 17vw;
         color: white;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
-        //background: rgba(125, 125, 125, 0.2);
-        //background: rgba(3, 155, 229, 0.2);
-        //background: url("../../assets/images/backgrounds/QL5I0O.jpg");
-
-        //filter: drop-shadow(0.8px 0.8px 0.8px black);
         .benefit-title {
           font-size: 18px;
           -webkit-animation: ani 1.4s ease-in;
+          animation: ani 1.4s ease-in;
           @keyframes ani {
             from {
               opacity: 0;
@@ -841,6 +664,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
         .secondary-benefit-title {
           -webkit-animation: ani 1.4s ease-in;
+          animation: ani 1.4s ease-in;
           @keyframes ani {
             from {
               opacity: 0;
@@ -869,6 +693,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           transition: 0.2s;
 
           -webkit-animation: ani 1.4s ease-in;
+          animation: ani 1.4s ease-in;
           @keyframes ani {
             from {
               opacity: 0;
@@ -939,9 +764,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
       padding: 100px 17vw 30px 17vw;
       background: rgba(0, 0, 0, 0.3);
-
-      //background: #00608c;
-
       color: #eee;
       text-align: justify;
       font-size: 12px;
@@ -990,8 +812,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
   .footer-contact-container {
-    //background-color: rgba(0, 0, 0, 0.3);
-    //filter: drop-shadow(0px 1px 4px black);
     .footer-contact {
       background: #002d41;
       color: white;
@@ -1007,65 +827,23 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
     }
   }
 
-  // .contact {
-  //   background: rgba(12, 20, 33, 1);
-  //   background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-  //   background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-  //   background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-  //   // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
-  //   // background-size: 100% 100%;
-  //   filter: drop-shadow(0px 1px 2px black);
-  //   color: silver;
-  //   font-weight: bold;
-  //   position: fixed;
-  //   z-index: 200;
-  //   width: 100%;
-  //   bottom: 0;
-  //   text-align: center;
-  //   padding: 15px;
-  //   -webkit-animation: contactAppearance 0.4s linear;
-  // }
-
   .topbar-container {
-    //background: rgba(0, 0, 0, 0.6);
-
     .topbar2 {
       position: fixed !important;
-      // background: rgba(12, 20, 33, 1) !important;
-      // background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1)) !important;
-      // background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1)) !important;
-      // background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1)) !important;
       animation: topbarAppearance 0.2s linear;
-
       backdrop-filter: blur(5px);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-      // background: rgba(7, 87, 115, 0.4);
-
       background-color: #7fcec5;
       background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     }
 
     .topbar {
-      //background: #1E2129;
-      //background: rgba(3, 155, 229, 0.4);
-      // background: url("../../assets/images/backgrounds/simple-color-wallpaper_623648412.jpg");
-      // background-size: 100% 100%;
-
-      // background: rgba(12, 20, 33, 1);
-      // background: -webkit-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-      // background: -moz-linear-gradient(top left, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-      // background: linear-gradient(to bottom right, rgba(12, 20, 33, 1), rgba(7, 87, 115, 1));
-
-      //background: #20222a;
-
-      //filter: drop-shadow(0px 1px 4px black);
       font-weight: bold;
       position: absolute;
       z-index: 200;
       width: 100%;
       top: 0;
       padding: 30px 17vw 15px 16.6vw;
-
       border: 0 !important;
       outline: 0 !important;
       box-sizing: 0 !important;
@@ -1084,6 +862,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
       .topbar-google-button {
         -webkit-animation: buttonAppearance 0.5s ease-in;
+        animation: buttonAppearance 0.5s ease-in;
         transition: 0.2s;
         &:hover {
           transform: scale(1.05, 1.05);
@@ -1099,6 +878,7 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
       .topbar-access-system-button {
         -webkit-animation: buttonAppearance 0.5s ease-in;
+        animation: buttonAppearance 0.5s ease-in;
         background: #44b543;
         color: white;
         &:hover {
@@ -1136,7 +916,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
     font-size: 14px;
     background-color: #ffffb5;
     background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
-    //background: rgba(56, 166, 221, 0.6);
 
     .topbar-container {
       .topbar {
@@ -1148,10 +927,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
         }
       }
     }
-
-    // .contact {
-    //   font-size: 12px;
-    // }
 
     .footer-contact-container {
       .footer-contact {
@@ -1169,9 +944,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       }
 
       .banner-container {
-        // background: url("../../assets/images/backgrounds/bg2.jpeg");
-        // background-size: 100% 100%;
-
         .banner {
           padding-left: 30px;
           padding-right: 30px;
@@ -1181,7 +953,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
           .decoration {
             width: 60vw;
-            //display: initial;
             display: none;
           }
 
@@ -1255,10 +1026,6 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
           .step-wrapper {
             .step {
               pointer-events: none;
-              .step-image {
-                .step-description {
-                }
-              }
             }
           }
         }
@@ -1303,22 +1070,9 @@ $textShadow0: 1px 1px 2px rgba(0, 0, 0, 0.4);
       .feature-item {
         padding-top: 15px;
         padding-bottom: 10px;
-
-        // mat-icon,
-        // img {
-        //   font-size: 40px;
-        //   min-width: 40px;
-        // }
-
-        // img {
-        //   height: 40px;
-        // }
       }
 
       .benefit-container {
-        // background-color: #7fcec5;
-        // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
-
         .benefit {
           padding: 30px;
           padding-top: 60px;

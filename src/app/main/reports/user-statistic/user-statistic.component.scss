@@ -170,6 +170,7 @@
           }
 
           -webkit-animation: rowAppearance 0.4s linear;
+          animation: rowAppearance 0.4s linear;
           @keyframes rowAppearance {
             from {
               opacity: 0;

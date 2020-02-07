@@ -82,6 +82,7 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
       -webkit-animation: notificationAni 0.4s ease-out;
+      animation: notificationAni 0.4s ease-out;
       @keyframes notificationAni {
         from {
           transform: translateY(3vh);
@@ -111,9 +112,10 @@
       top: -5vh;
 
       &.section-pie-chart {
-        -webkit-animation: animation1 0.4s ease-out;
         padding: 0;
 
+        -webkit-animation: animation1 0.4s ease-out;
+        animation: animation1 0.4s ease-out;
         @keyframes animation1 {
           from {
             transform: translateY(100vh);
@@ -130,17 +132,6 @@
           text-align: center;
           margin-top: 20px;
           font-weight: bold;
-
-          //box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.1);
-
-          // -webkit-animation: clickDetailAni 0.6s ease-out;
-          // @keyframes clickDetailAni {
-          //   from {
-          //     transform: translateY(60px)
-          //   } to {
-          //     transform: translateY(0)
-          //   }
-          // }
 
           .number {
             font-size: 20px;
@@ -267,6 +258,7 @@
     .div-line-chart {
       padding-bottom: 0;
       -webkit-animation: animation2 0.6s ease-out;
+      animation: animation2 0.6s ease-out;
 
       @keyframes animation2 {
         from {
@@ -305,6 +297,7 @@
       // height: 95vh;
 
       -webkit-animation: animation3 0.8s ease-out;
+      animation: animation3 0.8s ease-out;
       @keyframes animation3 {
         from {
           transform: translateY(100vh);
@@ -340,6 +333,7 @@
           }
 
           -webkit-animation: rowAppearance 0.4s linear;
+          animation: rowAppearance 0.4s linear;
           @keyframes rowAppearance {
             from {
               opacity: 0;

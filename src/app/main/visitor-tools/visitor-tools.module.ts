@@ -7,8 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ColorCircleModule } from 'ngx-color/circle';
 import { FakeCustomerComponent } from './fake-customer/fake-customer.component';
-
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
@@ -36,8 +34,6 @@ import { Ng5SliderModule } from 'ng5-slider';
     MatExpansionModule,
     MatSliderModule,
     MatCheckboxModule,
-
-    DragDropModule,
 
     NgxMatSelectSearchModule,
     ColorCircleModule,

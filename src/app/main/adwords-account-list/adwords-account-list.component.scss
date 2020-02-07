@@ -49,6 +49,7 @@
     position: relative;
     top: -15vh;
     -webkit-animation: formAni 0.4s ease-out;
+    animation: formAni 0.4s ease-out;
     @keyframes formAni {
       from {
         transform: translateY(100vh);
@@ -85,6 +86,7 @@
       }
 
       -webkit-animation: notificationAni 0.2s ease-out;
+      animation: notificationAni 0.2s ease-out;
       @keyframes notificationAni {
         from {
           transform: translateY(5vh);
@@ -281,6 +283,7 @@
           transition: 0.2s;
 
           -webkit-animation: rowAppearance 0.4s linear;
+          animation: rowAppearance 0.4s linear;
           @keyframes rowAppearance {
             from {
               opacity: 0;

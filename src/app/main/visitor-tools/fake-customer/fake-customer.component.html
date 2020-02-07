@@ -87,12 +87,7 @@
                     <div class="item-title" fxFlex="20">Thời gian hiển thị</div>
                     <div class="item-content" fxFlex="80">
                       <div class="time-setting">
-                        <!-- <mat-slider class="example-margin" [value]="displayConfig.autoDisplayTime" [disabled]="false"
-                          [invert]="false" [min]="minAutoDisplayTime" [max]="maxAutoDisplayTime" [step]="1"
-                          [thumbLabel]="true" [tickInterval]="10" [vertical]="false" color="accent"
-                          (change)="onChangeAutoDisplayTime($event)">
-                        </mat-slider> -->
-
+                        
                         <div class="auto-display-time-slider">
                           <ng5-slider [(value)]="autoDisplayTimeSlider.value"
                             [(highValue)]="autoDisplayTimeSlider.highValue" [options]="autoDisplayTimeSlider.options"></ng5-slider>
@@ -173,29 +168,6 @@
 
                         </div>
 
-                        <!-- <div class="fake-data-collection no-select example-list" fxLayout="row wrap" fxLayoutGap="grid"
-                          fxLayoutAlign="start start" cdkDropList cdkDropListOrientation="horizontal"
-                          (cdkDropListDropped)="drop($event)">
-
-                          <div class="fake-data selected {{item.value !== 5 ? 'info' : 'text'}} no-select example-box"
-                            *ngFor="let item of selectedTitleFakeDataFields; let i = index" cdkDrag>
-
-                            <span *ngIf="item.value !== 5">{{item.name}}</span>
-
-                            <textarea *ngIf="item.value === 5" type="text" placeholder="Nhập nội dung" autofocus
-                              (input)="onInputFakeDataText($event.target.value, {option: 1, index: i})"></textarea>
-
-                            <button mat-icon-button class="btn-remove" (click)="removeSelectedFakeDataField(i, 1)">
-                              <mat-icon>close</mat-icon>
-                            </button>
-
-                          </div>
-
-                          <span *ngIf="selectedTitleFakeDataFields.length === 0" class="placeholder">Chưa có nội
-                            dung</span>
-
-                        </div> -->
-
                         <textarea class="fake-data-input" placeholder="Chưa có nội dung"
                           [(ngModel)]="contentConfig.title"
                           (input)="onInputContent($event, 1)">{{contentConfig.title}}</textarea>
@@ -223,29 +195,6 @@
 
                         </div>
 
-                        <!-- <div class="fake-data-collection no-select example-list" fxLayout="row wrap" fxLayoutGap="grid"
-                          fxLayoutAlign="start start" cdkDropList cdkDropListOrientation="horizontal"
-                          (cdkDropListDropped)="drop($event)">
-
-                          <div class="fake-data selected {{item.value !== 5 ? 'info' : 'text'}} no-select example-box"
-                            *ngFor="let item of selectedBodyFakeDataFields; let i = index" cdkDrag>
-
-                            <span *ngIf="item.value !== 5">{{item.name}}</span>
-
-                            <textarea *ngIf="item.value === 5" type="text" placeholder="Nhập nội dung" autofocus
-                              (input)="onInputFakeDataText($event.target.value, {option: 2, index: i})"></textarea>
-
-                            <button mat-icon-button class="btn-remove" (click)="removeSelectedFakeDataField(i, 2)">
-                              <mat-icon>close</mat-icon>
-                            </button>
-
-                          </div>
-
-                          <span *ngIf="selectedBodyFakeDataFields.length === 0" class="placeholder">Chưa có nội
-                            dung</span>
-
-                        </div> -->
-
                         <textarea class="fake-data-input" placeholder="Chưa có nội dung"
                           [(ngModel)]="contentConfig.body"
                           (input)="onInputContent($event, 2)">{{contentConfig.body}}</textarea>
@@ -260,6 +209,10 @@
                       <div class="enter-page-url">
                         <input type="text" placeholder="Chưa có đường dẫn" value="{{contentConfig.pageUrl}}"
                           (input)="onInputPageUrl($event)">
+
+                        <div class="input-error">
+                          {{getInputErrorMessage('PAGE_URL') || ''}}
+                        </div>
 
                         <div class="enter-page-url__notice">
                           <span style="color: crimson">*</span> Đường dẫn phải kèm theo <span

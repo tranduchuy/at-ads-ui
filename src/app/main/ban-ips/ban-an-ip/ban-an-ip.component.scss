@@ -35,6 +35,7 @@
     top: -15vh;
 
     -webkit-animation: formAni 0.4s ease-out;
+    animation: formAni 0.4s ease-out;
 
     .title2 {
       padding-top: 30px;
@@ -86,6 +87,7 @@
       font-size: 12px;
 
       -webkit-animation: infoAni 0.4s ease-in;
+      animation: infoAni 0.4s ease-in;
       @keyframes infoAni {
         from {
           opacity: 0;
