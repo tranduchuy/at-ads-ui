@@ -5,9 +5,8 @@
   height: 90vh;
 
   .main-title {
-    background: url("../../../assets/images/backgrounds/simple2.png");
-    background-size: 100% 100%;
-    background-attachment: fixed;
+    background-color: #7fcec5;
+    background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
     .main-title-inner {
       padding: 70px 20px 250px 20px;

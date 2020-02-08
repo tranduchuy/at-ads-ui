@@ -17,7 +17,7 @@
       <span class="recommended" *ngIf="p.type === LICENCE.VIP1.type">Khuyên dùng</span>
       <span class="label-base {{'label-' + p.type}}">{{p.name}}</span>
       <p class="package-price">
-        {{p.price !== 0 ? ((p.price | number: '1.0-0')  + ' VNĐ/Tháng') : (p.type === LICENCE.FREE.type ? 'Miễn phí' : 'Liên hệ')}}
+        {{(p.type === LICENCE.FREE.type) ? 'Miễn phí' : (p.isContactPrice ? 'Liên hệ' : ((p.price | number: '1.0-0')  + ' VNĐ/Tháng'))}}
       </p>
       <mat-divider></mat-divider>
       <div class="package-benefit">
