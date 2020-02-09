@@ -998,10 +998,6 @@ $contentPadding: 30px;
       width: 95%;
     }
 
-    .wave {
-      margin-top: 50px;
-    }
-
     .footer-contact-container {
       .footer-contact {
         font-size: 10px;
@@ -1009,6 +1005,10 @@ $contentPadding: 30px;
     }
 
     .main-content {
+      .wave {
+        margin-top: -50px;
+      }
+
       .shiny {
         font-size: 18px !important;
       }
