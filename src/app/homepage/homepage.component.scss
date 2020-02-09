@@ -998,6 +998,10 @@ $contentPadding: 30px;
       width: 95%;
     }
 
+    .wave {
+      top: -50px;
+    }
+
     .footer-contact-container {
       .footer-contact {
         font-size: 10px;
@@ -1014,6 +1018,8 @@ $contentPadding: 30px;
           padding-bottom: 0;
 
           .banner {
+            height: 450px;
+
             .app-title {
               padding: 0 15px;
             }
