@@ -11,6 +11,16 @@ $contentPadding: 30px;
 
   background: #039be5;
 
+  .no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+  }
+
   .content-wrapper {
     width: 65%;
     margin: 0 auto;
@@ -159,6 +169,19 @@ $contentPadding: 30px;
       }
     }
 
+    .wave {
+      height: 150px;
+      overflow: hidden;
+      margin-top: -150px;
+    }
+
+    .bg-img1 {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+    }
+
     .banner-container {
       background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
       width: 100%;
@@ -191,7 +214,7 @@ $contentPadding: 30px;
             display: none;
 
             img {
-              filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+              filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
               transition: 0.2s;
 
               &:hover {
@@ -213,6 +236,7 @@ $contentPadding: 30px;
 
             .highline {
               font-weight: bold;
+              color: rgb(241, 202, 127);
             }
           }
 
@@ -235,10 +259,10 @@ $contentPadding: 30px;
 
             button {
               font-weight: bold;
-              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
               min-height: 45px;
-              background: white;
-              color: rgba(0, 0, 0, 0.7);
+              // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+              // background: white;
+              // color: rgba(0, 0, 0, 0.7);
               transition: 0.2s;
 
               &:hover {
@@ -251,10 +275,12 @@ $contentPadding: 30px;
         .banner-image {
           img {
             width: 250px;
-            height: 200px;
+            height: 190px;
             margin-top: 90px;
             filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
             transform: rotateZ(3deg);
+
+            @extend .no-select;
           }
         }
       }
@@ -493,20 +519,16 @@ $contentPadding: 30px;
                     font-weight: bold;
 
                     .step-label {
-                      background: #039be5;
+                      background: #44b543;
                       color: white;
                       font-weight: bold;
                       font-size: 10px;
                       text-align: center;
-
                       height: 18px;
                       width: 18px;
-
                       border-radius: 50%;
                       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-
                       padding: 2px 2px 1px 2px;
-
                       display: inline-block;
                       margin-right: 15px;
                     }
@@ -579,8 +601,7 @@ $contentPadding: 30px;
               width: 200px;
               display: table;
               margin: 0 auto;
-              margin-top: 60px;
-              filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.7));
+              margin-top: 70px;
             }
 
             .trial-button {
@@ -620,17 +641,32 @@ $contentPadding: 30px;
         }
 
         .feature-item-icon {
+          width: 35px;
+          height: 35px;
+          background: orange;
+          padding: 3px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+
+          // svg,
+          // mat-icon {
+          //   font-size: 34px;
+          //   width: 34px;
+          //   color: white;
+          //   margin-left: 5px;
+          // }
+
           svg,
           mat-icon {
-            font-size: 34px;
-            width: 34px;
-            color: orange;
-            margin-left: 5px;
+            font-size: 20px;
+            color: white;
+            width: 35px;
           }
 
-          svg {
-            font-size: 30px;
-            width: 34px;
+          mat-icon {
+            font-size: 26px;
           }
         }
 
@@ -723,26 +759,34 @@ $contentPadding: 30px;
           }
 
           .benefit-symbol {
+            background: #44b543;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+
             &.increase-customer {
-              padding-left: 20px;
+              padding-left: 5px;
             }
 
             svg {
               font-size: 35px;
-              color: green;
+              color: white;
             }
 
-            .fa-hand-holding-usd {
-              color: goldenrod;
-            }
+            // .fa-hand-holding-usd {
+            //   color: goldenrod;
+            // }
 
-            .fa-history {
-              color: darkmagenta;
-            }
+            // .fa-history {
+            //   color: darkmagenta;
+            // }
 
-            .increase-customer {
-              color: green;
-            }
+            // .increase-customer {
+            //   color: green;
+            // }
           }
 
           .benefit-description {
@@ -811,7 +855,7 @@ $contentPadding: 30px;
       }
 
       mat-icon {
-        color: gray;
+        color: silver;
         font-size: 20px !important;
       }
 
@@ -832,7 +876,6 @@ $contentPadding: 30px;
       padding-bottom: 10px;
       text-align: center;
       font-size: 12px;
-      line-height: 20px;
       font-weight: bold;
 
       a {
@@ -952,7 +995,7 @@ $contentPadding: 30px;
 @media screen and (max-width: 599px) {
   .homepage {
     .content-wrapper {
-      width: 92%;
+      width: 95%;
     }
 
     .footer-contact-container {
@@ -968,13 +1011,14 @@ $contentPadding: 30px;
 
       .banner-container {
         .banner-content-wrapper {
+          padding-bottom: 25px;
+
           .banner {
             height: 490px;
 
             .app-title {
-              padding-left: 15px;
-              padding-right: 15px;
-              padding-top: 40px;
+              padding: 25px 15px;
+              padding-bottom: 0;
             }
 
             .logo {
@@ -1041,15 +1085,10 @@ $contentPadding: 30px;
           padding: 0 ($contentPadding * 0.6);
 
           .feature {
+            padding: 30px 0;
+
             .overview {
               padding: 0;
-
-              .overview-title {
-                img {
-                  margin-right: 5px;
-                  margin-top: -10px;
-                }
-              }
 
               .overview-info {
                 line-height: 25px;
@@ -1079,10 +1118,6 @@ $contentPadding: 30px;
 
             .main-benefit-item {
               padding: 15px;
-            }
-
-            .benefit-symbol {
-              padding-top: 10px;
             }
           }
         }

@@ -27,7 +27,7 @@
       <div class="banner-container">
          <div class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="0"
             fxLayoutGap.sm="15px" fxLayoutGap="30px">
-            <div class="banner" fxFlex="50">
+            <div class="banner" fxFlex="55">
 
                <div class="app-title bounceIn bounceInDown">
                   <div class="insider">
@@ -53,7 +53,7 @@
                </p>
 
                <div class="login-with-google">
-                  <button mat-button (click)="checkLogin()" *ngIf="!isOnLogin"
+                  <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
                      class="login-google-button bounceIn bounceInUp">
                      <img src="../../assets/icons/google-flat.png" class="gg-icon" alt=""> Đăng nhập bằng
                      Google
@@ -62,25 +62,24 @@
 
             </div>
 
-            <div class="banner-image bounceIn bounceInRight" fxFlex="50" fxLayoutAlign="end center"
-               fxLayoutAlign.xs="center center">
+            <div class="banner-image bounceIn bounceInRight" fxFlex="45" fxLayoutAlign="center center">
                <img src="../../assets/images/backgrounds/FlowCentric-Technologies-9-1030x734.png" alt="">
-
 
             </div>
          </div>
       </div>
 
-      <div style="height: 150px; overflow: hidden; margin-top: -150px"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
-            style="height: 100%; width: 100%;">
+      <div class="wave"><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
             <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
                style="stroke: none; fill: #039be5"></path>
          </svg></div>
 
+      <img class="bg-img1" [src]="'../../assets/images/backgrounds/bg4.png'" alt="">
+
       <div class="content content-wrapper">
          <div class="table">
 
-            <div class="table-wrapper bounceIn bounceInUp" *ngIf="!isProcessing">
+            <div class="table-wrapper" *ngIf="!isProcessing">
                <mat-table [dataSource]="dataSource">
 
                   <ng-container matColumnDef="datetime">
@@ -303,7 +302,8 @@
                   <img [lazyLoad]="'../../assets/images/analytics-graphic.png'" (load)="onLoadingImage = true"
                      [class.onLoadingImage]="onLoadingImage" alt="" class="overview-image">
                </div>
-               <div class="feature-detail" fxFlex="75" fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px" fxLayoutGap.xs="0">
+               <div class="feature-detail" fxFlex="75" fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px"
+                  fxLayoutGap.xs="0">
                   <div class="feature-left" fxFlex="50" fxLayout="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
                      <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
                         <div class="feature-item-icon">
@@ -458,8 +458,9 @@
                      <div class="benefit-description">
                         <p class="benefit-description-title">GIẢM THỜI GIAN
                         </p>
-                        Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn 24h/ngày và 7
-                        ngày/tuần.
+                        Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn <span
+                           class="benefit-info-highline">24h/ngày</span> và <span class="benefit-info-highline">7
+                           ngày/tuần.</span>
                      </div>
                   </div>
                   <div class="main-benefit-item">
