@@ -579,6 +579,7 @@ $contentPadding: 30px;
             img {
               width: 22px;
               margin-right: 7px;
+              margin-left: -22px;
             }
           }
 
@@ -641,11 +642,11 @@ $contentPadding: 30px;
             }
 
             &.increase-customer {
-              background: darkred;
+              background: #1a65bd;
             }
 
             svg {
-              font-size: 30px;
+              font-size: 32px;
               color: white;
             }
 
@@ -657,7 +658,7 @@ $contentPadding: 30px;
             //   color: darkmagenta;
             // }
 
-            // .increase-customer {
+            // .fa-user-friends {
             //   color: green;
             // }
 
@@ -956,7 +957,7 @@ $contentPadding: 30px;
 
       .banner-container {
         .banner-content-wrapper {
-          padding: 0;
+          padding-top: 35px;
 
           .banner {
             height: 480px;
