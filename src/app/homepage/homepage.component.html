@@ -15,7 +15,7 @@
             </div>
             <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin && isLoginButtonDisplayed"
                class="topbar-google-button" fxFlex="nogrow" [disabled]="isProcessing">
-               <img src="../../assets/icons/google-flat.png" alt=""> Đăng nhập bằng
+               <img src="../../assets/icons/google-flat.png" alt="" class="gg-icon"> Đăng nhập bằng
                Google
             </button>
          </div>
@@ -27,7 +27,7 @@
       <div class="banner-container">
          <div class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="0"
             fxLayoutGap.sm="15px" fxLayoutGap="30px">
-            <div class="banner" fxFlex="55">
+            <div class="banner" fxFlex="60">
 
                <div class="app-title bounceIn bounceInDown">
                   <div class="insider">
@@ -53,7 +53,7 @@
                </p>
 
                <div class="login-with-google">
-                  <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
+                  <button mat-raised-button (click)="checkLogin()" *ngIf="!isOnLogin"
                      class="login-google-button bounceIn bounceInUp">
                      <img src="../../assets/icons/google-flat.png" class="gg-icon" alt=""> Đăng nhập bằng
                      Google
@@ -62,19 +62,26 @@
 
             </div>
 
-            <div class="banner-image bounceIn bounceInRight" fxFlex="45" fxLayoutAlign="center center">
+            <div class="banner-image bounceIn bounceInRight" fxFlex="40" fxLayoutAlign="end center">
                <img src="../../assets/images/backgrounds/FlowCentric-Technologies-9-1030x734.png" alt="">
 
             </div>
          </div>
       </div>
 
-      <div class="wave"><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
-            <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
-               style="stroke: none; fill: #039be5"></path>
-         </svg></div>
+      <div class="wave">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#e6ecf0" fill-opacity="1"
+               d="M0,224L48,192C96,160,192,96,288,112C384,128,480,224,576,224C672,224,768,128,864,90.7C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+            </path>
+         </svg>
+      </div>
 
-      <img class="bg-img1" [src]="'../../assets/images/backgrounds/bg4.png'" alt="">
+      <div class="wave--mobile"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+            style="height: 100%; width: 100%;">
+            <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+               style="stroke: none; fill: #e6ecf0"></path>
+         </svg></div>
 
       <div class="content content-wrapper">
          <div class="table">
@@ -100,7 +107,7 @@
 
                         <i *ngIf="element.os?.name === 'Windows'" class="fab fa-windows" style="color: #00baee"></i>
                         <i *ngIf="element.os?.name === 'iOS'" class="fab fa-apple" style="color: silver"></i>
-                        <i *ngIf="element.os?.name === 'Android'" class="fab fa-android" style="color: green"></i>
+                        <i *ngIf="element.os?.name === 'Android'" class="fab fa-android" style="color: #44b543"></i>
                         <i *ngIf="element.os?.name === 'Mac OS'" class="fab fa-apple" style="color: silver"></i>
                         <i *ngIf="element.os?.name === 'Linux'" class="fab fa-linux" style="color: gold"></i>
                         <i *ngIf="element.os?.name === 'Ubuntu'" class="fab fa-ubuntu" style="color: orange"></i>
@@ -120,14 +127,14 @@
                         <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"
                            style="color: orange"></i>
                         <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
-                           class="fab fa-chrome" style="color: green"></i>
+                           class="fab fa-chrome" style="color: #44b543"></i>
                         <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome"
                            style="color: lightblue"></i>
                         <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
                            class="fab fa-safari" style="color: #00baee"></i>
                         <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"
                            style="color: #00baee"></i>
-                        <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome" style="color: green"></i>
+                        <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome" style="color: #44b543"></i>
                         <i *ngIf="element.browser?.name === 'Opera'" class="fab fa-opera" style="color:crimson"></i>
 
                         <span *ngIf="element.browser?.name">
@@ -279,7 +286,7 @@
                fxLayoutGap.xs="20px" fxLayoutGap.sm="40px" fxLayoutGap.md="40px">
                <div class="overview" fxFlex="25">
                   <p class="overview-title">
-                     <i class="fas fa-lightbulb"></i>
+                     <mat-icon>wb_incandescent</mat-icon>
                      <span>Thông minh hơn</span>
                   </p>
                   <mat-divider></mat-divider>
@@ -428,6 +435,7 @@
             <div class="benefit">
 
                <div class="benefit-title">
+                  <img [lazyLoad]="'../../assets/icons/sparkles-icon.png'" alt="">
                   <span>LỢI ÍCH KHI SỬ DỤNG CHẶN CLICK ẢO</span>
                </div>
 
@@ -437,8 +445,11 @@
 
                <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px">
                   <div class="main-benefit-item">
-                     <div class="benefit-symbol">
+                     <div class="benefit-symbol save-money">
                         <i class="fas fa-hand-holding-usd"></i>
+                        <div class="benefit-symbol-label">
+                           <mat-icon>add</mat-icon>
+                        </div>
                      </div>
                      <div class="benefit-description">
                         <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ
@@ -452,8 +463,11 @@
                      </div>
                   </div>
                   <div class="main-benefit-item">
-                     <div class="benefit-symbol">
+                     <div class="benefit-symbol decrease-time">
                         <i class="fas fa-history"></i>
+                        <div class="benefit-symbol-label">
+                           <mat-icon>arrow_downward</mat-icon>
+                        </div>
                      </div>
                      <div class="benefit-description">
                         <p class="benefit-description-title">GIẢM THỜI GIAN
@@ -465,7 +479,10 @@
                   </div>
                   <div class="main-benefit-item">
                      <div class="benefit-symbol increase-customer">
-                        <i class="fas fa-user-plus"></i>
+                        <i class="fas fa-user-friends"></i>
+                        <div class="benefit-symbol-label">
+                           <mat-icon>arrow_upward</mat-icon>
+                        </div>
                      </div>
                      <div class="benefit-description">
                         <p class="benefit-description-title">TĂNG KHÁCH HÀNG

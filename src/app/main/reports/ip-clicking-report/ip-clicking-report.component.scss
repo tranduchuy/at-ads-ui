@@ -60,24 +60,30 @@
       padding-bottom: 15px;
       .section {
         padding: 20px;
+        padding-left: 40px;
         padding-right: 0;
-        font-size: 16px;
         border-radius: 7px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         transition: 0.2s;
+        color: rgba(0, 0, 0, 0.7);
 
         .number {
-          font-size: 22px;
+          font-size: 20px;
           font-weight: bold;
         }
 
+        .title {
+          font-size: 12px;
+          color: rgba(0, 0, 0, 0.7);
+        }
+
         mat-icon {
-          font-size: 50px;
+          font-size: 45px;
         }
 
         &.total {
           //background: #e6f5ff;
-          color: #039be5;
+          // color: #039be5;
           -webkit-animation: fade 0.4s ease-out;
 
           mat-icon {
@@ -88,7 +94,7 @@
 
         &.real-click {
           //background: #ebfaeb;
-          color: green;
+          // color: green;
           -webkit-animation: fade 0.4s ease-out;
 
           mat-icon {
@@ -98,7 +104,7 @@
 
         &.spam-click {
           //background: #ffebe6;
-          color: crimson;
+          // color: crimson;
           -webkit-animation: fade 0.4s ease-out;
 
           mat-icon {
@@ -140,7 +146,7 @@
     .pagination-table-wrapper {
       border-radius: 7px;
       background: white;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
       .pagination-buttons {
         display: table;
@@ -278,6 +284,11 @@
           align-items: center !important;
           mat-icon {
             font-size: 30px !important;
+            margin-right: 15px;
+          }
+
+          .number {
+            font-size: 18px;
           }
         }
       }

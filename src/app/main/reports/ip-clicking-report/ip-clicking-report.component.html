@@ -29,28 +29,28 @@
 
     <div class="statistic" fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutGap.xs="10px">
       <div class="section total" fxFlex="33.33" fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxFlex="80">
-          <div class="title">Tổng số click</div>
-          <div class="number">{{abbreviateNumber(clickTotal || 0)}}</div>
-        </div>
         <div fxFlex="20">
           <mat-icon>touch_app</mat-icon>
+        </div>
+        <div fxLayout="column" fxFlex="80">
+          <div class="number">{{abbreviateNumber(clickTotal || 0)}}</div>
+          <div class="title">Tổng số click</div>
         </div>
       </div>
       <div fxFlex="66.66" fxLayout="row" fxLayoutGap="15px" fxLayoutGap.xs="10px" fxLayoutAlign="start center">
         <div class="section real-click" fxFlex="50">
-          <div fxFlex="80" fxFlex.xs="75">
-            <div class="title">Click thật</div>
-            <div class="number">{{abbreviateNumber(realClick || 0)}}</div>
-          </div>
           <mat-icon fxFlex="20" fxFlex.xs="25">check_circle</mat-icon>
+          <div fxFlex="80" fxFlex.xs="75">
+            <div class="number">{{abbreviateNumber(realClick || 0)}}</div>
+            <div class="title">Click thật</div>
+          </div>
         </div>
         <div class="section spam-click" fxFlex="50">
-          <div fxFlex="80" fxFlex.xs="75">
-            <div class="title">Click ảo</div>
-            <div class="number">{{abbreviateNumber(spamClick || 0)}}</div>
-          </div>
           <mat-icon fxFlex="20" fxFlex.xs="25">not_interested</mat-icon>
+          <div fxFlex="80" fxFlex.xs="75">
+            <div class="number">{{abbreviateNumber(spamClick || 0)}}</div>
+            <div class="title">Click ảo</div>
+          </div>
         </div>
       </div>
     </div>

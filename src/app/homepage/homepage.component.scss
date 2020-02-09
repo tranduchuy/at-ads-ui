@@ -6,10 +6,7 @@ $defaultMargin: 30px;
 $contentPadding: 30px;
 
 .homepage {
-  font-size: 14px;
   width: 100%;
-
-  background: #039be5;
 
   .no-select {
     -webkit-touch-callout: none; /* iOS Safari */
@@ -19,6 +16,13 @@ $contentPadding: 30px;
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Opera and Firefox */
+  }
+
+  .gg-icon {
+    width: 20px;
+    margin-top: -2.5px;
+    margin-right: 5px;
+    filter: drop-shadow(0.5px 0.5px 1px rgba(0, 0, 0, 0.2));
   }
 
   .content-wrapper {
@@ -38,8 +42,8 @@ $contentPadding: 30px;
     }
 
     .shiny {
-      color: rgb(205, 236, 246);
-      background: -webkit-gradient(linear, left top, left bottom, from(rgb(205, 236, 246)), to(white));
+      color: #ccf5ff;
+      background: -webkit-gradient(linear, left top, left bottom, from(#ccf5ff), to(whitesmoke));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
@@ -49,137 +53,11 @@ $contentPadding: 30px;
       text-transform: uppercase;
     }
 
-    .shiny::before {
-      // -webkit-animation: flare 2s infinite;
-      // -webkit-animation-timing-function: linear;
-      // animation: flare 2s infinite;
-      // animation-timing-function: linear;
-      // background-image: linear-gradient(
-      //   65deg,
-      //   transparent 20%,
-      //   rgba(255, 255, 255, 0.2) 20%,
-      //   rgba(255, 255, 255, 0.3) 27%,
-      //   transparent 27%,
-      //   transparent 100%
-      // );
-      // -webkit-background-clip: text;
-      // -webkit-text-fill-color: transparent;
-      // content: "Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads";
-      // color: #fff;
-      // display: block;
-      // position: absolute;
-    }
-
-    .shiny::after {
-      //content: "Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads";
-      // color: #fff;
-      // display: block;
-      // position: absolute;
-      // text-shadow: 0 1px #6e4414, 0 2px #6e4414, 0 3px #6e4414, 0 4px #6e4414, 0 5px #6e4414, 0 6px #6e4414,
-      //   0 7px #6e4414, 0 8px #6e4414, 0 9px #6e4414, 0 10px #6e4414;
-      // top: 0;
-      // z-index: -1;
-    }
-
-    .inner-shiny::after,
-    .inner-shiny::before {
-      // -webkit-animation: sparkle 3s infinite;
-      // -webkit-animation-timing-function: linear;
-      // animation: sparkle 3s infinite;
-      // animation-timing-function: linear;
-      // background: #fff;
-      // border-radius: 100%;
-      // box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 25px #fff, 0 0 30px #fff, 0 0 35px #fff;
-      // content: "Chặn Click Ảo 2019 - Giảm đến 50% phí quảng cáo Google Ads";
-      // display: block;
-      // height: 10px;
-      // opacity: 0.7;
-      // position: absolute;
-      // width: 10px;
-    }
-
-    .inner-shiny::before {
-      // -webkit-animation-delay: 0.2s;
-      // animation-delay: 0.2s;
-      // height: 7px;
-      // left: 0.12em;
-      // top: 0.8em;
-      // width: 7px;
-    }
-
-    .inner-shiny::after {
-      // top: 0.32em;
-      // right: -5px;
-    }
-
-    @keyframes flare {
-      0% {
-        background-position: -17vw;
-      }
-      30% {
-        background-position: 500px;
-      }
-      100% {
-        background-position: 500px;
-      }
-    }
-    @-webkit-keyframes flare {
-      0% {
-        background-position: -17vw;
-      }
-      30% {
-        background-position: 500px;
-      }
-      100% {
-        background-position: 500px;
-      }
-    }
-    @keyframes sparkle {
-      0% {
-        opacity: 0;
-      }
-      30% {
-        opacity: 0;
-      }
-      40% {
-        opacity: 0.8;
-      }
-      60% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 0;
-      }
-    }
-    @-webkit-keyframes sparkle {
-      0% {
-        opacity: 0;
-      }
-      30% {
-        opacity: 0;
-      }
-      40% {
-        opacity: 0.8;
-      }
-      60% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 0;
-      }
-    }
-
-    .wave {
+    .wave--mobile {
       height: 150px;
       overflow: hidden;
-      margin-top: -150px;
-    }
-
-    .bg-img1 {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      left: 0;
+      margin-top: -100px;
+      display: none;
     }
 
     .banner-container {
@@ -187,16 +65,14 @@ $contentPadding: 30px;
       width: 100%;
 
       .banner-content-wrapper {
-        padding-bottom: 50px;
-
         .banner {
           // background: rgba(7, 87, 115, 0.6);
           color: white;
-          height: 570px;
+          height: 480px;
 
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
           flex-direction: column;
 
           .app-title {
@@ -236,7 +112,7 @@ $contentPadding: 30px;
 
             .highline {
               font-weight: bold;
-              color: rgb(241, 202, 127);
+              color: #ffcc80;
             }
           }
 
@@ -245,14 +121,6 @@ $contentPadding: 30px;
             padding-top: 20px;
             width: 100%;
 
-            .gg-icon {
-              height: 18px;
-              width: 18px;
-              margin-top: -2.5px;
-              margin-right: 5px;
-              filter: drop-shadow(0.5px 0.5px 1px rgba(0, 0, 0, 0.2));
-            }
-
             .access-system-button {
               background: #44b543;
               color: white;
@@ -260,10 +128,9 @@ $contentPadding: 30px;
 
             button {
               font-weight: bold;
-              min-height: 45px;
-              // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-              // background: white;
-              // color: rgba(0, 0, 0, 0.7);
+              min-height: 40px;
+              background: whitesmoke;
+              color: rgba(0, 0, 0, 0.7);
               transition: 0.2s;
 
               &:hover {
@@ -275,12 +142,9 @@ $contentPadding: 30px;
 
         .banner-image {
           img {
-            width: 250px;
-            height: 190px;
-            margin-top: 90px;
+            width: 70%;
+            margin-top: 50px;
             filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
-            transform: rotateZ(3deg);
-
             @extend .no-select;
           }
         }
@@ -292,7 +156,8 @@ $contentPadding: 30px;
 
       .table {
         padding: $contentPadding 0;
-        padding-top: $contentPadding * 0.3;
+        padding-top: 0;
+        margin-top: -1.5 * $defaultMargin;
 
         .table-wrapper {
           overflow: auto;
@@ -510,7 +375,7 @@ $contentPadding: 30px;
                   text-align: justify;
                   font-size: 11px;
                   position: absolute;
-                  bottom: 0;
+                  bottom: -0.5px;
                   left: 0;
                   box-sizing: border-box;
                   color: rgba(0, 0, 0, 0.8);
@@ -523,7 +388,7 @@ $contentPadding: 30px;
                       background: #44b543;
                       color: white;
                       font-weight: bold;
-                      font-size: 10px;
+                      font-size: 11px;
                       text-align: center;
                       height: 18px;
                       width: 18px;
@@ -578,11 +443,11 @@ $contentPadding: 30px;
             }
 
             .overview-title {
-              font-size: 18px;
+              font-size: 16px;
 
-              svg {
-                font-size: 20px;
-                margin-right: 15px;
+              mat-icon {
+                font-size: 22px;
+                margin-right: 7px;
                 color: goldenrod;
               }
 
@@ -650,14 +515,7 @@ $contentPadding: 30px;
           justify-content: center;
           align-items: center;
           border-radius: 50%;
-
-          // svg,
-          // mat-icon {
-          //   font-size: 34px;
-          //   width: 34px;
-          //   color: white;
-          //   margin-left: 5px;
-          // }
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
           svg,
           mat-icon {
@@ -717,6 +575,11 @@ $contentPadding: 30px;
                 opacity: 1;
               }
             }
+
+            img {
+              width: 22px;
+              margin-right: 7px;
+            }
           }
 
           .secondary-benefit-title {
@@ -760,20 +623,29 @@ $contentPadding: 30px;
           }
 
           .benefit-symbol {
-            background: #44b543;
-            width: 60px;
-            height: 60px;
+            position: relative;
+            width: 75px;
+            height: 75px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+            &.save-money {
+              background: cadetblue;
+            }
+
+            &.decrease-time {
+              background: darkmagenta;
+            }
 
             &.increase-customer {
-              padding-left: 5px;
+              background: darkred;
             }
 
             svg {
-              font-size: 35px;
+              font-size: 30px;
               color: white;
             }
 
@@ -788,6 +660,26 @@ $contentPadding: 30px;
             // .increase-customer {
             //   color: green;
             // }
+
+            .benefit-symbol-label {
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              background: #44b543;
+              width: 25px;
+              height: 25px;
+              border-radius: 50%;
+              padding: 5px 3px 2px 3px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              
+              mat-icon {
+                color: white;
+                font-size: 20px;
+              }
+            }
           }
 
           .benefit-description {
@@ -811,13 +703,13 @@ $contentPadding: 30px;
   .footer-container {
     background: whitesmoke;
     width: 100%;
-    margin-top: $defaultMargin * 3;
+    margin-top: $defaultMargin * 2;
     position: relative;
     z-index: 2;
 
     .footer {
       margin: 0 auto;
-      padding: 100px 0 30px 0;
+      padding: 100px 0 50px 0;
       color: rgba(0, 0, 0, 0.7);
       text-align: justify;
       font-size: 11px;
@@ -874,7 +766,6 @@ $contentPadding: 30px;
       background: #eee;
       color: rgba(0, 0, 0, 0.7);
       padding: 15px;
-      padding-bottom: 10px;
       text-align: center;
       font-size: 12px;
       font-weight: bold;
@@ -929,7 +820,7 @@ $contentPadding: 30px;
       }
 
       .topbar-title {
-        color: white;
+        color: whitesmoke;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
       }
 
@@ -937,19 +828,11 @@ $contentPadding: 30px;
         background: white;
         font-weight: bold;
         color: rgba(0, 0, 0, 0.7);
-        min-height: 45px;
+        min-height: 40px;
 
         transition: 0.2s;
         &:hover {
           transform: scale(1.02, 1.02);
-        }
-
-        img {
-          height: 18px;
-          width: 18px;
-          margin-top: -5px;
-          margin-right: 5px;
-          filter: drop-shadow(0.5px 0.5px 1px rgba(0, 0, 0, 0.2));
         }
       }
     }
@@ -967,10 +850,23 @@ $contentPadding: 30px;
 
 @media screen and (min-width: 1280px) {
   .homepage {
-    .content {
-      .table {
-        .table-wrapper {
-          overflow: hidden !important;
+    .main-content {
+      .wave {
+        margin-top: -35vh;
+      }
+
+      .banner-container {
+        .banner-content-wrapper {
+          padding-top: 120px;
+          padding-left: 80px;
+        }
+      }
+
+      .content {
+        .table {
+          .table-wrapper {
+            overflow: hidden !important;
+          }
         }
       }
     }
@@ -982,13 +878,53 @@ $contentPadding: 30px;
     .content-wrapper {
       width: 85%;
     }
+
+    .main-content {
+      .wave {
+        margin-top: -200px;
+      }
+
+      .banner-container {
+        .banner-content-wrapper {
+          padding-top: 120px;
+          padding-left: 0;
+        }
+      }
+    }
   }
 }
+
+@media screen and (min-width: 600px) and (max-width: 767px) {
+  .homepage {
+    .main-content {
+      .wave {
+        margin-top: -120px !important;
+      }
+    }
+  }
+}  
 
 @media screen and (min-width: 600px) and (max-width: 959px) {
   .homepage {
     .content-wrapper {
       width: 80%;
+    }
+
+    .main-content {
+      .wave {
+        margin-top: -150px;
+      }
+
+      .shiny {
+        font-size: 20px !important;
+      }
+
+      .banner-container {
+        .banner-content-wrapper {
+          padding-top: 120px;
+          padding-left: 0;
+        }
+      }
     }
   }
 }
@@ -1006,17 +942,24 @@ $contentPadding: 30px;
     }
 
     .main-content {
+      .wave {
+        display: none;
+      }
+
+      .wave--mobile {
+        display: block;
+      }
+
       .shiny {
         font-size: 18px !important;
       }
 
       .banner-container {
         .banner-content-wrapper {
-          padding-bottom: 0;
+          padding: 0;
 
           .banner {
-            height: 450px;
-            align-items: flex-start;
+            height: 480px;
 
             .app-title {
               padding: 0 15px;
@@ -1037,29 +980,12 @@ $contentPadding: 30px;
 
             .login-with-google {
               padding-top: 15px;
-
-              .gg-icon {
-                height: 18px;
-                width: 18px;
-                margin-top: -5px;
-                margin-right: 2px;
-              }
-
-              .access-system-button {
-                font-size: 11px;
-                padding-left: 5px;
-                padding-right: 0;
-                margin-left: -15px;
-              }
             }
           }
 
           .banner-image {
             img {
               display: none;
-              width: 50%;
-              height: 140px;
-              margin-top: 60px;
             }
           }
         }
