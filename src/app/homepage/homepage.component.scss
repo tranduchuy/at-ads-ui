@@ -1011,14 +1011,11 @@ $contentPadding: 30px;
 
       .banner-container {
         .banner-content-wrapper {
-          padding-bottom: 20px;
+          padding-bottom: 0;
 
           .banner {
-            height: 490px;
-
             .app-title {
-              padding: 5px 15px;
-              padding-bottom: 0;
+              padding: 0 15px;
             }
 
             .logo {
