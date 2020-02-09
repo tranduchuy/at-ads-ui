@@ -1,7 +1,7 @@
 .container {
   width: 100%;
-  background: url("../../../assets/images/backgrounds/bg3.jpg");
-  background-size: 100% 100%;
+  background-color: #7fcec5;
+  background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
   .title1 {
     //padding: 86px 20px 16px 0px;
@@ -12,6 +12,7 @@
     font-size: 16px;
     font-weight: bold;
     padding: 30px 30px 30px 30px;
+    padding-left: 15px;
     height: 25vh;
 
     .title1-main {
