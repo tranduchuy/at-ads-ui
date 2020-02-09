@@ -243,6 +243,7 @@ $contentPadding: 30px;
           .login-with-google {
             text-align: center;
             padding-top: 20px;
+            width: 100%;
 
             .gg-icon {
               height: 18px;
@@ -1005,10 +1006,6 @@ $contentPadding: 30px;
     }
 
     .main-content {
-      .wave {
-        margin-top: -50px;
-      }
-
       .shiny {
         font-size: 18px !important;
       }
@@ -1019,9 +1016,11 @@ $contentPadding: 30px;
 
           .banner {
             height: 450px;
+            align-items: flex-start;
 
             .app-title {
-              padding: 0 15px;
+              padding: 15px;
+              padding-bottom: 0;
             }
 
             .logo {
