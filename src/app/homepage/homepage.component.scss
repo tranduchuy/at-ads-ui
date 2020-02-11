@@ -42,15 +42,44 @@ $contentPadding: 30px;
     }
 
     .shiny {
-      color: #ccf5ff;
-      background: -webkit-gradient(linear, left top, left bottom, from(#ccf5ff), to(whitesmoke));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: whitesmoke;
+      // -webkit-background-clip: text;
+      // -webkit-text-fill-color: transparent;
       display: inline-block;
       font-size: 2.2rem !important;
       font-weight: 900;
       position: relative;
       text-transform: uppercase;
+
+      .gg-ads-title {
+        &:nth-of-type(1) {
+          color: #9bdcfd;
+        }
+        &:nth-of-type(2) {
+          color: #f4a4a4;
+        }
+        &:nth-of-type(3) {
+          color: #ffdb99;
+        }
+        &:nth-of-type(4) {
+          color: #9bdcfd;
+        }
+        &:nth-of-type(5) {
+          color: #b3ffb3;
+        }
+        &:nth-of-type(6) {
+          color: #f4a4a4;
+        }
+        &:nth-of-type(8) {
+          color: #b3ffb3;
+        }
+        &:nth-of-type(9) {
+          color: #ffdb99;
+        }
+        &:nth-of-type(10) {
+          color: #9bdcfd;
+        }
+      }
     }
 
     .wave--mobile {
@@ -125,7 +154,7 @@ $contentPadding: 30px;
 
             .highline {
               font-weight: bold;
-              color: #ffcc80;
+              color: #ffdb99;
             }
           }
 
@@ -833,7 +862,7 @@ $contentPadding: 30px;
       }
 
       .company-brand {
-        color: white;
+        color: whitesmoke;
 
         .company-brand__logo {
           background: url("../../assets/images/atom.png");
@@ -856,7 +885,7 @@ $contentPadding: 30px;
           }
           .company-brand__name__sub {
             font-size: 9px;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
           }
         }
       }
@@ -1095,7 +1124,7 @@ $contentPadding: 30px;
       &.topbar2 {
         .company-brand {
           .company-brand__logo {
-            width: 36px !important; 
+            width: 35px !important;
             height: 30px !important;
           }
 
