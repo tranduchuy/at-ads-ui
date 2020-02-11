@@ -3,12 +3,19 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { API } from 'app/shared/constants/api.constant';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { DialogService } from 'app/shared/services/dialog.service';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import { IError } from '../models/i-error';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 import { ISuccess } from '../models/i-success';
+
+interface Licence {
+  name: string;
+  type: string;
+  price: number;
+  isDiscount: boolean;
+  discountMonths: number[]
+}
 
 @Component({
   selector: 'app-upgrade-licence-dialog',
@@ -16,25 +23,28 @@ import { ISuccess } from '../models/i-success';
   styleUrls: ['./upgrade-licence-dialog.component.scss']
 })
 export class UpgradeLicenceDialogComponent extends PageBaseComponent implements OnInit {
-  licenceType: string;
-  licenceName: string;
+  licence: Licence;
 
   expirations = [
     {
       text: '1 tháng',
-      value: 1
+      value: 1,
+      discount: 0
     },
     {
-      text: '3 tháng (giảm 10%)',
-      value: 3
+      text: '3 tháng',
+      value: 3,
+      discount: 0
     },
     {
-      text: '6 tháng (giảm 20%)',
-      value: 6
+      text: '6 tháng',
+      value: 6,
+      discount: 0
     },
     {
-      text: '12 tháng (giảm 40%)',
-      value: 12
+      text: '12 tháng',
+      value: 12,
+      discount: 0
     },
   ];
 
@@ -51,7 +61,7 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
   }
 
   ngOnInit() {
-    this.selectedExpiration = this.expirations[0].value;
+    this.mapExpirations();
   }
 
   _openErrorDialog(error: IError, contact?: boolean): void {
@@ -77,12 +87,19 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
+  mapExpirations() {
+    (this.licence.discountMonths || []).forEach((discount, index) => {
+      this.expirations[index].discount = discount;
+    });
+    this.selectedExpiration = this.expirations[0].value;
+  }
+
 
   sendRequest() {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
     const sub = this._httpClient.post(API.User.sendUpgradeLicenceRequest, {
-      packageType: this.licenceType,
+      packageType: this.licence.type,
       numOfMonths: this.selectedExpiration
     }).subscribe((res: any) => {
       this._openSuccessDialog({

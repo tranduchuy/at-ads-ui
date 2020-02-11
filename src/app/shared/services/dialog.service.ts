@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ErrorDialogComponent } from '../../dialog/error-dialog/error-dialog.component';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from '../../dialog/success-dialog/success-dialog.component';
 import { ISuccess } from '../../dialog/models/i-success';
 import { IError } from '../../dialog/models/i-error';
@@ -10,6 +10,14 @@ import { InfoDialogComponent } from 'app/dialog/info-dialog/info-dialog.componen
 import { ImageDialogComponent } from 'app/dialog/image-dialog/image-dialog.component';
 import { CampaignDialogComponent } from 'app/dialog/campaign-dialog/campaign-dialog.component';
 import { UpgradeLicenceDialogComponent } from 'app/dialog/upgrade-licence-dialog/upgrade-licence-dialog.component';
+
+interface Licence {
+  name: string;
+  type: string;
+  price: number;
+  isDiscount: boolean;
+  discountMonths: number[]
+}
 
 @Injectable()
 export class DialogService {
@@ -39,14 +47,13 @@ export class DialogService {
     dialogRef.componentInstance.messages = res.messages;
   }
 
-  public _openUpgradeLicenceDialog(licenceType: string, licenceName: string): void {
+  public _openUpgradeLicenceDialog(licence: Licence): void {
     const dialogRef = this._matDialog.open(UpgradeLicenceDialogComponent, {
-      panelClass: 'upgrade-dialog',
+      panelClass: 'upgrade-licence-dialog',
       autoFocus: false,
       minHeight: '42vh',
     });
-    dialogRef.componentInstance.licenceType = licenceType;
-    dialogRef.componentInstance.licenceName = licenceName;
+    dialogRef.componentInstance.licence = licence;
   }
 
   public _openCampaignDialog(campaigns: any) {

@@ -15,6 +15,9 @@
   <div class="package-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
     <div class="package fadeInUp {{'package-' + p.type}}" *ngFor="let p of packages">
       <span class="recommended" *ngIf="p.type === LICENCE.VIP1.type">Khuyên dùng</span>
+      <div class="on-sale" *ngIf="p.isDiscount === true && p.isContactPrice === false">
+        <img src="../../../assets/images/sale.png" alt="">
+      </div>
       <span class="label-base {{'label-' + p.type}}">{{p.name}}</span>
       <p class="package-price">
         {{(p.type === LICENCE.FREE.type) ? 'Miễn phí' : (p.isContactPrice ? 'Liên hệ' : ((p.price | number: '1.0-0')  + ' VNĐ/Tháng'))}}
@@ -29,14 +32,14 @@
         </ul>
       </div>
 
-      <div class="register-package-button" (click)="openUpgradeLicenceDialog(LICENCE.VIP1.type, LICENCE.VIP1.name)"
-        *ngIf="isRegisterButtonDisplayed && p.type === LICENCE.VIP1.type && p.type !== LICENCE.FREE.type">
+      <div class="register-package-button" (click)="openUpgradeLicenceDialog(p.type)"
+        *ngIf="isRegisterButtonDisplayed && p.type !== LICENCE.FREE.type && p.isContactPrice === false">
         <button mat-raised-button color="accent">Đăng ký ngay</button>
       </div>
 
       <div class="contact-button"
-        *ngIf="isRegisterButtonDisplayed && p.type === LICENCE.CUSTOM.type && p.type !== LICENCE.FREE.type">
-        <button mat-raised-button color="accent" (click)="openContactInfoDialog()">Liên hệ ngay</button>
+        *ngIf="isRegisterButtonDisplayed && p.type !== LICENCE.FREE.type && p.isContactPrice === true">
+        <button mat-raised-button color="accent" (click)="openContactInfoDialog(p.contact)">Liên hệ ngay</button>
       </div>
 
     </div>
