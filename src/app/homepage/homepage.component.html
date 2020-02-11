@@ -8,10 +8,15 @@
       <div class="topbar content-wrapper">
          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="10px">
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
-               <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
-               <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed || true">
-                  {{APP_INFO.name + ' ' + APP_INFO.yearOfRelease}}
-               </span>
+               <div class="company-brand" fxLayout="row" fxLayoutGap="5px">
+                  <div class="company-brand__logo">
+                     <div class="company-brand__logo__name">AT</div>
+                  </div>
+                  <div class="company-brand__name">
+                     <div class="company-brand__name__main">APPNET TECHNOLOGY</div>
+                     <div class="company-brand__name__sub">Digital Marketing Flatform</div>
+                  </div>
+               </div>
             </div>
             <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin && isLoginButtonDisplayed"
                class="topbar-google-button" fxFlex="nogrow" [disabled]="isProcessing">
@@ -32,14 +37,14 @@
                <div class="app-title bounceIn bounceInDown">
                   <div class="insider">
                      <span class="shiny">
-                        <span class="inner-shiny">Công Cụ Chặn Click Ảo - Giảm đến 50% phí quảng cáo
+                        <span class="inner-shiny">Công Cụ Chặn Click Ảo {{APP_INFO.yearOfRelease}} - Giảm đến 50% phí quảng cáo
                            Google Ads</span>
                      </span>
                   </div>
                </div>
 
-               <div class="logo">
-                  <img src="../../assets/images/app-logo.png" alt="">
+               <div class="app-logo">
+                  <i class="fas fa-mouse-pointer"></i>
                </div>
 
                <p class="title2 bounceIn bounceInUp">

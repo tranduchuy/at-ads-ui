@@ -47,7 +47,7 @@ $contentPadding: 30px;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
-      font-size: 2.5rem !important;
+      font-size: 2.2rem !important;
       font-weight: 900;
       position: relative;
       text-transform: uppercase;
@@ -83,19 +83,32 @@ $contentPadding: 30px;
             padding: 20px 0 20px 0;
           }
 
-          .logo {
-            width: 90px;
-            margin: 22px auto;
-            margin-bottom: 6px;
-            display: none;
+          .app-logo {
+            position: relative;
+            background: url("../../assets/images/shield.png");
+            background-size: 100% 100%;
+            background-position: center center;
+            width: 70px;
+            height: 70px;
 
-            img {
-              filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
-              transition: 0.2s;
-
-              &:hover {
-                transform: scale(1.02, 1.02);
+            -webkit-animation: 0.6s appLogoFadeIn ease-in;
+            animation: 0.6s appLogoFadeIn ease-in;
+            @keyframes appLogoFadeIn {
+              from {
+                opacity: 0;
               }
+              to {
+                opacity: 1;
+              }
+            }
+
+            .fa-mouse-pointer {
+              color: rgba(125, 125, 125, 0.4);
+              font-size: 24px;
+              position: absolute;
+              top: 32%;
+              left: 42%;
+              transform: rotate(348deg);
             }
           }
 
@@ -118,13 +131,8 @@ $contentPadding: 30px;
 
           .login-with-google {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 5px;
             width: 100%;
-
-            .access-system-button {
-              background: #44b543;
-              color: white;
-            }
 
             button {
               font-weight: bold;
@@ -142,8 +150,8 @@ $contentPadding: 30px;
 
         .banner-image {
           img {
-            width: 70%;
-            margin-top: 50px;
+            width: 65%;
+            margin-top: 90px;
             filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
             @extend .no-select;
           }
@@ -352,7 +360,7 @@ $contentPadding: 30px;
               height: 200px;
               width: 100%;
               color: white;
-              box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
               transition: 0.2s;
               cursor: pointer;
 
@@ -625,8 +633,8 @@ $contentPadding: 30px;
 
           .benefit-symbol {
             position: relative;
-            width: 75px;
-            height: 75px;
+            width: 60px;
+            height: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -646,7 +654,7 @@ $contentPadding: 30px;
             }
 
             svg {
-              font-size: 32px;
+              font-size: 25px;
               color: white;
             }
 
@@ -668,17 +676,17 @@ $contentPadding: 30px;
               bottom: 0;
               right: 0;
               background: #44b543;
-              width: 25px;
-              height: 25px;
+              width: 20px;
+              height: 20px;
               border-radius: 50%;
-              padding: 5px 3px 2px 3px;
+              padding: 10px 2px 1px 2px;
               display: flex;
               justify-content: center;
               align-items: center;
-              
+
               mat-icon {
                 color: white;
-                font-size: 20px;
+                font-size: 16px;
               }
             }
           }
@@ -807,6 +815,10 @@ $contentPadding: 30px;
         color: rgba(0, 0, 0, 0.7) !important;
         text-shadow: none !important;
       }
+
+      .company-brand {
+        color: navy !important;
+      }
     }
 
     .topbar {
@@ -814,10 +826,39 @@ $contentPadding: 30px;
       font-weight: bold;
 
       .topbar-logo {
-        height: 26px;
-        width: 28px;
-        margin-right: 8px;
-        filter: drop-shadow(0.5px 0.5px 1px rgba(0, 0, 0, 0.5));
+        height: 22px;
+        width: 24px;
+        margin-right: 5px;
+        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+      }
+
+      .company-brand {
+        color: white;
+
+        .company-brand__logo {
+          background: url("../../assets/images/atom.png");
+          background-size: 100% 100%;
+          background-position: center center;
+          width: 33px;
+          height: 33px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: bolder;
+        }
+
+        .company-brand__name {
+          padding-top: 4px;
+          .company-brand__name__main {
+            font-weight: bold;
+            font-size: 10px;
+            letter-spacing: 1px;
+          }
+          .company-brand__name__sub {
+            font-size: 9px;
+            letter-spacing: 1px;
+          }
+        }
       }
 
       .topbar-title {
@@ -853,12 +894,12 @@ $contentPadding: 30px;
   .homepage {
     .main-content {
       .wave {
-        margin-top: -35vh;
+        margin-top: -33vh;
       }
 
       .banner-container {
         .banner-content-wrapper {
-          padding-top: 120px;
+          padding-top: 90px;
           padding-left: 80px;
         }
       }
@@ -903,7 +944,7 @@ $contentPadding: 30px;
       }
     }
   }
-}  
+}
 
 @media screen and (min-width: 600px) and (max-width: 959px) {
   .homepage {
@@ -957,20 +998,18 @@ $contentPadding: 30px;
 
       .banner-container {
         .banner-content-wrapper {
-          padding-top: 60px;
+          padding-top: 50px;
 
           .banner {
-            height: 480px;
+            height: 450px;
 
             .app-title {
               padding: 0 15px;
             }
 
-            .logo {
-              width: 100px;
-              margin: 18px auto;
-              margin-bottom: 6px;
-              display: block;
+            .app-logo {
+              margin: 10px 0;
+              margin-bottom: 0;
             }
 
             .title2 {
@@ -1053,9 +1092,37 @@ $contentPadding: 30px;
     }
 
     .topbar-container {
+      &.topbar2 {
+        .company-brand {
+          .company-brand__logo {
+            width: 36px !important; 
+            height: 30px !important;
+          }
+
+          .company-brand__name {
+            .company-brand__name__sub {
+              display: none !important;
+            }
+          }
+        }
+      }
+
       .topbar {
-        .topbar-title {
-          font-size: 10px;
+        .company-brand {
+          .company-brand__logo {
+            width: 30px;
+            height: 30px;
+          }
+
+          .company-brand__name {
+            .company-brand__name__main {
+              font-size: 9px;
+            }
+
+            .company-brand__name__sub {
+              font-size: 7px;
+            }
+          }
         }
       }
     }

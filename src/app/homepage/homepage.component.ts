@@ -12,7 +12,6 @@ import { ILoginSuccess } from '../authentication/login/models/i-login-success';
 import { AuthService } from '../shared/services/auth.service';
 import { DialogService } from '../shared/services/dialog.service';
 import { SessionService } from '../shared/services/session.service';
-import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
 import { Generals } from 'app/shared/constants/generals';
 
@@ -56,7 +55,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private http: HttpClient,
     private _authService: AuthService,
     private _router: Router,
-    private _fuseProgressBarService: FuseProgressBarService,
     private _homepageService: HomepageService,
   ) {
 

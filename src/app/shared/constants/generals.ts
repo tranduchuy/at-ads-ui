@@ -4,7 +4,7 @@ export interface TrafficSourceType {
 }
 export namespace Generals {
     export namespace AppInfo {
-        export const name = 'Chống click tặc';
+        export const name = 'Chặn click ảo';
         export const yearOfRelease = '2019';
     };
     export namespace Contact {
