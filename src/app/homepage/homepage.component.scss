@@ -95,10 +95,7 @@ $contentPadding: 30px;
 
       .banner-content-wrapper {
         .banner {
-          // background: rgba(7, 87, 115, 0.6);
-          color: white;
           height: 480px;
-
           display: flex;
           align-items: center;
           justify-content: flex-start;
@@ -151,6 +148,7 @@ $contentPadding: 30px;
             font-size: 14px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
             font-weight: bold;
+            color: whitesmoke;
 
             .highline {
               font-weight: bold;
@@ -1124,7 +1122,7 @@ $contentPadding: 30px;
       &.topbar2 {
         .company-brand {
           .company-brand__logo {
-            width: 35px !important;
+            width: 34px !important;
             height: 30px !important;
           }
 
