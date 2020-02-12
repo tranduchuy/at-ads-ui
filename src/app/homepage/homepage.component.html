@@ -29,10 +29,12 @@
 
    <div class="main-content">
 
-      <div class="banner-container">
-         <div class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="0"
-            fxLayoutGap.sm="15px" fxLayoutGap="30px">
-            <div class="banner" fxFlex="60">
+      <div class="banner-container" fxLayout="column">
+
+         <div fxFlex="55" class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column"
+            fxLayoutGap.xs="0" fxLayoutGap.sm="15px" fxLayoutGap="30px">
+            
+            <div class="banner" fxFlex="60" fxFlexAlign="end">
 
                <div class="app-title bounceIn bounceInDown">
                   <div class="insider">
@@ -54,6 +56,7 @@
                </div>
 
                <div class="app-logo">
+                  <img src="../../assets/images/shield.png" alt="" class="shield">
                   <i class="fas fa-mouse-pointer"></i>
                </div>
 
@@ -77,26 +80,19 @@
 
             </div>
 
-            <div class="banner-image bounceIn bounceInRight" fxFlex="40" fxLayoutAlign="end center">
+            <div class="banner-image bounceIn bounceInRight" fxFlex="40" fxFlexAlign="end">
                <img src="../../assets/images/backgrounds/FlowCentric-Technologies-9-1030x734.png" alt="">
-
             </div>
+
          </div>
-      </div>
 
-      <div class="wave">
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#e6ecf0" fill-opacity="1"
-               d="M0,224L48,192C96,160,192,96,288,112C384,128,480,224,576,224C672,224,768,128,864,90.7C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-            </path>
-         </svg>
-      </div>
+         <div fxFlex="45" class="extra-background">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+               <path fill-opacity="1" d="M0,288L1440,96L1440,320L0,320Z"></path>
+            </svg>
+         </div>
 
-      <div class="wave--mobile"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
-            style="height: 100%; width: 100%;">
-            <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
-               style="stroke: none; fill: #e6ecf0"></path>
-         </svg></div>
+      </div>
 
       <div class="content content-wrapper">
          <div class="table">
@@ -120,12 +116,12 @@
                      <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
                      <mat-cell *matCellDef="let element">
 
-                        <i *ngIf="element.os?.name === 'Windows'" class="fab fa-windows" style="color: #00baee"></i>
-                        <i *ngIf="element.os?.name === 'iOS'" class="fab fa-apple" style="color: silver"></i>
-                        <i *ngIf="element.os?.name === 'Android'" class="fab fa-android" style="color: #44b543"></i>
-                        <i *ngIf="element.os?.name === 'Mac OS'" class="fab fa-apple" style="color: silver"></i>
-                        <i *ngIf="element.os?.name === 'Linux'" class="fab fa-linux" style="color: gold"></i>
-                        <i *ngIf="element.os?.name === 'Ubuntu'" class="fab fa-ubuntu" style="color: orange"></i>
+                        <i *ngIf="element.os?.name === 'Windows'" class="fab fa-windows"></i>
+                        <i *ngIf="element.os?.name === 'iOS'" class="fab fa-apple"></i>
+                        <i *ngIf="element.os?.name === 'Android'" class="fab fa-android"></i>
+                        <i *ngIf="element.os?.name === 'Mac OS'" class="fab fa-apple"></i>
+                        <i *ngIf="element.os?.name === 'Linux'" class="fab fa-linux"></i>
+                        <i *ngIf="element.os?.name === 'Ubuntu'" class="fab fa-ubuntu"></i>
 
                         <span *ngIf="element.os?.name"
                            loading="lazy">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
@@ -138,19 +134,16 @@
                      <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
                      <mat-cell *matCellDef="let element">
 
-                        <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge" style="color: #0066d7"></i>
-                        <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"
-                           style="color: orange"></i>
+                        <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge"></i>
+                        <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"></i>
                         <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
-                           class="fab fa-chrome" style="color: #44b543"></i>
-                        <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome"
-                           style="color: lightblue"></i>
+                           class="fab fa-chrome"></i>
+                        <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome chromium-icon"></i>
                         <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
-                           class="fab fa-safari" style="color: #00baee"></i>
-                        <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"
-                           style="color: #00baee"></i>
-                        <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome" style="color: #44b543"></i>
-                        <i *ngIf="element.browser?.name === 'Opera'" class="fab fa-opera" style="color:crimson"></i>
+                           class="fab fa-safari"></i>
+                        <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"></i>
+                        <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome"></i>
+                        <i *ngIf="element.browser?.name === 'Opera'" class="fab fa-opera"></i>
 
                         <span *ngIf="element.browser?.name">
                            <span>{{element.browser?.name}}</span>

@@ -1,30 +1,24 @@
+$primaryFontSize: 12px;
+
 .container {
   width: 100%;
   height: 50vh;
-  // background: url("../../../../assets/images/backgrounds/simple2.png");
-  // background-size: 100% 100%;
   background-color: #7fcec5;
   background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
   .main-title {
-    // background-color: #000000 !important;
-    // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-    // background-color: #7fcec5;
-    // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     padding: 45px 60px 0 60px;
     height: 35vh;
     text-shadow: 1px 1px 2px black;
     color: white;
     font-size: 16px;
     font-weight: bold;
-    //color: rgba(0, 0, 0, 0.7);
 
     .main-title-text {
       padding-top: 15px;
     }
 
     .adsId {
-      // color: #40a5ec;
       margin-left: 5px;
       color: yellow;
     }
@@ -294,7 +288,6 @@
     .tables {
       margin-top: 20px;
       border-radius: 7px;
-      // height: 95vh;
 
       -webkit-animation: animation3 0.8s ease-out;
       animation: animation3 0.8s ease-out;
@@ -314,7 +307,7 @@
           font-weight: bold;
           padding-left: 2px;
           transition: 0.2s;
-          font-size: 11px;
+          font-size: $primaryFontSize - 2;
 
           &:hover {
             background: rgba(3, 155, 229, 0.1);
@@ -392,7 +385,7 @@
 
         mat-header-cell,
         mat-cell {
-          font-size: 11px;
+          font-size: $primaryFontSize - 2;
         }
       }
     }

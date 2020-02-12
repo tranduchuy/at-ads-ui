@@ -43,10 +43,8 @@ $contentPadding: 30px;
 
     .shiny {
       color: whitesmoke;
-      // -webkit-background-clip: text;
-      // -webkit-text-fill-color: transparent;
       display: inline-block;
-      font-size: 2.2rem !important;
+      font-size: 22px !important;
       font-weight: 900;
       position: relative;
       text-transform: uppercase;
@@ -74,7 +72,7 @@ $contentPadding: 30px;
           color: #b3ffb3;
         }
         &:nth-of-type(9) {
-          color: #ffdb99;
+          color: #ffff99;
         }
         &:nth-of-type(10) {
           color: #9bdcfd;
@@ -82,20 +80,25 @@ $contentPadding: 30px;
       }
     }
 
-    .wave--mobile {
-      height: 150px;
-      overflow: hidden;
-      margin-top: -100px;
-      display: none;
-    }
-
     .banner-container {
       background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
       width: 100%;
+      height: 100vh;
+      position: relative;
+      z-index: 2;
+
+      .extra-background {
+        position: relative;
+        z-index: 2;
+        display: none;
+
+        svg > path {
+          fill: #e6ecf0;
+        }
+      }
 
       .banner-content-wrapper {
         .banner {
-          height: 480px;
           display: flex;
           align-items: center;
           justify-content: flex-start;
@@ -103,19 +106,17 @@ $contentPadding: 30px;
 
           .app-title {
             text-align: center;
-            margin-top: 50px;
             filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
             font-weight: bolder;
-            padding: 20px 0 20px 0;
+            padding: 15px;
+            letter-spacing: 1px;
           }
 
           .app-logo {
             position: relative;
-            background: url("../../assets/images/shield.png");
-            background-size: 100% 100%;
-            background-position: center center;
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
+            @extend .no-select;
 
             -webkit-animation: 0.6s appLogoFadeIn ease-in;
             animation: 0.6s appLogoFadeIn ease-in;
@@ -128,12 +129,16 @@ $contentPadding: 30px;
               }
             }
 
+            img {
+              object-fit: cover;
+            }
+
             .fa-mouse-pointer {
-              color: rgba(125, 125, 125, 0.4);
+              color: rgba(125, 125, 125, 0.6);
               font-size: 24px;
               position: absolute;
-              top: 32%;
-              left: 42%;
+              top: 34%;
+              left: 44%;
               transform: rotate(348deg);
             }
           }
@@ -145,10 +150,12 @@ $contentPadding: 30px;
           .title2 {
             width: 100%;
             text-align: center;
-            font-size: 14px;
+            font-size: 0.8vw;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
             font-weight: bold;
             color: whitesmoke;
+            padding: 15px;
+            padding-bottom: 5px;
 
             .highline {
               font-weight: bold;
@@ -158,7 +165,6 @@ $contentPadding: 30px;
 
           .login-with-google {
             text-align: center;
-            padding-top: 5px;
             width: 100%;
 
             button {
@@ -178,8 +184,8 @@ $contentPadding: 30px;
         .banner-image {
           img {
             width: 65%;
-            margin-top: 90px;
-            filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
+            display: table;
+            margin: 0 auto;
             @extend .no-select;
           }
         }
@@ -192,13 +198,13 @@ $contentPadding: 30px;
       .table {
         padding: $contentPadding 0;
         padding-top: 0;
-        margin-top: -1.5 * $defaultMargin;
+        margin-top: -34vh;
 
         .table-wrapper {
           overflow: auto;
           border-radius: 7px;
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-          background: snow;
+          background: white;
 
           .unknown-icon {
             color: silver;
@@ -304,6 +310,48 @@ $contentPadding: 30px;
             mat-cell:nth-child(2) {
               font-weight: bold;
               font-size: 12px;
+            }
+
+            mat-cell:nth-child(3) {
+              .fa-windows {
+                color: #00baee;
+              }
+              .fa-apple {
+                color: silver;
+              }
+              .fa-android {
+                color: #44b543;
+              }
+              .fa-linux {
+                color: gray;
+              }
+              .fa-ubuntu {
+                color: darkorange;
+              }
+            }
+
+            mat-cell:nth-child(4) {
+              .fa-edge {
+                color: #1a65bd;
+              }
+              .fa-firefox-browser {
+                color: darkorange;
+              }
+              .fa-chrome {
+                color: #44b543;
+                &.chromium-icon {
+                  color: skyblue;
+                }
+              }
+              .fa-safari {
+                color: #00baee;
+              }
+              .fa-internet-explorer {
+                color: #00baee;
+              }
+              .fa-opera {
+                color: crimson;
+              }
             }
 
             mat-header-cell:nth-child(8),
@@ -420,7 +468,7 @@ $contentPadding: 30px;
                     font-weight: bold;
 
                     .step-label {
-                      background: #44b543;
+                      background: #00b752;
                       color: white;
                       font-weight: bold;
                       font-size: 11px;
@@ -429,8 +477,8 @@ $contentPadding: 30px;
                       width: 18px;
                       border-radius: 50%;
                       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-                      padding: 2px 2px 1px 2px;
                       display: inline-block;
+                      padding-top: 1px;
                       margin-right: 15px;
                     }
                   }
@@ -879,7 +927,7 @@ $contentPadding: 30px;
           .company-brand__name__main {
             font-weight: bold;
             font-size: 10px;
-            letter-spacing: 1px;
+            letter-spacing: 1.25px;
           }
           .company-brand__name__sub {
             font-size: 9px;
@@ -920,17 +968,11 @@ $contentPadding: 30px;
 @media screen and (min-width: 1280px) {
   .homepage {
     .main-content {
-      .wave {
-        margin-top: -33vh;
-      }
-
       .banner-container {
-        .banner-content-wrapper {
-          padding-top: 90px;
-          padding-left: 80px;
+        .extra-background {
+          display: block !important;
         }
       }
-
       .content {
         .table {
           .table-wrapper {
@@ -949,10 +991,6 @@ $contentPadding: 30px;
     }
 
     .main-content {
-      .wave {
-        margin-top: -200px;
-      }
-
       .banner-container {
         .banner-content-wrapper {
           padding-top: 120px;
@@ -963,15 +1001,12 @@ $contentPadding: 30px;
   }
 }
 
-@media screen and (min-width: 600px) and (max-width: 767px) {
-  .homepage {
-    .main-content {
-      .wave {
-        margin-top: -120px !important;
-      }
-    }
-  }
-}
+// @media screen and (min-width: 600px) and (max-width: 767px) {
+//   .homepage {
+//     .main-content {
+//     }
+//   }
+// }
 
 @media screen and (min-width: 600px) and (max-width: 959px) {
   .homepage {
@@ -980,12 +1015,8 @@ $contentPadding: 30px;
     }
 
     .main-content {
-      .wave {
-        margin-top: -150px;
-      }
-
       .shiny {
-        font-size: 20px !important;
+        font-size: 18px !important;
       }
 
       .banner-container {
@@ -1000,6 +1031,8 @@ $contentPadding: 30px;
 
 @media screen and (max-width: 599px) {
   .homepage {
+    background: none;
+
     .content-wrapper {
       width: 95%;
     }
@@ -1011,29 +1044,19 @@ $contentPadding: 30px;
     }
 
     .main-content {
-      .wave {
-        display: none;
-      }
-
-      .wave--mobile {
-        display: block;
-      }
-
       .shiny {
         font-size: 18px !important;
       }
 
       .banner-container {
+        .extra-background {
+          display: none;
+        }
+
         .banner-content-wrapper {
           padding-top: 60px;
 
           .banner {
-            height: 400px;
-
-            .app-title {
-              padding: 0 15px;
-            }
-
             .app-logo {
               margin: 15px 0;
               margin-bottom: 0;
@@ -1041,12 +1064,6 @@ $contentPadding: 30px;
 
             .title2 {
               font-size: 12px;
-              padding-left: 15px;
-              padding-right: 15px;
-            }
-
-            .login-with-google {
-              padding-top: 15px;
             }
           }
 
@@ -1060,7 +1077,7 @@ $contentPadding: 30px;
 
       .content {
         .table {
-          padding-top: 0;
+          margin-top: -40vh;
         }
 
         .instruction-container {
@@ -1122,14 +1139,8 @@ $contentPadding: 30px;
       &.topbar2 {
         .company-brand {
           .company-brand__logo {
-            width: 34px !important;
+            width: 33px !important;
             height: 30px !important;
-          }
-
-          .company-brand__name {
-            .company-brand__name__sub {
-              display: none !important;
-            }
           }
         }
       }
@@ -1149,6 +1160,14 @@ $contentPadding: 30px;
             .company-brand__name__sub {
               font-size: 7px;
             }
+          }
+        }
+
+        .topbar-google-button {
+          font-size: 10px;
+
+          img {
+            width: 16px;
           }
         }
       }
