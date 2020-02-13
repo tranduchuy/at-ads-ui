@@ -21051,12 +21051,7 @@ var SendInfoComponent = /** @class */ (function (_super) {
         _this._sessionService = _sessionService;
         _this._visitorToolsService = _visitorToolsService;
         _this.websites = [];
-        _this.images = [
-            'http://vaytienkhongthechap.net.vn/wp-content/uploads/2016/04/telephone_skills.jpg',
-            'https://tekshanghai.com/wp-content/uploads/2018/12/tek-contact-us-support-man.png.png',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRxpmxve4G01hSCfB-D1bmdznjBweo6vgAD_ZM06cxUeBAHmtf1',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFcmk67STyYb6HciXbcTguIXPJ69M9iLT5PjM2sFBU_xatnOi-'
-        ];
+        _this.images = [];
         _this.popupDisplayEnableSlideToggle = {
             label: 'Hiển thị nút mở popup',
             color: 'accent',

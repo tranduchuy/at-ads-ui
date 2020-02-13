@@ -7,19 +7,19 @@
     </ng-template>
 
     <mat-step [stepControl]="stepForms[0]" state="step1">
-      <ng-template matStepLabel>Kết nối Google Ads</ng-template>
+      <ng-template matStepLabel>{{STEP_INFO.CONNECT_ACCOUNT.name}}</ng-template>
     </mat-step>
     <mat-step [stepControl]="stepForms[1]">
-      <ng-template matStepLabel>Gắn tracking chiến dịch</ng-template>
+      <ng-template matStepLabel>{{STEP_INFO.SELECT_CAMPAIGN.name}}</ng-template>
     </mat-step>
     <mat-step [stepControl]="stepForms[2]" (click)="alert()">
-      <ng-template matStepLabel>Thêm website</ng-template>
+      <ng-template matStepLabel>{{STEP_INFO.ADD_WEBSITE.name}}</ng-template>
     </mat-step>
     <mat-step [stepControl]="stepForms[3]">
-      <ng-template matStepLabel>Gắn mã tracking vào website</ng-template>
+      <ng-template matStepLabel>{{STEP_INFO.ADD_TRACKING.name}}</ng-template>
     </mat-step>
     <mat-step [stepControl]="stepForms[4]">
-      <ng-template matStepLabel>Xem báo cáo click ảo</ng-template>
+      <ng-template matStepLabel>{{STEP_INFO.SEE_REPORT.name}}</ng-template>
     </mat-step>
 
   </mat-horizontal-stepper>

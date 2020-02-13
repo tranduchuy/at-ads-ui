@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="title1" fxLayout="row" fxLayout.xs="column">
-    <p class="title2" fxFlex="80">BÁO CÁO THỐNG KÊ NGƯỜI DÙNG - TÀI KHOẢN <span
+    <p class="title2" fxFlex="80">BÁO CÁO NGƯỜI DÙNG CLICK QUẢNG CÁO - TÀI KHOẢN <span
         class="adsId">{{sessionService.activeAdsAccountId}}</span></p>
     <mat-form-field class="datePicker" fxFlex="20">
       <mat-label style="color: white; font-weight: bold">Khoảng thời gian thống kê</mat-label>
@@ -31,7 +31,7 @@
                 <ngx-avatar size="24" name="{{element.customerInfo.name.split(' ').slice(-1)[0]}}"
                   *ngIf="element.customerInfo?.name">
                 </ngx-avatar>
-                <ngx-avatar size="24" src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png"
+                <ngx-avatar size="24" src="../../../../assets/icons/blank-avatar.png"
                   *ngIf="!element.customerInfo?.name"></ngx-avatar>
                 <span
                   *ngIf="element.customerInfo?.phoneNumber">{{numberWithSpaces(element.customerInfo.phoneNumber, '### ### ####')}}</span>
@@ -40,7 +40,7 @@
             </a>
             <div *ngIf="!element.customerInfo?.phoneNumber && !element.uuid" fxLayout="row" fxLayoutGap="8px"
               fxLayoutAlign="start center">
-              <ngx-avatar size="24" src="https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png">
+              <ngx-avatar size="24" src="../../../../assets/icons/blank-avatar.png">
               </ngx-avatar>
               <span style="color:silver; font-weight: bold">Unknown</span>
             </div>

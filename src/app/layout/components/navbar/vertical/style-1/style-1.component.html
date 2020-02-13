@@ -30,8 +30,7 @@
         <div class="h5 username"><strong>{{user.name || ''}}</strong></div>
         <div class="h6 email mt-8">{{user.email || ''}}</div>
         <div class="avatar-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground">
-            <img class="avatar"
-                [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+            <img class="avatar" [src]="user.avatar || '../../../../../../assets/icons/blank-avatar.png'">
         </div>
         <div class="user-licence" *ngIf="user.email && user.licence" fxLayout="row" fxLayoutAlign="center center">
             <span [class.free-label]="user.licence.type === 'FREE'" [class.vip-label]="user.licence.type === 'VIP1'"

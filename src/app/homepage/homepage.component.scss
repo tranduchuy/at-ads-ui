@@ -113,6 +113,7 @@ $contentPadding: 30px;
           }
 
           .app-logo {
+            margin-top: 5px;
             position: relative;
             width: 80px;
             height: 80px;
@@ -150,11 +151,11 @@ $contentPadding: 30px;
           .title2 {
             width: 100%;
             text-align: center;
-            font-size: 0.8vw;
+            font-size: 12px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
             font-weight: bold;
             color: whitesmoke;
-            padding: 15px;
+            padding: 10px 15px;
             padding-bottom: 5px;
 
             .highline {
@@ -170,7 +171,7 @@ $contentPadding: 30px;
             button {
               font-weight: bold;
               min-height: 40px;
-              background: whitesmoke;
+              background: white;
               color: rgba(0, 0, 0, 0.7);
               transition: 0.2s;
 
@@ -263,8 +264,8 @@ $contentPadding: 30px;
 
             mat-row {
               transition: 0.2s;
-              -webkit-animation: rowFadeIn 0.4s linear;
-              animation: rowFadeIn 0.4s linear;
+              -webkit-animation: rowFadeIn 0.25s ease-in;
+              animation: rowFadeIn 0.25s ease-in;
 
               &:nth-child(odd) {
                 background: whitesmoke;
@@ -968,9 +969,24 @@ $contentPadding: 30px;
 @media screen and (min-width: 1280px) {
   .homepage {
     .main-content {
+      .shiny {
+        font-size: 1.4vw !important;
+      }
+
       .banner-container {
         .extra-background {
           display: block !important;
+        }
+
+        .banner {
+          .title2 {
+            font-size: 0.8vw !important;
+          }
+
+          .app-logo {
+            width: 5.6vw !important;
+            height: 5.6vw !important;
+          }
         }
       }
       .content {
@@ -1054,7 +1070,7 @@ $contentPadding: 30px;
         }
 
         .banner-content-wrapper {
-          padding-top: 60px;
+          padding-top: 90px;
 
           .banner {
             .app-logo {
@@ -1077,7 +1093,7 @@ $contentPadding: 30px;
 
       .content {
         .table {
-          margin-top: -40vh;
+          margin-top: -35vh;
         }
 
         .instruction-container {

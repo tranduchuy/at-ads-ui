@@ -1,3 +1,5 @@
+$primaryFontSize: 12px;
+
 .container {
   width: 100%;
   height: 90vh;
@@ -92,7 +94,7 @@
               overflow: hidden;
               white-space: nowrap;
               font-weight: bold;
-              font-size: 11px;
+              font-size: $primaryFontSize - 2;
 
               &:hover {
                 background: rgba(3, 155, 229, 0.05);
@@ -135,7 +137,10 @@
             }
 
             mat-header-cell:nth-child(1),
-            mat-cell:nth-child(1),
+            mat-cell:nth-child(1) {
+              flex: 0 0 10%;
+            }
+
             mat-header-cell:nth-child(2),
             mat-cell:nth-child(2),
             mat-header-cell:nth-child(3),
@@ -172,9 +177,56 @@
               justify-content: center;
             }
 
+            svg {
+              margin-right: 5px;
+              font-size: $primaryFontSize !important;
+            }
+
+            mat-cell:nth-child(6) {
+              .fa-windows {
+                color: #00baee;
+              }
+              .fa-apple {
+                color: silver;
+              }
+              .fa-android {
+                color: #44b543;
+              }
+              .fa-linux {
+                color: gray;
+              }
+              .fa-ubuntu {
+                color: darkorange;
+              }
+            }
+
+            mat-cell:nth-child(7) {
+              .fa-edge {
+                color: #1a65bd;
+              }
+              .fa-firefox-browser {
+                color: darkorange;
+              }
+              .fa-chrome {
+                color: #44b543;
+                &.chromium-icon {
+                  color: skyblue;
+                }
+              }
+              .fa-safari {
+                color: #00baee;
+              }
+              .fa-internet-explorer {
+                color: #00baee;
+              }
+              .fa-opera {
+                color: crimson;
+              }
+            }
+
             mat-header-cell,
             mat-cell {
-              font-size: 10px;
+              font-size: $primaryFontSize - 2;
             }
 
             mat-cell {

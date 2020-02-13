@@ -52,7 +52,7 @@
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button btn-standby">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar mr-0 mr-sm-16"
-                        [src]="standBy.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                        [src]="standBy.avatar || '../../../../assets/icons/blank-avatar.png'">
                     <span class="username mr-12" fxHide fxShow.gt-sm>
                         <strong>{{ standBy.name || '' }}</strong> <small style="margin-left: 5px;">đang thay quyền</small>
                     </span>
@@ -72,7 +72,7 @@
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar mr-0 mr-sm-16"
-                        [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+                        [src]="user.avatar || '../../../../assets/icons/blank-avatar.png'">
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{ user.name || '' }}</span>
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>

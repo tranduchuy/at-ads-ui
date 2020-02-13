@@ -43,14 +43,13 @@
       hạn chế click ảo.
     </div>
 
-    <div class="overview-chart">
+    <div class="overview-chart" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="20px">
 
-      <div class="pie-chart">
-
+      <div class="__chart {{pieChart.heightClass}}" fxFlex="75">
         <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
           [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
           [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" [labelFormatting]="pieChart.setLabelFormatting"
-          [legend]="true" [legendTitle]="''" (window:resize)="onResizeWindow($event)" [view]="view">
+          [legend]="pieChart.legend" [legendTitle]="''">
 
           <ng-template #tooltipTemplate let-model="model">
             <p style="color: #fff; text-align: left">
@@ -60,12 +59,21 @@
 
         </ngx-charts-pie-chart>
 
-        <div class="session-total" *ngIf="sessionTotal">
+        <div class="session-total" *ngIf="sessionTotal" fxLayout="column" fxLayoutAlign="center center">
           <span class="session-number">{{abbreviateNumber(sessionTotal)}}</span>
-          <br><span class="session-label">phiên</span>
+          <span class="session-label">phiên</span>
         </div>
-
       </div>
+
+      <div class="__chart-legend" fxFlex="25">
+        <ul *ngIf="pieChart.dataSource.length > 0">
+          <li *ngFor="let src of pieChart.dataSource; let i = index">
+            <div class="__color-label" [style.backgroundColor]="pieChart.scheme.domain[i]"></div>
+            {{src.name}}
+          </li>
+        </ul>
+      </div>
+
     </div>
 
     <div class="overview-report">

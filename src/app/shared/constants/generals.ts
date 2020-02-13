@@ -126,7 +126,7 @@ export namespace Generals {
         export const CONNECT_ACCOUNT = {
             value: 1,
             route: '/them-tai-khoan-moi',
-            name: 'Kết nối Google Ads'
+            name: 'Kết nối Tài khoản Google Ads'
         }
         export const SELECT_CAMPAIGN = {
             value: 2,
@@ -136,7 +136,7 @@ export namespace Generals {
         export const ADD_WEBSITE = {
             value: 3,
             route: '/quan-ly-website/',
-            name: 'Thêm website'
+            name: 'Thêm website vào tài khoản'
         };
         export const ADD_TRACKING = {
             value: 4,

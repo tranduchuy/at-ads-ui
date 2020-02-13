@@ -192,6 +192,15 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
 
         this.receiveMessage();
 
+        // setInterval(() => {
+        //   const newLog = this.logs[this.logs.length - 1];
+        //   this.logs.unshift(newLog);
+        //   if (this.logs.length > 30) {
+        //     this.logs.pop();
+        //   }
+        //   this.dataSource = new MatTableDataSource<Element>(this.logs);
+        // }, 500);
+
         this.isProcessing = false;
       });
     this.subscriptions.push(sub);
