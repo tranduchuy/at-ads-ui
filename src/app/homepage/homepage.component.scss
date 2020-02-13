@@ -1085,6 +1085,11 @@ $contentPadding: 30px;
       }
 
       .banner-container {
+
+        .extra-background {
+          display: none;
+        }
+
         .banner-content-wrapper {
           padding-top: 90px;
 
@@ -1109,7 +1114,7 @@ $contentPadding: 30px;
 
       .content {
         .table {
-          margin-top: -300px;
+          margin-top: -310px;
         }
 
         .instruction-container {
