@@ -33,6 +33,23 @@ $contentPadding: 30px;
   }
 
   .main-content {
+    padding-bottom: $contentPadding * 2;
+    position: relative;
+    z-index: 2;
+
+
+    .decor-bg1 {
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+
+      img {
+        width: 100%;
+      }
+    }
+
     button {
       transition: 0.2s;
 
@@ -83,17 +100,21 @@ $contentPadding: 30px;
     .banner-container {
       background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
       width: 100%;
-      height: 100vh;
+      height: 780px;
       position: relative;
       z-index: 2;
 
       .extra-background {
         position: relative;
         z-index: 2;
-        display: none;
 
-        svg > path {
-          fill: #e6ecf0;
+        svg {
+          position: absolute;
+          bottom: 0;
+
+          path {
+            fill: #e6ecf0;
+          }
         }
       }
 
@@ -115,8 +136,8 @@ $contentPadding: 30px;
           .app-logo {
             margin-top: 5px;
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             @extend .no-select;
 
             -webkit-animation: 0.6s appLogoFadeIn ease-in;
@@ -138,8 +159,8 @@ $contentPadding: 30px;
               color: rgba(125, 125, 125, 0.6);
               font-size: 24px;
               position: absolute;
-              top: 34%;
-              left: 44%;
+              top: 36%;
+              left: 46%;
               transform: rotate(348deg);
             }
           }
@@ -199,7 +220,7 @@ $contentPadding: 30px;
       .table {
         padding: $contentPadding 0;
         padding-top: 0;
-        margin-top: -34vh;
+        margin-top: -260px;
 
         .table-wrapper {
           overflow: auto;
@@ -788,7 +809,6 @@ $contentPadding: 30px;
   .footer-container {
     background: whitesmoke;
     width: 100%;
-    margin-top: $defaultMargin * 2;
     position: relative;
     z-index: 2;
 
@@ -970,7 +990,7 @@ $contentPadding: 30px;
   .homepage {
     .main-content {
       .shiny {
-        font-size: 1.4vw !important;
+        font-size: 1.5vw !important;
       }
 
       .banner-container {
@@ -980,6 +1000,7 @@ $contentPadding: 30px;
 
         .banner {
           .title2 {
+            padding-top: 5px;
             font-size: 0.8vw !important;
           }
 
@@ -1065,9 +1086,6 @@ $contentPadding: 30px;
       }
 
       .banner-container {
-        .extra-background {
-          display: none;
-        }
 
         .banner-content-wrapper {
           padding-top: 90px;
@@ -1080,6 +1098,7 @@ $contentPadding: 30px;
 
             .title2 {
               font-size: 12px;
+
             }
           }
 
@@ -1093,7 +1112,7 @@ $contentPadding: 30px;
 
       .content {
         .table {
-          margin-top: -35vh;
+          margin-top: -148px;
         }
 
         .instruction-container {

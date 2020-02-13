@@ -21,8 +21,8 @@
             <mat-form-field *ngIf="_sessionService.activeAdsAccountId && isAccountSelectionDisplayed === true"
                 appearance="none">
                 <img src="../../../../assets/icons/gg-ads.png" alt="googleAdsIcon" class="ggAds-icon">
-                <mat-label style="color: lightgreen">Đang kết nối tài khoản</mat-label>
-                
+                <mat-label style="color: lightgreen">Google Ads đang kết nối</mat-label>
+
 
                 <input matInput [value]="accountCtrl.value?.name || ''" readonly *ngIf="user.licence.type !== 'CUSTOM'">
                 <mat-select [formControl]="accountCtrl" placeholder="Tài khoản Google Ads" #singleSelect
@@ -35,7 +35,7 @@
                         {{account.name}}
                     </mat-option>
                 </mat-select>
-                
+
                 <!-- <span class="free-label" *ngIf="accountCtrl.value?.isFree === true">FREE</span>
                 <span *ngIf="accountCtrl.value?.isFree === false">
                     <span class="vip-label">VIP</span>
@@ -46,6 +46,12 @@
 
     </div>
 
+    <!-- <div class="toolbar__navigation" style="width: 35vw">
+        <a routerLink="/yeu-cau-boi-hoan-phi" mat-icon-button>
+            <mat-icon>help</mat-icon>
+        </a>
+    </div> -->
+
     <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
         <div *ngIf="adminIsStandingForUser === true">
@@ -54,7 +60,8 @@
                     <img class="avatar mr-0 mr-sm-16"
                         [src]="standBy.avatar || '../../../../assets/icons/blank-avatar.png'">
                     <span class="username mr-12" fxHide fxShow.gt-sm>
-                        <strong>{{ standBy.name || '' }}</strong> <small style="margin-left: 5px;">đang thay quyền</small>
+                        <strong>{{ standBy.name || '' }}</strong> <small style="margin-left: 5px;">đang thay
+                            quyền</small>
                     </span>
                     <!--<mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>-->
                 </div>
@@ -68,27 +75,42 @@
             </mat-menu>
         </div>
 
-        <div *ngIf="adminIsStandingForUser === false">
-            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
-                <div fxLayout="row" fxLayoutAlign="center center">
+
+        <div class="toolbar__navigation" fxLayout="row" fxLayoutGap="7px" fxLayoutGap.xs="0"
+            fxLayoutAlign="start center" fxLayoutAlign.xs="center center" *ngIf="adminIsStandingForUser === false">
+
+            <a routerLink="/nang-cap-vip" mat-icon-button matTooltip="Nâng cấp tài khoản" class="upgrade-licence-button">
+                <mat-icon>person</mat-icon>
+                <mat-icon>arrow_upward</mat-icon>
+            </a>
+
+            <a routerLink="/tro-giup" mat-icon-button matTooltip="Trợ giúp">
+                <mat-icon>help</mat-icon>
+            </a>
+
+            <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-button"
+                [style.backgroundImage]="'url(' + (user.avatar || '../../../../assets/icons/blank-avatar.png') + ')'">
+                <!-- <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar mr-0 mr-sm-16"
                         [src]="user.avatar || '../../../../assets/icons/blank-avatar.png'">
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{ user.name || '' }}</span>
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
-                </div>
+                </div> -->
+
+                <!-- <img class="user-avatar" [src]="user.avatar || '../../../../assets/icons/blank-avatar.png'"> -->
+
             </button>
 
             <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
 
-                <a routerLink="/nang-cap-vip" mat-menu-item style="color: #44b543; font-weight: bold">
-                    <!-- <img src="../../../../assets/icons/golden-shield.png" alt="" class="vip-logo"> -->
-                    <mat-icon style="color: #44b433">arrow_upward</mat-icon>
-                    <span>Nâng cấp tài khoản</span>
-                </a>
-
                 <a routerLink="/nguoi-dung/thong-tin-ca-nhan" mat-menu-item>
                     <mat-icon>account_circle</mat-icon>
-                    <span>Cập nhật thông tin</span>
+                    <span>Thông tin cá nhân</span>
+                </a>
+
+                <a routerLink="/nguoi-dung/lich-su-thao-tac" mat-menu-item>
+                    <mat-icon>history</mat-icon>
+                    <span>Lịch sử thao tác</span>
                 </a>
 
                 <button mat-menu-item class="" (click)="logout()">
@@ -97,54 +119,55 @@
                 </button>
 
             </mat-menu>
+
         </div>
 
         <!-- <div class="toolbar-separator"></div>
 
-            <fuse-search-bar (input)="search($event)"></fuse-search-bar>
+        <fuse-search-bar (input)="search($event)"></fuse-search-bar>
 
-            <div class="toolbar-separator"></div>
+        <div class="toolbar-separator"></div>
 
-            <button mat-button fxHide fxShow.gt-xs class="language-button" [matMenuTriggerFor]="languageMenu">
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="flag mr-8" [src]="'assets/icons/flags/'+selectedLanguage.flag+'.png'">
-                    <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
-                </div>
+        <button mat-button fxHide fxShow.gt-xs class="language-button" [matMenuTriggerFor]="languageMenu">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <img class="flag mr-8" [src]="'assets/icons/flags/'+selectedLanguage.flag+'.png'">
+                <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
+            </div>
+        </button>
+
+        <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
+
+            <button mat-menu-item *ngFor="let lang of languages" (click)="setLanguage(lang)">
+                <span fxLayout="row" fxLayoutAlign="start center">
+                    <img class="flag mr-16" [src]="'assets/icons/flags/'+lang.flag+'.png'">
+                    <span class="iso">{{lang.title}}</span>
+                </span>
             </button>
 
-            <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
+        </mat-menu>
 
-                <button mat-menu-item *ngFor="let lang of languages" (click)="setLanguage(lang)">
-                    <span fxLayout="row" fxLayoutAlign="start center">
-                        <img class="flag mr-16" [src]="'assets/icons/flags/'+lang.flag+'.png'">
-                        <span class="iso">{{lang.title}}</span>
-                    </span>
-                </button>
+        <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
 
-            </mat-menu>
+        <button mat-icon-button class="quick-panel-toggle-button" (click)="toggleSidebarOpen('quickPanel')"
+            aria-label="Toggle quick panel">
+            <mat-icon class="secondary-text">format_list_bulleted</mat-icon>
+        </button>
 
-            <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
+        <div class="toolbar-separator" *ngIf="!hiddenNavbar && rightNavbar" fxHide fxShow.gt-xs></div>
 
-            <button mat-icon-button class="quick-panel-toggle-button" (click)="toggleSidebarOpen('quickPanel')"
-                aria-label="Toggle quick panel">
-                <mat-icon class="secondary-text">format_list_bulleted</mat-icon>
-            </button>
-
-            <div class="toolbar-separator" *ngIf="!hiddenNavbar && rightNavbar" fxHide fxShow.gt-xs></div>
-
-            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && rightNavbar"
-                (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
-                <mat-icon class="secondary-text">menu</mat-icon>
-            </button> -->
+        <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && rightNavbar"
+            (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+            <mat-icon class="secondary-text">menu</mat-icon>
+        </button> -->
 
     </div>
 
-    <div class="alert" *ngIf="isAlertDisplayed">
+    <!-- <div class="alert" *ngIf="isAlertDisplayed">
         Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống! Vui lòng chấp nhận và <span
             style="color: skyblue; text-decoration: underline" (click)="updateAccountAcceptance()">nhấn vào đây</span>
         để
         cập
         nhật.
-    </div>
+    </div> -->
 
 </mat-toolbar>

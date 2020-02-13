@@ -26,6 +26,7 @@ $primaryFontSize: 12px;
       font-size: 14px;
       display: flex;
       align-items: center;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
 
       mat-icon {
         font-size: 16px;
@@ -35,6 +36,7 @@ $primaryFontSize: 12px;
       .number {
         font-weight: bolder;
         color: white;
+        margin-left: 5px;
       }
     }
 
@@ -205,7 +207,7 @@ $primaryFontSize: 12px;
       text-align: center;
     }
     .inner {
-      margin: 22px 15px 15px 15px;
+      margin: 22px 10px 10px 10px;
 
       .pagination-buttons {
         margin-left: 5px;

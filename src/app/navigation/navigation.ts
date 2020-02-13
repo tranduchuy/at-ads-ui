@@ -210,7 +210,7 @@ export const navigation: FuseNavigation[] = [
   },
   {
     id: 'user_info',
-    title: 'THÔNG TIN NGƯỜI DÙNG',
+    title: 'TÀI KHOẢN NGƯỜI DÙNG',
     translate: 'NAV.APPLICATIONS',
     type: 'group',
     children: [
@@ -224,7 +224,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'user_profile',
-        title: 'Cập nhật thông tin',
+        title: 'Thông tin cá nhân',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'account_circle',
