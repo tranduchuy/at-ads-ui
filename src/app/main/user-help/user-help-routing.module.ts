@@ -7,9 +7,8 @@ import { UserHelpComponent } from './user-help.component';
   imports: [
     RouterModule.forChild([
       {
-        path: '',
-        pathMatch: 'full',
-        component: UserHelpComponent
+        path: ':problemId',
+        component: UserHelpComponent,
       }
     ])
   ],
