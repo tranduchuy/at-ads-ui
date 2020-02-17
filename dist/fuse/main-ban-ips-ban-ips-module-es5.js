@@ -162,7 +162,7 @@ var AnonymousBrowserComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 _this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, function (error) {
@@ -359,7 +359,7 @@ var AutoBanIPComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 _this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, function (error) {
@@ -531,7 +531,7 @@ var AutoBlockingCellularNetworksComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgressBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 _this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, function (error) {
@@ -802,7 +802,7 @@ var AutoBlockingRangeIpsComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 _this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, function (error) {
@@ -968,7 +968,7 @@ var BanAnIPComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 _this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, function (error) {
@@ -1718,7 +1718,7 @@ var BanOptionalIPComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 _this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, function (error) {
@@ -1927,7 +1927,7 @@ var WhitelistIpComponent = /** @class */ (function (_super) {
             if (res.data.adsAccount.isConnected)
                 _this.getWhitelistIPs();
             else {
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 _this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, function (error) {

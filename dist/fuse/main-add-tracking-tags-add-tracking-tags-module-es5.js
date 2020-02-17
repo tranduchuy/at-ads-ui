@@ -338,7 +338,7 @@ var SelectCampaignsComponent = /** @class */ (function (_super) {
                 _this.trackingCampaignList = [];
                 _this.hasCampaign = false;
                 if (error.status === 400) {
-                    _this._dialogService._openInfoDialog('Tài khoản chưa được chấp nhận quyền quản lý hệ thống');
+                    _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 }
                 else {
                     _this._dialogService._openErrorDialog(error.error);

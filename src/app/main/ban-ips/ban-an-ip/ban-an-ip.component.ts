@@ -53,7 +53,11 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
           }
           else {
             this._fuseProgresBarService.hide();
-            this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+            this._dialogService._openInfoDialog(
+              'Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn',
+              'tại đây',
+              '/tro-giup/fI10j2DfAFexKoOQ'
+            );
             this._router.navigateByUrl('/danh-sach-tai-khoan');
           }
 
@@ -128,7 +132,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
           this.hasBlockedIP = true;
 
           setTimeout(() => {
-            this._dialogService._openSuccessDialog({messages: ['Chặn IP thành công']});
+            this._dialogService._openSuccessDialog({ messages: ['Chặn IP thành công'] });
             this.isProcessing = false;
           }, 0);
         },
@@ -165,7 +169,7 @@ export class BanAnIPComponent extends EditableFormBaseComponent implements OnIni
                 this._fuseProgresBarService.hide();
                 this.blockedIPs = [];
                 this.hasBlockedIP = false;
-                this._dialogService._openSuccessDialog({messages: ['Bỏ chặn IP thành công']});
+                this._dialogService._openSuccessDialog({ messages: ['Bỏ chặn IP thành công'] });
                 this.isProcessing = false;
               },
                 (error: HttpErrorResponse) => {

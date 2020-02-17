@@ -158,7 +158,7 @@ let AnonymousBrowserComponent = class AnonymousBrowserComponent extends app_shar
             }
             else {
                 this._fuseProgresBarService.hide();
-                this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, (error) => {
@@ -348,7 +348,7 @@ let AutoBanIPComponent = class AutoBanIPComponent extends app_shared_components_
             }
             else {
                 this._fuseProgresBarService.hide();
-                this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, (error) => {
@@ -513,7 +513,7 @@ let AutoBlockingCellularNetworksComponent = class AutoBlockingCellularNetworksCo
             }
             else {
                 this._fuseProgressBarService.hide();
-                this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, (error) => {
@@ -777,7 +777,7 @@ let AutoBlockingRangeIpsComponent = class AutoBlockingRangeIpsComponent extends 
             }
             else {
                 this._fuseProgresBarService.hide();
-                this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, (error) => {
@@ -936,7 +936,7 @@ let BanAnIPComponent = class BanAnIPComponent extends _shared_components_base_ed
             }
             else {
                 this._fuseProgresBarService.hide();
-                this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, (error) => {
@@ -1663,7 +1663,7 @@ let BanOptionalIPComponent = class BanOptionalIPComponent extends _shared_compon
             }
             else {
                 this._fuseProgresBarService.hide();
-                this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, (error) => {
@@ -1863,7 +1863,7 @@ let WhitelistIpComponent = class WhitelistIpComponent extends app_shared_compone
             if (res.data.adsAccount.isConnected)
                 this.getWhitelistIPs();
             else {
-                this._dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
+                this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
                 this._router.navigateByUrl('/danh-sach-tai-khoan');
             }
         }, (error) => {
