@@ -770,3 +770,19 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    .main-title {
+      height: 35vh;
+      padding: 45px 20px 20px 20px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .inner {
+      margin: 10px;
+      padding: 45px 15px 15px 20px;
+    }
+  }
+}

@@ -264,7 +264,12 @@ var AddAdwordsAccountsComponent = /** @class */ (function (_super) {
                 _this.loginByGG();
             }
             else {
-                _this._dialogService._openErrorDialog(error.error, true);
+                if (error.error.messages[0] === 'Bạn không có tài khoản hợp lệ.') {
+                    _this._dialogService._openErrorDialog({ messages: ['Chúng tôi không tìm thấy tài khoản Google Ads nào trong Gmail của bạn.'] }, true);
+                }
+                else {
+                    _this._dialogService._openErrorDialog(error.error, true);
+                }
             }
         });
         this.subscriptions.push(sub);

@@ -33,7 +33,7 @@
       </mat-form-field>
 
       <div class="fake-customer-config">
-        <div fxLayout="row" fxLayoutGap="25px" fxLayout.xs="column" fxLayoutGap.xs="0">
+        <div fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayout.xs="column">
           <div class="config" fxFlex="50">
             <mat-accordion>
               <mat-expansion-panel (opened)="configPanelOpenState = true" (closed)="configPanelOpenState = false">
@@ -46,7 +46,7 @@
                 </mat-expansion-panel-header>
                 <div class="panel-content">
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Cho phép hiển thị</div>
                     <div class="item-content" fxFlex="80">
                       <div class="enabled-toggle">
@@ -57,7 +57,7 @@
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Thiết bị</div>
                     <div class="item-content" fxFlex="80">
                       <div class="enabled-device-selection">
@@ -69,10 +69,12 @@
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start center">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px"
+                    fxLayoutAlign="start center">
                     <div class="item-title" fxFlex="20">Vị trí</div>
                     <div class="item-content" fxFlex="80">
-                      <div class="position-selection" fxLayout="row" fxLayoutGap="31px">
+                      <div class="position-selection" fxLayout="row" fxLayoutGap="31px" fxLayout.xs="column"
+                        fxLayoutGap.xs="5px">
                         <div class="position-option-wrapper" *ngFor="let element of positionOptions"
                           [class.selected]="element.selected" (click)="onSelectPositionOption(element.value)">
                           <div class="position-option">
@@ -83,14 +85,16 @@
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start center">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px"
+                    fxLayoutAlign="start center">
                     <div class="item-title" fxFlex="20">Thời gian hiển thị</div>
                     <div class="item-content" fxFlex="80">
                       <div class="time-setting">
-                        
+
                         <div class="auto-display-time-slider">
                           <ng5-slider [(value)]="autoDisplayTimeSlider.value"
-                            [(highValue)]="autoDisplayTimeSlider.highValue" [options]="autoDisplayTimeSlider.options"></ng5-slider>
+                            [(highValue)]="autoDisplayTimeSlider.highValue" [options]="autoDisplayTimeSlider.options">
+                          </ng5-slider>
                         </div>
 
                       </div>
@@ -114,12 +118,12 @@
                 </mat-expansion-panel-header>
                 <div class="panel-content">
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Ảnh đại diện</div>
                     <div class="item-content" fxFlex="80">
                       <div class="avatar-selection">
-                        <mat-radio-group fxLayout="row" fxLayoutGap="10px grid" fxLayoutAlign="center center"
-                          (change)="onSelectAvatarOption($event)">
+                        <mat-radio-group fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid"
+                          fxLayoutAlign="center center" (change)="onSelectAvatarOption($event)">
                           <mat-radio-button *ngFor="let item of avatarOptions" [value]="item.value"
                             [checked]="item.checked">
                             {{item.name}}
@@ -149,7 +153,7 @@
                     </span>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="14.3">Tiêu đề</div>
                     <div class="item-content" fxFlex="85.7">
                       <div class="custom-content">
@@ -176,7 +180,7 @@
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="14.3">Nội dung</div>
                     <div class="item-content" fxFlex="85.7">
                       <div class="custom-content">
@@ -203,7 +207,7 @@
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="14.3">Link đến trang</div>
                     <div class="item-content" fxFlex="85.7">
                       <div class="enter-page-url">
@@ -238,7 +242,7 @@
                   </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="panel-content">
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Màu sắc chủ đề</div>
                     <div class="item-content" fxFlex="80">
                       <div class="theme-color-selection">
@@ -249,7 +253,7 @@
                     </div>
                   </div>
 
-                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="start start">
+                  <div class="item" fxLayout="row" fxLayoutGap="25px" fxLayoutGap.xs="10px" fxLayoutAlign="start start">
                     <div class="item-title" fxFlex="20">Hình dạng</div>
                     <div class="item-content" fxFlex="80">
                       <div class="shape-selection">

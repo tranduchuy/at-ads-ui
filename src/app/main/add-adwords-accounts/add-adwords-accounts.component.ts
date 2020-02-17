@@ -216,7 +216,11 @@ export class AddAdwordsAccountsComponent extends EditableFormBaseComponent imple
           if (error.error.messages[0] === 'unauthorized_client') {
             this.loginByGG();
           } else {
-            this._dialogService._openErrorDialog(error.error, true);
+            if (error.error.messages[0] === 'Bạn không có tài khoản hợp lệ.') {
+              this._dialogService._openErrorDialog({ messages: ['Chúng tôi không tìm thấy tài khoản Google Ads nào trong Gmail của bạn.'] }, true);
+            } else {
+              this._dialogService._openErrorDialog(error.error, true);
+            }
           }
         });
     this.subscriptions.push(sub);

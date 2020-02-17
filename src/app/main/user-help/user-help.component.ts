@@ -23,48 +23,8 @@ export class UserHelpComponent extends PageBaseComponent implements OnInit, OnDe
   demoSteps = [
     {
       'id': 'tp2S0PwPHtDqMfvx',
-      'title': 'Hướng dẫn sử dụng',
-      'content': '<h1>Hướng dẫn sử dụng</h1>' +
-        '<br>' +
-        'This is an example step of the course. You can put anything in here from example codes to videos.' +
-        '<br><br>' +
-        'To install the CLI you need to have installed <b>npm</b> which typically comes with <b>NodeJS</b>.' +
-        'To install or upgrade the CLI run the following <b>npm</b> command:' +
-        '<br><br>' +
-        '<code>npm -g install @angular/cli</code>' +
-        '<br><br>' +
-        'To verify that the CLI has been installed correctly, open a console and run:' +
-        '<br><br>' +
-        '<code>ng version</code>' +
-        '<br><br>' +
-        '<h2>Install dependencies</h2>' +
-        '<br>' +
-        'To moderate the images we\'ll need a few Node.js packages:' +
-        '<br><br>' +
-        '<ul>' +
-        '<li>' +
-        'The Google Cloud Vision Client Library for Node.js: @google-cloud/vision to run the image through the Cloud Vision API to detect inappropriate images.' +
-        '</li>' +
-        '<br>' +
-        '<li>' +
-        'The Google Cloud Storage Client Library for Node.js: @google-cloud/storage to download and upload the images from Cloud Storage.' +
-        '</li>' +
-        '<br>' +
-        '<li>' +
-        'A Node.js library allowing us to run processes: child-process-promise to run ImageMagick since the ImageMagick command-line tool comes pre-installed on all Functions instances.' +
-        '</li>' +
-        '</ul>' +
-        '<br>' +
-        'To install these three packages into your Cloud Functions app, run the following npm install --save command. Make sure that you do this from the functions directory.' +
-        '<br><br>' +
-        '<code>npm install --save @google-cloud/vision @google-cloud/storage child-process-promise</code>' +
-        '<br><br>' +
-        'This will install the three packages locally and add them as declared dependencies in your package.js file.'
-    },
-    {
-      'id': 'uvPrD6E9UFIP73Hv',
-      'title': 'Sửa lỗi: Bạn không có tài khoản hợp lệ',
-      'content': '<h1>Sửa lỗi: Bạn không có tài khoản hợp lệ</h1>' +
+      'title': 'Hướng dẫn sử dụng công cụ',
+      'content': '<h1></h1>' +
         '<br>' +
         'This is an example step of the course. You can put anything in here from example codes to videos.' +
         '<br><br>' +
@@ -103,8 +63,8 @@ export class UserHelpComponent extends PageBaseComponent implements OnInit, OnDe
     },
     {
       'id': 'fI10j2DfAFexKoOQ',
-      'title': 'Chấp nhận quyền quản lý hệ thống từ Google Ads',
-      'content': '<h1>Chấp nhận quyền quản lý hệ thống từ Google Ads</h1>' +
+      'title': 'Hướng dẫn chấp nhận quyền quản lý hệ thống từ Google Ads',
+      'content': '<h1></h1>' +
         '<br>' +
         'This is an example step of the course. You can put anything in here from example codes to videos.' +
         '<br><br>' +

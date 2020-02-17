@@ -1018,21 +1018,21 @@ $contentPadding: 30px;
   }
 }
 
-// @media screen and (min-width: 600px) and (max-width: 959px) and (orientation: landscape) {
-//   .homepage {
-//     .main-content {
-//       .banner-container {
-//         height: 208vh;
-//       }
+@media screen and (min-width: 600px) and (max-width: 959px) and (orientation: landscape) {
+  .homepage {
+    .main-content {
+      .banner-container {
+        height: 208vh;
+      }
 
-//       .content {
-//         .table {
-//           margin-top: -79.48vh;
-//         }
-//       }
-//     }
-//   }
-// }
+      .content {
+        .table {
+          margin-top: -79.48vh;
+        }
+      }
+    }
+  }
+}
 
 @media screen and (min-width: 600px) and (max-width: 959px) {
   .homepage {
