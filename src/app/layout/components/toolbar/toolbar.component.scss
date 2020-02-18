@@ -26,7 +26,8 @@ toolbar {
     max-width: 300px;
 
     @include media-breakpoint("xs") {
-      max-width: 130px;
+      min-width: 120px;
+      max-width: 120px;
     }
   }
 
@@ -204,12 +205,12 @@ toolbar {
       background-position: center center;
       margin-left: 16px;
 
-      @include media-breakpoint('xs') {
+      @include media-breakpoint("xs") {
         margin-left: 10px;
       }
-    }    
+    }
 
-    @include media-breakpoint('xs') {
+    @include media-breakpoint("xs") {
       padding-right: 5px;
       height: 56px;
     }
@@ -253,6 +254,18 @@ a {
 
 $btn_standby: #760200;
 .btn-standby {
+  width: auto !important;
+
+  img {
+    width: 20px;
+    border-radius: 50%;
+  }
+
+  .username {
+    margin-left: 5px !important;
+    line-height: 20px;
+  }
+
   -webkit-animation-name: animation;
   -webkit-animation-duration: 2s;
   -webkit-animation-timing-function: ease-in-out;
