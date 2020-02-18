@@ -31,12 +31,7 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
   hasWebsite: boolean;
   isProcessing: boolean;
 
-  images = [
-    'http://vaytienkhongthechap.net.vn/wp-content/uploads/2016/04/telephone_skills.jpg',
-    'https://tekshanghai.com/wp-content/uploads/2018/12/tek-contact-us-support-man.png.png',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRxpmxve4G01hSCfB-D1bmdznjBweo6vgAD_ZM06cxUeBAHmtf1',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFcmk67STyYb6HciXbcTguIXPJ69M9iLT5PjM2sFBU_xatnOi-'
-  ];
+  images = [];
 
   popupDisplayEnableSlideToggle = {
     label: 'Hiển thị nút mở popup',

@@ -1,3 +1,5 @@
+$primaryFontSize: 12px;
+
 .container {
   width: 100%;
   height: 90vh;
@@ -60,24 +62,30 @@
       padding-bottom: 15px;
       .section {
         padding: 20px;
+        padding-left: 40px;
         padding-right: 0;
-        font-size: 16px;
         border-radius: 7px;
-        border: 0.5px solid #dcdcdc;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         transition: 0.2s;
+        color: rgba(0, 0, 0, 0.7);
 
         .number {
-          font-size: 22px;
+          font-size: 20px;
           font-weight: bold;
         }
 
+        .title {
+          font-size: 12px;
+          color: rgba(0, 0, 0, 0.7);
+        }
+
         mat-icon {
-          font-size: 50px;
+          font-size: 45px;
         }
 
         &.total {
-          background: #e6f5ff;
-          color: #039be5;
+          //background: #e6f5ff;
+          // color: #039be5;
           -webkit-animation: fade 0.4s ease-out;
 
           mat-icon {
@@ -87,8 +95,8 @@
         }
 
         &.real-click {
-          background: #ebfaeb;
-          color: green;
+          //background: #ebfaeb;
+          // color: green;
           -webkit-animation: fade 0.4s ease-out;
 
           mat-icon {
@@ -97,8 +105,8 @@
         }
 
         &.spam-click {
-          background: #ffebe6;
-          color: crimson;
+          //background: #ffebe6;
+          // color: crimson;
           -webkit-animation: fade 0.4s ease-out;
 
           mat-icon {
@@ -140,7 +148,7 @@
     .pagination-table-wrapper {
       border-radius: 7px;
       background: white;
-      border: 0.5px solid #dcdcdc;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
       .pagination-buttons {
         display: table;
@@ -161,8 +169,8 @@
           .ip-detail-link {
             font-weight: bold;
             padding-left: 2px;
+            font-size: $primaryFontSize - 2;
             transition: 0.2s;
-            font-size: 11px;
 
             &:hover {
               background: rgba(3, 155, 229, 0.05);
@@ -183,6 +191,53 @@
           mat-header-cell:nth-child(7),
           mat-cell:nth-child(7) {
             flex: 0 0 8%;
+          }
+
+          svg {
+            margin-right: 5px;
+            font-size: $primaryFontSize !important;
+          }
+
+          mat-cell:nth-child(6) {
+            .fa-windows {
+              color: #00baee;
+            }
+            .fa-apple {
+              color: silver;
+            }
+            .fa-android {
+              color: #44b543;
+            }
+            .fa-linux {
+              color: gray;
+            }
+            .fa-ubuntu {
+              color: darkorange;
+            }
+          }
+
+          mat-cell:nth-child(7) {
+            .fa-edge {
+              color: #1a65bd;
+            }
+            .fa-firefox-browser {
+              color: darkorange;
+            }
+            .fa-chrome {
+              color: #44b543;
+              &.chromium-icon {
+                color: skyblue;
+              }
+            }
+            .fa-safari {
+              color: #00baee;
+            }
+            .fa-internet-explorer {
+              color: #00baee;
+            }
+            .fa-opera {
+              color: crimson;
+            }
           }
 
           mat-header-cell:nth-child(3),
@@ -224,7 +279,7 @@
           mat-row {
             transition: 0.2s;
 
-            &:nth-child(even) {
+            &:nth-child(odd) {
               background: whitesmoke;
             }
 
@@ -251,7 +306,7 @@
 
           mat-header-cell,
           mat-cell {
-            font-size: 11px;
+            font-size: $primaryFontSize - 2;
           }
         }
       }
@@ -278,6 +333,11 @@
           align-items: center !important;
           mat-icon {
             font-size: 30px !important;
+            margin-right: 15px;
+          }
+
+          .number {
+            font-size: 18px;
           }
         }
       }

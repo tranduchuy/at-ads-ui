@@ -4,7 +4,8 @@
     <div fxFlex="70" class="title1-main">TÀI KHOẢN GOOGLE ADS & WEBSITE</div>
     <div class="add-account">
       <button (click)="router.navigateByUrl('/them-tai-khoan-moi')" mat-raised-button class="add-account-button">
-        <mat-icon>library_add</mat-icon> Kết nối tài khoản Google Ads
+        <img src="../../../assets/icons/gg-ads.png" alt="">
+        Kết nối tài khoản Google Ads
       </button>
     </div>
   </div>
@@ -25,7 +26,7 @@
         </ng-container>
 
         <ng-container matColumnDef="date">
-          <mat-header-cell *matHeaderCellDef> Ngày kết nối </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Ngày tạo </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'HH:mm dd/MM/yyyy'}} </mat-cell>
         </ng-container>
 
@@ -99,7 +100,7 @@
                 <div fxFlex="10">
                   <button (click)="openRemoveWebsiteConfirmDialog(website.code)" mat-icon-button color="accent"
                     matTooltip="Xóa website" [disabled]="isProcessing">
-                    <mat-icon style="color: silver; font-size: 20px">delete</mat-icon>
+                    <mat-icon style="color: silver">delete</mat-icon>
                   </button>
                 </div>
               </li>

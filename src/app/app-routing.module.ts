@@ -67,6 +67,11 @@ const appRoutes: Routes = [
     loadChildren: './main/upgrade-licence/upgrade-licence.module#UpgradeLicenceModule'
   },
   {
+    path: 'tro-giup',
+    canActivate: [MainGuardService],
+    loadChildren: './main/user-help/user-help.module#UserHelpModule'
+  },
+  {
     path: '**',
     redirectTo: '/danh-sach-tai-khoan'
   },

@@ -1,8 +1,5 @@
-<div class="upgrade-dialog">
-  <div matDialogTitle style="font-size: 16px">NÂNG CẤP TÀI KHOẢN {{licenceName | uppercase}}</div>
-  <!-- <div style="text-align: center; margin-bottom: 15px">
-        <mat-icon class="s-60" style="color: #40a5ec">info</mat-icon>
-      </div> -->
+<div class="upgrade-licence-dialog">
+  <div matDialogTitle style="font-size: 16px">NÂNG CẤP TÀI KHOẢN {{licence.name | uppercase}}</div>
   <div mat-dialog-content style="text-align: justify">
     <p id="expirations-label">
       Vui lòng lựa chọn các gói sau đây:
@@ -10,11 +7,33 @@
     <mat-radio-group aria-labelledby="expirations-label" class="example-radio-group" [(ngModel)]="selectedExpiration">
       <mat-radio-button class="example-radio-button" *ngFor="let option of expirations" [value]="option.value"
         (change)="onSelectExpiration($event)" fxLayout="row" style="margin-top: 5px">
-        {{option.text}}
+
+        <span class="licence__name">{{option.text}}</span>
+        <span>
+          {{' giá '}}
+          <span class="licence__price"
+            *ngIf="licence.isDiscount === false || (licence.isDiscount === true && option.discount === 0)">
+            {{((licence.price * option.value) | number: '1.0-0') + ' VNĐ'}}
+          </span>
+          <span class="licence__price" *ngIf="licence.isDiscount === true && option.discount > 0"
+            style="text-decoration: line-through">
+            {{((licence.price * option.value) | number: '1.0-0') + ' VNĐ'}}
+          </span>
+
+          <span *ngIf="licence.isDiscount === true">
+            <span *ngIf="option.discount > 0" style="margin-left: 5px">
+              {{' chỉ còn '}}
+              <span class="licence__price">
+                {{((licence.price * option.value - licence.price * option.value * option.discount) | number: '1.0-0') + ' VNĐ (giảm ' + (option.discount * 100) + '%)'}}
+              </span>
+            </span>
+          </span>
+        </span>
+
       </mat-radio-button>
     </mat-radio-group>
     <p style="color: gray">
-      <span style="color: red">*</span> <b>Chú ý:</b> Nếu gói {{licenceName}} của bạn đang còn thời hạn, hệ thống sẽ tự
+      <span style="color: red">*</span> <b>Chú ý:</b> Nếu gói {{licence.name}} của bạn đang còn thời hạn, hệ thống sẽ tự
       động
       thêm thời hạn cho gói của bạn.
     </p>

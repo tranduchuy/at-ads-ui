@@ -1,3 +1,5 @@
+$primaryFontSize: 12px;
+
 .container {
   width: 100%;
   height: 90vh;
@@ -24,6 +26,7 @@
       font-size: 14px;
       display: flex;
       align-items: center;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
 
       mat-icon {
         font-size: 16px;
@@ -33,6 +36,7 @@
       .number {
         font-weight: bolder;
         color: white;
+        margin-left: 5px;
       }
     }
 
@@ -75,7 +79,7 @@
           font-weight: bold;
           padding-left: 2px;
           transition: 0.2s;
-          font-size: 11px;
+          font-size: $primaryFontSize - 2;
 
           &:hover {
             background: rgba(3, 155, 229, 0.05);
@@ -84,7 +88,7 @@
 
         .view-campaign-button {
           margin-left: 10px;
-          font-size: 11px;
+          font-size: $primaryFontSize - 2;
           background: none;
           color: #039be5;
           box-shadow: none;
@@ -162,7 +166,7 @@
 
         mat-header-cell,
         mat-cell {
-          font-size: 11px;
+          font-size: $primaryFontSize - 2;
         }
 
         mat-row {
@@ -203,7 +207,7 @@
       text-align: center;
     }
     .inner {
-      margin: 22px 15px 15px 15px;
+      margin: 22px 10px 10px 10px;
 
       .pagination-buttons {
         margin-left: 5px;

@@ -1,497 +1,507 @@
 <div class="homepage">
-
    <div class="contact" *ngIf="isContactDisplayed">
       Vui lòng liên hệ email <span class="feature-info-highline2">ha@appnet.edu.vn</span> nếu bạn cần trợ giúp.
    </div>
 
-   <div class="topbar-container" *ngIf="isTopbarDisplayed">
-      <div class="topbar" [class.topbar2]="isLoginButtonDisplayed">
+   <div class="topbar-container" [class.topbar2]="isLoginButtonDisplayed" *ngIf="isTopbarDisplayed">
+      <div class="topbar content-wrapper">
          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="10px">
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
-               <img src="../../assets/images/app-logo.png" alt="" class="topbar-logo" fxFlex="none">
-               <span class="topbar-title" fxFlex *ngIf="isTopbarTitleDisplayed || true">
-                  {{APP_INFO.name + ' ' + APP_INFO.yearOfRelease}}
-               </span>
+               <div class="company-brand" fxLayout="row" fxLayoutGap="5px">
+                  <div class="company-brand__logo">
+                     <div class="company-brand__logo__name">AT</div>
+                  </div>
+                  <div class="company-brand__name">
+                     <div class="company-brand__name__main">APPNET TECHNOLOGY</div>
+                     <div class="company-brand__name__sub">Công cụ {{APP_INFO.name}}</div>
+                  </div>
+               </div>
             </div>
             <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin && isLoginButtonDisplayed"
                class="topbar-google-button" fxFlex="nogrow" [disabled]="isProcessing">
-               <img src="../../assets/icons/google-icon.png" alt=""> Đăng nhập bằng
+               <img src="../../assets/icons/google-flat.png" alt="" class="gg-icon"> Đăng nhập bằng
                Google
             </button>
-            <!-- <button mat-raised-button class="topbar-access-system-button" (click)="checkLogin()"
-               *ngIf="isOnLogin && isLoginButtonDisplayed" fxFlex="nogrow" [disabled]="isProcessing">
-               TRUY CẬP HỆ THỐNG CHẶN CLICK ẢO<mat-icon style="font-size: 20px">navigate_next</mat-icon>
-            </button> -->
          </div>
       </div>
    </div>
 
    <div class="main-content">
 
-      <div class="banner-container">
-         <div class="banner">
+      <div class="banner-container" fxLayout="column">
 
-            <!-- <img src="https://i.pinimg.com/originals/c1/16/d0/c116d0bcd7663786a5a2d619a70fd2b7.png" class="decoration" alt=""> -->
+         <div fxFlex="55" class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column"
+            fxLayoutGap.xs="0" fxLayoutGap.sm="15px" fxLayoutGap="30px">
 
-            <div class="title1 app-title">
-               <div class="insider">
-                  <span class="shiny">
-                     <span class="inner-shiny">Chặn Click Ảo {{APP_INFO.yearOfRelease}} - Giảm đến 50% phí quảng cáo
-                        Google Ads</span>
-                  </span>
-               </div>
-            </div>
+            <div class="banner" fxFlex="60" fxFlexAlign="end">
 
-            <div class="logo">
-               <img src="../../assets/images/app-logo.png" alt="">
-            </div>
-
-            <p class="title2">
-               <span class="highline">Giải Pháp Chặn Click Ảo</span> sử dụng Công nghệ <span class="highline">AI</span>
-               và
-               <span class="highline">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
-               giản và
-               hiệu
-               quả.
-            </p>
-
-            <!-- <div class="login-with-google" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px"
-               fxLayoutAlign="center center">
-               <a routerLink="/auth/register">
-                  <button mat-raised-button class="register-button">
-                     <mat-icon>arrow_right</mat-icon> Đăng ký ngay
-                  </button>
-               </a>
-               <button mat-raised-button color="warn" class="google-login-button">
-                  <img src="../../assets/icons/google-icon.png"
-                     style="height: 18px; width: 18px; margin-top: -5px; margin-right: 2px" alt=""> Đăng nhập bằng
-                  Google
-               </button>
-            </div> -->
-
-            <div class="login-with-google">
-               <button mat-raised-button color="warn" (click)="checkLogin()" *ngIf="!isOnLogin"
-                  class="login-google-button">
-                  <img src="../../assets/icons/google-icon.png" class="gg-icon" alt=""> Đăng nhập bằng
-                  Google
-               </button>
-               <!-- <button mat-raised-button class="access-system-button" (click)="checkLogin()" *ngIf="isOnLogin">
-                  TRUY CẬP HỆ THỐNG CHẶN CLICK ẢO<mat-icon style="font-size: 20px">navigate_next</mat-icon>
-               </button> -->
-            </div>
-
-            <!-- <div class="login">
-               <a routerLink="/auth/login" class="feature-info-highline">Đăng nhập tài khoản</a>
-            </div> -->
-
-         </div>
-      </div>
-
-      <div class="table">
-
-         <!-- <div class="table-title">
-            Trong 30 ngày qua đã có <span style="color: skyblue; font-weight: bold">19,227,560</span> click quảng
-            cáo, tỉ
-            lệ <span style="color: orange; font-weight: bold">17.50%</span>
-         </div> -->
-
-         <div class="table-wrapper" *ngIf="!isProcessing">
-            <mat-table [dataSource]="dataSource">
-
-               <ng-container matColumnDef="datetime">
-                  <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
-                  <mat-cell *matCellDef="let element">{{element.createdAt | date: 'HH:mm dd/MM/yyyy'}}</mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="ip">
-                  <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                     <span>{{element.ip}}</span>
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="os">
-                  <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-
-                     <i *ngIf="element.os?.name === 'Windows'" class="fab fa-windows" style="color: #00baee"></i>
-                     <i *ngIf="element.os?.name === 'iOS'" class="fab fa-apple" style="color: silver"></i>
-                     <i *ngIf="element.os?.name === 'Android'" class="fab fa-android" style="color: lightgreen"></i>
-                     <i *ngIf="element.os?.name === 'Mac OS'" class="fab fa-apple" style="color: silver"></i>
-                     <i *ngIf="element.os?.name === 'Linux'" class="fab fa-linux" style="color: white"></i>
-                     <i *ngIf="element.os?.name === 'Ubuntu'" class="fab fa-ubuntu" style="color: orange"></i>
-
-                     <span *ngIf="element.os?.name"
-                        loading="lazy">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
-
-                     <span *ngIf="!element.os?.name" class="UNKNOWN">Unknown</span>
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="browser">
-                  <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-
-                     <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge" style="color: #0066d7"></i>
-                     <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"
-                        style="color: orange"></i>
-                     <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
-                        class="fab fa-chrome" style="color: white"></i>
-                     <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome" style="color: lightblue"></i>
-                     <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
-                        class="fab fa-safari" style="color: #00baee"></i>
-                     <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"
-                        style="color: #00baee"></i>
-                     <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome" style="color: lightgreen"></i>
-                     <i *ngIf="element.browser?.name === 'Opera'" class="fab fa-opera" style="color: red"></i>
-
-                     <span *ngIf="element.browser?.name">
-                        <span>{{element.browser?.name}}</span>
-                        <br>
-                        <span>{{element.browser?.version || ''}}</span>
+               <div class="app-title bounceIn bounceInDown">
+                  <div class="insider">
+                     <span class="shiny">
+                        <span class="inner-shiny">Chặn Click Ảo {{APP_INFO.yearOfRelease}} - Giảm đến 50% phí quảng cáo
+                           <span class="gg-ads-title">G</span>
+                           <span class="gg-ads-title">O</span>
+                           <span class="gg-ads-title">O</span>
+                           <span class="gg-ads-title">G</span>
+                           <span class="gg-ads-title">L</span>
+                           <span class="gg-ads-title">E</span>
+                           <span class="gg-ads-title">&nbsp;</span>
+                           <span class="gg-ads-title">A</span>
+                           <span class="gg-ads-title">D</span>
+                           <span class="gg-ads-title">S</span>
+                        </span>
                      </span>
-                     <span *ngIf="!element.browser?.name" class="UNKNOWN">Unknown</span>
-
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="network">
-                  <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.network?.name"
-                        class="{{element.network?.name}}">{{element.network?.name}}</span>
-                     <span *ngIf="!element.network?.name" class="UNKNOWN">Unknown</span>
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="location">
-                  <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
-
-                  <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.location?.city">{{element.location?.city}}</span>
-
-                     <span *ngIf="!element.location?.city" class="UNKNOWN">Unknown</span>
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="keyword">
-                  <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.keyword">{{element.keyword}}</span>
-                     <span *ngIf="!element.keyword" class="UNKNOWN"></span>
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="campaignType">
-                  <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.campaignType">{{element.campaignType}}</span>
-                     <span *ngIf="!element.campaignType" class="UNKNOWN"></span>
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="matchType">
-                  <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.matchType">{{element.matchType}}</span>
-                     <span *ngIf="!element.matchType" class="UNKNOWN"></span>
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="page">
-                  <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.page">{{element.page}}</span>
-                     <span *ngIf="!element.page" class="UNKNOWN"></span>
-                  </mat-cell>
-               </ng-container>
-
-               <ng-container matColumnDef="position">
-                  <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                     <span *ngIf="element.position">{{element.position}}</span>
-                     <span *ngIf="!element.position" class="UNKNOWN"></span>
-                  </mat-cell>
-               </ng-container>
-
-               <mat-header-row *matHeaderRowDef="logColumns"></mat-header-row>
-               <mat-row *matRowDef="let row; columns: logColumns;"></mat-row>
-            </mat-table>
-         </div>
-
-      </div>
-
-      <div class="instruction-container" *ngIf="isInstructionDisplayed">
-         <div class="instruction">
-            <p class="steps-main-title">
-               3 BƯỚC PHÁT HIỆN VÀ CHẶN CLICK ẢO
-            </p>
-
-            <!-- <div class="demo-video">
-               <button mat-raised-button style="background-color:crimson; color: white" matTooltip="Sắp ra mắt">
-                  <mat-icon>ondemand_video</mat-icon> VIDEO DEMO CÔNG CỤ
-               </button>
-            </div> -->
-
-            <div class="step-wrapper" fxLayout="row" fxLayoutGap="40px" fxLayout.sm="column" fxLayout.xs="column">
-
-               <div class="step step1" fxFlex="33.33">
-                  <div class="step-image" [lazyLoad]="'../../assets/images/step1.png'" matTooltip="Phóng to ảnh"
-                     (click)="showImageDialog('../../assets/images/step1.png')" (load)="onLoadingImage = true"
-                     [class.onLoadingImage]="onLoadingImage">
-                     <div class="step-description">
-                        <div class="step-name" fxLayoutAlign="start center"><span class="step-label">1</span>Liên kết
-                           Google Ads</div>
-                        <p>
-                           Liên kết tài khoản quảng cáo <span class="step-highline">Google Ads</span> của bạn với hệ
-                           thống
-                           của Appnet Technology.
-                        </p>
-                     </div>
                   </div>
                </div>
 
-               <div class="step step2" fxFlex="33.33">
-                  <div class="step-image" [lazyLoad]="'../../assets/images/step2.png'" matTooltip="Phóng to ảnh"
-                     (click)="showImageDialog('../../assets/images/step2.png')" (load)="onLoadingImage = true"
-                     [class.onLoadingImage]="onLoadingImage">
-                     <div class="step-description">
-                        <div class="step-name" fxLayoutAlign="start center"><span class="step-label">2</span>Theo dõi
-                           click quảng cáo</div>
-                        <p>
-                           Theo dõi thiết bị, trình duyệt, vị trí đang click quảng cáo của bạn. Xác định đối tượng phá
-                           hoại.
-                        </p>
-                     </div>
-                  </div>
+               <div class="app-logo">
+                  <img src="../../assets/images/shield.png" alt="" class="shield">
+                  <i class="fas fa-mouse-pointer"></i>
                </div>
 
-               <div class="step step3" fxFlex="33.33">
-                  <div class="step-image" [lazyLoad]="'../../assets/images/step3.png'" matTooltip="Phóng to ảnh"
-                     (click)="showImageDialog('../../assets/images/step3.png')" (load)="onLoadingImage = true"
-                     [class.onLoadingImage]="onLoadingImage">
-                     <div class="step-description">
-                        <div class="step-name" fxLayoutAlign="start center"><span class="step-label">3</span>Chặn click
-                           ảo</div>
-                        <p>
-                           Thực hiện chặn những IP đang phá hoại bằng tác vụ thủ công hoặc tự động.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-
-            </div>
-         </div>
-      </div>
-
-      <div class="feature-container" *ngIf="isFeatureDisplayed">
-         <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
-            <div class="overview" fxFlex="32.7">
-               <p class="overview-title">
-                  <i class="fas fa-lightbulb"></i>
-                  <span>Thông minh hơn</span>
+               <p class="title2 bounceIn bounceInUp">
+                  <span class="highline">Giải Pháp Chặn Click Ảo</span> sử dụng Công nghệ <span
+                     class="highline">AI</span>
+                  và
+                  <span class="highline">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
+                  giản và
+                  hiệu
+                  quả.
                </p>
-               <mat-divider></mat-divider>
-               <div class="overview-info">
-                  Tích hợp nhiều tiện ích giúp giảm chi phí quảng cáo trong 1 công cụ duy nhất.
-                  <br><br>
-                  Công cụ hoạt động theo cơ chế tự động hóa, không chỉ cung cấp báo cáo trực quan mà còn có
-                  thể
-                  tương
-                  tác trực tiếp đến quảng cáo của bạn, cải thiện và giúp bạn tiết kiệm đáng kể chi phí và thời gian chạy
-                  quảng cáo.
-                  <br>
-                  <div class="trial-button">
-                     <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
-                        DÙNG THỬ NGAY <mat-icon>navigate_next</mat-icon>
-                     </button>
-                  </div>
+
+               <div class="login-with-google">
+                  <button mat-raised-button (click)="checkLogin()" *ngIf="!isOnLogin"
+                     class="login-google-button bounceIn bounceInUp">
+                     <img src="../../assets/icons/google-flat.png" class="gg-icon" alt=""> Đăng nhập bằng
+                     Google
+                  </button>
                </div>
-               <img [lazyLoad]="'../../assets/images/backgrounds/FlowCentric-Technologies-9-1030x734.png'"
-                  (load)="onLoadingImage = true" [class.onLoadingImage]="onLoadingImage" alt="" class="overview-image">
+
             </div>
-            <div class="feature-detail" fxLayout="row" fxLayout.xs="column">
-               <div class="feature-left" fxLayout="column" fxLayoutGap="20px">
-                  <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
-                     <div class="feature-item-icon">
-                        <!-- <mat-icon color="accent">verified_user</mat-icon> -->
-                        <i class="fas fa-user-shield"></i>
+
+            <div class="banner-image bounceIn bounceInRight" fxFlex="40" fxFlexAlign="end">
+               <img src="../../assets/images/backgrounds/FlowCentric-Technologies-9-1030x734.png" alt="">
+            </div>
+
+         </div>
+
+         <div fxFlex="45" class="extra-background">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+               <path fill-opacity="1" d="M0,288L1440,96L1440,320L0,320Z"></path>
+            </svg>
+         </div>
+
+      </div>
+
+      <div class="content content-wrapper">
+         <div class="table">
+
+            <div class="table-wrapper" *ngIf="!isProcessing">
+               <mat-table [dataSource]="dataSource">
+
+                  <ng-container matColumnDef="datetime">
+                     <mat-header-cell *matHeaderCellDef> Thời gian </mat-header-cell>
+                     <mat-cell *matCellDef="let element">{{element.createdAt | date: 'HH:mm dd/MM/yyyy'}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="ip">
+                     <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+                        <span>{{element.ip}}</span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="os">
+                     <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+
+                        <i *ngIf="element.os?.name === 'Windows'" class="fab fa-windows"></i>
+                        <i *ngIf="element.os?.name === 'iOS'" class="fab fa-apple"></i>
+                        <i *ngIf="element.os?.name === 'Android'" class="fab fa-android"></i>
+                        <i *ngIf="element.os?.name === 'Mac OS'" class="fab fa-apple"></i>
+                        <i *ngIf="element.os?.name === 'Linux'" class="fab fa-linux"></i>
+                        <i *ngIf="element.os?.name === 'Ubuntu'" class="fab fa-ubuntu"></i>
+
+                        <span *ngIf="element.os?.name"
+                           loading="lazy">{{element.os?.name + ' ' + (element.os?.version || '')}}</span>
+
+                        <span *ngIf="!element.os?.name" class="UNKNOWN">Unknown</span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="browser">
+                     <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+
+                        <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge"></i>
+                        <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"></i>
+                        <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
+                           class="fab fa-chrome"></i>
+                        <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome chromium-icon"></i>
+                        <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
+                           class="fab fa-safari"></i>
+                        <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"></i>
+                        <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome"></i>
+                        <i *ngIf="element.browser?.name === 'Opera'" class="fab fa-opera"></i>
+
+                        <span *ngIf="element.browser?.name">
+                           <span>{{element.browser?.name}}</span>
+                           <br>
+                           <span>{{element.browser?.version || ''}}</span>
+                        </span>
+                        <span *ngIf="!element.browser?.name" class="UNKNOWN">Unknown</span>
+
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="network">
+                     <mat-header-cell *matHeaderCellDef> Mạng </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.network?.name"
+                           class="{{element.network?.name}}">{{element.network?.name}}</span>
+                        <span *ngIf="!element.network?.name" class="UNKNOWN">Unknown</span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="location">
+                     <mat-header-cell *matHeaderCellDef> Tại (địa điểm) </mat-header-cell>
+
+                     <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.location?.city">{{element.location?.city}}</span>
+
+                        <span *ngIf="!element.location?.city" class="UNKNOWN">Unknown</span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="keyword">
+                     <mat-header-cell *matHeaderCellDef> Từ khóa </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.keyword">{{element.keyword}}</span>
+                        <span *ngIf="!element.keyword" class="UNKNOWN"></span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="campaignType">
+                     <mat-header-cell *matHeaderCellDef> Chiến dịch </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.campaignType">{{element.campaignType}}</span>
+                        <span *ngIf="!element.campaignType" class="UNKNOWN"></span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="matchType">
+                     <mat-header-cell *matHeaderCellDef> Đối sánh </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.matchType">{{element.matchType}}</span>
+                        <span *ngIf="!element.matchType" class="UNKNOWN"></span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="page">
+                     <mat-header-cell *matHeaderCellDef> Trang </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.page">{{element.page}}</span>
+                        <span *ngIf="!element.page" class="UNKNOWN"></span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="position">
+                     <mat-header-cell *matHeaderCellDef> Vị trí </mat-header-cell>
+                     <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.position">{{element.position}}</span>
+                        <span *ngIf="!element.position" class="UNKNOWN"></span>
+                     </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="logColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: logColumns;"></mat-row>
+               </mat-table>
+            </div>
+
+         </div>
+
+         <div class="instruction-container" *ngIf="isInstructionDisplayed">
+            <div class="instruction">
+               <p class="steps-main-title">
+                  3 BƯỚC PHÁT HIỆN VÀ CHẶN CLICK ẢO
+               </p>
+
+               <div class="step-wrapper" fxLayout="row" f xLayoutAlign="center center" fxLayoutGap="30px"
+                  fxLayoutGap.sm="15px" fxLayout.xs="column" fxLayout.sm="column">
+
+                  <div fxLayout="row" fxLayout.xs="column" fxFlex="70" fxLayoutAlign="center center" fxLayoutGap="30px"
+                     fxLayoutGap.sm="15px" class="step1-2-wrapper">
+
+                     <div class="step step1" fxFlex="50">
+                        <div class="step-image" [lazyLoad]="'../../assets/images/step1.png'" matTooltip="Phóng to ảnh"
+                           (click)="showImageDialog('../../assets/images/step1.png')" (load)="onLoadingImage = true"
+                           [class.onLoadingImage]="onLoadingImage">
+                           <div class="step-description step-description--1">
+                              <div class="step-name" fxLayoutAlign="start center"><span class="step-label">1</span>Liên
+                                 kết
+                                 Google Ads</div>
+                              <p>
+                                 Liên kết tài khoản quảng cáo <span class="step-highline">Google Ads</span> của bạn với
+                                 hệ
+                                 thống
+                                 của Appnet Technology.
+                              </p>
+                           </div>
+                        </div>
                      </div>
-                     <div class="feature-description">
-                        <span class="feature-name">Chặn theo IP</span>
-                        <p>
-                           Giải pháp chặn click ảo theo IP này được cải tiến hơn nhờ sự đồng bộ với toàn bộ mạng lưới
-                           <span class="feature-info-highline">Big Data</span> giúp chặn chính xác hơn.
-                        </p>
+
+                     <div class="step step2" fxFlex="50">
+                        <div class="step-image" [lazyLoad]="'../../assets/images/step2.png'" matTooltip="Phóng to ảnh"
+                           (click)="showImageDialog('../../assets/images/step2.png')" (load)="onLoadingImage = true"
+                           [class.onLoadingImage]="onLoadingImage">
+                           <div class="step-description step-description--2">
+                              <div class="step-name" fxLayoutAlign="start center"><span class="step-label">2</span>Theo
+                                 dõi
+                                 click quảng cáo</div>
+                              <p>
+                                 Theo dõi thiết bị, trình duyệt, vị trí đang click quảng cáo của bạn. Xác định đối tượng
+                                 phá
+                                 hoại.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+
+                  </div>
+
+                  <div class="step step3" fxFlex="30">
+                     <div class="step-image" [lazyLoad]="'../../assets/images/step3.png'" matTooltip="Phóng to ảnh"
+                        (click)="showImageDialog('../../assets/images/step3.png')" (load)="onLoadingImage = true"
+                        [class.onLoadingImage]="onLoadingImage">
+                        <div class="step-description step-description--3">
+                           <div class="step-name" fxLayoutAlign="start center"><span class="step-label">3</span>Chặn
+                              click
+                              ảo</div>
+                           <p>
+                              Thực hiện chặn những IP đang phá hoại bằng tác vụ thủ công hoặc tự động.
+                           </p>
+                        </div>
                      </div>
                   </div>
-                  <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
-                     <div class="feature-item-icon">
-                        <!-- <mat-icon color="accent" >public</mat-icon> -->
-                        <!-- <img src="../../assets/icons/incognito.png" alt=""> -->
-                        <i class="fas fa-user-secret"></i>
-                     </div>
-                     <div class="feature-description">
-                        <span class="feature-name">Chặn trình duyệt ẩn danh</span>
-                        <p>
-                           Nhận diện người dùng đang sử dụng <span class="feature-info-highline">Trình duyệt Ẩn
-                              danh</span>, từ
-                           đó có thể <span class="feature-info-highline2">ngừng quảng cáo</span>, giúp
-                           tiết kiệm chi phí với những người dùng muốn dấu thông tin truy cập vào quảng cáo.
-                        </p>
-                     </div>
-                  </div>
-                  <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
-                     <div class="feature-item-icon">
-                        <!-- <mat-icon color="accent">wifi</mat-icon> -->
-                        <i class="fas fa-wifi"></i>
-                     </div>
-                     <div class="feature-description">
-                        <span class="feature-name">Chặn theo 3G & 4G</span>
-                        <p>
-                           Chỉ với 1 thao tác bạn có thể chặn quảng cáo trên toàn bộ mạng 3G & 4G, giúp ngăn chặn <span
-                              class="feature-info-highline2">Click ảo</span> hiệu quả.
-                        </p>
-                     </div>
-                  </div>
-                  <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
-                     <div class="feature-item-icon">
-                        <!-- <mat-icon color="accent">timeline</mat-icon> -->
-                        <i class="fas fa-database"></i>
-                     </div>
-                     <div class="feature-description">
-                        <span class="feature-name">Chặn theo Big Data</span>
-                        <p>
-                           Dựa vào thống kê các IP đang phá hoại bằng <span class="feature-info-highline2">Click
-                              ảo</span> trên
-                           toàn bộ
-                           mạng
-                           lưới, bạn có thể thiết lập chặn toàn bộ các IP này.
-                        </p>
-                     </div>
-                  </div>
+
                </div>
             </div>
-            <div class="feature-right" fxLayout="column" fxLayoutGap="20px">
-               <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
-                  <div class="feature-item-icon">
-                     <mat-icon color="accent">phonelink</mat-icon>
+         </div>
+
+         <div class="feature-container" *ngIf="isFeatureDisplayed">
+            <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="90px"
+               fxLayoutGap.xs="20px" fxLayoutGap.sm="40px" fxLayoutGap.md="40px">
+               <div class="overview" fxFlex="25">
+                  <p class="overview-title">
+                     <mat-icon>wb_incandescent</mat-icon>
+                     <span>Tiện ích thông minh</span>
+                  </p>
+                  <mat-divider></mat-divider>
+                  <div class="overview-info">
+                     Tích hợp nhiều tiện ích giúp giảm chi phí quảng cáo trong 1 công cụ duy nhất.
+                     <br>
+                     Công cụ hoạt động theo cơ chế tự động hóa, không chỉ cung cấp báo cáo trực quan mà còn có
+                     thể
+                     tương
+                     tác trực tiếp đến quảng cáo của bạn, cải thiện và giúp bạn tiết kiệm đáng kể chi phí và thời gian
+                     chạy
+                     quảng cáo.
+                     <br>
+                     <div class="trial-button">
+                        <button mat-raised-button color="accent" (click)="checkLogin()" [disabled]="isProcessing">
+                           DÙNG THỬ NGAY <mat-icon>navigate_next</mat-icon>
+                        </button>
+                     </div>
                   </div>
-                  <div class="feature-description">
-                     <span class="feature-name">Chặn theo thiết bị</span>
-                     <p>
-                        Dễ dàng theo dõi tình trạng bật/tắt quảng cáo theo từng thiết bị: <span
-                           class="feature-info-highline">Mobile,
-                           Tablet, PC</span>. Nếu bạn muốn tắt quảng cáo trên các thiết bị này chỉ cần bấm là xong.
-                     </p>
-                  </div>
+                  <img [lazyLoad]="'../../assets/images/analytics-graphic.png'" (load)="onLoadingImage = true"
+                     [class.onLoadingImage]="onLoadingImage" alt="" class="overview-image">
                </div>
-               <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
-                  <div class="feature-item-icon">
-                     <!-- <mat-icon color="accent">apps</mat-icon> -->
-                     <i class="fas fa-th"></i>
+               <div class="feature-detail" fxFlex="75" fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px"
+                  fxLayoutGap.xs="0">
+                  <div class="feature-left" fxFlex="50" fxLayout="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+                     <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                        <div class="feature-item-icon">
+                           <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="feature-description">
+                           <span class="feature-name">Chặn theo IP</span>
+                           <p>
+                              Giải pháp chặn click ảo theo IP này được cải tiến hơn nhờ sự đồng bộ với toàn bộ mạng lưới
+                              <span class="feature-info-highline">Big Data</span> giúp chặn chính xác hơn.
+                           </p>
+                        </div>
+                     </div>
+                     <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                        <div class="feature-item-icon">
+                           <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="feature-description">
+                           <span class="feature-name">Chặn trình duyệt ẩn danh</span>
+                           <p>
+                              Nhận diện người dùng đang sử dụng <span class="feature-info-highline">Trình duyệt Ẩn
+                                 danh</span>, từ
+                              đó có thể <span class="feature-info-highline2">ngừng quảng cáo</span>, giúp
+                              tiết kiệm chi phí với những người dùng muốn dấu thông tin truy cập vào quảng cáo.
+                           </p>
+                        </div>
+                     </div>
+                     <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                        <div class="feature-item-icon">
+                           <i class="fas fa-wifi"></i>
+                        </div>
+                        <div class="feature-description">
+                           <span class="feature-name">Chặn theo 3G & 4G</span>
+                           <p>
+                              Chỉ với 1 thao tác bạn có thể chặn quảng cáo trên toàn bộ mạng 3G & 4G, giúp ngăn chặn
+                              <span class="feature-info-highline2">Click ảo</span> hiệu quả.
+                           </p>
+                        </div>
+                     </div>
+                     <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                        <div class="feature-item-icon">
+                           <i class="fas fa-database"></i>
+                        </div>
+                        <div class="feature-description">
+                           <span class="feature-name">Chặn theo Big Data</span>
+                           <p>
+                              Dựa vào thống kê các IP đang phá hoại bằng <span class="feature-info-highline2">Click
+                                 ảo</span> trên
+                              toàn bộ
+                              mạng
+                              lưới, bạn có thể thiết lập chặn toàn bộ các IP này.
+                           </p>
+                        </div>
+                     </div>
                   </div>
-                  <div class="feature-description">
-                     <span class="feature-name">Chặn theo mạng lưới</span>
-                     <p>
-                        Xem xét quảng cáo đang hiển thị ở đâu trên <span class="feature-info-highline">Google
-                           Search</span> hay
-                        trên
-                        <span class="feature-info-highline">Đối tác</span> của Google. Liều thuốc đơn giản nhưng tiết
-                        kiệm đến
-                        <span class="feature-info-highline2">30%</span> chi phí.
-                     </p>
-                  </div>
-               </div>
-               <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
-                  <div class="feature-item-icon">
-                     <!-- <mat-icon color="accent">location_on</mat-icon> -->
-                     <i class="fas fa-search-location"></i>
-                  </div>
-                  <div class="feature-description">
-                     <span class="feature-name">Xác định Tỉnh-Thành quảng cáo</span>
-                     <p>
-                        Biết chính xác các <span class="feature-info-highline">tỉnh, thành</span> đang hiện quảng cáo.
-                        Bạn có
-                        thể
-                        <span class="feature-info-highline2">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
-                     </p>
-                  </div>
-               </div>
-               <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
-                  <div class="feature-item-icon">
-                     <!-- <mat-icon color="accent">view_list</mat-icon> -->
-                     <i class="fas fa-address-book"></i>
-                  </div>
-                  <div class="feature-description">
-                     <span class="feature-name">Blacklist / Whitelist</span>
-                     <p>
-                        Nếu bạn biết chính xác địa chỉ IP của đối thủ, hoặc của khách hàng, bạn có thể <span
-                           class="feature-info-highline2">ngừng quảng cáo</span>
-                        với đối thủ để tránh mất thêm chi phí và luôn hiển thị quảng cáo tới khách hàng của mình.
-                     </p>
+                  <div class="feature-right" fxFlex="50" fxLayout="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+                     <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                        <div class="feature-item-icon">
+                           <mat-icon color="accent">phonelink</mat-icon>
+                        </div>
+                        <div class="feature-description">
+                           <span class="feature-name">Chặn theo thiết bị</span>
+                           <p>
+                              Dễ dàng theo dõi tình trạng bật/tắt quảng cáo theo từng thiết bị: <span
+                                 class="feature-info-highline">Mobile,
+                                 Tablet, PC</span>. Nếu bạn muốn tắt quảng cáo trên các thiết bị này chỉ cần bấm là
+                              xong.
+                           </p>
+                        </div>
+                     </div>
+                     <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                        <div class="feature-item-icon">
+                           <i class="fas fa-th"></i>
+                        </div>
+                        <div class="feature-description">
+                           <span class="feature-name">Chặn theo mạng lưới</span>
+                           <p>
+                              Xem xét quảng cáo đang hiển thị ở đâu trên <span class="feature-info-highline">Google
+                                 Search</span> hay
+                              trên
+                              <span class="feature-info-highline">Đối tác</span> của Google. Liều thuốc đơn giản nhưng
+                              tiết
+                              kiệm đến
+                              <span class="feature-info-highline2">30%</span> chi phí.
+                           </p>
+                        </div>
+                     </div>
+                     <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                        <div class="feature-item-icon">
+                           <i class="fas fa-search-location"></i>
+                        </div>
+                        <div class="feature-description">
+                           <span class="feature-name">Xác định Tỉnh-Thành quảng cáo</span>
+                           <p>
+                              Biết chính xác các <span class="feature-info-highline">tỉnh, thành</span> đang hiện quảng
+                              cáo.
+                              Bạn có
+                              thể
+                              <span class="feature-info-highline2">ngừng quảng cáo</span> theo tỉnh, thành nếu muốn.
+                           </p>
+                        </div>
+                     </div>
+                     <div class="feature-item" fxFlex="30" fxLayout="row" fxLayoutGap="20px">
+                        <div class="feature-item-icon">
+                           <i class="fas fa-address-book"></i>
+                        </div>
+                        <div class="feature-description">
+                           <span class="feature-name">Blacklist / Whitelist</span>
+                           <p>
+                              Nếu bạn biết chính xác địa chỉ IP của đối thủ, hoặc của khách hàng, bạn có thể <span
+                                 class="feature-info-highline2">ngừng quảng cáo</span>
+                              với đối thủ để tránh mất thêm chi phí và luôn hiển thị quảng cáo tới khách hàng của mình.
+                           </p>
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
          </div>
-      </div>
 
-      <div class="benefit-container" *ngIf="isBenefitDisplayed"
-         [lazyLoad]="'../../assets/images/backgrounds/Automotive-Data-Analytics-Market.png'">
-         <div class="benefit">
+         <div class="benefit-container" *ngIf="isBenefitDisplayed">
+            <div class="benefit">
 
-            <div class="benefit-title">
-               <!-- <span class="shiny2">
-                  <span class="inner-shiny2">Lợi ích khi sử dụng chặn click ảo</span>
-               </span> -->
-               <span>LỢI ÍCH KHI SỬ DỤNG CHẶN CLICK ẢO</span>
-            </div>
-
-            <p class="secondary-benefit-title">
-               Lợi ích thấy ngay khi đăng ký và sử dụng Công cụ Chặn Click Ảo
-            </p>
-
-            <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px">
-               <div class="main-benefit-item">
-                  <div class="benefit-symbol">
-                     <i class="fas fa-hand-holding-usd"></i>
-                  </div>
-                  <div class="benefit-description">
-                     <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ <mat-icon>add</mat-icon>
-                     </p>
-                     Giảm thiểu đến 50% chi phí quảng cáo <span class="benefit-info-highline">lãng phí vô ích</span> do
-                     đối thủ
-                     phá
-                     hoại
-                     hay virus, bot click quảng cáo.
-                  </div>
+               <div class="benefit-title">
+                  <img [lazyLoad]="'../../assets/icons/sparkles-icon.png'" alt="">
+                  <span>LỢI ÍCH KHI SỬ DỤNG CHẶN CLICK ẢO</span>
                </div>
-               <div class="main-benefit-item">
-                  <div class="benefit-symbol">
-                     <i class="fas fa-history"></i>
+
+               <p class="secondary-benefit-title">
+                  Lợi ích thấy ngay khi đăng ký và sử dụng Công cụ Chặn Click Ảo
+               </p>
+
+               <div class="main-benefit" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px">
+                  <div class="main-benefit-item">
+                     <div class="benefit-symbol save-money">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <div class="benefit-symbol-label">
+                           <mat-icon>add</mat-icon>
+                        </div>
+                     </div>
+                     <div class="benefit-description">
+                        <p class="benefit-description-title">TIẾT KIỆM CHI PHÍ
+                        </p>
+                        Giảm thiểu đến <span class="benefit-info-highline">50%</span> chi phí quảng cáo <span
+                           class="benefit-info-highline">lãng phí vô ích</span>
+                        do
+                        đối thủ
+                        phá
+                        hoại
+                        hay virus, bot click quảng cáo.
+                     </div>
                   </div>
-                  <div class="benefit-description">
-                     <p class="benefit-description-title">GIẢM THỜI GIAN <mat-icon>arrow_downward
-                        </mat-icon>
-                     </p>
-                     Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn 24h/ngày và 7
-                     ngày/tuần.
+                  <div class="main-benefit-item">
+                     <div class="benefit-symbol decrease-time">
+                        <i class="fas fa-history"></i>
+                        <div class="benefit-symbol-label">
+                           <mat-icon>arrow_downward</mat-icon>
+                        </div>
+                     </div>
+                     <div class="benefit-description">
+                        <p class="benefit-description-title">GIẢM THỜI GIAN
+                        </p>
+                        Không còn tốn thời gian để chặn từng IP. Công cụ có thể giúp bạn thực hiện chặn <span
+                           class="benefit-info-highline">24h/ngày</span> và <span class="benefit-info-highline">7
+                           ngày/tuần.</span>
+                     </div>
                   </div>
-               </div>
-               <div class="main-benefit-item">
-                  <div class="benefit-symbol increase-customer">
-                     <i class="fas fa-user-plus"></i>
-                  </div>
-                  <div class="benefit-description">
-                     <p class="benefit-description-title">TĂNG KHÁCH HÀNG <mat-icon>arrow_upward
-                        </mat-icon>
-                     </p>
-                     Giảm các chi phí <span class="benefit-info-highline">lãng phí</span> do click ảo, bạn sẽ có thêm
-                     chi phí
-                     quảng
-                     cáo.
-                     Từ
-                     đó có thêm tiềm năng.
+                  <div class="main-benefit-item">
+                     <div class="benefit-symbol increase-customer">
+                        <i class="fas fa-user-friends"></i>
+                        <div class="benefit-symbol-label">
+                           <mat-icon>arrow_upward</mat-icon>
+                        </div>
+                     </div>
+                     <div class="benefit-description">
+                        <p class="benefit-description-title">TĂNG KHÁCH HÀNG
+                        </p>
+                        Giảm các chi phí <span class="benefit-info-highline">lãng phí</span> do click ảo, bạn sẽ có thêm
+                        chi phí
+                        quảng
+                        cáo.
+                        Từ
+                        đó có thêm tiềm năng.
+                     </div>
                   </div>
                </div>
             </div>
@@ -500,8 +510,8 @@
    </div>
 
    <div class="footer-container">
-      <div class="footer" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px"
-         *ngIf="isFooterDisplayed">
+      <div class="footer content-wrapper" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px"
+         fxLayoutGap.sm="40px" *ngIf="isFooterDisplayed">
 
          <div class="footer-col1" fxFlex="33.33">
             <div class="footer-title1">FAQ</div>
@@ -581,8 +591,10 @@
                      Chi phí là bao nhiêu?
                   </span>
                   <p>
-                     Chi phí bạn thanh toán hàng tháng đối với mỗi tài khoản Google Ads được tối ưu là
-                     <strong>{{LICENCE.VIP.price}}</strong>. Bạn sẽ có thể thêm không giới hạn tài khoản Google Ads.
+                     Bạn được sử dụng công cụ này hoàn toàn miễn phí. Tuy nhiên, nếu bạn muốn trải nghiệm thêm nhiều
+                     tính
+                     năng tuyệt vời khác từ chúng tôi, bạn sẽ phải thực hiện nâng cấp tài khoản và chi trả
+                     mỗi tháng.
                   </p>
                </div>
             </div>
@@ -629,7 +641,8 @@
       <div class="footer-contact">
          Vui lòng liên hệ <a href="tel:0937573139">SĐT, Zalo,
             Viber 093.757.3139 (Mr. Long)</a> khi bạn cần trợ giúp. <br>
-         Phát triển bởi Appnet Technology
+         <strong><i class="fas fa-bolt"></i>
+            Phát triển bởi Appnet Technology</strong>
       </div>
    </div>
 

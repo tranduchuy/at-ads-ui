@@ -158,14 +158,14 @@ export const navigation: FuseNavigation[] = [
         icon: 'live_help',
         url: '/cong-cu-khach-hang/gui-thong-tin-tu-van',
       },
-      // {
-      //   id: 'fake-customer',
-      //   title: 'Giả khách mua hàng',
-      //   translate: 'NAV.SAMPLE.TITLE',
-      //   type: 'item',
-      //   icon: 'person_pin',
-      //   url: '/cong-cu-khach-hang/gia-khach-mua-hang',
-      // }
+      {
+        id: 'fake-customer',
+        title: 'Giả khách mua hàng',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'person_pin',
+        url: '/cong-cu-khach-hang/gia-khach-mua-hang',
+      }
     ]
   },
   {
@@ -210,7 +210,7 @@ export const navigation: FuseNavigation[] = [
   },
   {
     id: 'user_info',
-    title: 'THÔNG TIN NGƯỜI DÙNG',
+    title: 'TÀI KHOẢN NGƯỜI DÙNG',
     translate: 'NAV.APPLICATIONS',
     type: 'group',
     children: [
@@ -224,7 +224,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'user_profile',
-        title: 'Cập nhật thông tin',
+        title: 'Thông tin cá nhân',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'account_circle',

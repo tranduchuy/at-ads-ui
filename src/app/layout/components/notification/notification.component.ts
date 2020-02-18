@@ -28,6 +28,7 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
   isNotificationShown: boolean;
   isStepperShown: boolean;
   activedRoute: string;
+  STEP_INFO = Generals.AccountConfigStep;
 
   constructor(
     private _formBuilder: FormBuilder,

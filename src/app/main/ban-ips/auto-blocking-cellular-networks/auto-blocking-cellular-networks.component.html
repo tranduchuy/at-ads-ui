@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="title1">
-    CẤU HÌNH CHẶN TỰ ĐỘNG 3G & 4G - TÀI KHOẢN <span
+    CẤU HÌNH CHẶN TỰ ĐỘNG THEO MẠNG 3G & 4G - TÀI KHOẢN <span
       class="account-id">{{sessionService.activeAdsAccountId || ''}}</span>
   </div>
 
@@ -15,31 +15,31 @@
     <div class="checkbox-group" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="space-around">
       <mat-checkbox [checked]="mobileNetworks.viettel" (change)="selectNetwork($event,'viettel')"
         [disabled]="isProcessing" class="viettel-animation">
-        <img src="https://dangky3gviettel.vn/wp-content/uploads/2018/10/cropped-logo-dang-ky-3g-viettel.png"
+        <img src="../../../../assets/images/vt.png"
           class="network-logo" alt="">
       </mat-checkbox>
       <mat-checkbox [checked]="mobileNetworks.mobifone" (change)="selectNetwork($event,'mobifone')"
         [disabled]="isProcessing" class="mobifone-animation">
-        <img src="https://brasol.vn/public/uploads/1521197514-brasol.vn-logo-mobifone-mobifone-logo.svg_.png"
+        <img src="../../../../assets/images/mbf.png"
           class="network-logo" alt="">
       </mat-checkbox>
       <mat-checkbox [checked]="mobileNetworks.vinafone" (change)="selectNetwork($event,'vinafone')"
         [disabled]="isProcessing" class="vinafone-animation">
-        <img src="https://img2.thuthuatphanmem.vn/uploads/2018/12/13/logo-vinaphone_010429237.png" class="network-logo"
+        <img src="../../../../assets/images/vnp.png" class="network-logo"
           alt="">
       </mat-checkbox>
       <mat-checkbox [checked]="mobileNetworks.vietnammobile" (change)="selectNetwork($event,'vietnammobile')"
         [disabled]="isProcessing" class="vietnammobile-animation">
-        <img src="https://css.vietnamobile.com.vn/images/logo.png" class="network-logo" alt="">
+        <img src="../../../../assets/images/vnm.png" class="network-logo" alt="">
       </mat-checkbox>
       <mat-checkbox [checked]="mobileNetworks.fpt" (change)="selectNetwork($event,'fpt')" [disabled]="isProcessing"
         class="fpt-animation">
-        <img src="http://vinacorp.vn/uploads/news/FPT-ava_1828613.png" class="fpt" alt="">
+        <img src="../../../../assets/images/fpt.png" class="fpt" alt="">
       </mat-checkbox>
     </div>
 
     <p class="text-center">
-      <button mat-raised-button color="warn" class="submit-button" aria-label="Kết nối"
+      <button mat-raised-button color="accent" class="submit-button" aria-label="Kết nối"
         (click)="setAutoBlocking3G4G()" [disabled]="isProcessing">
         <mat-icon style="font-size: 20px">check</mat-icon> KÍCH HOẠT VÀ CẬP NHẬT CẤU HÌNH
       </button>

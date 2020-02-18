@@ -1,26 +1,16 @@
+$primaryFontSize: 12px;
+
 .container {
   width: 100%;
   height: 50vh;
-  // background: url("../../../../assets/images/backgrounds/simple2.png");
-  // background-size: 100% 100%;
-  // background-attachment: fixed;
   background-color: #7fcec5;
   background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
 
   .main-title {
-    // padding: 55px 30px 17px 30px;
-    // padding: 7px 30px 0 30px;
-    // background-color: #000000 !important;
-    // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-    // background-color: #7fcec5;
-    // background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     text-shadow: 1px 1px 2px black;
     color: white;
     font-size: 16px;
     font-weight: bold;
-    // background: url("../../../../assets/images/backgrounds/simple2.png");
-    // background-size: 100% 100%;
-    // background-attachment: fixed;
     padding: 45px 60px 0 60px;
     height: 35vh;
 
@@ -94,6 +84,7 @@
       text-align: center;
 
       -webkit-animation: notificationAni 0.4s ease-out;
+      animation: notificationAni 0.4s ease-out;
       @keyframes notificationAni {
         from {
           transform: translateY(3vh);
@@ -114,13 +105,14 @@
     .overview-chart {
       position: relative;
       top: -5vh;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding: 40px 20px 0 20px;
+      margin: 20px 0;
+      padding: 40px 20px 20px 20px;
       border-radius: 7px;
-      border: 1px solid #dcdcdc;
-      -webkit-animation: chartWidgetAni 0.4s ease-out;
-      @keyframes chartWidgetAni {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+      -webkit-animation: chartWidgetDownIn 0.4s ease-out;
+      animation: chartWidgetDownIn 0.4s ease-out;
+      @keyframes chartWidgetDownIn {
         from {
           transform: translateY(100vh);
         }
@@ -129,19 +121,14 @@
         }
       }
 
-      .pie-chart {
-        min-height: 300px;
-      
+      .__chart {
+        position: relative;
         .session-total {
-          width: 50px;
-          text-align: center;
-          // position: absolute;
-          // top: 155px;
-          // left: 22%;
-          // transform: translateX(18%);
-          position: relative;
-          left: 39.8%;
-          top: -175px;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
 
           .session-number {
             font-size: 18px;
@@ -153,14 +140,43 @@
           }
         }
       }
+
+      .__chart-legend {
+        ul {
+          list-style: none;
+          padding: 5px;
+          padding-left: 10px;
+          background: whitesmoke;
+          border-radius: 7px;
+          width: 250px;
+          display: table;
+          margin: 0 auto;
+
+          li {
+            line-height: 20px;
+            font-size: 10px;
+            color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+
+            .__color-label {
+              width: 14px;
+              height: 14px;
+              margin-right: 10px;
+              border-radius: 3px;
+            }
+          }
+        }
+      }
     }
 
     .overview-report {
       position: relative;
       top: -5vh;
       border-radius: 7px;
-      border: 1px solid #dcdcdc;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       -webkit-animation: overviewTableAni 0.6s ease-out;
+      animation: overviewTableAni 0.6s ease-out;
       @keyframes overviewTableAni {
         from {
           transform: translateY(100vh);
@@ -224,7 +240,7 @@
               font-weight: bold;
               padding-left: 2px;
               transition: 0.2s;
-              font-size: 9px;
+              font-size: $primaryFontSize - 2;
 
               &:hover {
                 background: rgba(3, 155, 229, 0.05);
@@ -272,6 +288,53 @@
               justify-content: center;
             }
 
+            svg {
+              margin-right: 5px;
+              font-size: $primaryFontSize !important;
+            }
+
+            mat-cell:nth-child(6) {
+              .fa-windows {
+                color: #00baee;
+              }
+              .fa-apple {
+                color: silver;
+              }
+              .fa-android {
+                color: #44b543;
+              }
+              .fa-linux {
+                color: gray;
+              }
+              .fa-ubuntu {
+                color: darkorange;
+              }
+            }
+
+            mat-cell:nth-child(7) {
+              .fa-edge {
+                color: #1a65bd;
+              }
+              .fa-firefox-browser {
+                color: darkorange;
+              }
+              .fa-chrome {
+                color: #44b543;
+                &.chromium-icon {
+                  color: skyblue;
+                }
+              }
+              .fa-safari {
+                color: #00baee;
+              }
+              .fa-internet-explorer {
+                color: #00baee;
+              }
+              .fa-opera {
+                color: crimson;
+              }
+            }
+
             mat-header-cell {
               background: whitesmoke;
               color: rgba(0, 0, 0, 0.7);
@@ -298,6 +361,7 @@
               }
 
               -webkit-animation: rowAppearance 0.4s linear;
+              animation: rowAppearance 0.4s linear;
               @keyframes rowAppearance {
                 from {
                   opacity: 0;
@@ -310,7 +374,7 @@
 
             mat-header-cell,
             mat-cell {
-              font-size: 10px;
+              font-size: $primaryFontSize - 2;
             }
 
             mat-header-row,
@@ -329,7 +393,7 @@
   .container {
     .main-title {
       padding: 45px 20px 30vh 20px;
-      height: 60vh;
+      height: 65vh;
       text-align: center;
 
       .website-selection {
@@ -343,36 +407,16 @@
     }
 
     .inner {
-      margin: 15px;
+      margin: 10px;
+      margin-top: 15px;
       padding: 0 15px 0 15px;
-  
-      ::ng-deep .ngx-charts-outer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
 
       .notification {
         padding: 10px;
       }
 
       .overview-chart {
-        padding: 0;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        .pie-chart {
-          .ngx-charts-outer {
-            .ngx-charts {
-            }
-          }
-
-          .session-total {
-            top: -465px;
-            left: 42%;
-          }
-        }
+        padding: 20px 0;
       }
     }
   }

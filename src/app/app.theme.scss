@@ -84,6 +84,7 @@ $typography: mat-typography-config(
 @import "src/app/errors/404/error-404.theme";
 @import "src/app/errors/500/error-500.theme";
 @import "src/app/maintenance/maintenance.theme";
+@import "src/app/main/user-help/academy.theme";
 
 // -----------------------------------------------------------------------------------------------------
 // @ Component theming
@@ -97,6 +98,7 @@ $typography: mat-typography-config(
 @mixin components-theme($theme) {
 
     // Layout components
+    @include academy-theme($theme);
     @include chat-panel-theme($theme);
     @include toolbar-theme($theme);
 

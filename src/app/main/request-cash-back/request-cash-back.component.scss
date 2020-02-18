@@ -3,8 +3,8 @@
   height: 90vh;
 
   .main-title {
-    padding: 45px 30px 0 45px;
-    height: 25vh;
+    padding: 60px 30px 0 45px;
+    height: 27vh;
     background-color: #ffffb5;
     background-image: linear-gradient(315deg, #ffffb5 0%, #247ba0 74%);
     color: white;
@@ -28,6 +28,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
     -webkit-animation: innerAnimation 0.4s ease-out;
+    animation: innerAnimation 0.4s ease-out;
     @keyframes innerAnimation {
       from {
         transform: translateY(100vh);
@@ -39,12 +40,13 @@
 
     .step {
       .step-title {
-        font-size: 18px;
+        font-size: 16px;
         padding-top: 20px;
       }
 
       img {
         -webkit-animation: imgAni 0.4s ease-in;
+        animation: imgAni 0.4s ease-in;
         @keyframes imgAni {
           from {
             opacity: 0;
@@ -101,7 +103,7 @@
     }
     .inner {
       padding: 30px 15px 15px 15px;
-      margin: 15px;
+      margin: 10px;
 
       .step {
         .step1-img1 {

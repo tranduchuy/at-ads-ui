@@ -11,10 +11,22 @@ export interface IUpdatePopupConfigParams {
 }
 
 export interface IPopupDisplaySettings {
-  popupStatus?: boolean
+  popupStatus?: boolean;
   popupPosition?: number;
-  autoShowPopupRepeatTime?: number,
-  autoShowPopup?: number,
+  autoShowPopupRepeatTime?: number;
+  autoShowPopup?: number;
+}
+
+export interface IUpdateFakeCustomerParams {
+  isEnable?: boolean;
+  runningDevices?: any;
+  positionOnPage?: number;
+  avatarType?: number;
+  title?: string;
+  body?: string;
+  pageUrl?: string;
+  themeColor?: string;
+  shape?: number
 }
 
 @Injectable({
@@ -33,6 +45,11 @@ export class VisitorToolsService {
 
   setPopupDislay(params: IPopupDisplaySettings, websiteId: string): Observable<any> {
     const url = API.Website.enablePopupDisplay.replace('{website_id}', websiteId);
+    return this._http.put(url, params);
+  }
+
+  updateFakeCustomer(params: IUpdateFakeCustomerParams, websiteId: string): Observable<any> {
+    const url = API.Website.updateFakeCustomer.replace('{website_id}', websiteId);
     return this._http.put(url, params);
   }
 }

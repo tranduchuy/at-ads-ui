@@ -57,6 +57,7 @@ export namespace API {
     export const getWebsiteTrackingInfo = environment.hostApi + '/api/account-adwords/{account_id}/verify-acctached-code-domains';
     export const updateWebsiteSendInfoPopupConfig = environment.hostApi + '/api/websites/{website_id}/popup';
     export const enablePopupDisplay = environment.hostApi + '/api/websites/{website_id}/status-popup';
+    export const updateFakeCustomer = environment.hostApi + '/api/websites/{website_id}/fake-customer';
   }
   export namespace Report {
     export const getAccountStatisticReport = environment.hostApi + '/api/account-adwords/{account_id}/report-statistic?from={from}&to={to}&timeZone={timeZone}';
@@ -74,5 +75,8 @@ export namespace API {
 
     export const getStatisticTrafficSourceReport = environment.hostApi + '/api/reports/{account_id}/statistic/traffic-source?from={from}&to={to}';
     export const getSessionReport = environment.hostApi + '/api/reports/{account_id}/sessions?from={from}&to={to}';
+  }
+  export namespace Licence {
+    export const getPackages = environment.hostApi + '/api/packages';
   }
 }

@@ -58,6 +58,7 @@
           }
 
           -webkit-animation: rowAppearance 0.4s linear;
+          animation: rowAppearance 0.4s linear;
           @keyframes rowAppearance {
             from {
               opacity: 0;
@@ -99,7 +100,7 @@
       height: 15vh;
     }
     .inner {
-      margin: 33px 15px 15px 15px;
+      margin: 33px 10px 10px 10px;
       .table-wrapper {
         mat-table {
           mat-header-cell:nth-child(2),

@@ -7,146 +7,41 @@
       </span>
       <!-- <span class="title">NÂNG CẤP TÀI KHOẢN</span> -->
       <p class="notice">
-        Hãy nâng cấp tài khoản của bạn để trải nghiệm những tính năng tuyệt vời nhất!
+        Hãy nâng cấp tài khoản của bạn để trải nghiệm những tính năng tuyệt vời nhất !
       </p>
     </div>
   </div>
 
   <div class="package-wrapper" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
-    <div class="package free-package">
-      <span class="label-base free-label">{{LICENCE.FREE.name | uppercase}}</span>
-      <p class="package-price">
-        {{LICENCE.FREE.price}}
-      </p>
-      <div style="padding: 10px 25px 10px 25px">
-        <mat-divider></mat-divider>
+    <div class="package fadeInUp {{'package-' + p.type}}" *ngFor="let p of packages">
+      <span class="recommended" *ngIf="p.type === LICENCE.VIP1.type">Khuyên dùng</span>
+      <div class="on-sale" *ngIf="p.isDiscount === true && p.isContactPrice === false">
+        <img src="../../../assets/images/sale.png" alt="">
       </div>
+      <span class="label-base {{'label-' + p.type}}">{{p.name}}</span>
+      <p class="package-price">
+        {{(p.type === LICENCE.FREE.type) ? 'Miễn phí' : (p.isContactPrice ? 'Liên hệ' : ((p.price | number: '1.0-0')  + ' VNĐ/Tháng'))}}
+      </p>
+      <mat-divider></mat-divider>
       <div class="package-benefit">
         <ul>
-          <li>
+          <li *ngFor="let item of p.interests">
             <mat-icon>check</mat-icon>
-            Chặn click ảo theo tần suất
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo nhà mạng (3G/4G)
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo tự động ít hơn 5 giây
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Tùy chỉnh danh sách IP cần chặn
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Báo cáo quản trị IP click
+            {{item}}
           </li>
         </ul>
       </div>
-    </div>
-    <div class="package vip-package">
-      <span class="recommended">Khuyên dùng</span>
-      <span class="label-base vip-label">{{LICENCE.VIP.name | uppercase}}</span>
-      <p class="package-price">
-        {{LICENCE.VIP.price}}
-      </p>
-      <div style="padding: 10px 25px 10px 25px">
-        <mat-divider></mat-divider>
-      </div>
-      <div class="package-benefit">
-        <ul>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo tần suất
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo nhà mạng (3G/4G)
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo tự động ít hơn 5 giây
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Tùy chỉnh danh sách IP cần chặn
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Báo cáo quản trị IP click
-          </li>
-          <li class="benefit-highline">
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo hành vi người dùng
-          </li>
-          <li class="benefit-highline">
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo nhắm chọn vị trí
-          </li>
-          <li class="benefit-highline">
-            <mat-icon>check</mat-icon>
-            Hỗ trợ gửi bồi hoàn phí từ Google
-          </li>
-        </ul>
-      </div>
-      <div class="register-package-button" (click)="openUpgradeLicenceDialog('VIP1', 'Tối ưu')"
-        *ngIf="isRegisterButtonNotDisplayed">
+
+      <div class="register-package-button" (click)="openUpgradeLicenceDialog(p.type)"
+        *ngIf="isRegisterButtonDisplayed && p.type !== LICENCE.FREE.type && p.isContactPrice === false">
         <button mat-raised-button color="accent">Đăng ký ngay</button>
       </div>
-    </div>
-    <div class="package custom-package">
-      <span class="label-base custom-label">{{LICENCE.CUSTOM.name | uppercase}}</span>
-      <p class="package-price">
-        {{LICENCE.CUSTOM.price}}
-      </p>
-      <div style="padding: 10px 25px 10px 25px">
-        <mat-divider></mat-divider>
+
+      <div class="contact-button"
+        *ngIf="isRegisterButtonDisplayed && p.type !== LICENCE.FREE.type && p.isContactPrice === true">
+        <button mat-raised-button color="accent" (click)="openContactInfoDialog(p.contact)">Liên hệ ngay</button>
       </div>
-      <div class="package-benefit">
-        <ul>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo tần suất
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo nhà mạng (3G/4G)
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo tự động ít hơn 5 giây
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Tùy chỉnh danh sách IP cần chặn
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Báo cáo quản trị IP click
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo hành vi người dùng
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Chặn click ảo theo nhắm chọn vị trí
-          </li>
-          <li>
-            <mat-icon>check</mat-icon>
-            Hỗ trợ gửi bồi hoàn phí từ Google
-          </li>
-          <li class="benefit-highline">
-            <mat-icon>check</mat-icon>
-            Có 1 nhân viên hỗ trợ riêng
-          </li>
-        </ul>
-      </div>
-      <div class="contact-button" *ngIf="isRegisterButtonNotDisplayed">
-        <button mat-raised-button color="accent" (click)="openContactInfoDialog()">Liên hệ ngay</button>
-      </div>
+
     </div>
   </div>
 </div>

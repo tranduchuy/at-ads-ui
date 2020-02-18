@@ -1,1 +1,8 @@
+$primaryTextColor: rgba(0, 0, 0, 0.7);
 
+.upgrade-licence-dialog {
+  .licence___price {
+    font-weight: bold;
+    color: $primaryTextColor;
+  }
+}

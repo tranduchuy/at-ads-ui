@@ -3,12 +3,10 @@
   height: 90vh;
 
   .title1 {
-    padding: 45px 30px 0 45px;
-    height: 25vh;
-    // background-color: #000000 !important;
-    // background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%) !important;
-    background-color: #e0455f;
-    background-image: linear-gradient(147deg, #e0455f 0%, #44000b 74%);
+    padding: 60px 30px 0 45px;
+    height: 27vh;
+    background-color: #7fcec5;
+    background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     text-shadow: 1px 1px 2px black;
     color: white;
     font-size: 16px;
@@ -30,6 +28,7 @@
     top: -15vh;
 
     -webkit-animation: formAni 0.4s ease-out;
+    animation: formAni 0.4s ease-out;
     @keyframes formAni {
       from {
         transform: translateY(100vh);
@@ -50,6 +49,7 @@
     .config-checking {
       font-size: 20px;
       padding-left: 10%;
+      color: rgba(0, 0, 0, 0.8);
     }
 
     .button-area {
@@ -68,7 +68,7 @@
     }
     .inner {
       padding: 15px;
-      margin: 15px;
+      margin: 10px;
 
       .config-checking {
         padding: 0;

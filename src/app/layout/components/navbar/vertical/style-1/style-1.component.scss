@@ -103,7 +103,9 @@ navbar {
       position: absolute;
       top: 0;
       right: 0;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+      
+      // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       .vip-expiration,
       .custom-expiration {
         font-size: 9.5px;
@@ -113,9 +115,9 @@ navbar {
         font-weight: bolder;
         padding: 0 4px 0 4px;
         color: #1a65bd;
-        text-shadow: 1px 1px 2px gray;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
         background: lightblue;
-        border-right: 3px solid #039be5;
+        border-right: 3px solid #1a65bd;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -143,11 +145,10 @@ navbar {
         font-size: 12px;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
-        text-shadow: none;
-        // filter: drop-shadow(0.2px 0.8px 0.8px black);
-        border-radius: 2px;
+        height: 25px;
       }
       .free-label {
+        height: 25px;
         background-color: #63d471;
         background-image: linear-gradient(315deg, #63d471 0%, #233329 74%);
         color: white;
@@ -155,19 +156,15 @@ navbar {
         font-size: 12px;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
-        margin-left: 10px;
         height: 100%;
       }
       .custom-label {
+        height: 25px;
         padding: 4px;
         font-weight: bold;
-        text-shadow: none;
-        // filter: drop-shadow(0.2px 0.8px 0.8px black);
-        border-radius: 2px;
         color: gold;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-size: 12px;
-
         background-color: #e0455f;
         background-image: linear-gradient(147deg, #e0455f 0%, #44000b 74%);
       }
@@ -197,15 +194,15 @@ navbar {
         align-items: center;
 
         .logo-icon {
-          width: 22px;
-          height: 22px;
+          width: 26px;
+          margin-top: -5px;
         }
 
         .logo-text {
-          margin-left: 10px !important;
+          margin-left: 6px !important;
           font-size: 10px !important;
           font-weight: bold;
-          letter-spacing: 0.4px;
+          letter-spacing: 1px;
           line-height: normal;
         }
       }
@@ -230,9 +227,8 @@ navbar {
       background-size: 100% 40px, 100% 10px;
       background-attachment: local, scroll;
 
-      background: url("../../../../../../assets/images/backgrounds/gg-material_1.png");
+      background: url("../../../../../../assets/images/backgrounds/Patterns-Wallpaper-1080x2280-380x802.jpg");
       background-size: 100% 100%;
-      backdrop-filter: blur(2px);
 
       .user {
         position: relative;
@@ -256,7 +252,6 @@ navbar {
           // padding: 8px;
           transform: translateX(-50%);
           left: 50%;
-          background: rgba(0, 0, 0, 0.2) !important;
           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
           .avatar {
@@ -270,7 +265,7 @@ navbar {
       .navbar-content {
         flex: 1 1 auto;
         padding-top: 32px;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.75);
       }
     }
   }

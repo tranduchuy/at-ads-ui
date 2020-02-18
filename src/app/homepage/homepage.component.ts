@@ -12,7 +12,6 @@ import { ILoginSuccess } from '../authentication/login/models/i-login-success';
 import { AuthService } from '../shared/services/auth.service';
 import { DialogService } from '../shared/services/dialog.service';
 import { SessionService } from '../shared/services/session.service';
-import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { HomepageService } from './homepage.service';
 import { Generals } from 'app/shared/constants/generals';
 
@@ -25,7 +24,6 @@ declare let gapi: any;
 })
 export class HomepageComponent extends PageBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   APP_INFO = Generals.AppInfo;
-  LICENCE = Generals.Licence;
   logColumns = ['datetime', 'ip', 'os', 'browser', 'network', 'location', 'keyword', 'campaignType', 'matchType', 'page', 'position'];
   logs = [];
   auth2: any;
@@ -57,7 +55,6 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private http: HttpClient,
     private _authService: AuthService,
     private _router: Router,
-    private _fuseProgressBarService: FuseProgressBarService,
     private _homepageService: HomepageService,
   ) {
 
@@ -95,7 +92,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     //   this.isTopbarDisplayed = false;
     // }
 
-    if (currentOffset > 450) {
+    if (currentOffset > 400) {
       this.isLoginButtonDisplayed = true;
       this.isTopbarTitleDisplayed = window.innerWidth > 600 ? true : false;
     } else {
@@ -194,6 +191,15 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
         this.dataSource = new MatTableDataSource<Element>(this.logs);
 
         this.receiveMessage();
+
+        // setInterval(() => {
+        //   const newLog = this.logs[this.logs.length - 1];
+        //   this.logs.unshift(newLog);
+        //   if (this.logs.length > 30) {
+        //     this.logs.pop();
+        //   }
+        //   this.dataSource = new MatTableDataSource<Element>(this.logs);
+        // }, 500);
 
         this.isProcessing = false;
       });

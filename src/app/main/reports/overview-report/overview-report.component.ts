@@ -61,7 +61,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
   itemsPerPageOptions = Generals.Pagination.itemsPerPageOptions;
 
   pieChart = {
-    legend: true,
+    legend: false,
     explodeSlices: false,
     labels: true,
     doughnut: true,
@@ -75,6 +75,7 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
       ]
     },
     dataSource: [],
+    heightClass: ''
   };
 
   TRAFFIC_SOURCE_TYPES: TrafficSourceType[] = Generals.TrafficSourceReport.TRAFFIC_SOURCE_TYPES;
@@ -122,18 +123,14 @@ export class OverviewReportComponent extends PageBaseComponent implements OnInit
     this.subscriptions.push(sub);
 
     this.pieChart.labels = window.innerWidth > 600;
-  }
 
-  ngOnDestroy(): void {
-    window.removeEventListener('resize', this.onResizeWindow, true);
-  }
-
-  ngAfterViewInit(): void {
-    window.addEventListener('resize', this.onResizeWindow, true);
-  }
-
-  onResizeWindow = (event: any): void => {
-    this.pieChart.view = [event.target.innerWidth - 900, 280 ];
+    if (window.innerWidth > 600) {
+      this.pieChart.labels = true;
+      this.pieChart.heightClass = 'h-300';
+    } else {
+      this.pieChart.labels = false;
+      this.pieChart.heightClass = 'h-200';
+    }
   }
 
   getReport() {

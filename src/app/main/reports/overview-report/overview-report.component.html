@@ -43,14 +43,13 @@
       hạn chế click ảo.
     </div>
 
-    <div class="overview-chart">
+    <div class="overview-chart" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="20px">
 
-      <div class="pie-chart">
-
+      <div class="__chart {{pieChart.heightClass}}" fxFlex="75">
         <ngx-charts-pie-chart *fuseIfOnDom [scheme]="pieChart.scheme" [results]="pieChart.dataSource"
           [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.labels" [trimLabels]="pieChart.trimLabels"
           [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" [labelFormatting]="pieChart.setLabelFormatting"
-          [legend]="true" [legendTitle]="''" (window:resize)="onResizeWindow($event)" [view]="view">
+          [legend]="pieChart.legend" [legendTitle]="''">
 
           <ng-template #tooltipTemplate let-model="model">
             <p style="color: #fff; text-align: left">
@@ -60,12 +59,21 @@
 
         </ngx-charts-pie-chart>
 
-        <div class="session-total" *ngIf="sessionTotal">
+        <div class="session-total" *ngIf="sessionTotal" fxLayout="column" fxLayoutAlign="center center">
           <span class="session-number">{{abbreviateNumber(sessionTotal)}}</span>
-          <br><span class="session-label">phiên</span>
+          <span class="session-label">phiên</span>
         </div>
-
       </div>
+
+      <div class="__chart-legend" fxFlex="25">
+        <ul *ngIf="pieChart.dataSource.length > 0">
+          <li *ngFor="let src of pieChart.dataSource; let i = index">
+            <div class="__color-label" [style.backgroundColor]="pieChart.scheme.domain[i]"></div>
+            {{src.name}}
+          </li>
+        </ul>
+      </div>
+
     </div>
 
     <div class="overview-report">
@@ -122,18 +130,14 @@
             <ng-container matColumnDef="os">
               <mat-header-cell *matHeaderCellDef> Hệ điều hành </mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <img *ngIf="element.os?.name === 'Windows'"
-                  src="https://1000logos.net/wp-content/uploads/2017/06/Windows-Logo.png" alt="" class="icon">
-                <img *ngIf="element.os?.name === 'iOS'"
-                  src="https://fairphone.cdn.shoprenter.hu/custom/fairphone/image/data/brand%20k%C3%A9pek/PNGPIX-COM-Apple-Grey-Logo-PNG-Transparent-500x576.png?lastmod=1534242773.1525780115"
-                  alt="" class="icon">
-                <img *ngIf="element.os?.name === 'Android'"
-                  src="https://image.flaticon.com/icons/png/512/226/226770.png" alt="" class="icon">
-                <img *ngIf="element.os?.name === 'Mac OS'"
-                  src="https://banner2.kisspng.com/20180415/vae/kisspng-finder-computer-icons-apple-logo-5ad351903f2c75.5613029815237984162588.jpg"
-                  alt="" class="icon">
-                <img *ngIf="element.os?.name === 'Linux'"
-                  src="https://1000logos.net/wp-content/uploads/2017/03/LINUX-LOGO.png" alt="" class="icon">
+
+                <i *ngIf="element.os?.name === 'Windows'" class="fab fa-windows"></i>
+                <i *ngIf="element.os?.name === 'iOS'" class="fab fa-apple"></i>
+                <i *ngIf="element.os?.name === 'Android'" class="fab fa-android"></i>
+                <i *ngIf="element.os?.name === 'Mac OS'" class="fab fa-apple"></i>
+                <i *ngIf="element.os?.name === 'Linux'" class="fab fa-linux"></i>
+                <i *ngIf="element.os?.name === 'Ubuntu'" class="fab fa-ubuntu"></i>
+
                 {{(element.os?.name || 'Unknown') + ' ' + (element.os?.version || '')}}
               </mat-cell>
             </ng-container>
@@ -141,27 +145,18 @@
             <ng-container matColumnDef="browser">
               <mat-header-cell *matHeaderCellDef> Trình duyệt </mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <img *ngIf="element.browser?.name === 'Firefox'"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1024px-Firefox_Logo%2C_2017.svg.png"
-                  alt="" class="icon">
-                <img *ngIf="element.browser?.name === 'Chrome'"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png"
-                  alt="" class="icon">
-                <img *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/1200px-Safari_browser_logo.svg.png"
-                  alt="" class="icon">
-                <img *ngIf="element.browser?.name === 'IE'"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png"
-                  alt="" class="icon">
-                <img *ngIf="element.browser?.name === 'Cốc Cốc'"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1024px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png"
-                  alt="" class="icon">
-                <img *ngIf="element.browser?.name === 'Opera'"
-                  src="https://cdn.freebiesupply.com/logos/large/2x/opera-2-logo-png-transparent.png" alt=""
-                  class="icon">
-                <img *ngIf="element.browser?.name === 'Tor'"
-                  src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/2d904534-a747-4e77-b01c-a7a77fe8adb7/d7t716u-49fc2695-680d-4264-b8c0-510f85dd2ebf.png/v1/fill/w_894,h_894,strp/tor_logo_by_stanchenko_d7t716u-pre.png"
-                  alt="" class="icon">
+
+                <i *ngIf="element.browser?.name === 'Edge'" class="fab fa-edge"></i>
+                <i *ngIf="element.browser?.name === 'Firefox'" class="fab fa-firefox-browser"></i>
+                <i *ngIf="element.browser?.name === 'Chrome' || element.browser?.name === 'Cốc Cốc'"
+                  class="fab fa-chrome"></i>
+                <i *ngIf="element.browser?.name === 'Chromium'" class="fab fa-chrome chromium-icon"></i>
+                <i *ngIf="element.browser?.name === 'Safari' || element.browser?.name === 'Mobile Safari'"
+                  class="fab fa-safari"></i>
+                <i *ngIf="element.browser?.name === 'IE'" class="fab fa-internet-explorer"></i>
+                <i *ngIf="element.browser?.name === 'Cốc Cốc'" class="fab fa-chrome"></i>
+                <i *ngIf="element.browser?.name === 'Opera'" class="fab fa-opera"></i>
+
                 {{(element.browser?.name || 'Unknown') + ' ' + (element.browser?.version || '')}}
               </mat-cell>
             </ng-container>

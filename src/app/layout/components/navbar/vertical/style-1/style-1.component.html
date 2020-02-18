@@ -2,7 +2,7 @@
 
     <div class="logo">
         <a>
-            <img class="logo-icon" src="assets/images/app-logo.png">
+            <img class="logo-icon" src="assets/icons/click-logo.png">
         </a>
         <span class="logo-text secondary-text">{{APP_INFO.name + ' ' + APP_INFO.yearOfRelease}}</span>
     </div>
@@ -30,13 +30,12 @@
         <div class="h5 username"><strong>{{user.name || ''}}</strong></div>
         <div class="h6 email mt-8">{{user.email || ''}}</div>
         <div class="avatar-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground">
-            <img class="avatar"
-                [src]="user.avatar || 'https://www.mncplay.id/wp-content/uploads/2016/08/blank-profile.png'">
+            <img class="avatar" [src]="user.avatar || '../../../../../../assets/icons/blank-avatar.png'">
         </div>
         <div class="user-licence" *ngIf="user.email && user.licence" fxLayout="row" fxLayoutAlign="center center">
             <span [class.free-label]="user.licence.type === 'FREE'" [class.vip-label]="user.licence.type === 'VIP1'"
                 [class.custom-label]="user.licence.type === 'CUSTOM'" fxLayout="row"
-                matTooltip="{{LICENCE_INTERESTS[user.licence.type].interests}}">
+                matTooltip="{{'(*)QUYỀN LỢI: ' + user.licence.interests.join(' ')}}">
                 {{user.licence?.name}}
             </span>
             <span [class.vip-expiration]="user.licence.type === 'VIP1'"
