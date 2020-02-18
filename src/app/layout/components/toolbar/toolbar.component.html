@@ -55,7 +55,7 @@
     <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
         <div class="toolbar__navigation" fxLayout="row" fxLayoutGap="7px" fxLayoutGap.xs="0"
-            fxLayoutAlign="start center" fxLayoutAlign.xs="center center" *ngIf="adminIsStandingForUser === false">
+            fxLayoutAlign="start center" fxLayoutAlign.xs="center center" *ngIf="adminIsStandingForUser === true">
 
             <a routerLink="/nang-cap-vip" mat-icon-button matTooltip="Nâng cấp tài khoản"
                 class="upgrade-licence-button">
@@ -88,7 +88,7 @@
 
 
         <div class="toolbar__navigation" fxLayout="row" fxLayoutGap="7px" fxLayoutGap.xs="0"
-            fxLayoutAlign="start center" fxLayoutAlign.xs="center center" *ngIf="adminIsStandingForUser === true">
+            fxLayoutAlign="start center" fxLayoutAlign.xs="center center" *ngIf="adminIsStandingForUser === false">
 
             <a routerLink="/nang-cap-vip" mat-icon-button matTooltip="Nâng cấp tài khoản"
                 class="upgrade-licence-button">
