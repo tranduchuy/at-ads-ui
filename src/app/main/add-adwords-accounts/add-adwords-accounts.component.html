@@ -5,7 +5,7 @@
   <div class="inner">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="50px" fxLayoutGap.xs="10px">
       <div gdArea="connect-button" class="connect-by-email" fxFlex="40">
-        <h5><strong><span class="step">1</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h5>
+        <h5><strong><span class="step">Cách 1</span> KẾT NỐI NHANH BẰNG GMAIL</strong></h5>
         <p class="note"> Sử dụng tài khoản Gmail quản lý Google Ads, bấm kết nối nhanh để hoàn tất
           quá
           trình kết nối</p>
@@ -13,15 +13,14 @@
 
           <button mat-raised-button (click)="showAccountListByEmail()" [disabled]="isProcessing || disableAllControls"
             *ngIf="!isAccountListShown" class="connect-by-email-button">
-            <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt=""
-              style="margin-right: 8px">Kết nối nhanh
+            <img src="../../../assets/icons/gmail.png" alt="" class="gmail-icon">Kết nối nhanh
             bằng
             Gmail</button>
 
           <button mat-raised-button (click)="isAccountListShown = false; selectedAccount = ''"
             [disabled]="isProcessing || disableAllControls" *ngIf="isAccountListShown"
             class="disconnect-by-email-button">
-            <img src="https://cdn4.iconfinder.com/data/icons/free-colorful-icons/360/gmail.png" alt="">Hủy kết nối nhanh
+            <img src="../../../assets/icons/gmail.png" alt="" class="gmail-icon">Hủy kết nối nhanh
             bằng Gmail</button>
 
         </div>
@@ -29,9 +28,9 @@
 
       <div gdArea="input-side" class="connect-by-id" fxFlex="60">
 
-        <h5><strong><span class="step">2</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h5>
-        <p class="note"><strong>Bước 1: </strong> Đăng nhập <b><a
-              href="https://ads.google.com/intl/vi_VN/home/" target="_blank">Awords.google.com</a></b>, ID tài
+        <h5><strong><span class="step">Cách 2</span> KẾT NỐI THÔNG QUA MÃ GOOGLE ADS ID</strong></h5>
+        <p class="note"><strong>Bước 1: </strong> Đăng nhập <b><a href="https://ads.google.com/intl/vi_VN/home/"
+              target="_blank">Awords.google.com</a></b>, ID tài
           khoản Google Ads của bạn sẽ nằm ở góc phải trên cùng. <span style="color: deeppink; font-weight: bold">VD:
             552-999-5152</span>
           là
