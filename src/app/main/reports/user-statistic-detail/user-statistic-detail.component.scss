@@ -381,8 +381,16 @@ $primaryFontSize: 12px;
   .container {
     .title1 {
       padding: 30px 20px 15vh 20px;
-      height: 33vh;
+      height: 40vh;
       text-align: center;
+
+      .datePicker {
+        margin-top: 20px;
+      }
+
+      mat-icon {
+        margin-left: -20px;
+      }
     }
 
     .main-inner {
