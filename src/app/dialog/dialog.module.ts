@@ -13,6 +13,7 @@ import { CampaignDialogComponent } from './campaign-dialog/campaign-dialog.compo
 import { UpgradeLicenceDialogComponent } from './upgrade-licence-dialog/upgrade-licence-dialog.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { SelectAccountDialogComponent } from './select-account-dialog/select-account-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
     ConfirmDialogComponent,
     ImageDialogComponent,
     CampaignDialogComponent,
-    UpgradeLicenceDialogComponent
+    UpgradeLicenceDialogComponent,
+    SelectAccountDialogComponent
   ],
   providers: [],
   imports: [
@@ -50,7 +52,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
     ConfirmDialogComponent,
     ImageDialogComponent,
     CampaignDialogComponent,
-    UpgradeLicenceDialogComponent
+    UpgradeLicenceDialogComponent,
+    SelectAccountDialogComponent
   ],
   exports: [
     InfoDialogComponent,
@@ -60,6 +63,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
     ImageDialogComponent,
     CampaignDialogComponent,
     UpgradeLicenceDialogComponent,
+    SelectAccountDialogComponent
   ]
 })
 export class DialogModule {

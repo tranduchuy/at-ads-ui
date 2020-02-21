@@ -1,0 +1,70 @@
+$blockPadding: 15px;
+
+.select-account-dialog {
+  padding: $blockPadding;
+
+  .main-title {
+    text-align: center;
+  }
+
+  .content {
+    .accounts {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0;
+      max-height: 150px;
+      overflow: auto;
+
+      border: 1px solid #eee;
+      padding: 10px;
+      border-radius: 7px;
+
+      .example-radio-button {
+        margin: 5px;
+      }
+    }
+
+    .connect-account-button {
+      width: 100%;
+
+      button {
+        background: none;
+        box-shadow: none;
+        color: #039be5;
+        display: table;
+        margin: 0 auto;
+      }
+    }
+
+    .upgrade-account-button {
+      width: 100%;
+      text-align: center;
+
+      a {
+        background: #44b543;
+        color: white;
+      }
+    }
+
+    .separator {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: gray;
+      padding: $blockPadding 0;
+      padding-top: $blockPadding * 2;
+    }
+    .separator::before,
+    .separator::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #eee;
+    }
+    .separator::before {
+      margin-right: 0.25em;
+    }
+    .separator::after {
+      margin-left: 0.25em;
+    }
+  }
+}

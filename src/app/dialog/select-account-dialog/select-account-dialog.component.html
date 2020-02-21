@@ -1,0 +1,27 @@
+<div class="select-account-dialog">
+  <h1 matDialogTitle class="main-title">Tài khoản đã hết hạn sử dụng gói Đối tác</h1>
+  <div mat-dialog-content class="content">
+
+    <label id="example-radio-group-label">Bạn chỉ được phép kết nối 1 tài khoản Google Ads</label>
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group accounts"
+      [(ngModel)]="selectedAccount">
+      <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account">
+        {{account.name}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div class="connect-account-button">
+      <button mat-button color="accent">Kết nối tài khoản</button>
+    </div>
+
+    <div class="separator">HOẶC</div>
+
+    <p class="upgrade-account-button">
+      <a mat-raised-button routerLink="/nang-cap-vip" (click)="dialogRef.close(true)">Nâng cấp tài khoản ngay</a>
+    </p>
+
+  </div>
+  <!-- <div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">
+    <button mat-raised-button color="basic" (click)="dialogRef.close(true)">Đóng
+    </button>
+  </div> -->
+</div>
