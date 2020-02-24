@@ -1,5 +1,5 @@
 <div class="select-account-dialog">
-  <h1 matDialogTitle class="main-title">Tài khoản đã hết hạn sử dụng gói Đối tác</h1>
+  <h1 matDialogTitle class="main-title">Gói Đối tác đã hết hạn sử dụng</h1>
   <div mat-dialog-content class="content">
 
     <label id="example-radio-group-label">Bạn chỉ được phép kết nối 1 tài khoản Google Ads</label>
@@ -10,7 +10,7 @@
       </mat-radio-button>
     </mat-radio-group>
     <div class="connect-account-button">
-      <button mat-button color="accent">Kết nối tài khoản</button>
+      <button mat-button color="accent" (click)="connectAccount()">Kết nối tài khoản</button>
     </div>
 
     <div class="separator">HOẶC</div>
