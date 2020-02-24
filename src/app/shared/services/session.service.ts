@@ -32,11 +32,20 @@ export class SessionService {
   private _activeAccountConnection$ = new BehaviorSubject<string>('');
   private _stepperStepOption$ = new BehaviorSubject<string>('');
   private _userLoginChecker$ = new BehaviorSubject<boolean>(false);
+  private _expiredUserConnectsAccount$ = new BehaviorSubject<boolean>(null);
 
   constructor(
     private cookieService: CookieService
   ) {
 
+  }
+
+  onExpiredUserConnectsAccount(): Observable<boolean> {
+    return this._expiredUserConnectsAccount$.asObservable();
+  }
+
+  emitSelectedAccountFromExpiredUser(account: any) {
+    this._expiredUserConnectsAccount$.next(account);
   }
 
   getValueOfUserLoginChecker(): boolean {
@@ -158,15 +167,19 @@ export class SessionService {
     this._accountAcceptance$.next(true);
     this._acceptedAdsId$.next('');
     this._isListAccountChanged$.next(false);
-    this._doesUserHaveAccount$.next(false);
+    this._doesUserHaveAccount$.next(true);
     this._listAccounts$.next(false);
     this._removedAccountId$.next('');
     this._activeAccountChanged$.next('');
     this._reportTableChanged$.next(0);
     this._doneConfigStep$.next(0);
+    this._isNoficationShown$.next(false);
     this._activeAccountConnection$.next('');
     this._stepperStepOption$.next('');
     this._userLoginChecker$.next(false);
+    this._expiredUserConnectsAccount$.next(null);
+
+    this.unsetActiveGoogleAdsAccount();
   }
 
   getAcceptedAdsId(): Observable<string> {

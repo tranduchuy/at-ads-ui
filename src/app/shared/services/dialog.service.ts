@@ -10,6 +10,7 @@ import { InfoDialogComponent } from 'app/dialog/info-dialog/info-dialog.componen
 import { ImageDialogComponent } from 'app/dialog/image-dialog/image-dialog.component';
 import { CampaignDialogComponent } from 'app/dialog/campaign-dialog/campaign-dialog.component';
 import { UpgradeLicenceDialogComponent } from 'app/dialog/upgrade-licence-dialog/upgrade-licence-dialog.component';
+import { SelectAccountDialogComponent } from 'app/dialog/select-account-dialog/select-account-dialog.component';
 
 interface Licence {
   name: string;
@@ -63,6 +64,16 @@ export class DialogService {
     });
     dialogRef.componentInstance.campaigns = campaigns;
   }
+
+
+  public _openSelectAccountDialog(accounts: any) {
+    const dialogRef = this._matDialog.open(SelectAccountDialogComponent, {
+      width: '40%',
+      panelClass: 'select-account-dialog'
+    });
+    dialogRef.componentInstance.accounts = accounts;
+  }
+
 
   public _openErrorDialog(error: IError, contact?: boolean): void {
     const dialogRef = this._matDialog.open(ErrorDialogComponent);

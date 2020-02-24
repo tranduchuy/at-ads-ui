@@ -1,23 +1,34 @@
 <div class="select-account-dialog">
-  <h1 matDialogTitle class="main-title">Gói Đối tác đã hết hạn sử dụng</h1>
+  <h1 matDialogTitle class="main-title">Tài khoản đã hết hạn sử dụng gói Đối Tác</h1>
   <div mat-dialog-content class="content">
 
-    <label id="example-radio-group-label">Bạn chỉ được phép kết nối 1 tài khoản Google Ads</label>
-    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group accounts"
-      [(ngModel)]="selectedAccount">
-      <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account">
-        {{account.name}}
-      </mat-radio-button>
-    </mat-radio-group>
-    <div class="connect-account-button">
-      <button mat-button color="accent" (click)="connectAccount()">Kết nối tài khoản</button>
+    <p class="toggle-connect-account-button" *ngIf="isBtnToggleConnectAccountShown">
+      <button mat-raised-button color="accent" (click)="toggleConnectAccountForm()">Kết
+        nối 1 tài khoản</button>
+    </p>
+
+    <div *ngIf="toggleState === false">
+      <label id="example-radio-group-label">Bạn chỉ được phép kết nối 1 tài khoản Google Ads</label>
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group accounts"
+        [(ngModel)]="selectedAccount">
+        <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account">
+          {{account.name}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div class="connect-account-button">
+        <button mat-button color="accent" (click)="connectAccount()">Kết nối tài khoản</button>
+      </div>
     </div>
 
     <div class="separator">HOẶC</div>
 
-    <p class="upgrade-account-button">
-      <a mat-raised-button routerLink="/nang-cap-vip" (click)="dialogRef.close(true)">Nâng cấp tài khoản ngay</a>
+    <p class="upgrade-account-button" *ngIf="toggleState === false">
+      <button mat-raised-button (click)="toggleUpgradeAccountForm()">Nâng cấp tài khoản Đối Tác</button>
     </p>
+
+    <div *ngIf="toggleState === true">
+      Upgrade account...
+    </div>
 
   </div>
   <!-- <div mat-dialog-actions [fxLayoutAlign]="'center center'" class="pt-24">

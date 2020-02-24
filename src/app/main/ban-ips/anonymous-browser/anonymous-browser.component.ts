@@ -55,11 +55,9 @@ export class AnonymousBrowserComponent extends PageBaseComponent implements OnIn
           else {
             this._fuseProgresBarService.hide();
             this._dialogService._openInfoDialog(
-                'Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn',
-                'tại đây',
-                '/tro-giup/fI10j2DfAFexKoOQ'
-              );
-            this._router.navigateByUrl('/danh-sach-tai-khoan');
+              'Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.'
+            );
+            this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
           }
 
         },

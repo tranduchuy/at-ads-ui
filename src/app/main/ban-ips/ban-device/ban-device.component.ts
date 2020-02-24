@@ -104,8 +104,10 @@ export class BanDeviceComponent extends PageBaseComponent implements OnInit {
           else {
             this._fuseSplashScreenService.hide();
             this._fuseProgressBarService.hide();
-            this.dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-            this._router.navigateByUrl('/danh-sach-tai-khoan');
+            this.dialogService._openInfoDialog(
+              'Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.'
+            );
+            this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
           }
         },
         (error: HttpErrorResponse) => {

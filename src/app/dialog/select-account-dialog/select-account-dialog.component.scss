@@ -12,7 +12,7 @@ $blockPadding: 15px;
       display: flex;
       flex-direction: column;
       margin: 15px 0;
-      max-height: 150px;
+      max-height: 200px;
       overflow: auto;
 
       border: 1px solid #eee;
@@ -28,7 +28,7 @@ $blockPadding: 15px;
       width: 100%;
 
       button {
-        background: none;
+        background: rgba(3, 155, 229, 0.1);
         box-shadow: none;
         color: #039be5;
         display: table;
@@ -36,11 +36,16 @@ $blockPadding: 15px;
       }
     }
 
+    .toggle-connect-account-button {
+      width: 100%;
+      text-align: center;
+    }
+
     .upgrade-account-button {
       width: 100%;
       text-align: center;
 
-      a {
+      button {
         background: #44b543;
         color: white;
       }

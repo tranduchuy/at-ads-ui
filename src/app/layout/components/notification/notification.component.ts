@@ -47,10 +47,8 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
   }
 
   ngOnInit() {
-    this._fuseProgressBarService.show();
     this.isNotificationShown = false;
     this.isStepperShown = false;
-    //this.initStepForms();
   }
 
   initStepForms() {
@@ -103,6 +101,7 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
           const activeAccount: any = _.find(
             this._sessionService.getValueOfListAccounts(),
             account => account.accountId === this._sessionService.activeAccountId);
+            
           if (activeAccount) {
             this.initStepForms();
             this._sessionService.completeConfigStep(activeAccount.configStep);

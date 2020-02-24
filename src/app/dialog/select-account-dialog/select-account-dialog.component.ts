@@ -15,6 +15,8 @@ export class SelectAccountDialogComponent extends PageBaseComponent implements O
 
   accounts: any;
   selectedAccount: any;
+  toggleState: boolean = false;
+  isBtnToggleConnectAccountShown: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<SelectAccountDialogComponent>,
@@ -33,7 +35,6 @@ export class SelectAccountDialogComponent extends PageBaseComponent implements O
 
   connectAccount() {
     this._fuseProgressBarService.show();
-
     const sub = this._selectAccountDialogService.enableSelectedAccount(this.selectedAccount.accountId)
       .subscribe(() => {
         this.selectedAccount.isDisabled = false;
@@ -47,5 +48,14 @@ export class SelectAccountDialogComponent extends PageBaseComponent implements O
     this.subscriptions.push(sub);
   }
 
+  toggleConnectAccountForm() {
+    this.toggleState = false;
+    this.isBtnToggleConnectAccountShown = false;
+  }
+
+  toggleUpgradeAccountForm() {
+    this.toggleState = true;
+    this.isBtnToggleConnectAccountShown = true;
+  }
 }
 

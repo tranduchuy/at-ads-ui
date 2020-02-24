@@ -47,12 +47,11 @@ export class AccountAcceptanceGuardService extends PageBaseComponent implements 
 
                     if (route.routeConfig.path.includes('chan-ip')
                         && isConnected === false && connectType === Generals.AccountConnectionType.byGoogleAdsId) {
-                        this._router.navigateByUrl('/danh-sach-tai-khoan');
-                        this._dialogService._openInfoDialog(
-                            'Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn',
-                            'tại đây',
-                            '/tro-giup/fI10j2DfAFexKoOQ'
-                        );
+                        // this._dialogService._openInfoDialog(
+                        //     'Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.'
+                        // );
+
+                        // this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
                         return false;
                     }
 

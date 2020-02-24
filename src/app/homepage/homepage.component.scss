@@ -7,6 +7,7 @@ $contentPadding: 30px;
 
 .homepage {
   width: 100%;
+  background: whitesmoke;
 
   .no-select {
     -webkit-touch-callout: none; /* iOS Safari */
@@ -16,6 +17,12 @@ $contentPadding: 30px;
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Opera and Firefox */
+  }
+
+  .primary-title {
+    letter-spacing: 1px !important;
+    font-family: "Quicksand", sans-serif !important;
+    font-weight: bold !important;
   }
 
   .gg-icon {
@@ -48,10 +55,11 @@ $contentPadding: 30px;
     .shiny {
       color: whitesmoke;
       display: inline-block;
-      font-size: 1.45vw !important;
+      font-size: 1.42vw !important;
       font-weight: 900;
       position: relative;
       text-transform: uppercase;
+      font-family: "Quicksand", sans-serif !important;
 
       .gg-ads-title {
         &:nth-of-type(1) {
@@ -100,7 +108,7 @@ $contentPadding: 30px;
           bottom: 0;
 
           path {
-            fill: #e6ecf0;
+            fill: whitesmoke;
           }
         }
       }
@@ -117,7 +125,7 @@ $contentPadding: 30px;
             filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
             font-weight: bolder;
             padding: 15px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
           }
 
           .app-logo {
@@ -144,10 +152,10 @@ $contentPadding: 30px;
 
             .fa-mouse-pointer {
               color: rgba(125, 125, 125, 0.6);
-              font-size: 24px;
+              font-size: 20px;
               position: absolute;
-              top: 36%;
-              left: 46%;
+              top: 37%;
+              left: 47%;
               transform: rotate(348deg);
             }
           }
@@ -161,10 +169,11 @@ $contentPadding: 30px;
             text-align: center;
             font-size: 12px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-            font-weight: bold;
             color: whitesmoke;
             padding: 10px 15px;
             padding-bottom: 5px;
+
+            @extend .primary-title;
 
             .highline {
               font-weight: bold;
@@ -406,9 +415,10 @@ $contentPadding: 30px;
             width: 100%;
             text-align: center;
             color: rgba(0, 0, 0, 0.7);
-            font-weight: bold;
             padding-bottom: 20px;
             text-shadow: none;
+
+            @extend .primary-title;
           }
 
           .demo-video {
@@ -536,6 +546,7 @@ $contentPadding: 30px;
 
             .overview-title {
               font-size: 16px;
+              @extend .primary-title;
 
               mat-icon {
                 font-size: 22px;
@@ -654,7 +665,8 @@ $contentPadding: 30px;
 
           .benefit-title {
             font-size: 16px;
-            font-weight: bold;
+            @extend .primary-title;
+
             -webkit-animation: ani 1.4s ease-in;
             animation: ani 1.4s ease-in;
             @keyframes ani {
@@ -794,7 +806,8 @@ $contentPadding: 30px;
   }
 
   .footer-container {
-    background: whitesmoke;
+    margin-top: $defaultMargin * 3;
+    background: #eee;
     width: 100%;
     position: relative;
     z-index: 2;
@@ -814,7 +827,7 @@ $contentPadding: 30px;
 
       .footer-title1 {
         font-size: 30px;
-        font-family: "Courier New";
+        @extend .primary-title
       }
 
       .footer-divider {
@@ -890,7 +903,7 @@ $contentPadding: 30px;
     &.topbar2 {
       padding-top: 0 !important;
       position: fixed !important;
-      background: whitesmoke !important;
+      background: white !important;
       animation: topbarInDown 0.2s linear;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
@@ -935,11 +948,13 @@ $contentPadding: 30px;
           .company-brand__name__main {
             font-weight: bold;
             font-size: 10px;
-            letter-spacing: 1.25px;
+            letter-spacing: 1.5px;
+            font-family: "Quicksand", sans-serif !important;
           }
           .company-brand__name__sub {
             font-size: 9px;
             letter-spacing: 1.5px;
+            font-family: "Quicksand", sans-serif !important;
           }
         }
       }
@@ -988,8 +1003,8 @@ $contentPadding: 30px;
           }
 
           .app-logo {
-            width: 5.6vw !important;
-            height: 5.6vw !important;
+            width: 5.5vw !important;
+            height: 5.5vw !important;
           }
         }
       }

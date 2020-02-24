@@ -15,21 +15,27 @@ toolbar {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   //filter: drop-shadow(0px 1px 2px black);
 
-  .mat-select-value-text {
-    font-size: 13px;
-    font-weight: bold;
-    display: block;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    min-width: 130px;
-    max-width: 300px;
+  .mat-form-field-infix {
+    width: 400px;
 
     @include media-breakpoint("xs") {
-      min-width: 120px;
-      max-width: 120px;
+      width: 150px;
     }
   }
+
+  // .mat-select-value-text {
+  //   display: block;
+  //   white-space: nowrap;
+  //   text-overflow: ellipsis;
+  //   overflow: hidden;
+  //   min-width: 130px;
+  //   max-width: 400px;
+
+  //   @include media-breakpoint("xs") {
+  //     min-width: 120px;
+  //     max-width: 120px;
+  //   }
+  // }
 
   &.below {
     z-index: 2;

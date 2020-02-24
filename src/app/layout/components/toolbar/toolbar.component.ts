@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { Subject, ReplaySubject, combineLatest, pipe } from 'rxjs';
-import { takeUntil, distinctUntilChanged, first, takeLast, take, distinct, single, last } from 'rxjs/operators';
+import { Subject, ReplaySubject, combineLatest, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -51,6 +51,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     isAlertDisplayed = false;
     isAccountSelectionDisplayed = false;
     accountConnectTypes = [];
+    USER_LICENCE = Generals.Licence;
 
     adsAccounts = [];
 
@@ -169,7 +170,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
             const user = values[0];
             if (user) {
                 this.user.name = user.name;
-                this.user.avatar = user.avatar;
+                this.user.avatar = user.avatar || '';
                 this.user.email = user.email;
                 this.user.licence = user.licence;
                 this.adminIsStandingForUser = false;
@@ -266,6 +267,53 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
         this._sessionService.emitSelectedActiveAccount(this.accountCtrl.value.accountId);
     }
 
+    setForEmptyListAccounts() {
+        this.isAccountSelectionDisplayed = false;
+        this.accountCtrl.setValue('');
+        this._sessionService.setListAccounts([]);
+        this._sessionService.unsetActiveGoogleAdsAccount();
+        this._sessionService.completeCheckingIfUserHasAccount(false);
+        this._sessionService.completeConfigStep(0);
+        this._fuseNavigationService.reloadNavigation();
+    }
+
+    setForNotEmptyListAccounts() {
+        this._sessionService.setListAccounts(this.adsAccounts);
+        this._sessionService.completeCheckingIfUserHasAccount(true);
+
+        let activeIndex = 0;
+
+        if (this._sessionService.activeAccountId && this._sessionService.activeAdsAccountId) {
+            activeIndex = _.findIndex(this.adsAccounts, account => account.accountId === this._sessionService.activeAccountId);
+
+            if (activeIndex < 0)
+                activeIndex = 0;
+        }
+
+        this.accountCtrl.setValue(this.adsAccounts[activeIndex]);
+        this._sessionService.setActiveGoogleAdsAccount(
+            this.accountCtrl.value.accountId,
+            this._adsAccountPipe.transform(this.accountCtrl.value.adsId)
+        );
+
+        // load the initial account list
+        this.filteredAccounts.next(this.adsAccounts.slice());
+
+        // listen for search field value changes
+        this.accountFilterCtrl.valueChanges
+            .pipe(takeUntil(this._onDestroy))
+            .subscribe(() => {
+                this.filterAccounts();
+            });
+
+        // emit config step value
+        this._sessionService.completeConfigStep(this.adsAccounts[activeIndex].configStep);
+
+        this._fuseNavigationService.reloadNavigation();
+        this.isAccountSelectionDisplayed = true;
+        this.isProcessing = false;
+    }
+
     getAdsAccounts(action?: ChangingListAccountsAction): void {
         this._fuseProgressiveBarService.show();
         this.isProcessing = true;
@@ -274,6 +322,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 this.adsAccounts = (res.data.accounts || [])
                     .map((account: any) => {
                         this.accountConnectTypes[this._adsAccountPipe.transform(account.adsId)] = account.connectType;
+
                         return {
                             name: this._adsAccountPipe.transform(account.adsId)
                                 + (account.adsName ? ` | ${account.adsName}` : ''),
@@ -287,56 +336,50 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                             connectType: account.connectType,
                             websites: account.websites,
                             limitWebsite: account.limitWebsite,
-                            configStep: account.configStep || Generals.AccountConfigStep.CONNECT_ACCOUNT.value
+                            configStep: account.configStep || Generals.AccountConfigStep.CONNECT_ACCOUNT.value,
+                            isDisabled: account.isDisabled
                         };
                     });
 
                 this._fuseProgressiveBarService.hide();
-                this._sessionService.setListAccounts(this.adsAccounts);
 
-                if (this.adsAccounts.length === 0) {
-                    this.isAccountSelectionDisplayed = false;
-                    this.accountCtrl.setValue('');
-                    this._sessionService.unsetActiveGoogleAdsAccount();
-                    this._sessionService.completeCheckingIfUserHasAccount(false);
-                    this._sessionService.completeConfigStep(0);
-                    this._fuseNavigationService.reloadNavigation();
+                // Check if account's CUSTOM-type licence is expired
+                const userLicenceType = this.user.licence.type;
+                if (userLicenceType !== this.USER_LICENCE.CUSTOM.type && this.adsAccounts.length > 1) {
+
+                    const selectedAccount = this.adsAccounts.find(a => a.isDisabled === false);
+                    if (!selectedAccount) {
+                        this.setForEmptyListAccounts();
+                        this._router.navigateByUrl('/nang-cap-vip');
+
+                        const expiredUserConnectsAccountSub = this._sessionService.onExpiredUserConnectsAccount()
+                            .subscribe(account => {
+                                if (account) {
+                                    this.adsAccounts = [account];
+
+                                    if (this.adsAccounts[0].configStep === Generals.AccountConfigStep.SEE_REPORT.value)
+                                        this._sessionService.setUserLoginChecker(true);
+
+                                    this.setForNotEmptyListAccounts();
+                                }
+                            });
+                        this.subscriptions.push(expiredUserConnectsAccountSub);
+
+                        this._dialogService._openSelectAccountDialog(this.adsAccounts);
+                        return;
+                    }
+
+                    this.adsAccounts = [selectedAccount];
+                    this.setForNotEmptyListAccounts();
                     return;
                 }
 
-                this._sessionService.completeCheckingIfUserHasAccount(true);
-
-                let activeIndex = 0;
-
-                if (this._sessionService.activeAccountId && this._sessionService.activeAdsAccountId) {
-                    activeIndex = _.findIndex(this.adsAccounts, account => account.accountId === this._sessionService.activeAccountId);
-
-                    if (activeIndex < 0)
-                        activeIndex = 0;
+                if (this.adsAccounts.length === 0) {
+                    this.setForEmptyListAccounts();
+                    return;
                 }
 
-                this.accountCtrl.setValue(this.adsAccounts[activeIndex]);
-                this._sessionService.setActiveGoogleAdsAccount(
-                    this.accountCtrl.value.accountId,
-                    this._adsAccountPipe.transform(this.accountCtrl.value.adsId)
-                );
-
-                // load the initial account list
-                this.filteredAccounts.next(this.adsAccounts.slice());
-
-                // listen for search field value changes
-                this.accountFilterCtrl.valueChanges
-                    .pipe(takeUntil(this._onDestroy))
-                    .subscribe(() => {
-                        this.filterAccounts();
-                    });
-
-                // emit config step value
-                this._sessionService.completeConfigStep(this.adsAccounts[activeIndex].configStep);
-
-                this._fuseNavigationService.reloadNavigation();
-                this.isAccountSelectionDisplayed = true;
-                this.isProcessing = false;
+                this.setForNotEmptyListAccounts();
 
                 if (action) {
                     if (action.status === 'SUCCESS') {
@@ -485,11 +528,15 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 (isAccepted: boolean) => {
                     if (isAccepted) {
                         this._sessionService.remove();
-                        this._sessionService.allowNoficationToShow(false);
-                        this._sessionService.completeCheckingIfUserHasAccount(true);
-                        this._sessionService.setListAccounts(false);
-                        this._sessionService.unsetActiveGoogleAdsAccount();
-                        this._router.navigate(['/gioi-thieu']);
+                        this._sessionService.resetAllObservables();
+
+                        this.subscriptions.forEach((subscription: Subscription) => {
+                            if (subscription) {
+                                subscription.unsubscribe();
+                            }
+                        });
+
+                        this._router.navigateByUrl('/gioi-thieu');
                     }
                 }
             );

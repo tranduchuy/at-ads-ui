@@ -29,7 +29,7 @@ export namespace API {
     export const checkRefreshToken = environment.hostApi + '/api/users/check-refresh-token';
     export const getAwordsAccountDetail = environment.hostApi + '/api/account-adwords/{account_id}';
     export const updateAccountConfigStep = environment.hostApi + '/api/account-adwords/{account_id}/config-step';
-    
+
     export const getOriginalCampaigns = environment.hostApi + '/api/account-adwords/{account_id}/original-campaigns';
     export const getTrackingCampaigns = environment.hostApi + '/api/account-adwords/{account_id}/campaigns';
     export const addCampaignTracking = environment.hostApi + '/api/account-adwords/{account_id}/campaigns';
@@ -49,6 +49,8 @@ export namespace API {
     export const setDeviceCampaignRunning = environment.hostApi + '/api/account-adwords/{account_id}/report/device';
     export const setBlockingAnonymousBrowser = environment.hostApi + '/api/account-adwords/{account_id}/block-by-private-browser'
     export const getBlockingIPSettings = environment.hostApi + '/api/account-adwords/{account_id}/setting';
+
+    export const enableExpiredUserAccount = environment.hostApi + '/api/account-adwords/{account_id}/enabled';
   }
   export namespace Website {
     export const getWebsites = environment.hostApi + '/api/websites?accountId={accountId}';
