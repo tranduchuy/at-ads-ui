@@ -7,6 +7,8 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import * as _ from 'lodash';
+import { SessionService } from 'app/shared/services/session.service';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 
 @Component({
   selector: 'app-user-help',
@@ -121,7 +123,9 @@ export class UserHelpComponent extends PageBaseComponent implements OnInit, OnDe
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseSidebarService: FuseSidebarService,
     private _activedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _sessionService: SessionService,
+    private _fuseProgressBarService: FuseProgressBarService
   ) {
     super();
 
@@ -153,7 +157,13 @@ export class UserHelpComponent extends PageBaseComponent implements OnInit, OnDe
       'steps': this.demoSteps
     };
 
-    const getParamsSub = this._activedRoute.params
+
+    this.onGettingPathParams();
+    this.onListAccountsLoaded();
+  }
+
+  onGettingPathParams() {
+    const sub = this._activedRoute.params
       .subscribe((params: any) => {
         const { problemId } = params;
         const problemIndex = _.findIndex(this.demoSteps, step => step.id === problemId);
@@ -164,7 +174,17 @@ export class UserHelpComponent extends PageBaseComponent implements OnInit, OnDe
         this.currentStep = problemIndex;
 
       });
-    this.subscriptions.push(getParamsSub);
+    this.subscriptions.push(sub);
+  }
+
+  onListAccountsLoaded() {
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId)
+          this._fuseProgressBarService.hide();
+        else this._fuseProgressBarService.show();
+      });
+    this.subscriptions.push(sub);
   }
 
   /**

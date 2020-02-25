@@ -5,6 +5,7 @@ import { SessionService } from 'app/shared/services/session.service';
 import { Generals } from 'app/shared/constants/generals';
 import { LicenceService } from './licence.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 
 interface Licence {
   name: string;
@@ -28,7 +29,8 @@ export class UpgradeLicenceComponent extends PageBaseComponent implements OnInit
   constructor(
     private _dialogService: DialogService,
     private _sessionService: SessionService,
-    private _licenceService: LicenceService
+    private _licenceService: LicenceService,
+    private _fuseProgressBarService: FuseProgressBarService
   ) {
     super();
   }
@@ -44,6 +46,18 @@ export class UpgradeLicenceComponent extends PageBaseComponent implements OnInit
 
           this.getPackages();
         }
+      });
+    this.subscriptions.push(sub);
+
+    this.onListAccountsLoaded();
+  }
+
+  onListAccountsLoaded() {
+    const sub = this._sessionService.getAccountId()
+      .subscribe((accountId: string) => {
+        if (accountId)
+          this._fuseProgressBarService.hide();
+        else this._fuseProgressBarService.show();
       });
     this.subscriptions.push(sub);
   }

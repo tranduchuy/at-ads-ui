@@ -140,8 +140,8 @@ $primaryFontSize: 12px;
             color: green;
             padding: 10px 5px 0px 5px;
             border-bottom-left-radius: 7px;
-            border-right: 1px solid #dcdcdc;
-            border-top: 1px solid #dcdcdc;
+            border-right: 1px solid #eee;
+            border-top: 1px solid #eee;
             min-height: 75px;
           }
 
@@ -149,7 +149,7 @@ $primaryFontSize: 12px;
             color: crimson;
             padding: 10px 5px 0px 5px;
             border-bottom-right-radius: 7px;
-            border-top: 1px solid #dcdcdc;
+            border-top: 1px solid #eee;
             min-height: 75px;
           }
         }
@@ -242,7 +242,7 @@ $primaryFontSize: 12px;
 
     .full-view-button {
       border-radius: 15px;
-      background-color: #dcdcdc;
+      background-color: #eee;
       color: gray;
     }
 
