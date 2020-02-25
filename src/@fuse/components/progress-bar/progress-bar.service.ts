@@ -13,6 +13,7 @@ export class FuseProgressBarService
     private _mode: BehaviorSubject<string>;
     private _value: BehaviorSubject<number>;
     private _visible: BehaviorSubject<boolean>;
+    private _forceVisible: BehaviorSubject<boolean>;
 
     /**
      * Constructor
@@ -78,6 +79,14 @@ export class FuseProgressBarService
         return this._visible.asObservable();
     }
 
+    /**
+     * Force visible
+     */
+    get forceVisible(): Observable<any>
+    {
+        return this._forceVisible.asObservable();
+    }
+
     // -----------------------------------------------------------------------------------------------------
     // @ Private methods
     // -----------------------------------------------------------------------------------------------------
@@ -94,18 +103,21 @@ export class FuseProgressBarService
         this._mode = new BehaviorSubject('indeterminate');
         this._value = new BehaviorSubject(0);
         this._visible = new BehaviorSubject(false);
+        this._forceVisible = new BehaviorSubject(false);
 
         // Subscribe to the router events to show/hide the loading bar
         this._router.events
             .pipe(filter((event) => event instanceof NavigationStart))
             .subscribe(() => {
                 this.show();
+                this.forceShow();
             });
 
         this._router.events
             .pipe(filter((event) => event instanceof NavigationEnd || event instanceof NavigationError || event instanceof NavigationCancel))
             .subscribe(() => {
                 this.hide();
+                this.forceHide();
             });
     }
 
@@ -127,6 +139,14 @@ export class FuseProgressBarService
     hide(): void
     {
         this._visible.next(false);
+    }
+
+    forceShow(): void {
+        this._forceVisible.next(true);
+    }
+
+    forceHide(): void {
+        this._forceVisible.next(false);
     }
 }
 

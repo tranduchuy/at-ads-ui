@@ -1,33 +1,102 @@
 <div class="select-account-dialog">
-  <h1 matDialogTitle class="main-title">Tài khoản đã hết hạn sử dụng gói Đối Tác</h1>
+  <h1 matDialogTitle class="main-title">Tài khoản Đối Tác đã hết thời hạn sử dụng</h1>
   <div mat-dialog-content class="content">
 
-    <p class="toggle-connect-account-button" *ngIf="isBtnToggleConnectAccountShown">
-      <button mat-raised-button color="accent" (click)="toggleConnectAccountForm()">Kết
-        nối 1 tài khoản</button>
+    <div class="warning-icon">
+      <mat-icon>warning</mat-icon>
+    </div>
+
+    <p class="upgrade-account-button" *ngIf="toggleState === true">
+      <button mat-raised-button (click)="toggleUpgradeAccountForm()">Nâng cấp tài khoản Đối Tác</button>
     </p>
 
-    <div *ngIf="toggleState === false">
-      <label id="example-radio-group-label">Bạn chỉ được phép kết nối 1 tài khoản Google Ads</label>
-      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group accounts"
-        [(ngModel)]="selectedAccount">
-        <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account">
-          {{account.name}}
-        </mat-radio-button>
-      </mat-radio-group>
-      <div class="connect-account-button">
-        <button mat-button color="accent" (click)="connectAccount()">Kết nối tài khoản</button>
+    <div [hidden]="toggleState === true" class="frm-upgrade-account">
+
+      <div *ngIf="licence">
+
+        <div *ngIf="licence?.isContactPrice === true" class="__package-selection">
+          <span>{{licence.contact}}</span>
+        </div>
+
+        <div *ngIf="licence?.isContactPrice === false">
+          <p class="notice">Vui lòng lựa chọn các gói Đối Tác sau đây:</p>
+          <div class="__package-selection">
+            <mat-radio-group aria-labelledby="expirations-label" class="example-radio-group"
+              [(ngModel)]="selectedExpiration">
+              <mat-radio-button class="example-radio-button" *ngFor="let option of expirations" [value]="option.value"
+                (change)="onSelectExpiration($event)" fxLayout="row" style="margin-top: 5px">
+
+                <span class="licence__name">{{option.text}}</span>
+                <span>
+                  {{' giá '}}
+                  <span class="licence__price"
+                    *ngIf="licence.isDiscount === false || (licence.isDiscount === true && option.discount === 0)">
+                    {{((licence.price * option.value) | number: '1.0-0') + ' VNĐ'}}
+                  </span>
+                  <span class="licence__price" *ngIf="licence.isDiscount === true && option.discount > 0"
+                    style="text-decoration: line-through">
+                    {{((licence.price * option.value) | number: '1.0-0') + ' VNĐ'}}
+                  </span>
+
+                  <span *ngIf="licence.isDiscount === true">
+                    <span *ngIf="option.discount > 0" style="margin-left: 5px">
+                      {{' chỉ còn '}}
+                      <span class="licence__price">
+                        {{((licence.price * option.value - licence.price * option.value * option.discount) | number: '1.0-0') + ' VNĐ (giảm ' + (option.discount * 100) + '%)'}}
+                      </span>
+                    </span>
+                  </span>
+                </span>
+
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
       </div>
+
+      <div [fxLayoutAlign]="'center center'" class="pt-24" class="btn-send-upgrade-licence-request"
+        *ngIf="licence?.isContactPrice === false">
+        <button mat-raised-button color="accent" (click)="sendRequest()" [disabled]="isProcessing" autofocus="false">Gửi
+          yêu cầu
+        </button>
+      </div>
+
     </div>
 
     <div class="separator">HOẶC</div>
 
-    <p class="upgrade-account-button" *ngIf="toggleState === false">
-      <button mat-raised-button (click)="toggleUpgradeAccountForm()">Nâng cấp tài khoản Đối Tác</button>
+    <p class="toggle-connect-account-button" *ngIf="toggleState === false">
+      <button mat-raised-button color="accent" (click)="toggleConnectAccountForm()">Kết
+        nối 1 tài khoản</button>
     </p>
 
-    <div *ngIf="toggleState === true">
-      Upgrade account...
+    <div [hidden]="toggleState === false" class="frm-connect-account">
+      <label id="example-radio-group-label">
+        <span class="notice">
+          <span style="color: crimson">*</span> Bạn chỉ còn được phép kết nối 1 tài khoản Google Ads
+        </span>
+      </label>
+
+      <div class="__searching-account-to-connect">
+        <mat-form-field>
+          <mat-icon matPrefix style="font-size: 20px; color: rgba(0,0,0,0.6);">search</mat-icon>
+          <input matInput (keyup)="filterListAccounts($event.target.value)" placeholder="Tìm kiếm">
+        </mat-form-field>
+      </div>
+
+      <div class="accounts">
+        <span *ngIf="searchedAccounts.length === 0">Không có kết quả nào.</span>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+          [(ngModel)]="selectedAccount" *ngIf="searchedAccounts.length > 0" fxLayout="column" fxLayoutGap="8px">
+          <mat-radio-button class="example-radio-button" *ngFor="let account of searchedAccounts" [value]="account">
+            {{account.name}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="connect-account-button">
+        <button mat-button color="accent" (click)="connectAccount()">Kết nối tài khoản</button>
+      </div>
     </div>
 
   </div>

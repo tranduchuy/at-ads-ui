@@ -68,7 +68,7 @@ export class DialogService {
 
   public _openSelectAccountDialog(accounts: any) {
     const dialogRef = this._matDialog.open(SelectAccountDialogComponent, {
-      width: '40%',
+      minWidth: '40%',
       panelClass: 'select-account-dialog'
     });
     dialogRef.componentInstance.accounts = accounts;

@@ -92,119 +92,134 @@ $contentPadding: 30px;
       }
     }
 
-    .banner-container {
-      background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
-      width: 100%;
-      height: 104vh;
-      position: relative;
-      z-index: 2;
+    .banner-container-outer {
+      background: url("../../assets/images/backgrounds/consulting-meeting.jpg");
+      background-size: 100% 100%;
+      background-attachment: fixed;
 
-      .extra-background {
+      .banner-container {
+        background: rgba(0, 102, 153, 0.8);
+        width: 100%;
+        height: 104vh;
         position: relative;
         z-index: 2;
 
-        svg {
-          position: absolute;
-          bottom: 0;
+        .extra-background {
+          position: relative;
+          z-index: 2;
 
-          path {
-            fill: whitesmoke;
+          svg {
+            position: absolute;
+            bottom: 0;
+
+            path {
+              fill: whitesmoke;
+            }
           }
         }
-      }
 
-      .banner-content-wrapper {
-        .banner {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          flex-direction: column;
+        .banner-content-wrapper {
+          .banner {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
 
-          .app-title {
-            text-align: center;
-            filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
-            font-weight: bolder;
-            padding: 15px;
-            letter-spacing: 2px;
-          }
+            .app-title {
+              text-align: center;
+              filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
+              font-weight: bolder;
+              padding: 15px;
+              letter-spacing: 2px;
+            }
 
-          .app-logo {
-            margin-top: 5px;
-            position: relative;
-            width: 100px;
-            height: 100px;
-            @extend .no-select;
+            .app-logo {
+              margin-top: 5px;
+              position: relative;
+              width: 100px;
+              height: 100px;
+              @extend .no-select;
 
-            -webkit-animation: 0.6s appLogoFadeIn ease-in;
-            animation: 0.6s appLogoFadeIn ease-in;
-            @keyframes appLogoFadeIn {
-              from {
-                opacity: 0;
+              -webkit-animation: 0.6s appLogoFadeIn ease-in;
+              animation: 0.6s appLogoFadeIn ease-in;
+              @keyframes appLogoFadeIn {
+                from {
+                  opacity: 0;
+                }
+                to {
+                  opacity: 1;
+                }
               }
-              to {
-                opacity: 1;
+
+              img {
+                object-fit: cover;
+              }
+
+              .fa-mouse-pointer {
+                color: rgba(125, 125, 125, 0.6);
+                font-size: 20px;
+                position: absolute;
+                top: 37%;
+                left: 47%;
+                transform: rotate(348deg);
               }
             }
+
+            .title0 {
+              padding-top: 30px;
+            }
+
+            .title2 {
+              width: 100%;
+              text-align: center;
+              font-size: 12px;
+              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+              color: whitesmoke;
+              padding: 10px 15px;
+              padding-bottom: 5px;
+
+              @extend .primary-title;
+
+              .highline {
+                font-weight: bold;
+                color: #ffdb99;
+              }
+            }
+
+            .login-with-google {
+              text-align: center;
+              width: 100%;
+
+              button {
+                font-weight: bold;
+                min-height: 40px;
+                background: rgba(255, 255, 255, 0.3);
+                color: white;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+                box-shadow: none;
+                font-size: 12px;
+                transition: 0.2s;
+
+                &:hover {
+                  transform: scale(1.02, 1.02);
+                }
+              }
+            }
+          }
+
+          .banner-image {
+            background: url("https://macmall.vn/wp-content/uploads/2019/01/macbook-air-2017-moi.png");
+            background-size: 100% 100%;
+            width: 200px;
+            height: 300px;
 
             img {
+              width: 65%;
+              display: table;
+              margin: 0 auto;
+              @extend .no-select;
               object-fit: cover;
             }
-
-            .fa-mouse-pointer {
-              color: rgba(125, 125, 125, 0.6);
-              font-size: 20px;
-              position: absolute;
-              top: 37%;
-              left: 47%;
-              transform: rotate(348deg);
-            }
-          }
-
-          .title0 {
-            padding-top: 30px;
-          }
-
-          .title2 {
-            width: 100%;
-            text-align: center;
-            font-size: 12px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-            color: whitesmoke;
-            padding: 10px 15px;
-            padding-bottom: 5px;
-
-            @extend .primary-title;
-
-            .highline {
-              font-weight: bold;
-              color: #ffdb99;
-            }
-          }
-
-          .login-with-google {
-            text-align: center;
-            width: 100%;
-
-            button {
-              font-weight: bold;
-              min-height: 40px;
-              background: white;
-              color: rgba(0, 0, 0, 0.7);
-              transition: 0.2s;
-
-              &:hover {
-                transform: scale(1.02, 1.02);
-              }
-            }
-          }
-        }
-
-        .banner-image {
-          img {
-            width: 65%;
-            display: table;
-            margin: 0 auto;
-            @extend .no-select;
           }
         }
       }
@@ -563,7 +578,8 @@ $contentPadding: 30px;
               padding-top: 20px;
               line-height: 22px;
               text-align: justify;
-              font-size: 12px;
+              font-size: 11px;
+              letter-spacing: 1px;
             }
 
             .overview-image {
@@ -612,18 +628,17 @@ $contentPadding: 30px;
         .feature-item-icon {
           width: 35px;
           height: 35px;
-          background: orange;
+          background: #fff5e6;
           padding: 3px;
           display: flex;
           justify-content: center;
           align-items: center;
           border-radius: 50%;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
           svg,
           mat-icon {
             font-size: 20px;
-            color: white;
+            color: orange;
             width: 35px;
           }
 
@@ -654,7 +669,7 @@ $contentPadding: 30px;
       }
 
       .benefit-container {
-        padding: $contentPadding * 2;
+        padding: ($contentPadding * 3) ($contentPadding * 2);
         border-radius: 7px;
         background: white;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -688,6 +703,10 @@ $contentPadding: 30px;
           }
 
           .secondary-benefit-title {
+            color: gray;
+            font-size: 12px;
+            letter-spacing: 1px;
+
             -webkit-animation: ani 1.4s ease-in;
             animation: ani 1.4s ease-in;
             @keyframes ani {
@@ -703,7 +722,7 @@ $contentPadding: 30px;
           }
 
           .main-benefit {
-            padding-top: 50px;
+            padding-top: $contentPadding * 2;
           }
 
           .main-benefit-item {
@@ -735,23 +754,36 @@ $contentPadding: 30px;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            background: #f2ffe6;
 
             &.save-money {
-              background: cadetblue;
+              // background: cadetblue;
+
+              svg {
+                color: cadetblue;
+              }
             }
 
             &.decrease-time {
-              background: darkmagenta;
+              // background: darkmagenta;
+
+              svg {
+                color: darkmagenta;
+              }
             }
 
             &.increase-customer {
-              background: #1a65bd;
+              // background: #1a65bd;
+
+              svg {
+                color: #1a65bd;
+              }
             }
 
             svg {
               font-size: 25px;
-              color: white;
+              color: darkgreen !important;
             }
 
             // .fa-hand-holding-usd {
@@ -767,7 +799,7 @@ $contentPadding: 30px;
             // }
 
             .benefit-symbol-label {
-              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+              border: 2px solid white;
               position: absolute;
               bottom: 0;
               right: 0;
@@ -775,20 +807,21 @@ $contentPadding: 30px;
               width: 20px;
               height: 20px;
               border-radius: 50%;
-              padding: 10px 2px 1px 2px;
+              padding: 10px 2px 0 2px;
               display: flex;
               justify-content: center;
               align-items: center;
 
               mat-icon {
                 color: white;
-                font-size: 16px;
+                font-size: 14px;
               }
             }
           }
 
           .benefit-description {
-            font-size: 11px;
+            font-size: 10px;
+            letter-spacing: 0.5px;
 
             .benefit-info-highline {
               font-weight: bold;
@@ -798,6 +831,7 @@ $contentPadding: 30px;
               padding-top: 5px;
               font-size: 12px;
               font-weight: bold;
+              font-family: "Quicksand", sans-serif !important;
             }
           }
         }
@@ -827,7 +861,7 @@ $contentPadding: 30px;
 
       .footer-title1 {
         font-size: 30px;
-        @extend .primary-title
+        @extend .primary-title;
       }
 
       .footer-divider {
@@ -1003,8 +1037,8 @@ $contentPadding: 30px;
           }
 
           .app-logo {
-            width: 5.5vw !important;
-            height: 5.5vw !important;
+            width: 5.4vw !important;
+            height: 5.4vw !important;
           }
         }
       }

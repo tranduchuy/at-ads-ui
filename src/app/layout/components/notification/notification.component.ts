@@ -39,11 +39,11 @@ export class NotificationComponent extends PageBaseComponent implements OnInit, 
   ) {
     super();
 
-    _router.events
-      .pipe(take(1))
-      .subscribe((url: any) => {
-        this.activedRoute = url.url;
-      });
+    // _router.events
+    //   .pipe(take(1))
+    //   .subscribe((url: any) => {
+    //     this.activedRoute = url.url;
+    //   });
   }
 
   ngOnInit() {

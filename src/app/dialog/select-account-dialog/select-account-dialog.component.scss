@@ -2,38 +2,83 @@ $blockPadding: 15px;
 
 .select-account-dialog {
   padding: $blockPadding;
+  padding-bottom: 0;
 
   .main-title {
     text-align: center;
+    padding-top: $blockPadding;
   }
 
   .content {
-    .accounts {
-      display: flex;
-      flex-direction: column;
-      margin: 15px 0;
-      max-height: 200px;
-      overflow: auto;
+    overflow: hidden;
 
-      border: 1px solid #eee;
-      padding: 10px;
-      border-radius: 7px;
+    .warning-icon {
+      width: 100%;
+      text-align: center;
+      padding-bottom: $blockPadding;
 
-      .example-radio-button {
-        margin: 5px;
+      mat-icon {
+        color: #ffcc00;
+        font-size: 48px;
+        margin-left: -1 * $blockPadding;
       }
     }
 
-    .connect-account-button {
+    .frm-connect-account {
+      padding: $blockPadding 0;
+
+      .__searching-account-to-connect {
+        margin-top: 10px;
+      }
+
+      .accounts {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+        overflow: auto;
+
+        border: 1px solid #eee;
+        padding: 10px;
+        border-radius: 5px;
+
+        animation: ani 0.8s ease;
+        @keyframes ani {
+          from {
+            max-height: 0;
+            opacity: 0;
+          }
+          to {
+            max-height: 200px;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .example-radio-button {
+      font-size: 13px;
+    }
+
+    .notice {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .connect-account-button,
+    .btn-send-upgrade-licence-request {
       width: 100%;
 
       button {
         background: rgba(3, 155, 229, 0.1);
-        box-shadow: none;
         color: #039be5;
+        box-shadow: none;
         display: table;
         margin: 0 auto;
       }
+    }
+
+    .btn-send-upgrade-licence-request {
+      padding: $blockPadding 0;
     }
 
     .toggle-connect-account-button {
@@ -44,10 +89,30 @@ $blockPadding: 15px;
     .upgrade-account-button {
       width: 100%;
       text-align: center;
-
+      
       button {
         background: #44b543;
         color: white;
+      }
+    }
+
+    .frm-upgrade-account {
+      .__package-selection {
+        padding: 10px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+
+        animation: ani 0.8s ease;
+        @keyframes ani {
+          from {
+            max-height: 0;
+            opacity: 0;
+          }
+          to {
+            max-height: 200px;
+            opacity: 1;
+          }
+        }
       }
     }
 

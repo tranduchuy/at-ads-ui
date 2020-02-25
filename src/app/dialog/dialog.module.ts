@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FlexAlignDirective, FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatDialogModule, MatIconModule, MatRadioModule, MatFormFieldModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatIconModule, MatRadioModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
@@ -44,6 +44,7 @@ import { SelectAccountDialogComponent } from './select-account-dialog/select-acc
     MatRadioModule,
     ReactiveFormsModule,
     FuseSharedModule,
+    MatInputModule
   ],
   entryComponents: [
     InfoDialogComponent,

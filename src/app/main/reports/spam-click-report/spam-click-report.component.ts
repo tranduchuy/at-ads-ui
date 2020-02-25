@@ -71,7 +71,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     doughnut: true,
     gradient: false,
     scheme: {
-      domain: ['#44b543', 'crimson']
+      domain: ['#c4e9c3', 'crimson']
     },
     dataSource: [
       {
@@ -114,7 +114,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     labels: [],
     colors: [
       {
-        borderColor: '#00bf4f',
+        borderColor: 'green',
         //backgroundColor: 'rgba(0, 204, 255,0.5)',
         backgroundColor: 'rgba(0,0,0,0)',
         pointBackgroundColor: 'green',
@@ -123,7 +123,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         pointHoverBorderColor: 'white'
       },
       {
-        borderColor: 'lightcoral',
+        borderColor: 'crimson',
         //backgroundColor: 'rgba(255, 0, 57, 0.4)',
         backgroundColor: 'rgba(0,0,0,0)',
         pointBackgroundColor: 'crimson',
@@ -531,7 +531,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             doughnut: true,
             gradient: false,
             scheme: {
-              domain: ['#00bf4f', '#ff5757']
+              domain: ['#44b543', 'crimson']
             },
             dataSource: [
               realClickDetail, spamClickDetail

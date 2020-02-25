@@ -8,6 +8,7 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import { IError } from '../models/i-error';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 import { ISuccess } from '../models/i-success';
+import { LicenceService } from 'app/main/upgrade-licence/licence.service';
 
 interface Licence {
   name: string;
@@ -54,7 +55,7 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
   constructor(
     public dialogRef: MatDialogRef<UpgradeLicenceDialogComponent>,
     private _fuseProgressBarService: FuseProgressBarService,
-    private _httpClient: HttpClient,
+    private _licenceService: LicenceService,
     private _matDialog: MatDialog
   ) {
     super();
@@ -98,7 +99,7 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
   sendRequest() {
     this.isProcessing = true;
     this._fuseProgressBarService.show();
-    const sub = this._httpClient.post(API.User.sendUpgradeLicenceRequest, {
+    const sub = this._licenceService.sendUpgradeLicenceRequest({
       packageType: this.licence.type,
       numOfMonths: this.selectedExpiration
     }).subscribe((res: any) => {
@@ -126,6 +127,5 @@ export class UpgradeLicenceDialogComponent extends PageBaseComponent implements 
         this.dialogRef.close(true);
       });
     this.subscriptions.push(sub);
-
   }
 }

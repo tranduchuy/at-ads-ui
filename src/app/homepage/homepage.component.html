@@ -27,69 +27,72 @@
    </div>
 
    <div class="main-content">
-      <div class="banner-container" fxLayout="column">
-         
-         <div fxFlex="55" class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column"
-            fxLayoutGap.xs="0" fxLayoutGap.sm="15px" fxLayoutGap="30px">
+      <div class="banner-container-outer">
+         <div class="banner-container" fxLayout="column">
 
-            <div class="banner" fxFlex="60" fxFlexAlign="end">
+            <div fxFlex="55" class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column"
+               fxLayoutGap.xs="0" fxLayoutGap.sm="15px" fxLayoutGap="30px">
 
-               <div class="app-title bounceIn bounceInDown">
-                  <div class="insider">
-                     <span class="shiny">
-                        <span class="inner-shiny">Chặn Click Ảo {{APP_INFO.yearOfRelease}} - Giảm đến 50% phí quảng cáo
-                           <span class="gg-ads-title">G</span>
-                           <span class="gg-ads-title">O</span>
-                           <span class="gg-ads-title">O</span>
-                           <span class="gg-ads-title">G</span>
-                           <span class="gg-ads-title">L</span>
-                           <span class="gg-ads-title">E</span>
-                           <span class="gg-ads-title">&nbsp;</span>
-                           <span class="gg-ads-title">A</span>
-                           <span class="gg-ads-title">D</span>
-                           <span class="gg-ads-title">S</span>
+               <div class="banner" fxFlex="60" fxFlexAlign="end">
+
+                  <div class="app-title bounceIn bounceInDown">
+                     <div class="insider">
+                        <span class="shiny">
+                           <span class="inner-shiny">Chặn Click Ảo {{APP_INFO.yearOfRelease}} - Giảm đến 50% phí quảng
+                              cáo
+                              <span class="gg-ads-title">G</span>
+                              <span class="gg-ads-title">O</span>
+                              <span class="gg-ads-title">O</span>
+                              <span class="gg-ads-title">G</span>
+                              <span class="gg-ads-title">L</span>
+                              <span class="gg-ads-title">E</span>
+                              <span class="gg-ads-title">&nbsp;</span>
+                              <span class="gg-ads-title">A</span>
+                              <span class="gg-ads-title">D</span>
+                              <span class="gg-ads-title">S</span>
+                           </span>
                         </span>
-                     </span>
+                     </div>
                   </div>
+
+                  <div class="app-logo">
+                     <img src="../../assets/images/shield.png" alt="" class="shield">
+                     <i class="fas fa-mouse-pointer"></i>
+                  </div>
+
+                  <p class="title2 bounceIn bounceInUp">
+                     <span class="highline">Giải Pháp Chặn Click Ảo</span> sử dụng Công nghệ <span
+                        class="highline">AI</span>
+                     và
+                     <span class="highline">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
+                     giản và
+                     hiệu
+                     quả.
+                  </p>
+
+                  <div class="login-with-google">
+                     <button mat-raised-button (click)="checkLogin()" *ngIf="!isOnLogin"
+                        class="login-google-button bounceIn bounceInUp">
+                        <img src="../../assets/icons/google-flat.png" class="gg-icon" alt=""> Đăng nhập bằng
+                        Google
+                     </button>
+                  </div>
+
                </div>
 
-               <div class="app-logo">
-                  <img src="../../assets/images/shield.png" alt="" class="shield">
-                  <i class="fas fa-mouse-pointer"></i>
-               </div>
-
-               <p class="title2 bounceIn bounceInUp">
-                  <span class="highline">Giải Pháp Chặn Click Ảo</span> sử dụng Công nghệ <span
-                     class="highline">AI</span>
-                  và
-                  <span class="highline">Big Data</span> giúp ngăn chặn Click Ảo nhanh chóng, đơn
-                  giản và
-                  hiệu
-                  quả.
-               </p>
-
-               <div class="login-with-google">
-                  <button mat-raised-button (click)="checkLogin()" *ngIf="!isOnLogin"
-                     class="login-google-button bounceIn bounceInUp">
-                     <img src="../../assets/icons/google-flat.png" class="gg-icon" alt=""> Đăng nhập bằng
-                     Google
-                  </button>
+               <div class="banner-image bounceIn bounceInRight" fxFlex="40" fxFlexAlign="end">
+                  <!-- <img src="https://macmall.vn/wp-content/uploads/2019/01/macbook-air-2017-moi.png" alt=""> -->
                </div>
 
             </div>
 
-            <div class="banner-image bounceIn bounceInRight" fxFlex="40" fxFlexAlign="end">
-               <img src="../../assets/images/backgrounds/FlowCentric-Technologies-9-1030x734.png" alt="">
+            <div fxFlex="45" class="extra-background">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                  <path fill-opacity="1" d="M0,288L1440,96L1440,320L0,320Z"></path>
+               </svg>
             </div>
 
          </div>
-
-         <div fxFlex="45" class="extra-background">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-               <path fill-opacity="1" d="M0,288L1440,96L1440,320L0,320Z"></path>
-            </svg>
-         </div>
-
       </div>
 
       <div class="content content-wrapper">
@@ -454,7 +457,7 @@
                      <div class="benefit-symbol save-money">
                         <i class="fas fa-hand-holding-usd"></i>
                         <div class="benefit-symbol-label">
-                           <mat-icon>add</mat-icon>
+                           <mat-icon>check</mat-icon>
                         </div>
                      </div>
                      <div class="benefit-description">
@@ -473,7 +476,7 @@
                      <div class="benefit-symbol decrease-time">
                         <i class="fas fa-history"></i>
                         <div class="benefit-symbol-label">
-                           <mat-icon>arrow_downward</mat-icon>
+                           <mat-icon>check</mat-icon>
                         </div>
                      </div>
                      <div class="benefit-description">
@@ -488,7 +491,7 @@
                      <div class="benefit-symbol increase-customer">
                         <i class="fas fa-user-friends"></i>
                         <div class="benefit-symbol-label">
-                           <mat-icon>arrow_upward</mat-icon>
+                           <mat-icon>check</mat-icon>
                         </div>
                      </div>
                      <div class="benefit-description">

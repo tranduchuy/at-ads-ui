@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import { DialogService } from '../../shared/services/dialog.service';
 import { SessionService } from 'app/shared/services/session.service';
-import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { Generals } from 'app/shared/constants/generals';
 import { LicenceService } from './licence.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -29,19 +28,17 @@ export class UpgradeLicenceComponent extends PageBaseComponent implements OnInit
   constructor(
     private _dialogService: DialogService,
     private _sessionService: SessionService,
-    private _fuseProgressBarService: FuseProgressBarService,
     private _licenceService: LicenceService
   ) {
     super();
   }
 
   ngOnInit() {
-    this._fuseProgressBarService.show();
     const sub = this._sessionService.getUser()
       .subscribe(user => {
         if (user) {
           this.loggedInUser = user;
-          if (user.licence.type === this.LICENCE.CUSTOM.type)
+          if (user.licence && user.licence.type === this.LICENCE.CUSTOM.type)
             this.isRegisterButtonDisplayed = false;
           else this.isRegisterButtonDisplayed = true;
 
@@ -70,15 +67,12 @@ export class UpgradeLicenceComponent extends PageBaseComponent implements OnInit
   }
 
   getPackages() {
-    this._fuseProgressBarService.show();
     const sub = this._licenceService.getPackages()
       .subscribe(res => {
         this.packages = res.data.packages;
-        this._fuseProgressBarService.hide();
       }, (error: HttpErrorResponse) => {
         this.packages = [];
         this._dialogService._openErrorDialog(error.error);
-        this._fuseProgressBarService.hide();
       });
     this.subscriptions.push(sub);
   }
