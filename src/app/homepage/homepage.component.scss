@@ -33,7 +33,7 @@ $primaryBorderRadius: 5px;
     width: 20px;
     margin-top: -2.5px;
     margin-right: 5px;
-    filter: drop-shadow(0.5px 0.5px 1px rgba(0, 0, 0, 0.2));
+    // filter: drop-shadow(0.5px 0.5px 1px rgba(0, 0, 0, 0.2));
   }
 
   .content-wrapper {
@@ -57,7 +57,7 @@ $primaryBorderRadius: 5px;
     }
 
     .shiny {
-      color: whitesmoke;
+      color: #ccf5ff;
       display: inline-block;
       font-size: 1.45vw !important;
       font-weight: 900;
@@ -593,10 +593,6 @@ $primaryBorderRadius: 5px;
               }
             }
 
-            mat-divider {
-              border: 0.5px solid silver;
-            }
-
             .overview-title {
               font-size: 16px;
               @extend .primary-title;
@@ -610,6 +606,10 @@ $primaryBorderRadius: 5px;
               span {
                 font-weight: bold;
               }
+            }
+
+            mat-divider {
+              border-color: #eee;
             }
 
             .overview-info {
@@ -632,7 +632,9 @@ $primaryBorderRadius: 5px;
 
               button {
                 border-radius: 15px;
-                background: #44b543;
+                box-shadow: none;
+                background: rgba(3, 155, 229, 0.1);
+                color: #039be5;
               }
 
               mat-icon {
@@ -1038,12 +1040,17 @@ $primaryBorderRadius: 5px;
       }
 
       .topbar-google-button {
-        background: white;
+        // background: white;
+        // color: rgba(0, 0, 0, 0.7);
+        // border: 1px solid #eee;
+
         font-weight: bold;
-        color: rgba(0, 0, 0, 0.7);
         min-height: 35px;
         font-size: 12px;
-        border: 1px solid #eee;
+
+        box-shadow: none;
+        background: rgba(3, 155, 229, 0.1);
+        color: #039be5;
 
         transition: 0.2s;
         &:hover {
@@ -1089,6 +1096,18 @@ $primaryBorderRadius: 5px;
             overflow: hidden !important;
           }
         }
+
+        .instruction-container {
+          .instruction {
+            .step-wrapper {
+              .step {
+                .step-label {
+                  font-size: 0.6vw !important;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -1108,21 +1127,21 @@ $primaryBorderRadius: 5px;
   }
 }
 
-// @media screen and (min-width: 600px) and (max-width: 959px) and (orientation: landscape) {
-//   .homepage {
-//     .main-content {
-//       .banner-container {
-//         height: 208vh;
-//       }
+@media screen and (min-width: 600px) and (max-width: 959px) and (orientation: landscape) {
+  .homepage {
+    .main-content {
+      .banner-container-outer {
+        .decor-bg {
+          height: 170vh;
+        }
 
-//       .content {
-//         .table {
-//           margin-top: -79.48vh;
-//         }
-//       }
-//     }
-//   }
-// }
+        .banner-container {
+          height: 170vh;
+        }
+      }
+    }
+  }
+}
 
 @media screen and (min-width: 600px) and (max-width: 959px) {
   .homepage {
@@ -1133,6 +1152,28 @@ $primaryBorderRadius: 5px;
     .main-content {
       .shiny {
         font-size: 2vw !important;
+      }
+
+      .content {
+        .instruction-container {
+          .instruction {
+            .step-wrapper {
+              .step3 {
+                height: 300px;
+              }
+            }
+          }
+        }
+
+        .feature-container {
+          .feature {
+            .overview {
+              .overview-image {
+                width: 35%;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -1160,7 +1201,6 @@ $primaryBorderRadius: 5px;
       }
 
       .banner-container {
-
         .extra-background {
           display: none;
         }
@@ -1211,6 +1251,10 @@ $primaryBorderRadius: 5px;
 
               .overview-info {
                 line-height: 25px;
+              }
+
+              .overview-image {
+                width: 45%;
               }
 
               .trial {
