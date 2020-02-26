@@ -162,8 +162,8 @@ var AnonymousBrowserComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.');
+                _this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
             }
         }, function (error) {
             _this._fuseProgresBarService.hide();
@@ -359,8 +359,8 @@ var AutoBanIPComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.');
+                _this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
             }
         }, function (error) {
             _this._fuseProgresBarService.hide();
@@ -531,8 +531,8 @@ var AutoBlockingCellularNetworksComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgressBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.');
+                _this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
             }
         }, function (error) {
             _this._fuseProgressBarService.hide();
@@ -802,8 +802,8 @@ var AutoBlockingRangeIpsComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.');
+                _this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
             }
         }, function (error) {
             _this._fuseProgresBarService.hide();
@@ -968,8 +968,8 @@ var BanAnIPComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.');
+                _this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
             }
         }, function (error) {
             _this._fuseProgresBarService.hide();
@@ -1207,8 +1207,8 @@ var BanDeviceComponent = /** @class */ (function (_super) {
             else {
                 _this._fuseSplashScreenService.hide();
                 _this._fuseProgressBarService.hide();
-                _this.dialogService._openInfoDialog('Tài khoản Google Ads chưa được chấp nhận quyền quản lý hệ thống');
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
+                _this.dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.');
+                _this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
             }
         }, function (error) {
             _this._fuseSplashScreenService.hide();
@@ -1718,8 +1718,8 @@ var BanOptionalIPComponent = /** @class */ (function (_super) {
             }
             else {
                 _this._fuseProgresBarService.hide();
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.');
+                _this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
             }
         }, function (error) {
             _this._fuseProgresBarService.hide();
@@ -1927,8 +1927,8 @@ var WhitelistIpComponent = /** @class */ (function (_super) {
             if (res.data.adsAccount.isConnected)
                 _this.getWhitelistIPs();
             else {
-                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn', 'tại đây', '/tro-giup/fI10j2DfAFexKoOQ');
-                _this._router.navigateByUrl('/danh-sach-tai-khoan');
+                _this._dialogService._openInfoDialog('Tài khoản Google Ads này chưa được chấp nhận quyền quản lý hệ thống. Vui lòng thực hiện theo hướng dẫn sau đây.');
+                _this._router.navigateByUrl('/tro-giup/fI10j2DfAFexKoOQ');
             }
         }, function (error) {
             _this._fuseProgressBarService.hide();
