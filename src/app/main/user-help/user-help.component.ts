@@ -178,11 +178,13 @@ export class UserHelpComponent extends PageBaseComponent implements OnInit, OnDe
   }
 
   onListAccountsLoaded() {
-    const sub = this._sessionService.getAccountId()
-      .subscribe((accountId: string) => {
-        if (accountId)
+    const sub = this._sessionService.getListAccounts()
+      .subscribe(listAccounts => {
+        if (listAccounts) {
           this._fuseProgressBarService.hide();
-        else this._fuseProgressBarService.show();
+        } else {
+          this._fuseProgressBarService.show();
+        }
       });
     this.subscriptions.push(sub);
   }

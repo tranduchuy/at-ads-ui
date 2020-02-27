@@ -4,7 +4,7 @@
         <a>
             <img class="logo-icon" src="assets/icons/click-logo.png">
         </a>
-        <span class="logo-text secondary-text">{{APP_INFO.name + ' ' + APP_INFO.yearOfRelease}}</span>
+        <span class="logo-text secondary-text">Công cụ {{APP_INFO.name}}</span>
     </div>
 
     <div class="buttons">
@@ -25,23 +25,24 @@
 <div class="navbar-scroll-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground" fusePerfectScrollbar
     [fusePerfectScrollbarOptions]="{suppressScrollX: true}">
 
-    <div class="user" fxLayout="column" [ngClass]="fuseConfig.layout.navbar.secondaryBackground">
-
-        <div class="h5 username"><strong>{{user.name || ''}}</strong></div>
-        <div class="h6 email mt-8">{{user.email || ''}}</div>
-        <div class="avatar-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground">
-            <img class="avatar" [src]="user.avatar || '../../../../../../assets/icons/blank-avatar.png'">
-        </div>
-        <div class="user-licence" *ngIf="user.email && user.licence" fxLayout="row" fxLayoutAlign="center center">
-            <span [class.free-label]="user.licence.type === 'FREE'" [class.vip-label]="user.licence.type === 'VIP1'"
-                [class.custom-label]="user.licence.type === 'CUSTOM'" fxLayout="row"
-                matTooltip="{{'(*)QUYỀN LỢI: ' + user.licence.interests.join(' ')}}">
-                {{user.licence?.name}}
-            </span>
-            <span [class.vip-expiration]="user.licence.type === 'VIP1'"
-                [class.custom-expiration]="user.licence.type === 'CUSTOM'"
-                *ngIf="user.licence.type !== 'FREE' && user.licence.expiredAt"
-                matTooltip="Hạn dùng đến hết ngày {{user.licence.expiredAt | date: 'dd/MM/yyyy'}}">{{user.licence?.expiredAt | date: 'dd/MM/yyyy'}}</span>
+    <div class="user-wrapper" [ngStyle]="{ 'background-image': 'url(' + (user.avatar || '../../../../../../assets/icons/blank-avatar.png') + ')' }">
+        <div class="user" fxLayout="column">
+            <div class="h5 username"><strong>{{user.name || ''}}</strong></div>
+            <div class="h6 email mt-8">{{user.email || ''}}</div>
+            <div class="avatar-container">
+                <img class="avatar" [src]="user.avatar || '../../../../../../assets/icons/blank-avatar.png'">
+            </div>
+            <div class="user-licence" *ngIf="user.email && user.licence" fxLayout="row" fxLayoutAlign="center center">
+                <span [class.free-label]="user.licence.type === 'FREE'" [class.vip-label]="user.licence.type === 'VIP1'"
+                    [class.custom-label]="user.licence.type === 'CUSTOM'" fxLayout="row"
+                    matTooltip="{{'(*)QUYỀN LỢI: ' + user.licence.interests.join(' ')}}">
+                    {{user.licence?.name}}
+                </span>
+                <span [class.vip-expiration]="user.licence.type === 'VIP1'"
+                    [class.custom-expiration]="user.licence.type === 'CUSTOM'"
+                    *ngIf="user.licence.type !== 'FREE' && user.licence.expiredAt"
+                    matTooltip="Hạn dùng đến hết ngày {{user.licence.expiredAt | date: 'dd/MM/yyyy'}}">{{user.licence?.expiredAt | date: 'dd/MM/yyyy'}}</span>
+            </div>
         </div>
     </div>
 

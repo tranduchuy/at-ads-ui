@@ -268,13 +268,18 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
     }
 
     setForEmptyListAccounts() {
+        this.adsAccounts = [];
+        this.isProcessing = false;
         this.isAccountSelectionDisplayed = false;
+
         this.accountCtrl.setValue('');
         this._sessionService.setListAccounts([]);
         this._sessionService.unsetActiveGoogleAdsAccount();
         this._sessionService.completeCheckingIfUserHasAccount(false);
         this._sessionService.completeConfigStep(0);
         this._fuseNavigationService.reloadNavigation();
+
+        this._fuseProgressiveBarService.hide();
     }
 
     setForNotEmptyListAccounts() {
@@ -349,9 +354,14 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
 
                     const selectedAccount = this.adsAccounts.find(a => a.isDisabled === false);
                     if (!selectedAccount) {
-                        this.setForEmptyListAccounts();
                         this._router.navigateByUrl('/nang-cap-vip');
 
+                        // Be cautious right here!!!
+                        const temp = this.adsAccounts;
+                        this.setForEmptyListAccounts();
+                        this.adsAccounts = temp;
+                        // --------------------------------
+                        
                         const expiredUserConnectsAccountSub = this._sessionService.onExpiredUserConnectsAccount()
                             .subscribe(account => {
                                 if (account) {
@@ -396,16 +406,7 @@ export class ToolbarComponent extends PageBaseComponent implements OnInit, OnDes
                 }
             },
                 (error: HttpErrorResponse) => {
-                    this._fuseProgressiveBarService.hide();
-                    this.adsAccounts = [];
-                    this._sessionService.setListAccounts(this.adsAccounts);
-                    this.accountCtrl.setValue('');
-                    this._sessionService.completeCheckingIfUserHasAccount(false);
-                    this._sessionService.unsetActiveGoogleAdsAccount();
-                    this._sessionService.completeConfigStep(0);
-                    this._fuseNavigationService.reloadNavigation();
-                    this.isProcessing = false;
-                    this.isAccountSelectionDisplayed = false;
+                    this.setForEmptyListAccounts();
 
                     if (action) {
                         if (action.status === 'SUCCESS') {

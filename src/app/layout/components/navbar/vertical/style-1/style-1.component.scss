@@ -104,6 +104,9 @@ navbar {
       top: 0;
       right: 0;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+      margin: 5px;
+
+      $labelFontSize: 11px;
       
       // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       .vip-expiration,
@@ -114,10 +117,9 @@ navbar {
         // background-image: linear-gradient(315deg, #d2a813 0%, #000000 74%);
         font-weight: bolder;
         padding: 0 4px 0 4px;
-        color: #1a65bd;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-        background: lightblue;
-        border-right: 3px solid #1a65bd;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+        background: rgba(255, 255, 255, 0.3);
+        color: white;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -142,10 +144,15 @@ navbar {
           );
         color: lightyellow;
         padding: 3px 5px 3px 5px;
-        font-size: 12px;
+        font-size: $labelFontSize;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
         height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
       }
       .free-label {
         height: 25px;
@@ -153,10 +160,14 @@ navbar {
         background-image: linear-gradient(315deg, #63d471 0%, #233329 74%);
         color: white;
         padding: 3.5px 10px 3.5px 10px;
-        font-size: 12px;
+        font-size: $labelFontSize;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
         height: 100%;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .custom-label {
         height: 25px;
@@ -164,9 +175,14 @@ navbar {
         font-weight: bold;
         color: gold;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 12px;
+        font-size: $labelFontSize;
         background-color: #e0455f;
         background-image: linear-gradient(147deg, #e0455f 0%, #44000b 74%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
       }
     }
 
@@ -194,14 +210,13 @@ navbar {
         align-items: center;
 
         .logo-icon {
-          width: 26px;
-          margin-top: -5px;
+          width: 20px;
+          margin-top: -2px;
         }
 
         .logo-text {
           margin-left: 6px !important;
-          font-size: 10px !important;
-          font-weight: bold;
+          font-size: 9px !important;
           letter-spacing: 1px;
           line-height: normal;
         }
@@ -230,6 +245,10 @@ navbar {
       background: url("../../../../../../assets/images/backgrounds/Patterns-Wallpaper-1080x2280-380x802.jpg");
       background-size: 100% 100%;
 
+      .user-wrapper {
+        background-size: 100% 100%;
+      }
+
       .user {
         position: relative;
         display: flex;
@@ -242,8 +261,8 @@ navbar {
         padding: 45px 0 64px 0;
 
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-        background-color: #7fcec5;
-        background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
 
         .avatar-container {
           position: absolute;
@@ -255,9 +274,10 @@ navbar {
           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
           .avatar {
-            width: 62px;
-            height: 62px;
-            margin: 0;
+            width: 57px;
+            height: 55px;
+            margin: auto;
+            object-fit: cover;
           }
         }
       }

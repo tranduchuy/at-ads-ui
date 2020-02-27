@@ -91,6 +91,13 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     // }
   };
 
+  lineChartPoint = {
+    radius: 0,
+    borderWstatusth: 10,
+    hoverRadius: 4,
+    hoverBorderWstatusth: 10
+  };
+
   lineChart: any = {
     chartOptions: {
       responsive: true
@@ -99,13 +106,18 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     datasets: {
       report: [
         {
-          label: 'Click thật',
+          label: 'Tổng số click',
+          data: [],
+          fill: 'start'
+        },
+        {
+          label: 'Số click thật',
           data: [],
           fill: 'start'
 
         },
         {
-          label: 'Click ảo',
+          label: 'Số click ảo',
           data: [],
           fill: 'start'
         }
@@ -114,22 +126,31 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     labels: [],
     colors: [
       {
+        borderColor: '#039be5',
+        //backgroundColor: 'rgba(3, 155, 229, 0.1)',
+        backgroundColor: 'rgba(0,0,0,0)',
+        pointBackgroundColor: 'white',
+        pointHoverBackgroundColor: '#039be5',
+        pointBorderColor: '#039be5',
+        pointHoverBorderColor: '#039be5'
+      },
+      {
         borderColor: 'green',
         //backgroundColor: 'rgba(0, 204, 255,0.5)',
         backgroundColor: 'rgba(0,0,0,0)',
-        pointBackgroundColor: 'green',
+        pointBackgroundColor: 'white',
         pointHoverBackgroundColor: 'green',
-        pointBorderColor: 'white',
-        pointHoverBorderColor: 'white'
+        pointBorderColor: 'green',
+        pointHoverBorderColor: 'green'
       },
       {
         borderColor: 'crimson',
         //backgroundColor: 'rgba(255, 0, 57, 0.4)',
         backgroundColor: 'rgba(0,0,0,0)',
-        pointBackgroundColor: 'crimson',
+        pointBackgroundColor: 'white',
         pointHoverBackgroundColor: 'crimson',
-        pointBorderColor: 'white',
-        pointHoverBorderColor: 'white'
+        pointBorderColor: 'crimson',
+        pointHoverBorderColor: 'crimson'
       }
     ],
     options: {
@@ -151,12 +172,217 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
         }
       },
       elements: {
-        point: {
-          radius: 4,
-          borderWstatusth: 10,
-          hoverRadius: 4,
-          hoverBorderWstatusth: 10
-        },
+        point: this.lineChartPoint,
+        line: {
+          tension: 0
+        }
+      },
+      scales: {
+        xAxes: [{}],
+        yAxes: [
+          {
+            status: 'y-axis-0',
+            position: 'left',
+            ticks: {
+              beginAtZero: true,
+            }
+          }
+        ]
+      },
+      plugins: {
+        filler: {
+          propagate: false
+        }
+      }
+    }
+  }
+
+  totalClickLineChart: any = {
+    chartOptions: {
+      responsive: true
+    },
+    chartType: 'line',
+    datasets: {
+      report: [
+        {
+          label: 'Tổng số click',
+          data: [],
+          fill: 'start'
+        }
+      ],
+    },
+    labels: [],
+    colors: [
+      {
+        borderColor: '#039be5',
+        backgroundColor: 'rgba(3, 155, 229, 0.1)',
+        // backgroundColor: 'rgba(0,0,0,0)',
+        pointBackgroundColor: 'white',
+        pointHoverBackgroundColor: '#039be5',
+        pointBorderColor: '#039be5',
+        pointHoverBorderColor: '#039be5'
+      }
+    ],
+    options: {
+      spanGaps: false,
+      legend: {
+        display: false
+      },
+      maintainAspectRatio: false,
+      tooltips: {
+        position: 'nearest',
+        mode: 'index',
+        intersect: false
+      },
+      layout: {
+        padding: {
+          left: 24,
+          right: 32,
+          top: 20
+        }
+      },
+      elements: {
+        point: this.lineChartPoint,
+        line: {
+          tension: 0
+        }
+      },
+      scales: {
+        xAxes: [{}],
+        yAxes: [
+          {
+            status: 'y-axis-0',
+            position: 'left',
+            ticks: {
+              beginAtZero: true,
+            }
+          }
+        ]
+      },
+      plugins: {
+        filler: {
+          propagate: false
+        }
+      }
+    }
+  }
+
+  realClickLineChart: any = {
+    chartOptions: {
+      responsive: true
+    },
+    chartType: 'line',
+    datasets: {
+      report: [
+        {
+          label: 'Số click thật',
+          data: [],
+          fill: 'start'
+        }
+      ],
+    },
+    labels: [],
+    colors: [
+      {
+        borderColor: 'green',
+        backgroundColor: 'rgba(0, 128, 0, 0.1)',
+        //backgroundColor: 'rgba(0,0,0,0)',
+        pointBackgroundColor: 'white',
+        pointHoverBackgroundColor: 'green',
+        pointBorderColor: 'green',
+        pointHoverBorderColor: 'green'
+      }
+    ],
+    options: {
+      spanGaps: false,
+      legend: {
+        display: false
+      },
+      maintainAspectRatio: false,
+      tooltips: {
+        position: 'nearest',
+        mode: 'index',
+        intersect: false
+      },
+      layout: {
+        padding: {
+          left: 24,
+          right: 32,
+          top: 20
+        }
+      },
+      elements: {
+        point: this.lineChartPoint,
+        line: {
+          tension: 0
+        }
+      },
+      scales: {
+        xAxes: [{}],
+        yAxes: [
+          {
+            status: 'y-axis-0',
+            position: 'left',
+            ticks: {
+              beginAtZero: true,
+            }
+          }
+        ]
+      },
+      plugins: {
+        filler: {
+          propagate: false
+        }
+      }
+    }
+  }
+
+  spamClickLineChart: any = {
+    chartOptions: {
+      responsive: true
+    },
+    chartType: 'line',
+    datasets: {
+      report: [
+        {
+          label: 'Số click ảo',
+          data: [],
+          fill: 'start'
+        }
+      ]
+    },
+    labels: [],
+    colors: [
+      {
+        borderColor: 'crimson',
+        backgroundColor: 'rgba(220, 20, 60, 0.1)',
+        //backgroundColor: 'rgba(0,0,0,0)',
+        pointBackgroundColor: 'white',
+        pointHoverBackgroundColor: 'crimson',
+        pointBorderColor: 'crimson',
+        pointHoverBorderColor: 'crimson'
+      }
+    ],
+    options: {
+      spanGaps: false,
+      legend: {
+        display: false
+      },
+      maintainAspectRatio: false,
+      tooltips: {
+        position: 'nearest',
+        mode: 'index',
+        intersect: false
+      },
+      layout: {
+        padding: {
+          left: 24,
+          right: 32,
+          top: 20
+        }
+      },
+      elements: {
+        point: this.lineChartPoint,
         line: {
           tension: 0
         }
@@ -435,7 +661,6 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
   getReportDates() {
     let dates = [];
-
     let currDate = moment(this.selectedDateRange.start).startOf('day');
     let lastDate = moment(this.selectedDateRange.end).startOf('day');
 
@@ -508,19 +733,24 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     const sub = this._reportService.getAccountStatisticReport(params, accountId)
       .subscribe(
         res => {
-          this.clickTotal = res.data.pieChart.realClick + res.data.pieChart.spamClick;
+          // let data: any = '{"pieChart":{"spamClick":141,"realClick":1359},"lineChart":[{"_id":"21-02-2020","spamClick":25,"realClick":144},{"_id":"23-02-2020","spamClick":28,"realClick":291},{"_id":"20-02-2020","spamClick":9,"realClick":150},{"_id":"22-02-2020","spamClick":20,"realClick":271},{"_id":"24-02-2020","spamClick":28,"realClick":227},{"_id":"26-02-2020","spamClick":14,"realClick":129},{"_id":"25-02-2020","spamClick":17,"realClick":147}]}';
+          // data = JSON.parse(data);
 
-          this.realClickTotal = res.data.pieChart.realClick;
-          this.realClickPercentage = _.round(res.data.pieChart.realClick * 100 / this.clickTotal, 2) || 0;
+          const data = res.data;
+
+          this.clickTotal = data.pieChart.realClick + data.pieChart.spamClick;
+
+          this.realClickTotal = data.pieChart.realClick;
+          this.realClickPercentage = _.round(data.pieChart.realClick * 100 / this.clickTotal, 2) || 0;
           const realClickDetail: any = {
-            name: 'Click thật: ' + this.abbreviateNumber(res.data.pieChart.realClick),
+            name: 'Click thật: ' + this.abbreviateNumber(data.pieChart.realClick),
             value: this.realClickPercentage
           };
 
-          this.spamClickTotal = res.data.pieChart.spamClick;
-          this.spamClickPercentage = _.round(res.data.pieChart.spamClick * 100 / this.clickTotal, 2) || 0;
+          this.spamClickTotal = data.pieChart.spamClick;
+          this.spamClickPercentage = _.round(data.pieChart.spamClick * 100 / this.clickTotal, 2) || 0;
           const spamClickDetail: any = {
-            name: 'Click ảo: ' + this.abbreviateNumber(res.data.pieChart.spamClick),
+            name: 'Click ảo: ' + this.abbreviateNumber(data.pieChart.spamClick),
             value: this.spamClickPercentage
           };
 
@@ -531,7 +761,7 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             doughnut: true,
             gradient: false,
             scheme: {
-              domain: ['#44b543', 'crimson']
+              domain: ['rgba(0, 128, 0, 0.8)', 'crimson']
             },
             dataSource: [
               realClickDetail, spamClickDetail
@@ -546,15 +776,16 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
 
           let lineChartData = [];
 
-          for (const item of res.data.lineChart)
+          for (const item of data.lineChart)
             lineChartData[item._id] = {
               realClick: item.realClick,
               spamClick: item.spamClick
             };
 
-          const lineChartLabels = this.getReportDates();
+          let lineChartLabels = this.getReportDates();
           const realClickDataSets = [];
           const spamClickDataSets = [];
+          const totalClickDataSets = [];
 
           lineChartLabels.forEach((item, index) => {
             if (lineChartData[item] !== undefined) {
@@ -567,9 +798,26 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
             }
           });
 
+          for (const i in realClickDataSets)
+            totalClickDataSets.push(realClickDataSets[i] + spamClickDataSets[i]);
+
+          lineChartLabels = (lineChartLabels || []).map(l => {
+            const date = l.split('-');
+            return `${date[0]}-${date[1]}`;
+          });
+
           this.lineChart.labels = lineChartLabels;
-          this.lineChart.datasets.report[0].data = realClickDataSets;
-          this.lineChart.datasets.report[1].data = spamClickDataSets;
+          this.totalClickLineChart.labels = lineChartLabels;
+          this.realClickLineChart.labels = lineChartLabels;
+          this.spamClickLineChart.labels = lineChartLabels;
+
+          this.lineChart.datasets.report[0].data = totalClickDataSets;
+          this.lineChart.datasets.report[1].data = realClickDataSets;
+          this.lineChart.datasets.report[2].data = spamClickDataSets;
+
+          this.totalClickLineChart.datasets.report[0].data = totalClickDataSets;
+          this.realClickLineChart.datasets.report[0].data = realClickDataSets;
+          this.spamClickLineChart.datasets.report[0].data = spamClickDataSets;
         },
         (error: HttpErrorResponse) => {
           this._dialogService._openErrorDialog(error.error);
@@ -607,9 +855,14 @@ export class SpamClickReportComponent extends PageBaseComponent implements OnIni
     const sub = this._reportService.getAccountReport(params, accountId)
       .subscribe(
         res => {
-          this.advertisementClickReport = res.data.logs;
+          // let data: any = '{"logs":[{"_id":"5e5713b8fb31ad4e1c294a2a","isPrivateBrowsing":false,"isSpam":false,"uuid":"320c3b41-d104-4824-aee5-881230710802","ip":"115.73.208.64","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-27T00:56:24.743Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":2,"countMaxClickInHours":60},"click":2},{"_id":"5e57135efb31ad4e1c294a22","isPrivateBrowsing":false,"isSpam":false,"uuid":"320c3b41-d104-4824-aee5-881230710802","ip":"115.73.208.64","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-27T00:54:54.991Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":2},{"_id":"5e5707fffb31ad4e1c2949c0","isPrivateBrowsing":false,"isSpam":false,"uuid":"0324281b-2b3b-4b29-a38f-32b8dc822111","ip":"27.75.42.187","location":{"country_code":"VN","country_name":"Vietnam","city":"Bien Hoa","postal":null,"latitude":10.95,"longitude":106.8167,"state":"Tinh GJong Nai"},"keyword":"giường gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-27T00:06:23.706Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e56f9d1fb31ad4e1c29498d","isPrivateBrowsing":false,"isSpam":false,"uuid":"c9aadb51-badc-4087-ad51-d4e55c611bbc","ip":"171.248.65.207","location":{"country_code":"VN","country_name":"Vietnam","city":null,"postal":null,"latitude":16,"longitude":106,"state":null},"keyword":"giường gỗ xoan","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T23:05:53.441Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":2,"countMaxClickInHours":60},"click":2},{"_id":"5e56f9b7fb31ad4e1c294989","isPrivateBrowsing":false,"isSpam":false,"uuid":"c9aadb51-badc-4087-ad51-d4e55c611bbc","ip":"171.248.65.207","location":{"country_code":"VN","country_name":"Vietnam","city":null,"postal":null,"latitude":16,"longitude":106,"state":null},"keyword":"giường gỗ xoan","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T23:05:27.461Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":2},{"_id":"5e569313fb31ad4e1c294809","isPrivateBrowsing":false,"isSpam":false,"uuid":"0a9905d1-157d-43c9-b29f-926a48d59640","ip":"116.109.75.17","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường ngủ gỗ xoan đào","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T15:47:31.324Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e567e44fb31ad4e1c294751","isPrivateBrowsing":false,"isSpam":false,"uuid":"74630fce-f666-471f-a3fe-2d5f4c8e0b43","ip":"113.23.114.241","location":{"country_code":"VN","country_name":"Vietnam","city":null,"postal":null,"latitude":16,"longitude":106,"state":null},"keyword":"giường ngủ gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T14:18:44.552Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e567c40fb31ad4e1c29472b","isPrivateBrowsing":false,"isSpam":false,"uuid":"ab34ea19-326f-463a-abba-586cc233f22c","ip":"171.239.167.123","location":{"country_code":"VN","country_name":"Vietnam","city":null,"postal":null,"latitude":16,"longitude":106,"state":null},"keyword":"giuong go xoan","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T14:10:08.604Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e567bf3fb31ad4e1c294727","isPrivateBrowsing":false,"isSpam":false,"uuid":"c6e942d1-7358-4c49-baf7-89398172e110","ip":"14.187.26.245","location":{"country_code":"VN","country_name":"Vietnam","city":null,"postal":null,"latitude":16,"longitude":106,"state":null},"keyword":"giường ngủ gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T14:08:51.845Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e567b50fb31ad4e1c29471b","isPrivateBrowsing":false,"isSpam":false,"uuid":"a9650f3c-9636-43c7-9eaa-96589b9e8725","ip":"1.53.217.180","location":{"country_code":"VN","country_name":"Vietnam","city":null,"postal":null,"latitude":16,"longitude":106,"state":null},"keyword":"giường ngủ gỗ xoan","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T14:06:08.281Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e5679e4fb31ad4e1c294705","isPrivateBrowsing":false,"isSpam":false,"uuid":"caf77f3c-0f50-46f2-8cfc-116864b583f4","ip":"183.80.220.57","location":{"country_code":"VN","country_name":"Vietnam","city":"Thu Duc","postal":null,"latitude":10.85,"longitude":106.75,"state":"Ho Chi Minh"},"keyword":"giường ngủ gỗ xoan đào","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T14:00:04.407Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":2,"countMaxClickInHours":60},"click":2},{"_id":"5e5677dffb31ad4e1c2946f1","isPrivateBrowsing":false,"isSpam":false,"uuid":"caf77f3c-0f50-46f2-8cfc-116864b583f4","ip":"183.80.220.57","location":{"country_code":"VN","country_name":"Vietnam","city":"Thu Duc","postal":null,"latitude":10.85,"longitude":106.75,"state":"Ho Chi Minh"},"keyword":"giường ngủ gỗ xoan đào","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T13:51:27.666Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":2},{"_id":"5e566f50fb31ad4e1c29467a","isPrivateBrowsing":false,"isSpam":false,"uuid":"0e799f5b-8eca-4f43-a258-91ca7d0ec113","ip":"113.23.29.149","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T13:14:56.152Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e566e92fb31ad4e1c29466f","isPrivateBrowsing":false,"isSpam":false,"uuid":"6aaba55d-4f0d-49fb-adbc-1d20abfb0169","ip":"103.199.41.14","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T13:11:46.239Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e56654afb31ad4e1c294644","isPrivateBrowsing":false,"isSpam":false,"uuid":"8b6296cd-f2de-408b-9113-82e027bff952","ip":"171.254.207.63","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường ngủ gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T12:32:10.722Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":2,"countMaxClickInHours":60},"click":2},{"_id":"5e566528fb31ad4e1c294642","isPrivateBrowsing":false,"isSpam":false,"uuid":"ffe5af58-2038-4cbb-9c16-45738aeb7532","ip":"1.55.45.137","location":{"country_code":"VN","country_name":"Vietnam","city":"Hanoi","postal":null,"latitude":21.0333,"longitude":105.85,"state":"Hanoi"},"keyword":"mau giuong go dep","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T12:31:36.422Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e566517fb31ad4e1c29463e","isPrivateBrowsing":false,"isSpam":false,"uuid":"8b6296cd-f2de-408b-9113-82e027bff952","ip":"171.254.207.63","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường ngủ gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T12:31:19.545Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":2},{"_id":"5e566054fb31ad4e1c294620","isPrivateBrowsing":false,"isSpam":false,"uuid":"8862ae0d-15f2-4298-896a-3c61ae6e502d","ip":"14.186.112.4","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường gỗ sồi","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T12:11:00.639Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":1},{"_id":"5e565ff5fb31ad4e1c29461d","isPrivateBrowsing":false,"isSpam":false,"uuid":"edcea1a9-f1d7-453d-98d7-121ed476b003","ip":"103.199.54.151","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường ngủ gỗ xoan đào","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T12:09:25.528Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":2,"countMaxClickInHours":60},"click":2},{"_id":"5e565fcffb31ad4e1c294619","isPrivateBrowsing":false,"isSpam":false,"uuid":"edcea1a9-f1d7-453d-98d7-121ed476b003","ip":"103.199.54.151","location":{"country_code":"VN","country_name":"Vietnam","city":"Ho Chi Minh City","postal":null,"latitude":10.8142,"longitude":106.6438,"state":"Ho Chi Minh"},"keyword":"giường ngủ gỗ xoan đào","matchType":"Cụm từ","page":null,"position":null,"campaignType":"Google search","gclid":null,"createdAt":"2020-02-26T12:08:47.825Z","reason":{"message":"Số lượng click của ip nhỏ hơn giới hạn click cho phép.","clickNumber":1,"countMaxClickInHours":60},"click":2}],"totalItems":357}';
+          // data = JSON.parse(data);
 
-          this.totalItems = res.data.totalItems;
+          const data = res.data;
+          
+          this.advertisementClickReport = data.logs;
+
+          this.totalItems = data.totalItems;
           this.pageTotal = Math.ceil(this.totalItems / this.pageLimit);
 
           this._fuseProgressBarService.hide();
