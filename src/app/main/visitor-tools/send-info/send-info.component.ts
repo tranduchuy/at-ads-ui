@@ -146,18 +146,6 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
     this._fuseProgressBarService.show();
     this.initForms();
 
-    // themeColor: config.themeColor,
-    //     supporterAvatar: config.supporter.avatar,
-    //     supporterName: config.supporter.name,
-    //     supporterMajor: config.supporter.major,
-    //     supporterPhone: config.supporter.phone,
-    //   };
-
-    //   popupDisplayConfig = {
-    //     popupPosition: config.popupPosition,
-    //     autoShowPopupRepeatTime: config.autoShowPopupRepeatTime,
-    //     autoShowPopup: config.autoShowPopup
-
     this.websiteCtrl.setValue({
       id: '',
       name: '',
@@ -174,10 +162,25 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
         }
       }
     });
+
     const sub = this._sessionService.getAccountId()
       .subscribe((accountId: string) => {
         if (accountId) {
           this.getWebsites(accountId);
+        }
+      });
+    this.subscriptions.push(sub);
+
+    this.onListAccountsLoaded();
+  }
+
+  onListAccountsLoaded() {
+    const sub = this._sessionService.getListAccounts()
+      .subscribe(listAccounts => {
+        if (listAccounts) {
+          this._fuseProgressBarService.hide();
+        } else {
+          this._fuseProgressBarService.show();
         }
       });
     this.subscriptions.push(sub);
@@ -194,14 +197,6 @@ export class SendInfoComponent extends PageBaseComponent implements OnInit {
 
   changeOpenPopupButtonPosition(e: MatRadioChange) {
     this.setPopupDisplay({ popupPosition: e.value });
-    // for (const item of this.openPopupButtonPositions) {
-    //   if (item.value === e.value) {
-    //     item.checked = true;
-    //     this.openPopupButtonPositionStyle = item.value;
-    //   } else {
-    //     item.checked = false;
-    //   }
-    // }
   }
 
   changeAutoDisplayPopupTime(e: MatRadioChange) {

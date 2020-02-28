@@ -8,11 +8,13 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ColorCircleModule } from 'ngx-color/circle';
 import { FakeCustomerComponent } from './fake-customer/fake-customer.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { EventWidgetComponent } from './event-widget/event-widget.component';
 
 @NgModule({
   declarations: [
     SendInfoComponent,
-    FakeCustomerComponent
+    FakeCustomerComponent,
+    EventWidgetComponent
   ],
   imports: [
 
