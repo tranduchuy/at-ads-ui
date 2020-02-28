@@ -27,6 +27,19 @@ export class UpdateUserInfoComponent extends EditableFormBaseComponent implement
   ngOnInit(): void {
     this.initForm();
     this.userInfo = JSON.parse(this._sessionService.user);
+    this.onListAccountsLoaded();
+  }
+
+  onListAccountsLoaded() {
+    const sub = this._sessionService.getListAccounts()
+      .subscribe(listAccounts => {
+        if (listAccounts) {
+          this._fuseProgressBarService.hide();
+        } else {
+          this._fuseProgressBarService.show();
+        }
+      });
+    this.subscriptions.push(sub);
   }
 
   submitForm(): void {

@@ -5,6 +5,7 @@ import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-b
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SessionService } from 'app/shared/services/session.service';
 
 export interface History {
   createdAt: Date;
@@ -31,7 +32,8 @@ export class ActionHistoryComponent extends PageBaseComponent implements OnInit 
     private _fuseProgressBarService: FuseProgressBarService,
     private _dialogService: DialogService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _sessionService: SessionService
   ) {
     super();
   }
@@ -55,6 +57,19 @@ export class ActionHistoryComponent extends PageBaseComponent implements OnInit 
     }
 
     this.getActionHistory(this.currentPageNumber);
+    this.onListAccountsLoaded();
+  }
+
+  onListAccountsLoaded() {
+    const sub = this._sessionService.getListAccounts()
+      .subscribe(listAccounts => {
+        if (listAccounts) {
+          this._fuseProgressBarService.hide();
+        } else {
+          this._fuseProgressBarService.show();
+        }
+      });
+    this.subscriptions.push(sub);
   }
 
   getActionHistory(page: number) {
