@@ -5,6 +5,7 @@ $defaultPadding: 50px;
 $defaultMargin: 30px;
 $contentPadding: 30px;
 $primaryBorderRadius: 5px;
+$primaryFontSize: 12px;
 
 .homepage {
   width: 100%;
@@ -102,9 +103,9 @@ $primaryBorderRadius: 5px;
         position: absolute;
         top: 0;
         right: 0;
-        opacity: 0.7;
         width: 100vw;
         height: 100vh;
+        opacity: 0.9;
 
         background: url("../../assets/images/backgrounds/security2.png");
         background-size: 100% 100%;
@@ -112,8 +113,8 @@ $primaryBorderRadius: 5px;
       }
 
       .banner-container {
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(3.5px);
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(3px);
         width: 100%;
         // height: 104vh;
         height: 100vh;
@@ -178,7 +179,7 @@ $primaryBorderRadius: 5px;
             .title2 {
               width: 100%;
               text-align: center;
-              font-size: 12px;
+              font-size: $primaryFontSize;
               text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
               color: whitesmoke;
               padding: 5px 15px;
@@ -204,7 +205,7 @@ $primaryBorderRadius: 5px;
                 color: white;
                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
                 box-shadow: none;
-                font-size: 12px;
+                font-size: $primaryFontSize;
                 transition: 0.2s;
 
                 &:hover {
@@ -220,8 +221,9 @@ $primaryBorderRadius: 5px;
             .__pc {
               background: url("../../assets/images/laptop.png");
               background-size: 100% 100%;
-              width: 70%;
-              height: 20vh;
+              width: 30rem;
+              height: 17rem;
+              filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.5));
 
               margin: 0 auto;
               position: relative;
@@ -229,7 +231,6 @@ $primaryBorderRadius: 5px;
               .__pc__image {
                 display: table;
                 margin: 0 auto;
-                filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.7));
 
                 position: absolute;
                 width: 66%;
@@ -239,20 +240,32 @@ $primaryBorderRadius: 5px;
               }
 
               .__mobile {
-                background: url("../../assets/images/smartphone.webp");
-                background-size: 100% 100%;
-                width: 46%;
-                height: 12vh;
                 position: relative;
-                top: 35%;
-                filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.4));
+                width: 5rem;
+                top: 30%;
+                left: 8%;
+                height: 9rem;
 
                 .__mobile__image {
+                  background: url("../../assets/images/usage5-mobile.png");
+                  background-size: 100% 100%;
+                  width: 98%;
+                  height: 97%;
+                  top: 2%;
+                  left: 1%;
                   position: absolute;
-                  width: 27%;
-                  height: 8vh;
-                  top: 15%;
-                  left: 36.5%;
+                  border-radius: 7px;
+                  z-index: 1;
+                }
+
+                .__mobile__frame {
+                  filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.5));
+                  background: url("../../assets/images/ipx.png");
+                  background-size: 100% 100%;
+                  position: absolute;
+                  width: 100%;
+                  height: 100%;
+                  z-index: 2;
                 }
               }
             }
@@ -379,7 +392,7 @@ $primaryBorderRadius: 5px;
 
             mat-cell:nth-child(2) {
               font-weight: bold;
-              font-size: 12px;
+              font-size: $primaryFontSize;
             }
 
             mat-cell:nth-child(3) {
@@ -441,7 +454,7 @@ $primaryBorderRadius: 5px;
 
             mat-cell {
               svg {
-                font-size: 12px;
+                font-size: $primaryFontSize;
                 margin-right: 7px;
               }
             }
@@ -535,7 +548,7 @@ $primaryBorderRadius: 5px;
                   color: rgba(0, 0, 0, 0.8);
 
                   .step-name {
-                    font-size: 12px;
+                    font-size: $primaryFontSize;
                     font-weight: bold;
 
                     .step-label {
@@ -700,7 +713,7 @@ $primaryBorderRadius: 5px;
         .feature-name {
           font-weight: bold;
           color: rgba(0, 0, 0, 0.7);
-          font-size: 12px;
+          font-size: $primaryFontSize;
         }
       }
 
@@ -740,7 +753,7 @@ $primaryBorderRadius: 5px;
 
           .secondary-benefit-title {
             color: gray;
-            font-size: 12px;
+            font-size: $primaryFontSize;
             letter-spacing: 1px;
 
             -webkit-animation: ani 1.4s ease-in;
@@ -865,7 +878,7 @@ $primaryBorderRadius: 5px;
 
             .benefit-description-title {
               padding-top: 5px;
-              font-size: 12px;
+              font-size: $primaryFontSize;
               font-weight: bold;
               font-family: "Quicksand", sans-serif !important;
             }
@@ -913,7 +926,7 @@ $primaryBorderRadius: 5px;
           background: rgba(0, 0, 0, 0.05);
           border-radius: 15px;
           transition: 0.2s;
-          font-size: 12px;
+          font-size: $primaryFontSize;
         }
 
         mat-icon {
@@ -942,7 +955,7 @@ $primaryBorderRadius: 5px;
       color: rgba(0, 0, 0, 0.7);
       padding: 15px;
       text-align: center;
-      font-size: 12px;
+      font-size: $primaryFontSize;
       font-weight: bold;
 
       a {
@@ -1042,7 +1055,7 @@ $primaryBorderRadius: 5px;
 
         font-weight: bold;
         min-height: 35px;
-        font-size: 12px;
+        font-size: $primaryFontSize;
 
         box-shadow: none;
         background: rgba(3, 155, 229, 0.1);
@@ -1205,9 +1218,7 @@ $primaryBorderRadius: 5px;
           padding-top: 90px;
 
           .banner-image {
-            img {
-              display: none;
-            }
+            display: none;
           }
         }
       }

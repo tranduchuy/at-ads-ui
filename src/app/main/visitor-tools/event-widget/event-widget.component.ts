@@ -1,412 +1,179 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { Subject } from 'rxjs';
+
+import { fuseAnimations } from '@fuse/animations';
+import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
+import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
+import * as _ from 'lodash';
 import { SessionService } from 'app/shared/services/session.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 
 @Component({
   selector: 'app-event-widget',
   templateUrl: './event-widget.component.html',
-  styleUrls: ['./event-widget.component.scss']
+  styleUrls: ['./event-widget.component.scss'],
+  animations: fuseAnimations
 })
-export class EventWidgetComponent extends PageBaseComponent implements OnInit, AfterViewInit {
+export class EventWidgetComponent extends PageBaseComponent implements OnInit, OnDestroy, AfterViewInit {
+  animationDirection: 'left' | 'right' | 'none';
+  courseStepContent: any;
+  currentStep: number;
 
-  host = 'https://tuevo-it.000webhostapp.com';
-  template = `
-  <!DOCTYPE html>
-  <html lang="en">
-  
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/jpeg" href="${this.host}/public/assets/images/tuevo.jpeg">
-    <title>CV | Tue Vo</title>
-    <link rel="stylesheet" href="${this.host}/public/styles/cv.style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/35d7e512c4.js" crossorigin="anonymous"></script>
-    
-    <script type="text/javascript" src="https://static.x2.com.vn/static/tracking.js?key=xCj3X1sQ"></script>
-  
-  </head>
-  
-  <body>
-  
-    <div class="cv__container">
-  
-      <div class="cv">
-  
-        <div class="cv__left-col">
-  
-          <div class="cv__left-col__main-info">
-  
-            <div class="cv__left-col__main-info__avatar">
-              <div class="cv__left-col__main-info__avatar__wallpaper">
-                <div class="cv__left-col__main-info__avatar__wallpaper__cover"></div>
-              </div>
-              <div class="cv__left-col__main-info__avatar__image">
-                <img src="${this.host}/public/assets/images/tuevo.jpeg" alt="">
-              </div>
-            </div>
-  
-            <div class="cv__left-col__main-info__profile cv__content-wrapper">
-              <div>
-                <label for="" class="cv__content-label">Full name</label>
-                <p class="cv__fullname">VO THAI MINH TUE</p>
-              </div>
-  
-              <div>
-                <label for="" class="cv__content-label">Applied position</label>
-                <p class="cv__applied-position">Web Front-end Developer</p>
-              </div>
-            </div>
-  
-          </div>
-  
-          <div class="cv__left-col__personal-info">
-  
-            <div class="cv__content-title--left">
-              <span>PERSONAL INFO</span>
-            </div>
-  
-            <div class="cv__left-col__personal-info__profile cv__content-wrapper">
-  
-              <p>
-                <i class="fas fa-birthday-cake cv__content-icon"></i>
-                <span>December 3, 1998</span>
-              </p>
-  
-              <p>
-                <i class="fas fa-user cv__content-icon"></i>
-                <span>Male 100%</span>
-              </p>
-  
-              <p>
-                <i class="fas fa-phone-alt cv__content-icon"></i>
-                <a href="tel:+84932659211">+84 932 659 211</a>
-              </p>
-  
-              <p>
-                <i class="fas fa-envelope cv__content-icon"></i>
-                <span>tuevo.it@gmail.com</span>
-              </p>
-  
-              <p>
-                <i class="fab fa-facebook-square cv__content-icon--fb"></i>
-                <a href="https://fb.com/tuevo0312" target="_blank">fb.com/tuevo0312</a>
-              </p>
-  
-              <p>
-                <i class="fas fa-map-marker-alt cv__content-icon--location"></i>
-                <span>495 Nguyen Van Luong, Dist. 6, Ho Chi Minh City, Vietnam.</span>
-              </p>
-  
-            </div>
-  
-          </div>
-  
-          <div class="cv__left-col__personality">
-  
-            <div class="cv__content-title--left">
-              <span>PERSONALITY</span>
-            </div>
-  
-            <ul>
-              <li>Social oriented</li>
-              <li>Friendly</li>
-              <li>Collaborable</li>
-              <li>Optimistic</li>
-              <li>Comprehensive</li>
-            </ul>
-  
-          </div>
-  
-          <div class="cv__left-col__soft-skills">
-  
-            <div class="cv__content-title--left">
-              <span>SOFT SKILLS</span>
-            </div>
-  
-            <ul>
-              <li>English communication</li>
-              <li>Teamwork</li>
-              <li>Critical thinking</li>
-              <li>Self-learning</li>
-            </ul>
-          </div>
-  
-        </div>
-  
-        <div class="cv__right-col">
-  
-          <div class="cv__right-col__education">
-  
-            <div class="cv__content-title--right">
-              <i
-                class="fas fa-graduation-cap cv__content-title--right__icon cv__content-title--right__icon--education"></i>
-              <span class="cv__content-title--right__text--education">EDUCATION</span>
-            </div>
-  
-            <div class="cv__right-col__education__content cv__content-wrapper">
-              <p class="cv__school-name">VNUHCM - UNIVERSITY OF SCIENCE</p>
-              <table class="cv__table">
-                <tbody>
-                  <tr>
-                    <td>Faculty</td>
-                    <td>Information Technology</td>
-                  </tr>
-                  <tr>
-                    <td>Major</td>
-                    <td>Information Technology</td>
-                  </tr>
-                  <tr>
-                    <td>GPA</td>
-                    <td><strong>8.25/10.00</strong></td>
-                  </tr>
-                  <tr>
-                    <td>Awards</td>
-                    <td>Top 10 of The Highest-GPA Students of Faculty in Semester 2017-2018</td>
-                  </tr>
-                  <tr>
-                    <td>Certifications</td>
-                    <td>No</td>
-                  </tr>
-                </tbody>
-              </table>
-  
-            </div>
-  
-          </div>
-  
-          <div class="cv__right-col__technical-skills">
-  
-            <div class="cv__content-title--right">
-              <i
-                class="fas fa-drafting-compass cv__content-title--right__icon cv__content-title--right__icon--technical"></i>
-              <span class="cv__content-title--right__text--technical">TECHNICAL SKILLS</span>
-            </div>
-  
-            <div class="cv__right-col__tecnical-skills__content cv__content-wrapper">
-  
-              <table class="cv__table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <i class="fab fa-html5 cv__html5-icon"></i>HTML5</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fab fa-css3-alt cv__css3-icon"></i>CSS3</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fab fa-sass cv__scss-icon"></i>SCSS</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fab fa-bootstrap cv__bootstrap-icon"></i>Bootstrap</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img class="cv__jquery-icon" src="${this.host}/public/assets/images/jquery.png" alt="">JQuery</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fab fa-react cv__react-icon"></i>ReactJS</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fab fa-angular cv__angular-icon"></i>Angular</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fab fa-node-js cv__nodejs-icon"></i>NodeJS</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img class="cv__mysql-icon" src="${this.host}/public/assets/images/mysql.png" alt="">MySQL
-                    </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <i class="fab fa-envira cv__mongodb-icon"></i>MongoDB</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-  
-            </div>
-  
-          </div>
-  
-          <div class="cv__right-col__expericence">
-            <div class="cv__content-title--right">
-              <i class="fas fa-star cv__content-title--right__icon cv__content-title--right__icon--experience"></i>
-              <span class="cv__content-title--right__text--experience">EXPERIENCE</span>
-            </div>
-  
-            <div class="cv__right-col__expericence__content cv__content-wrapper--experience">
-  
-              <div class="cv__right-col__expericence__item">
-                <p>Worked as a <strong>Web Front-end Developer</strong> at <strong>APPNET Digital
-                    Marketing
-                    Agency</strong> in <strong>over 6 months</strong>.
-                </p>
-  
-                <ul>
-                  <li><a href="https://x2.com.vn" target="_blank">Công Cụ Chống Click Tặc - Giảm
-                      Đến 50% Phí Quảng Cáo Google Ads (HTML,SCSS,Angular,NodeJS,MongoDB)</a></li>
-                  <li><a href="https://admin.x2.com.vn" target="_blank">Công Cụ Chống Click Tặc -
-                      Admin (HTML,SCSS,ReactJS,NodeJS,MongoDB)</a></li>
-                </ul>
-              </div>
-  
-              <div class="cv__right-col__expericence__item">
-                <p>
-                  Worked as a <strong>Freelancer UI Designer</strong> in <strong>3 months</strong>.
-                </p>
-  
-                <ul>
-                  <li><a href="http://thaydoivanmenh.top" target="_blank">Thay Đổi Vận Mệnh
-                      (HTML,CSS,JQuery,NodeJS,Postgres)</a></li>
-                </ul>
-              </div>
-  
-              <div class="cv__right-col__expericence__item">
-                <p>
-                  Final-term projects at University.
-                </p>
-  
-                <ul>
-                  <li><a href="https://wingscinema.herokuapp.com" target="_blank">Booking Cinema Ticket
-                      (HTML,CSS,JQuery,NodeJS,Postgres)</a></li>
-                  <li><a href="https://tuevo.daonguyenvu.com/DACK/Nhom06" target="_blank" rel="noopener noreferrer">Mini
-                      Social Network (HTML,CSS,Vanilla JS,PHP,MySQL)</a></li>
-                </ul>
-              </div>
-            </div>
-  
-          </div>
-  
-          <div class="cv__left-col__activities">
-            <div class="cv__content-title--right">
-              <i class="fas fa-running cv__content-title--right__icon cv__content-title--right__icon--activities"></i>
-              <span class="cv__content-title--right__text--activities">ACTIVITIES</span>
-            </div>
-  
-            <div class="cv__content-wrapper">
-              <ul>
-                <li>Attended many workshops about <strong>Technology, Techniques, The 4th Industry Revolution, AI &
-                    Machine
-                    Learning, Vietnam Web Summit 2019,...</strong></li>
-                <li>Used to be a member of <strong>Coders.Tokyo Programming Community.</strong></li>
-                <li>Used to be a member of <strong>CKIT - A Programming Club at University.</strong></li>
-              </ul>
-              </di>
-  
-            </div>
-  
-            <div class="cv__right-col__interests">
-              <div class="cv__content-title--right">
-                <i class="fas fa-thumbs-up cv__content-title--right__icon cv__content-title--right__icon--interests"></i>
-                <span class="cv__content-title--right__text--interests">INTERESTS</span>
-              </div>
-  
-              <div class="cv__content-wrapper">
-                <ul>
-                  <li>UI design, editing videos and images.</li>
-                  <li>Researching, discovering about science, technology, history and life.</li>
-                  <li>Help everyone learn about something.</li>
-                  <li>Training martial arts.</li>
-                </ul>
-              </div>
-  
-            </div>
-  
-          </div>
-  
-        </div>
-  
-      </div>
-  
-  </body>
-  
-  </html>
-  `;
+  demoSteps = [
+    {
+      'id': 'tp2S0PwPHtDqMfvx',
+      'title': 'Tất cả',
+      'content': '<h1></h1>' +
+        '<br>' +
+        'This is an example step of the course. You can put anything in here from example codes to videos.' +
+        '<br><br>' +
+        'To install the CLI you need to have installed <b>npm</b> which typically comes with <b>NodeJS</b>.' +
+        'To install or upgrade the CLI run the following <b>npm</b> command:' +
+        '<br><br>' +
+        '<code>npm -g install @angular/cli</code>' +
+        '<br><br>' +
+        'To verify that the CLI has been installed correctly, open a console and run:' +
+        '<br><br>' +
+        '<code>ng version</code>' +
+        '<br><br>' +
+        '<h2>Install dependencies</h2>' +
+        '<br>' +
+        'To moderate the images we\'ll need a few Node.js packages:' +
+        '<br><br>' +
+        '<ul>' +
+        '<li>' +
+        'The Google Cloud Vision Client Library for Node.js: @google-cloud/vision to run the image through the Cloud Vision API to detect inappropriate images.' +
+        '</li>' +
+        '<br>' +
+        '<li>' +
+        'The Google Cloud Storage Client Library for Node.js: @google-cloud/storage to download and upload the images from Cloud Storage.' +
+        '</li>' +
+        '<br>' +
+        '<li>' +
+        'A Node.js library allowing us to run processes: child-process-promise to run ImageMagick since the ImageMagick command-line tool comes pre-installed on all Functions instances.' +
+        '</li>' +
+        '</ul>' +
+        '<br>' +
+        'To install these three packages into your Cloud Functions app, run the following npm install --save command. Make sure that you do this from the functions directory.' +
+        '<br><br>' +
+        '<code>npm install --save @google-cloud/vision @google-cloud/storage child-process-promise</code>' +
+        '<br><br>' +
+        'This will install the three packages locally and add them as declared dependencies in your package.js file.'
+    },
+    {
+      'id': 'fI10j2DfAFexKoOQ',
+      'title': 'Banner khuyến mãi',
+      'content': '<h1></h1>' +
+        '<br>' +
+        'This is an example step of the course. You can put anything in here from example codes to videos.' +
+        '<br><br>' +
+        'To install the CLI you need to have installed <b>npm</b> which typically comes with <b>NodeJS</b>.' +
+        'To install or upgrade the CLI run the following <b>npm</b> command:' +
+        '<br><br>' +
+        '<code>npm -g install @angular/cli</code>' +
+        '<br><br>' +
+        'To verify that the CLI has been installed correctly, open a console and run:' +
+        '<br><br>' +
+        '<code>ng version</code>' +
+        '<br><br>' +
+        '<h2>Install dependencies</h2>' +
+        '<br>' +
+        'To moderate the images we\'ll need a few Node.js packages:' +
+        '<br><br>' +
+        '<ul>' +
+        '<li>' +
+        'The Google Cloud Vision Client Library for Node.js: @google-cloud/vision to run the image through the Cloud Vision API to detect inappropriate images.' +
+        '</li>' +
+        '<br>' +
+        '<li>' +
+        'The Google Cloud Storage Client Library for Node.js: @google-cloud/storage to download and upload the images from Cloud Storage.' +
+        '</li>' +
+        '<br>' +
+        '<li>' +
+        'A Node.js library allowing us to run processes: child-process-promise to run ImageMagick since the ImageMagick command-line tool comes pre-installed on all Functions instances.' +
+        '</li>' +
+        '</ul>' +
+        '<br>' +
+        'To install these three packages into your Cloud Functions app, run the following npm install --save command. Make sure that you do this from the functions directory.' +
+        '<br><br>' +
+        '<code>npm install --save @google-cloud/vision @google-cloud/storage child-process-promise</code>' +
+        '<br><br>' +
+        'This will install the three packages locally and add them as declared dependencies in your package.js file.'
+    }
+  ];
+  course: any;
 
+  @ViewChildren(FusePerfectScrollbarDirective)
+  fuseScrollbarDirectives: QueryList<FusePerfectScrollbarDirective>;
+
+  // Private
+  private _unsubscribeAll: Subject<any>;
+
+  /**
+   * Constructor
+   *
+   * @param {AcademyCourseService} _academyCourseService
+   * @param {ChangeDetectorRef} _changeDetectorRef
+   * @param {FuseSidebarService} _fuseSidebarService
+   */
   constructor(
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _fuseSidebarService: FuseSidebarService,
+    private _activedRoute: ActivatedRoute,
+    private _router: Router,
     private _sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService
   ) {
     super();
+
+    // Set the defaults
+    this.animationDirection = 'none';
+    this.currentStep = 0;
+
+    // Set the private defaults
+    this._unsubscribeAll = new Subject();
   }
 
-  ngOnInit() {
+  // -----------------------------------------------------------------------------------------------------
+  // @ Lifecycle hooks
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * On init
+   */
+  ngOnInit(): void {
+    this.course = {
+      'id': '15459251a6d6b397565',
+      'title': 'Trợ giúp người dùng',
+      'slug': 'basics-of-angular',
+      'description': 'Commits that need to be pushed lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      'category': 'web',
+      'length': 30,
+      'totalSteps': 11,
+      'updated': 'Jun 28, 2017',
+      'steps': this.demoSteps
+    };
+
+
+    //this.onGettingPathParams();
     this.onListAccountsLoaded();
   }
 
-  ngAfterViewInit() {
+  onGettingPathParams() {
+    const sub = this._activedRoute.params
+      .subscribe((params: any) => {
+        const { problemId } = params;
+        const problemIndex = _.findIndex(this.demoSteps, step => step.id === problemId);
 
+        if (problemIndex < 0)
+          return this._router.navigateByUrl('/danh-sach-tai-khoan');
+
+        this.currentStep = problemIndex;
+
+      });
+    this.subscriptions.push(sub);
   }
 
   onListAccountsLoaded() {
@@ -420,4 +187,91 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, A
       });
     this.subscriptions.push(sub);
   }
+
+  /**
+   * After view init
+   */
+  ngAfterViewInit(): void {
+    this.courseStepContent = this.fuseScrollbarDirectives.find((fuseScrollbarDirective) => {
+      return fuseScrollbarDirective.elementRef.nativeElement.id === 'course-step-content';
+    });
+  }
+
+  /**
+   * On destroy
+   */
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Go to step
+   *
+   * @param step
+   */
+  gotoStep(step): void {
+    // Decide the animation direction
+    this.animationDirection = this.currentStep < step ? 'left' : 'right';
+
+    // Run change detection so the change
+    // in the animation direction registered
+    this._changeDetectorRef.detectChanges();
+
+    // Set the current step
+    this.currentStep = step;
+  }
+
+  /**
+   * Go to next step
+   */
+  gotoNextStep(): void {
+    if (this.currentStep === this.course.totalSteps - 1) {
+      return;
+    }
+
+    // Set the animation direction
+    this.animationDirection = 'left';
+
+    // Run change detection so the change
+    // in the animation direction registered
+    this._changeDetectorRef.detectChanges();
+
+    // Increase the current step
+    this.currentStep++;
+  }
+
+  /**
+   * Go to previous step
+   */
+  gotoPreviousStep(): void {
+    if (this.currentStep === 0) {
+      return;
+    }
+
+    // Set the animation direction
+    this.animationDirection = 'right';
+
+    // Run change detection so the change
+    // in the animation direction registered
+    this._changeDetectorRef.detectChanges();
+
+    // Decrease the current step
+    this.currentStep--;
+  }
+
+  /**
+   * Toggle the sidebar
+   *
+   * @param name
+   */
+  toggleSidebar(name): void {
+    this._fuseSidebarService.getSidebar(name).toggleOpen();
+  }
 }
+

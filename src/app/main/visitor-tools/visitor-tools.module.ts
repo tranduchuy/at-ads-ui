@@ -9,6 +9,7 @@ import { ColorCircleModule } from 'ngx-color/circle';
 import { FakeCustomerComponent } from './fake-customer/fake-customer.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { EventWidgetComponent } from './event-widget/event-widget.component';
+import { FuseSidebarModule } from '@fuse/components';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EventWidgetComponent } from './event-widget/event-widget.component';
     Ng5SliderModule,
 
     FuseSharedModule,
+    FuseSidebarModule,
 
     VisitorToolsRoutingModule
   ]
