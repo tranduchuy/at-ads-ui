@@ -47,7 +47,7 @@
     </p>
 
     <div class="content__charts" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
-      <div class="section section__pie-chart" fxFlex="25">
+      <div class="section section__pie-chart" fxFlex="22">
 
         <div class="section__title">
           <span>Báo cáo tổng thể click quảng cáo <br>(<span [(ngModel)]="selectedDateRange"
@@ -99,7 +99,7 @@
           </div>
         </div>
       </div>
-      <div class="section section__line-chart" fxFlex="75">
+      <div class="section section__line-chart" fxFlex="78">
         <div class="section__title">
           <span>Thống kê click quảng cáo mỗi ngày (<span [(ngModel)]="selectedDateRange"
               ngDefaultControl>{{selectedDateRange.start | date: 'dd/MM/yyyy'}}</span> - <span

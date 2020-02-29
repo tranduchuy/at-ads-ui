@@ -1,5 +1,7 @@
 @import "src/@fuse/scss/fuse";
 
+$stepTitleFontSize: 12px;
+
 #academy-course {
   .sidebar {
     .steps {
@@ -92,6 +94,7 @@
 
         .title {
           display: flex;
+          font-size: $stepTitleFontSize;
         }
       }
     }
@@ -146,7 +149,7 @@
           .instruction-step-body {
             padding-bottom: 20px;
             .instruction-step-title {
-              font-size: 12px;
+              font-size: $stepTitleFontSize;
               color: rgba(0, 0, 0, 0.7);
 
               .step-highline {
