@@ -14,7 +14,6 @@ import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-b
   selector: 'app-user-help',
   templateUrl: './user-help.component.html',
   styleUrls: ['./user-help.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
 export class UserHelpComponent extends PageBaseComponent implements OnInit, OnDestroy, AfterViewInit {

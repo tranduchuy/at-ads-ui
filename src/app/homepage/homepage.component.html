@@ -32,10 +32,10 @@
          <div class="decor-bg"></div>
          <div class="banner-container" fxLayout="column">
 
-            <div fxFlex="60" class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column"
+            <div fxFlex="62" class="banner-content-wrapper content-wrapper" fxLayout="row" fxLayout.xs="column"
                fxLayoutGap.xs="0" fxLayoutGap.sm="15px" fxLayoutGap="30px">
 
-               <div class="banner" fxFlex="60" fxFlexAlign="end">
+               <div class="banner animated bounceInLeft" fxFlex="60" fxFlexAlign="end">
 
                   <div class="app-title">
                      <div class="insider">
@@ -81,7 +81,7 @@
 
                </div>
 
-               <div class="banner-image" fxFlex="40" fxFlexAlign="end">
+               <div class="banner-image animated bounceInRight" fxFlex="40" fxFlexAlign="end">
                   <div class="__pc">
                      <img src="../../assets/images/usage5-pc.png" alt="" class="__pc__image">
                      <div class="__mobile">
@@ -102,7 +102,7 @@
          </div>
       </div>
 
-      <div class="content content-wrapper">
+      <div class="content content-wrapper animated bounceInUp" *ngIf="!isProcessing">
          <div class="table">
 
             <div class="table-wrapper" *ngIf="!isProcessing">
@@ -229,7 +229,7 @@
 
          </div>
 
-         <div class="instruction-container" *ngIf="isInstructionDisplayed">
+         <div class="instruction-container">
             <div class="instruction">
                <p class="steps-main-title">
                   3 bước phát hiện & Chặn click ảo
@@ -297,7 +297,7 @@
             </div>
          </div>
 
-         <div class="feature-container" *ngIf="isFeatureDisplayed">
+         <div class="feature-container" data-wow-delay="0.5s">
             <div class="feature" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="90px"
                fxLayoutGap.xs="20px" fxLayoutGap.sm="40px" fxLayoutGap.md="40px">
                <div class="overview" fxFlex="25">
@@ -449,7 +449,7 @@
             </div>
          </div>
 
-         <div class="benefit-container" *ngIf="isBenefitDisplayed">
+         <div class="benefit-container">
             <div class="benefit">
 
                <div class="benefit-title">
@@ -522,7 +522,7 @@
 
    <div class="footer-container">
       <div class="footer content-wrapper" fxLayout="row" fxLayoutGap="80px" fxLayout.xs="column" fxLayoutGap.xs="20px"
-         fxLayoutGap.sm="40px" *ngIf="isFooterDisplayed">
+         fxLayoutGap.sm="40px">
 
          <div class="footer-col1" fxFlex="33.33">
             <div class="footer-title1">FAQ</div>

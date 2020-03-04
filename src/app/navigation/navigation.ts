@@ -166,14 +166,14 @@ export const navigation: FuseNavigation[] = [
         icon: 'person_pin',
         url: '/cong-cu-khach-hang/gia-khach-mua-hang',
       },
-      // {
-      //   id: 'event-widget',
-      //   title: 'Hút khách',
-      //   translate: 'NAV.SAMPLE.TITLE',
-      //   type: 'item',
-      //   icon: 'card_giftcard',
-      //   url: '/cong-cu-khach-hang/hut-khach',
-      // }
+      {
+        id: 'event-widget',
+        title: 'Hút khách',
+        translate: 'NAV.SAMPLE.TITLE',
+        type: 'item',
+        icon: 'card_giftcard',
+        url: '/cong-cu-khach-hang/hut-khach',
+      }
     ]
   },
   {

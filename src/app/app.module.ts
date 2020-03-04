@@ -41,7 +41,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { PreviousRouteService } from './shared/services/previous-route.service';
 import { FakeDbService } from './fake-db/fake-db.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { UserHelpComponent } from './main/user-help/user-help.component';
+import { NgwWowModule } from 'ngx-wow';
 
 const config: SocketIoConfig = {
   url: environment.hostApi + '/WEB_HOMEPAGE',
@@ -105,6 +105,8 @@ export function init_app(appInitService: AppInitService): any {
     MatTableModule,
 
     AppRoutingModule,
+
+    NgwWowModule,
 
     // Cookie
 

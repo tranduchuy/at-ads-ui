@@ -2,11 +2,15 @@
 
   <div class="header" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="center start"
     fxLayoutGap="50px" fxLayoutGap.xs="10px">
-    <div class="header__text" fxFlex="55">
-      BÁO CÁO CLICK QUẢNG CÁO - TÀI KHOẢN <span class="header__adsId" *ngIf="selectedAdsId">{{selectedAdsId}}</span>
+    <div class="header__title" fxFlex="55">
+      <span class="header__title__text">BÁO CÁO CLICK QUẢNG CÁO - TÀI KHOẢN</span>
+      <span class="header__title__adsId" *ngIf="selectedAdsId">
+        <img src="../../../../assets/icons/gg-ads.png" alt="">
+        {{selectedAdsId}}
+      </span>
     </div>
 
-    <div class="header__no-website-notify" *ngIf="hasWebsite === false">
+    <div class="header__no-website-notifier" *ngIf="hasWebsite === false">
       Không tìm thấy website nào.
     </div>
 
@@ -25,13 +29,15 @@
       <mat-icon matPrefix class="header__icon">web</mat-icon>
     </mat-form-field>
 
-    <mat-form-field class="header__date-picker" appearance="outline">
-      <mat-label>Khoảng thời gian thống kê</mat-label>
-      <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
-        startKey="start" endKey="end" [material]="true" [ranges]="ranges" (datesUpdated)="onSelectDateRange($event)"
-        (change)="onApplyDateRange()" ngDefaultControl />
-      <mat-icon matPrefix class="header__icon">access_time</mat-icon>
-    </mat-form-field>
+    <div class="header__date-picker">
+      <mat-form-field appearance="outline">
+        <mat-label>Khoảng thời gian thống kê</mat-label>
+        <input type="text" ngxDaterangepickerMd matInput readonly [locale]="locale" [(ngModel)]="selectedDateRange"
+          startKey="start" endKey="end" [material]="true" [ranges]="ranges" (datesUpdated)="onSelectDateRange($event)"
+          (change)="onApplyDateRange()" ngDefaultControl />
+        <mat-icon matPrefix class="header__icon">access_time</mat-icon>
+      </mat-form-field>
+    </div>
 
   </div>
 

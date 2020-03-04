@@ -55,7 +55,7 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
     private http: HttpClient,
     private _authService: AuthService,
     private _router: Router,
-    private _homepageService: HomepageService,
+    private _homepageService: HomepageService
   ) {
 
     super();

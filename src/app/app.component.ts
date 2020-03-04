@@ -18,6 +18,7 @@ import { SessionService } from './shared/services/session.service';
 import { PageBaseComponent } from './shared/components/base/page-base.component';
 import { Meta } from '@angular/platform-browser';
 import { environment } from 'environments/environment';
+import { NgwWowService } from 'ngx-wow';
 
 @Component({
     selector: 'app',
@@ -43,7 +44,8 @@ export class AppComponent extends PageBaseComponent implements OnInit, OnDestroy
         private _translateService: TranslateService,
         private _platform: Platform,
         private _sessionService: SessionService,
-        private _meta: Meta
+        private _meta: Meta,
+        private _wowService: NgwWowService
     ) {
         super();
 
@@ -110,6 +112,9 @@ export class AppComponent extends PageBaseComponent implements OnInit, OnDestroy
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+
+        // Init Wow Js
+        this._wowService.init();
     }
 
     // -----------------------------------------------------------------------------------------------------

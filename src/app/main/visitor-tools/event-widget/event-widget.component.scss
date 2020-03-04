@@ -1,6 +1,16 @@
 @import "src/@fuse/scss/fuse";
 
-$stepTitleFontSize: 12px;
+$primaryFontSize: 12px;
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
 
 #academy-course {
   .sidebar {
@@ -12,16 +22,33 @@ $stepTitleFontSize: 12px;
     .steps {
       padding: 16px 0;
 
+      .tab-search {
+        padding: 16px;
+
+        label {
+          font-size: $primaryFontSize;
+        }
+
+        input {
+          font-size: $primaryFontSize;
+        }
+
+        mat-icon {
+          font-size: 16px;
+        }
+      }
+
       .step {
         position: relative;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         padding: 16px;
+        margin-left: 5px;
         cursor: pointer;
 
         &.current {
-          background: #ff9e0e;
+          background: #0b2b9e;
           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
           color: white;
           border-top-left-radius: 24px;
@@ -105,7 +132,7 @@ $stepTitleFontSize: 12px;
 
         .title {
           display: flex;
-          font-size: $stepTitleFontSize;
+          font-size: $primaryFontSize;
         }
       }
     }
@@ -122,10 +149,49 @@ $stepTitleFontSize: 12px;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
       color: white;
 
-      background-color: #ffbc14;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 800'%3E%3Cg %3E%3Ccircle fill='%23ffbc14' cx='400' cy='400' r='600'/%3E%3Ccircle fill='%23e79e14' cx='400' cy='400' r='500'/%3E%3Ccircle fill='%23cd8215' cx='400' cy='400' r='400'/%3E%3Ccircle fill='%23b16713' cx='400' cy='400' r='300'/%3E%3Ccircle fill='%23944f11' cx='400' cy='400' r='200'/%3E%3Ccircle fill='%2377380d' cx='400' cy='400' r='100'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: cover;
+      background-color: #0b2b9e;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 800'%3E%3Cg %3E%3Ccircle fill='%230b2b9e' cx='400' cy='400' r='600'/%3E%3Ccircle fill='%2307278f' cx='400' cy='400' r='500'/%3E%3Ccircle fill='%23052380' cx='400' cy='400' r='400'/%3E%3Ccircle fill='%23041e71' cx='400' cy='400' r='300'/%3E%3Ccircle fill='%23041a62' cx='400' cy='400' r='200'/%3E%3Ccircle fill='%23041654' cx='400' cy='400' r='100'/%3E%3C/g%3E%3C/svg%3E");
+      background-attachment: fixed;
+      background-size: cover;
+
+      .header__title {
+        font-size: $primaryFontSize + 4;
+        font-weight: bold;
+      }
+
+      .header__no-website-notifier {
+        font-size: $primaryFontSize;
+        font-weight: normal;
+      }
+
+      .header__website-selection {
+        margin-top: 25px;
+
+        mat-label {
+          color: #eee;
+          font-size: $primaryFontSize;
+        }
+
+        .mat-select {
+          font-size: $primaryFontSize !important;
+          font-weight: bold;
+        }
+
+        .header__website-selection__icon {
+          font-size: 18px;
+          color: white;
+          margin-right: 3px;
+        }
+      }
+
+      /* Border */
+      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: silver !important;
+      }
+
+      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 0.5em 0 0.5em 0 !important;
+      }
     }
 
     .content {
@@ -137,13 +203,69 @@ $stepTitleFontSize: 12px;
       background-attachment: fixed;
       background-size: cover;
 
+      .event-widget__sample {
+        .__container {
+          position: fixed;
+          z-index: 10;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(6px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .__div-iframe {
+            font-size: 16px;
+            position: relative;
+
+            .__iframe {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+
+            .__btn-close {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              overflow: hidden;
+              cursor: pointer;
+              opacity: 0.6;
+
+              position: absolute;
+              z-index: 2;
+              right: 1%;
+              top: 1%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              mat-icon {
+                font-size: 20px;
+                color: rgba(0, 0, 0, 0.8);
+              }
+
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+
       .course-step {
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        padding: 48px;
+        padding: 10px;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
 
@@ -156,18 +278,106 @@ $stepTitleFontSize: 12px;
         }
 
         .course-step-content {
-          padding: 24px;
+          // padding: 24px;
           // max-width: 720px;
-          margin: 0 auto;
-          width: 100%;
-          border-radius: 8px;
-          background: white;
-          @include mat-elevation(1);
+          // margin: 0 auto;
+          // width: 100%;
+          // border-radius: 8px;
+          // background: white;
+          // @include mat-elevation(1);
+
+          mat-grid-tile {
+            $widgetBorderRadius: 7px;
+            border-radius: $widgetBorderRadius;
+            overflow: hidden;
+
+            box-sizing: border-box;
+            background-size: 100% 100%;
+            @include mat-elevation(1);
+
+            .event-widget {
+              width: 100%;
+              height: 100%;
+              position: relative;
+              cursor: pointer;
+
+              @extend .no-select;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: 0.4s;
+              }
+
+              &:hover {
+                img {
+                  transform: scale(1.2, 1.2);
+                }
+              }
+
+              animation: widgetFadeIn 0.6s ease;
+              @keyframes widgetFadeIn {
+                from {
+                  opacity: 0;
+                }
+                to {
+                  opacity: 1;
+                }
+              }
+
+              .event-widget__menu {
+                position: absolute;
+                z-index: 3;
+                top: 1%;
+                right: 0;
+                width: 15%;
+                height: 99%;
+                border-top-right-radius: $widgetBorderRadius;
+                border-bottom-right-radius: $widgetBorderRadius;
+                list-style: none;
+                padding-left: 10px;
+                margin: 0;
+                text-align: center;
+                box-sizing: border-box;
+
+                button {
+                  display: flex;
+                  justify-content: center;
+                  margin-top: 10px;
+                  max-width: 35px;
+                  max-height: 35px;
+                  box-sizing: border-box;
+                  border-radius: 50%;
+                  background: rgba(0, 0, 0, 0.5);
+
+                  mat-icon {
+                    color: white;
+                    font-size: 14px;
+                  }
+                }
+
+                animation: menuSlideInRight 0.2s ease-out;
+                -webkit-animation: menuSlideInRight 0.2s ease-out;
+                @keyframes menuSlideInRight {
+                  from {
+                    right: -100px;
+                  }
+                  to {
+                    right: 0;
+                  }
+                }
+              }
+            }
+          }
 
           .instruction-step-body {
             padding-bottom: 20px;
             .instruction-step-title {
-              font-size: $stepTitleFontSize;
+              font-size: $primaryFontSize;
               color: rgba(0, 0, 0, 0.7);
 
               .step-highline {

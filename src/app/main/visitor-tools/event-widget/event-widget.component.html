@@ -4,24 +4,44 @@
   <div class="center">
 
     <!-- HEADER -->
-    <div class="header accent p-24" fxLayout="row"
-      fxLayoutAlign="start center">
+    <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
 
       <!-- <button mat-icon-button class="mr-16" [routerLink]="'/apps/academy/courses'">
           <mat-icon>arrow_back</mat-icon>
         </button> -->
 
-      <div fxFlex="95">
-        <h3>
-          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-            <mat-icon>card_giftcard</mat-icon>
-            <span>CÔNG CỤ KHÁCH HÀNG</span>
-            <mat-icon>arrow_right</mat-icon>
-            <span>HÚT KHÁCH</span>
-            <mat-icon>arrow_right</mat-icon>
-            <span>{{demoSteps[currentStep].title}}</span>
+      <div class="header__title" fxFlex="95" fxLayout="row" fxLayoutAlign="start center">
+
+        <div fxFlex="80" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon>card_giftcard</mat-icon>
+          <span>CÔNG CỤ KHÁCH HÀNG</span>
+          <mat-icon>arrow_right</mat-icon>
+          <span>HÚT KHÁCH</span>
+          <mat-icon>arrow_right</mat-icon>
+          <span>{{demoSteps[currentStep].title}}</span>
+        </div>
+
+        <div fxFlex="20">
+          <div class="header__no-website-notifier" *ngIf="hasWebsite === false">
+            Không tìm thấy website nào.
           </div>
-        </h3>
+
+          <mat-form-field class="header__website-selection" *ngIf="hasWebsite === true" appearance="outline">
+            <mat-label>Lựa chọn website</mat-label>
+            <mat-select [formControl]="websiteCtrl" #singleSelect (selectionChange)="selectWebsite()"
+              [disabled]="isProcessing === true">
+              <mat-option>
+                <ngx-mat-select-search [formControl]="websiteFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
+                  [noEntriesFoundLabel]="'Không tìm thấy website nào'"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let website of filteredWebsites | async" [value]="website">
+                {{website.name}}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix class="header__website-selection__icon">web</mat-icon>
+          </mat-form-field>
+        </div>
+
       </div>
 
       <button mat-icon-button class="sidebar-toggle" fxHide.gt-md
@@ -37,223 +57,67 @@
 
       <ng-container *ngFor="let step of course.steps; let i = index;">
 
-        <div class="course-step" fusePerfectScrollbar *ngIf="currentStep === i" [@slideIn]="animationDirection">
+        <div class="course-step" fusePerfectScrollbar *ngIf="currentStep === i">
 
           <div id="course-step-content" class="course-step-content">
-            <h2>{{step.title}}</h2>
 
-            <div *ngIf="step.id === 'tp2S0PwPHtDqMfvx'">
-
-              <div class="instruction-step-body">
-                <div class="instruction-step-title">
-                  <h4>Bước 1: Kết nối tài khoản Google Ads của bạn</h4>
-                  Đến trang <span class="step-highline">Kết nối tài khoản</span>, bạn có thể kết nối tài khoản Google
-                  Ads
-                  bằng 2 cách:
-
-                  <div>
-                    <p>
-                      <strong>Cách 1:</strong>
-                      <br>
-                      Kết nối thông qua <span class="step-highline">Gmail</span> bằng cách nhấn nút
-                      <span class="step-highline">Kết nối nhanh bằng Gmail</span>, chọn tài khoản Google Ads và nhấn nút
-                      <span class="step-highline">Kết nối tài khoản</span>.
-                    </p>
-                    <div>
-                      <img src="../../../assets/images/tool-usage1.1.png" alt="">
-                    </div>
-                  </div>
-
-                  <div>
-                    <p>
-                      <br>
-                      <strong>Cách 2:</strong>
-                      <br>
-                      Nhập <span class="step-highline">Google Ads ID</span> vào khung bên
-                      phải, sau đó nhấn nút <span class="step-highline">Kết nối</span> và làm theo các hướng dẫn để hoàn
-                      tất
-                      kết
-                      nối.
-                    </p>
-                    <div>
-                      <img src="../../../assets/images/tool-usage1.2.png" alt="">
-                    </div>
-                  </div>
-
+            <mat-grid-list [cols]="3" rowHeight="3:2" gutterSize="5px" #grid>
+              <mat-grid-tile *ngFor="let w of widgets; let i = index">
+                <div class="event-widget" (mouseover)="toggleMenuCheckList[i].isToggled = true"
+                  (mouseout)="toggleMenuCheckList[i].isToggled = false" (click)="onClickBtnShowWidgetSample(i)">
+                  <img [src]="w.sampleImage" alt="">
+                  <ul class="event-widget__menu" [hidden]="toggleMenuCheckList[i].isToggled === false">
+                    <li>
+                      <button mat-icon-button matTooltip="Xem mẫu thử" (click)="onClickBtnShowWidgetSample(i)">
+                        <mat-icon>remove_red_eye</mat-icon>
+                      </button>
+                    </li>
+                    <li>
+                      <button mat-icon-button matTooltip="Thiết lập cho website">
+                        <mat-icon>settings</mat-icon>
+                      </button>
+                    </li>
+                  </ul>
                 </div>
-              </div>
-
-              <div class="instruction-step-body">
-                <div class="instruction-step-title">
-                  <h4>Bước 2: Gắn tracking cho các chiến dịch cần theo dõi</h4>
-                  Đến trang <span class="step-highline">Gắn tracking chiến dịch</span>, bạn cần check vào cột <span
-                    class="step-highline">Gắn mã</span> đối với các chiến dịch của website cần gắn tracking, sau đó nhấn
-                  nút
-                  <span class="step-highline">Gắn mã tracking</span> để hoàn tất.
-                </div>
-                <p>
-                  <img src="../../../assets/images/tool-usage2.png" alt="">
-                </p>
-              </div>
-
-              <div class="instruction-step-body">
-                <div class="instruction-step-title">
-                  <h4>Bước 3: Thêm website vào tài khoản Google Ads đã kết nối</h4>
-                  Đến trang <span class="step-highline">Quản lý tài khoản</span>, bạn tìm đến tài
-                  khoản Google Ads của bạn và nhấn vào nút <span class="step-highline">Thêm website</span> tại cột <span
-                    class="step-highline">Website của tài khoản</span>.
-                </div>
-                <br>
-                <div>
-                  <img src="../../../assets/images/tool-usage0.png" alt="">
-                </div>
-
-                <br>
-
-                <p class="instruction-step-title">
-                  Tại trang <span class="step-highline">Website đang quảng cáo trong tài khoản</span>, bạn nhập tên miền
-                  vào khung bên dưới và nhấn nút <span class="step-highline">Thêm website</span> để thêm website cần gắn
-                  tracking vào tài khoản Google Ads.
-                </p>
-                <div>
-                  <img src="../../../assets/images/tool-usage3.png" alt="">
-                </div>
-              </div>
-
-              <div class="instruction-step-body">
-                <div class="instruction-step-title">
-                  <h4>Bước 4: Gẵn tracking vào website cần theo dõi</h4>
-                  Đến trang <span class="step-highline">Quản lý tài khoản</span>, bạn tìm đến tài
-                  khoản Google Ads của bạn và nhấn vào biểu tượng <mat-icon class="tracking-icon">code</mat-icon> sẽ dẫn
-                  bạn đến trang gắn mã tracking.
-                </div>
-                <p>
-                  <img src="../../../assets/images/tool-usage0.png" alt="">
-                </p>
-
-                <br>
-
-                <p class="instruction-step-title">
-                  Tại trang <span class="step-highline">Gắn mã tracking cho website</span>, bạn vui lòng làm theo hướng
-                  dẫn tại đây để hoàn tất gắn tracking cho website của bạn.
-                </p>
-                <div>
-                  <img src="../../../assets/images/tool-usage4.png" alt="">
-                </div>
-              </div>
-
-              <div class="instruction-step-body">
-                <div class="instruction-step-title">
-                  <h4>Bước 5: Xem báo cáo click thật, click ảo cho website của bạn</h4>
-                  Đến trang <span class="step-highline">Báo cáo click ảo</span> để xem báo click thật, click ảo trên
-                  website của bạn.
-                </div>
-                <p>
-                  <img src="../../../assets/images/tool-usage5.png" alt="">
-                </p>
-              </div>
-
-            </div>
-
-            <div *ngIf="step.id === 'fI10j2DfAFexKoOQ'">
-              <div class="instruction-step-body">
-
-                <div class="instruction-step-title">
-                  <h4>Bước 1</h4>
-                  Đăng nhập vào tài khoản Google Ads của bạn
-                  tại
-                  trang
-                  <b><a href="https://ads.google.com/intl/vi_VN/home/" target="_blank">Adwords.google.com</a></b> và
-                  nhấn
-                  vào biểu
-                  tượng ở
-                  menu
-                  bên góc trái - phía trên màn hình. Tại mục <span class="step-highline">CÀI ĐẶT</span> nhấn
-                  chọn <span class="step-highline">Truy cập tài khoản</span>
-                </div>
-
-                <p>
-                  <img src="../../../assets/images/adwords-caidat-b1-moi.jpg?v=1" alt="">
-                </p>
-
-              </div>
-
-              <div class="instruction-step-body">
-
-                <div class="instruction-step-title">
-                  <h4>Bước 2</h4>
-                  Nhấn vào <span class="step-highline"> NGƯỜI
-                    QUẢN
-                    LÝ
-                  </span> và chọn
-                  <span class="step-highline">CHẤP NHẬN</span> (nếu bạn
-                  không thấy nút Người Quản Lý, vui lòng chờ khoảng 5 phút)
-                </div>
-
-                <p>
-                  <img src="../../../assets/images/adwords-caidat-b2-moi.jpg" alt="">
-                </p>
-
-              </div>
-
-              <div class="instruction-step-body">
-
-                <div class="instruction-step-title">
-                  <h4>Bước 3</h4>
-                  Một thông báo hiện ra, bạn chọn
-                  <span class="step-highline">CẤP QUYỀN TRUY CẬP</span>
-                </div>
-
-                <p>
-                  <img src="../../../assets/images/adwords-caidat-b3-moi.jpg" alt="">
-                </p>
-
-              </div>
-
-              <div class="instruction-step-body">
-
-                <div class="instruction-step-title">
-                  <h4>Bước 4</h4>
-                  Sau khi đã chấp nhận quyền truy cập, bạn đến trang <span class="step-highline">Quản lý tài
-                    khoản</span>, tìm đến tài
-                  khoản Google Ads của bạn và nhấn vào biểu tượng <mat-icon class="update-icon">synce</mat-icon> tại cột
-                  <span class="step-highline">Tác vụ</span> để
-                  hệ thống cập nhật quyền quản lý tài khoản cho bạn.
-                </div>
-
-                <p>
-                  <img src="../../../assets/images/tool-usage0.png" alt="">
-                </p>
-
-              </div>
-
-            </div>
+              </mat-grid-tile>
+            </mat-grid-list>
 
           </div>
         </div>
 
       </ng-container>
 
+      <div class="event-widget__sample" [hidden]="isWidgetSampleShown === false">
+        <div class="__container">
+          <div class="__div-iframe animated bounceIn" [style.width]="widgetWidth" [style.height]="widgetHeight">
+            <button mat-icon-button class="__btn-close" (click)="onClickBtnCloseWidgetSample()">
+              <mat-icon>close</mat-icon>
+            </button>
+            <iframe scrolling="no" frameborder="0" id="event-widget-sample-iframe" class="__iframe"></iframe>
+          </div>
+        </div>
+      </div>
+
     </div>
     <!-- / CONTENT -->
 
     <!-- <div class="step-navigation">
-  
+
         <button mat-fab class="previous mat-accent fuse-white-fg" (click)="gotoPreviousStep()"
           [disabled]="currentStep === 0" [fxHide]="currentStep === 0">
           <mat-icon>chevron_left</mat-icon>
         </button>
-  
+
         <button mat-fab class="next mat-accent fuse-white-fg" (click)="gotoNextStep()"
           [disabled]="currentStep === course.totalSteps - 1" [fxHide]="currentStep === course.totalSteps - 1">
           <mat-icon>chevron_right</mat-icon>
         </button>
-  
+
         <button mat-fab class="done green-600" routerLink="/apps/academy/courses"
           [disabled]="currentStep !== course.totalSteps - 1" [fxShow]="currentStep === course.totalSteps - 1">
           <mat-icon>check</mat-icon>
         </button>
-  
+
       </div> -->
 
   </div>
@@ -266,6 +130,14 @@
     <div class="content" fusePerfectScrollbar>
 
       <div class="steps">
+
+        <div class="tab-search">
+          <mat-form-field>
+            <mat-label>Tìm kiếm thể loại</mat-label>
+            <input type="text" matInput (keyup)="filterListCategories($event.target.value)" />
+            <mat-icon matPrefix>search</mat-icon>
+          </mat-form-field>
+        </div>
 
         <div class="step" *ngFor="let step of course.steps; let i = index; let last = last; let first = first"
           (click)="gotoStep(i)"

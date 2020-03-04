@@ -1,14 +1,15 @@
 $primaryFontSize: 12px;
 $primaryBorderRadius: 5px;
 $headerForeColor: whitesmoke;
-$headerTextShadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+$headerTextShadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 $primarySectionMargin: 10px;
 $primaryPadding: 10px;
 $primaryMargin: 10px;
 
 .container {
   width: 100%;
-  padding: (2.25 * $primaryPadding) $primaryPadding;
+  padding: $primaryPadding;
+  padding-top: 2.25 * $primaryPadding;
 
   background-color: #00a1e0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 800'%3E%3Cg %3E%3Ccircle fill='%2300a1e0' cx='400' cy='400' r='600'/%3E%3Ccircle fill='%231095d2' cx='400' cy='400' r='500'/%3E%3Ccircle fill='%231889c3' cx='400' cy='400' r='400'/%3E%3Ccircle fill='%231c7eb5' cx='400' cy='400' r='300'/%3E%3Ccircle fill='%231e72a7' cx='400' cy='400' r='200'/%3E%3Ccircle fill='%231f6799' cx='400' cy='400' r='100'/%3E%3C/g%3E%3C/svg%3E");
@@ -22,14 +23,13 @@ $primaryMargin: 10px;
   }
 
   .header {
-    padding-left: $primaryPadding * 2.25;
     color: $headerForeColor;
     font-size: $primaryFontSize + 4;
     text-shadow: $headerTextShadow;
 
     /* Border */
     ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-      color: silver !important;
+      color: #eee !important;
     }
 
     ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
@@ -42,22 +42,36 @@ $primaryMargin: 10px;
       margin-top: -5px;
     }
 
-    .header__text {
-      padding-top: 15px;
+    .header__title {
+      $headerTitlePadding: 15px;
+      padding-top: $headerTitlePadding;
+      padding-left: $headerTitlePadding;
+
       line-height: 35px;
       width: 100%;
       @extend .primary-title;
-    }
 
-    .header__adsId {
-      margin-left: 10px;
-      color: white;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 0 6px 2px 6px;
-      font-size: $primaryFontSize + 2;
-      border-radius: 12px;
-      max-width: 120px;
-      margin: 0 auto;
+      .header__title__text {
+        margin-right: 10px;
+      }
+
+      .header__title__adsId {
+        margin-left: 10px;
+        color: yellow;
+        background: rgba(255, 255, 255, 0.3);
+        padding: 2px 10px 4px 10px;
+        font-size: $primaryFontSize + 2;
+        border-radius: 12px;
+        box-sizing: border-box;
+        margin: 0 auto;
+
+        img {
+          width: 13px;
+          margin-top: 12px;
+          margin-right: 3px;
+          filter: drop-shadow(0.5px 0.5px 1px rgba(0, 0, 0, 0.2));
+        }
+      }
     }
 
     mat-label {
@@ -68,30 +82,44 @@ $primaryMargin: 10px;
     .header__website-selection {
       width: 250px;
 
-      ::ng-deep .mat-select {
-        .mat-select-value {
-          color: $headerForeColor;
-          font-size: $primaryFontSize;
-          font-weight: bold;
-        }
-        .mat-select-arrow {
-          color: $headerForeColor;
-        }
+      .mat-select {
+        font-size: $primaryFontSize;
+      }
+
+      ::ng-deep .mat-select-value {
+        color: $headerForeColor !important;
+        font-weight: bold;
+      }
+
+      ::ng-deep .mat-select-arrow {
+        color: $headerForeColor !important;
       }
     }
 
     .header__date-picker {
-      width: 250px;
+      mat-form-field {
+        width: 250px;
 
-      input {
-        font-size: $primaryFontSize;
-        font-weight: bold;
-        text-shadow: $headerTextShadow;
+        input {
+          font-size: $primaryFontSize;
+          font-weight: bold;
+          text-shadow: $headerTextShadow;
+        }
+      }
+
+      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding-top: 0.3em !important;
       }
     }
 
     .header__no-website-notifier {
       font-size: $primaryFontSize;
+      font-weight: normal;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      padding-top: 20px;
     }
   }
 
