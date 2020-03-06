@@ -164,21 +164,21 @@ export class HomepageComponent extends PageBaseComponent implements OnInit, Afte
               createdAt: item.createdAt,
               ip: item.ip,
               device: {
-                name: item.device !== undefined ? item.device.vendor : null
+                name: item.device ? item.device.vendor : null
               },
               os: {
-                name: item.os !== undefined ? item.os.name : null,
-                version: item.os !== undefined ? item.os.version : null
+                name: item.os ? item.os.name : null,
+                version: item.os ? item.os.version : null
               },
               browser: {
-                name: item.browser !== undefined ? item.browser.name : null,
-                version: item.browser !== undefined ? item.browser.version : null
+                name: item.browser ? item.browser.name : null,
+                version: item.browser ? item.browser.version : null
               },
               network: {
-                name: item.networkCompany !== undefined ? item.networkCompany.name : null
+                name: item.networkCompany ? item.networkCompany.name : null
               },
               location: {
-                city: item.location !== undefined ? item.location.city : null
+                city: item.location ? item.location.city : null
               },
               keyword: item.keyword || null,
               campaignType: item.campaignType || null,

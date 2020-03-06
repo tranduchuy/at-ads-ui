@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { SendInfoComponent } from './send-info/send-info.component';
 import { FakeCustomerComponent } from './fake-customer/fake-customer.component';
 import { EventWidgetComponent } from './event-widget/event-widget.component';
+import { EventWidgetConfigPanelComponent } from './event-widget-config-panel/event-widget-config-panel.component';
 
 @NgModule({
   imports: [

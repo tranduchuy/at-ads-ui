@@ -4,93 +4,99 @@
   <div class="center">
 
     <!-- HEADER -->
-    <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+    <ng-container *ngIf="isWidgetConfigPanelShown === false">
+      <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
 
-      <!-- <button mat-icon-button class="mr-16" [routerLink]="'/apps/academy/courses'">
-          <mat-icon>arrow_back</mat-icon>
-        </button> -->
+        <div class="header__title" fxFlex="95" fxLayout="row" fxLayoutAlign="start center">
 
-      <div class="header__title" fxFlex="95" fxLayout="row" fxLayoutAlign="start center">
-
-        <div fxFlex="80" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <mat-icon>card_giftcard</mat-icon>
-          <span>CÔNG CỤ KHÁCH HÀNG</span>
-          <mat-icon>arrow_right</mat-icon>
-          <span>HÚT KHÁCH</span>
-          <mat-icon>arrow_right</mat-icon>
-          <span>{{demoSteps[currentStep].title}}</span>
-        </div>
-
-        <div fxFlex="20">
-          <div class="header__no-website-notifier" *ngIf="hasWebsite === false">
-            Không tìm thấy website nào.
+          <div fxFlex="80" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-icon>card_giftcard</mat-icon>
+            <span>CÔNG CỤ KHÁCH HÀNG</span>
+            <mat-icon>arrow_right</mat-icon>
+            <span>HÚT KHÁCH</span>
+            <mat-icon>arrow_right</mat-icon>
+            <span>{{demoSteps[currentStep].title}}</span>
           </div>
 
-          <mat-form-field class="header__website-selection" *ngIf="hasWebsite === true" appearance="outline">
-            <mat-label>Lựa chọn website</mat-label>
-            <mat-select [formControl]="websiteCtrl" #singleSelect (selectionChange)="selectWebsite()"
-              [disabled]="isProcessing === true">
-              <mat-option>
-                <ngx-mat-select-search [formControl]="websiteFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
-                  [noEntriesFoundLabel]="'Không tìm thấy website nào'"></ngx-mat-select-search>
-              </mat-option>
-              <mat-option *ngFor="let website of filteredWebsites | async" [value]="website">
-                {{website.name}}
-              </mat-option>
-            </mat-select>
-            <mat-icon matPrefix class="header__website-selection__icon">web</mat-icon>
-          </mat-form-field>
+          <div fxFlex="20">
+            <div class="header__no-website-notifier" *ngIf="hasWebsite === false">
+              Không tìm thấy website nào.
+            </div>
+
+            <mat-form-field class="header__website-selection" *ngIf="hasWebsite === true" appearance="outline">
+              <mat-label>Lựa chọn website</mat-label>
+              <mat-select [formControl]="websiteCtrl" #singleSelect (selectionChange)="selectWebsite()"
+                [disabled]="isProcessing === true">
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="websiteFilterCtrl" [placeholderLabel]="'Tìm kiếm'"
+                    [noEntriesFoundLabel]="'Không tìm thấy website nào'"></ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let website of filteredWebsites | async" [value]="website">
+                  {{website.name}}
+                </mat-option>
+              </mat-select>
+              <mat-icon matPrefix class="header__website-selection__icon">web</mat-icon>
+            </mat-form-field>
+          </div>
+
         </div>
 
+        <button mat-icon-button class="sidebar-toggle" fxHide.gt-md
+          (click)="toggleSidebar('academy-course-left-sidebar-1')">
+          <mat-icon>menu</mat-icon>
+        </button>
+
       </div>
-
-      <button mat-icon-button class="sidebar-toggle" fxHide.gt-md
-        (click)="toggleSidebar('academy-course-left-sidebar-1')">
-        <mat-icon>menu</mat-icon>
-      </button>
-
-    </div>
+    </ng-container>
     <!-- / HEADER -->
 
     <!-- CONTENT -->
     <div id="course-content" class="content">
 
-      <ng-container *ngFor="let step of course.steps; let i = index;">
+      <ng-container *ngIf="isWidgetConfigPanelShown === true">
+        <app-event-widget-config-panel (close)="closeWidgetConfigPanel($event)" [widget]="selectedWidget">
+        </app-event-widget-config-panel>
+      </ng-container>
 
-        <div class="course-step" fusePerfectScrollbar *ngIf="currentStep === i">
+      <ng-container *ngIf="isWidgetConfigPanelShown === false">
+        <ng-container *ngFor="let step of course.steps; let i = index;">
 
-          <div id="course-step-content" class="course-step-content">
+          <div class="course-step" fusePerfectScrollbar *ngIf="currentStep === i">
 
-            <mat-grid-list [cols]="3" rowHeight="3:2" gutterSize="5px" #grid>
-              <mat-grid-tile *ngFor="let w of widgets; let i = index">
-                <div class="event-widget" (mouseover)="toggleMenuCheckList[i].isToggled = true"
-                  (mouseout)="toggleMenuCheckList[i].isToggled = false" (click)="onClickBtnShowWidgetSample(i)">
-                  <img [src]="w.sampleImage" alt="">
-                  <ul class="event-widget__menu" [hidden]="toggleMenuCheckList[i].isToggled === false">
-                    <li>
-                      <button mat-icon-button matTooltip="Xem mẫu thử" (click)="onClickBtnShowWidgetSample(i)">
-                        <mat-icon>remove_red_eye</mat-icon>
-                      </button>
-                    </li>
-                    <li>
-                      <button mat-icon-button matTooltip="Thiết lập cho website">
-                        <mat-icon>settings</mat-icon>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </mat-grid-tile>
-            </mat-grid-list>
+            <div id="course-step-content" class="course-step-content">
 
+              <mat-grid-list [cols]="3" rowHeight="3:2" gutterSize="5px" #grid>
+                <mat-grid-tile *ngFor="let w of widgets; let i = index">
+                  <div class="event-widget animated fadeIn" (mouseover)="toggleMenuCheckList[i].isToggled = true"
+                    (mouseout)="toggleMenuCheckList[i].isToggled = false">
+                    <img [src]="w.sampleImage" alt="">
+                    <ul class="event-widget__menu" [hidden]="toggleMenuCheckList[i].isToggled === false">
+                      <li>
+                        <button mat-icon-button matTooltip="Xem mẫu thử" (click)="showWidgetSample(i)">
+                          <mat-icon>remove_red_eye</mat-icon>
+                        </button>
+                      </li>
+                      <li>
+                        <button mat-icon-button matTooltip="Thiết lập cho website"
+                          (click)="openWidgetConfigPanel(w)">
+                          <mat-icon>settings</mat-icon>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </mat-grid-tile>
+              </mat-grid-list>
+
+            </div>
           </div>
-        </div>
 
+        </ng-container>
       </ng-container>
 
       <div class="event-widget__sample" [hidden]="isWidgetSampleShown === false">
         <div class="__container">
           <div class="__div-iframe animated bounceIn" [style.width]="widgetWidth" [style.height]="widgetHeight">
-            <button mat-icon-button class="__btn-close" (click)="onClickBtnCloseWidgetSample()">
+            <button mat-icon-button class="__btn-close" (click)="hideWidgetSample()">
               <mat-icon>close</mat-icon>
             </button>
             <iframe scrolling="no" frameborder="0" id="event-widget-sample-iframe" class="__iframe"></iframe>
@@ -124,36 +130,38 @@
   <!-- / CENTER -->
 
   <!-- SIDEBAR -->
-  <fuse-sidebar class="sidebar" name="academy-course-left-sidebar-1" position="right" lockedOpen="gt-md">
+  <ng-container *ngIf="isWidgetConfigPanelShown === false">
+    <fuse-sidebar class="sidebar" name="academy-course-left-sidebar-1" position="right" lockedOpen="gt-md">
 
-    <!-- SIDEBAR CONTENT -->
-    <div class="content" fusePerfectScrollbar>
+      <!-- SIDEBAR CONTENT -->
+      <div class="content" fusePerfectScrollbar>
 
-      <div class="steps">
+        <div class="steps">
 
-        <div class="tab-search">
-          <mat-form-field>
-            <mat-label>Tìm kiếm thể loại</mat-label>
-            <input type="text" matInput (keyup)="filterListCategories($event.target.value)" />
-            <mat-icon matPrefix>search</mat-icon>
-          </mat-form-field>
-        </div>
+          <div class="tab-search">
+            <mat-form-field>
+              <mat-label>Tìm kiếm thể loại</mat-label>
+              <input type="text" matInput (keyup)="filterListCategories($event.target.value)" />
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+          </div>
 
-        <div class="step" *ngFor="let step of course.steps; let i = index; let last = last; let first = first"
-          (click)="gotoStep(i)"
-          [ngClass]="{'current': currentStep === i, 'completed': currentStep > i, 'last': last, 'first': first}">
-          <!-- <div class="index">
-            <span>{{i + 1}}</span>
-          </div> -->
-          <div class="title">{{step.title}}</div>
+          <div class="step" *ngFor="let step of course.steps; let i = index; let last = last; let first = first"
+            (click)="gotoStep(i)"
+            [ngClass]="{'current': currentStep === i, 'completed': currentStep > i, 'last': last, 'first': first}">
+            <!-- <div class="index">
+                        <span>{{i + 1}}</span>
+                      </div> -->
+            <div class="title">{{step.title}}</div>
+          </div>
+
         </div>
 
       </div>
+      <!-- / SIDEBAR CONTENT -->
 
-    </div>
-    <!-- / SIDEBAR CONTENT -->
-
-  </fuse-sidebar>
+    </fuse-sidebar>
+  </ng-container>
   <!-- / SIDEBAR -->
 
 </div>

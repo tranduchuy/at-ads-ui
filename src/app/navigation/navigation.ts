@@ -168,7 +168,7 @@ export const navigation: FuseNavigation[] = [
       },
       {
         id: 'event-widget',
-        title: 'Hút khách',
+        title: 'Công cụ hút khách',
         translate: 'NAV.SAMPLE.TITLE',
         type: 'item',
         icon: 'card_giftcard',

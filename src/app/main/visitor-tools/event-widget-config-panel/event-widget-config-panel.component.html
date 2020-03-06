@@ -1,0 +1,84 @@
+<div class="container" fxLayout="column">
+  <div class="header" fxFlex="0 0 10" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+    <button mat-icon-button (click)="closePanel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h3>CÔNG CỤ KHÁCH HÀNG</h3>
+    <mat-icon>arrow_right</mat-icon>
+    <h3>HÚT KHÁCH</h3>
+    <mat-icon>arrow_right</mat-icon>
+    <h3>Tùy chỉnh giao diện</h3>
+  </div>
+  <div class="body" fxFlex="0 0 90" fxLayout="row">
+    <div class="sidebar" fxFlex="0 0 20">
+      <div class="sidebar-list-tab-header" fxLayout="row">
+        <button mat-button fxFlex="0 0 50" [class.selected]="isContentPanelOpened"
+          (click)="isContentPanelOpened = true">Nội dung</button>
+        <button mat-button fxFlex="0 0 50" [class.selected]="!isContentPanelOpened"
+          (click)="isContentPanelOpened = false">Cấu hình</button>
+      </div>
+      <div class="sidebar-list-tab">
+        <div class="sidebar-panel-tab content-panel animated slideInLeft" [hidden]="!isContentPanelOpened">
+          <mat-accordion>
+
+            <mat-expansion-panel class="content-panel-tab" (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false" *ngFor="let c of widget.components; let i = index">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{c.name}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="panel-tab-body">
+                <div class="panel-tab-body-section">
+                  <div class="panel-tab-body-section-title">Nội dung</div>
+                  <div class="panel-tab-body-section-content">
+                    <mat-form-field>
+                      <input matInput value="{{c.text}}" (input)="onChangeTitleInput($event.target.value, i)">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="panel-tab-body-section">
+                  <div class="panel-tab-body-section-title">Màu chữ</div>
+                  <div class="panel-tab-body-section-content">
+                    <color-sketch color="#fff" (onChangeComplete)="onChangeTitleColor($event, i)"></color-sketch>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+
+          </mat-accordion>
+        </div>
+        <div class="sidebar-panel-tab config-panel animated slideInRight" [hidden]="isContentPanelOpened">
+          PANEL TAB
+        </div>
+      </div>
+    </div>
+    <div class="content" fxFlex="0 0 80" fxLayoutAlign="start center">
+
+      <div class="content-inner" fxLayout="column" fxLayoutAlign="center start">
+        <div class="display-mode" fxFlex="0 0 10" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center start">
+          <button mat-button color="warn" (click)="isMobileMode = false" [class.selected]="!isMobileMode">
+            <mat-icon>laptop_mac</mat-icon>
+            <span>Máy tính</span>
+          </button>
+          <button mat-button color="accent" (click)="isMobileMode = true" [class.selected]="isMobileMode">
+            <mat-icon>phone_iphone</mat-icon>
+            <span>Điện thoại</span>
+          </button>
+        </div>
+        <div class="widget-wrapper" fxFlex="0 0 90" fxLayoutAlign="center start">
+          <div class="widget-device animated fadeIn" [class.is-mobile]="isMobileMode" [class.is-pc]="!isMobileMode"
+            fxLayoutAlign="center center">
+            <div class="widget" [class.widget--mobile]="isMobileMode" [class.widget--pc]="!isMobileMode">
+              <iframe src="" [style.width]="widgetWidth" [style.height]="widgetHeight" scrolling="no" frameborder="0"
+                class="widget-iframe" id="event-widget-sample-iframe"></iframe>
+            </div>
+            <div class="is-pc__bg" *ngIf="!isMobileMode"></div>
+            <div class="is-mobile__bg" *ngIf="isMobileMode"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

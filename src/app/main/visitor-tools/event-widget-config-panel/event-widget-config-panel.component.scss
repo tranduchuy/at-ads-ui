@@ -1,0 +1,243 @@
+$primaryBorderRadius: 5px;
+$primaryBackground: white;
+$primaryBoxShadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+$headerForeColor: silver;
+$panelPrimaryForeColor: white;
+$panelSecondaryForeColor: silver;
+$panelFontSize: 12px;
+$panelIconSize: 20px;
+
+.container {
+  width: 100%;
+  height: 100%;
+  background: $primaryBackground;
+
+  .no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+  }
+
+  .full-size {
+    width: 100%;
+    height: 100%;
+  }
+
+  .header {
+    @extend .full-size;
+
+    background-color: #1e1f1c;
+    color: $headerForeColor;
+  }
+
+  .body {
+    @extend .full-size;
+
+    .sidebar {
+      width: 100%;
+      height: 100%;
+      background: #1e1f1c;
+      padding: 10px;
+      overflow: hidden;
+
+      .sidebar-list-tab-header {
+        button {
+          color: $panelSecondaryForeColor;
+          border-radius: 0;
+          border-bottom: 2px solid transparent;
+          font-size: $panelFontSize;
+
+          &.selected {
+            color: $panelPrimaryForeColor;
+            border-bottom-color: orangered;
+          }
+        }
+      }
+
+      .sidebar-list-tab {
+        .sidebar-panel-tab {
+          padding-top: 13.5px;
+
+          &.content-panel {
+            .content-panel-tab {
+              background: rgba(255, 255, 255, 0.2);
+
+              .mat-expansion-panel-header {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                max-height: 35px;
+                padding: 0 12px;
+                @extend .no-select;
+
+                .mat-expansion-panel-header-title {
+                  color: $panelSecondaryForeColor;
+                  font-size: $panelFontSize;
+                }
+
+                ::ng-deep .mat-expansion-indicator::after {
+                  color: $panelSecondaryForeColor;
+                  margin-top: -5px;
+                }
+              }
+
+              .panel-tab-body {
+                padding-left: 4px;
+
+                .panel-tab-body-section {
+                  .panel-tab-body-section-title {
+                    color: $panelSecondaryForeColor;
+                  }
+
+                  .panel-tab-body-section-content {
+                    color: $panelPrimaryForeColor;
+
+                    .mat-form-field {
+                      margin-top: -10px;
+                      width: 100%;
+
+                      ::ng-deep.mat-form-field-underline {
+                        /*change color of underline*/
+                        background-color: $panelSecondaryForeColor !important;
+                      }
+
+                      ::ng-deep.mat-form-field-ripple {
+                        /*change color of underline when focused*/
+                        background-color: $panelSecondaryForeColor !important;
+                      }
+                    }
+
+                    ::ng-deep .sketch-picker {
+                      margin-top: 5px;
+                      background: #272822 !important;
+
+                      span {
+                        color: white !important;
+                      }
+                    }
+                  }
+                }
+              }
+
+              ::ng-deep .mat-expansion-panel-body {
+                padding: 10px !important;
+                color: white;
+                font-size: $panelFontSize;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .content {
+      @extend .full-size;
+
+      .content-inner {
+        @extend .full-size;
+        background: #1e1f1c;
+
+        .display-mode {
+          @extend .full-size;
+          background: #1e1f1c;
+
+          padding-top: 10px;
+
+          button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $panelSecondaryForeColor;
+
+            height: 40px;
+            min-height: 40px;
+            max-height: 40px;
+
+            mat-icon {
+              margin-right: 7px;
+              margin-top: 5px;
+              font-size: 18px;
+              color: $panelSecondaryForeColor;
+            }
+          }
+
+          .selected {
+            background: orangered;
+            color: white;
+
+            mat-icon {
+              color: white;
+            }
+          }
+        }
+
+        .widget-wrapper {
+          @extend .full-size;
+          background: #4a4b49;
+          padding-top: 30px;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+
+          .widget-device {
+            @extend .full-size;
+            height: 480px;
+
+            .widget {
+              font-size: 16px;
+
+              &.widget--mobile {
+                transform: scale(0.4, 0.4);
+              }
+
+              &.widget--pc {
+                margin-top: 15%;
+                transform: scale(0.8, 0.8);
+              }
+            }
+
+            &.is-pc {
+              width: 70%;
+              border-radius: 7px;
+              position: relative;
+              background-image: linear-gradient(-20deg, #d558c8 0%, #24d292 100%);
+              filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.7));
+
+              .is-pc__bg {
+                width: 100%;
+                background: url("../../../../assets/images/backgrounds/157853860662229211.png");
+                background-size: 100% 100%;
+                position: absolute;
+                top: -0.1%;
+                left: -0.1%;
+                width: 100.2%;
+                height: 100.2%;
+              }
+            }
+
+            &.is-mobile {
+              width: 250px;
+              border-radius: 50px;
+              position: relative;
+              background-image: linear-gradient(-20deg, #d558c8 0%, #24d292 100%);
+
+              .is-mobile__bg {
+                width: 100%;
+                background: url("../../../../assets/images/ipx.png");
+                background-size: 100% 100%;
+                filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.7));
+                position: absolute;
+                top: -1%;
+                left: -1%;
+                width: 102%;
+                height: 102%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

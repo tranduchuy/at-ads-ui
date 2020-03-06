@@ -1,10 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren, ViewEncapsulation, ViewChild, AfterContentInit, HostListener } from '@angular/core';
 import { Subject, ReplaySubject } from 'rxjs';
-
 import { fuseAnimations } from '@fuse/animations';
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PageBaseComponent } from 'app/shared/components/base/page-base.component';
 import * as _ from 'lodash';
 import { SessionService } from 'app/shared/services/session.service';
@@ -16,6 +15,7 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { DialogService } from 'app/shared/services/dialog.service';
 import { FormControl } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
+import { VisitorToolsService } from '../visitor-tools.service';
 
 interface Website {
   id: string;
@@ -28,13 +28,17 @@ interface WidgetSize {
 }
 
 interface Widget {
+  _id: string;
   name: string;
   sampleTemplate: string;
   sampleImage: string;
   code: string;
   category: string;
   components: any[];
-  size: any
+  size: {
+    pc: WidgetSize,
+    mobile: WidgetSize
+  }
 }
 
 @Component({
@@ -47,20 +51,23 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
   animationDirection: 'left' | 'right' | 'none';
   courseStepContent: any;
   currentStep: number;
-  isWidgetSampleShown: boolean = false;
   websites: Website[] = [];
   hasWebsite: boolean;
   isProcessing: boolean;
   course: any;
 
   widgetCategories = ['ALL', 'BANNER_SALES', 'CONTACT_FORM'];
+  isWidgetSampleShown: boolean = false;
+  isWidgetConfigPanelShown: boolean = false;
 
   toggleMenuCheckList = [];
   widgetWidth: string = '0';
   widgetHeight: string = '0';
+  selectedWidget: Widget;
   widgetsDataSource: Widget[] = [];
   widgets: Widget[] = [
     {
+      _id: '1d8cad30-5e88-11ea-bc55-0242ac130003',
       name: 'Mẫu 1',
       sampleTemplate: `
       <html class="wf-playfairdisplay-n4-active wf-quicksand-n4-active wf-active"><head>
@@ -82,7 +89,7 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
         <div class="cick-to-call-header-img widgetAvata" id="field-content_avatar" src="https://image.flaticon.com/icons/png/128/205/205702.png" style="display: none;">
           <img class="widgetAvata" src="https://image.flaticon.com/icons/png/128/205/205702.png" style="display: none;">
         </div>
-        <div class="content-salebanner-1 font-tilte-1 widgetTitle" style="font-family: &quot;Playfair Display&quot;; font-size: 38px; color: rgb(255, 244, 237);">Happy&nbsp; Woman Day</div>
+        <div class="content-salebanner-1 font-tilte-1 widgetTitle" style="font-family: &quot;Playfair Display&quot;; font-size: 38px; color: <!-- TEXT_0_COLOR -->;"><!-- TEXT_0 --></div>
         <div class="content-salebanner-2 font-tilte-2 widgetTitlemini" style="font-family: Quicksand; font-size: 16px; color: rgb(250, 250, 250);">&nbsp;Nhận ngay mã giảm 50%&nbsp; &amp; miễn phí giao&nbsp; hàng</div>
         <div class="form-email">
           <input type="text" name="email" class="banner-email inputEmail widgetTextbox" placeholder="Nhập email của bạn" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
@@ -112,6 +119,13 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
           name: 'Hình nền',
           type: 'BACKGROUND_IMAGE',
           url: 'https://f.trazk.com/userfiles/uploads/201912/61d422107b1e54d755d9d63b8079c2c3.png'
+        },
+        {
+          name: 'Tiêu đề lớn',
+          type: 'TEXT',
+          text: 'QUỐC TẾ PHỤ NỮ',
+          defaultColor: 'rgb(255, 244, 237)',
+          color: 'rgb(255, 204, 204)'
         }
       ],
       size: {
@@ -124,155 +138,7 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
           height: '21.875em'
         }
       },
-    },
-    //   {
-    //     name: 'Mẫu 2',
-    //     sampleTemplate: `
-    //     <html class="wf-quicksand-n4-active wf-dancingscript-n4-active wf-active"><head>
-    //     <title>Widget Content</title>
-    //     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    //     <script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async=""></script><script src="https://themes.trazk.com/master/js/jquery.js"></script>
-    //     <script src="https://themes.trazk.com/master/js/rebuildData.js"></script>
-    //     <script src="https://themes.trazk.com/master/js/widgetsConfig.js"></script>
-    //     <!-- <script src="https://themes.trazk.com/master/js/validate.js"></script> -->
-    //     <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-    //     <link rel="stylesheet" type="text/css" href="https://themes.trazk.com/master/css/style.css">
-    //     <link rel="stylesheet" type="text/css" href="https://themes.trazk.com/002/009/css/style.css">
-    //     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script%7CQuicksand" media="all">
-    // </head>
-    // <body>
-    //   <div class="container widgetPosition_center" id="container">
-    //     <div class="banner-3-container widgetBg" style="background-image: url(&quot;https://f.trazk.com/userfiles/uploads/201912/596f9f4c183cafdf3c1498928c394ca8.jpeg&quot;);">
-    //       <div class="banner-images-3 ">
-    //           <img class="widgetProduct" src="https://f.trazk.com/userfiles/uploads/201912/596f9f4c183cafdf3c1498928c394ca8.jpeg" alt="" style="display: none;">
-    //         </div>
-    //     <form class="banner-text-3 formStep1" novalidate="novalidate">
-    //       <h1 class="banner-3-title widgetTitle" id="field-content_title" style="font-family: &quot;Dancing Script&quot;; font-size: 39px; color: rgb(255, 86, 138); background-color: transparent;"><div style="text-align: center;"><b>Một nửa yêu thương</b></div></h1>
-    //       <p class="banner-3-des widgetDes" id="field-content_description" style="font-family: Quicksand; font-size: 15px; color: rgba(76, 55, 55, 0.95);"><div><b>Mừng 8/3 tặng ngay mã giảm giá 70% cho đơn hàng trên 1.000.000VND</b></div></p>
-
-    //         <div class="banner-input-user">
-    //           <div class="icon">
-    //             <i class="fas fa-user"></i>
-    //           </div>
-    //           <input type="text" name="name" class="banner-user widgetInputFullname inputName displayBlock" placeholder="Tên của bạn">
-    //         </div>
-    //         <div class="banner-input-email">
-    //           <div class="icon">
-    //             <i class="fas fa-envelope"></i>
-    //           </div>
-    //           <input type="phone" name="phone" class="banner-email widgetInputEmail inputPhone displayBlock" placeholder="Email của bạn">
-    //         </div>
-    //         <button type="submit" target="_blank" class="banner-3-button widgetSendButton className" style="color: rgb(255, 254, 254); background-color: rgb(255, 89, 146);">Đăng ký</button>
-    //       </form>
-
-    //         <style>.widgetPowerBy::after { content: 'by x2.com.vn' }</style>
-    //         <a target="_blank" id="poweredByCompany" href="https://x2.com.vn" class="widgetPowerBy widgetPowerByDark"></a>
-
-    //         <div class="formStep2 hiddenAll">
-    //           <div class="success-check animated bounce"> 
-    //             <img class="images-check" src="https://themes.trazk.com/003/013/images/check_mark.png" alt="">
-    //             </div>
-    //             <p class="thanks">Cảm ơn bạn đã để lại thông tin</p>
-    //         </div>
-
-    //         <style>.widgetPowerBy::after { content: 'by x2.com.vn' }</style>
-    //         <a target="_blank" id="poweredByCompany" href="https://x2.com.vn" class="widgetPowerBy widgetPowerByDark"></a>
-
-    //     </div>
-    //   </div>
-
-    // </body></html>
-    //     `,
-    //     sampleImage: 'https://f.trazk.com/userfiles/uploads/201912/2bf2277f5e52bbf4603ae89ed2d08cda.png',
-    //     category: 'CONTACT_FORM',
-    //     code: 'CONTACT_FORM_mau2',    // CATEGORY_name
-    //     components: [],
-    //     size: {
-    //       width: '37.5em',
-    //       height: '23.75em'
-    //     }
-    //   },
-    //   {
-    //     name: 'Mẫu 2',
-    //     sampleTemplate: `
-    //     <html><head>
-    //     <title>Widget Content</title>
-    //     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    //     <script src="https://themes.trazk.com/master/js/jquery.js"></script>
-    //     <script src="https://themes.trazk.com/master/js/rebuildData.js"></script>
-    //     <script src="https://themes.trazk.com/master/js/widgetsConfig.js"></script>
-    //     <link rel="stylesheet" type="text/css" href="https://themes.trazk.com/master/css/style.css">
-    //     <link rel="stylesheet" type="text/css" href="https://themes.trazk.com/002/005/css/style.css">
-    //     </head>
-    //     <body>
-    //     <div class="container widgetPosition_center" id="container">
-    //     <div class="banner-2-container widgetBg" id="field-content_fake_background" style="background-color: rgb(255, 73, 73); background-image: url(&quot;https://f.trazk.com/userfiles/uploads/202002/d1edc10e5851ef425add59bad98ac1d0.png&quot;); background-position: center center;">
-    //       <div class="button-banner-2">
-    //         <a class="content-banner-href widgetButton" target="_top" href="https://fff.com.vn" style="color: rgba(255, 255, 255, 0.95); background-color: rgb(172, 104, 66);">Xem ngay</a>
-
-    //       </div>
-
-    //       <style>.widgetPowerBy::after { content: 'by x2.com.vn' }</style>
-    //       <a target="_blank" id="poweredByCompany" href="https://x2.com.vn" class="widgetPowerBy widgetPowerByDark"></a>
-
-    //     </div>
-    //     </div>
-
-
-    //     </body></html>
-    //     `,
-    //     sampleImage: 'https://f.trazk.com/userfiles/uploads/202002/8f76eedcfc63da35d2fbab00abe57e76.png',
-    //     category: 'BANNER_SALES',
-    //     code: 'BANNER_SALES_mau2',    // CATEGORY_name
-    //     components: [],
-    //     size: {
-    //       width: '23.125em',
-    //       height: '37.5em'
-    //     }
-    //   },
-    //   {
-    //     name: 'Mẫu 3',
-    //     sampleTemplate: `
-    //     <html class="wf-quicksand-n4-active wf-chonburi-n4-active wf-itim-n4-active wf-active"><head>
-    //     <title>Widget Content</title>
-    //     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    //     <script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async=""></script><script src="https://trazk.vncdn.vn/master/js/jquery.js"></script>
-    //     <script src="https://trazk.vncdn.vn/master/js/rebuildData.js"></script>
-    //     <script src="https://trazk.vncdn.vn/master/js/widgetsConfig.js"></script>
-    //     <link rel="stylesheet" type="text/css" href="https://trazk.vncdn.vn/master/css/style.css">
-    //     <link rel="stylesheet" type="text/css" href="https://themes.trazk.com/003/038/css/style.css">
-    //     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chonburi%7CItim%7CQuicksand" media="all">
-    // </head>
-    // <body>
-    //   <div class="container widgetPosition_center" id="container">
-    //   <div class="salebanner-component-38 content_header_background_color-2 widgetBg">
-    //     <div class="main-salebanner widgetImage">
-    //       <div class="group">
-    //         <div class="content-salebanner-1 widgetTitle" style="font-family: Chonburi; font-size: 23px; color: rgb(6, 6, 6);">&nbsp; &nbsp; <i>&nbsp; 40% off</i></div>
-
-    //         <div class="content-salebanner-3 widgetContent" style="font-family: Itim; font-size: 25px; color: rgba(11, 33, 155, 0.8);">Happy woman day</div>
-    //         <div class="content-salebanner-4 widgetContent-1" style="font-family: Quicksand; font-size: 16px; color: rgb(0, 0, 0);"><div>Nhận ngay voucher 500k&nbsp;</div><div>cho phái nữ đến mua hàng</div></div>
-    //         <button class="button-send font-button-send widgetButton" href="https://www.fff.com.vn/" target="_top" style="color: rgb(249, 247, 247); background-color: rgb(255, 0, 136);">Xem ngay</button>
-
-
-    //       </div>
-    //     </div>
-
-    //     <style>.widgetPowerBy::after { content: 'by x2.com.vn' }</style>
-    //     <a target="_blank" id="poweredByCompany" href="https://x2.com.vn" class="widgetPowerBy widgetPowerByDark"></a>
-
-    //     </div>
-    // </div></body></html>
-    //     `,
-    //     sampleImage: 'https://f.trazk.com/userfiles/uploads/202002/c8f8887952aea97ad18260a949d6248d.png',
-    //     category: 'BANNER_SALES',
-    //     code: 'BANNER_SALES_mau3',    // CATEGORY_name
-    //     components: [],
-    //     size: {
-    //       width: '28.125em',
-    //       height: '37.75em'
-    //     }
-    //   }
+    }
   ]
 
   demoSteps = [
@@ -333,14 +199,13 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseSidebarService: FuseSidebarService,
-    private _activedRoute: ActivatedRoute,
-    private _router: Router,
     private _sessionService: SessionService,
     private _fuseProgressBarService: FuseProgressBarService,
     private _observableMedia: MediaObserver,
     private _websiteManagementService: WebsiteManagementService,
     private _fuseSplashScreenService: FuseSplashScreenService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _visitorToolsService: VisitorToolsService
   ) {
     super();
 
@@ -351,6 +216,7 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
     // Set the private defaults
     this._unsubscribeAll = new Subject();
 
+    // Init widgets
     this.widgetsDataSource = this.widgets.map(item => item);
     this.toggleMenuCheckList = this.widgets.map(() => ({ isToggled: false }));
   }
@@ -386,51 +252,6 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
     } else {
       this.course.steps = this.demoSteps.filter(item => item.title.toLowerCase().indexOf(filterValue.toLowerCase()) > -1);
     }
-  }
-
-  makeUpWidget(data: Widget): Widget {
-    let { sampleTemplate, category, code, components, size } = data;
-
-    let textIndexes = [];
-
-    for (const i in components) {
-
-      switch (components[i].type) {
-        case 'TEXT':
-          textIndexes.push(i);
-          break;
-
-        case 'BUTTON':
-          const re1 = new RegExp(`<!-- BUTTON_URL -->`, 'g');
-          const re2 = new RegExp(`<!-- BUTTON_TEXT -->`, 'g');
-          sampleTemplate = sampleTemplate
-            .replace(re1, components[i].url)
-            .replace(re2, components[i].text);
-          break;
-
-        case 'BACKGROUND_IMAGE':
-          const re = new RegExp(`<!-- BACKGROUND_IMAGE -->`, 'g');
-          sampleTemplate = sampleTemplate.replace(re, components[i].url);
-          break;
-
-        default:
-          break;
-      }
-
-    }
-
-    textIndexes.forEach((index, count) => {
-      const re = new RegExp(`<!-- TEXT_${count} -->`, 'g');
-      sampleTemplate = sampleTemplate.replace(re, components[index].text);
-    });
-
-    return {
-      sampleTemplate,
-      category,
-      code,
-      components,
-      size
-    } as Widget;
   }
 
   getWebsites(accountId: string) {
@@ -510,19 +331,34 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
     });
   }
 
-  onClickBtnCloseWidgetSample() {
+  hideWidgetSample() {
     this.isWidgetSampleShown = false;
   }
 
-  onClickBtnShowWidgetSample(widgetIndex: number) {
-    const widget = this.makeUpWidget(this.widgets[widgetIndex]);
+  showWidgetSample(widgetIndex: number) {
+    const widget = this._visitorToolsService.getDataRenderedWidget(this.widgets[widgetIndex]);
     const { sampleTemplate, size } = widget;
 
     this.loadWidgetSampleIframe(sampleTemplate);
+    this.setWidgetSampleIframeSize(size);
 
+    this.isWidgetSampleShown = true;
+  }
+
+  openWidgetConfigPanel(widget: Widget) {
+    this.selectedWidget = Object.assign({}, widget);
+    this.isWidgetConfigPanelShown = true;
+  }
+
+  closeWidgetConfigPanel(data: any) {
+    console.log(data);
+    this.isWidgetConfigPanelShown = false;
+  }
+
+  setWidgetSampleIframeSize(size: any) {
     if (size) {
       const windowSize = window.innerWidth;
-      
+
       let realSize: any;
       if (windowSize < 600)
         realSize = Object.assign({}, size.mobile);
@@ -531,8 +367,6 @@ export class EventWidgetComponent extends PageBaseComponent implements OnInit, O
       this.widgetWidth = realSize.width || '0';
       this.widgetHeight = realSize.height || '0';
     }
-
-    this.isWidgetSampleShown = true;
   }
 
   onListAccountsLoaded() {

@@ -6,16 +6,19 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ColorCircleModule } from 'ngx-color/circle';
+import { ColorSketchModule } from 'ngx-color/sketch';
 import { FakeCustomerComponent } from './fake-customer/fake-customer.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { EventWidgetComponent } from './event-widget/event-widget.component';
 import { FuseSidebarModule } from '@fuse/components';
+import { EventWidgetConfigPanelComponent } from './event-widget-config-panel/event-widget-config-panel.component';
 
 @NgModule({
   declarations: [
     SendInfoComponent,
     FakeCustomerComponent,
-    EventWidgetComponent
+    EventWidgetComponent,
+    EventWidgetConfigPanelComponent
   ],
   imports: [
 
@@ -40,9 +43,11 @@ import { FuseSidebarModule } from '@fuse/components';
     MatRippleModule,
     MatButtonModule,
     MatTooltipModule,
+    MatTabsModule,
 
     NgxMatSelectSearchModule,
     ColorCircleModule,
+    ColorSketchModule,
 
     Ng5SliderModule,
 
